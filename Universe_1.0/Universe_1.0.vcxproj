@@ -117,12 +117,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="device.cpp" />
     <ClCompile Include="dx_11.cpp" />
     <ClCompile Include="win_api.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="device.h" />
     <ClInclude Include="dx_11.h" />
     <ClInclude Include="win_api.h" />
   </ItemGroup>

@@ -1,4 +1,9 @@
 ﻿#pragma once
+#include <windows.h>
+#include <memory>
+
+
+#include "dx_11.h"
 
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
@@ -29,3 +34,16 @@
 #define _APS_NEXT_SYMED_VALUE       110
 #endif
 #endif
+
+
+std::unique_ptr<dx_11> device;
+
+//--------------------------------------------------------------------------------------
+// Объявления функций
+//--------------------------------------------------------------------------------------
+HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
+//HRESULT InitDevice();
+//HRESULT InitGeometry();
+//void CleanupDevice();
+LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+//void Render();

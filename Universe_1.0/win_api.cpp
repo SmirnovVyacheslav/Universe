@@ -1,45 +1,15 @@
-﻿#include <windows.h>
-
-
+﻿
 #include "win_api.h"
-
-#include "device.h"
 
 //--------------------------------------------------------------------------------------
 // Глобальные переменные
 //--------------------------------------------------------------------------------------
 HINSTANCE               g_hInst = NULL;
 HWND                    g_hWnd = NULL;
-//D3D_DRIVER_TYPE         g_driverType = D3D_DRIVER_TYPE_NULL;
-//D3D_FEATURE_LEVEL       g_featureLevel = D3D_FEATURE_LEVEL_11_0;
-//ID3D11Device*           g_pd3dDevice = NULL;
-//ID3D11DeviceContext*    g_pImmediateContext = NULL;
-//IDXGISwapChain*         g_pSwapChain = NULL;
-//ID3D11RenderTargetView* g_pRenderTargetView = NULL;
-//ID3D11Texture2D*        g_pDepthStencil = NULL;
-//ID3D11DepthStencilView* g_pDepthStencilView = NULL;
-//ID3D11VertexShader*     g_pVertexShader = NULL;
-//ID3D11PixelShader*      g_pPixelShader = NULL;
-//ID3D11InputLayout*      g_pVertexLayout = NULL;
-//ID3D11Buffer*           g_pVertexBuffer = NULL;
-//ID3D11Buffer*           g_pIndexBuffer = NULL;
-//ID3D11Buffer*           g_pConstantBuffer = NULL;
-//XMMATRIX                g_World;
-//XMMATRIX                g_View;
-//XMMATRIX                g_Projection;
-//MeshFromObj*		    g_pMesh1 = NULL;
-//MeshFromObj*		    g_pMesh2 = NULL;
 
 
-//--------------------------------------------------------------------------------------
-// Объявления функций
-//--------------------------------------------------------------------------------------
-HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
-//HRESULT InitDevice();
-//HRESULT InitGeometry();
-//void CleanupDevice();
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-//void Render();
+
+
 
 //--------------------------------------------------------------------------------------
 // Главная функция программы. Происходят все инициализации, и затем выполняется
@@ -75,13 +45,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		else
 		{
 			//Render();
-			Sleep(5000);
+			//Sleep(1000);
 		}
 	}
 
 	//CleanupDevice();
 
-	return (int)msg.wParam;
+	return static_cast<int>(msg.wParam);
 }
 
 
@@ -113,7 +83,7 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 	g_hInst = hInstance;
 	RECT rc = { 0, 0, 533, 400 };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	g_hWnd = CreateWindow(L"Header", L"Description", WS_OVERLAPPEDWINDOW,
+	g_hWnd = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, hInstance,
 		NULL);
 	if (!g_hWnd)
