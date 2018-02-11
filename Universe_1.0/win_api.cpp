@@ -1,15 +1,4 @@
-﻿
-#include "win_api.h"
-
-//--------------------------------------------------------------------------------------
-// Глобальные переменные
-//--------------------------------------------------------------------------------------
-HINSTANCE               g_hInst = NULL;
-HWND                    g_hWnd = NULL;
-
-
-
-
+﻿#include "win_api.h"
 
 //--------------------------------------------------------------------------------------
 // Главная функция программы. Происходят все инициализации, и затем выполняется
@@ -20,18 +9,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
-	if (FAILED(InitWindow(hInstance, nCmdShow)))
+	if (InitWindow(hInstance, nCmdShow))
 		return -1;
 
-	/*if (FAILED(InitDevice()))
-	{
-		CleanupDevice();
-		return 0;
-	}
-	if (FAILED(InitGeometry()))
-	{
-		return 0;
-	}*/
+	device.reset(new dx_11(hWnd));
+	if (!device->createDevice()) return -1;
+
+	geometry.reset(new Geometry);
+	device->setGeometry(geometry);
 
 	// Цикл обработки сообщений
 	MSG msg = { 0 };
@@ -44,12 +29,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		}
 		else
 		{
-			//Render();
-			//Sleep(1000);
+			device->render();
 		}
 	}
-
-	//CleanupDevice();
 
 	return static_cast<int>(msg.wParam);
 }
@@ -68,28 +50,26 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = hInstance;
-	//wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDI_TUTORIAL1);
-	wcex.hIcon = NULL;
+	wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDI_ICON);
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = NULL;
 	wcex.lpszClassName = L"Header";
-	//wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_TUTORIAL1);
-	wcex.hIconSm = NULL;
+	wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_ICON);
 	if (!RegisterClassEx(&wcex))
 		return E_FAIL;
 
 	// Create window
-	g_hInst = hInstance;
+	hInst = hInstance;
 	RECT rc = { 0, 0, 533, 400 };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	g_hWnd = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW,
+	hWnd = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, hInstance,
 		NULL);
-	if (!g_hWnd)
+	if (!hWnd)
 		return E_FAIL;
 
-	ShowWindow(g_hWnd, nCmdShow);
+	ShowWindow(hWnd, nCmdShow);
 
 	return S_OK;
 }
