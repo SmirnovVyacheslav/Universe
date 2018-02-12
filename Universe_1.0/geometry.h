@@ -24,6 +24,9 @@ class Geometry
 
 	std::vector<Object*> scene;
 
+	std::vector<Object*>::iterator beginIt;
+	std::vector<Object*>::iterator endIt;
+
 public:
 
 	Geometry();

@@ -256,19 +256,19 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 {
 	geometry =_geometry;
 
-	//for (auto it : *geometry)
-	for (std::vector<Object*>::iterator& it = geometry->begin(); it != geometry->end(); ++it)
+	for (auto it : *geometry)
+	//for (std::vector<Object*>::iterator& it = geometry->begin(); it != geometry->end(); ++it)
 	{
 		Shader *shader;
-		if (!shaders[(*it)->shader])
+		if (!shaders[it->shader])
 		{
 			shader = new Shader;
-			initShader((*it)->shader, shader);
-			shaders[(*it)->shader] = shader;
+			initShader(it->shader, shader);
+			shaders[it->shader] = shader;
 		}
 		else
 		{
-			shader = shaders[(*it)->shader];
+			shader = shaders[it->shader];
 		}
 
 		GObjects *gObject = new GObjects;
@@ -285,7 +285,7 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 		
 		D3D11_SUBRESOURCE_DATA InitData;
 		ZeroMemory(&InitData, sizeof(InitData));
-		InitData.pSysMem = &(*it)->vertices;
+		InitData.pSysMem = &it->vertices[0];
 		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
 			return;
 
@@ -298,7 +298,7 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 		bufferDesc.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
 		bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 		bufferDesc.CPUAccessFlags = 0;
-		InitData.pSysMem = &(*it)->indices;
+		InitData.pSysMem = &it->indices[0];
 		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
 			return;
 

@@ -42,10 +42,12 @@ Geometry::Geometry()
 
 std::vector<Object*>::iterator& Geometry::begin()
 {
-	return scene.begin();
+	beginIt = scene.begin();
+	return beginIt;
 }
 
 std::vector<Object*>::iterator& Geometry::end()
 {
-	return scene.end();
+	endIt = scene.end();
+	return endIt;
 }
