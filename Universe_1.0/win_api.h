@@ -17,6 +17,7 @@ HINSTANCE               hInst;
 
 std::unique_ptr<dx_11> device;
 std::shared_ptr<Geometry> geometry;
+std::shared_ptr<Camera> camera;
 
 //--------------------------------------------------------------------------------------
 // Объявления функций

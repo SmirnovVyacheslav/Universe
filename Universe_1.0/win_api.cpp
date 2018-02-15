@@ -15,6 +15,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	device.reset(new dx_11(hWnd));
 	if (!device->createDevice()) return -1;
 
+	camera.reset(new Camera);
+	device->setCamera(camera);
+
 	geometry.reset(new Geometry);
 	device->setGeometry(geometry);
 
@@ -85,6 +88,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	switch (message)
 	{
+	case WM_MOUSEMOVE:
+		camera->move((int)LOWORD(lParam), (int)HIWORD(lParam));
+		//xPos = GET_X_LPARAM(lParam);
+		//yPos = GET_Y_LPARAM(lParam);
+		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		EndPaint(hWnd, &ps);

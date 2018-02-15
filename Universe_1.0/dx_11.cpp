@@ -1,5 +1,53 @@
 ﻿#include "dx_11.h"
 
+Camera::Camera()
+{
+	eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+	at = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+}
+
+void Camera::init(UINT wndWidth, UINT wndHeight)
+{
+	_view = XMMatrixLookAtLH(eye, at, up);
+	_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
+}
+
+XMMATRIX& Camera::view()
+{
+	return _view;
+}
+
+XMMATRIX& Camera::projection()
+{
+	return _projection;
+}
+
+void Camera::move(UINT _x, UINT _y)
+{
+	//if (x == 0) x = _x;
+	//if (y == 0) y = _y;
+
+	horizontal += (x - _x) * step;
+	vertial += (y - _y) * step;
+	x = _x;
+	y = _y;
+
+	eye = XMVectorSet(sin(horizontal)*radius, 1.0f, cos(horizontal)*radius, 0.0f);
+
+	/*vx += _x * step;
+	vy += _y * step;
+
+	float vr = sqrt(vx * vx + vy * vy + vz * vz);
+
+	float vtx = sin(vx) * sin(vy) * vr;
+	float vty = cos(vy) * vr;
+	float vtz = sin(vy) * cos(vx) * vr;
+	eye = XMVectorSet(vtx * radius, 1.0f, vtz * radius, 0.0f);*/
+
+	_view = XMMatrixLookAtLH(eye, at, up);
+}
+
 dx_11::dx_11(HWND _hWnd) : hWnd(_hWnd)
 {
 	setWndSize();
@@ -217,7 +265,7 @@ void dx_11::render()
 	//
 	// Установка трансформации для куба
 	//
-	mWorld = XMMatrixRotationY(3.14159f / 4.0f);
+	//mWorld = XMMatrixRotationY(3.14159f / 4.0f);
 
 	//
 	// Очистка рендер-таргета
@@ -233,8 +281,8 @@ void dx_11::render()
 		//
 		ConstantBuffer cb;
 		cb.mWorld = XMMatrixTranspose(mWorld);
-		cb.mView = XMMatrixTranspose(mView);
-		cb.mProjection = XMMatrixTranspose(mProjection);
+		cb.mView = XMMatrixTranspose(camera->view());
+		cb.mProjection = XMMatrixTranspose(camera->projection());
 		immediateContext->UpdateSubresource(obj->constantBuffer, 0, NULL, &cb, 0, 0);
 
 		//
@@ -319,9 +367,16 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 
 	// Установка матриц
 	mWorld = XMMatrixIdentity();
-	XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
-	XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	mView = XMMatrixLookAtLH(Eye, At, Up);
-	mProjection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
+	//XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+	//XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	//XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	//mView = XMMatrixLookAtLH(Eye, At, Up);
+	//mProjection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
+}
+
+void dx_11::setCamera(std::shared_ptr<Camera> _camera)
+{
+	camera = _camera;
+
+	camera->init(wndWidth, wndHeight);
 }
