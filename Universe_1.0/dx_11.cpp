@@ -2,13 +2,16 @@
 
 Camera::Camera()
 {
-	eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
-	at = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	eye = XMVectorSet(0.0f, 1.0f, -4.0f, 0.0f);
+	at = XMVectorSet(0.0f, 3.0f, 0.0f, 0.0f);
 	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 }
 
-void Camera::init(UINT wndWidth, UINT wndHeight)
+void Camera::init(UINT _wndWidth, UINT _wndHeight)
 {
+	wndWidth = _wndWidth;
+	wndHeight = _wndHeight;
+
 	_view = XMMatrixLookAtLH(eye, at, up);
 	_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
 }
@@ -25,15 +28,72 @@ XMMATRIX& Camera::projection()
 
 void Camera::move(UINT _x, UINT _y)
 {
-	//if (x == 0) x = _x;
-	//if (y == 0) y = _y;
+	int xDiff = static_cast<int>(_x) - x;
+	int yDiff = y - static_cast<int>(_y);
 
-	horizontal += (x - _x) * step;
+	x = static_cast<int>(_x);
+	y = static_cast<int>(_y);
+
+	if (abs(xDiff) > 200 || abs(yDiff) > 200)
+	{
+		return;
+	}
+
+	
+	/*xAngle = (static_cast<float>(xDiff) / static_cast<float>(wndWidth)) * 2 * XM_PI * sensitivity;
+	yAngle = (static_cast<float>(yDiff) / static_cast<float>(wndHeight)) * 2 * XM_PI * sensitivity;*/
+
+	xAngle += (static_cast<float>(xDiff) / static_cast<float>(wndWidth)) * 2 * XM_PI * sensitivity;
+	yAngle += (static_cast<float>(yDiff) / static_cast<float>(wndHeight)) * 2 * XM_PI * sensitivity;
+	if (abs(xAngle) > XM_PI)
+	{
+		xAngle = xAngle > 0 ? xAngle - 2 * XM_PI : xAngle + 2 * XM_PI;
+	}
+
+	if (abs(yAngle) > XM_PI)
+	{
+		yAngle = yAngle > 0 ? yAngle - 2 * XM_PI : yAngle + 2 * XM_PI;
+	}
+
+	float vx = cos(xAngle) + sin(xAngle) * sin(yAngle) + sin(xAngle) * cos(yAngle);
+	float vy = cos(yAngle) - sin(yAngle);
+	float vz = -sin(xAngle) + cos(xAngle) * sin(yAngle) + cos(xAngle) * cos(yAngle);
+
+	//float vx = cos(xAngle) + sin(xAngle);
+	//float vy = 1;
+	//float vz = -sin(xAngle) + cos(xAngle);
+
+	/*float vx = 1;
+	float vy = cos(yAngle) - sin(yAngle);
+	float vz = tan(yAngle) + cos(yAngle);*/
+
+
+	//eye = XMVectorSet((cos(xAngle) - sin(xAngle)) * radius, 1.0f, (sin(xAngle) + cos(xAngle)) * radius, 0.0f);
+	
+	/*xRot = XMMatrixRotationX(xAngle);
+	yRot = XMMatrixRotationY(yAngle);
+	eye = XMVector4Transform(eye, xRot * yRot);*/
+
+	
+	eye = XMVectorSet(vx * radius, vy* radius, vz * radius, 0.0f);
+
+	/*if (xDiff > 0)
+	{
+
+	}
+	else
+	{
+
+	}*/
+
+
+
+	/*horizontal += (x - _x) * step;
 	vertial += (y - _y) * step;
 	x = _x;
-	y = _y;
+	y = _y;*/
 
-	eye = XMVectorSet(sin(horizontal)*radius, 1.0f, cos(horizontal)*radius, 0.0f);
+	//eye = XMVectorSet(cos(horizontal)*radius, 1.0f, -sin(horizontal)*radius, 0.0f);
 
 	/*vx += _x * step;
 	vy += _y * step;
@@ -172,6 +232,17 @@ bool dx_11::createDevice()
 	viewPort.TopLeftY = 0;
 	immediateContext->RSSetViewports(1, &viewPort);
 
+
+	// Создание буфера констант шейдера
+	D3D11_BUFFER_DESC bufferDesc;
+	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
+	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	bufferDesc.ByteWidth = sizeof(ConstantBuffer);
+	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	bufferDesc.CPUAccessFlags = 0;
+	if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &constantBuffer) < 0)
+		return false;
+
 	return true;
 }
 
@@ -196,8 +267,11 @@ bool dx_11::initShader(std::wstring path, Shader* shader)
 	// Определение формата вершинного буфера
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
+		/*{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }*/
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	UINT numElements = ARRAYSIZE(layout);
 
@@ -274,24 +348,50 @@ void dx_11::render()
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
 	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
+	//
+	// Установка констант шейдера
+	//
+	localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
+	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
+	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
+
+	bool first = true;
 	for (auto obj : gObjects)
 	{
 		//
 		// Установка констант шейдера
 		//
-		ConstantBuffer cb;
+
+		if (first)
+		{
+			first = false;
+			localConstantBuffer.mWorld = XMMatrixTranspose(XMMatrixTranslation(6.0f, 0, 0));
+		}
+		else
+		{
+			localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
+		}
+
+		/*ConstantBuffer cb;
 		cb.mWorld = XMMatrixTranspose(mWorld);
 		cb.mView = XMMatrixTranspose(camera->view());
-		cb.mProjection = XMMatrixTranspose(camera->projection());
-		immediateContext->UpdateSubresource(obj->constantBuffer, 0, NULL, &cb, 0, 0);
+		cb.mProjection = XMMatrixTranspose(camera->projection());*/
+		immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+
+		//
+		// Установка шейдера
+		//
+
+		immediateContext->VSSetShader(obj->shader->vertexShader, NULL, 0);
+		immediateContext->PSSetShader(obj->shader->pixelShader, NULL, 0);
+
+		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
 
 		//
 		// Рендер куба
 		//
-		immediateContext->VSSetShader(obj->shader->vertexShader, NULL, 0);
-		immediateContext->VSSetConstantBuffers(0, 1, &obj->constantBuffer);
-		immediateContext->PSSetShader(obj->shader->pixelShader, NULL, 0);
-		immediateContext->DrawIndexed(36, 0, 0); // 36 вершин образуют 12 полигонов, по три вершины на полигон
+		
+		immediateContext->DrawIndexed(obj->size, 0, 0);
 	}
 
 	//
@@ -323,16 +423,22 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 		gObjects.push_back(gObject);
 
 		gObject->shader = shader;
+		gObject->size = it->size;
+
 
 		D3D11_BUFFER_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		bufferDesc.ByteWidth = sizeof(SimpleVertex) * 8;
-		bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		bufferDesc.CPUAccessFlags = 0;
-		
+
 		D3D11_SUBRESOURCE_DATA InitData;
 		ZeroMemory(&InitData, sizeof(InitData));
+
+		// Создание вершинного буфера
+		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+		bufferDesc.ByteWidth = sizeof(SimpleVertex) * it->vertices.size();
+		bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		bufferDesc.CPUAccessFlags = 0;
+		bufferDesc.MiscFlags = 0;
+
 		InitData.pSysMem = &it->vertices[0];
 		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
 			return;
@@ -342,27 +448,63 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 		UINT offset = 0;
 		immediateContext->IASetVertexBuffers(0, 1, &gObject->vertexBuffer, &stride, &offset);
 
+		// Создание индексного буфера
 		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		bufferDesc.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+		bufferDesc.ByteWidth = sizeof(DWORD) * it->indices.size();
 		bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 		bufferDesc.CPUAccessFlags = 0;
+		bufferDesc.MiscFlags = 0;
+
 		InitData.pSysMem = &it->indices[0];
 		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
 			return;
 
 		// Установка индексного буфера
-		immediateContext->IASetIndexBuffer(gObject->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		immediateContext->IASetIndexBuffer(gObject->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		// Установка типа примитив
 		immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		// Создание буфера констант шейдера
-		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		bufferDesc.ByteWidth = sizeof(ConstantBuffer);
-		bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		bufferDesc.CPUAccessFlags = 0;
-		if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &gObject->constantBuffer) < 0)
-			return;
+
+		//D3D11_BUFFER_DESC bufferDesc;
+		//ZeroMemory(&bufferDesc, sizeof(bufferDesc));
+		//bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+		//bufferDesc.ByteWidth = sizeof(SimpleVertex) * 8;
+		//bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		//bufferDesc.CPUAccessFlags = 0;
+		//
+		//D3D11_SUBRESOURCE_DATA InitData;
+		//ZeroMemory(&InitData, sizeof(InitData));
+		//InitData.pSysMem = &it->vertices[0];
+		//if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
+		//	return;
+
+		//// Установка вершинного буфера
+		//UINT stride = sizeof(SimpleVertex);
+		//UINT offset = 0;
+		//immediateContext->IASetVertexBuffers(0, 1, &gObject->vertexBuffer, &stride, &offset);
+
+		//bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+		//bufferDesc.ByteWidth = sizeof(WORD) * it->indices.size();        // 36 vertices needed for 12 triangles in a triangle list
+		//bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		//bufferDesc.CPUAccessFlags = 0;
+		//InitData.pSysMem = &it->indices[0];
+		//if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
+		//	return;
+
+		//// Установка индексного буфера
+		//immediateContext->IASetIndexBuffer(gObject->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+		//// Установка типа примитив
+		//immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		//// Создание буфера констант шейдера
+		//bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+		//bufferDesc.ByteWidth = sizeof(ConstantBuffer);
+		//bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		//bufferDesc.CPUAccessFlags = 0;
+		//if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &gObject->constantBuffer) < 0)
+		//	return;
 	}
 
 	// Установка матриц

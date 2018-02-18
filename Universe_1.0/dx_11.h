@@ -4,8 +4,6 @@
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 
-//#include <d3dx11math.h>
-
 #include <windows.h>
 
 #include <vector>
@@ -26,13 +24,25 @@ class Camera
 	XMMATRIX                _view;
 	XMMATRIX                _projection;
 
-	float radius = 5.0f;
-	float horizontal = 0.0f;
-	float vertial = 1.0f;
-	float step = 0.00002f;
+	float xAngle = -3.0f * XM_PI / 4.0f;
+	float yAngle = -3.0f * XM_PI / 4.0f;
+	float radius = 3.0f;
+	float sensitivity = 0.4f;
+
+	int wndWidth, wndHeight;
+
+	XMMATRIX xRot;
+	XMMATRIX yRot;
+	XMMATRIX zRot;
+
+	//float radius = 5.0f;
+	//float horizontal = 0.0f;
+	//float vertial = 1.0f;
+	//float step = 0.00002f;
 	//float vx = 0.0f, vy = 0.0f, vz = 1.0f;
 
-	int x = 0, y = 0;
+	int x = 0;
+	int y = 0;
 
 public:
 
@@ -69,8 +79,9 @@ class dx_11
 	{
 		ID3D11Buffer*           vertexBuffer = nullptr;
 		ID3D11Buffer*           indexBuffer = nullptr;
-		ID3D11Buffer*           constantBuffer = nullptr;
+		//ID3D11Buffer*           constantBuffer = nullptr;
 		Shader*                 shader = nullptr;
+		int size;
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -89,6 +100,9 @@ class dx_11
 	ID3D11DepthStencilView* depthStencilView = nullptr;
 
 	ID3D11InputLayout*      vertexLayout = nullptr;
+
+	ID3D11Buffer*           constantBuffer = nullptr;
+	ConstantBuffer          localConstantBuffer;
 
 
 	XMMATRIX                mWorld;
