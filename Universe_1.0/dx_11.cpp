@@ -7,10 +7,22 @@ Camera::Camera()
 	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 }
 
-void Camera::init(UINT _wndWidth, UINT _wndHeight)
+void Camera::init(HWND _hWnd)
 {
-	wndWidth = _wndWidth;
-	wndHeight = _wndHeight;
+	hWnd = _hWnd;
+
+	RECT wndSize;
+
+	GetClientRect(hWnd, &wndSize);
+	wndWidth = wndSize.right;
+	wndHeight = wndSize.bottom;
+
+	GetWindowRect(hWnd, &wndSize);
+	wndX = static_cast<int>(wndSize.left);
+	wndY = static_cast<int>(wndSize.top);
+
+	topBorder = GetSystemMetrics(SM_CYCAPTION);
+	leftBorder = GetSystemMetrics(SM_CXFRAME);
 
 	_view = XMMatrixLookAtLH(eye, at, up);
 	_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
@@ -33,6 +45,30 @@ void Camera::move(UINT _x, UINT _y)
 
 	x = static_cast<int>(_x);
 	y = static_cast<int>(_y);
+
+	if (x <= 10)
+	{
+		x = wndWidth - 20;
+	}
+	else if (x >= wndWidth - 10)
+	{
+		x = 20;
+	}
+
+	if (y <= 30)
+	{
+		y = wndHeight - 40;
+	}
+	else if (y >= wndHeight - 30)
+	{
+		y = 40;
+	}
+
+	if (x != (int)_x || y != (int)_y)
+	{
+		SetCursorPos(wndX + leftBorder + x, wndY + topBorder + y);
+		return;
+	}
 
 	if (abs(xDiff) > 200 || abs(yDiff) > 200)
 	{
@@ -106,6 +142,21 @@ void Camera::move(UINT _x, UINT _y)
 	eye = XMVectorSet(vtx * radius, 1.0f, vtz * radius, 0.0f);*/
 
 	_view = XMMatrixLookAtLH(eye, at, up);
+}
+
+void Camera::catchMouse()
+{
+	RECT rc = {0, 0, wndWidth, wndHeight};
+
+	ClipCursor(&rc);
+	SetCursorPos(int(wndWidth / 2), int(wndHeight / 2));
+	ShowCursor(false);
+}
+
+void Camera::releseMouse()
+{
+	ShowCursor(true);
+	ClipCursor(NULL);
 }
 
 dx_11::dx_11(HWND _hWnd) : hWnd(_hWnd)
@@ -520,5 +571,5 @@ void dx_11::setCamera(std::shared_ptr<Camera> _camera)
 {
 	camera = _camera;
 
-	camera->init(wndWidth, wndHeight);
+	camera->init(hWnd);
 }

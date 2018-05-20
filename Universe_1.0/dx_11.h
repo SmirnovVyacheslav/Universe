@@ -29,7 +29,9 @@ class Camera
 	float radius = 3.0f;
 	float sensitivity = 0.4f;
 
-	int wndWidth, wndHeight;
+	HWND hWnd;
+	int wndWidth, wndHeight, wndX, wndY;
+	int topBorder, leftBorder;
 
 	XMMATRIX xRot;
 	XMMATRIX yRot;
@@ -48,13 +50,17 @@ public:
 
 	Camera();
 
-	void init(UINT wndWidth, UINT wndHeight);
+	void init(HWND _hWnd);
 
 	XMMATRIX& view();
 
 	XMMATRIX& projection();
 
 	void move(UINT x, UINT y);
+
+	void catchMouse();
+
+	void releseMouse();
 };
 
 class dx_11

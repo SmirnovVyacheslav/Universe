@@ -85,13 +85,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
 	HDC hdc;
+	RECT rc;
 
 	switch (message)
 	{
 	case WM_MOUSEMOVE:
 		camera->move((int)LOWORD(lParam), (int)HIWORD(lParam));
-		//xPos = GET_X_LPARAM(lParam);
-		//yPos = GET_Y_LPARAM(lParam);
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
@@ -101,6 +100,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+
+	case WM_ACTIVATE:
+	{
+		if (LOWORD(wParam) != WA_INACTIVE)
+		{
+			GetWindowRect(hWnd, &rc);
+
+			ClipCursor(&rc);
+			SetCursorPos(int(rc.right / 2), int(rc.bottom / 2));
+			ShowCursor(false);
+		}
+		else
+		{
+			ShowCursor(true);
+			ClipCursor(NULL);
+		}
+	} break;
 
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
