@@ -79,7 +79,7 @@ void Camera::move(UINT _x, UINT _y)
 	/*xAngle = (static_cast<float>(xDiff) / static_cast<float>(wndWidth)) * 2 * XM_PI * sensitivity;
 	yAngle = (static_cast<float>(yDiff) / static_cast<float>(wndHeight)) * 2 * XM_PI * sensitivity;*/
 
-	xAngle += (static_cast<float>(xDiff) / static_cast<float>(wndWidth)) * 2 * XM_PI * sensitivity;
+	/*xAngle += (static_cast<float>(xDiff) / static_cast<float>(wndWidth)) * 2 * XM_PI * sensitivity;
 	yAngle += (static_cast<float>(yDiff) / static_cast<float>(wndHeight)) * 2 * XM_PI * sensitivity;
 	if (abs(xAngle) > XM_PI)
 	{
@@ -89,11 +89,22 @@ void Camera::move(UINT _x, UINT _y)
 	if (abs(yAngle) > XM_PI)
 	{
 		yAngle = yAngle > 0 ? yAngle - 2 * XM_PI : yAngle + 2 * XM_PI;
-	}
+	}*/
 
-	float vx = cos(xAngle) + sin(xAngle) * sin(yAngle) + sin(xAngle) * cos(yAngle);
-	float vy = cos(yAngle) - sin(yAngle);
-	float vz = -sin(xAngle) + cos(xAngle) * sin(yAngle) + cos(xAngle) * cos(yAngle);
+	xAngle += static_cast<float>(xDiff) * sensitivity;
+	yAngle += static_cast<float>(yDiff) * sensitivity;
+
+	if (yAngle > 89.0f)
+		yAngle = 89.0f;
+	if (yAngle < -89.0f)
+		yAngle = -89.0f;
+
+	float xAngleRad = xAngle * XM_PI / 180.0f;
+	float yAngleRad = yAngle * XM_PI / 180.0f;
+
+	float vx = cos(xAngleRad) * cos(yAngleRad); //cos(xAngle) + sin(xAngle) * sin(yAngle) + sin(xAngle) * cos(yAngle);
+	float vy = sin(yAngleRad); //cos(yAngle) - sin(yAngle);
+	float vz = sin(xAngleRad) * cos(yAngleRad); //-sin(xAngle) + cos(xAngle) * sin(yAngle) + cos(xAngle) * cos(yAngle);
 
 	//float vx = cos(xAngle) + sin(xAngle);
 	//float vy = 1;
@@ -111,7 +122,7 @@ void Camera::move(UINT _x, UINT _y)
 	eye = XMVector4Transform(eye, xRot * yRot);*/
 
 	
-	eye = XMVectorSet(vx * radius, vy* radius, vz * radius, 0.0f);
+	eye = XMVectorSet(vx * radius, vy * radius, vz * radius, 0.0f);
 
 	/*if (xDiff > 0)
 	{

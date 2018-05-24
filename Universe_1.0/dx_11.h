@@ -24,10 +24,12 @@ class Camera
 	XMMATRIX                _view;
 	XMMATRIX                _projection;
 
-	float xAngle = -3.0f * XM_PI / 4.0f;
-	float yAngle = -3.0f * XM_PI / 4.0f;
+	//float xAngle = -3.0f * XM_PI / 4.0f;
+	//float yAngle = -3.0f * XM_PI / 4.0f;
+	float xAngle = 0.0f;
+	float yAngle = -90.0f;
 	float radius = 3.0f;
-	float sensitivity = 0.4f;
+	float sensitivity = 0.1f;
 
 	HWND hWnd;
 	int wndWidth, wndHeight, wndX, wndY;
