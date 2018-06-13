@@ -5,7 +5,7 @@ Geometry::Geometry()
 	person = new Object;
 
 	person->shader = L"shader.fx";
-	person->vertices = 
+	/*person->vertices = 
 	{
 		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),    XMFLOAT3(0.0f, 1.0f, 0.0f) },
 
@@ -81,7 +81,54 @@ Geometry::Geometry()
 
 		23,20,22
 	};
-	person->size = 36;
+	person->size = 36;*/
+
+	//for (int i = 0; i < 2 - 1; ++i)
+	//{
+	//	for (int j = 0; j < 2 - 1; ++j)
+	//	{
+	//		person->indices[(i + j) * 6 + 0];
+	//		person->indices[(i + j) * 6 + 1];
+	//		person->indices[(i + j) * 6 + 2];
+	//		person->indices[(i + j) * 6 + 3];
+	//		person->indices[(i + j) * 6 + 4];
+	//		person->indices[(i + j) * 6 + 5];
+	//	}
+	//}
+
+	person->vertices =
+	{
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),     XMFLOAT3(-1.0f / 3, 1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),       XMFLOAT3(1.0f / 3, 1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),        XMFLOAT3(1.0f / 3, 1.0f / 3, 1.0f / 3) }, //XMFLOAT3(0,1,0)}
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),       XMFLOAT3(-1.0f / 3, 1.0f / 3, 1.0f / 3) }, //XMFLOAT3(0,1,0)}
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f),     XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f / 3, -1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f / 3, -1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),       XMFLOAT3(1.0f / 3, -1.0f / 3, 1.0f / 3) }, //XMFLOAT3(0,1,0)}
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f / 3, -1.0f / 3, 1.0f / 3) } //XMFLOAT3(0,1,0)}
+
+	};
+	person->indices =
+	{
+		3,1,0,
+		2,1,3,
+
+		0,5,4,
+		1,5,0,
+
+		3,4,7,
+		0,4,3,
+
+		1,6,5,
+		2,6,1,
+
+		2,7,6,
+		3,7,2,
+
+		6,4,5,
+		7,4,6
+	};
+	person->size = 36;  // 36 vertices needed for 12 triangles in a triangle list
 
 	scene.push_back(person);
 

@@ -78,6 +78,23 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 }
 
 
+void lockCursor(HWND hWnd)
+{
+	RECT rc;
+	GetWindowRect(hWnd, &rc);
+
+	ClipCursor(&rc);
+	SetCursorPos(int(rc.right / 2), int(rc.bottom / 2));
+	ShowCursor(false);
+}
+
+void freeCursor(HWND hWnd)
+{
+	RECT rc;
+	ShowCursor(true);
+	ClipCursor(NULL);
+}
+
 //--------------------------------------------------------------------------------------
 // Процедура обработки сообщений Windows
 //--------------------------------------------------------------------------------------
@@ -86,11 +103,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	HDC hdc;
 	RECT rc;
+	static bool alt = true;
 
 	switch (message)
 	{
 	case WM_MOUSEMOVE:
-		camera->move((int)LOWORD(lParam), (int)HIWORD(lParam));
+		if (alt)
+			camera->move((int)LOWORD(lParam), (int)HIWORD(lParam));
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
@@ -103,20 +122,64 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_ACTIVATE:
 	{
-		if (LOWORD(wParam) != WA_INACTIVE)
+		if (LOWORD(wParam) != WA_INACTIVE && alt)
 		{
-			GetWindowRect(hWnd, &rc);
+			lockCursor(hWnd);
+			/*GetWindowRect(hWnd, &rc);
 
 			ClipCursor(&rc);
 			SetCursorPos(int(rc.right / 2), int(rc.bottom / 2));
-			ShowCursor(false);
+			ShowCursor(false);*/
 		}
 		else
 		{
-			ShowCursor(true);
-			ClipCursor(NULL);
+			freeCursor(hWnd);
+			/*ShowCursor(true);
+			ClipCursor(NULL);*/
 		}
 	} break;
+
+	case WM_KEYDOWN:
+	case WM_SYSKEYDOWN:
+	{
+		/*switch (wParam)
+		{
+		
+		}*/
+	}
+	break;
+
+	case WM_KEYUP:
+	case WM_SYSKEYUP:
+	{
+		switch (wParam)
+		{
+		case VK_MENU:
+		{
+			alt = alt ? false : true;
+			if (alt)
+				lockCursor(hWnd);
+			else
+				freeCursor(hWnd);
+		}
+			break;
+		}
+	}
+	break;
+
+	case WM_SIZE:
+	{
+		if (camera)
+			camera->resize();
+	}
+	break;
+
+	case WM_MOVE:
+	{
+		if (camera)
+			camera->resize();
+	}
+	break;
 
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);

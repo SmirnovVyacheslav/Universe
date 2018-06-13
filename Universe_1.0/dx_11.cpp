@@ -28,6 +28,22 @@ void Camera::init(HWND _hWnd)
 	_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
 }
 
+void Camera::resize()
+{
+	RECT wndSize;
+
+	GetClientRect(hWnd, &wndSize);
+	wndWidth = wndSize.right;
+	wndHeight = wndSize.bottom;
+
+	GetWindowRect(hWnd, &wndSize);
+	wndX = static_cast<int>(wndSize.left);
+	wndY = static_cast<int>(wndSize.top);
+
+	topBorder = GetSystemMetrics(SM_CYCAPTION);
+	leftBorder = GetSystemMetrics(SM_CXFRAME);
+}
+
 XMMATRIX& Camera::view()
 {
 	return _view;
@@ -420,6 +436,9 @@ void dx_11::render()
 	bool first = true;
 	for (auto obj : gObjects)
 	{
+		immediateContext->VSSetShader(obj->shader->vertexShader, NULL, 0);
+		immediateContext->PSSetShader(obj->shader->pixelShader, NULL, 0);
+
 		//
 		// Установка констант шейдера
 		//
@@ -427,7 +446,7 @@ void dx_11::render()
 		if (first)
 		{
 			first = false;
-			localConstantBuffer.mWorld = XMMatrixTranspose(XMMatrixTranslation(6.0f, 0, 0));
+			localConstantBuffer.mWorld = XMMatrixTranspose(XMMatrixTranslation(6.0f, 0.0f, 0.0));
 		}
 		else
 		{
@@ -444,10 +463,17 @@ void dx_11::render()
 		// Установка шейдера
 		//
 
-		immediateContext->VSSetShader(obj->shader->vertexShader, NULL, 0);
-		immediateContext->PSSetShader(obj->shader->pixelShader, NULL, 0);
+		
 
 		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+
+		// Установка вершинного буфера
+		UINT stride = sizeof(SimpleVertex);
+		UINT offset = 0;
+		immediateContext->IASetVertexBuffers(0, 1, &obj->vertexBuffer, &stride, &offset);
+
+		// Установка индексного буфера
+		immediateContext->IASetIndexBuffer(obj->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		//
 		// Рендер куба
@@ -505,10 +531,10 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
 			return;
 
-		// Установка вершинного буфера
-		UINT stride = sizeof(SimpleVertex);
-		UINT offset = 0;
-		immediateContext->IASetVertexBuffers(0, 1, &gObject->vertexBuffer, &stride, &offset);
+		//// Установка вершинного буфера
+		//UINT stride = sizeof(SimpleVertex);
+		//UINT offset = 0;
+		//immediateContext->IASetVertexBuffers(0, 1, &gObject->vertexBuffer, &stride, &offset);
 
 		// Создание индексного буфера
 		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -521,8 +547,8 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
 			return;
 
-		// Установка индексного буфера
-		immediateContext->IASetIndexBuffer(gObject->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		//// Установка индексного буфера
+		//immediateContext->IASetIndexBuffer(gObject->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		// Установка типа примитив
 		immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

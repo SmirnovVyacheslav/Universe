@@ -63,6 +63,8 @@ public:
 	void catchMouse();
 
 	void releseMouse();
+
+	void resize();
 };
 
 class dx_11
