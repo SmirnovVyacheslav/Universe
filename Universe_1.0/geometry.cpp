@@ -5,180 +5,11 @@ Geometry::Geometry()
 	person = new Object;
 
 	person->shader = L"shader.fx";
-	/*person->vertices = 
-	{
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),    XMFLOAT3(0.0f, 1.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f),     XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f),     XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f),     XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }
-	};
-	person->indices = 
-	{
-		3,1,0,
-
-		2,1,3,
-
-		6,4,5,
-
-		7,4,6,
-
-		11,9,8,
-
-		10,9,11,
-
-		14,12,13,
-
-		15,12,14,
-
-		19,17,16,
-
-		18,17,19,
-
-		22,20,21,
-
-		23,20,22
-	};
-	person->size = 36;*/
-
-	//for (int i = 0; i < 2 - 1; ++i)
-	//{
-	//	for (int j = 0; j < 2 - 1; ++j)
-	//	{
-	//		person->indices[(i + j) * 6 + 0];
-	//		person->indices[(i + j) * 6 + 1];
-	//		person->indices[(i + j) * 6 + 2];
-	//		person->indices[(i + j) * 6 + 3];
-	//		person->indices[(i + j) * 6 + 4];
-	//		person->indices[(i + j) * 6 + 5];
-	//	}
-	//}
-
-	person->vertices =
-	{
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),     XMFLOAT3(-1.0f / 3, 1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),       XMFLOAT3(1.0f / 3, 1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),        XMFLOAT3(1.0f / 3, 1.0f / 3, 1.0f / 3) }, //XMFLOAT3(0,1,0)}
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),       XMFLOAT3(-1.0f / 3, 1.0f / 3, 1.0f / 3) }, //XMFLOAT3(0,1,0)}
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f),     XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f / 3, -1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f / 3, -1.0f / 3, -1.0f / 3) }, //XMFLOAT3(0,1,0)}
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),       XMFLOAT3(1.0f / 3, -1.0f / 3, 1.0f / 3) }, //XMFLOAT3(0,1,0)}
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f),      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f / 3, -1.0f / 3, 1.0f / 3) } //XMFLOAT3(0,1,0)}
-
-	};
-	person->indices =
-	{
-		3,1,0,
-		2,1,3,
-
-		0,5,4,
-		1,5,0,
-
-		3,4,7,
-		0,4,3,
-
-		1,6,5,
-		2,6,1,
-
-		2,7,6,
-		3,7,2,
-
-		6,4,5,
-		7,4,6
-	};
-	person->size = 36;  // 36 vertices needed for 12 triangles in a triangle list
 
 	scene.push_back(person);
 
 	landscape = new Object;
 	landscape->shader = L"shader.fx";
-
-	// Генерация карты высот
-	float hmap[32][32];
-	for (int i = 0; i<u; i++)
-		for (int j = 0; j<v; j++)
-		{
-			float x = ((float)i / (float)u) - 0.25f;
-			float y = ((float)j / (float)v) - 0.25f;
-			float xx = ((float)i / (float)u) - 0.5f;
-			float yy = ((float)j / (float)v) - 0.5f;
-			float h = xx*yy*xx*yy + 0.3f / (1.0f + (x*x + y*y)*50.0f);
-			hmap[i][j] = h;
-		}
-
-	// Генерация сетки вершин для вершинного буфера
-	landscape->vertices = std::vector<SimpleVertex>(u*v);
-
-	for (int i = 0; i<u; i++)
-		for (int j = 0; j<v; j++)
-		{
-			float x = (float)i / (float)u - 0.5f;
-			float y = (float)j / (float)v - 0.5f; float c = 7.5f;
-			landscape->vertices[j*u + i].Pos = XMFLOAT3(x*c, hmap[i][j] * c, y*c);
-			landscape->vertices[j*u + i].Color = XMFLOAT4(1, 1, 1, 1);
-			landscape->vertices[j*u + i].Normal = XMFLOAT3(0, 1, 0);
-		}
-	//Генерация  индексного буфера
-	const int IndicesCount = (u - 1)*(v - 1) * 6;
-	landscape->indices = std::vector<DWORD>(IndicesCount);
-
-	for (int i = 0; i<(u - 1); i++)
-		for (int j = 0; j<(v - 1); j++)
-		{
-			unsigned int indexa = j*(u - 1) + i;
-			unsigned int indexb = j*u + i;
-			landscape->indices[indexa * 6 + 0] = indexb;
-			landscape->indices[indexa * 6 + 1] = indexb + 1 + u;
-			landscape->indices[indexa * 6 + 2] = indexb + 1;
-
-			landscape->indices[indexa * 6 + 3] = indexb;
-			landscape->indices[indexa * 6 + 4] = indexb + u;
-			landscape->indices[indexa * 6 + 5] = indexb + u + 1;
-		}
-
-	landscape->size = IndicesCount;
 
 	scene.push_back(landscape);
 }
@@ -193,4 +24,91 @@ std::vector<Object*>::iterator& Geometry::end()
 {
 	endIt = scene.end();
 	return endIt;
+}
+
+//void Cube::make_cube(Object * obj, XMFLOAT3 pos, int direction, float size)
+//{
+//	switch (direction)
+//	{
+//	case 1://x
+//	{
+//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, 1.0f / 3, -1.0f / 3) });
+//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, 1.0f / 3, -1.0f / 3) });
+//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, 1.0f / 3, 1.0f / 3) });
+//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, 1.0f / 3, 1.0f / 3) });
+//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y - size, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, -1.0f / 3, -1.0f / 3) });
+//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y - size, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, -1.0f / 3, -1.0f / 3) });
+//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y - size, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, -1.0f / 3, 1.0f / 3) });
+//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y - size, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, -1.0f / 3, 1.0f / 3) });
+//	
+//		obj->indices =
+//		{
+//			0,1,2,
+//			1,2,3,
+//
+//			0,4,6,
+//			0,2,6,
+//
+//			1,3,7,
+//			1,5,7,
+//
+//			2,3,7,
+//			2,6,7,
+//
+//			0,1,5,
+//			0,4,5,
+//
+//			4,5,7,
+//			4,6,7
+//		};
+//
+//		obj->size = 36;
+//	}
+//		break;
+//	case 2://y
+//	{
+//
+//	}
+//		break;
+//	case 3://z
+//	{
+//
+//	}
+//		break;
+//	}
+//}
+
+void Plane::make_plane(Object * obj, XMFLOAT3 pos, int w, int h, int direction, float scale)
+{
+	// Генерация сетки вершин для вершинного буфера
+	obj->vertices = std::vector<SimpleVertex>(w * h);
+
+	for (int i = 0; i < w; i++)
+		for (int j = 0; j < h; j++)
+		{
+			float x = (float)i / (float)w - 0.5f;
+			float y = (float)j / (float)h - 0.5f;
+			obj->vertices[j * w + i].Pos = XMFLOAT3(x * scale, 1.0f * scale, y * scale);
+			obj->vertices[j * w + i].Color = XMFLOAT4(1, 1, 1, 1);
+			obj->vertices[j * w + i].Normal = XMFLOAT3(0, 1, 0);
+		}
+	//Генерация  индексного буфера
+	int IndicesCount = (w - 1) * (h - 1) * 6;
+	obj->indices = std::vector<DWORD>(IndicesCount);
+
+	for (int i = 0; i < (w - 1); i++)
+		for (int j = 0; j < (h - 1); j++)
+		{
+			unsigned int indexa = j * (w - 1) + i;
+			unsigned int indexb = j * w + i;
+			obj->indices[indexa * 6 + 0] = indexb;
+			obj->indices[indexa * 6 + 1] = indexb + 1 + w;
+			obj->indices[indexa * 6 + 2] = indexb + 1;
+
+			obj->indices[indexa * 6 + 3] = indexb;
+			obj->indices[indexa * 6 + 4] = indexb + w;
+			obj->indices[indexa * 6 + 5] = indexb + w + 1;
+		}
+
+	obj->size = IndicesCount;
 }

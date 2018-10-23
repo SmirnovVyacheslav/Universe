@@ -43,3 +43,17 @@ public:
 
 	std::vector<Object*>::iterator& end();
 };
+
+class Plane
+{
+public:
+	static void make_plane(Object * obj, XMFLOAT3 pos, int w, int h, int direction, float scale);
+};
+
+class Cube
+{
+public:
+	//Cube(XMFLOAT3 pos, int direction, int size) {};
+
+	//static void make_cube(Object *obj, XMFLOAT3 pos, int direction, float size);
+};

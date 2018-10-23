@@ -91,22 +91,6 @@ void Camera::move(UINT _x, UINT _y)
 		return;
 	}
 
-	
-	/*xAngle = (static_cast<float>(xDiff) / static_cast<float>(wndWidth)) * 2 * XM_PI * sensitivity;
-	yAngle = (static_cast<float>(yDiff) / static_cast<float>(wndHeight)) * 2 * XM_PI * sensitivity;*/
-
-	/*xAngle += (static_cast<float>(xDiff) / static_cast<float>(wndWidth)) * 2 * XM_PI * sensitivity;
-	yAngle += (static_cast<float>(yDiff) / static_cast<float>(wndHeight)) * 2 * XM_PI * sensitivity;
-	if (abs(xAngle) > XM_PI)
-	{
-		xAngle = xAngle > 0 ? xAngle - 2 * XM_PI : xAngle + 2 * XM_PI;
-	}
-
-	if (abs(yAngle) > XM_PI)
-	{
-		yAngle = yAngle > 0 ? yAngle - 2 * XM_PI : yAngle + 2 * XM_PI;
-	}*/
-
 	xAngle += static_cast<float>(xDiff) * sensitivity;
 	yAngle += static_cast<float>(yDiff) * sensitivity;
 
@@ -118,55 +102,11 @@ void Camera::move(UINT _x, UINT _y)
 	float xAngleRad = xAngle * XM_PI / 180.0f;
 	float yAngleRad = yAngle * XM_PI / 180.0f;
 
-	float vx = cos(xAngleRad) * cos(yAngleRad); //cos(xAngle) + sin(xAngle) * sin(yAngle) + sin(xAngle) * cos(yAngle);
-	float vy = sin(yAngleRad); //cos(yAngle) - sin(yAngle);
-	float vz = sin(xAngleRad) * cos(yAngleRad); //-sin(xAngle) + cos(xAngle) * sin(yAngle) + cos(xAngle) * cos(yAngle);
-
-	//float vx = cos(xAngle) + sin(xAngle);
-	//float vy = 1;
-	//float vz = -sin(xAngle) + cos(xAngle);
-
-	/*float vx = 1;
-	float vy = cos(yAngle) - sin(yAngle);
-	float vz = tan(yAngle) + cos(yAngle);*/
-
-
-	//eye = XMVectorSet((cos(xAngle) - sin(xAngle)) * radius, 1.0f, (sin(xAngle) + cos(xAngle)) * radius, 0.0f);
-	
-	/*xRot = XMMatrixRotationX(xAngle);
-	yRot = XMMatrixRotationY(yAngle);
-	eye = XMVector4Transform(eye, xRot * yRot);*/
-
+	float vx = cos(xAngleRad) * cos(yAngleRad);
+	float vy = sin(yAngleRad);
+	float vz = sin(xAngleRad) * cos(yAngleRad);
 	
 	eye = XMVectorSet(vx * radius, vy * radius, vz * radius, 0.0f);
-
-	/*if (xDiff > 0)
-	{
-
-	}
-	else
-	{
-
-	}*/
-
-
-
-	/*horizontal += (x - _x) * step;
-	vertial += (y - _y) * step;
-	x = _x;
-	y = _y;*/
-
-	//eye = XMVectorSet(cos(horizontal)*radius, 1.0f, -sin(horizontal)*radius, 0.0f);
-
-	/*vx += _x * step;
-	vy += _y * step;
-
-	float vr = sqrt(vx * vx + vy * vy + vz * vz);
-
-	float vtx = sin(vx) * sin(vy) * vr;
-	float vty = cos(vy) * vr;
-	float vtz = sin(vy) * cos(vx) * vr;
-	eye = XMVectorSet(vtx * radius, 1.0f, vtz * radius, 0.0f);*/
 
 	_view = XMMatrixLookAtLH(eye, at, up);
 }
