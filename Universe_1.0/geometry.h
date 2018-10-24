@@ -5,6 +5,9 @@
 
 #include <xnamath.h>
 
+using std::vector;
+using std::wstring;
+
 struct SimpleVertex
 {
 	XMFLOAT3 Pos;
@@ -12,12 +15,25 @@ struct SimpleVertex
 	XMFLOAT3 Normal;
 };
 
-struct Object
+class Object
 {
-	std::wstring shader;
-	std::vector<DWORD> indices;
-	std::vector<SimpleVertex> vertices;
+protected:
+	wstring shader;
+	//vector<DWORD> indices;
+	//vector<SimpleVertex> vertices;
 	int size;
+
+	vector<DWORD> *start_indices;
+	vector<SimpleVertex> *start_vertices;
+	vector<DWORD> *end_indices;
+	vector<SimpleVertex> *end_vertices;
+
+	vector<Object*> contains;
+
+public:
+	Object(vector<DWORD> *indices, vector<SimpleVertex> *vertices): start_indices(indices), start_vertices(vertices){};
+
+	virtual void create() {};
 };
 
 class Geometry
@@ -44,13 +60,13 @@ public:
 	std::vector<Object*>::iterator& end();
 };
 
-class Plane
+class Plane : public Object
 {
 public:
 	static void make_plane(Object * obj, XMFLOAT3 pos, int w, int h, int direction, float scale);
 };
 
-class Cube
+class Cube : public Object
 {
 public:
 	//Cube(XMFLOAT3 pos, int direction, int size) {};
