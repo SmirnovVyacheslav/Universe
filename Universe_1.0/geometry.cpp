@@ -2,15 +2,13 @@
 
 Geometry::Geometry()
 {
-	person = new Object;
+	person = new Person(new vector<DWORD>, new vector<SimpleVertex>);
+	person->create();
 
-	person->shader = L"shader.fx";
+	landscape = new Landscape(new vector<DWORD>, new vector<SimpleVertex>);
+	landscape->create();
 
 	scene.push_back(person);
-
-	landscape = new Object;
-	landscape->shader = L"shader.fx";
-
 	scene.push_back(landscape);
 }
 
