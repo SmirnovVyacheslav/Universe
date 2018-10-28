@@ -2,11 +2,14 @@
 
 Geometry::Geometry()
 {
-	person = new Person(new vector<DWORD>, new vector<SimpleVertex>);
-	person->create();
+	Object_Args args;
 
-	landscape = new Landscape(new vector<DWORD>, new vector<SimpleVertex>);
-	landscape->create();
+	person = new Person;
+	person->create(args);
+
+	args.pos = XMFLOAT3{ 0.0f, 1.0f, 0.0f };
+	landscape = new Landscape;
+	landscape->create(args);
 
 	scene.push_back(person);
 	scene.push_back(landscape);
@@ -19,6 +22,18 @@ std::vector<Object*>::iterator& Geometry::begin()
 }
 
 std::vector<Object*>::iterator& Geometry::end()
+{
+	endIt = scene.end();
+	return endIt;
+}
+
+std::vector<Object_data*>::iterator& Geometry::begin()
+{
+	beginIt = scene.begin();
+	return beginIt;
+}
+
+std::vector<Object_data*>::iterator& Geometry::end()
 {
 	endIt = scene.end();
 	return endIt;
@@ -76,7 +91,7 @@ std::vector<Object*>::iterator& Geometry::end()
 //	}
 //}
 
-void Plane::make_plane(Object * obj, XMFLOAT3 pos, int w, int h, int direction, float scale)
+void Plane::create(Object_Args args)
 {
 	// Генерация сетки вершин для вершинного буфера
 	obj->vertices = std::vector<SimpleVertex>(w * h);
@@ -109,4 +124,43 @@ void Plane::make_plane(Object * obj, XMFLOAT3 pos, int w, int h, int direction, 
 		}
 
 	obj->size = IndicesCount;
+}
+
+template<typename ValueType>
+Object_Iterator<ValueType>::Object_Iterator(ValueType *p) :
+	p(p)
+{
+
+}
+
+template<typename ValueType>
+Object_Iterator<ValueType>::Object_Iterator(const Object_Iterator& it) :
+	p(it.p)
+{
+
+}
+
+template<typename ValueType>
+bool Object_Iterator<ValueType>::operator!=(Object_Iterator const& other) const
+{
+	return p != other.p;
+}
+
+template<typename ValueType>
+bool Object_Iterator<ValueType>::operator==(Object_Iterator const& other) const
+{
+	return p == other.p;
+}
+
+template<typename ValueType>
+typename Object_Iterator<ValueType>::reference Object_Iterator<ValueType>::operator*() const
+{
+	return *p;
+}
+
+template<typename ValueType>
+Object_Iterator<ValueType> &Object_Iterator<ValueType>::operator++()
+{
+	++p;
+	return *this;
 }

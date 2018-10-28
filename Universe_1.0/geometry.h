@@ -17,8 +17,6 @@ struct SimpleVertex
 
 struct Object_Args
 {
-	vector<DWORD> *indices = nullptr;
-	vector<SimpleVertex> *vertices = nullptr;
 	XMFLOAT3 pos = {0.0f, 0.0f, 0.0f};
 	int x = 1;
 	int y = 1;
@@ -27,30 +25,58 @@ struct Object_Args
 	float scale = 1.0f;
 };
 
+struct Object_data
+{
+	wstring shader;
+	vector<DWORD> *indices;
+	vector<SimpleVertex> *vertices;
+};
+
+template<typename ValueType>
+class Object_Iterator : public std::iterator<std::input_iterator_tag, ValueType>
+{
+	friend class OwnContainer;
+private:
+	Object_Iterator(ValueType* p);
+public:
+	Object_Iterator(const Object_Iterator &it);
+
+	bool operator!=(Object_Iterator const& other) const;
+	bool operator==(Object_Iterator const& other) const; //need for BOOST_FOREACH
+	typename Object_Iterator::reference operator*() const;
+	Object_Iterator& operator++();
+private:
+	ValueType* p;
+};
+
 class Object
 {
 protected:
 	wstring shader;
-	//vector<DWORD> indices;
-	//vector<SimpleVertex> vertices;
+	vector<DWORD> indices;
+	vector<SimpleVertex> vertices;
 	int size;
-
-	vector<DWORD> *start_indices;
-	vector<SimpleVertex> *start_vertices;
-	vector<DWORD> *end_indices;
-	vector<SimpleVertex> *end_vertices;
 
 	vector<Object*> components;
 
+	std::vector<Object*>::iterator beginIt;
+	std::vector<Object*>::iterator endIt;
+
 public:
-	Object(vector<DWORD> *indices, vector<SimpleVertex> *vertices): start_indices(indices), start_vertices(vertices){};
+	Object_Iterator<Object_data*> begin() {};
+	Object_Iterator<Object_data*> end() {};
 
-	virtual void create() { };
+	Object_Iterator<const Object_data*> begin() const {};
+	Object_Iterator<const Object_data*> end() const {};
 
-	virtual int create(Object_Args args)
-	{
-		return 0;
-	};
+
+	Object() {};
+
+	virtual void create(Object_Args args)
+	{};
+
+	std::vector<Object_data*>::iterator& begin();
+	std::vector<Object_data*>::iterator& end();
 };
 
 class Geometry
@@ -68,21 +94,15 @@ public:
 	Geometry();
 
 	std::vector<Object*>::iterator& begin();
-
 	std::vector<Object*>::iterator& end();
 };
 
 class Plane : public Object
 {
 public:
-	Plane(vector<DWORD> *indices, vector<SimpleVertex> *vertices) : ::Object(indices, vertices) {};
+	Plane() {};
 
-	void make_plane(Object * obj, XMFLOAT3 pos, int w, int h, int direction, float scale);
-
-	virtual int create(Object_Args args)
-	{
-
-	};
+	virtual void create(Object_Args args);
 };
 
 class Cube : public Object
@@ -96,31 +116,31 @@ public:
 class Person : public Object
 {
 public:
-	Person(vector<DWORD> *indices, vector<SimpleVertex> *vertices) : ::Object(indices, vertices)
+	Person()
 	{
 		shader = L"shader.fx";
 	};
 
 	virtual void create()
 	{
-		components.push_back(new Plane(start_indices, start_vertices));
+		components.push_back(new Plane);
 		Object_Args args;
-		size += components[0]->create(args);
+		components[0]->create(args);
 	};
 };
 
 class Landscape : public Object
 {
 public:
-	Landscape(vector<DWORD> *indices, vector<SimpleVertex> *vertices) : ::Object(indices, vertices)
+	Landscape()
 	{
 		shader = L"shader.fx";
 	};
 
 	virtual void create()
 	{
-		components.push_back(new Plane(start_indices, start_vertices));
+		components.push_back(new Plane);
 		Object_Args args;
-		size += components[0]->create(args);
+		components[0]->create(args);
 	};
 };
