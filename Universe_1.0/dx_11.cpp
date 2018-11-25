@@ -373,7 +373,6 @@ void dx_11::render()
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
 
-	bool first = true;
 	for (auto obj : gObjects)
 	{
 		immediateContext->VSSetShader(obj->shader->vertexShader, NULL, 0);
@@ -383,15 +382,7 @@ void dx_11::render()
 		// Установка констант шейдера
 		//
 
-		if (first)
-		{
-			first = false;
-			localConstantBuffer.mWorld = XMMatrixTranspose(XMMatrixTranslation(6.0f, 0.0f, 0.0));
-		}
-		else
-		{
 			localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
-		}
 
 		/*ConstantBuffer cb;
 		cb.mWorld = XMMatrixTranspose(mWorld);
@@ -416,7 +407,7 @@ void dx_11::render()
 		immediateContext->IASetIndexBuffer(obj->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		//
-		// Рендер куба
+		// Рендер
 		//
 		
 		immediateContext->DrawIndexed(obj->size, 0, 0);
@@ -435,113 +426,64 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 	for (auto it : *geometry)
 	//for (std::vector<Object*>::iterator& it = geometry->begin(); it != geometry->end(); ++it)
 	{
-		Shader *shader;
-		if (!shaders[it->shader])
+		for (auto obj : *it)
 		{
-			shader = new Shader;
-			initShader(it->shader, shader);
-			shaders[it->shader] = shader;
+			Object_data *obj_data = obj.get_data();
+			
+			Shader *shader;
+			if (!shaders[obj_data->shader])
+			{
+				shader = new Shader;
+				initShader(obj_data->shader, shader);
+				shaders[obj_data->shader] = shader;
+			}
+			else
+			{
+				shader = shaders[obj_data->shader];
+			}
+
+			GObjects *gObject = new GObjects;
+			gObjects.push_back(gObject);
+
+			gObject->shader = shader;
+			gObject->size = obj_data->size;
+
+
+			D3D11_BUFFER_DESC bufferDesc;
+			ZeroMemory(&bufferDesc, sizeof(bufferDesc));
+
+			D3D11_SUBRESOURCE_DATA InitData;
+			ZeroMemory(&InitData, sizeof(InitData));
+
+			// Создание вершинного буфера
+			bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+			bufferDesc.ByteWidth = sizeof(SimpleVertex) * obj_data->vertices->size();
+			bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+			bufferDesc.CPUAccessFlags = 0;
+			bufferDesc.MiscFlags = 0;
+
+			InitData.pSysMem = &(*obj_data->vertices)[0];
+			if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
+				return;
+
+			// Создание индексного буфера
+			bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+			bufferDesc.ByteWidth = sizeof(DWORD) * obj_data->indices->size();
+			bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+			bufferDesc.CPUAccessFlags = 0;
+			bufferDesc.MiscFlags = 0;
+
+			InitData.pSysMem = &(*obj_data->indices)[0];
+			if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
+				return;
 		}
-		else
-		{
-			shader = shaders[it->shader];
-		}
-
-		GObjects *gObject = new GObjects;
-		gObjects.push_back(gObject);
-
-		gObject->shader = shader;
-		gObject->size = it->size;
-
-
-		D3D11_BUFFER_DESC bufferDesc;
-		ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-
-		D3D11_SUBRESOURCE_DATA InitData;
-		ZeroMemory(&InitData, sizeof(InitData));
-
-		// Создание вершинного буфера
-		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		bufferDesc.ByteWidth = sizeof(SimpleVertex) * it->vertices.size();
-		bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		bufferDesc.CPUAccessFlags = 0;
-		bufferDesc.MiscFlags = 0;
-
-		InitData.pSysMem = &it->vertices[0];
-		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
-			return;
-
-		//// Установка вершинного буфера
-		//UINT stride = sizeof(SimpleVertex);
-		//UINT offset = 0;
-		//immediateContext->IASetVertexBuffers(0, 1, &gObject->vertexBuffer, &stride, &offset);
-
-		// Создание индексного буфера
-		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		bufferDesc.ByteWidth = sizeof(DWORD) * it->indices.size();
-		bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		bufferDesc.CPUAccessFlags = 0;
-		bufferDesc.MiscFlags = 0;
-
-		InitData.pSysMem = &it->indices[0];
-		if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
-			return;
-
-		//// Установка индексного буфера
-		//immediateContext->IASetIndexBuffer(gObject->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-		// Установка типа примитив
-		immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-
-		//D3D11_BUFFER_DESC bufferDesc;
-		//ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-		//bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		//bufferDesc.ByteWidth = sizeof(SimpleVertex) * 8;
-		//bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		//bufferDesc.CPUAccessFlags = 0;
-		//
-		//D3D11_SUBRESOURCE_DATA InitData;
-		//ZeroMemory(&InitData, sizeof(InitData));
-		//InitData.pSysMem = &it->vertices[0];
-		//if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
-		//	return;
-
-		//// Установка вершинного буфера
-		//UINT stride = sizeof(SimpleVertex);
-		//UINT offset = 0;
-		//immediateContext->IASetVertexBuffers(0, 1, &gObject->vertexBuffer, &stride, &offset);
-
-		//bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		//bufferDesc.ByteWidth = sizeof(WORD) * it->indices.size();        // 36 vertices needed for 12 triangles in a triangle list
-		//bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		//bufferDesc.CPUAccessFlags = 0;
-		//InitData.pSysMem = &it->indices[0];
-		//if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
-		//	return;
-
-		//// Установка индексного буфера
-		//immediateContext->IASetIndexBuffer(gObject->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-		//// Установка типа примитив
-		//immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-		//// Создание буфера констант шейдера
-		//bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		//bufferDesc.ByteWidth = sizeof(ConstantBuffer);
-		//bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		//bufferDesc.CPUAccessFlags = 0;
-		//if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &gObject->constantBuffer) < 0)
-		//	return;
 	}
+
+	// Установка типа примитив
+	immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// Установка матриц
 	mWorld = XMMatrixIdentity();
-	//XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
-	//XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	//XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	//mView = XMMatrixLookAtLH(Eye, At, Up);
-	//mProjection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
 }
 
 void dx_11::setCamera(std::shared_ptr<Camera> _camera)

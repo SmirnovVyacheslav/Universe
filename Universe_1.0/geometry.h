@@ -21,62 +21,113 @@ struct Object_Args
 	int x = 1;
 	int y = 1;
 	int z = 1;
-	int direction = 1;
+	int direction = 1; //1 - x, 2 - y, 3 - z
+	XMFLOAT3 Normal = { 0, 1, 0 };
 	float scale = 1.0f;
 };
 
 struct Object_data
 {
+	int size = 1;
 	wstring shader;
-	vector<DWORD> *indices;
-	vector<SimpleVertex> *vertices;
+	vector<DWORD> *indices = nullptr;
+	vector<SimpleVertex> *vertices = nullptr;
 };
 
 template<typename ValueType>
 class Object_Iterator : public std::iterator<std::input_iterator_tag, ValueType>
 {
-	friend class OwnContainer;
+	friend class Object;
+	friend class Empty_Object;
 private:
 	Object_Iterator(ValueType* p);
 public:
 	Object_Iterator(const Object_Iterator &it);
 
 	bool operator!=(Object_Iterator const& other) const;
-	bool operator==(Object_Iterator const& other) const; //need for BOOST_FOREACH
+	bool operator==(Object_Iterator const& other) const;
 	typename Object_Iterator::reference operator*() const;
 	Object_Iterator& operator++();
 private:
 	ValueType* p;
 };
 
+template<typename ValueType>
+Object_Iterator<ValueType>::Object_Iterator(ValueType *p) :
+	p(p)
+{
+
+};
+
+template<typename ValueType>
+Object_Iterator<ValueType>::Object_Iterator(const Object_Iterator& it) :
+	p(it.p)
+{
+
+};
+
+template<typename ValueType>
+bool Object_Iterator<ValueType>::operator!=(Object_Iterator const& other) const
+{
+	return p != other.p;
+};
+
+template<typename ValueType>
+bool Object_Iterator<ValueType>::operator==(Object_Iterator const& other) const
+{
+	return p == other.p;
+};
+
+template<typename ValueType>
+typename Object_Iterator<ValueType>::reference Object_Iterator<ValueType>::operator*() const
+{
+	return *p;
+};
+
+template<typename ValueType>
+Object_Iterator<ValueType> &Object_Iterator<ValueType>::operator++()
+{
+	++p;
+	return *this;
+};
+
+class Empty_Object;
+
 class Object
 {
 protected:
-	wstring shader;
-	vector<DWORD> indices;
-	vector<SimpleVertex> vertices;
-	int size;
-
+	mutable Object *empty;
+	Object_data *data;
 	vector<Object*> components;
+	mutable int curr_obj;
 
-	std::vector<Object*>::iterator beginIt;
-	std::vector<Object*>::iterator endIt;
+	bool next_data();
+
+	void reset_curr_obj();
+	void reset_curr_obj() const;
+
+	Object& operator++();
 
 public:
-	Object_Iterator<Object_data*> begin() {};
-	Object_Iterator<Object_data*> end() {};
+	Object_Iterator<Object> begin();
+	Object_Iterator<Object> end();
 
-	Object_Iterator<const Object_data*> begin() const {};
-	Object_Iterator<const Object_data*> end() const {};
+	Object_Iterator<const Object> begin() const;
+	Object_Iterator<const Object> end() const;
 
 
-	Object() {};
+	Object();
 
-	virtual void create(Object_Args args)
-	{};
+	virtual void create(Object_Args args);
 
-	std::vector<Object_data*>::iterator& begin();
-	std::vector<Object_data*>::iterator& end();
+	Object_data* get_data();
+};
+
+class Empty_Object : public Object
+{
+	Object& operator++();
+
+	Object_data* get_data();
 };
 
 class Geometry
@@ -84,23 +135,20 @@ class Geometry
 	Object* person;
 	Object* landscape;
 
-	std::vector<Object*> scene;
-
-	std::vector<Object*>::iterator beginIt;
-	std::vector<Object*>::iterator endIt;
+	vector<Object*> scene;
 
 public:
 
 	Geometry();
 
-	std::vector<Object*>::iterator& begin();
-	std::vector<Object*>::iterator& end();
+	vector<Object*>::iterator begin();
+	vector<Object*>::iterator end();
 };
 
 class Plane : public Object
 {
 public:
-	Plane() {};
+	Plane();
 
 	virtual void create(Object_Args args);
 };
@@ -108,39 +156,23 @@ public:
 class Cube : public Object
 {
 public:
-	//Cube(XMFLOAT3 pos, int direction, int size) {};
+	Cube();
 
-	//static void make_cube(Object *obj, XMFLOAT3 pos, int direction, float size);
+	virtual void create(Object_Args args);
 };
 
 class Person : public Object
 {
 public:
-	Person()
-	{
-		shader = L"shader.fx";
-	};
+	Person();
 
-	virtual void create()
-	{
-		components.push_back(new Plane);
-		Object_Args args;
-		components[0]->create(args);
-	};
+	virtual void create(Object_Args args);
 };
 
 class Landscape : public Object
 {
 public:
-	Landscape()
-	{
-		shader = L"shader.fx";
-	};
+	Landscape();
 
-	virtual void create()
-	{
-		components.push_back(new Plane);
-		Object_Args args;
-		components[0]->create(args);
-	};
+	virtual void create(Object_Args args);
 };

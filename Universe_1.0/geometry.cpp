@@ -15,152 +15,229 @@ Geometry::Geometry()
 	scene.push_back(landscape);
 }
 
-std::vector<Object*>::iterator& Geometry::begin()
+vector<Object*>::iterator Geometry::begin()
 {
-	beginIt = scene.begin();
-	return beginIt;
+	return scene.begin();
+}
+vector<Object*>::iterator Geometry::end()
+{
+	return scene.end();
 }
 
-std::vector<Object*>::iterator& Geometry::end()
+Cube::Cube()
 {
-	endIt = scene.end();
-	return endIt;
+
 }
 
-std::vector<Object_data*>::iterator& Geometry::begin()
+void Cube::create(Object_Args args)
 {
-	beginIt = scene.begin();
-	return beginIt;
+	components.push_back(new Plane);
+	components[0]->create(args);
+
+	components.push_back(new Plane);
+	components[1]->create(args);
+
+	components.push_back(new Plane);
+	components[2]->create(args);
+
+	components.push_back(new Plane);
+	components[3]->create(args);
+
+	components.push_back(new Plane);
+	components[4]->create(args);
+
+	components.push_back(new Plane);
+	components[5]->create(args);
 }
 
-std::vector<Object_data*>::iterator& Geometry::end()
+Plane::Plane()
 {
-	endIt = scene.end();
-	return endIt;
+	data = new Object_data;
+	data->shader = L"shader.fx";
 }
-
-//void Cube::make_cube(Object * obj, XMFLOAT3 pos, int direction, float size)
-//{
-//	switch (direction)
-//	{
-//	case 1://x
-//	{
-//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, 1.0f / 3, -1.0f / 3) });
-//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, 1.0f / 3, -1.0f / 3) });
-//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, 1.0f / 3, 1.0f / 3) });
-//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, 1.0f / 3, 1.0f / 3) });
-//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y - size, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, -1.0f / 3, -1.0f / 3) });
-//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y - size, pos.z) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, -1.0f / 3, -1.0f / 3) });
-//		obj->vertices.push_back({ XMFLOAT3(pos.x, pos.y - size, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f / 3, -1.0f / 3, 1.0f / 3) });
-//		obj->vertices.push_back({ XMFLOAT3(pos.x + size, pos.y - size, pos.z - size) , XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),  XMFLOAT3(-1.0f / 3, -1.0f / 3, 1.0f / 3) });
-//	
-//		obj->indices =
-//		{
-//			0,1,2,
-//			1,2,3,
-//
-//			0,4,6,
-//			0,2,6,
-//
-//			1,3,7,
-//			1,5,7,
-//
-//			2,3,7,
-//			2,6,7,
-//
-//			0,1,5,
-//			0,4,5,
-//
-//			4,5,7,
-//			4,6,7
-//		};
-//
-//		obj->size = 36;
-//	}
-//		break;
-//	case 2://y
-//	{
-//
-//	}
-//		break;
-//	case 3://z
-//	{
-//
-//	}
-//		break;
-//	}
-//}
 
 void Plane::create(Object_Args args)
 {
 	// Генерация сетки вершин для вершинного буфера
-	obj->vertices = std::vector<SimpleVertex>(w * h);
+	data->vertices = new vector<SimpleVertex>(args.x * args.y);
 
-	for (int i = 0; i < w; i++)
-		for (int j = 0; j < h; j++)
+	float *x = nullptr, *y = nullptr, *z = nullptr;
+	float w, h, v;
+
+	switch (args.direction)
+	{
+	case 1:
+	{
+		x = &w;
+		y = &v;
+		z = &h;
+	}
+		break;
+	case 2:
+	{
+		x = &w;
+		y = &h;
+		z = &v;
+	}
+		break;
+	case 3:
+	{
+		x = &v;
+		y = &h;
+		z = &w;
+	}
+		break;
+	}
+
+	for (int i = 0; i < args.x; i++)
+		for (int j = 0; j < args.y; j++)
 		{
-			float x = (float)i / (float)w - 0.5f;
-			float y = (float)j / (float)h - 0.5f;
-			obj->vertices[j * w + i].Pos = XMFLOAT3(x * scale, 1.0f * scale, y * scale);
-			obj->vertices[j * w + i].Color = XMFLOAT4(1, 1, 1, 1);
-			obj->vertices[j * w + i].Normal = XMFLOAT3(0, 1, 0);
+			w = (float)i / (float)args.x - 0.5f;
+			h = (float)j / (float)args.y - 0.5f;
+			v = 1.0;
+			(*data->vertices)[j * args.x + i].Pos = XMFLOAT3(*x * args.scale, *y * args.scale, *z * args.scale);
+			(*data->vertices)[j * args.x + i].Color = XMFLOAT4(1, 1, 1, 1);
+			(*data->vertices)[j * args.x + i].Normal = args.Normal;
 		}
 	//Генерация  индексного буфера
-	int IndicesCount = (w - 1) * (h - 1) * 6;
-	obj->indices = std::vector<DWORD>(IndicesCount);
+	int IndicesCount = (args.x - 1) * (args.y - 1) * 6;
+	data->indices = new vector<DWORD>(IndicesCount);
 
-	for (int i = 0; i < (w - 1); i++)
-		for (int j = 0; j < (h - 1); j++)
+	for (int i = 0; i < (args.x - 1); i++)
+		for (int j = 0; j < (args.y - 1); j++)
 		{
-			unsigned int indexa = j * (w - 1) + i;
-			unsigned int indexb = j * w + i;
-			obj->indices[indexa * 6 + 0] = indexb;
-			obj->indices[indexa * 6 + 1] = indexb + 1 + w;
-			obj->indices[indexa * 6 + 2] = indexb + 1;
+			unsigned int indexa = j * (args.x - 1) + i;
+			unsigned int indexb = j * args.x + i;
+			(*data->indices)[indexa * 6 + 0] = indexb;
+			(*data->indices)[indexa * 6 + 1] = indexb + 1 + args.x;
+			(*data->indices)[indexa * 6 + 2] = indexb + 1;
 
-			obj->indices[indexa * 6 + 3] = indexb;
-			obj->indices[indexa * 6 + 4] = indexb + w;
-			obj->indices[indexa * 6 + 5] = indexb + w + 1;
+			(*data->indices)[indexa * 6 + 3] = indexb;
+			(*data->indices)[indexa * 6 + 4] = indexb + args.x;
+			(*data->indices)[indexa * 6 + 5] = indexb + args.x + 1;
 		}
 
-	obj->size = IndicesCount;
+	data->size = IndicesCount;
 }
 
-template<typename ValueType>
-Object_Iterator<ValueType>::Object_Iterator(ValueType *p) :
-	p(p)
+Person::Person()
 {
 
 }
 
-template<typename ValueType>
-Object_Iterator<ValueType>::Object_Iterator(const Object_Iterator& it) :
-	p(it.p)
+void Person::create(Object_Args args)
+{
+	components.push_back(new Cube);
+	components[0]->create(args);
+}
+
+Landscape::Landscape()
 {
 
 }
 
-template<typename ValueType>
-bool Object_Iterator<ValueType>::operator!=(Object_Iterator const& other) const
+void Landscape::create(Object_Args args)
 {
-	return p != other.p;
+	components.push_back(new Plane);
+	components[0]->create(args);
 }
 
-template<typename ValueType>
-bool Object_Iterator<ValueType>::operator==(Object_Iterator const& other) const
+bool Object::next_data()
 {
-	return p == other.p;
+	if (data != nullptr)
+		return false;
+
+	if (components[curr_obj]->next_data() == false)
+	{
+		if (++curr_obj == components.size())
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
-template<typename ValueType>
-typename Object_Iterator<ValueType>::reference Object_Iterator<ValueType>::operator*() const
+void Object::reset_curr_obj()
 {
-	return *p;
+	if (data != nullptr)
+		return;
+
+	curr_obj = 0;
+	for (auto obj : components)
+	{
+		obj->reset_curr_obj();
+	}
+}
+void Object::reset_curr_obj() const
+{
+	if (data != nullptr)
+		return;
+
+	curr_obj = 0;
+	for (auto obj : components)
+	{
+		obj->reset_curr_obj();
+	}
 }
 
-template<typename ValueType>
-Object_Iterator<ValueType> &Object_Iterator<ValueType>::operator++()
+Object& Object::operator++()
 {
-	++p;
+	if (next_data() == true)
+		return *this;
+
+	return *empty;
+}
+
+Object_Iterator<Object> Object::begin()
+{
+	if (empty == nullptr)
+		empty = new Empty_Object;
+	reset_curr_obj();
+	return Object_Iterator<Object>(this);
+}
+Object_Iterator<Object> Object::end()
+{
+	reset_curr_obj();
+	return Object_Iterator<Object>(empty);
+}
+
+Object_Iterator<const Object> Object::begin() const
+{
+	if (empty == nullptr)
+		empty = new Empty_Object;
+	reset_curr_obj();
+	return Object_Iterator<const Object>(this);
+}
+Object_Iterator<const Object> Object::end() const
+{
+	reset_curr_obj();
+	return Object_Iterator<const Object>(empty);
+}
+
+Object::Object()
+{
+	data = nullptr;
+	empty = nullptr;
+}
+
+void Object::create(Object_Args args)
+{}
+
+Object_data* Object::get_data()
+{
+	if (data != nullptr)
+		return data;
+
+	return components[curr_obj]->get_data();
+}
+
+Object& Empty_Object::operator++()
+{
 	return *this;
+}
+
+Object_data* Empty_Object::get_data()
+{
+	return nullptr;
 }
