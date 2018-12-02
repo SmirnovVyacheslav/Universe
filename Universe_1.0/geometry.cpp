@@ -24,30 +24,40 @@ vector<Object*>::iterator Geometry::end()
 	return scene.end();
 }
 
-Cube::Cube()
+Cube::Cube() {}
+
+void Cube::create(Object_Args& args)
 {
-
-}
-
-void Cube::create(Object_Args args)
-{
-	components.push_back(new Plane);
-	components[0]->create(args);
+	Object_Args plane_args = args;
+	plane_args.length = 2;
+	plane_args.width  = 2;
 
 	components.push_back(new Plane);
-	components[1]->create(args);
+	components[0]->create(plane_args); //down
 
 	components.push_back(new Plane);
-	components[2]->create(args);
+	plane_args.plane = planeYZ;
+	plane_args.pos.y += args.length * args.scale;
+	components[1]->create(plane_args); //left side
 
 	components.push_back(new Plane);
-	components[3]->create(args);
+	plane_args.plane = planeXZ;
+	components[2]->create(plane_args); //top
 
 	components.push_back(new Plane);
-	components[4]->create(args);
+	plane_args.plane = planeXY;
+	components[3]->create(plane_args); //back side
 
 	components.push_back(new Plane);
-	components[5]->create(args);
+	plane_args.plane = planeYZ;
+	plane_args.pos.x += args.length * args.scale;
+	components[4]->create(plane_args); //right side
+
+	components.push_back(new Plane);
+	plane_args.plane = planeXY;
+	plane_args.pos.x = args.pos.x;
+	plane_args.pos.z += args.width * args.scale;
+	components[5]->create(plane_args); //front side
 }
 
 Plane::Plane()
@@ -56,65 +66,65 @@ Plane::Plane()
 	data->shader = L"shader.fx";
 }
 
-void Plane::create(Object_Args args)
+void Plane::create(Object_Args& args)
 {
 	// Генерация сетки вершин для вершинного буфера
-	data->vertices = new vector<SimpleVertex>(args.x * args.y);
+	//data->vertices.reserve(args.length * args.width);
+	data->vertices = vector<Vertex>(args.length * args.width);
 
-	float *x = nullptr, *y = nullptr, *z = nullptr;
-	float w, h, v;
+	float *length = nullptr, *width = nullptr, *height = nullptr;
+	float cur_length = 1.0f, cur_width = 1.0f, cur_height = 1.0f;
 
-	switch (args.direction)
+	switch (args.plane)
 	{
-	case 1:
+	case planeXZ:
 	{
-		x = &w;
-		y = &v;
-		z = &h;
+		length = &cur_length;
+		width  = &cur_height;
+		height = &cur_width;
 	}
 		break;
-	case 2:
+	case planeXY:
 	{
-		x = &w;
-		y = &h;
-		z = &v;
+		length = &cur_length;
+		width  = &cur_width;
+		height = &cur_height;
 	}
 		break;
-	case 3:
+	case planeYZ:
 	{
-		x = &v;
-		y = &h;
-		z = &w;
+		length = &cur_height;
+		width  = &cur_width;
+		height = &cur_length;
 	}
 		break;
 	}
 
-	for (int i = 0; i < args.x; i++)
-		for (int j = 0; j < args.y; j++)
+	for (int i = 0; i < args.length; ++i)
+		for (int j = 0; j < args.width; ++j)
 		{
-			w = (float)i / (float)args.x - 0.5f;
-			h = (float)j / (float)args.y - 0.5f;
-			v = 1.0;
-			(*data->vertices)[j * args.x + i].Pos = XMFLOAT3(*x * args.scale, *y * args.scale, *z * args.scale);
-			(*data->vertices)[j * args.x + i].Color = XMFLOAT4(1, 1, 1, 1);
-			(*data->vertices)[j * args.x + i].Normal = args.Normal;
+			cur_length = (float)i / (float)args.length - 0.5f;
+			cur_width  = (float)j / (float)args.width  - 0.5f;
+			data->vertices[j * args.length + i].pos = XMFLOAT3(*length * args.scale, *width * args.scale, *height * args.scale);
+			data->vertices[j * args.length + i].color = args.color;
+			data->vertices[j * args.length + i].normal = args.normal;
 		}
 	//Генерация  индексного буфера
-	int IndicesCount = (args.x - 1) * (args.y - 1) * 6;
-	data->indices = new vector<DWORD>(IndicesCount);
+	int IndicesCount = (args.length - 1) * (args.width - 1) * 6;
+	data->indices = vector<DWORD>(IndicesCount);
 
-	for (int i = 0; i < (args.x - 1); i++)
-		for (int j = 0; j < (args.y - 1); j++)
+	for (int i = 0; i < (args.length - 1); ++i)
+		for (int j = 0; j < (args.width - 1); ++j)
 		{
-			unsigned int indexa = j * (args.x - 1) + i;
-			unsigned int indexb = j * args.x + i;
-			(*data->indices)[indexa * 6 + 0] = indexb;
-			(*data->indices)[indexa * 6 + 1] = indexb + 1 + args.x;
-			(*data->indices)[indexa * 6 + 2] = indexb + 1;
+			unsigned int index_a = j * (args.length - 1) + i;
+			unsigned int index_b = j * args.length + i;
+			data->indices[index_a * 6 + 0] = index_b;
+			data->indices[index_a * 6 + 1] = index_b + 1 + args.length;
+			data->indices[index_a * 6 + 2] = index_b + 1;
 
-			(*data->indices)[indexa * 6 + 3] = indexb;
-			(*data->indices)[indexa * 6 + 4] = indexb + args.x;
-			(*data->indices)[indexa * 6 + 5] = indexb + args.x + 1;
+			data->indices[index_a * 6 + 3] = index_b;
+			data->indices[index_a * 6 + 4] = index_b + args.length;
+			data->indices[index_a * 6 + 5] = index_b + args.length + 1;
 		}
 
 	data->size = IndicesCount;
@@ -125,10 +135,12 @@ Person::Person()
 
 }
 
-void Person::create(Object_Args args)
+void Person::create(Object_Args& args)
 {
+	Object_Args cube_args = args;
+
 	components.push_back(new Cube);
-	components[0]->create(args);
+	components[0]->create(cube_args);
 }
 
 Landscape::Landscape()
@@ -136,10 +148,15 @@ Landscape::Landscape()
 
 }
 
-void Landscape::create(Object_Args args)
+void Landscape::create(Object_Args& args)
 {
+	Object_Args land_args = args;
+
 	components.push_back(new Plane);
-	components[0]->create(args);
+	land_args.length = 50;
+	land_args.width  = 50;
+	land_args.scale = 2;
+	components[0]->create(land_args);
 }
 
 bool Object::next_data()
@@ -198,7 +215,7 @@ Object_Iterator<Object> Object::begin()
 }
 Object_Iterator<Object> Object::end()
 {
-	reset_curr_obj();
+	//reset_curr_obj();
 	return Object_Iterator<Object>(empty);
 }
 
@@ -211,7 +228,7 @@ Object_Iterator<const Object> Object::begin() const
 }
 Object_Iterator<const Object> Object::end() const
 {
-	reset_curr_obj();
+	//reset_curr_obj();
 	return Object_Iterator<const Object>(empty);
 }
 
@@ -221,15 +238,26 @@ Object::Object()
 	empty = nullptr;
 }
 
-void Object::create(Object_Args args)
+Object::~Object()
+{
+
+}
+
+void Object::create(Object_Args& args)
 {}
 
-Object_data* Object::get_data()
+Object_data& Object::get_data()
 {
 	if (data != nullptr)
-		return data;
+		return *data;
 
 	return components[curr_obj]->get_data();
+}
+
+
+Empty_Object::Empty_Object()
+{
+	data = new Object_data;
 }
 
 Object& Empty_Object::operator++()
@@ -237,7 +265,7 @@ Object& Empty_Object::operator++()
 	return *this;
 }
 
-Object_data* Empty_Object::get_data()
+Object_data& Empty_Object::get_data()
 {
-	return nullptr;
+	return *data;
 }

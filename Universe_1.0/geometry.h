@@ -8,21 +8,24 @@
 using std::vector;
 using std::wstring;
 
-struct SimpleVertex
+struct Vertex
 {
-	XMFLOAT3 Pos;
-	XMFLOAT4 Color;
-	XMFLOAT3 Normal;
+	XMFLOAT3 pos;
+	XMFLOAT4 color;
+	XMFLOAT3 normal;
 };
+
+enum Object_Plane{planeXZ = 1, planeXY = 2, planeYZ = 3};
 
 struct Object_Args
 {
 	XMFLOAT3 pos = {0.0f, 0.0f, 0.0f};
-	int x = 1;
-	int y = 1;
-	int z = 1;
-	int direction = 1; //1 - x, 2 - y, 3 - z
-	XMFLOAT3 Normal = { 0, 1, 0 };
+	int length = 1;
+	int width  = 1;
+	int height = 1;
+	int plane  = planeXZ;
+	XMFLOAT3 normal = { 0.0f, 1.0f, 0.0f };
+	XMFLOAT4 color  = { 1.0f, 1.0f, 1.0f, 1.0f };
 	float scale = 1.0f;
 };
 
@@ -30,8 +33,8 @@ struct Object_data
 {
 	int size = 1;
 	wstring shader;
-	vector<DWORD> *indices = nullptr;
-	vector<SimpleVertex> *vertices = nullptr;
+	vector<DWORD> indices;
+	vector<Vertex> vertices;
 };
 
 template<typename ValueType>
@@ -40,64 +43,44 @@ class Object_Iterator : public std::iterator<std::input_iterator_tag, ValueType>
 	friend class Object;
 	friend class Empty_Object;
 private:
-	Object_Iterator(ValueType* p);
+	Object_Iterator(ValueType* p) : p(p) {};
 public:
-	Object_Iterator(const Object_Iterator &it);
+	Object_Iterator(const Object_Iterator& it) : p(it.p) {};
 
-	bool operator!=(Object_Iterator const& other) const;
-	bool operator==(Object_Iterator const& other) const;
-	typename Object_Iterator::reference operator*() const;
-	Object_Iterator& operator++();
+	bool operator!=(Object_Iterator const& other) const
+	{
+		return p != other.p;
+	};
+
+	bool operator==(Object_Iterator const& other) const
+	{
+		return p == other.p;
+	};
+
+	typename Object_Iterator::reference operator*() const
+	{
+		return *p;
+	};
+
+	Object_Iterator& operator++()
+	{
+		p = &++(*p);
+		return *this;
+	};
+
 private:
 	ValueType* p;
-};
-
-template<typename ValueType>
-Object_Iterator<ValueType>::Object_Iterator(ValueType *p) :
-	p(p)
-{
-
-};
-
-template<typename ValueType>
-Object_Iterator<ValueType>::Object_Iterator(const Object_Iterator& it) :
-	p(it.p)
-{
-
-};
-
-template<typename ValueType>
-bool Object_Iterator<ValueType>::operator!=(Object_Iterator const& other) const
-{
-	return p != other.p;
-};
-
-template<typename ValueType>
-bool Object_Iterator<ValueType>::operator==(Object_Iterator const& other) const
-{
-	return p == other.p;
-};
-
-template<typename ValueType>
-typename Object_Iterator<ValueType>::reference Object_Iterator<ValueType>::operator*() const
-{
-	return *p;
-};
-
-template<typename ValueType>
-Object_Iterator<ValueType> &Object_Iterator<ValueType>::operator++()
-{
-	++p;
-	return *this;
 };
 
 class Empty_Object;
 
 class Object
 {
+	friend class Object_Iterator<Object>;
+
 protected:
-	mutable Object *empty;
-	Object_data *data;
+	mutable Object* empty;
+	Object_data* data;
 	vector<Object*> components;
 	mutable int curr_obj;
 
@@ -117,17 +100,23 @@ public:
 
 
 	Object();
+	virtual ~Object();
 
-	virtual void create(Object_Args args);
+	virtual void create(Object_Args& args);
 
-	Object_data* get_data();
+	virtual Object_data& get_data();
 };
 
 class Empty_Object : public Object
 {
+	friend class Object_Iterator<Object>;
+
 	Object& operator++();
 
-	Object_data* get_data();
+	Object_data& get_data();
+public:
+
+	Empty_Object();
 };
 
 class Geometry
@@ -150,7 +139,7 @@ class Plane : public Object
 public:
 	Plane();
 
-	virtual void create(Object_Args args);
+	virtual void create(Object_Args& args);
 };
 
 class Cube : public Object
@@ -158,7 +147,7 @@ class Cube : public Object
 public:
 	Cube();
 
-	virtual void create(Object_Args args);
+	virtual void create(Object_Args& args);
 };
 
 class Person : public Object
@@ -166,7 +155,7 @@ class Person : public Object
 public:
 	Person();
 
-	virtual void create(Object_Args args);
+	virtual void create(Object_Args& args);
 };
 
 class Landscape : public Object
@@ -174,5 +163,5 @@ class Landscape : public Object
 public:
 	Landscape();
 
-	virtual void create(Object_Args args);
+	virtual void create(Object_Args& args);
 };

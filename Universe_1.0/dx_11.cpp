@@ -399,7 +399,7 @@ void dx_11::render()
 		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
 
 		// Установка вершинного буфера
-		UINT stride = sizeof(SimpleVertex);
+		UINT stride = sizeof(Vertex);
 		UINT offset = 0;
 		immediateContext->IASetVertexBuffers(0, 1, &obj->vertexBuffer, &stride, &offset);
 
@@ -428,25 +428,25 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 	{
 		for (auto obj : *it)
 		{
-			Object_data *obj_data = obj.get_data();
+			Object_data& obj_data = obj.get_data();
 			
 			Shader *shader;
-			if (!shaders[obj_data->shader])
+			if (!shaders[obj_data.shader])
 			{
 				shader = new Shader;
-				initShader(obj_data->shader, shader);
-				shaders[obj_data->shader] = shader;
+				initShader(obj_data.shader, shader);
+				shaders[obj_data.shader] = shader;
 			}
 			else
 			{
-				shader = shaders[obj_data->shader];
+				shader = shaders[obj_data.shader];
 			}
 
 			GObjects *gObject = new GObjects;
 			gObjects.push_back(gObject);
 
 			gObject->shader = shader;
-			gObject->size = obj_data->size;
+			gObject->size = obj_data.size;
 
 
 			D3D11_BUFFER_DESC bufferDesc;
@@ -457,23 +457,23 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 
 			// Создание вершинного буфера
 			bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-			bufferDesc.ByteWidth = sizeof(SimpleVertex) * obj_data->vertices->size();
+			bufferDesc.ByteWidth = sizeof(Vertex) * obj_data.vertices.size();
 			bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 			bufferDesc.CPUAccessFlags = 0;
 			bufferDesc.MiscFlags = 0;
 
-			InitData.pSysMem = &(*obj_data->vertices)[0];
+			InitData.pSysMem = &obj_data.vertices[0];
 			if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
 				return;
 
 			// Создание индексного буфера
 			bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-			bufferDesc.ByteWidth = sizeof(DWORD) * obj_data->indices->size();
+			bufferDesc.ByteWidth = sizeof(DWORD) * obj_data.indices.size();
 			bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 			bufferDesc.CPUAccessFlags = 0;
 			bufferDesc.MiscFlags = 0;
 
-			InitData.pSysMem = &(*obj_data->indices)[0];
+			InitData.pSysMem = &obj_data.indices[0];
 			if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
 				return;
 		}

@@ -24,8 +24,6 @@ class Camera
 	XMMATRIX                _view;
 	XMMATRIX                _projection;
 
-	//float xAngle = -3.0f * XM_PI / 4.0f;
-	//float yAngle = -3.0f * XM_PI / 4.0f;
 	float xAngle = 0.0f;
 	float yAngle = -90.0f;
 	float radius = 3.0f;
@@ -38,12 +36,6 @@ class Camera
 	XMMATRIX xRot;
 	XMMATRIX yRot;
 	XMMATRIX zRot;
-
-	//float radius = 5.0f;
-	//float horizontal = 0.0f;
-	//float vertial = 1.0f;
-	//float step = 0.00002f;
-	//float vx = 0.0f, vy = 0.0f, vz = 1.0f;
 
 	int x = 0;
 	int y = 0;
@@ -116,8 +108,6 @@ class dx_11
 
 
 	XMMATRIX                mWorld;
-	//XMMATRIX                mView;
-	//XMMATRIX                mProjection;
 
 	HWND hWnd;
 	UINT wndWidth, wndHeight;
