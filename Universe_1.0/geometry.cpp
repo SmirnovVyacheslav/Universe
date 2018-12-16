@@ -7,12 +7,12 @@ Geometry::Geometry()
 	person = new Person;
 	person->create(args);
 
-	//args.pos = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	//landscape = new Landscape;
-	//landscape->create(args);
+	args.pos = XMFLOAT3{ 0.0f, -2.0f, 0.0f };
+	landscape = new Landscape;
+	landscape->create(args);
 
 	scene.push_back(person);
-	//scene.push_back(landscape);
+	scene.push_back(landscape);
 }
 
 vector<Object*>::iterator Geometry::begin()
@@ -36,37 +36,43 @@ void Cube::create(Object_Args& args)
 	components.push_back(new Plane);
 	plane_args.normal = { 0.0f, -1.0f, 0.0f };
 	plane_args.plane = planeXZ;
-	plane_args.scale = 1.0f;
+	plane_args.pos.y = args.pos.y - (float)(plane_args.v_res - 1) / 2.0f * args.scale;
 	components[0]->create(plane_args); //down
 
-	//components.push_back(new Plane);
-	//plane_args.normal = { 1.0f, 0.0f, 0.0f };
-	//plane_args.plane = planeYZ;
-	////plane_args.pos.y += 0.5 * args.scale;
-	//components[1]->create(plane_args); //left side
+	plane_args.pos = args.pos;
+	components.push_back(new Plane);
+	plane_args.normal = { 1.0f, 0.0f, 0.0f };
+	plane_args.plane = planeYZ;
+	plane_args.pos.x = args.pos.x - (float)(plane_args.u_res - 1) / 2.0f * args.scale;
+	components[1]->create(plane_args); //left side
 
-	//components.push_back(new Plane);
-	//plane_args.normal = { 0.0f, 1.0f, 0.0f };
-	//plane_args.plane = planeXZ;
-	//components[2]->create(plane_args); //top
+	plane_args.pos = args.pos;
+	components.push_back(new Plane);
+	plane_args.normal = { 0.0f, 1.0f, 0.0f };
+	plane_args.plane = planeXZ;
+	plane_args.pos.y = args.pos.y + (float)(plane_args.v_res - 1) / 2.0f * args.scale;
+	components[2]->create(plane_args); //top
 
-	//components.push_back(new Plane);
-	//plane_args.normal = { 0.0f, 0.0f, 1.0f };
-	//plane_args.plane = planeXY;
-	//components[3]->create(plane_args); //back side
+	plane_args.pos = args.pos;
+	components.push_back(new Plane);
+	plane_args.normal = { 0.0f, 0.0f, 1.0f };
+	plane_args.plane = planeXY;
+	plane_args.pos.z = args.pos.z - (float)(plane_args.v_res - 1) / 2.0f * args.scale;
+	components[3]->create(plane_args); //back side
 
-	//components.push_back(new Plane);
-	//plane_args.normal = { 1.0f, 0.0f, 0.0f };
-	//plane_args.plane = planeYZ;
-	//plane_args.pos.x += args.length * args.scale;
-	//components[4]->create(plane_args); //right side
+	plane_args.pos = args.pos;
+	components.push_back(new Plane);
+	plane_args.normal = { 1.0f, 0.0f, 0.0f };
+	plane_args.plane = planeYZ;
+	plane_args.pos.x = args.pos.x + (float)(plane_args.u_res - 1) / 2.0f * args.scale;
+	components[4]->create(plane_args); //right side
 
-	//components.push_back(new Plane);
-	//plane_args.normal = { 0.0f, 0.0f, 1.0f };
-	//plane_args.plane = planeXY;
-	//plane_args.pos.x = args.pos.x;
-	//plane_args.pos.z += args.width * args.scale;
-	//components[5]->create(plane_args); //front side
+	plane_args.pos = args.pos;
+	components.push_back(new Plane);
+	plane_args.normal = { 0.0f, 0.0f, 1.0f };
+	plane_args.plane = planeXY;
+	plane_args.pos.z = args.pos.z + (float)(plane_args.v_res - 1) / 2.0f * args.scale;
+	components[5]->create(plane_args); //front side
 }
 
 Plane::Plane() : scale_def(1.0f)
@@ -155,9 +161,11 @@ void Landscape::create(Object_Args& args)
 	Object_Args land_args = args;
 
 	components.push_back(new Plane);
+	land_args.plane = planeXZ;
 	land_args.u_res = 50;
 	land_args.v_res = 50;
-	land_args.scale = 1.0f;
+	land_args.scale = 0.1f;
+	land_args.pos = { 0.0f, -1.0f, 0.0f };
 	components[0]->create(land_args);
 }
 
