@@ -15,14 +15,15 @@ struct Vertex
 	XMFLOAT3 normal;
 };
 
-enum Object_Plane{planeXZ = 1, planeXY = 2, planeYZ = 3};
+enum Object_Plane{planeXZ = 0, planeXY = 1, planeYZ = 2};
 
 struct Object_Args
 {
 	XMFLOAT3 pos = {0.0f, 0.0f, 0.0f};
-	int length = 1;
-	int width  = 1;
-	int height = 1;
+	// uvw resolution
+	int u_res = 1;
+	int v_res = 1;
+	int w_res = 1;
 	int plane  = planeXZ;
 	XMFLOAT3 normal = { 0.0f, 1.0f, 0.0f };
 	XMFLOAT4 color  = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -136,6 +137,14 @@ public:
 
 class Plane : public Object
 {
+	float scale_def;
+
+	XMFLOAT3(Plane::*pos[3]) (float length, float width, Object_Args& args);
+
+	XMFLOAT3 pos_xz(float length, float width, Object_Args& args);
+	XMFLOAT3 pos_xy(float length, float width, Object_Args& args);
+	XMFLOAT3 pos_yz(float length, float width, Object_Args& args);
+
 public:
 	Plane();
 

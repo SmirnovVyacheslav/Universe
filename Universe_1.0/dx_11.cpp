@@ -2,9 +2,9 @@
 
 Camera::Camera()
 {
-	eye = XMVectorSet(0.0f, 1.0f, -4.0f, 0.0f);
-	at = XMVectorSet(0.0f, 3.0f, 0.0f, 0.0f);
-	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	eye = XMVectorSet(0.0f, 1.0f, -1.0f, 0.0f); //Откуда
+	at = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f); //Куда
+	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f); //Верх
 }
 
 void Camera::init(HWND _hWnd)
@@ -353,12 +353,6 @@ bool dx_11::compileShader(std::wstring path, LPCSTR type, LPCSTR shaderModel, ID
 
 void dx_11::render()
 {
-	
-	//
-	// Установка трансформации для куба
-	//
-	//mWorld = XMMatrixRotationY(3.14159f / 4.0f);
-
 	//
 	// Очистка рендер-таргета
 	//
@@ -373,6 +367,8 @@ void dx_11::render()
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
 
+	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+
 	for (auto obj : gObjects)
 	{
 		immediateContext->VSSetShader(obj->shader->vertexShader, NULL, 0);
@@ -382,7 +378,7 @@ void dx_11::render()
 		// Установка констант шейдера
 		//
 
-			localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
+		localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
 
 		/*ConstantBuffer cb;
 		cb.mWorld = XMMatrixTranspose(mWorld);
@@ -394,8 +390,6 @@ void dx_11::render()
 		// Установка шейдера
 		//
 
-		
-
 		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
 
 		// Установка вершинного буфера
@@ -405,6 +399,10 @@ void dx_11::render()
 
 		// Установка индексного буфера
 		immediateContext->IASetIndexBuffer(obj->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+
+		// Установка типа примитив
+		immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		//
 		// Рендер
