@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------------------
-// File: Article2.fx
+// File: shader.fx
 //--------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------
@@ -10,6 +10,8 @@ cbuffer ConstantBuffer : register( b0 )
 	matrix World;
 	matrix View;
 	matrix Projection;
+    float4 vLightColor[1];
+    float4 vLightPos[1];
 }
 
 //--------------------------------------------------------------------------------------
@@ -22,15 +24,18 @@ struct VS_OUTPUT
 //--------------------------------------------------------------------------------------
 // Vertex Shader
 //--------------------------------------------------------------------------------------
-VS_OUTPUT VS( float4 Pos : POSITION, float4 Color : COLOR, float4 Normal: NORMAL)
+VS_OUTPUT VS( float4 Pos : POSITION, float3 Normal: NORMAL)
 {
-    VS_OUTPUT output = (VS_OUTPUT)0;
+    //VS_OUTPUT output = (VS_OUTPUT)0;
+    VS_OUTPUT output;
     output.Pos = mul( Pos, World );
     output.Pos = mul( output.Pos, View );
     output.Pos = mul( output.Pos, Projection );
-	float3 vLightDirection=(-1,0,0.25);
-	float4 vLightColor=(1,1,1,1);
-	output.Color=saturate( dot( (float3)vLightDirection,output.Pos*0.75f) * vLightColor);
+
+    output.Color=float4(0.0f,0.0f,0.0f,0.0f);
+
+    for (int i=0; i<1; i++)
+    output.Color+=max(0,dot(normalize(Normal),normalize((float3)vLightPos[i]-(float3)Pos) ))*vLightColor[i]*1.25f;
     return output;
 }
 

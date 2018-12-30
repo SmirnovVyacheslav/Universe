@@ -25,7 +25,7 @@ void Camera::init(HWND _hWnd)
 	leftBorder = GetSystemMetrics(SM_CXFRAME);
 
 	_view = XMMatrixLookAtLH(eye, at, up);
-	_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
+	_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, (FLOAT)wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
 }
 
 void Camera::resize()
@@ -212,14 +212,41 @@ bool dx_11::createDevice()
 	backBuffer->Release();
 	if (result < 0) return false;
 
-	// Создание поверхности для Z-буфера
+	//// Создание поверхности для Z-буфера
+	//D3D11_TEXTURE2D_DESC descDepth;
+	//ZeroMemory(&descDepth, sizeof(descDepth));
+	//descDepth.Width = wndWidth;
+	//descDepth.Height = wndHeight;
+	//descDepth.MipLevels = 1;
+	//descDepth.ArraySize = 1;
+	//descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	//descDepth.SampleDesc.Count = 1;
+	//descDepth.SampleDesc.Quality = 0;
+	//descDepth.Usage = D3D11_USAGE_DEFAULT;
+	//descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	//descDepth.CPUAccessFlags = 0;
+	//descDepth.MiscFlags = 0;
+	//if (d3dDevice->CreateTexture2D(&descDepth, NULL, &depthStencil))
+	//	return false;
+
+	//// Создание z-буфреа
+	//D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+	//ZeroMemory(&descDSV, sizeof(descDSV));
+	//descDSV.Format = descDepth.Format;
+	//descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	//descDSV.Texture2D.MipSlice = 0;
+	//if (d3dDevice->CreateDepthStencilView(depthStencil, &descDSV, &depthStencilView))
+	//	return false;
+
+	//immediateContext->OMSetRenderTargets(1, &renderTargetView, 0);
+
+	//============Создание поверхности для Z-буфера============
 	D3D11_TEXTURE2D_DESC descDepth;
-	ZeroMemory(&descDepth, sizeof(descDepth));
 	descDepth.Width = wndWidth;
 	descDepth.Height = wndHeight;
 	descDepth.MipLevels = 1;
 	descDepth.ArraySize = 1;
-	descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	descDepth.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 	descDepth.SampleDesc.Count = 1;
 	descDepth.SampleDesc.Quality = 0;
 	descDepth.Usage = D3D11_USAGE_DEFAULT;
@@ -229,16 +256,77 @@ bool dx_11::createDevice()
 	if (d3dDevice->CreateTexture2D(&descDepth, NULL, &depthStencil))
 		return false;
 
-	// Создание z-буфреа
-	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
-	ZeroMemory(&descDSV, sizeof(descDSV));
-	descDSV.Format = descDepth.Format;
+
+	D3D11_DEPTH_STENCIL_DESC dsDesc;
+
+	// Depth test parameters
+	dsDesc.DepthEnable = true;
+	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
+
+	// Stencil test parameters
+	dsDesc.StencilEnable = true;
+	dsDesc.StencilReadMask = 0xFF;
+	dsDesc.StencilWriteMask = 0xFF;
+
+	// Stencil operations if pixel is front-facing
+	dsDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	dsDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+	dsDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	dsDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+	// Stencil operations if pixel is back-facing
+	dsDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	dsDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+	dsDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	dsDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+	// Create depth stencil state
+	
+	d3dDevice->CreateDepthStencilState(&dsDesc, &pDSState);
+
+	// Bind depth stencil state
+	immediateContext->OMSetDepthStencilState(pDSState, 1);
+
+	
+	descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0;
-	if (d3dDevice->CreateDepthStencilView(depthStencil, &descDSV, &depthStencilView))
+
+	// Create the depth stencil view
+	if (d3dDevice->CreateDepthStencilView(depthStencil, // Depth stencil texture
+		&descDSV, // Depth stencil desc
+		&depthStencilView))  // [out] Depth stencil view
 		return false;
 
-	immediateContext->OMSetRenderTargets(1, &renderTargetView, 0);
+				 // Bind the depth stencil view
+	immediateContext->OMSetRenderTargets(1,          // One rendertarget view
+		&renderTargetView,      // Render target view, created earlier
+		depthStencilView);     // Depth stencil view for the render target
+
+	//============Создание поверхности для Z-буфера============
+
+	//================D3D11_RASTERIZER_DESC rasterDesc;==========
+	rasterDesc.AntialiasedLineEnable = false;
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!IMP!!!!!!!!!!!!!
+	//rasterDesc.CullMode = D3D11_CULL_BACK;
+	rasterDesc.CullMode = D3D11_CULL_NONE;
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!IMP!!!!!!!!!!!!!
+	rasterDesc.DepthBias = 0;
+	rasterDesc.DepthBiasClamp = 0.0f;
+	rasterDesc.DepthClipEnable = true;
+	rasterDesc.FillMode = D3D11_FILL_SOLID;
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!IMP!!!!!!!!!!!!!
+	rasterDesc.FrontCounterClockwise = false;
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!IMP!!!!!!!!!!!!!
+	rasterDesc.MultisampleEnable = false;
+	rasterDesc.ScissorEnable = false;
+	rasterDesc.SlopeScaledDepthBias = 0.0f;
+
+	result = d3dDevice->CreateRasterizerState(&rasterDesc, &m_rasterState);
+	if (FAILED(result)) return false;
+	immediateContext->RSSetState(m_rasterState);
+	//================D3D11_RASTERIZER_DESC rasterDesc;==========
 
 	// Setup the viewport
 	D3D11_VIEWPORT viewPort;
@@ -287,9 +375,13 @@ bool dx_11::initShader(std::wstring path, Shader* shader)
 	{
 		/*{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }*/
+		//{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		//{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		//{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		/*{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }*/
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	UINT numElements = ARRAYSIZE(layout);
 
@@ -353,12 +445,14 @@ bool dx_11::compileShader(std::wstring path, LPCSTR type, LPCSTR shaderModel, ID
 
 void dx_11::render()
 {
+
+	//ConstantBuffer          localConstantBuffer;
 	//
 	// Очистка рендер-таргета
 	//
 	float ClearColor[4] = { 0.0f, 0.9f, 0.5f, 1.0f }; // цвет
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
-	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
 
 	//
 	// Установка констант шейдера
@@ -367,30 +461,49 @@ void dx_11::render()
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
 
+	// ==========Light=============
+	XMFLOAT4 LightPos[1];
+	XMFLOAT4 LightColor[1];
+	LightPos[0] = XMFLOAT4(0.0f, 10.0f, 0.0f, 0);
+
+	LightColor[0] = XMFLOAT4(1, 1, 0, 1);
+
+	memcpy(&localConstantBuffer.vLightColor, &LightColor, sizeof(LightColor));
+	memcpy(&localConstantBuffer.vLightPos, &LightPos, sizeof(LightPos));
+
+	// ==========Light=============
+
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+
+
 
 	for (auto obj : gObjects)
 	{
+
+		//
+		// Установка шейдера
+		//
 		immediateContext->VSSetShader(obj->shader->vertexShader, NULL, 0);
 		immediateContext->PSSetShader(obj->shader->pixelShader, NULL, 0);
 
 		//
 		// Установка констант шейдера
 		//
+		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+		immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);
 
-		localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
+
+		//localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
 
 		/*ConstantBuffer cb;
 		cb.mWorld = XMMatrixTranspose(mWorld);
 		cb.mView = XMMatrixTranspose(camera->view());
 		cb.mProjection = XMMatrixTranspose(camera->projection());*/
-		immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+		//immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
 
-		//
-		// Установка шейдера
-		//
 
-		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+
+
 
 		// Установка вершинного буфера
 		UINT stride = sizeof(Vertex);
@@ -399,6 +512,7 @@ void dx_11::render()
 
 		// Установка индексного буфера
 		immediateContext->IASetIndexBuffer(obj->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		//immediateContext->IASetIndexBuffer(obj->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
 
 		// Установка типа примитив

@@ -11,7 +11,7 @@ using std::wstring;
 struct Vertex
 {
 	XMFLOAT3 pos;
-	XMFLOAT4 color;
+	//XMFLOAT4 color;
 	XMFLOAT3 normal;
 };
 
@@ -26,7 +26,7 @@ struct Object_Args
 	int w_res = 1;
 	int plane  = planeXZ;
 	XMFLOAT3 normal = { 0.0f, 1.0f, 0.0f };
-	XMFLOAT4 color  = { 1.0f, 1.0f, 1.0f, 1.0f };
+	//XMFLOAT4 color  = { 1.0f, 1.0f, 1.0f, 1.0f };
 	float scale = 1.0f;
 };
 

@@ -69,6 +69,8 @@ class dx_11
 		XMMATRIX mWorld;
 		XMMATRIX mView;
 		XMMATRIX mProjection;
+		XMFLOAT4 vLightColor[1];
+		XMFLOAT4 vLightPos[1];
 	};
 
 	struct Shader
@@ -106,6 +108,16 @@ class dx_11
 	ID3D11Buffer*           constantBuffer = nullptr;
 	ConstantBuffer          localConstantBuffer;
 
+	//============Создание поверхности для Z-буфера============
+	ID3D11DepthStencilState* pDSState;
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+	//============Создание поверхности для Z-буфера============
+
+
+	//================D3D11_RASTERIZER_DESC rasterDesc;==========
+	D3D11_RASTERIZER_DESC rasterDesc;
+	ID3D11RasterizerState *m_rasterState;
+	//================D3D11_RASTERIZER_DESC rasterDesc;==========
 
 	XMMATRIX                mWorld;
 

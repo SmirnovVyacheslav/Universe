@@ -94,7 +94,7 @@ void Plane::create(Object_Args& args)
 		for (int j = 0; j < args.u_res; ++j)
 		{
 			data->vertices[i * args.u_res + j].pos = (this->*pos[args.plane])((float)j, (float)i, args);
-			data->vertices[i * args.u_res + j].color = args.color;
+			//data->vertices[i * args.u_res + j].color = args.color;
 			data->vertices[i * args.u_res + j].normal = args.normal;
 		}
 	//Генерация  индексного буфера
