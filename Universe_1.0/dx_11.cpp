@@ -5,6 +5,8 @@ Camera::Camera()
 	eye = XMVectorSet(0.0f, 1.0f, -1.0f, 0.0f); //Откуда
 	at = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f); //Куда
 	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f); //Верх
+
+	pos = XMFLOAT3(0.0f, 1.0f, -1.0f);
 }
 
 void Camera::init(HWND _hWnd)
@@ -109,6 +111,8 @@ void Camera::move(UINT _x, UINT _y)
 	eye = XMVectorSet(vx * radius, vy * radius, vz * radius, 0.0f);
 
 	_view = XMMatrixLookAtLH(eye, at, up);
+
+	pos = XMFLOAT3(vx * radius, vy * radius, vz * radius);
 }
 
 void Camera::catchMouse()
@@ -126,9 +130,32 @@ void Camera::releseMouse()
 	ClipCursor(NULL);
 }
 
+bool Camera::camera_cross(XMFLOAT3 point, XMFLOAT3 vec)
+{
+	XMFLOAT3 point_2 = XMFLOAT3(vec.x - point.x, vec.y - point.y, vec.z - point.z);
+
+	float cross_y = (pos.y - point.y) / (point_2.y - point.y);
+
+	float cross_x = point_2.x * cross_y - point.x * cross_y + point.x;
+	float cross_z = point_2.z * cross_y - point.z * cross_y + point.z;
+
+	if ((cross_x > pos.x - (float)wndWidth / 2.0f) && (cross_x < pos.x + ((float)wndWidth / 2.0f)))
+	{
+		if ((cross_z > pos.z - (float)wndWidth / 2.0f) && (cross_z < pos.z + ((float)wndWidth / 2.0f)))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 dx_11::dx_11(HWND _hWnd) : hWnd(_hWnd)
 {
 	setWndSize();
+
+	light.reset(new Light);
 }
 
 dx_11::~dx_11()
@@ -375,13 +402,13 @@ bool dx_11::initShader(std::wstring path, Shader* shader)
 	{
 		/*{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }*/
-		//{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		//{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		//{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 		/*{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }*/
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		//{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		//{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	UINT numElements = ARRAYSIZE(layout);
 
@@ -445,6 +472,19 @@ bool dx_11::compileShader(std::wstring path, LPCSTR type, LPCSTR shaderModel, ID
 
 void dx_11::render()
 {
+	light->start_tracing(geometry, camera);
+
+	//for (auto obj : geometry->all_objects)
+	//{
+	//	Object_data& obj_data = obj->get_data();
+
+	//	for (Vertex& vertex : obj_data.vertices)
+	//	{
+	//		vertex.color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	//	}
+	//}
+
+	updateGeometry();
 
 	//ConstantBuffer          localConstantBuffer;
 	//
@@ -461,20 +501,19 @@ void dx_11::render()
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
 
-	// ==========Light=============
-	XMFLOAT4 LightPos[1];
-	XMFLOAT4 LightColor[1];
-	LightPos[0] = XMFLOAT4(0.0f, 10.0f, 0.0f, 0);
+	//// ==========Light=============
+	//XMFLOAT4 LightPos[1];
+	//XMFLOAT4 LightColor[1];
+	//LightPos[0] = XMFLOAT4(0.0f, 10.0f, 0.0f, 0);
 
-	LightColor[0] = XMFLOAT4(1, 1, 0, 1);
+	//LightColor[0] = XMFLOAT4(1, 1, 0, 1);
 
-	memcpy(&localConstantBuffer.vLightColor, &LightColor, sizeof(LightColor));
-	memcpy(&localConstantBuffer.vLightPos, &LightPos, sizeof(LightPos));
+	//memcpy(&localConstantBuffer.vLightColor, &LightColor, sizeof(LightColor));
+	//memcpy(&localConstantBuffer.vLightPos, &LightPos, sizeof(LightPos));
 
-	// ==========Light=============
+	//// ==========Light=============
 
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
-
 
 
 	for (auto obj : gObjects)
@@ -534,6 +573,8 @@ void dx_11::render()
 void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 {
 	geometry =_geometry;
+
+	//gObjects.clear();
 
 	for (auto it : *geometry)
 	//for (std::vector<Object*>::iterator& it = geometry->begin(); it != geometry->end(); ++it)
@@ -596,6 +637,74 @@ void dx_11::setGeometry(std::shared_ptr<Geometry> _geometry)
 
 	// Установка матриц
 	mWorld = XMMatrixIdentity();
+}
+
+void dx_11::updateGeometry()
+{
+	for (auto gobj : gObjects)
+	{
+		delete gobj;
+	}
+
+	gObjects.clear();
+
+	for (auto it : *geometry)
+	{
+		for (auto obj : *it)
+		{
+			Object_data& obj_data = obj.get_data();
+
+			Shader *shader;
+			if (!shaders[obj_data.shader])
+			{
+				shader = new Shader;
+				initShader(obj_data.shader, shader);
+				shaders[obj_data.shader] = shader;
+			}
+			else
+			{
+				shader = shaders[obj_data.shader];
+			}
+
+			GObjects *gObject = new GObjects;
+			gObjects.push_back(gObject);
+
+			gObject->shader = shader;
+			gObject->size = obj_data.size;
+
+
+			D3D11_BUFFER_DESC bufferDesc;
+			ZeroMemory(&bufferDesc, sizeof(bufferDesc));
+
+			D3D11_SUBRESOURCE_DATA InitData;
+			ZeroMemory(&InitData, sizeof(InitData));
+
+			// Создание вершинного буфера
+			bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+			bufferDesc.ByteWidth = sizeof(Vertex) * obj_data.vertices.size();
+			bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+			bufferDesc.CPUAccessFlags = 0;
+			bufferDesc.MiscFlags = 0;
+
+			InitData.pSysMem = &obj_data.vertices[0];
+			if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->vertexBuffer) < 0)
+				return;
+
+			// Создание индексного буфера
+			bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+			bufferDesc.ByteWidth = sizeof(DWORD) * obj_data.indices.size();
+			bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+			bufferDesc.CPUAccessFlags = 0;
+			bufferDesc.MiscFlags = 0;
+
+			InitData.pSysMem = &obj_data.indices[0];
+			if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &gObject->indexBuffer) < 0)
+				return;
+		}
+	}
+
+	// Установка типа примитив
+	immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 void dx_11::setCamera(std::shared_ptr<Camera> _camera)

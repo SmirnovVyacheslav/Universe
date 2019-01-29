@@ -1,7 +1,11 @@
 ﻿#include "geometry.h"
 
+int Object::id_counter;
+
 Geometry::Geometry()
 {
+	Object::init();
+
 	Object_Args args;
 
 	person = new Person;
@@ -13,16 +17,88 @@ Geometry::Geometry()
 
 	scene.push_back(person);
 	scene.push_back(landscape);
+
+	for (auto it : scene)
+	{
+		for (auto obj : *it)
+		{
+			all_objects.push_back(obj.get_obj());
+		}
+	}
 }
 
 vector<Object*>::iterator Geometry::begin()
 {
 	return scene.begin();
+	//return all_objects.begin();
 }
 vector<Object*>::iterator Geometry::end()
 {
 	return scene.end();
+	//return all_objects.end();
 }
+
+bool Geometry::is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex, int id)
+{
+	//for (auto obj : *this)
+	for (auto obj : all_objects)
+	{
+		//for (auto obj : *it)
+		//{
+			if (obj->get_id() == id)
+				continue;
+
+			if (obj->is_shaded(LightPos, vertex))
+				return true;
+		//}
+	}
+
+	return false;
+}
+
+bool Geometry::find_cross(XMFLOAT3 point, XMFLOAT3 vec, Object*& cross_obj, Vertex*& cross)
+{
+	XMFLOAT3 point_2 = XMFLOAT3(vec.x - point.x, vec.y - point.y, vec.z - point.z);
+
+	/*float cross_y = (pos.y - point.y) / (point_2.y - point.y);
+
+	float cross_x = point_2.x * cross_y - point.x * cross_y + point.x;
+	float cross_z = point_2.z * cross_y - point.z * cross_y + point.z;*/
+
+	//for (auto it : *this)
+	for (auto obj : all_objects)
+	{
+		//for (auto obj : *it)
+		//{
+			Object_data& obj_data = obj->get_data();
+
+			for (auto vertex : obj_data.vertices)
+			{
+				float cross_y = (vertex.pos.y - point.y) / (point_2.y - point.y);
+
+				float cross_x = point_2.x * cross_y - point.x * cross_y + point.x;
+				float cross_z = point_2.z * cross_y - point.z * cross_y + point.z;
+
+				if (vertex.pos.x - cross_x < 0.5f && vertex.pos.z - cross_z < 0.5f)
+				{
+					cross_obj = obj;
+					cross = &vertex;
+					return true;
+				}
+			}
+
+			//if (obj.get_id == id)
+			//	continue;
+
+			//if (obj.is_shaded(LightPos, vertex))
+			//	return true;
+		//}
+	}
+
+	return false;
+}
+
+
 
 Cube::Cube() {}
 
@@ -94,9 +170,15 @@ void Plane::create(Object_Args& args)
 		for (int j = 0; j < args.u_res; ++j)
 		{
 			data->vertices[i * args.u_res + j].pos = (this->*pos[args.plane])((float)j, (float)i, args);
-			//data->vertices[i * args.u_res + j].color = args.color;
+			data->vertices[i * args.u_res + j].color = args.color;
 			data->vertices[i * args.u_res + j].normal = args.normal;
 		}
+	//set ref to perimeter
+	perimeter.push_back(&data->vertices[0].pos);
+	perimeter.push_back(&data->vertices[args.u_res - 1].pos);
+	perimeter.push_back(&data->vertices[args.u_res * (args.v_res - 2)].pos);
+	perimeter.push_back(&data->vertices[args.u_res * (args.v_res - 1) - 1].pos);
+
 	//Генерация  индексного буфера
 	data->size = (args.u_res - 1) * (args.v_res - 1) * 6;
 	data->indices = vector<DWORD>(data->size);
@@ -162,9 +244,9 @@ void Landscape::create(Object_Args& args)
 
 	components.push_back(new Plane);
 	land_args.plane = planeXZ;
-	land_args.u_res = 50;
-	land_args.v_res = 50;
-	land_args.scale = 0.1f;
+	land_args.u_res = 5;
+	land_args.v_res = 5;
+	land_args.scale = 1.0f;
 	land_args.pos = { 0.0f, -1.0f, 0.0f };
 	components[0]->create(land_args);
 }
@@ -242,10 +324,19 @@ Object_Iterator<const Object> Object::end() const
 	return Object_Iterator<const Object>(empty);
 }
 
+
+void Object::init()
+{
+	id_counter = 0;
+}
+
 Object::Object()
 {
 	data = nullptr;
 	empty = nullptr;
+	id = id_counter++;
+
+	tex.push_back(XMFLOAT4(1.0f, 1.0f, 0.1f, 0.0f));
 }
 
 Object::~Object()
@@ -264,6 +355,60 @@ Object_data& Object::get_data()
 	return components[curr_obj]->get_data();
 }
 
+Object* Object::get_obj()
+{
+	if (data != nullptr)
+		return this;
+
+	return components[curr_obj]->get_obj();
+}
+
+int Object::get_id()
+{
+	return id;
+}
+
+bool Object::is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex)
+{
+	float light_y = (perimeter[0]->y - LightPos.y) / (vertex.y - LightPos.y);
+
+	float light_x = vertex.x * light_y - LightPos.x * light_y + LightPos.x;
+	float light_z = vertex.z * light_y - LightPos.z * light_y + LightPos.z;
+
+	if ((light_x > perimeter[0]->x && light_x < perimeter[1]->x) || (light_x > perimeter[2]->x && light_x < perimeter[3]->x))
+	{
+		if ((light_z > perimeter[0]->z && light_z < perimeter[2]->z) || (light_z > perimeter[1]->z && light_z < perimeter[3]->z))
+		{
+			return true;
+		}
+	}
+
+
+	/*switch (plane)
+	{
+	case planeXZ:
+		float light_y = (perimeter[0]->y - LightPos.y) / (vertex.y - LightPos.y);
+
+		float light_x = vertex.x * light_y - LightPos.x * light_y + LightPos.x;
+		float light_z = vertex.z * light_y - LightPos.z * light_y + LightPos.z;
+
+		if ((light_x > perimeter[0]->x && light_x < perimeter[1]->x) || (light_x > perimeter[2]->x && light_x < perimeter[3]->x))
+		{
+			if ((light_z > perimeter[0]->z && light_z < perimeter[2]->z) || (light_z > perimeter[1]->z && light_z < perimeter[3]->z))
+			{
+				return true;
+			}
+		}
+		break;
+	case planeXY:
+		break;
+	case planeYZ:
+		break;
+	}*/
+
+	return false;
+}
+
 
 Empty_Object::Empty_Object()
 {
@@ -279,3 +424,4 @@ Object_data& Empty_Object::get_data()
 {
 	return *data;
 }
+

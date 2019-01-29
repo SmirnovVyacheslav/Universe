@@ -120,11 +120,13 @@
   <ItemGroup>
     <ClCompile Include="dx_11.cpp" />
     <ClCompile Include="geometry.cpp" />
+    <ClCompile Include="lighting.cpp" />
     <ClCompile Include="win_api.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dx_11.h" />
     <ClInclude Include="geometry.h" />
+    <ClInclude Include="lighting.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="win_api.h" />
   </ItemGroup>

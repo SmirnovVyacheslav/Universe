@@ -14,12 +14,21 @@
 
 #include <xnamath.h>
 
+#include "lighting.h"
+
+using std::vector;
+using std::wstring;
+using std::shared_ptr;
+using std::unordered_map;
+
 class Camera
 {
 
 	XMVECTOR eye;// = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
 	XMVECTOR at;// = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 	XMVECTOR up;// = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+
+	XMFLOAT3 pos;
 
 	XMMATRIX                _view;
 	XMMATRIX                _projection;
@@ -57,10 +66,16 @@ public:
 	void releseMouse();
 
 	void resize();
+
+	bool camera_cross(XMFLOAT3 point, XMFLOAT3 vec);
 };
+
+class Light;
 
 class dx_11
 {
+	std::shared_ptr<Light> light;
+
 	//--------------------------------------------------------------------------------------
 	// Структуры
 	//--------------------------------------------------------------------------------------
@@ -124,18 +139,18 @@ class dx_11
 	HWND hWnd;
 	UINT wndWidth, wndHeight;
 
-	std::shared_ptr<Geometry> geometry;
-	std::shared_ptr<Camera> camera;
+	shared_ptr<Geometry> geometry;
+	shared_ptr<Camera> camera;
 
-	std::unordered_map<std::wstring, Shader*> shaders;
+	unordered_map<std::wstring, Shader*> shaders;
 
-	std::vector<GObjects*> gObjects;
+	vector<GObjects*> gObjects;
 
 	void setWndSize();
 
-	bool initShader(std::wstring path, Shader* shader);
+	bool initShader(wstring path, Shader* shader);
 
-	bool compileShader(std::wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlob** blobOut);
+	bool compileShader(wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlob** blobOut);
 
 public:
 
@@ -147,7 +162,9 @@ public:
 
 	void render();
 
-	void setGeometry(std::shared_ptr<Geometry> _geometry);
+	void setGeometry(shared_ptr<Geometry> _geometry);
 
-	void setCamera(std::shared_ptr<Camera> _camera);
+	void setCamera(shared_ptr<Camera> _camera);
+
+	void updateGeometry();
 };

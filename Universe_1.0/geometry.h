@@ -8,10 +8,17 @@
 using std::vector;
 using std::wstring;
 
+struct Material
+{
+	float diffuse = 0.2f;
+	float mirror = 0.6f;
+	float absorption = 0.2f;
+};
+
 struct Vertex
 {
 	XMFLOAT3 pos;
-	//XMFLOAT4 color;
+	XMFLOAT4 color;
 	XMFLOAT3 normal;
 };
 
@@ -26,7 +33,7 @@ struct Object_Args
 	int w_res = 1;
 	int plane  = planeXZ;
 	XMFLOAT3 normal = { 0.0f, 1.0f, 0.0f };
-	//XMFLOAT4 color  = { 1.0f, 1.0f, 1.0f, 1.0f };
+	XMFLOAT4 color  = { 0.0f, 0.0f, 0.0f, 1.0f };
 	float scale = 1.0f;
 };
 
@@ -92,6 +99,11 @@ protected:
 
 	Object& operator++();
 
+	vector<XMFLOAT3*> perimeter;//sides coords
+	static int id_counter;
+	int id;
+	Object_Plane plane;
+
 public:
 	Object_Iterator<Object> begin();
 	Object_Iterator<Object> end();
@@ -106,6 +118,19 @@ public:
 	virtual void create(Object_Args& args);
 
 	virtual Object_data& get_data();
+	virtual Object* get_obj();
+
+	static void init();
+
+	int get_id();
+
+	bool is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex);
+
+	vector<XMFLOAT4> tex;
+
+	Material mat;
+
+	XMFLOAT4 cur_color;
 };
 
 class Empty_Object : public Object
@@ -126,13 +151,18 @@ class Geometry
 	Object* landscape;
 
 	vector<Object*> scene;
+	//vector<Object*> all_objects;
 
 public:
-
+	vector<Object*> all_objects;
 	Geometry();
 
 	vector<Object*>::iterator begin();
 	vector<Object*>::iterator end();
+
+	bool is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex, int id);
+
+	bool find_cross(XMFLOAT3 point, XMFLOAT3 vec, Object*& cross_obj , Vertex*& cross);
 };
 
 class Plane : public Object
