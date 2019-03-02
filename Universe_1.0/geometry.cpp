@@ -1,342 +1,442 @@
 ﻿#include "geometry.h"
 
-int Object::id_counter;
+int Object::objCounter = 0;
 
 Geometry::Geometry()
 {
-	Object::init();
+	ObjectArgs args;
 
-	Object_Args args;
+	person = new Person(nullptr);
+	person->create(args, objects);
 
-	person = new Person;
-	person->create(args);
-
-	args.pos = XMFLOAT3{ 0.0f, -2.0f, 0.0f };
-	landscape = new Landscape;
-	landscape->create(args);
+	args.pos = Vector3{ 0.0f, -2.0f, 0.0f };
+	landscape = new Landscape(nullptr);
+	landscape->create(args, objects);
 
 	scene.push_back(person);
 	scene.push_back(landscape);
-
-	for (auto it : scene)
-	{
-		for (auto obj : *it)
-		{
-			all_objects.push_back(obj.get_obj());
-		}
-	}
 }
 
 vector<Object*>::iterator Geometry::begin()
 {
-	return scene.begin();
-	//return all_objects.begin();
+	return objects.begin();
 }
+
 vector<Object*>::iterator Geometry::end()
 {
-	return scene.end();
-	//return all_objects.end();
+	return objects.end();
 }
 
-bool Geometry::is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex, int id)
+bool Geometry::isShaded(Vector3 srcPos, Vector3 dstPos, int id)
 {
-	//for (auto obj : *this)
-	for (auto obj : all_objects)
+	for (auto obj : scene)
 	{
-		//for (auto obj : *it)
-		//{
-			if (obj->get_id() == id)
-				continue;
-
-			if (obj->is_shaded(LightPos, vertex))
-				return true;
-		//}
+		if (obj->isShaded(srcPos, dstPos, id))
+		{
+			return true;
+		}
 	}
 
 	return false;
 }
 
-bool Geometry::find_cross(XMFLOAT3 point, XMFLOAT3 vec, Object*& cross_obj, Vertex*& cross)
+bool Geometry::findCross(Vector3 srcPos, Vector3 dstPos, Object*& crossObj, Vertex*& crossVertex)
 {
-	XMFLOAT3 point_2 = XMFLOAT3(vec.x - point.x, vec.y - point.y, vec.z - point.z);
+	vector<std::pair<Object*, Vertex*>> cross;
 
-	/*float cross_y = (pos.y - point.y) / (point_2.y - point.y);
-
-	float cross_x = point_2.x * cross_y - point.x * cross_y + point.x;
-	float cross_z = point_2.z * cross_y - point.z * cross_y + point.z;*/
-
-	//for (auto it : *this)
-	for (auto obj : all_objects)
+	for (auto obj : scene)
 	{
-		//for (auto obj : *it)
-		//{
-			Object_data& obj_data = obj->get_data();
-
-			for (auto vertex : obj_data.vertices)
-			{
-				float cross_y = (vertex.pos.y - point.y) / (point_2.y - point.y);
-
-				float cross_x = point_2.x * cross_y - point.x * cross_y + point.x;
-				float cross_z = point_2.z * cross_y - point.z * cross_y + point.z;
-
-				if (vertex.pos.x - cross_x < 0.5f && vertex.pos.z - cross_z < 0.5f)
-				{
-					cross_obj = obj;
-					cross = &vertex;
-					return true;
-				}
-			}
-
-			//if (obj.get_id == id)
-			//	continue;
-
-			//if (obj.is_shaded(LightPos, vertex))
-			//	return true;
-		//}
+		obj->findCross(srcPos, dstPos, cross);
 	}
+
+	crossObj = nullptr;
+	crossVertex = nullptr;
+
+	float minDist = 200.0f, curDist;
+	for (auto crossPair : cross)
+	{
+		if ((curDist = dist(crossPair.second->pos, srcPos)) < minDist)
+		{
+			minDist = curDist;
+			crossObj = crossPair.first;
+			crossVertex = crossPair.second;
+		}
+	}
+
+	if (crossObj != nullptr)
+		return true;
 
 	return false;
 }
 
 
 
-Cube::Cube() {}
+Cube::Cube(Object* _base) : Object(_base) {}
 
-void Cube::create(Object_Args& args)
+void Cube::create(ObjectArgs& args, vector<Object*>& objects)
 {
-	Object_Args plane_args = args;
-	plane_args.u_res = 2;
-	plane_args.v_res = 2;
-	plane_args.pos = { 0.0f, 0.0f, 0.0f };
+	pos = args.pos;
+	uSize = (float)(args.uRes - 1) / 2.0f * args.scale;
+	vSize = (float)(args.vRes - 1) / 2.0f * args.scale;
 
-	components.push_back(new Plane);
-	plane_args.normal = { 0.0f, -1.0f, 0.0f };
-	plane_args.plane = planeXZ;
-	plane_args.pos.y = args.pos.y - (float)(plane_args.v_res - 1) / 2.0f * args.scale;
-	components[0]->create(plane_args); //down
+	ObjectArgs planeArgs = args;
+	planeArgs.uRes = 4;
+	planeArgs.vRes = 4;
+	planeArgs.scale = 0.5f;
+	planeArgs.pos = { 0.0f, 0.0f, 0.0f };
 
-	plane_args.pos = args.pos;
-	components.push_back(new Plane);
-	plane_args.normal = { 1.0f, 0.0f, 0.0f };
-	plane_args.plane = planeYZ;
-	plane_args.pos.x = args.pos.x - (float)(plane_args.u_res - 1) / 2.0f * args.scale;
-	components[1]->create(plane_args); //left side
+	components.push_back(new Plane(this));
+	planeArgs.normal = { 0.0f, -1.0f, 0.0f };
+	planeArgs.axis = XZ;
+	planeArgs.pos.y = args.pos.y - (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
+	components[0]->create(planeArgs, objects); //down
 
-	plane_args.pos = args.pos;
-	components.push_back(new Plane);
-	plane_args.normal = { 0.0f, 1.0f, 0.0f };
-	plane_args.plane = planeXZ;
-	plane_args.pos.y = args.pos.y + (float)(plane_args.v_res - 1) / 2.0f * args.scale;
-	components[2]->create(plane_args); //top
+	planeArgs.pos = args.pos;
+	components.push_back(new Plane(this));
+	planeArgs.normal = { 1.0f, 0.0f, 0.0f };
+	planeArgs.axis = YZ;
+	planeArgs.pos.x = args.pos.x - (float)(planeArgs.uRes - 1) / 2.0f * planeArgs.scale;
+	components[1]->create(planeArgs, objects); //left side
 
-	plane_args.pos = args.pos;
-	components.push_back(new Plane);
-	plane_args.normal = { 0.0f, 0.0f, 1.0f };
-	plane_args.plane = planeXY;
-	plane_args.pos.z = args.pos.z - (float)(plane_args.v_res - 1) / 2.0f * args.scale;
-	components[3]->create(plane_args); //back side
+	planeArgs.pos = args.pos;
+	components.push_back(new Plane(this));
+	planeArgs.normal = { 0.0f, 1.0f, 0.0f };
+	planeArgs.axis = XZ;
+	planeArgs.pos.y = args.pos.y + (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
+	components[2]->create(planeArgs, objects); //top
 
-	plane_args.pos = args.pos;
-	components.push_back(new Plane);
-	plane_args.normal = { 1.0f, 0.0f, 0.0f };
-	plane_args.plane = planeYZ;
-	plane_args.pos.x = args.pos.x + (float)(plane_args.u_res - 1) / 2.0f * args.scale;
-	components[4]->create(plane_args); //right side
+	planeArgs.pos = args.pos;
+	components.push_back(new Plane(this));
+	planeArgs.normal = { 0.0f, 0.0f, 1.0f };
+	planeArgs.axis = XY;
+	planeArgs.pos.z = args.pos.z - (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
+	components[3]->create(planeArgs, objects); //back side
 
-	plane_args.pos = args.pos;
-	components.push_back(new Plane);
-	plane_args.normal = { 0.0f, 0.0f, 1.0f };
-	plane_args.plane = planeXY;
-	plane_args.pos.z = args.pos.z + (float)(plane_args.v_res - 1) / 2.0f * args.scale;
-	components[5]->create(plane_args); //front side
+	planeArgs.pos = args.pos;
+	components.push_back(new Plane(this));
+	planeArgs.normal = { 1.0f, 0.0f, 0.0f };
+	planeArgs.axis = YZ;
+	planeArgs.pos.x = args.pos.x + (float)(planeArgs.uRes - 1) / 2.0f * planeArgs.scale;
+	components[4]->create(planeArgs, objects); //right side
+
+	planeArgs.pos = args.pos;
+	components.push_back(new Plane(this));
+	planeArgs.normal = { 0.0f, 0.0f, 1.0f };
+	planeArgs.axis = XY;
+	planeArgs.pos.z = args.pos.z + (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
+	components[5]->create(planeArgs, objects); //front side
 }
 
-Plane::Plane() : scale_def(1.0f)
+bool Cube::isShaded(Vector3 srcPos, Vector3 dstPos, int id)
 {
-	data = new Object_data;
+	/*Если s = {m; n; p} - направляющий вектор прямой l, M1(x1, y1, z1) - точка лежащей на прямой, тогда расстояние от точки M0(x0, y0, z0) до прямой l можно найти, используя формулу
+
+d = 	|M0M1×s|
+			|s|
+*/
+
+	Vector3 srcVec = srcPos - dstPos;
+	float dist = ((dstPos - pos) ^ srcVec).length() / srcVec.length();
+
+	if (dist > uSize + 0.2f)
+		return false;
+
+	for (auto obj : components)
+	{
+		if (obj->isShaded(srcPos, dstPos, id))
+			return true;
+	}
+
+	return false;
+}
+
+void Cube::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross)
+{
+	Vector3 srcVec = srcPos - dstPos;
+	float dist = ((dstPos - pos) ^ srcVec).length() / srcVec.length();
+
+	if (dist > uSize + 0.2f)
+		return;
+
+	for (auto obj : components)
+	{
+		obj->findCross(srcPos, dstPos, cross);
+	}
+
+	return;
+}
+
+
+Plane::Plane(Object* _base) : Object(_base), scaleDef(1.0f)
+{
+	data = new ObjectData;
 	data->shader = L"shader.fx";
 
-	pos[0] = &Plane::pos_xz;
-	pos[1] = &Plane::pos_xy;
-	pos[2] = &Plane::pos_yz;
+	posAxis[0] = &Plane::posXZ;
+	posAxis[1] = &Plane::posXY;
+	posAxis[2] = &Plane::posYZ;
 }
 
-void Plane::create(Object_Args& args)
+void Plane::create(ObjectArgs& args, vector<Object*>& objects)
 {
-	// Генерация сетки вершин для вершинного буфера
-	data->vertices = vector<Vertex>(args.u_res * args.v_res);
+	objects.push_back(this);
+	pos = args.pos;
 
-	for (int i = 0; i < args.v_res; ++i)
-		for (int j = 0; j < args.u_res; ++j)
+	// Генерация сетки вершин для вершинного буфера
+	data->vertices = vector<Vertex>(args.uRes * args.vRes);
+
+	for (int i = 0; i < args.vRes; ++i)
+		for (int j = 0; j < args.uRes; ++j)
 		{
-			data->vertices[i * args.u_res + j].pos = (this->*pos[args.plane])((float)j, (float)i, args);
-			data->vertices[i * args.u_res + j].color = args.color;
-			data->vertices[i * args.u_res + j].normal = args.normal;
+			data->vertices[i * args.uRes + j].pos = (this->*posAxis[args.axis])((float)j, (float)i, args);
+			data->vertices[i * args.uRes + j].color = args.color;
+			data->vertices[i * args.uRes + j].normal = args.normal;
 		}
-	//set ref to perimeter
-	perimeter.push_back(&data->vertices[0].pos);
-	perimeter.push_back(&data->vertices[args.u_res - 1].pos);
-	perimeter.push_back(&data->vertices[args.u_res * (args.v_res - 2)].pos);
-	perimeter.push_back(&data->vertices[args.u_res * (args.v_res - 1) - 1].pos);
+
+	//points to calc intersection with line
+	planeA = &data->vertices[0].pos;
+	planeB = &data->vertices[args.uRes - 1].pos;
+	planeC = &data->vertices[args.uRes * (args.vRes - 2)].pos;
+	planeD = &data->vertices[args.uRes * (args.vRes - 1) - 1].pos;
 
 	//Генерация  индексного буфера
-	data->size = (args.u_res - 1) * (args.v_res - 1) * 6;
+	data->size = (args.uRes - 1) * (args.vRes - 1) * 6;
 	data->indices = vector<DWORD>(data->size);
 
-	for (int i = 0; i < (args.v_res - 1); ++i)
-		for (int j = 0; j < (args.u_res - 1); ++j)
+	for (int i = 0; i < (args.vRes - 1); ++i)
+		for (int j = 0; j < (args.uRes - 1); ++j)
 		{
-			unsigned int index_a = i * (args.u_res - 1) + j;
-			unsigned int index_b = i * args.u_res + j;
+			unsigned int index_a = i * (args.uRes - 1) + j;
+			unsigned int index_b = i * args.uRes + j;
 			data->indices[index_a * 6 + 0] = index_b;
-			data->indices[index_a * 6 + 1] = index_b + 1 + args.u_res;
+			data->indices[index_a * 6 + 1] = index_b + 1 + args.uRes;
 			data->indices[index_a * 6 + 2] = index_b + 1;
 
 			data->indices[index_a * 6 + 3] = index_b;
-			data->indices[index_a * 6 + 4] = index_b + args.u_res;
-			data->indices[index_a * 6 + 5] = index_b + args.u_res + 1;
+			data->indices[index_a * 6 + 4] = index_b + args.uRes;
+			data->indices[index_a * 6 + 5] = index_b + args.uRes + 1;
 		}
 }
 
-XMFLOAT3 Plane::pos_xz(float u, float v, Object_Args& args)
+Vector3 Plane::posXZ(float u, float v, ObjectArgs& args)
 {
-	float start_x = args.pos.x - (float)(args.u_res - 1) / 2.0f * args.scale;
+	float start_x = args.pos.x - (float)(args.uRes - 1) / 2.0f * args.scale;
 	float start_y = args.pos.y;
-	float start_z = args.pos.z - (float)(args.v_res - 1) / 2.0f * args.scale;
-	return XMFLOAT3(start_x + u * args.scale, start_y, start_z + v * args.scale);
+	float start_z = args.pos.z - (float)(args.vRes - 1) / 2.0f * args.scale;
+	return Vector3(start_x + u * args.scale, start_y, start_z + v * args.scale);
 }
-XMFLOAT3 Plane::pos_xy(float u, float v, Object_Args& args)
+Vector3 Plane::posXY(float u, float v, ObjectArgs& args)
 {
-	float start_x = args.pos.x - (float)(args.u_res - 1) / 2.0f * args.scale;
-	float start_y = args.pos.y - (float)(args.v_res - 1) / 2.0f * args.scale;
+	float start_x = args.pos.x - (float)(args.uRes - 1) / 2.0f * args.scale;
+	float start_y = args.pos.y - (float)(args.vRes - 1) / 2.0f * args.scale;
 	float start_z = args.pos.z;
-	return XMFLOAT3(start_x + u * args.scale, start_y + v * args.scale, start_z);
+	return Vector3(start_x + u * args.scale, start_y + v * args.scale, start_z);
 }
-XMFLOAT3 Plane::pos_yz(float u, float v, Object_Args& args)
+Vector3 Plane::posYZ(float u, float v, ObjectArgs& args)
 {
 	float start_x = args.pos.x;
-	float start_y = args.pos.y - (float)(args.u_res - 1) / 2.0f * args.scale;
-	float start_z = args.pos.z - (float)(args.v_res - 1) / 2.0f * args.scale;
-	return XMFLOAT3(start_x, start_y + v * args.scale, start_z + u * args.scale);
+	float start_y = args.pos.y - (float)(args.uRes - 1) / 2.0f * args.scale;
+	float start_z = args.pos.z - (float)(args.vRes - 1) / 2.0f * args.scale;
+	return Vector3(start_x, start_y + v * args.scale, start_z + u * args.scale);
 }
 
-Person::Person()
+bool Plane::isShaded(Vector3 srcPos, Vector3 dstPos, int id)
 {
-
-}
-
-void Person::create(Object_Args& args)
-{
-	Object_Args cube_args = args;
-
-	components.push_back(new Cube);
-	components[0]->create(cube_args);
-}
-
-Landscape::Landscape()
-{
-
-}
-
-void Landscape::create(Object_Args& args)
-{
-	Object_Args land_args = args;
-
-	components.push_back(new Plane);
-	land_args.plane = planeXZ;
-	land_args.u_res = 5;
-	land_args.v_res = 5;
-	land_args.scale = 1.0f;
-	land_args.pos = { 0.0f, -1.0f, 0.0f };
-	components[0]->create(land_args);
-}
-
-bool Object::next_data()
-{
-	if (data != nullptr)
+	if (id == this->id)
 		return false;
 
-	if (components[curr_obj]->next_data() == false)
+	/*
+	Будем обозначать A, B, C - точки плоскости, X, Y - точки прямой(концы отрезка), SP - скалярное произведение, VP - векторное произведение.O - искомое множество точек пересечения
+
+	N = VP(B - A, C - A)
+	N = N / | N | -нормаль к плоскости  // в принципе это можно и не делать
+	V = A - X
+	// расстояние до плоскости по нормали
+	d = SP(N, V)
+	W = Y - X
+	// приближение к плоскости по нормали при прохождении отрезка
+	e = SP(N, W)
+
+	if (e != 0)
+	O = X + W * d / e;          // одна точка
+	else if (d == 0)
+	O = X + W * (anything)     // прямая принадлежит плоскости
+	else
+	O = empty;                // прямая параллельна плоскости
+	*/
+
+	Vector3 crossPoint;
+
+	//Normal to plane
+	Vector3 normal = ((*planeB - *planeA) ^ (*planeC - *planeA)).normalize();
+	Vector3 vectorToPlane = *planeA - srcPos;
+
+	//dst to plane using normal
+	float dist = normal & vectorToPlane;
+	Vector3 srcVec = dstPos - srcPos;
+
+	//Approx to plane with interseption
+	float eRes = normal & srcVec;
+
+	if (eRes != 0) //one point
 	{
-		if (++curr_obj == components.size())
-		{
+		crossPoint = srcPos + srcVec * dist / eRes;
+		/*
+		// триангл задается тремя вершинами v1,v2,v3
+		bool intersect(vertex a, vertex b, vertex &c) {
+		vertex tn = normal(); // нормаль триангла
+		float d1 = (a-v1).proj(tn), d2 = (b-v1).proj(tn); // проекции на нормаль траингла
+		if(msign(d1)==msign(d2)) return false; // если обе точки с одной стороны (знаки совпадают) то нет пересечения
+		c = (a + ((b - a) * (-d1 / (d2 - d1)))); // в c точка лежащая в плоскости треугольника в месте пересечения
+		if( (((v2 - v1) ^ (c - v1)) * tn) <= 0) return false; // функции проверки попадания внутрь триангла точки c
+		if( (((v3 - v2) ^ (c - v2)) * tn) <= 0) return false; // ^ - векторное, * - скалярное произведение векторов
+		if( (((v1 - v3) ^ (c - v3)) * tn) <= 0) return false;
+		return true; // если точка попала в триангл
+		}
+		*/
+
+		if ((((*planeB - *planeA) ^ (crossPoint - *planeA)) & normal) <= 0)
 			return false;
+		if ((((*planeD - *planeB) ^ (crossPoint - *planeB)) & normal) <= 0)
+			return false;
+		if ((((*planeA - *planeC) ^ (crossPoint - *planeC)) & normal) <= 0)
+			return false;
+		if ((((*planeC - *planeD) ^ (crossPoint - *planeD)) & normal) <= 0)
+			return false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Plane::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross)
+{
+	Vector3 crossPoint;
+
+	//Normal to plane
+	Vector3 normal = ((*planeB - *planeA) ^ (*planeC - *planeA)).normalize();
+	Vector3 vectorToPlane = *planeA - srcPos;
+
+	//dst to plane using normal
+	float dist = normal & vectorToPlane;
+	Vector3 srcVec = dstPos - srcPos;
+
+	//Approx to plane with interseption
+	float eRes = normal & srcVec;
+
+	if (eRes != 0) //one point
+	{
+		crossPoint = srcPos + srcVec * dist / eRes;
+		/*
+		// триангл задается тремя вершинами v1,v2,v3
+		bool intersect(vertex a, vertex b, vertex &c) {
+		vertex tn = normal(); // нормаль триангла
+		float d1 = (a-v1).proj(tn), d2 = (b-v1).proj(tn); // проекции на нормаль траингла
+		if(msign(d1)==msign(d2)) return false; // если обе точки с одной стороны (знаки совпадают) то нет пересечения
+		c = (a + ((b - a) * (-d1 / (d2 - d1)))); // в c точка лежащая в плоскости треугольника в месте пересечения
+		if( (((v2 - v1) ^ (c - v1)) * tn) <= 0) return false; // функции проверки попадания внутрь триангла точки c
+		if( (((v3 - v2) ^ (c - v2)) * tn) <= 0) return false; // ^ - векторное, * - скалярное произведение векторов
+		if( (((v1 - v3) ^ (c - v3)) * tn) <= 0) return false;
+		return true; // если точка попала в триангл
+		}
+		*/
+
+		if ((((*planeB - *planeA) ^ (crossPoint - *planeA)) & normal) <= 0)
+			return;
+		if ((((*planeD - *planeB) ^ (crossPoint - *planeB)) & normal) <= 0)
+			return;
+		if ((((*planeA - *planeC) ^ (crossPoint - *planeC)) & normal) <= 0)
+			return;
+		if ((((*planeC - *planeD) ^ (crossPoint - *planeD)) & normal) <= 0)
+			return;
+		
+		for (Vertex &vertex : data->vertices)
+		{
+			if ((vertex.pos - crossPoint) < 0.2f)
+			{
+				cross.push_back(std::make_pair(this, &vertex));
+			}
 		}
 	}
-
-	return true;
-}
-
-void Object::reset_curr_obj()
-{
-	if (data != nullptr)
-		return;
-
-	curr_obj = 0;
-	for (auto obj : components)
+	else
 	{
-		obj->reset_curr_obj();
-	}
-}
-void Object::reset_curr_obj() const
-{
-	if (data != nullptr)
 		return;
-
-	curr_obj = 0;
-	for (auto obj : components)
-	{
-		obj->reset_curr_obj();
 	}
 }
 
-Object& Object::operator++()
-{
-	if (next_data() == true)
-		return *this;
 
-	return *empty;
+Person::Person(Object* _base) : Object(_base) {}
+
+void Person::create(ObjectArgs& args, vector<Object*>& objects)
+{
+	ObjectArgs cubeArgs = args;
+
+	components.push_back(new Cube(this));
+	components[0]->create(cubeArgs, objects);
 }
 
-Object_Iterator<Object> Object::begin()
+bool Person::isShaded(Vector3 srcPos, Vector3 dstPos, int id)
 {
-	if (empty == nullptr)
-		empty = new Empty_Object;
-	reset_curr_obj();
-	return Object_Iterator<Object>(this);
-}
-Object_Iterator<Object> Object::end()
-{
-	//reset_curr_obj();
-	return Object_Iterator<Object>(empty);
+	for (auto obj : components)
+	{
+		if (obj->isShaded(srcPos, dstPos, id))
+			return true;
+	}
+
+	return false;
 }
 
-Object_Iterator<const Object> Object::begin() const
+void Person::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross)
 {
-	if (empty == nullptr)
-		empty = new Empty_Object;
-	reset_curr_obj();
-	return Object_Iterator<const Object>(this);
+	for (auto obj : components)
+	{
+		obj->findCross(srcPos, dstPos, cross);
+	}
 }
-Object_Iterator<const Object> Object::end() const
+
+Landscape::Landscape(Object* _base) : Object(_base) {}
+
+void Landscape::create(ObjectArgs& args, vector<Object*>& objects)
 {
-	//reset_curr_obj();
-	return Object_Iterator<const Object>(empty);
+	ObjectArgs landArgs = args;
+
+	components.push_back(new Plane(this));
+	landArgs.axis = XZ;
+	landArgs.uRes = 5;
+	landArgs.vRes = 5;
+	landArgs.scale = 2.0f;
+	landArgs.pos = { 0.0f, -1.0f, 0.0f };
+	components[0]->create(landArgs, objects);
+}
+
+bool Landscape::isShaded(Vector3 srcPos, Vector3 dstPos, int id)
+{
+	for (auto obj : components)
+	{
+		if (obj->isShaded(srcPos, dstPos, id))
+			return true;
+	}
+
+	return false;
+}
+
+void Landscape::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross)
+{
+	for (auto obj : components)
+	{
+		obj->findCross(srcPos, dstPos, cross);
+	}
 }
 
 
-void Object::init()
-{
-	id_counter = 0;
-}
-
-Object::Object()
+Object::Object(Object* _base) : base(_base)
 {
 	data = nullptr;
-	empty = nullptr;
-	id = id_counter++;
+	id = objCounter++;
 
-	tex.push_back(XMFLOAT4(1.0f, 1.0f, 0.1f, 0.0f));
+	texture.push_back(Vector4(1.0f, 1.0f, 0.1f, 0.0f));
 }
 
 Object::~Object()
@@ -344,84 +444,34 @@ Object::~Object()
 
 }
 
-void Object::create(Object_Args& args)
-{}
-
-Object_data& Object::get_data()
-{
-	if (data != nullptr)
-		return *data;
-
-	return components[curr_obj]->get_data();
-}
-
-Object* Object::get_obj()
-{
-	if (data != nullptr)
-		return this;
-
-	return components[curr_obj]->get_obj();
-}
-
-int Object::get_id()
+int Object::getId()
 {
 	return id;
 }
 
-bool Object::is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex)
+ObjectData* Object::getData()
 {
-	float light_y = (perimeter[0]->y - LightPos.y) / (vertex.y - LightPos.y);
-
-	float light_x = vertex.x * light_y - LightPos.x * light_y + LightPos.x;
-	float light_z = vertex.z * light_y - LightPos.z * light_y + LightPos.z;
-
-	if ((light_x > perimeter[0]->x && light_x < perimeter[1]->x) || (light_x > perimeter[2]->x && light_x < perimeter[3]->x))
-	{
-		if ((light_z > perimeter[0]->z && light_z < perimeter[2]->z) || (light_z > perimeter[1]->z && light_z < perimeter[3]->z))
-		{
-			return true;
-		}
-	}
-
-
-	/*switch (plane)
-	{
-	case planeXZ:
-		float light_y = (perimeter[0]->y - LightPos.y) / (vertex.y - LightPos.y);
-
-		float light_x = vertex.x * light_y - LightPos.x * light_y + LightPos.x;
-		float light_z = vertex.z * light_y - LightPos.z * light_y + LightPos.z;
-
-		if ((light_x > perimeter[0]->x && light_x < perimeter[1]->x) || (light_x > perimeter[2]->x && light_x < perimeter[3]->x))
-		{
-			if ((light_z > perimeter[0]->z && light_z < perimeter[2]->z) || (light_z > perimeter[1]->z && light_z < perimeter[3]->z))
-			{
-				return true;
-			}
-		}
-		break;
-	case planeXY:
-		break;
-	case planeYZ:
-		break;
-	}*/
-
-	return false;
+	return data;
 }
 
+bool Object::isShaded(Vector3 srcPos, Vector3 dstPos, int id) { return false; }
+void Object::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross) {}
 
-Empty_Object::Empty_Object()
+float Object::getDiffuse()
 {
-	data = new Object_data;
+	return material.diffuse;
+}
+float Object::getMirror()
+{
+	return material.mirror;
+}
+float Object::getAbsorption()
+{
+	return material.absorption;
 }
 
-Object& Empty_Object::operator++()
+Vector4 Object::sampleTex()
 {
-	return *this;
-}
-
-Object_data& Empty_Object::get_data()
-{
-	return *data;
+	return texture[0];
 }
 

@@ -4,12 +4,7 @@
 
 #include "geometry.h"
 #include "dx_11.h"
-
-//struct material
-//{
-//	float diffuse = 0.7f;
-//	float mirror = 0.3f;
-//};
+#include "x_vector.h"
 
 class Camera;
 
@@ -17,22 +12,18 @@ class Light
 {
 	float intensity; //intensity
 
-	XMFLOAT4 LightPos;
-	XMFLOAT4 LightColor;
+	Vector3 lightPos;
+	Vector4 lightColor;
 
 	int depth;
 
 	std::shared_ptr<Geometry> geometry;
-	std::shared_ptr<Camera> camera;
+	std::shared_ptr<Camera>   camera;
 
 public:
-	Light();
+	Light(std::shared_ptr<Geometry> _geometry, std::shared_ptr<Camera> _camera);
 
-	void start_tracing(std::shared_ptr<Geometry> _geometry, std::shared_ptr<Camera> _camera);
+	void startTracing();
 
-	void process(XMFLOAT4 light_pos, Object &obj, Vertex &vertex, float intensity, int depth);
-
-	void reset_color();
-
-	float point_dest(XMFLOAT3 p1, XMFLOAT3 p2);
+	void process(Vector3 lightPos, Vector4 lightColor, Object &obj, Vertex &vertex, float intensity, int depth);
 };

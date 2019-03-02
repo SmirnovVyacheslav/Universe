@@ -10,8 +10,6 @@ cbuffer ConstantBuffer : register( b0 )
 	matrix World;
 	matrix View;
 	matrix Projection;
-    //float4 vLightColor[1];
-    //float4 vLightPos[1];
 }
 
 //--------------------------------------------------------------------------------------
@@ -24,7 +22,7 @@ struct VS_OUTPUT
 //--------------------------------------------------------------------------------------
 // Vertex Shader
 //--------------------------------------------------------------------------------------
-VS_OUTPUT VS( float4 Pos : POSITION, float4 Color: COLOR, float3 Normal: NORMAL)
+VS_OUTPUT VS( float4 Pos : POSITION, float3 Normal: NORMAL, float4 Color: COLOR)
 {
     //VS_OUTPUT output = (VS_OUTPUT)0;
     VS_OUTPUT output;

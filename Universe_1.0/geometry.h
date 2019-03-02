@@ -5,8 +5,12 @@
 
 #include <xnamath.h>
 
+#include "x_vector.h"
+
 using std::vector;
 using std::wstring;
+
+enum ObjectAxis { XZ = 0, XY = 1, YZ = 2 };
 
 struct Material
 {
@@ -17,132 +21,72 @@ struct Material
 
 struct Vertex
 {
-	XMFLOAT3 pos;
-	XMFLOAT4 color;
-	XMFLOAT3 normal;
+	Vector3 pos;
+	Vector3 normal;
+	Vector4 color;
 };
 
-enum Object_Plane{planeXZ = 0, planeXY = 1, planeYZ = 2};
-
-struct Object_Args
+struct ObjectArgs
 {
-	XMFLOAT3 pos = {0.0f, 0.0f, 0.0f};
+	Vector3 pos    = { 0.0f, 0.0f, 0.0f };
+	Vector3 normal = { 0.0f, 1.0f, 0.0f };
+	Vector4 color  = { 0.0f, 0.0f, 0.0f, 1.0f };
+
 	// uvw resolution
-	int u_res = 1;
-	int v_res = 1;
-	int w_res = 1;
-	int plane  = planeXZ;
-	XMFLOAT3 normal = { 0.0f, 1.0f, 0.0f };
-	XMFLOAT4 color  = { 0.0f, 0.0f, 0.0f, 1.0f };
+	int uRes = 1;
+	int vRes = 1;
+	int wRes = 1;
+
+	int axis = XZ;
+
 	float scale = 1.0f;
 };
 
-struct Object_data
+struct ObjectData
 {
-	int size = 1;
-	wstring shader;
-	vector<DWORD> indices;
+	int            size = 1;
+	wstring        shader;
+	vector<DWORD>  indices;
 	vector<Vertex> vertices;
 };
 
-template<typename ValueType>
-class Object_Iterator : public std::iterator<std::input_iterator_tag, ValueType>
-{
-	friend class Object;
-	friend class Empty_Object;
-private:
-	Object_Iterator(ValueType* p) : p(p) {};
-public:
-	Object_Iterator(const Object_Iterator& it) : p(it.p) {};
-
-	bool operator!=(Object_Iterator const& other) const
-	{
-		return p != other.p;
-	};
-
-	bool operator==(Object_Iterator const& other) const
-	{
-		return p == other.p;
-	};
-
-	typename Object_Iterator::reference operator*() const
-	{
-		return *p;
-	};
-
-	Object_Iterator& operator++()
-	{
-		p = &++(*p);
-		return *this;
-	};
-
-private:
-	ValueType* p;
-};
-
-class Empty_Object;
-
 class Object
 {
-	friend class Object_Iterator<Object>;
-
 protected:
-	mutable Object* empty;
-	Object_data* data;
-	vector<Object*> components;
-	mutable int curr_obj;
-
-	bool next_data();
-
-	void reset_curr_obj();
-	void reset_curr_obj() const;
-
-	Object& operator++();
-
-	vector<XMFLOAT3*> perimeter;//sides coords
-	static int id_counter;
 	int id;
-	Object_Plane plane;
+	static int objCounter;
 
-public:
-	Object_Iterator<Object> begin();
-	Object_Iterator<Object> end();
+	Object*         base;
+	ObjectData*     data;
+	vector<Object*> components;
 
-	Object_Iterator<const Object> begin() const;
-	Object_Iterator<const Object> end() const;
-
-
-	Object();
-	virtual ~Object();
-
-	virtual void create(Object_Args& args);
-
-	virtual Object_data& get_data();
-	virtual Object* get_obj();
-
-	static void init();
-
-	int get_id();
-
-	bool is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex);
-
-	vector<XMFLOAT4> tex;
-
-	Material mat;
+	ObjectAxis      axis;
+	vector<Vector4> texture;
+	Material        material;
 
 	XMFLOAT4 cur_color;
-};
 
-class Empty_Object : public Object
-{
-	friend class Object_Iterator<Object>;
+	Vector3 pos;
 
-	Object& operator++();
-
-	Object_data& get_data();
 public:
 
-	Empty_Object();
+	Object(Object* _base);
+	virtual ~Object();
+
+	virtual void create(ObjectArgs& args, vector<Object*>& objects) = 0;
+
+	int getId();
+
+	ObjectData* getData();
+
+	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
+	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
+
+	float getDiffuse();
+	float getMirror();
+	float getAbsorption();
+
+	Vector4 sampleTex();
 };
 
 class Geometry
@@ -151,56 +95,75 @@ class Geometry
 	Object* landscape;
 
 	vector<Object*> scene;
-	//vector<Object*> all_objects;
+	vector<Object*> objects;
 
 public:
-	vector<Object*> all_objects;
 	Geometry();
 
 	vector<Object*>::iterator begin();
 	vector<Object*>::iterator end();
 
-	bool is_shaded(XMFLOAT4 LightPos, XMFLOAT3 vertex, int id);
+	bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
 
-	bool find_cross(XMFLOAT3 point, XMFLOAT3 vec, Object*& cross_obj , Vertex*& cross);
+	bool findCross(Vector3 srcPos, Vector3 dstPos, Object*& cross_obj, Vertex*& cross);
 };
 
 class Plane : public Object
 {
-	float scale_def;
+	float scaleDef;
 
-	XMFLOAT3(Plane::*pos[3]) (float length, float width, Object_Args& args);
+	Vector3(Plane::*posAxis[3]) (float length, float width, ObjectArgs& args);
 
-	XMFLOAT3 pos_xz(float length, float width, Object_Args& args);
-	XMFLOAT3 pos_xy(float length, float width, Object_Args& args);
-	XMFLOAT3 pos_yz(float length, float width, Object_Args& args);
+	Vector3 posXZ(float length, float width, ObjectArgs& args);
+	Vector3 posXY(float length, float width, ObjectArgs& args);
+	Vector3 posYZ(float length, float width, ObjectArgs& args);
+
+	//points to calc intersection with line
+	Vector3* planeA;
+	Vector3* planeB;
+	Vector3* planeC;
+	Vector3* planeD;
 
 public:
-	Plane();
+	Plane(Object* _base);
 
-	virtual void create(Object_Args& args);
+	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+
+	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
+	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };
 
 class Cube : public Object
 {
-public:
-	Cube();
+	float uSize, vSize;
 
-	virtual void create(Object_Args& args);
+public:
+	Cube(Object* _base);
+
+	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+
+	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
+	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };
 
 class Person : public Object
 {
 public:
-	Person();
+	Person(Object* _base);
 
-	virtual void create(Object_Args& args);
+	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+
+	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
+	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };
 
 class Landscape : public Object
 {
 public:
-	Landscape();
+	Landscape(Object* _base);
 
-	virtual void create(Object_Args& args);
+	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+
+	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
+	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };

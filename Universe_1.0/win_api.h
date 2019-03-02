@@ -4,8 +4,10 @@
 
 #include"resource.h"
 
-#include "dx_11.h"
-#include "geometry.h"
+#include"engine.h"
+
+using std::shared_ptr;
+using std::unique_ptr;
 
 //--------------------------------------------------------------------------------------
 // Глобальные переменные
@@ -14,10 +16,7 @@
 HWND                    hWnd;
 HINSTANCE               hInst;
 
-
-std::unique_ptr<dx_11> device;
-std::shared_ptr<Geometry> geometry;
-std::shared_ptr<Camera> camera;
+unique_ptr<Engine> engine;
 
 //--------------------------------------------------------------------------------------
 // Объявления функций

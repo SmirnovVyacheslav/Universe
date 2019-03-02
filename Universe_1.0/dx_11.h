@@ -9,73 +9,18 @@
 #include <vector>
 #include <memory>
 #include <unordered_map>
-
-#include "geometry.h"
-
 #include <xnamath.h>
 
-#include "lighting.h"
+#include "camera.h"
+#include "geometry.h"
 
 using std::vector;
 using std::wstring;
 using std::shared_ptr;
 using std::unordered_map;
 
-class Camera
+class DX_11
 {
-
-	XMVECTOR eye;// = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
-	XMVECTOR at;// = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	XMVECTOR up;// = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-
-	XMFLOAT3 pos;
-
-	XMMATRIX                _view;
-	XMMATRIX                _projection;
-
-	float xAngle = 0.0f;
-	float yAngle = -90.0f;
-	float radius = 3.0f;
-	float sensitivity = 0.1f;
-
-	HWND hWnd;
-	int wndWidth, wndHeight, wndX, wndY;
-	int topBorder, leftBorder;
-
-	XMMATRIX xRot;
-	XMMATRIX yRot;
-	XMMATRIX zRot;
-
-	int x = 0;
-	int y = 0;
-
-public:
-
-	Camera();
-
-	void init(HWND _hWnd);
-
-	XMMATRIX& view();
-
-	XMMATRIX& projection();
-
-	void move(UINT x, UINT y);
-
-	void catchMouse();
-
-	void releseMouse();
-
-	void resize();
-
-	bool camera_cross(XMFLOAT3 point, XMFLOAT3 vec);
-};
-
-class Light;
-
-class dx_11
-{
-	std::shared_ptr<Light> light;
-
 	//--------------------------------------------------------------------------------------
 	// Структуры
 	//--------------------------------------------------------------------------------------
@@ -84,23 +29,20 @@ class dx_11
 		XMMATRIX mWorld;
 		XMMATRIX mView;
 		XMMATRIX mProjection;
-		XMFLOAT4 vLightColor[1];
-		XMFLOAT4 vLightPos[1];
 	};
 
 	struct Shader
 	{
-		ID3D11VertexShader*     vertexShader = nullptr;
-		ID3D11PixelShader*      pixelShader = nullptr;
+		ID3D11VertexShader* vertexShader = nullptr;
+		ID3D11PixelShader*  pixelShader = nullptr;
 	};
 
-	struct GObjects
+	struct GPUData
 	{
-		ID3D11Buffer*           vertexBuffer = nullptr;
-		ID3D11Buffer*           indexBuffer = nullptr;
-		//ID3D11Buffer*           constantBuffer = nullptr;
-		Shader*                 shader = nullptr;
-		int size;
+		int           size;
+		Shader*       shader = nullptr;
+		ID3D11Buffer* vertexBuffer = nullptr;
+		ID3D11Buffer* indexBuffer = nullptr;
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -109,7 +51,7 @@ class dx_11
 
 	D3D_DRIVER_TYPE         driverType = D3D_DRIVER_TYPE_NULL;
 	D3D_FEATURE_LEVEL       featureLevel = D3D_FEATURE_LEVEL_11_0;
-	
+
 	ID3D11Device*           d3dDevice = nullptr;
 	ID3D11DeviceContext*    immediateContext = nullptr;
 	IDXGISwapChain*         swapChain = nullptr;
@@ -124,47 +66,42 @@ class dx_11
 	ConstantBuffer          localConstantBuffer;
 
 	//============Создание поверхности для Z-буфера============
-	ID3D11DepthStencilState* pDSState;
+	ID3D11DepthStencilState*      pDSState;
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
-	//============Создание поверхности для Z-буфера============
-
 
 	//================D3D11_RASTERIZER_DESC rasterDesc;==========
 	D3D11_RASTERIZER_DESC rasterDesc;
 	ID3D11RasterizerState *m_rasterState;
-	//================D3D11_RASTERIZER_DESC rasterDesc;==========
+
+	HWND hWnd;
+	int  wndWidth;
+	int  wndHeight;
+
+	std::shared_ptr<Camera>   camera;
+	std::shared_ptr<Geometry> geometry;
 
 	XMMATRIX                mWorld;
 
-	HWND hWnd;
-	UINT wndWidth, wndHeight;
+	std::unordered_map<std::wstring, Shader*>          shaders;
+	std::unordered_map<ObjectData*, GPUData*>           objects;
 
-	shared_ptr<Geometry> geometry;
-	shared_ptr<Camera> camera;
+	bool createShader(std::wstring path, Shader* shader);
 
-	unordered_map<std::wstring, Shader*> shaders;
-
-	vector<GObjects*> gObjects;
-
-	void setWndSize();
-
-	bool initShader(wstring path, Shader* shader);
-
-	bool compileShader(wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlob** blobOut);
+	bool compileShader(std::wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlob** blobOut);
 
 public:
 
-	dx_11(HWND _hWnd);
+	DX_11(HWND _hWnd);
 
-	~dx_11();
+	~DX_11();
 
 	bool createDevice();
 
 	void render();
 
-	void setGeometry(shared_ptr<Geometry> _geometry);
+	void setGeometry(std::shared_ptr<Geometry> _geometry);
 
-	void setCamera(shared_ptr<Camera> _camera);
+	void setCamera(std::shared_ptr<Camera> _camera);
 
 	void updateGeometry();
 };

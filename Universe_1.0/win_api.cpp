@@ -1,5 +1,7 @@
 ﻿#include "win_api.h"
 
+//#pragma comment(linker, "/STACK:20000000") // 20 mb
+
 //--------------------------------------------------------------------------------------
 // Главная функция программы. Происходят все инициализации, и затем выполняется
 // цикл обработки сообщений
@@ -12,14 +14,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	if (InitWindow(hInstance, nCmdShow))
 		return -1;
 
-	device.reset(new dx_11(hWnd));
-	if (!device->createDevice()) return -1;
-
-	camera.reset(new Camera);
-	device->setCamera(camera);
-
-	geometry.reset(new Geometry);
-	device->setGeometry(geometry);
+	engine.reset(new Engine(hWnd));
+	if (!engine->init())
+		return -1;
 
 	// Цикл обработки сообщений
 	MSG msg = { 0 };
@@ -32,7 +29,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		}
 		else
 		{
-			device->render();
+			engine->render();
 		}
 	}
 
@@ -47,18 +44,18 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 {
 	// Register class
 	WNDCLASSEX wcex;
-	wcex.cbSize = sizeof(WNDCLASSEX);
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = 0;
-	wcex.hInstance = hInstance;
-	wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDI_ICON);
-	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wcex.cbSize        = sizeof(WNDCLASSEX);
+	wcex.style         = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc   = WndProc;
+	wcex.cbClsExtra    = 0;
+	wcex.cbWndExtra    = 0;
+	wcex.hInstance     = hInstance;
+	wcex.hIcon         = LoadIcon(hInstance, (LPCTSTR)IDI_ICON);
+	wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszMenuName = NULL;
+	wcex.lpszMenuName  = NULL;
 	wcex.lpszClassName = L"Header";
-	wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_ICON);
+	wcex.hIconSm       = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_ICON);
 	if (!RegisterClassEx(&wcex))
 		return E_FAIL;
 
@@ -66,9 +63,8 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 	hInst = hInstance;
 	RECT rc = { 0, 0, 533, 400 };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	hWnd = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, hInstance,
-		NULL);
+	hWnd = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+		rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, hInstance, NULL);
 	if (!hWnd)
 		return E_FAIL;
 
@@ -109,7 +105,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_MOUSEMOVE:
 		if (alt)
-			camera->move((int)LOWORD(lParam), (int)HIWORD(lParam));
+			engine->moveCamera(static_cast<int>(LOWORD(lParam)), static_cast<int>(HIWORD(lParam)));
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
@@ -125,17 +121,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (LOWORD(wParam) != WA_INACTIVE && alt)
 		{
 			lockCursor(hWnd);
-			/*GetWindowRect(hWnd, &rc);
-
-			ClipCursor(&rc);
-			SetCursorPos(int(rc.right / 2), int(rc.bottom / 2));
-			ShowCursor(false);*/
 		}
 		else
 		{
 			freeCursor(hWnd);
-			/*ShowCursor(true);
-			ClipCursor(NULL);*/
 		}
 	} break;
 
@@ -169,15 +158,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_SIZE:
 	{
-		if (camera)
-			camera->resize();
+		if (engine)
+			engine->resize();
 	}
 	break;
 
 	case WM_MOVE:
 	{
-		if (camera)
-			camera->resize();
+		if (engine)
+			engine->resize();
 	}
 	break;
 
