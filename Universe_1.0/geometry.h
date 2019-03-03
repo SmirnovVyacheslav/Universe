@@ -4,11 +4,16 @@
 #include <Windows.h>
 
 #include <xnamath.h>
+#include <mutex>
+#include <memory>
+#include <map>
 
 #include "x_vector.h"
 
 using std::vector;
 using std::wstring;
+using std::mutex;
+using std::map;
 
 enum ObjectAxis { XZ = 0, XY = 1, YZ = 2 };
 
@@ -48,6 +53,8 @@ struct ObjectData
 	wstring        shader;
 	vector<DWORD>  indices;
 	vector<Vertex> vertices;
+	//map<Vertex*, mutex*> vertexMutex;
+	mutex          vertexMutex;
 };
 
 class Object
@@ -87,6 +94,9 @@ public:
 	float getAbsorption();
 
 	Vector4 sampleTex();
+
+	//mutex* getMutex(Vertex* vertex);
+	mutex& getMutex();
 };
 
 class Geometry

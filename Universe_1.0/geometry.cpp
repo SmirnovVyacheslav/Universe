@@ -191,6 +191,8 @@ void Plane::create(ObjectArgs& args, vector<Object*>& objects)
 			data->vertices[i * args.uRes + j].pos = (this->*posAxis[args.axis])((float)j, (float)i, args);
 			data->vertices[i * args.uRes + j].color = args.color;
 			data->vertices[i * args.uRes + j].normal = args.normal;
+
+			//data->vertexMutex[&data->vertices[i * args.uRes + j]] = new mutex;
 		}
 
 	//points to calc intersection with line
@@ -475,3 +477,12 @@ Vector4 Object::sampleTex()
 	return texture[0];
 }
 
+/*mutex* Object::getMutex(Vertex* vertex)
+{
+	return data->vertexMutex[vertex];
+}*/
+
+mutex& Object::getMutex()
+{
+	return data->vertexMutex;
+}
