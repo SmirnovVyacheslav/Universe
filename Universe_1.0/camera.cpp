@@ -54,40 +54,61 @@ XMMATRIX& Camera::projection()
 
 void Camera::move(int _x, int _y)
 {
-	int xDiff = static_cast<int>(_x) - x;
-	int yDiff = y - static_cast<int>(_y);
+	//SetCursorPos(wndX + leftBorder + wndWidth / 2, wndY + topBorder + wndHeight / 2);
+	//return;
 
-	x = static_cast<int>(_x);
-	y = static_cast<int>(_y);
+	//int xDiff = _x - x;
+	//int yDiff = y - _y;
 
-	if (x <= 10)
-	{
-		x = wndWidth - 20;
-	}
-	else if (x >= wndWidth - 10)
-	{
-		x = 20;
-	}
+	//x = _x;
+	//y = _y;
 
-	if (y <= 30)
-	{
-		y = wndHeight - 40;
-	}
-	else if (y >= wndHeight - 30)
-	{
-		y = 40;
-	}
+	//if (x <= 10)
+	//{
+	//	x = wndWidth - 20;
+	//}
+	//else if (x >= wndWidth - 10)
+	//{
+	//	x = 20;
+	//}
 
-	if (x != (int)_x || y != (int)_y)
+	//if (y <= 30)
+	//{
+	//	y = wndHeight - 40;
+	//}
+	//else if (y >= wndHeight - 30)
+	//{
+	//	y = 40;
+	//}
+
+	//if (x != _x || y != _y)
+	//{
+	//	SetCursorPos(wndX + leftBorder + x, wndY + topBorder + y);
+	//	//return;
+	//}
+
+	int half_wnd_width = wndWidth / 2;
+	int half_wnd_height = wndHeight / 2;
+
+	if (half_wnd_width == _x && half_wnd_height == _y)
 	{
-		SetCursorPos(wndX + leftBorder + x, wndY + topBorder + y);
 		return;
 	}
 
-	if (abs(xDiff) > 200 || abs(yDiff) > 200)
+	int xDiff = _x - half_wnd_width;
+	int yDiff = half_wnd_height - _y;
+
+	POINT pt;
+	pt.x = half_wnd_width;
+	pt.y = half_wnd_height;
+	ClientToScreen(hWnd, &pt);
+	SetCursorPos(pt.x, pt.y);
+	//SetCursorPos(wndX + half_wnd_width, wndY + half_wnd_height);
+
+	/*if (abs(xDiff) > 200 || abs(yDiff) > 200)
 	{
 		return;
-	}
+	}*/
 
 	xAngle += static_cast<float>(xDiff) * sensitivity;
 	yAngle += static_cast<float>(yDiff) * sensitivity;

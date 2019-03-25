@@ -6,15 +6,15 @@
 // Главная функция программы. Происходят все инициализации, и затем выполняется
 // цикл обработки сообщений
 //--------------------------------------------------------------------------------------
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev_inst, LPWSTR cmd_line, int cmd_show)
 {
-	UNREFERENCED_PARAMETER(hPrevInstance);
-	UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(inst);
+	UNREFERENCED_PARAMETER(cmd_line);
 
-	if (InitWindow(hInstance, nCmdShow))
+	if (init_window(inst, cmd_show))
 		return -1;
 
-	engine.reset(new Engine(hWnd));
+	engine.reset(new Engine(window));
 	if (!engine->init())
 		return -1;
 
@@ -40,17 +40,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 //--------------------------------------------------------------------------------------
 // Создание окна
 //--------------------------------------------------------------------------------------
-HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
+HRESULT init_window(HINSTANCE inst, int cmd_show)
 {
 	// Register class
 	WNDCLASSEX wcex;
 	wcex.cbSize        = sizeof(WNDCLASSEX);
 	wcex.style         = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc   = WndProc;
+	wcex.lpfnWndProc   = msg_handler;
 	wcex.cbClsExtra    = 0;
 	wcex.cbWndExtra    = 0;
-	wcex.hInstance     = hInstance;
-	wcex.hIcon         = LoadIcon(hInstance, (LPCTSTR)IDI_ICON);
+	wcex.hInstance     = inst;
+	wcex.hIcon         = LoadIcon(inst, (LPCTSTR)IDI_ICON);
 	wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName  = NULL;
@@ -60,56 +60,55 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 		return E_FAIL;
 
 	// Create window
-	hInst = hInstance;
-	RECT rc = { 0, 0, 533, 400 };
+	instance = inst;
+	RECT rc = { 0, 0, wnd_width, wnd_height };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	hWnd = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-		rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, hInstance, NULL);
-	if (!hWnd)
+	window = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+		rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, inst, NULL);
+	if (!window)
 		return E_FAIL;
 
-	ShowWindow(hWnd, nCmdShow);
+	ShowWindow(window, cmd_show);
 
 	return S_OK;
 }
 
-
-void lockCursor(HWND hWnd)
+void lock_cursor(HWND wnd)
 {
-	RECT rc;
-	GetWindowRect(hWnd, &rc);
-
-	ClipCursor(&rc);
-	SetCursorPos(int(rc.right / 2), int(rc.bottom / 2));
-	ShowCursor(false);
+	SetCapture(wnd);
+	//ShowCursor(false);
+	SetCursorPos(half_wnd_width, half_wnd_height);
 }
 
-void freeCursor(HWND hWnd)
+void free_cursor(HWND wnd)
 {
-	RECT rc;
-	ShowCursor(true);
-	ClipCursor(NULL);
+	ReleaseCapture();
+	//ShowCursor(true);
 }
 
 //--------------------------------------------------------------------------------------
 // Процедура обработки сообщений Windows
 //--------------------------------------------------------------------------------------
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK msg_handler(HWND wnd, UINT message, WPARAM w_param, LPARAM l_param)
 {
-	PAINTSTRUCT ps;
-	HDC hdc;
-	RECT rc;
 	static bool alt = true;
+
+	PAINTSTRUCT ps;
+	HDC device_context;
 
 	switch (message)
 	{
 	case WM_MOUSEMOVE:
 		if (alt)
-			engine->moveCamera(static_cast<int>(LOWORD(lParam)), static_cast<int>(HIWORD(lParam)));
+			/*
+			xPos = GET_X_LPARAM(lParam);
+			yPos = GET_Y_LPARAM(lParam);
+			*/
+			engine->moveCamera(GET_X_LPARAM(l_param), GET_Y_LPARAM(l_param));
 		break;
 	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		EndPaint(hWnd, &ps);
+		device_context = BeginPaint(wnd, &ps);
+		EndPaint(wnd, &ps);
 		break;
 
 	case WM_DESTROY:
@@ -118,13 +117,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_ACTIVATE:
 	{
-		if (LOWORD(wParam) != WA_INACTIVE && alt)
+		if (LOWORD(w_param) != WA_INACTIVE && alt)
 		{
-			lockCursor(hWnd);
+			lock_cursor(wnd);
 		}
 		else
 		{
-			freeCursor(hWnd);
+			free_cursor(wnd);
 		}
 	} break;
 
@@ -141,15 +140,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
 	{
-		switch (wParam)
+		switch (w_param)
 		{
 		case VK_MENU:
 		{
 			alt = alt ? false : true;
 			if (alt)
-				lockCursor(hWnd);
+			{
+				lock_cursor(wnd);
+			}
 			else
-				freeCursor(hWnd);
+			{
+				free_cursor(wnd);
+			}
 		}
 			break;
 		}
@@ -171,7 +174,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	break;
 
 	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
+		return DefWindowProc(wnd, message, w_param, l_param);
 	}
 
 	return 0;

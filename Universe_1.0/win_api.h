@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <windows.h>
+#include <windowsx.h>
 #include <memory>
 
 #include"resource.h"
@@ -13,13 +14,16 @@ using std::unique_ptr;
 // Глобальные переменные
 //--------------------------------------------------------------------------------------
 
-HWND                    hWnd;
-HINSTANCE               hInst;
+HWND                    window;
+HINSTANCE               instance;
+
+int wnd_width = 533, wnd_height = 400;
+int half_wnd_width = wnd_width / 2, half_wnd_height = wnd_height / 2;
 
 unique_ptr<Engine> engine;
 
 //--------------------------------------------------------------------------------------
 // Объявления функций
 //--------------------------------------------------------------------------------------
-HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+HRESULT          init_window(HINSTANCE inst, int cmd_show);
+LRESULT CALLBACK msg_handler(HWND, UINT, WPARAM, LPARAM);
