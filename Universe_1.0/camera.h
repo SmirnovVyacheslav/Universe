@@ -3,8 +3,10 @@
 #include <windows.h>
 #include <xnamath.h>
 
-#include "x_vector.h"
+#include <thread>
+#include <mutex>
 
+#include "x_vector.h"
 
 class Camera
 {
@@ -35,11 +37,14 @@ class Camera
 	int x = 0;
 	int y = 0;
 
+	std::mutex camera_mutex;
+
 public:
 
 	Camera(HWND _hWnd);
 
-	XMMATRIX& view();
+	//XMMATRIX& view();
+	XMMATRIX view();
 
 	XMMATRIX& projection();
 

@@ -42,9 +42,12 @@ void Camera::resize()
 	leftBorder = GetSystemMetrics(SM_CXFRAME);
 }
 
-XMMATRIX& Camera::view()
+XMMATRIX Camera::view()
 {
-	return _view;
+	camera_mutex.lock();
+	XMMATRIX tmp_view = _view;
+	camera_mutex.unlock();
+	return tmp_view;
 }
 
 XMMATRIX& Camera::projection()
@@ -54,61 +57,13 @@ XMMATRIX& Camera::projection()
 
 void Camera::move(int _x, int _y)
 {
-	//SetCursorPos(wndX + leftBorder + wndWidth / 2, wndY + topBorder + wndHeight / 2);
-	//return;
-
-	//int xDiff = _x - x;
-	//int yDiff = y - _y;
-
-	//x = _x;
-	//y = _y;
-
-	//if (x <= 10)
-	//{
-	//	x = wndWidth - 20;
-	//}
-	//else if (x >= wndWidth - 10)
-	//{
-	//	x = 20;
-	//}
-
-	//if (y <= 30)
-	//{
-	//	y = wndHeight - 40;
-	//}
-	//else if (y >= wndHeight - 30)
-	//{
-	//	y = 40;
-	//}
-
-	//if (x != _x || y != _y)
-	//{
-	//	SetCursorPos(wndX + leftBorder + x, wndY + topBorder + y);
-	//	//return;
-	//}
-
-	int half_wnd_width = wndWidth / 2;
-	int half_wnd_height = wndHeight / 2;
-
-	if (half_wnd_width == _x && half_wnd_height == _y)
-	{
-		return;
-	}
-
-	int xDiff = _x - half_wnd_width;
-	int yDiff = half_wnd_height - _y;
-
-	POINT pt;
-	pt.x = half_wnd_width;
-	pt.y = half_wnd_height;
-	ClientToScreen(hWnd, &pt);
-	SetCursorPos(pt.x, pt.y);
-	//SetCursorPos(wndX + half_wnd_width, wndY + half_wnd_height);
-
 	/*if (abs(xDiff) > 200 || abs(yDiff) > 200)
 	{
 		return;
 	}*/
+
+	int xDiff = _x;
+	int yDiff = _y;
 
 	xAngle += static_cast<float>(xDiff) * sensitivity;
 	yAngle += static_cast<float>(yDiff) * sensitivity;
@@ -127,7 +82,9 @@ void Camera::move(int _x, int _y)
 
 	eye = XMVectorSet(vx * radius, vy * radius, vz * radius, 0.0f);
 
+	camera_mutex.lock();
 	_view = XMMatrixLookAtLH(eye, at, up);
+	camera_mutex.unlock();
 
 	pos = Vector3(vx * radius, vy * radius, vz * radius);
 

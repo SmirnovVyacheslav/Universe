@@ -19,15 +19,41 @@ bool Engine::init()
 
 	light.reset(new Light(geometry, camera));
 
+	render_ctrl = 0;
+
+	render_thread = thread(&Engine::render, this);
+	render_thread.detach();
+
 	return true;
+}
+
+void Engine::start_render()
+{
+	render_ctrl = 1;
+}
+
+void Engine::stop_render()
+{
+	render_ctrl = 0;
+}
+
+void Engine::exit_render()
+{
+	render_ctrl = -1;
 }
 
 void Engine::render()
 {
-	light->startTracing();
+	while (render_ctrl != -1)
+	{
+		if (render_ctrl)
+		{
+			light->startTracing();
 
-	device->updateGeometry();
-	device->render();
+			device->updateGeometry();
+			device->render();
+		}
+	}
 }
 
 void Engine::moveCamera(int x, int y)

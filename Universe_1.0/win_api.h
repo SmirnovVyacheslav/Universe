@@ -3,9 +3,19 @@
 #include <windowsx.h>
 #include <memory>
 
+#include <thread>
+#include <mutex>
+
 #include"resource.h"
 
 #include"engine.h"
+
+/*40. Заголовочные файлы должны содержать защиту от вложенного включения.
+
+#ifndef COM_COMPANY_MODULE_CLASSNAME_H
+#define COM_COMPANY_MODULE_CLASSNAME_H
+  :
+#endif // COM_COMPANY_MODULE_CLASSNAME_H*/
 
 using std::shared_ptr;
 using std::unique_ptr;

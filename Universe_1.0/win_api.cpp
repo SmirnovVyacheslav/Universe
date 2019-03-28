@@ -18,6 +18,8 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev_inst, LPWSTR cmd_line, int cm
 	if (!engine->init())
 		return -1;
 
+	engine->start_render();
+
 	// Цикл обработки сообщений
 	MSG msg = { 0 };
 	while (WM_QUIT != msg.message)
@@ -29,9 +31,11 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev_inst, LPWSTR cmd_line, int cm
 		}
 		else
 		{
-			engine->render();
+			//engine->render();
 		}
 	}
+
+	engine->exit_render();
 
 	return static_cast<int>(msg.wParam);
 }
@@ -100,11 +104,35 @@ LRESULT CALLBACK msg_handler(HWND wnd, UINT message, WPARAM w_param, LPARAM l_pa
 	{
 	case WM_MOUSEMOVE:
 		if (alt)
+		{
+			int x = GET_X_LPARAM(l_param);
+			int y = GET_Y_LPARAM(l_param);
+
+			if (half_wnd_width == x && half_wnd_height == y)
+			{
+				//camera_diff_x = 0;
+				//camera_diff_y = 0;
+				//sleep(0.1);
+				break;
+			}
+
+			int diff_x = x - half_wnd_width;
+			int diff_y = half_wnd_height - y;
+
+			engine->moveCamera(diff_x, diff_y);
+
+			POINT pt;
+			pt.x = half_wnd_width;
+			pt.y = half_wnd_height;
+			ClientToScreen(wnd, &pt);
+			SetCursorPos(pt.x, pt.y);
+		}
 			/*
 			xPos = GET_X_LPARAM(lParam);
 			yPos = GET_Y_LPARAM(lParam);
 			*/
-			engine->moveCamera(GET_X_LPARAM(l_param), GET_Y_LPARAM(l_param));
+			//engine->moveCamera(GET_X_LPARAM(l_param), GET_Y_LPARAM(l_param));
+
 		break;
 	case WM_PAINT:
 		device_context = BeginPaint(wnd, &ps);
