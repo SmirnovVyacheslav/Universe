@@ -16,6 +16,15 @@ DX_11::~DX_11()
 	if (swapChain) swapChain->Release();
 	if (immediateContext) immediateContext->Release();
 	if (d3dDevice) d3dDevice->Release();
+
+	if (depthStencil) depthStencil->Release();
+	if (depthStencilView) depthStencilView->Release();
+
+	if (constantBuffer) constantBuffer->Release();
+
+	if (pDSState) pDSState->Release();
+
+	if (m_rasterState) m_rasterState->Release();
 }
 
 bool DX_11::createDevice()

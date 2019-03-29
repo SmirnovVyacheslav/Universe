@@ -109,6 +109,7 @@ class Geometry
 
 public:
 	Geometry();
+	~Geometry();
 
 	vector<Object*>::iterator begin();
 	vector<Object*>::iterator end();
@@ -136,6 +137,7 @@ class Plane : public Object
 
 public:
 	Plane(Object* _base);
+	~Plane();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
 
@@ -149,6 +151,7 @@ class Cube : public Object
 
 public:
 	Cube(Object* _base);
+	~Cube();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
 
@@ -160,6 +163,7 @@ class Person : public Object
 {
 public:
 	Person(Object* _base);
+	~Person();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
 
@@ -171,6 +175,7 @@ class Landscape : public Object
 {
 public:
 	Landscape(Object* _base);
+	~Landscape();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
 

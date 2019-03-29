@@ -22,9 +22,14 @@ bool Engine::init()
 	render_ctrl = 0;
 
 	render_thread = thread(&Engine::render, this);
-	render_thread.detach();
+	//render_thread.detach();
 
 	return true;
+}
+
+Engine::~Engine()
+{
+
 }
 
 void Engine::start_render()
@@ -40,6 +45,7 @@ void Engine::stop_render()
 void Engine::exit_render()
 {
 	render_ctrl = -1;
+	render_thread.join();
 }
 
 void Engine::render()

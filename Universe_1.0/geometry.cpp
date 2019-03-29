@@ -17,6 +17,14 @@ Geometry::Geometry()
 	scene.push_back(landscape);
 }
 
+Geometry::~Geometry()
+{
+	for (auto obj : scene)
+	{
+		delete obj;
+	}
+}
+
 vector<Object*>::iterator Geometry::begin()
 {
 	return objects.begin();
@@ -72,6 +80,14 @@ bool Geometry::findCross(Vector3 srcPos, Vector3 dstPos, Object*& crossObj, Vert
 
 
 Cube::Cube(Object* _base) : Object(_base) {}
+
+Cube::~Cube()
+{
+	for (auto obj : components)
+	{
+		delete obj;
+	}
+}
 
 void Cube::create(ObjectArgs& args, vector<Object*>& objects)
 {
@@ -175,6 +191,11 @@ Plane::Plane(Object* _base) : Object(_base), scaleDef(1.0f)
 	posAxis[0] = &Plane::posXZ;
 	posAxis[1] = &Plane::posXY;
 	posAxis[2] = &Plane::posYZ;
+}
+
+Plane::~Plane()
+{
+
 }
 
 void Plane::create(ObjectArgs& args, vector<Object*>& objects)
@@ -371,6 +392,14 @@ void Plane::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, 
 
 Person::Person(Object* _base) : Object(_base) {}
 
+Person::~Person()
+{
+	for (auto obj : components)
+	{
+		delete obj;
+	}
+}
+
 void Person::create(ObjectArgs& args, vector<Object*>& objects)
 {
 	ObjectArgs cubeArgs = args;
@@ -399,6 +428,14 @@ void Person::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*,
 }
 
 Landscape::Landscape(Object* _base) : Object(_base) {}
+
+Landscape::~Landscape()
+{
+	for (auto obj : components)
+	{
+		delete obj;
+	}
+}
 
 void Landscape::create(ObjectArgs& args, vector<Object*>& objects)
 {

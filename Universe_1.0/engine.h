@@ -27,6 +27,8 @@ public:
 	void exit_render();
 
 	Engine(HWND _hWnd);
+	~Engine();
+
 	bool init();
 	void render();
 
