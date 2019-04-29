@@ -7,6 +7,34 @@ Camera::Camera(HWND _hWnd) : hWnd(_hWnd)
 	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
 	pos = Vector3(0.0f, 1.0f, -1.0f);
+
+	float tmpX, tmpY, tmpZ;
+	Vector3 normal = viewPoint - pos;
+
+	tmpX = pos.x - (float)wndWidth / 2.0f;
+	tmpY = pos.y - (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointA = { tmpX, tmpY, tmpZ };
+	camera_def.a = pointA;
+
+	tmpX = pos.x + (float)wndWidth / 2.0f;
+	tmpY = pos.y - (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointB = { tmpX, tmpY, tmpZ };
+	camera_def.b = pointB;
+
+	tmpX = pos.x - (float)wndWidth / 2.0f;
+	tmpY = pos.y + (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointC = { tmpX, tmpY, tmpZ };
+	camera_def.c = pointC;
+
+	tmpX = pos.x + (float)wndWidth / 2.0f;
+	tmpY = pos.y + (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointD = { tmpX, tmpY, tmpZ };
+	camera_def.d = pointD;
+
 	viewPoint = { 0.0f, 0.0f, 0.0f };
 
 	RECT wndSize;
@@ -87,6 +115,34 @@ void Camera::move(int _x, int _y)
 	camera_mutex.unlock();
 
 	pos = Vector3(vx * radius, vy * radius, vz * radius);
+
+
+	float tmpX, tmpY, tmpZ;
+	Vector3 normal = viewPoint - pos;
+
+	tmpX = pos.x - (float)wndWidth / 2.0f;
+	tmpY = pos.y - (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointA = { tmpX, tmpY, tmpZ };
+	camera_def.a = pointA;
+
+	tmpX = pos.x + (float)wndWidth / 2.0f;
+	tmpY = pos.y - (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointB = { tmpX, tmpY, tmpZ };
+	camera_def.b = pointB;
+
+	tmpX = pos.x - (float)wndWidth / 2.0f;
+	tmpY = pos.y + (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointC = { tmpX, tmpY, tmpZ };
+	camera_def.c = pointC;
+
+	tmpX = pos.x + (float)wndWidth / 2.0f;
+	tmpY = pos.y + (float)wndHeight / 2.0f;
+	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
+	Vector3 pointD = { tmpX, tmpY, tmpZ };
+	camera_def.d = pointD;
 
 	viewPoint = { 0.0f, 0.0f, 0.0f };
 }
@@ -172,4 +228,9 @@ bool Camera::cameraCross(Vector3 srcPos, Vector3 dstPos)
 	}
 
 	return false;
+}
+
+cameraDef& Camera::get_def()
+{
+	return camera_def;
 }

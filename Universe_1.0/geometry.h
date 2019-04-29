@@ -19,8 +19,8 @@ enum ObjectAxis { XZ = 0, XY = 1, YZ = 2 };
 
 struct Material
 {
-	float diffuse = 0.2f;
-	float mirror = 0.6f;
+	float diffuse = 0.6f;
+	float mirror = 0.2f;
 	float absorption = 0.2f;
 };
 
@@ -35,7 +35,6 @@ struct ObjectArgs
 {
 	Vector3 pos    = { 0.0f, 0.0f, 0.0f };
 	Vector3 normal = { 0.0f, 1.0f, 0.0f };
-	Vector4 color  = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 	// uvw resolution
 	int uRes = 1;
@@ -47,14 +46,22 @@ struct ObjectArgs
 	float scale = 1.0f;
 };
 
+struct ObjectDef
+{
+	Vector4 a;
+	Vector4 b;
+	Vector4 c;
+	Vector4 d;
+	Vector4 color = { 1.0f, 1.0f, 0.1f, 0.0f };
+};
+
 struct ObjectData
 {
 	int            size = 1;
 	wstring        shader;
 	vector<DWORD>  indices;
 	vector<Vertex> vertices;
-	//map<Vertex*, mutex*> vertexMutex;
-	mutex          vertexMutex;
+	ObjectDef      def;
 };
 
 class Object
@@ -70,8 +77,6 @@ protected:
 	ObjectAxis      axis;
 	vector<Vector4> texture;
 	Material        material;
-
-	XMFLOAT4 cur_color;
 
 	Vector3 pos;
 
@@ -94,9 +99,6 @@ public:
 	float getAbsorption();
 
 	Vector4 sampleTex();
-
-	//mutex* getMutex(Vertex* vertex);
-	mutex& getMutex();
 };
 
 class Geometry
@@ -129,20 +131,14 @@ class Plane : public Object
 	Vector3 posXY(float length, float width, ObjectArgs& args);
 	Vector3 posYZ(float length, float width, ObjectArgs& args);
 
-	//points to calc intersection with line
-	Vector3* planeA;
-	Vector3* planeB;
-	Vector3* planeC;
-	Vector3* planeD;
-
 public:
 	Plane(Object* _base);
 	~Plane();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
 
-	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
-	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
+	//virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
+	//virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };
 
 class Cube : public Object

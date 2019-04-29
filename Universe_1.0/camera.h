@@ -8,6 +8,15 @@
 
 #include "x_vector.h"
 
+struct cameraDef
+{
+	Vector4 a;
+	Vector4 b;
+	Vector4 c;
+	Vector4 d;
+	Vector4 color = { 0.0f, 0.0f, 0.0f, 0.0f};
+};
+
 class Camera
 {
 
@@ -39,6 +48,8 @@ class Camera
 
 	std::mutex camera_mutex;
 
+	cameraDef camera_def;
+
 public:
 
 	Camera(HWND _hWnd);
@@ -53,4 +64,6 @@ public:
 	void resize();
 
 	bool cameraCross(Vector3 srcPos, Vector3 dstPos);
+
+	cameraDef& get_def();
 };

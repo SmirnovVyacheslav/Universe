@@ -211,8 +211,7 @@ bool DX_11::createShader(wstring path, Shader* shader)
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	UINT numElements = ARRAYSIZE(layout);
 
@@ -283,6 +282,14 @@ void DX_11::render()
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
 	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
 
+	// Update camera pos
+	cameraDef camera_def = camera->get_def();
+
+	object_def[0] = camera_def.a;
+	object_def[1] = camera_def.b;
+	object_def[2] = camera_def.c;
+	object_def[3] = camera_def.d;
+	object_color[0] = camera_def.color;
 	//
 	// Установка констант шейдера
 	//
@@ -290,11 +297,23 @@ void DX_11::render()
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
 
+	localConstantBuffer.light_pos = { 0.0f, 10.0f, 0.0f, 0.0f };
+	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 0.0f };
+
+	localConstantBuffer.plane_num.x = object_color.size();
+	localConstantBuffer.plane_num.y = 0;
+	memcpy(&localConstantBuffer.plane_def, &object_def[0], sizeof(object_def));
+	memcpy(&localConstantBuffer.plane_color, &object_color[0], sizeof(object_color));
+
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
 
-
+	float i = 0;
 	for (auto it : objects)
 	{
+		//set current obj number
+		i++;
+		localConstantBuffer.plane_num.y = i;
+		immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
 		//
 		// Установка шейдера
 		//
@@ -333,6 +352,14 @@ void DX_11::render()
 
 void DX_11::setGeometry(shared_ptr<Geometry> _geometry)
 {
+	cameraDef camera_def = camera->get_def();
+
+	object_def.push_back(camera_def.a);
+	object_def.push_back(camera_def.b);
+	object_def.push_back(camera_def.c);
+	object_def.push_back(camera_def.d);
+	object_color.push_back(camera_def.color);
+
 	geometry =_geometry;
 
 	for (auto obj : *geometry)
@@ -357,6 +384,12 @@ void DX_11::setGeometry(shared_ptr<Geometry> _geometry)
 		gpuData->shader = shader;
 		gpuData->size = objData->size;
 
+		// object shell
+		object_def.push_back(objData->def.a);
+		object_def.push_back(objData->def.b);
+		object_def.push_back(objData->def.c);
+		object_def.push_back(objData->def.d);
+		object_color.push_back(objData->def.color);
 
 		D3D11_BUFFER_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(bufferDesc));

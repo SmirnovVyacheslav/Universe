@@ -131,6 +131,53 @@ Vector3 Vector3::operator^(const Vector3& vec)
 	return Vector3(y * vec.z - z * vec.y, z * vec.x - x * vec.z, x * vec.y - y * vec.x);
 }
 
+bool Vector3::operator==(const Vector3& vec)
+{
+	if ((x - vec.x) * (x - vec.x) > 0.000001f)
+	{
+		return false;
+	}
+
+	if ((y - vec.y) * (y - vec.y) > 0.000001f)
+	{
+		return false;
+	}
+
+	if ((z - vec.z) * (z - vec.z) > 0.000001f)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool Vector3::operator!=(const Vector3& vec)
+{
+	if ((x - vec.x) * (x - vec.x) > 0.000001f)
+	{
+		return true;
+	}
+
+	if ((y - vec.y) * (y - vec.y) > 0.000001f)
+	{
+		return true;
+	}
+
+	if ((z - vec.z) * (z - vec.z) > 0.000001f)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+Vector3::operator Vector4()
+{
+	return { x, y, z, 0.0f };
+}
+
+
+
 float dist(Vector3 vecA, Vector3 vecB)
 {
 	return sqrt((vecB.x - vecA.x) * (vecB.x - vecA.x) + (vecB.y - vecA.y) * (vecB.y - vecA.y) + (vecB.z - vecA.z) * (vecB.z - vecA.z));
@@ -147,6 +194,7 @@ float dist(Vector4 vecA, Vector4 vecB)
 {
 	return sqrt((vecB.x - vecA.x) * (vecB.x - vecA.x) + (vecB.y - vecA.y) * (vecB.y - vecA.y) + (vecB.z - vecA.z) * (vecB.z - vecA.z) + (vecB.w - vecA.w) * (vecB.w - vecA.w));
 }
+
 
 
 Vector4& Vector4::operator=(const Vector4& vec)

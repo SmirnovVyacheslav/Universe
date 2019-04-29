@@ -54,7 +54,7 @@ void Engine::render()
 	{
 		if (render_ctrl)
 		{
-			light->startTracing();
+			//light->startTracing();
 
 			device->updateGeometry();
 			device->render();

@@ -210,17 +210,19 @@ void Plane::create(ObjectArgs& args, vector<Object*>& objects)
 		for (int j = 0; j < args.uRes; ++j)
 		{
 			data->vertices[i * args.uRes + j].pos = (this->*posAxis[args.axis])((float)j, (float)i, args);
-			data->vertices[i * args.uRes + j].color = args.color;
 			data->vertices[i * args.uRes + j].normal = args.normal;
-
-			//data->vertexMutex[&data->vertices[i * args.uRes + j]] = new mutex;
 		}
 
-	//points to calc intersection with line
-	planeA = &data->vertices[0].pos;
-	planeB = &data->vertices[args.uRes - 1].pos;
-	planeC = &data->vertices[args.uRes * (args.vRes - 2)].pos;
-	planeD = &data->vertices[args.uRes * (args.vRes - 1) - 1].pos;
+
+	/*
+	 a -> b
+	      |
+	 d <- c
+	*/
+	data->def.a = data->vertices[0].pos;
+	data->def.b = data->vertices[args.uRes - 1].pos;
+	data->def.c = data->vertices[args.uRes * args.vRes - 1].pos;
+	data->def.d = data->vertices[args.uRes * (args.vRes - 1)].pos;
 
 	//Генерация  индексного буфера
 	data->size = (args.uRes - 1) * (args.vRes - 1) * 6;
@@ -263,131 +265,131 @@ Vector3 Plane::posYZ(float u, float v, ObjectArgs& args)
 	return Vector3(start_x, start_y + v * args.scale, start_z + u * args.scale);
 }
 
-bool Plane::isShaded(Vector3 srcPos, Vector3 dstPos, int id)
-{
-	if (id == this->id)
-		return false;
-
-	/*
-	Будем обозначать A, B, C - точки плоскости, X, Y - точки прямой(концы отрезка), SP - скалярное произведение, VP - векторное произведение.O - искомое множество точек пересечения
-
-	N = VP(B - A, C - A)
-	N = N / | N | -нормаль к плоскости  // в принципе это можно и не делать
-	V = A - X
-	// расстояние до плоскости по нормали
-	d = SP(N, V)
-	W = Y - X
-	// приближение к плоскости по нормали при прохождении отрезка
-	e = SP(N, W)
-
-	if (e != 0)
-	O = X + W * d / e;          // одна точка
-	else if (d == 0)
-	O = X + W * (anything)     // прямая принадлежит плоскости
-	else
-	O = empty;                // прямая параллельна плоскости
-	*/
-
-	Vector3 crossPoint;
-
-	//Normal to plane
-	Vector3 normal = ((*planeB - *planeA) ^ (*planeC - *planeA)).normalize();
-	Vector3 vectorToPlane = *planeA - srcPos;
-
-	//dst to plane using normal
-	float dist = normal & vectorToPlane;
-	Vector3 srcVec = dstPos - srcPos;
-
-	//Approx to plane with interseption
-	float eRes = normal & srcVec;
-
-	if (eRes != 0) //one point
-	{
-		crossPoint = srcPos + srcVec * dist / eRes;
-		/*
-		// триангл задается тремя вершинами v1,v2,v3
-		bool intersect(vertex a, vertex b, vertex &c) {
-		vertex tn = normal(); // нормаль триангла
-		float d1 = (a-v1).proj(tn), d2 = (b-v1).proj(tn); // проекции на нормаль траингла
-		if(msign(d1)==msign(d2)) return false; // если обе точки с одной стороны (знаки совпадают) то нет пересечения
-		c = (a + ((b - a) * (-d1 / (d2 - d1)))); // в c точка лежащая в плоскости треугольника в месте пересечения
-		if( (((v2 - v1) ^ (c - v1)) * tn) <= 0) return false; // функции проверки попадания внутрь триангла точки c
-		if( (((v3 - v2) ^ (c - v2)) * tn) <= 0) return false; // ^ - векторное, * - скалярное произведение векторов
-		if( (((v1 - v3) ^ (c - v3)) * tn) <= 0) return false;
-		return true; // если точка попала в триангл
-		}
-		*/
-
-		if ((((*planeB - *planeA) ^ (crossPoint - *planeA)) & normal) <= 0)
-			return false;
-		if ((((*planeD - *planeB) ^ (crossPoint - *planeB)) & normal) <= 0)
-			return false;
-		if ((((*planeA - *planeC) ^ (crossPoint - *planeC)) & normal) <= 0)
-			return false;
-		if ((((*planeC - *planeD) ^ (crossPoint - *planeD)) & normal) <= 0)
-			return false;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-void Plane::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross)
-{
-	Vector3 crossPoint;
-
-	//Normal to plane
-	Vector3 normal = ((*planeB - *planeA) ^ (*planeC - *planeA)).normalize();
-	Vector3 vectorToPlane = *planeA - srcPos;
-
-	//dst to plane using normal
-	float dist = normal & vectorToPlane;
-	Vector3 srcVec = dstPos - srcPos;
-
-	//Approx to plane with interseption
-	float eRes = normal & srcVec;
-
-	if (eRes != 0) //one point
-	{
-		crossPoint = srcPos + srcVec * dist / eRes;
-		/*
-		// триангл задается тремя вершинами v1,v2,v3
-		bool intersect(vertex a, vertex b, vertex &c) {
-		vertex tn = normal(); // нормаль триангла
-		float d1 = (a-v1).proj(tn), d2 = (b-v1).proj(tn); // проекции на нормаль траингла
-		if(msign(d1)==msign(d2)) return false; // если обе точки с одной стороны (знаки совпадают) то нет пересечения
-		c = (a + ((b - a) * (-d1 / (d2 - d1)))); // в c точка лежащая в плоскости треугольника в месте пересечения
-		if( (((v2 - v1) ^ (c - v1)) * tn) <= 0) return false; // функции проверки попадания внутрь триангла точки c
-		if( (((v3 - v2) ^ (c - v2)) * tn) <= 0) return false; // ^ - векторное, * - скалярное произведение векторов
-		if( (((v1 - v3) ^ (c - v3)) * tn) <= 0) return false;
-		return true; // если точка попала в триангл
-		}
-		*/
-
-		if ((((*planeB - *planeA) ^ (crossPoint - *planeA)) & normal) <= 0)
-			return;
-		if ((((*planeD - *planeB) ^ (crossPoint - *planeB)) & normal) <= 0)
-			return;
-		if ((((*planeA - *planeC) ^ (crossPoint - *planeC)) & normal) <= 0)
-			return;
-		if ((((*planeC - *planeD) ^ (crossPoint - *planeD)) & normal) <= 0)
-			return;
-		
-		for (Vertex &vertex : data->vertices)
-		{
-			if ((vertex.pos - crossPoint) < 0.2f)
-			{
-				cross.push_back(std::make_pair(this, &vertex));
-			}
-		}
-	}
-	else
-	{
-		return;
-	}
-}
+//bool Plane::isShaded(Vector3 srcPos, Vector3 dstPos, int id)
+//{
+//	if (id == this->id)
+//		return false;
+//
+//	/*
+//	Будем обозначать A, B, C - точки плоскости, X, Y - точки прямой(концы отрезка), SP - скалярное произведение, VP - векторное произведение.O - искомое множество точек пересечения
+//
+//	N = VP(B - A, C - A)
+//	N = N / | N | -нормаль к плоскости  // в принципе это можно и не делать
+//	V = A - X
+//	// расстояние до плоскости по нормали
+//	d = SP(N, V)
+//	W = Y - X
+//	// приближение к плоскости по нормали при прохождении отрезка
+//	e = SP(N, W)
+//
+//	if (e != 0)
+//	O = X + W * d / e;          // одна точка
+//	else if (d == 0)
+//	O = X + W * (anything)     // прямая принадлежит плоскости
+//	else
+//	O = empty;                // прямая параллельна плоскости
+//	*/
+//
+//	Vector3 crossPoint;
+//
+//	//Normal to plane
+//	Vector3 normal = ((*planeB - *planeA) ^ (*planeC - *planeA)).normalize();
+//	Vector3 vectorToPlane = *planeA - srcPos;
+//
+//	//dst to plane using normal
+//	float dist = normal & vectorToPlane;
+//	Vector3 srcVec = dstPos - srcPos;
+//
+//	//Approx to plane with interseption
+//	float eRes = normal & srcVec;
+//
+//	if (eRes != 0) //one point
+//	{
+//		crossPoint = srcPos + srcVec * dist / eRes;
+//		/*
+//		// триангл задается тремя вершинами v1,v2,v3
+//		bool intersect(vertex a, vertex b, vertex &c) {
+//		vertex tn = normal(); // нормаль триангла
+//		float d1 = (a-v1).proj(tn), d2 = (b-v1).proj(tn); // проекции на нормаль траингла
+//		if(msign(d1)==msign(d2)) return false; // если обе точки с одной стороны (знаки совпадают) то нет пересечения
+//		c = (a + ((b - a) * (-d1 / (d2 - d1)))); // в c точка лежащая в плоскости треугольника в месте пересечения
+//		if( (((v2 - v1) ^ (c - v1)) * tn) <= 0) return false; // функции проверки попадания внутрь триангла точки c
+//		if( (((v3 - v2) ^ (c - v2)) * tn) <= 0) return false; // ^ - векторное, * - скалярное произведение векторов
+//		if( (((v1 - v3) ^ (c - v3)) * tn) <= 0) return false;
+//		return true; // если точка попала в триангл
+//		}
+//		*/
+//
+//		if ((((*planeB - *planeA) ^ (crossPoint - *planeA)) & normal) <= 0)
+//			return false;
+//		if ((((*planeD - *planeB) ^ (crossPoint - *planeB)) & normal) <= 0)
+//			return false;
+//		if ((((*planeA - *planeC) ^ (crossPoint - *planeC)) & normal) <= 0)
+//			return false;
+//		if ((((*planeC - *planeD) ^ (crossPoint - *planeD)) & normal) <= 0)
+//			return false;
+//		return true;
+//	}
+//	else
+//	{
+//		return false;
+//	}
+//}
+//
+//void Plane::findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross)
+//{
+//	Vector3 crossPoint;
+//
+//	//Normal to plane
+//	Vector3 normal = ((*planeB - *planeA) ^ (*planeC - *planeA)).normalize();
+//	Vector3 vectorToPlane = *planeA - srcPos;
+//
+//	//dst to plane using normal
+//	float dist = normal & vectorToPlane;
+//	Vector3 srcVec = dstPos - srcPos;
+//
+//	//Approx to plane with interseption
+//	float eRes = normal & srcVec;
+//
+//	if (eRes != 0) //one point
+//	{
+//		crossPoint = srcPos + srcVec * dist / eRes;
+//		/*
+//		// триангл задается тремя вершинами v1,v2,v3
+//		bool intersect(vertex a, vertex b, vertex &c) {
+//		vertex tn = normal(); // нормаль триангла
+//		float d1 = (a-v1).proj(tn), d2 = (b-v1).proj(tn); // проекции на нормаль траингла
+//		if(msign(d1)==msign(d2)) return false; // если обе точки с одной стороны (знаки совпадают) то нет пересечения
+//		c = (a + ((b - a) * (-d1 / (d2 - d1)))); // в c точка лежащая в плоскости треугольника в месте пересечения
+//		if( (((v2 - v1) ^ (c - v1)) * tn) <= 0) return false; // функции проверки попадания внутрь триангла точки c
+//		if( (((v3 - v2) ^ (c - v2)) * tn) <= 0) return false; // ^ - векторное, * - скалярное произведение векторов
+//		if( (((v1 - v3) ^ (c - v3)) * tn) <= 0) return false;
+//		return true; // если точка попала в триангл
+//		}
+//		*/
+//
+//		if ((((*planeB - *planeA) ^ (crossPoint - *planeA)) & normal) <= 0)
+//			return;
+//		if ((((*planeD - *planeB) ^ (crossPoint - *planeB)) & normal) <= 0)
+//			return;
+//		if ((((*planeA - *planeC) ^ (crossPoint - *planeC)) & normal) <= 0)
+//			return;
+//		if ((((*planeC - *planeD) ^ (crossPoint - *planeD)) & normal) <= 0)
+//			return;
+//		
+//		for (Vertex &vertex : data->vertices)
+//		{
+//			if ((vertex.pos - crossPoint) < 0.2f && vertex.pos != srcPos)
+//			{
+//				cross.push_back(std::make_pair(this, &vertex));
+//			}
+//		}
+//	}
+//	else
+//	{
+//		return;
+//	}
+//}
 
 
 Person::Person(Object* _base) : Object(_base) {}
@@ -443,9 +445,9 @@ void Landscape::create(ObjectArgs& args, vector<Object*>& objects)
 
 	components.push_back(new Plane(this));
 	landArgs.axis = XZ;
-	landArgs.uRes = 5;
-	landArgs.vRes = 5;
-	landArgs.scale = 2.0f;
+	landArgs.uRes = 10;
+	landArgs.vRes = 10;
+	landArgs.scale = 1.0f;
 	landArgs.pos = { 0.0f, -1.0f, 0.0f };
 	components[0]->create(landArgs, objects);
 }
@@ -512,14 +514,4 @@ float Object::getAbsorption()
 Vector4 Object::sampleTex()
 {
 	return texture[0];
-}
-
-/*mutex* Object::getMutex(Vertex* vertex)
-{
-	return data->vertexMutex[vertex];
-}*/
-
-mutex& Object::getMutex()
-{
-	return data->vertexMutex;
 }

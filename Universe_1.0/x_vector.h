@@ -27,7 +27,12 @@ struct Vector3
 	float operator&(const Vector3& vec);
 	Vector3 operator^(const Vector3& vec);
 
+	bool operator==(const Vector3& vec);
+	bool operator!=(const Vector3& vec);
+
 	Vector3 trunc();
+
+	operator Vector4();
 };
 
 Vector3 operator+(Vector3& vec, const float& num);
