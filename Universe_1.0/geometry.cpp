@@ -91,16 +91,18 @@ Cube::~Cube()
 
 void Cube::create(ObjectArgs& args, vector<Object*>& objects)
 {
-	pos = args.pos;
+	//pos = args.pos;
 	uSize = (float)(args.uRes - 1) / 2.0f * args.scale;
 	vSize = (float)(args.vRes - 1) / 2.0f * args.scale;
 
 	ObjectArgs planeArgs = args;
-	planeArgs.uRes = 4;
-	planeArgs.vRes = 4;
-	planeArgs.scale = 0.5f;
-	planeArgs.pos = { 0.0f, 0.0f, 0.0f };
+	planeArgs.uRes = 10;
+	planeArgs.vRes = 10;
+	planeArgs.scale = 0.2f;
+	//planeArgs.pos = { 0.0f, 0.0f, 0.0f };
 
+
+	planeArgs.pos = args.pos;
 	components.push_back(new Plane(this));
 	planeArgs.normal = { 0.0f, -1.0f, 0.0f };
 	planeArgs.axis = XZ;
@@ -109,7 +111,7 @@ void Cube::create(ObjectArgs& args, vector<Object*>& objects)
 
 	planeArgs.pos = args.pos;
 	components.push_back(new Plane(this));
-	planeArgs.normal = { 1.0f, 0.0f, 0.0f };
+	planeArgs.normal = { -1.0f, 0.0f, 0.0f };
 	planeArgs.axis = YZ;
 	planeArgs.pos.x = args.pos.x - (float)(planeArgs.uRes - 1) / 2.0f * planeArgs.scale;
 	components[1]->create(planeArgs, objects); //left side
@@ -223,6 +225,7 @@ void Plane::create(ObjectArgs& args, vector<Object*>& objects)
 	data->def.b = data->vertices[args.uRes - 1].pos;
 	data->def.c = data->vertices[args.uRes * args.vRes - 1].pos;
 	data->def.d = data->vertices[args.uRes * (args.vRes - 1)].pos;
+	data->def.color = args.color;
 
 	//Генерация  индексного буфера
 	data->size = (args.uRes - 1) * (args.vRes - 1) * 6;
@@ -405,6 +408,7 @@ Person::~Person()
 void Person::create(ObjectArgs& args, vector<Object*>& objects)
 {
 	ObjectArgs cubeArgs = args;
+	cubeArgs.color = { 0.1f, 1.0f, 1.0f };
 
 	components.push_back(new Cube(this));
 	components[0]->create(cubeArgs, objects);
@@ -443,12 +447,14 @@ void Landscape::create(ObjectArgs& args, vector<Object*>& objects)
 {
 	ObjectArgs landArgs = args;
 
+	landArgs.color = { 1.0f, 1.0f, 0.1f };
+
 	components.push_back(new Plane(this));
 	landArgs.axis = XZ;
-	landArgs.uRes = 10;
-	landArgs.vRes = 10;
-	landArgs.scale = 1.0f;
-	landArgs.pos = { 0.0f, -1.0f, 0.0f };
+	landArgs.uRes = 100;
+	landArgs.vRes = 100;
+	landArgs.scale = 0.5f;
+	landArgs.pos = { 0.0f, -3.0f, 0.0f };
 	components[0]->create(landArgs, objects);
 }
 

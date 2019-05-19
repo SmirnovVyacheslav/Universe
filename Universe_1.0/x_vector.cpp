@@ -277,3 +277,8 @@ Vector4 operator/(const float& num, Vector4& vec)
 {
 	return Vector4(num / vec.x, num / vec.y, num / vec.z, 1.0f);
 }
+
+Vector4::operator Vector3()
+{
+	return { x, y, z };
+}

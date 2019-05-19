@@ -76,6 +76,8 @@ struct Vector4
 	Vector4 operator/(const Vector4& vec);
 
 	Vector4 trunc();
+
+	operator Vector3();
 };
 
 Vector4 operator+(Vector4& vec, const float& num);

@@ -182,7 +182,7 @@ bool DX_11::createDevice()
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.ByteWidth = sizeof(ConstantBuffer);
 	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	bufferDesc.CPUAccessFlags = 0;
+	//bufferDesc.CPUAccessFlags = 0;
 	if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &constantBuffer) < 0)
 		return false;
 
@@ -269,12 +269,14 @@ bool DX_11::compileShader(wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlo
 	return true;
 }
 
+
 //--------------------------------------------------------------------------------------
 // Рендер
 //--------------------------------------------------------------------------------------
-
 void DX_11::render()
 {
+	static const float PI = 3.14159265f;
+
 	//
 	// Очистка рендер-таргета
 	//
@@ -297,23 +299,98 @@ void DX_11::render()
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
 
-	localConstantBuffer.light_pos = { 0.0f, 10.0f, 0.0f, 0.0f };
+	localConstantBuffer.light_pos = { 0.0f, 5.0f, 0.0f, 0.0f };
 	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 0.0f };
 
-	localConstantBuffer.plane_num.x = object_color.size();
-	localConstantBuffer.plane_num.y = 0;
-	memcpy(&localConstantBuffer.plane_def, &object_def[0], sizeof(object_def));
-	memcpy(&localConstantBuffer.plane_color, &object_color[0], sizeof(object_color));
+	localConstantBuffer.plane_num.x = (float)object_color.size();
+	localConstantBuffer.plane_num.y = 0.0f;
+	//memcpy(&localConstantBuffer.plane_def, &object_def[0], object_def.size() * sizeof(XMFLOAT4));
+	//memcpy(&localConstantBuffer.plane_color, &object_color[0], object_color.size() * sizeof(XMFLOAT4));
+	memset(&localConstantBuffer.plane_def, 0, sizeof(localConstantBuffer.plane_def));
+	memset(&localConstantBuffer.plane_color, 0, sizeof(localConstantBuffer.plane_color));
+
+	memcpy(&localConstantBuffer.plane_def, &(object_def[0]), object_def.size() * sizeof(XMFLOAT4));
+	memcpy(&localConstantBuffer.plane_color, &(object_color[0]), object_color.size() * sizeof(XMFLOAT4));
+
+	volatile long sz1 = sizeof(object_def);
+	volatile long sz2 = object_def.size() * sizeof(XMFLOAT4);
+	sz1 = sizeof(Vector4);
+	sz2 = sizeof(XMFLOAT4);
 
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+
+	
+	////Vector3 src_p = { 20.0f, -5.0f, 0.0f };
+	//Vector3 src_p = (Vector3)object_def[(int)1 * 4 + 0];
+	//bool flag = false;
+	//int num = 0;
+
+	//for (int i = 1; i < object_color.size(); ++i)
+	//{
+	//	if (i == 0 || i == 2)
+	//		continue;
+
+	//	//float3 cross_point;
+
+	//	Vector3 a = (Vector3)object_def[(int)i * 4 + 0];
+	//	Vector3 b = (Vector3)object_def[(int)i * 4 + 1];
+	//	Vector3 c = (Vector3)object_def[(int)i * 4 + 2];
+	//	Vector3 d = (Vector3)object_def[(int)i * 4 + 3];
+
+	//	//Normal to plane
+	//	Vector3 normal = ((b - a) ^ (c - a)).normalize();
+	//	Vector3 v_to_p = a - src_p;
+	//	      
+	//	//dst to plane using normal
+	//	float dist = normal & v_to_p;
+	//	Vector3 src_v = Vector3(0.0f, 10.0f, 0.0f) - src_p;
+	//	      
+	//	//Approx to plane with interseption
+	//	float e_res = normal & src_v;
+	//	      
+	//	if (e_res != 0.0f) //one point
+	//	{
+	//		Vector3 cross_p = src_p + src_v * dist / e_res;
+	//	
+	//		Vector3 vec_a = (a - cross_p).normalize();
+	//		Vector3 vec_b = (b - cross_p).normalize();
+	//		Vector3 vec_c = (c - cross_p).normalize();
+	//		Vector3 vec_d = (d - cross_p).normalize();
+
+	//		float ab = vec_a & vec_b;
+	//		float bc = vec_b & vec_c;
+	//		float cd = vec_c & vec_d;
+	//		float da = vec_d & vec_a;
+	//	
+	//	    float angle_sum = acos(ab) + acos(bc) + acos(cd) + acos(da);
+	//		if (abs(angle_sum - 2.0f * PI) < 0.01f)
+	//		{
+	//			if (distance(src, dst) > distance(src, cross_p))
+	//			if dist(src);
+
+	//			flag = true;
+	//			num++;
+	//		}
+	//	}
+	//}
+
+	//volatile bool new_flag = false;
+
+	//if (flag == true)
+	//{
+	//	new_flag = true;
+	//}
 
 	float i = 0;
 	for (auto it : objects)
 	{
+		//memcpy((void*)&localConstantBuffer.plane_def, (void*)&object_def[0], object_def.size() * sizeof(XMFLOAT4));
+		//memcpy((void*)&localConstantBuffer.plane_color, (void*)&object_color[0], object_color.size() * sizeof(XMFLOAT4));
+
 		//set current obj number
-		i++;
-		localConstantBuffer.plane_num.y = i;
+		localConstantBuffer.plane_num.y = ++i;
 		immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+
 		//
 		// Установка шейдера
 		//

@@ -3,18 +3,20 @@
 //--------------------------------------------------------------------------------------
 
 static const float PI = 3.14159265f;
+//for PI you can also use acos(-1), works fine too.
 
 //--------------------------------------------------------------------------------------
 // Constant Buffer Variables
 //--------------------------------------------------------------------------------------
-cbuffer ConstantBuffer : register( b0 )
+cbuffer ConstantBuffer// : register( b0 )
 {
 	matrix World;
 	matrix View;
 	matrix Projection;
+	float4 plane_def[80];//del
     float4 light_color;
     float4 light_pos;
-    float4 plane_def[80];
+	//float4 plane_def[80]; //stay
     float4 plane_color[80];
     float4 plane_num; //num, curr_obj, tmp_1, tmp_2
 }
@@ -26,98 +28,78 @@ struct VS_OUTPUT
     float4 Color : COLOR0;
 };
 
-bool is_shaded(float4 src, float4 dst)
+bool is_shaded(float3 src, float3 dst)
 {
-    for (float i = 1.0f; i < plane_num.x; i++)
+    for (int i = 1; i < plane_num.x; ++i)
     {
-        if (i == plane_num.y)
-            continue;
+        //if ((float)i == plane_num.y)
+        //    continue;
 
-        //float3 cross_point;
-
-        float3 a = (float3)plane_def[(int)i * 4 + 0];
-        float3 b = (float3)plane_def[(int)i * 4 + 1];
-        float3 c = (float3)plane_def[(int)i * 4 + 2];
-        float3 d = (float3)plane_def[(int)i * 4 + 3];
-
-
-        /* Calculate the parameters for the plane */
+        float3 a = plane_def[i * 4 + 0].xyz;
+        float3 b = plane_def[i * 4 + 1].xyz;
+        float3 c = plane_def[i * 4 + 2].xyz;
+        float3 d = plane_def[i * 4 + 3].xyz;
+      
+        //Normal to plane
         float3 normal = normalize(cross(b - a, c - a));
-        //float d_plane = - normal.x * a.x - normal.y * a.y - normal.z * a.z;
+        float3 v_to_p = a - src;
+      
+        //dst to plane using normal
+        float dist = dot(normal, v_to_p);
+        float3 src_v = dst - src;
+      
+        //Approx to plane with interseption
+        float e_res = dot(normal, src_v);
+      
+        if (e_res != 0.0f) //one point
+        {
+            float3 cross_p = src + src_v * dist / e_res;
+            //cross_p -= 0.00001f;
 
-        float t = -dot((float3)src - a, normal) / dot((float3)src - (float3)dst, normal);
+            float3 vec_a = normalize(a - cross_p);
+            float3 vec_b = normalize(b - cross_p);
+            float3 vec_c = normalize(c - cross_p);
+            float3 vec_d = normalize(d - cross_p);
 
-        float3 cross_point = (float3)src + ((float3)src - (float3)dst) * t;
+            float ab = dot(vec_a, vec_b);
+            float bc = dot(vec_b, vec_c);
+            float cd = dot(vec_c, vec_d);
+            float da = dot(vec_d, vec_a);
 
-        float3 mid = float3(a.x + abs(a.x - b.x), a.y + abs(a.y - c.y), a.z);
-        if (distance(cross_point, mid) > 15.0f)
-            return true;
+			//if (ab > 1.0f)
+			//	ab = 1.0f;
+			//if (ab < -1.0f)
+			//	ab = -1.0f;
 
-        float3 vec_a = normalize(a - cross_point);
-        float3 vec_b = normalize(b - cross_point);
-        float3 vec_c = normalize(c - cross_point);
-        float3 vec_d = normalize(d - cross_point);
+			//if (bc > 1.0f)
+			//	bc = 1.0f;
+			//if (bc < -1.0f)
+			//	bc = -1.0f;
 
-        float angle_tmp = degrees(acos(dot(vec_a, vec_b)) + acos(dot(vec_b, vec_c)) + acos(dot(vec_c, vec_a)));
-        if (abs(angle_tmp - 360.0f) < 1.0f)
-            return true;
+			//if (cd > 1.0f)
+			//	cd = 1.0f;
+			//if (cd < -1.0f)
+			//	cd = -1.0f;
 
-        angle_tmp = degrees(acos(dot(vec_a, vec_c)) + acos(dot(vec_c, vec_d)) + acos(dot(vec_d, vec_a)));
-        if (abs(angle_tmp - 360.0f) < 1.0f)
-            return true;
-//
-//
-//        /* Calculate the parameters for the plane */
-//        float3 normal = normalize(cross(b - a, c - a));
-//        float d_plane = - normal.x * a.x - normal.y * a.y - normal.z * a.z;
-//
-//        /* Calculate the position on the line that intersects the plane */
-//        float denom = normal.x * ((float3)src.x - (float3)dst.x) + normal.y * ((float3)src.y - (float3)dst.y) + normal.z * ((float3)src.z - (float3)dst.z);
-//        /* Line and plane don't intersect */
-//        if (abs(denom) < 0.001f)
-//            continue;
-//
-//        float mu = (d_plane + normal.x * (float3)src.x + normal.y * (float3)src.y + normal.z * (float3)src.z) / denom;
-//
-//        cross_point = (float3)src + mu * ((float3)dst - (float3)src);
-//
-//        float3 color_tmp = (float3)plane_color[1];
-//        if (color_tmp.x == 1.0f && color_tmp.y == 1.0f && color_tmp.z == 0.1f)
-//            return true;
-//      
-//        //Normal to plane
-//        float3 normal = normalize(cross(b - a, c - a));
-//        float3 vector_to_plane = a - (float3)src;
-//      
-//        //dst to plane using normal
-//        float dist = dot(normal, vector_to_plane);
-//        float3 src_vec = (float3)dst - (float3)src;
-//      
-//        //Approx to plane with interseption
-//        float e_res = dot(normal, src_vec);
-//      
-//        if (e_res != 0.0f) //one point
-//        {
-//            cross_point = (float3)src + src_vec * dist / e_res;
-//
-//            float3 vec_a = normalize(a - cross_point);
-//            float3 vec_b = normalize(b - cross_point);
-//            float3 vec_c = normalize(c - cross_point);
-//            float3 vec_d = normalize(d - cross_point);
-//
-//            float angle_tmp = degrees(acos(dot(vec_a, vec_b)) + acos(dot(vec_b, vec_c)) + acos(dot(vec_c, vec_a)));
-//            if (abs(angle_tmp - 360.0f) < 1.0f)
-//                return true;
-//
-//            angle_tmp = degrees(acos(dot(vec_a, vec_c)) + acos(dot(vec_c, vec_d)) + acos(dot(vec_d, vec_a)));
-//            if (abs(angle_tmp - 360.0f) < 1.0f)
-//                return true;
-//
-//            //float angle_sum = degrees(acos(dot(vec_a, vec_b)) + acos(dot(vec_b, vec_c)) + acos(dot(vec_c, vec_d)) + acos(dot(vec_d, vec_a)));
-//            ////if (abs(angle_sum - 2.0f * PI) < 1.0)
-//            //if (abs(angle_sum - 360.0f) < 1.0)
-//            //    return true;
-//        }
+			//if (da > 1.0f)
+			//	da = 1.0f;
+			//if (da < -1.0f)
+			//	da = -1.0f;
+
+            float angle_sum = acos(ab) + acos(bc) + acos(cd) + acos(da);
+            //if (abs(angle_sum - 2.0f * PI) < 0.000000000001f)
+			if (abs(angle_sum - 2.0f * acos(-1.0f)) < 0.01f)
+            {
+				//float src_dst = distance(src, dst);
+				//float cross_dst = distance(src, cross_p);
+
+				if (distance(src, dst) > distance(src, cross_p))
+				//if (sqrt(dot(src, dst)) > sqrt(dot(src, cross_p)))
+				//if (src_dst > cross_dst)
+					return true;
+                //return true;
+            }
+        }
     }
 
     return false;
@@ -134,14 +116,9 @@ VS_OUTPUT VS( float4 Pos : POSITION, float3 Normal: NORMAL)
     output.Pos = mul( output.Pos, View );
     output.Pos = mul( output.Pos, Projection );
 
-    //output.Color = float4(1.0f, 0.0f, 0.0f, 0.0f);
-    output.Color = light_color;
+	output.Color = light_color *plane_color[(int)plane_num.y];
 
-    //float3 tmp_pos = float3(Pos.x, Pos.y, Pos.z);
-    //float3 tmp_light_pos = float3(light_pos.x, light_pos.y, light_pos.z);
-
-    //if (is_shaded(tmp_pos, tmp_light_pos))
-    if (is_shaded(light_pos, Pos))
+    if (is_shaded(light_pos.xyz, Pos.xyz))
     {
         output.Color = float4(0.0f, 0.0f, 0.0f, 0.0f);
     }

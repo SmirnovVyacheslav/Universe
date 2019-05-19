@@ -29,9 +29,10 @@ class DX_11
 		XMMATRIX mWorld;//0
 		XMMATRIX mView;//64
 		XMMATRIX mProjection;//128
+		XMFLOAT4 plane_def[80];//1120 //del
 		XMFLOAT4 light_color;//144
 		XMFLOAT4 light_pos;//160
-		XMFLOAT4 plane_def[80];//1120
+		//XMFLOAT4 plane_def[80];//1120 //stay
 		XMFLOAT4 plane_color[80];//2080
 		XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
 	};

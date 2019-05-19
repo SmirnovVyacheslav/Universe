@@ -44,6 +44,8 @@ struct ObjectArgs
 	int axis = XZ;
 
 	float scale = 1.0f;
+
+	Vector3 color;
 };
 
 struct ObjectDef
