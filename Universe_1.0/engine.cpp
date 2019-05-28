@@ -1,5 +1,8 @@
 #include"engine.h"
 
+extern int wnd_width;
+extern int wnd_height;
+
 Engine::Engine(HWND _hWnd) : hWnd(_hWnd)
 {
 
@@ -11,7 +14,7 @@ bool Engine::init()
 	if (!device->createDevice())
 		return false;
 
-	camera.reset(new Camera(hWnd));
+	camera.reset(new Camera(wnd_width, wnd_height));
 	device->setCamera(camera);
 
 	geometry.reset(new Geometry());
@@ -22,7 +25,6 @@ bool Engine::init()
 	render_ctrl = 0;
 
 	render_thread = thread(&Engine::render, this);
-	//render_thread.detach();
 
 	return true;
 }
@@ -54,8 +56,6 @@ void Engine::render()
 	{
 		if (render_ctrl)
 		{
-			//light->startTracing();
-
 			device->updateGeometry();
 			device->render();
 		}
@@ -69,5 +69,5 @@ void Engine::moveCamera(int x, int y)
 
 void Engine::resize()
 {
-	camera->resize();
+
 }

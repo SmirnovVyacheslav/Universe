@@ -93,9 +93,6 @@ public:
 
 	ObjectData* getData();
 
-	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
-	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
-
 	float getDiffuse();
 	float getMirror();
 	float getAbsorption();
@@ -117,10 +114,6 @@ public:
 
 	vector<Object*>::iterator begin();
 	vector<Object*>::iterator end();
-
-	bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
-
-	bool findCross(Vector3 srcPos, Vector3 dstPos, Object*& cross_obj, Vertex*& cross);
 };
 
 class Plane : public Object
@@ -138,9 +131,6 @@ public:
 	~Plane();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
-
-	//virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
-	//virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };
 
 class Cube : public Object
@@ -152,9 +142,6 @@ public:
 	~Cube();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
-
-	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
-	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };
 
 class Person : public Object
@@ -164,9 +151,6 @@ public:
 	~Person();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
-
-	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
-	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };
 
 class Landscape : public Object
@@ -176,7 +160,4 @@ public:
 	~Landscape();
 
 	virtual void create(ObjectArgs& args, vector<Object*>& objects);
-
-	virtual bool isShaded(Vector3 srcPos, Vector3 dstPos, int id);
-	virtual void findCross(Vector3 srcPos, Vector3 dstPos, vector<std::pair<Object*, Vertex*>> &cross);
 };

@@ -1,6 +1,6 @@
 #include"camera.h"
 
-Camera::Camera(HWND _hWnd) : hWnd(_hWnd)
+Camera::Camera(int wndWidth, int wndHeight)
 {
 	eye = XMVectorSet(0.0f, 1.0f, -1.0f, 0.0f);
 	at = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
@@ -8,66 +8,15 @@ Camera::Camera(HWND _hWnd) : hWnd(_hWnd)
 
 	pos = Vector3(0.0f, 1.0f, -1.0f);
 
-	float tmpX, tmpY, tmpZ;
-	Vector3 normal = viewPoint - pos;
-
-	tmpX = pos.x - (float)wndWidth / 2.0f;
-	tmpY = pos.y - (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointA = { tmpX, tmpY, tmpZ };
-	camera_def.a = pointA;
-
-	tmpX = pos.x + (float)wndWidth / 2.0f;
-	tmpY = pos.y - (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointB = { tmpX, tmpY, tmpZ };
-	camera_def.b = pointB;
-
-	tmpX = pos.x - (float)wndWidth / 2.0f;
-	tmpY = pos.y + (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointC = { tmpX, tmpY, tmpZ };
-	camera_def.c = pointC;
-
-	tmpX = pos.x + (float)wndWidth / 2.0f;
-	tmpY = pos.y + (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointD = { tmpX, tmpY, tmpZ };
-	camera_def.d = pointD;
+	camera_def.a = { 0.0f, 0.0f, 0.0f, 0.0f };
+	camera_def.b = { 0.0f, 0.0f, 0.0f, 0.0f };
+	camera_def.c = { 0.0f, 0.0f, 0.0f, 0.0f };
+	camera_def.d = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 	viewPoint = { 0.0f, 0.0f, 0.0f };
 
-	RECT wndSize;
-
-	GetClientRect(hWnd, &wndSize);
-	wndWidth  = wndSize.right;
-	wndHeight = wndSize.bottom;
-
-	GetWindowRect(hWnd, &wndSize);
-	wndX = static_cast<int>(wndSize.left);
-	wndY = static_cast<int>(wndSize.top);
-
-	topBorder = GetSystemMetrics(SM_CYCAPTION);
-	leftBorder = GetSystemMetrics(SM_CXFRAME);
-
 	_view = XMMatrixLookAtLH(eye, at, up);
 	_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, (FLOAT)wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
-}
-
-void Camera::resize()
-{
-	RECT wndSize;
-
-	GetClientRect(hWnd, &wndSize);
-	wndWidth = wndSize.right;
-	wndHeight = wndSize.bottom;
-
-	GetWindowRect(hWnd, &wndSize);
-	wndX = static_cast<int>(wndSize.left);
-	wndY = static_cast<int>(wndSize.top);
-
-	topBorder = GetSystemMetrics(SM_CYCAPTION);
-	leftBorder = GetSystemMetrics(SM_CXFRAME);
 }
 
 XMMATRIX Camera::view()
@@ -85,11 +34,6 @@ XMMATRIX& Camera::projection()
 
 void Camera::move(int _x, int _y)
 {
-	/*if (abs(xDiff) > 200 || abs(yDiff) > 200)
-	{
-		return;
-	}*/
-
 	int xDiff = _x;
 	int yDiff = _y;
 
@@ -117,117 +61,12 @@ void Camera::move(int _x, int _y)
 	pos = Vector3(vx * radius, vy * radius, vz * radius);
 
 
-	float tmpX, tmpY, tmpZ;
-	Vector3 normal = viewPoint - pos;
-
-	tmpX = pos.x - (float)wndWidth / 2.0f;
-	tmpY = pos.y - (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointA = { tmpX, tmpY, tmpZ };
-	camera_def.a = pointA;
-
-	tmpX = pos.x + (float)wndWidth / 2.0f;
-	tmpY = pos.y - (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointB = { tmpX, tmpY, tmpZ };
-	camera_def.b = pointB;
-
-	tmpX = pos.x - (float)wndWidth / 2.0f;
-	tmpY = pos.y + (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointC = { tmpX, tmpY, tmpZ };
-	camera_def.c = pointC;
-
-	tmpX = pos.x + (float)wndWidth / 2.0f;
-	tmpY = pos.y + (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointD = { tmpX, tmpY, tmpZ };
-	camera_def.d = pointD;
+	camera_def.a = { 0.0f, 0.0f, 0.0f, 0.0f };
+	camera_def.b = { 0.0f, 0.0f, 0.0f, 0.0f };
+	camera_def.c = { 0.0f, 0.0f, 0.0f, 0.0f };
+	camera_def.d = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 	viewPoint = { 0.0f, 0.0f, 0.0f };
-}
-
-bool Camera::cameraCross(Vector3 srcPos, Vector3 dstPos)
-{
-	/*
-	Теорема. Если в пространстве задана точка М0(х0, у0, z0),
-	то уравнение плоскости, проходящей через точку М0 перпендикулярно вектору нормали (A, B, C) имеет вид:
-
-	A(x – x0) + B(y – y0) + C(z – z0) = 0.
-	z = z0 - (A(x - x0) + B(y - y0)) / C
-	*/
-
-	float tmpX, tmpY, tmpZ;
-	Vector3 normal = viewPoint - pos;
-
-	tmpX = pos.x - (float)wndWidth / 2.0f;
-	tmpY = pos.y - (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointA = { tmpX, tmpY, tmpZ };
-
-	tmpX = pos.x + (float)wndWidth / 2.0f;
-	tmpY = pos.y - (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointB = { tmpX, tmpY, tmpZ };
-
-	tmpX = pos.x - (float)wndWidth / 2.0f;
-	tmpY = pos.y + (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointC = { tmpX, tmpY, tmpZ };
-
-	tmpX = pos.x + (float)wndWidth / 2.0f;
-	tmpY = pos.y + (float)wndHeight / 2.0f;
-	tmpZ = pos.z - (normal.x * (tmpX - pos.x) + normal.y * (tmpY - pos.y)) / normal.z;
-	Vector3 pointD = { tmpX, tmpY, tmpZ };
-
-
-	Vector3 crossPoint;
-
-	//Normal to plane
-	normal = ((pointB - pointA) ^ (pointC - pointA)).normalize();
-	Vector3 vectorToPlane = pointA - srcPos;
-
-	//dst to plane using normal
-	float dist = normal & vectorToPlane;
-	Vector3 srcVec = dstPos - srcPos;
-
-	//Approx to plane with interseption
-	float eRes = normal & srcVec;
-
-	if (eRes != 0) //one point
-	{
-		crossPoint = srcPos + srcVec * dist / eRes;
-		/*
-		// триангл задается тремя вершинами v1,v2,v3
-		bool intersect(vertex a, vertex b, vertex &c) {
-		vertex tn = normal(); // нормаль триангла
-		float d1 = (a-v1).proj(tn), d2 = (b-v1).proj(tn); // проекции на нормаль траингла
-		if(msign(d1)==msign(d2)) return false; // если обе точки с одной стороны (знаки совпадают) то нет пересечения
-		c = (a + ((b - a) * (-d1 / (d2 - d1)))); // в c точка лежащая в плоскости треугольника в месте пересечения
-		if( (((v2 - v1) ^ (c - v1)) * tn) <= 0) return false; // функции проверки попадания внутрь триангла точки c
-		if( (((v3 - v2) ^ (c - v2)) * tn) <= 0) return false; // ^ - векторное, * - скалярное произведение векторов
-		if( (((v1 - v3) ^ (c - v3)) * tn) <= 0) return false;
-		return true; // если точка попала в триангл
-		}
-		*/
-
-		if ((((pointB - pointA) ^ (crossPoint - pointA)) & normal) <= 0)
-			return false;
-		if ((((pointD - pointB) ^ (crossPoint - pointB)) & normal) <= 0)
-			return false;
-		if ((((pointA - pointC) ^ (crossPoint - pointC)) & normal) <= 0)
-			return false;
-		if ((((pointC - pointD) ^ (crossPoint - pointD)) & normal) <= 0)
-			return false;
-
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
-	return false;
 }
 
 cameraDef& Camera::get_def()

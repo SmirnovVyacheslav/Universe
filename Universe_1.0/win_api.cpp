@@ -110,9 +110,6 @@ LRESULT CALLBACK msg_handler(HWND wnd, UINT message, WPARAM w_param, LPARAM l_pa
 
 			if (half_wnd_width == x && half_wnd_height == y)
 			{
-				//camera_diff_x = 0;
-				//camera_diff_y = 0;
-				//sleep(0.1);
 				break;
 			}
 
@@ -127,11 +124,6 @@ LRESULT CALLBACK msg_handler(HWND wnd, UINT message, WPARAM w_param, LPARAM l_pa
 			ClientToScreen(wnd, &pt);
 			SetCursorPos(pt.x, pt.y);
 		}
-			/*
-			xPos = GET_X_LPARAM(lParam);
-			yPos = GET_Y_LPARAM(lParam);
-			*/
-			//engine->moveCamera(GET_X_LPARAM(l_param), GET_Y_LPARAM(l_param));
 
 		break;
 	case WM_PAINT:

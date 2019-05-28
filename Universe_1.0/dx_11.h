@@ -18,6 +18,7 @@ using std::vector;
 using std::wstring;
 using std::shared_ptr;
 using std::unordered_map;
+using std::pair;
 
 class DX_11
 {
@@ -29,11 +30,15 @@ class DX_11
 		XMMATRIX mWorld;//0
 		XMMATRIX mView;//64
 		XMMATRIX mProjection;//128
-		XMFLOAT4 plane_def[80];//1120 //del
 		XMFLOAT4 light_color;//144
 		XMFLOAT4 light_pos;//160
-		//XMFLOAT4 plane_def[80];//1120 //stay
+		XMFLOAT4 plane_def[80];//1120
 		XMFLOAT4 plane_color[80];//2080
+		//XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
+	};
+
+	struct ConstantBuffer_2
+	{
 		XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
 	};
 
@@ -69,7 +74,9 @@ class DX_11
 	ID3D11InputLayout*      vertexLayout = nullptr;
 
 	ID3D11Buffer*           constantBuffer = nullptr;
+	ID3D11Buffer*           constantBuffer_2 = nullptr;
 	ConstantBuffer          localConstantBuffer;
+	ConstantBuffer_2          localConstantBuffer_2;
 
 	//============Создание поверхности для Z-буфера============
 	ID3D11DepthStencilState*      pDSState;
@@ -83,13 +90,14 @@ class DX_11
 	int  wndWidth;
 	int  wndHeight;
 
-	std::shared_ptr<Camera>   camera;
-	std::shared_ptr<Geometry> geometry;
+	shared_ptr<Camera>   camera;
+	shared_ptr<Geometry> geometry;
 
 	XMMATRIX                mWorld;
 
-	std::unordered_map<std::wstring, Shader*>          shaders;
-	std::unordered_map<ObjectData*, GPUData*>           objects;
+	unordered_map<wstring, Shader*>          shaders;
+	//std::unordered_map<ObjectData*, GPUData*>           objects;
+	vector<pair<ObjectData*, GPUData*>>           objects;
 
 	vector<Vector4> object_def;
 	vector<Vector4> object_color;

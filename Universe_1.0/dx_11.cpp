@@ -21,6 +21,7 @@ DX_11::~DX_11()
 	if (depthStencilView) depthStencilView->Release();
 
 	if (constantBuffer) constantBuffer->Release();
+	if (constantBuffer_2) constantBuffer_2->Release();
 
 	if (pDSState) pDSState->Release();
 
@@ -182,8 +183,17 @@ bool DX_11::createDevice()
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.ByteWidth = sizeof(ConstantBuffer);
 	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	//bufferDesc.CPUAccessFlags = 0;
+	bufferDesc.CPUAccessFlags = 0;
 	if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &constantBuffer) < 0)
+		return false;
+
+	// Создание буфера констант шейдера
+	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
+	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	bufferDesc.ByteWidth = sizeof(ConstantBuffer_2);
+	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	bufferDesc.CPUAccessFlags = 0;
+	if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &constantBuffer_2) < 0)
 		return false;
 
 	return true;
@@ -211,7 +221,7 @@ bool DX_11::createShader(wstring path, Shader* shader)
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 16, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	UINT numElements = ARRAYSIZE(layout);
 
@@ -275,8 +285,6 @@ bool DX_11::compileShader(wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlo
 //--------------------------------------------------------------------------------------
 void DX_11::render()
 {
-	static const float PI = 3.14159265f;
-
 	//
 	// Очистка рендер-таргета
 	//
@@ -292,6 +300,7 @@ void DX_11::render()
 	object_def[2] = camera_def.c;
 	object_def[3] = camera_def.d;
 	object_color[0] = camera_def.color;
+
 	//
 	// Установка констант шейдера
 	//
@@ -302,106 +311,44 @@ void DX_11::render()
 	localConstantBuffer.light_pos = { 0.0f, 5.0f, 0.0f, 0.0f };
 	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 0.0f };
 
-	localConstantBuffer.plane_num.x = (float)object_color.size();
-	localConstantBuffer.plane_num.y = 0.0f;
-	//memcpy(&localConstantBuffer.plane_def, &object_def[0], object_def.size() * sizeof(XMFLOAT4));
-	//memcpy(&localConstantBuffer.plane_color, &object_color[0], object_color.size() * sizeof(XMFLOAT4));
+	localConstantBuffer_2.plane_num.x = (float)object_color.size();
+	localConstantBuffer_2.plane_num.y = 0.0f;
+
 	memset(&localConstantBuffer.plane_def, 0, sizeof(localConstantBuffer.plane_def));
 	memset(&localConstantBuffer.plane_color, 0, sizeof(localConstantBuffer.plane_color));
-
 	memcpy(&localConstantBuffer.plane_def, &(object_def[0]), object_def.size() * sizeof(XMFLOAT4));
 	memcpy(&localConstantBuffer.plane_color, &(object_color[0]), object_color.size() * sizeof(XMFLOAT4));
 
-	volatile long sz1 = sizeof(object_def);
-	volatile long sz2 = object_def.size() * sizeof(XMFLOAT4);
-	sz1 = sizeof(Vector4);
-	sz2 = sizeof(XMFLOAT4);
-
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+	immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
 
-	
-	////Vector3 src_p = { 20.0f, -5.0f, 0.0f };
-	//Vector3 src_p = (Vector3)object_def[(int)1 * 4 + 0];
-	//bool flag = false;
-	//int num = 0;
+	ID3D11Buffer* cbarr[2] = { constantBuffer , constantBuffer_2 };
 
-	//for (int i = 1; i < object_color.size(); ++i)
-	//{
-	//	if (i == 0 || i == 2)
-	//		continue;
+	//
+	// Установка шейдера
+	//
+	immediateContext->VSSetShader(shaders[L"shader.fx"]->vertexShader, NULL, 0);
+	immediateContext->PSSetShader(shaders[L"shader.fx"]->pixelShader, NULL, 0);
 
-	//	//float3 cross_point;
-
-	//	Vector3 a = (Vector3)object_def[(int)i * 4 + 0];
-	//	Vector3 b = (Vector3)object_def[(int)i * 4 + 1];
-	//	Vector3 c = (Vector3)object_def[(int)i * 4 + 2];
-	//	Vector3 d = (Vector3)object_def[(int)i * 4 + 3];
-
-	//	//Normal to plane
-	//	Vector3 normal = ((b - a) ^ (c - a)).normalize();
-	//	Vector3 v_to_p = a - src_p;
-	//	      
-	//	//dst to plane using normal
-	//	float dist = normal & v_to_p;
-	//	Vector3 src_v = Vector3(0.0f, 10.0f, 0.0f) - src_p;
-	//	      
-	//	//Approx to plane with interseption
-	//	float e_res = normal & src_v;
-	//	      
-	//	if (e_res != 0.0f) //one point
-	//	{
-	//		Vector3 cross_p = src_p + src_v * dist / e_res;
-	//	
-	//		Vector3 vec_a = (a - cross_p).normalize();
-	//		Vector3 vec_b = (b - cross_p).normalize();
-	//		Vector3 vec_c = (c - cross_p).normalize();
-	//		Vector3 vec_d = (d - cross_p).normalize();
-
-	//		float ab = vec_a & vec_b;
-	//		float bc = vec_b & vec_c;
-	//		float cd = vec_c & vec_d;
-	//		float da = vec_d & vec_a;
-	//	
-	//	    float angle_sum = acos(ab) + acos(bc) + acos(cd) + acos(da);
-	//		if (abs(angle_sum - 2.0f * PI) < 0.01f)
-	//		{
-	//			if (distance(src, dst) > distance(src, cross_p))
-	//			if dist(src);
-
-	//			flag = true;
-	//			num++;
-	//		}
-	//	}
-	//}
-
-	//volatile bool new_flag = false;
-
-	//if (flag == true)
-	//{
-	//	new_flag = true;
-	//}
-
-	float i = 0;
+	float i = 1.0f;
 	for (auto it : objects)
 	{
-		//memcpy((void*)&localConstantBuffer.plane_def, (void*)&object_def[0], object_def.size() * sizeof(XMFLOAT4));
-		//memcpy((void*)&localConstantBuffer.plane_color, (void*)&object_color[0], object_color.size() * sizeof(XMFLOAT4));
+		localConstantBuffer_2.plane_num.y = i++;
+		immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
 
-		//set current obj number
-		localConstantBuffer.plane_num.y = ++i;
-		immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
-
-		//
-		// Установка шейдера
-		//
-		immediateContext->VSSetShader(it.second->shader->vertexShader, NULL, 0);
-		immediateContext->PSSetShader(it.second->shader->pixelShader, NULL, 0);
+		////
+		//// Установка шейдера
+		////
+		//immediateContext->VSSetShader(it.second->shader->vertexShader, NULL, 0);
+		//immediateContext->PSSetShader(it.second->shader->pixelShader, NULL, 0);
 
 		//
 		// Установка констант шейдера
 		//
-		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
-		immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);
+		/*immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+		immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);*/
+		immediateContext->VSSetConstantBuffers(0, 2, cbarr);
+		immediateContext->PSSetConstantBuffers(0, 2, cbarr);
 
 		// Установка вершинного буфера
 		UINT stride = sizeof(Vertex);
@@ -456,7 +403,8 @@ void DX_11::setGeometry(shared_ptr<Geometry> _geometry)
 		}
 
 		GPUData *gpuData = new GPUData;
-		objects[objData] = gpuData;
+		//objects[objData] = gpuData;
+		objects.push_back(std::make_pair(objData, gpuData));
 
 		gpuData->shader = shader;
 		gpuData->size = objData->size;

@@ -35,35 +35,19 @@ class Camera
 	float radius = 3.0f;
 	float sensitivity = 0.1f;
 
-	HWND hWnd;
-	int wndWidth, wndHeight, wndX, wndY;
-	int topBorder, leftBorder;
-
-	XMMATRIX xRot;
-	XMMATRIX yRot;
-	XMMATRIX zRot;
-
-	int x = 0;
-	int y = 0;
-
 	std::mutex camera_mutex;
 
 	cameraDef camera_def;
 
 public:
 
-	Camera(HWND _hWnd);
+	Camera(int wndWidth, int wndHeight);
 
-	//XMMATRIX& view();
 	XMMATRIX view();
 
 	XMMATRIX& projection();
 
 	void move(int x, int y);
-
-	void resize();
-
-	bool cameraCross(Vector3 srcPos, Vector3 dstPos);
 
 	cameraDef& get_def();
 };
