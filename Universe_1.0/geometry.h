@@ -98,6 +98,8 @@ public:
 	float getAbsorption();
 
 	Vector4 sampleTex();
+
+	void move_down();
 };
 
 class Geometry
@@ -135,6 +137,8 @@ public:
 
 class Cube : public Object
 {
+	vector<Vector3*> base_vertex;
+
 	float uSize, vSize;
 
 public:
