@@ -33,6 +33,8 @@ struct Vector3
 	Vector3 trunc();
 
 	operator Vector4();
+
+	bool is_zero();
 };
 
 Vector3 operator+(Vector3& vec, const float& num);

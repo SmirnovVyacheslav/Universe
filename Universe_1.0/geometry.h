@@ -14,8 +14,12 @@ using std::vector;
 using std::wstring;
 using std::mutex;
 using std::map;
+using std::unique_ptr;
+using std::shared_ptr;
 
-enum ObjectAxis { XZ = 0, XY = 1, YZ = 2 };
+static const float pi = 3.14159265358979323846f;  /* pi */
+
+class Object;
 
 struct Material
 {
@@ -31,23 +35,6 @@ struct Vertex
 	Vector4 color;
 };
 
-struct ObjectArgs
-{
-	Vector3 pos    = { 0.0f, 0.0f, 0.0f };
-	Vector3 normal = { 0.0f, 1.0f, 0.0f };
-
-	// uvw resolution
-	int uRes = 1;
-	int vRes = 1;
-	int wRes = 1;
-
-	int axis = XZ;
-
-	float scale = 1.0f;
-
-	Vector3 color;
-};
-
 struct ObjectDef
 {
 	Vector4 a;
@@ -59,39 +46,60 @@ struct ObjectDef
 
 struct ObjectData
 {
-	int            size = 1;
-	wstring        shader;
+	int            size;
 	vector<DWORD>  indices;
 	vector<Vertex> vertices;
-	ObjectDef      def;
+	Vector3 color;
+	//ObjectDef      def;
 };
+
+void make_mesh(Vector3 pos, Vector3 size, ObjectData& data);
+
+struct sq_index
+{
+	int p1;
+	int p2;
+	int p3;
+	int p4;
+};
+
+struct sq_value
+{
+	Vector3 p1;
+	Vector3 p2;
+	Vector3 p3;
+	Vector3 p4;
+};
+
 
 class Object
 {
 protected:
 	int id;
-	static int objCounter;
+	static int obj_counter;
 
 	Object*         base;
 	ObjectData*     data;
 	vector<Object*> components;
 
-	ObjectAxis      axis;
+	Vector3 size;
+
 	vector<Vector4> texture;
 	Material        material;
 
 	Vector3 pos;
+	Vector3 res;
 
 public:
 
-	Object(Object* _base);
+	Object(Object* base);
 	virtual ~Object();
 
-	virtual void create(ObjectArgs& args, vector<Object*>& objects) = 0;
+	virtual void create(Vector3 size, Vector3 res = {0.0f, 0.0f, 0.0f}) = 0;
 
-	int getId();
+	int get_id();
 
-	ObjectData* getData();
+	ObjectData* get_data();
 
 	float getDiffuse();
 	float getMirror();
@@ -100,6 +108,7 @@ public:
 	Vector4 sampleTex();
 
 	void move_down();
+
 };
 
 class Geometry
@@ -108,7 +117,6 @@ class Geometry
 	Object* landscape;
 
 	vector<Object*> scene;
-	vector<Object*> objects;
 
 public:
 	Geometry();
@@ -120,48 +128,54 @@ public:
 
 class Plane : public Object
 {
-	float scaleDef;
-
-	Vector3(Plane::*posAxis[3]) (float length, float width, ObjectArgs& args);
-
-	Vector3 posXZ(float length, float width, ObjectArgs& args);
-	Vector3 posXY(float length, float width, ObjectArgs& args);
-	Vector3 posYZ(float length, float width, ObjectArgs& args);
-
 public:
-	Plane(Object* _base);
+	Plane(Object* base = nullptr);
 	~Plane();
 
-	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
 };
 
 class Cube : public Object
 {
-	vector<Vector3*> base_vertex;
-
-	float uSize, vSize;
-
 public:
-	Cube(Object* _base);
+	Cube(Object* base = nullptr);
 	~Cube();
 
-	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
 };
 
 class Person : public Object
 {
 public:
-	Person(Object* _base);
+	Person(Object* base = nullptr);
 	~Person();
 
-	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
 };
 
 class Landscape : public Object
 {
 public:
-	Landscape(Object* _base);
+	Landscape(Object* base = nullptr);
 	~Landscape();
 
-	virtual void create(ObjectArgs& args, vector<Object*>& objects);
+	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+};
+
+class Sphere : public Object
+{
+public:
+	Sphere(Object* base = nullptr);
+	~Sphere();
+
+	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+};
+
+class Cylinder : public Object
+{
+public:
+	Cylinder(Object* base = nullptr);
+	~Cylinder();
+
+	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
 };

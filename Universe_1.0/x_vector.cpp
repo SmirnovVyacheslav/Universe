@@ -177,6 +177,11 @@ Vector3::operator Vector4()
 }
 
 
+bool Vector3::is_zero()
+{
+	return x + y + z == 0.0f;
+}
+
 
 float dist(Vector3 vecA, Vector3 vecB)
 {

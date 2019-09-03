@@ -1,17 +1,112 @@
 ﻿#include "geometry.h"
 
-int Object::objCounter = 0;
+int Object::obj_counter = 0;
+
+vector<Object*> objects;
+
+
+
+void make_mesh(Vector3 pos, Vector3 size, ObjectData& data)
+{
+	int u_square = static_cast<int>(50); // TODO make resolution calc
+	int v_square = static_cast<int>(50);
+	int u_vertex = u_square + 1;
+	int v_vertex = v_square + 1;
+
+	sq_index next_index;
+	sq_value values;
+	data.vertices = vector<Vertex>(u_vertex * v_vertex);
+	int p1_index, p2_index, p3_index, p4_index;
+	float u_step = size.x / float(u_square); // TODO add step calc like vertex for u and v
+	float v_step = size.z / float(v_square);
+	for (int j = 0; j < v_square; ++j)
+	{
+		for (int i = 0; i < u_square; ++i)
+		{
+			p1_index = j * u_vertex + i;
+			p2_index = j * u_vertex + i + 1;
+			p3_index = (j + 1) * u_vertex + i + 1;
+			p4_index = (j + 1) * u_vertex + i;
+
+			data.vertices[p1_index].pos = { u_step * i, 0.0f, v_step * j };
+			data.vertices[p2_index].pos = { u_step * (i + 1), 0.0f, v_step * j };
+			data.vertices[p3_index].pos = { u_step * (i + 1), 0.0f, v_step * (j + 1) };
+			data.vertices[p4_index].pos = { u_step * i, 0.0f, v_step * (j + 1) };
+
+			data.indices.push_back(p1_index);
+			data.indices.push_back(p2_index);
+			data.indices.push_back(p3_index);
+
+			data.indices.push_back(p1_index);
+			data.indices.push_back(p3_index);
+			data.indices.push_back(p4_index);
+
+			/*if (wrap)
+			{
+				p1_index = j * u_vertex + i;
+				p2_index = j * u_vertex + (i + 1) % u_vertex;
+				p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
+				p4_index = (j + 1) * u_vertex + i;
+			}
+			else
+			{
+				p1_index = j * u_vertex + i;
+				p2_index = j * u_vertex + i + 1;
+				p3_index = (j + 1) * u_vertex + i + 1;
+				p4_index = (j + 1) * u_vertex + i;
+			}
+			set_values(values, i, j);*/
+		}
+	}
+
+	data.size = data.indices.size();
+
+
+	//float rad = size.x / 2.0f;
+
+	//// Vertex buffer
+	//data->vertices = vector<Vertex>(u_vertex * v_vertex + 2);
+	//float u_step = size.x / res.x;
+	//float v_step = size.y / res.y;
+	//int p1_index, p2_index, p3_index, p4_index;
+	//float psy = 2.0f * pi / u_square;
+	//float phi = pi / v_square;
+	//for (int j = 0; j < v_square; ++j)
+	//	for (int i = 0; i < u_square; ++i)
+	//	{
+	//		p1_index = j * u_vertex + i;
+	//		p2_index = j * u_vertex + (i + 1) % u_vertex;
+	//		p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
+	//		p4_index = (j + 1) * u_vertex + i;
+
+	//		//float curr_rad = rad * cos(phi * j);
+	//		float curr_rad = rad * sin(phi * j);
+
+	//		data->vertices[p1_index].pos = { rad * sin(phi * j) * cos(psy * i), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * i) };
+	//		data->vertices[p2_index].pos = { rad * sin(phi * j) * cos(psy * (i + 1)), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * (i + 1)) };
+	//		data->vertices[p3_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * (i + 1)), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * (i + 1)) };
+	//		data->vertices[p4_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * i), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * i) };
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p2_index);
+	//		data->indices.push_back(p3_index);
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p3_index);
+	//		data->indices.push_back(p4_index);
+	//	}
+}
 
 Geometry::Geometry()
 {
-	ObjectArgs args;
+	person = new Person();
+	person->create(Vector3(5.0f, 10.0f, 2.0f));
 
-	person = new Person(nullptr);
-	person->create(args, objects);
-
-	args.pos = Vector3{ 0.0f, -2.0f, 0.0f };
-	landscape = new Landscape(nullptr);
-	landscape->create(args, objects);
+	landscape = new Landscape();
+	landscape->create(Vector3(100.0f, 100.0f, 100.0f));
+	landscape->move_down();
+	landscape->move_down();
+	landscape->move_down();
 	landscape->move_down();
 
 	scene.push_back(person);
@@ -37,8 +132,7 @@ vector<Object*>::iterator Geometry::end()
 }
 
 
-
-Cube::Cube(Object* _base) : Object(_base) {}
+Cube::Cube(Object* base) : Object(base) {}
 
 Cube::~Cube()
 {
@@ -48,217 +142,103 @@ Cube::~Cube()
 	}
 }
 
-void Cube::create(ObjectArgs& args, vector<Object*>& objects)
+void Cube::create(Vector3 size, Vector3 res)
 {
-	ObjectArgs planeArgs = args;
-	planeArgs.uRes = 2;
-	planeArgs.vRes = 2;
+	//this->size = size;
+	//this->res = res;
+	//pos = { size.x / 2.0f, size.y / 2.0f, -size.z / 2.0f };
 
-	components.push_back(new Plane(this));
-	components[0]->create(planeArgs, objects); //down
-
-	////pos = args.pos;
-	//uSize = (float)(args.uRes - 1) / 2.0f * args.scale;
-	//vSize = (float)(args.vRes - 1) / 2.0f * args.scale;
-
-	//ObjectArgs planeArgs = args;
-	//planeArgs.uRes = 10;
-	//planeArgs.vRes = 10;
-	//planeArgs.scale = 0.2f;
-	////planeArgs.pos = { 0.0f, 0.0f, 0.0f };
+	//make_mesh(this, );
 
 
-	//planeArgs.pos = args.pos;
+
 	//components.push_back(new Plane(this));
-	//planeArgs.normal = { 0.0f, -1.0f, 0.0f };
-	//planeArgs.axis = XZ;
-	//planeArgs.pos.y = args.pos.y - (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
-	//components[0]->create(planeArgs, objects); //down
+	//components[0]->create(size); //down
 
-	//planeArgs.pos = args.pos;
-	//components.push_back(new Plane(this));
-	//planeArgs.normal = { -1.0f, 0.0f, 0.0f };
-	//planeArgs.axis = YZ;
-	//planeArgs.pos.x = args.pos.x - (float)(planeArgs.uRes - 1) / 2.0f * planeArgs.scale;
-	//components[1]->create(planeArgs, objects); //left side
 
-	//planeArgs.pos = args.pos;
 	//components.push_back(new Plane(this));
-	//planeArgs.normal = { 0.0f, 1.0f, 0.0f };
-	//planeArgs.axis = XZ;
-	//planeArgs.pos.y = args.pos.y + (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
-	//components[2]->create(planeArgs, objects); //top
+	//components[1]->create(Vector3(size.z, size.y, 0.0f)); //left
+	//components[1]->move_down();
 
-	//planeArgs.pos = args.pos;
 	//components.push_back(new Plane(this));
-	//planeArgs.normal = { 0.0f, 0.0f, 1.0f };
-	//planeArgs.axis = XY;
-	//planeArgs.pos.z = args.pos.z - (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
-	//components[3]->create(planeArgs, objects); //back side
+	//components[2]->create(Vector3(size.x, size.y, 0.0f)); //back
+	//components[2]->move_down();
+	//components[2]->move_down();
 
-	//planeArgs.pos = args.pos;
 	//components.push_back(new Plane(this));
-	//planeArgs.normal = { 1.0f, 0.0f, 0.0f };
-	//planeArgs.axis = YZ;
-	//planeArgs.pos.x = args.pos.x + (float)(planeArgs.uRes - 1) / 2.0f * planeArgs.scale;
-	//components[4]->create(planeArgs, objects); //right side
+	//components[3]->create(Vector3(size.z, size.y, 0.0f)); //right
+	//components[3]->move_down();
+	//components[3]->move_down();
+	//components[3]->move_down();
 
-	//planeArgs.pos = args.pos;
 	//components.push_back(new Plane(this));
-	//planeArgs.normal = { 0.0f, 0.0f, 1.0f };
-	//planeArgs.axis = XY;
-	//planeArgs.pos.z = args.pos.z + (float)(planeArgs.vRes - 1) / 2.0f * planeArgs.scale;
-	//components[5]->create(planeArgs, objects); //front side
+	//components[4]->create(Vector3(size.x, size.y, 0.0f)); //front
+
+	//components.push_back(new Plane(this));
+	//components[5]->create(Vector3(size.x, size.z, 0.0f)); //top
 }
 
-
-
-Plane::Plane(Object* _base) : Object(_base), scaleDef(1.0f)
+Plane::Plane(Object* _base) : Object(_base)
 {
 	data = new ObjectData;
-	data->shader = L"shader.fx";
-
-	posAxis[0] = &Plane::posXZ;
-	posAxis[1] = &Plane::posXY;
-	posAxis[2] = &Plane::posYZ;
+	objects.push_back(this);
 }
 
 Plane::~Plane()
 {
-
+	delete data;
 }
 
-void Plane::create(ObjectArgs& args, vector<Object*>& objects)
+void Plane::create(Vector3 _size, Vector3 _res)
 {
-	objects.push_back(this);
+	Vector3 _pos = {0.0f, 0.0f, 0.0f};
 
-	float u_size = args.uRes, v_size = args.vRes; //Size
-	float u_res = 10.0f; //mesh size
-	float v_res = 10.0f; //mesh size
+	make_mesh(_pos, _size, *data);
 
-	// Генерация сетки вершин для вершинного буфера
-	data->vertices = vector<Vertex>(u_res * v_res);
+	data->color = { 1.0f, 1.0f, 0.0f };
 
-	for (int j = 0; j < v_res; ++j)
-		for (int i = 0; i < u_res; ++i)
-		{
-			float x = u_size / u_res * i;
-			float y = 0.0f;
-			float z = -v_size / v_res * j;
+	// size = _size;
+	// pos = { size.x / 2.0f, 0.0f, size.z / 2.0f };
+	// res = _res.is_zero() ? size * 5 : _res;
 
-			data->vertices[j * u_res + i].pos = Vector3(x, y, z);
-			data->vertices[j * u_res + i].normal = Vector3(0.0f, 0.1f, 0.0f);
-		}
+	// int u_square = static_cast<int>(res.x);
+	// int v_square = static_cast<int>(res.z);
+	// int u_vertex = u_square + 1;
+	// int v_vertex = v_square + 1;
 
-	//Perimeter
-	/*
-	a -> b
-	|
-	d <- c
-	*/
-	data->def.a = data->vertices[0].pos;
-	data->def.b = data->vertices[u_res - 1].pos;
-	data->def.c = data->vertices[u_res * v_res - 1].pos;
-	data->def.d = data->vertices[u_res * (v_res - 1)].pos;
-	data->def.color = args.color;
+	// // Vertex buffer
+	// data->vertices = vector<Vertex>(u_vertex * v_vertex);
+	// float u_step = size.x / res.x;
+	// float v_step = size.z / res.z;
+	// int p1_index, p2_index, p3_index, p4_index;
+	// for (int j = 0; j < v_square; ++j)
+	// 	for (int i = 0; i < u_square; ++i)
+	// 	{
+	// 		p1_index = j * u_vertex + i;
+	// 		p2_index = j * u_vertex + i + 1;
+	// 		p3_index = (j + 1) * u_vertex + i + 1;
+	// 		p4_index = (j + 1) * u_vertex + i;
 
-	//Генерация  индексного буфера
-	data->size = (u_res - 1) * (v_res - 1) * 6;
-	data->indices = vector<DWORD>(data->size);
+	// 		data->vertices[p1_index].pos = { u_step * i, 0.0f, v_step * j };
+	// 		data->vertices[p2_index].pos = { u_step * (i + 1), 0.0f, v_step * j };
+	// 		data->vertices[p3_index].pos = { u_step * (i + 1), 0.0f, v_step * (j + 1) };
+	// 		data->vertices[p4_index].pos = { u_step * i, 0.0f, v_step * (j + 1) };
 
-	for (int j = 0; j < (v_res - 1); ++j)
-		for (int i = 0; i < (u_res - 1); ++i)
-		{
-			int index = (j * (u_res - 1) + i) * 6;
-			int vertex_index = j * u_res + i;
+	// 		data->indices.push_back(p1_index);
+	// 		data->indices.push_back(p2_index);
+	// 		data->indices.push_back(p3_index);
 
-			/*
-			1 -> 2
-			     |
-				 3
-			1
-			  \
-			3 <- 2
-			*/
-			data->indices[index + 0] = vertex_index;
-			data->indices[index + 1] = vertex_index + 1;
-			data->indices[index + 2] = vertex_index + u_res + 1;
+	// 		data->indices.push_back(p1_index);
+	// 		data->indices.push_back(p3_index);
+	// 		data->indices.push_back(p4_index);
+	// 	}
 
-			data->indices[index + 3] = vertex_index;
-			data->indices[index + 4] = vertex_index + u_res + 1;
-			data->indices[index + 5] = vertex_index + u_res;
-		}
-
-
-	//objects.push_back(this);
-	//pos = args.pos;
-
-	//// Генерация сетки вершин для вершинного буфера
-	//data->vertices = vector<Vertex>(args.uRes * args.vRes);
-
-	//for (int i = 0; i < args.vRes; ++i)
-	//	for (int j = 0; j < args.uRes; ++j)
-	//	{
-	//		data->vertices[i * args.uRes + j].pos = (this->*posAxis[args.axis])((float)j, (float)i, args);
-	//		data->vertices[i * args.uRes + j].normal = args.normal;
-	//	}
-
-
-	///*
-	// a -> b
-	//      |
-	// d <- c
-	//*/
-	//data->def.a = data->vertices[0].pos;
-	//data->def.b = data->vertices[args.uRes - 1].pos;
-	//data->def.c = data->vertices[args.uRes * args.vRes - 1].pos;
-	//data->def.d = data->vertices[args.uRes * (args.vRes - 1)].pos;
-	//data->def.color = args.color;
-
-	////Генерация  индексного буфера
-	//data->size = (args.uRes - 1) * (args.vRes - 1) * 6;
-	//data->indices = vector<DWORD>(data->size);
-
-	//for (int i = 0; i < (args.vRes - 1); ++i)
-	//	for (int j = 0; j < (args.uRes - 1); ++j)
-	//	{
-	//		unsigned int index_a = i * (args.uRes - 1) + j;
-	//		unsigned int index_b = i * args.uRes + j;
-	//		data->indices[index_a * 6 + 0] = index_b;
-	//		data->indices[index_a * 6 + 1] = index_b + 1 + args.uRes;
-	//		data->indices[index_a * 6 + 2] = index_b + 1;
-
-	//		data->indices[index_a * 6 + 3] = index_b;
-	//		data->indices[index_a * 6 + 4] = index_b + args.uRes;
-	//		data->indices[index_a * 6 + 5] = index_b + args.uRes + 1;
-	//	}
-}
-
-Vector3 Plane::posXZ(float u, float v, ObjectArgs& args)
-{
-	float start_x = args.pos.x - (float)(args.uRes - 1) / 2.0f * args.scale;
-	float start_y = args.pos.y;
-	float start_z = args.pos.z - (float)(args.vRes - 1) / 2.0f * args.scale;
-	return Vector3(start_x + u * args.scale, start_y, start_z + v * args.scale);
-}
-Vector3 Plane::posXY(float u, float v, ObjectArgs& args)
-{
-	float start_x = args.pos.x - (float)(args.uRes - 1) / 2.0f * args.scale;
-	float start_y = args.pos.y - (float)(args.vRes - 1) / 2.0f * args.scale;
-	float start_z = args.pos.z;
-	return Vector3(start_x + u * args.scale, start_y + v * args.scale, start_z);
-}
-Vector3 Plane::posYZ(float u, float v, ObjectArgs& args)
-{
-	float start_x = args.pos.x;
-	float start_y = args.pos.y - (float)(args.uRes - 1) / 2.0f * args.scale;
-	float start_z = args.pos.z - (float)(args.vRes - 1) / 2.0f * args.scale;
-	return Vector3(start_x, start_y + v * args.scale, start_z + u * args.scale);
+	// data->size = data->indices.size();
+	// data->def.color = { 0.0f, 0.5f, 0.5f, 0.0f };
 }
 
 
-
-Person::Person(Object* _base) : Object(_base) {}
+Person::Person(Object* base) : Object(base) {}
 
 Person::~Person()
 {
@@ -268,18 +248,23 @@ Person::~Person()
 	}
 }
 
-void Person::create(ObjectArgs& args, vector<Object*>& objects)
+void Person::create(Vector3 size, Vector3 res)
 {
-	ObjectArgs cubeArgs = args;
-	cubeArgs.color = { 0.1f, 1.0f, 1.0f };
+	components.push_back(new Plane(this));
+	components[0]->create(size);
 
-	components.push_back(new Cube(this));
-	components[0]->create(cubeArgs, objects);
+	//components.push_back(new Cube(this));
+	//components[0]->create(size);
+
+	////components.push_back(new Cylinder(this));
+	////components[1]->create(Vector3(1.5f, 2.0f, 1.0f));
+
+	//components.push_back(new Sphere(this));
+	//components[1]->create(Vector3(2.0f, 2.0f, 1.0f), Vector3(20.0f, 20.0f, 20.0f));
 }
 
 
-
-Landscape::Landscape(Object* _base) : Object(_base) {}
+Landscape::Landscape(Object* base) : Object(base) {}
 
 Landscape::~Landscape()
 {
@@ -289,43 +274,199 @@ Landscape::~Landscape()
 	}
 }
 
-void Landscape::create(ObjectArgs& args, vector<Object*>& objects)
+void Landscape::create(Vector3 size, Vector3 res)
 {
-	ObjectArgs landArgs = args;
-
-	landArgs.color = { 1.0f, 1.0f, 0.1f };
-
-	components.push_back(new Plane(this));
-	landArgs.axis = XZ;
-	landArgs.uRes = 100;
-	landArgs.vRes = 100;
-	landArgs.scale = 0.5f;
-	landArgs.pos = { 0.0f, -3.0f, 0.0f };
-	components[0]->create(landArgs, objects);
+	//components.push_back(new Plane(this));
+	//components[0]->create(size);
 }
 
+
+Sphere::Sphere(Object* base) : Object(base)
+{
+	data = new ObjectData;
+	objects.push_back(this);
+}
+
+Sphere::~Sphere()
+{
+	delete data;
+}
+
+void Sphere::create(Vector3 _size, Vector3 _res)
+{
+	//size = _size;
+	//pos = { size.x / 2.0f, 0.0f, size.z / 2.0f };
+	//res = _res.is_zero() ? size * 5 : _res;
+
+	//int u_square = static_cast<int>(res.x);
+	//int v_square = static_cast<int>(res.y);
+	//int u_vertex = u_square + 1;
+	//int v_vertex = v_square + 1;
+
+	//float rad = size.x / 2.0f;
+
+	//// Vertex buffer
+	//data->vertices = vector<Vertex>(u_vertex * v_vertex + 2);
+	//float u_step = size.x / res.x;
+	//float v_step = size.y / res.y;
+	//int p1_index, p2_index, p3_index, p4_index;
+	//float psy = 2.0f * pi / u_square;
+	//float phi = pi / v_square;
+	//for (int j = 0; j < v_square; ++j)
+	//	for (int i = 0; i < u_square; ++i)
+	//	{
+	//		p1_index = j * u_vertex + i;
+	//		p2_index = j * u_vertex + (i + 1) % u_vertex;
+	//		p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
+	//		p4_index = (j + 1) * u_vertex + i;
+
+	//		//float curr_rad = rad * cos(phi * j);
+	//		float curr_rad = rad * sin(phi * j);
+
+	//		data->vertices[p1_index].pos = { rad * sin(phi * j) * cos(psy * i), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * i) };
+	//		data->vertices[p2_index].pos = { rad * sin(phi * j) * cos(psy * (i + 1)), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * (i + 1)) };
+	//		data->vertices[p3_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * (i + 1)), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * (i + 1)) };
+	//		data->vertices[p4_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * i), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * i) };
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p2_index);
+	//		data->indices.push_back(p3_index);
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p3_index);
+	//		data->indices.push_back(p4_index);
+	//	}
+
+	//for (int j = 0; j < 2; ++j)
+	//	for (int i = 0; i < u_square; ++i)
+	//	{
+	//		if (j)
+	//		{
+	//			p1_index = u_vertex * v_vertex;
+	//			p2_index = (i + 1) % u_vertex;
+	//			p3_index = i;
+
+	//			data->vertices[p1_index].pos = { 0.0f, 0.0f,0.0f };
+	//		}
+	//		else
+	//		{
+	//			p2_index = v_square * u_vertex + i;
+	//			p3_index = v_square * u_vertex + (i + 1) % u_vertex;
+	//			p3_index = u_vertex * v_vertex + 1;
+
+	//			data->vertices[p3_index].pos = { 0.0f, size.y, 0.0f };
+	//		}
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p2_index);
+	//		data->indices.push_back(p3_index);
+	//	}
+
+	data->size = data->indices.size();
+	//data->def.color = { 0.0f, 0.5f, 0.5f, 0.0f };
+}
+
+
+Cylinder::Cylinder(Object* _base) : Object(_base)
+{
+	data = new ObjectData;
+	objects.push_back(this);
+}
+
+Cylinder::~Cylinder()
+{
+	delete data;
+}
+
+void Cylinder::create(Vector3 _size, Vector3 _res)
+{
+	//size = _size;
+	//pos = { size.x / 2.0f, 0.0f, size.z / 2.0f };
+	//res = _res.is_zero() ? size * 5 : _res;
+
+	//int u_square = static_cast<int>(res.x);
+	//int v_square = static_cast<int>(res.y);
+	//int u_vertex = u_square + 1;
+	//int v_vertex = v_square + 1;
+
+	//float rad = size.x / 2.0f;
+
+	//// Vertex buffer
+	//data->vertices = vector<Vertex>(u_vertex * v_vertex + 2);
+	//float u_step = size.x / res.x;
+	//float v_step = size.y / res.y;
+	//int p1_index, p2_index, p3_index, p4_index;
+	//float teta = 2.0f * pi / u_square;
+	//for (int j = 0; j < v_square; ++j)
+	//	for (int i = 0; i < u_square; ++i)
+	//	{
+	//		p1_index = j * u_vertex + i;
+	//		p2_index = j * u_vertex + (i + 1) % u_vertex;
+	//		p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
+	//		p4_index = (j + 1) * u_vertex + i;
+
+	//		data->vertices[p1_index].pos = { rad * cos(teta * i), v_step * j, rad * sin(teta * i) };
+	//		data->vertices[p2_index].pos = { rad * cos(teta * (i + 1)), v_step * j, rad * sin(teta * (i + 1)) };
+	//		data->vertices[p3_index].pos = { rad * cos(teta * (i + 1)), v_step * (j + 1), rad * sin(teta * (i + 1)) };
+	//		data->vertices[p4_index].pos = { rad * cos(teta * i), v_step * (j + 1), rad * sin(teta * i) };
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p2_index);
+	//		data->indices.push_back(p3_index);
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p3_index);
+	//		data->indices.push_back(p4_index);
+	//	}
+
+	//for (int j = 0; j < 2; ++j)
+	//	for (int i = 0; i < u_square; ++i)
+	//	{
+	//		if (j)
+	//		{
+	//			p1_index = u_vertex * v_vertex;
+	//			p2_index = (i + 1) % u_vertex;
+	//			p3_index = i;
+
+	//			data->vertices[p1_index].pos = { 0.0f, 0.0f,0.0f };
+	//		}
+	//		else
+	//		{
+	//			p2_index = v_square * u_vertex + i;
+	//			p3_index = v_square * u_vertex + (i + 1) % u_vertex;
+	//			p3_index = u_vertex * v_vertex + 1;
+
+	//			data->vertices[p3_index].pos = {0.0f, size.y, 0.0f };
+	//		}
+
+	//		data->indices.push_back(p1_index);
+	//		data->indices.push_back(p2_index);
+	//		data->indices.push_back(p3_index);
+	//	}
+
+	//data->size = data->indices.size();
+	//data->def.color = { 0.0f, 0.5f, 0.5f, 0.0f };
+}
 
 
 
 Object::Object(Object* _base) : base(_base)
 {
 	data = nullptr;
-	id = objCounter++;
+	id = obj_counter++;
 
 	texture.push_back(Vector4(1.0f, 1.0f, 0.1f, 0.0f));
+	pos = { 0.0f, 0.0f, 0.0f };
 }
 
-Object::~Object()
-{
+Object::~Object() {}
 
-}
-
-int Object::getId()
+int Object::get_id()
 {
 	return id;
 }
 
-ObjectData* Object::getData()
+ObjectData* Object::get_data()
 {
 	return data;
 }

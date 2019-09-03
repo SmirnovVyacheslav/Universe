@@ -32,14 +32,15 @@ class DX_11
 		XMMATRIX mProjection;//128
 		XMFLOAT4 light_color;//144
 		XMFLOAT4 light_pos;//160
-		XMFLOAT4 plane_def[80];//1120
-		XMFLOAT4 plane_color[80];//2080
+		//XMFLOAT4 plane_def[80];//1120
+		//XMFLOAT4 plane_color[80];//2080
 		//XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
 	};
 
 	struct ConstantBuffer_2
 	{
-		XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
+		XMFLOAT4 color;//obj color
+		//XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
 	};
 
 	struct Shader
@@ -51,9 +52,9 @@ class DX_11
 	struct GPUData
 	{
 		int           size;
-		Shader*       shader = nullptr;
 		ID3D11Buffer* vertexBuffer = nullptr;
 		ID3D11Buffer* indexBuffer = nullptr;
+		Vector4 color;
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -93,14 +94,14 @@ class DX_11
 	shared_ptr<Camera>   camera;
 	shared_ptr<Geometry> geometry;
 
+	Shader* shader;
+
 	XMMATRIX                mWorld;
 
-	unordered_map<wstring, Shader*>          shaders;
-	//std::unordered_map<ObjectData*, GPUData*>           objects;
 	vector<pair<ObjectData*, GPUData*>>           objects;
 
-	vector<Vector4> object_def;
-	vector<Vector4> object_color;
+	//vector<Vector4> object_def;
+	//vector<Vector4> object_color;
 
 	bool createShader(std::wstring path, Shader* shader);
 
