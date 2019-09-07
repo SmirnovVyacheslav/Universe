@@ -4,9 +4,137 @@ int Object::obj_counter = 0;
 
 vector<Object*> objects;
 
+struct Edge
+{
+	Vector3 a;
+	Vector3 b;
+	Vector3 c;
+};
 
+float rad_to_deg(float rad)
+{
+	return rad * 180 / pi;
+}
 
-void make_mesh(Vector3 pos, Vector3 size, ObjectData& data)
+float deg_to_rad(float deg)
+{
+	return deg * pi / 180;
+}
+
+Vector3 get_normale(Edge edge)
+{
+	return ((edge.a - edge.b) ^ (edge.a - edge.c)).normalize();
+}
+
+bool check_index(int index, int max)
+{
+	if (index < 0)
+	{
+		return false;
+	}
+	if (index >= max)
+	{
+		return false;
+	}
+	return true;
+}
+
+void calc_normale(ObjectData& data, int u_vertex, int v_vertex, Vector3 dir_normale)
+{
+	for (int j = 0; j < v_vertex; ++j)
+	{
+		for (int i = 0; i < u_vertex; ++i)
+		{
+			vector<Edge> near_egdes;
+			Vector3 result_normale = { 0.0f, 0.0f, 0.0f };
+
+			// check t1 & t2
+			if (check_index(j - 1, v_vertex) && check_index(i - 1, u_vertex))
+			{
+				//t1
+				near_egdes.push_back({
+					data.vertices[(j - 1) * u_vertex + i - 1].pos,
+					data.vertices[j * u_vertex + i].pos,
+					data.vertices[j * u_vertex + i - 1].pos
+				});
+				//t2
+				near_egdes.push_back({
+					data.vertices[(j - 1) * u_vertex + i - 1].pos,
+					data.vertices[(j - 1) * u_vertex + i].pos,
+					data.vertices[j * u_vertex + i].pos
+				});
+			}
+			// check t3
+			if (check_index(j - 1, v_vertex) && check_index(i + 1, u_vertex))
+			{
+				//t3
+				near_egdes.push_back({
+					data.vertices[(j - 1) * u_vertex + i].pos,
+					data.vertices[j * u_vertex + i + 1].pos,
+					data.vertices[j * u_vertex + i].pos
+				});
+			}
+			// check t4 & t5
+			if (check_index(j + 1, v_vertex) && check_index(i + 1, u_vertex))
+			{
+				//t4
+				near_egdes.push_back({
+					data.vertices[j * u_vertex + i].pos,
+					data.vertices[j * u_vertex + i + 1].pos,
+					data.vertices[(j + 1) * u_vertex + i + 1].pos
+				});
+
+				//t5
+				near_egdes.push_back({
+					data.vertices[j * u_vertex + i].pos,
+					data.vertices[(j + 1) * u_vertex + i + 1].pos,
+					data.vertices[(j + 1) * u_vertex + i].pos
+				});
+			}
+			// check t6
+			if (check_index(j + 1, v_vertex) && check_index(i - 1, u_vertex))
+			{
+				near_egdes.push_back({
+					data.vertices[j * u_vertex + i - 1].pos,
+					data.vertices[j * u_vertex + i].pos,
+					data.vertices[(j + 1) * u_vertex + i].pos
+				});
+			}
+			//t1 = (j - 1) * u    + i - 1;
+			//	  j * u         + i;
+			//	  j * u         + i - 1;
+			//t2 = (j - 1) * u    + i - 1;
+			//	 (j - 1) * u    + i;
+			//	 j * u          + i;
+			//t3 = (j - 1) * u    + i;
+			//	 j * u          + i + 1;
+			//	 j * u          + i;
+			//t4 = j * u          + i;
+			//	 j * u          + i + 1;
+			//	 (j + 1) * u    + i + 1;
+			//t5 = j * u          + i;
+			//	 (j + 1) * u    + i + 1;
+			//	 (j + 1) * u    + i;
+			//t6 = j * u          + i - 1;
+			//	 j * u          + i;
+			//	 (j + 1) * u    + i;
+
+			for (auto edge : near_egdes)
+			{
+				result_normale = result_normale + get_normale(edge);
+			}
+			result_normale = result_normale / near_egdes.size();
+			float angle = rad_to_deg(acos((result_normale & dir_normale) / (result_normale.length() * dir_normale.length())));
+			if (angle > 90)
+			{
+				result_normale = result_normale * -1;
+			}
+			data.vertices[j * u_vertex + i].normal = result_normale;
+		}
+	}
+}
+
+void make_mesh(Vector3 pos, Vector3 size, ObjectData& data, Vector3 normale_direction)
 {
 	int u_square = static_cast<int>(50); // TODO make resolution calc
 	int v_square = static_cast<int>(50);
@@ -41,6 +169,8 @@ void make_mesh(Vector3 pos, Vector3 size, ObjectData& data)
 			data.indices.push_back(p3_index);
 			data.indices.push_back(p4_index);
 
+			
+
 			/*if (wrap)
 			{
 				p1_index = j * u_vertex + i;
@@ -61,6 +191,8 @@ void make_mesh(Vector3 pos, Vector3 size, ObjectData& data)
 
 	data.size = data.indices.size();
 
+	//Calc normales
+	calc_normale(data, u_vertex, v_vertex, normale_direction);
 
 	//float rad = size.x / 2.0f;
 
@@ -102,15 +234,15 @@ Geometry::Geometry()
 	person = new Person();
 	person->create(Vector3(5.0f, 10.0f, 2.0f));
 
-	landscape = new Landscape();
+	/*landscape = new Landscape();
 	landscape->create(Vector3(100.0f, 100.0f, 100.0f));
 	landscape->move_down();
 	landscape->move_down();
 	landscape->move_down();
-	landscape->move_down();
+	landscape->move_down();*/
 
 	scene.push_back(person);
-	scene.push_back(landscape);
+	//scene.push_back(landscape);
 }
 
 Geometry::~Geometry()
@@ -193,7 +325,9 @@ void Plane::create(Vector3 _size, Vector3 _res)
 {
 	Vector3 _pos = {0.0f, 0.0f, 0.0f};
 
-	make_mesh(_pos, _size, *data);
+	Vector3 dir_normale = { 0.0f, 1.0f, 0.0f };
+
+	make_mesh(_pos, _size, *data, dir_normale);
 
 	data->color = { 1.0f, 1.0f, 0.0f };
 

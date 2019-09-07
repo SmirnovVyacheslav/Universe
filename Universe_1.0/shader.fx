@@ -100,7 +100,8 @@ VS_OUTPUT VS( float4 Pos : POSITION, float4 Normal: NORMAL)
     //    output.Color = float4(0.0f, 0.0f, 0.0f, 0.0f);
     //}
     
-	output.Color = light_color * color;
+	//output.Color = light_color * color;
+	output.Color = dot(Normal, normalize(light_pos.xyz - Pos.xyz)) * light_color * color;
 
     return output;
 }
