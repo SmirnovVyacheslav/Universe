@@ -4,12 +4,63 @@ int Object::obj_counter = 0;
 
 vector<Object*> objects;
 
-struct Edge
+class Constructor
 {
-	Vector3 a;
-	Vector3 b;
-	Vector3 c;
+	struct Edge
+	{
+		Vector3 a;
+		Vector3 b;
+		Vector3 c;
+	};
+
+public:
+
+	Constructor(Vector3 pos, Vector3 size, Vector3 u_vec, Vector3 v_vec);
+
+	~Constructor();
+
+	Vector3 get_value(int i, int j);
+
+	Vector3 u_vec;
+	Vector3 v_vec;
+
+	int u_square; // TODO make resolution calc
+	int v_square;
+	int u_vertex;
+	int v_vertex;
+
+	Vector3 pos;
+	Vector3 size;
+
+	void make_mesh(ObjectData& data, Vector3 normale_direction);
+	void calc_normale(ObjectData& data, Vector3 dir_normale);
+
+	bool check_index(int index, int max);
+	Vector3 get_normale(Edge edge);
+
 };
+
+Constructor::Constructor(Vector3 pos, Vector3 size, Vector3 u_vec, Vector3 v_vec) : pos(pos), size(size), u_vec(u_vec), v_vec(v_vec)
+{
+	u_square = static_cast<int>(50); // TODO make resolution calc
+	v_square = static_cast<int>(50);
+	u_vertex = u_square + 1;
+	v_vertex = v_square + 1;
+
+	this->u_vec = u_vec * (size.x / float(u_square));
+	this->v_vec = v_vec * (size.z / float(v_square));
+}
+
+Constructor::~Constructor()
+{
+
+}
+
+Vector3 Constructor::get_value(int i, int j)
+{
+	return u_vec * i + v_vec * j;
+}
+
 
 float rad_to_deg(float rad)
 {
@@ -21,12 +72,12 @@ float deg_to_rad(float deg)
 	return deg * pi / 180;
 }
 
-Vector3 get_normale(Edge edge)
+Vector3 Constructor::get_normale(Edge edge)
 {
 	return ((edge.a - edge.b) ^ (edge.a - edge.c)).normalize();
 }
 
-bool check_index(int index, int max)
+bool Constructor::check_index(int index, int max)
 {
 	if (index < 0)
 	{
@@ -39,7 +90,7 @@ bool check_index(int index, int max)
 	return true;
 }
 
-void calc_normale(ObjectData& data, int u_vertex, int v_vertex, Vector3 dir_normale)
+void Constructor::calc_normale(ObjectData& data, Vector3 dir_normale)
 {
 	for (int j = 0; j < v_vertex; ++j)
 	{
@@ -134,19 +185,10 @@ void calc_normale(ObjectData& data, int u_vertex, int v_vertex, Vector3 dir_norm
 	}
 }
 
-void make_mesh(Vector3 pos, Vector3 size, ObjectData& data, Vector3 normale_direction)
+void Constructor::make_mesh(ObjectData& data, Vector3 normale_direction)
 {
-	int u_square = static_cast<int>(50); // TODO make resolution calc
-	int v_square = static_cast<int>(50);
-	int u_vertex = u_square + 1;
-	int v_vertex = v_square + 1;
-
-	sq_index next_index;
-	sq_value values;
 	data.vertices = vector<Vertex>(u_vertex * v_vertex);
 	int p1_index, p2_index, p3_index, p4_index;
-	float u_step = size.x / float(u_square); // TODO add step calc like vertex for u and v
-	float v_step = size.z / float(v_square);
 	for (int j = 0; j < v_square; ++j)
 	{
 		for (int i = 0; i < u_square; ++i)
@@ -156,10 +198,10 @@ void make_mesh(Vector3 pos, Vector3 size, ObjectData& data, Vector3 normale_dire
 			p3_index = (j + 1) * u_vertex + i + 1;
 			p4_index = (j + 1) * u_vertex + i;
 
-			data.vertices[p1_index].pos = { u_step * i, 0.0f, v_step * j };
-			data.vertices[p2_index].pos = { u_step * (i + 1), 0.0f, v_step * j };
-			data.vertices[p3_index].pos = { u_step * (i + 1), 0.0f, v_step * (j + 1) };
-			data.vertices[p4_index].pos = { u_step * i, 0.0f, v_step * (j + 1) };
+			data.vertices[p1_index].pos = pos + get_value(i, j);
+			data.vertices[p2_index].pos = pos + get_value(i + 1, j);
+			data.vertices[p3_index].pos = pos + get_value(i + 1, j + 1);
+			data.vertices[p4_index].pos = pos + get_value(i, j + 1);
 
 			data.indices.push_back(p1_index);
 			data.indices.push_back(p2_index);
@@ -192,41 +234,7 @@ void make_mesh(Vector3 pos, Vector3 size, ObjectData& data, Vector3 normale_dire
 	data.size = data.indices.size();
 
 	//Calc normales
-	calc_normale(data, u_vertex, v_vertex, normale_direction);
-
-	//float rad = size.x / 2.0f;
-
-	//// Vertex buffer
-	//data->vertices = vector<Vertex>(u_vertex * v_vertex + 2);
-	//float u_step = size.x / res.x;
-	//float v_step = size.y / res.y;
-	//int p1_index, p2_index, p3_index, p4_index;
-	//float psy = 2.0f * pi / u_square;
-	//float phi = pi / v_square;
-	//for (int j = 0; j < v_square; ++j)
-	//	for (int i = 0; i < u_square; ++i)
-	//	{
-	//		p1_index = j * u_vertex + i;
-	//		p2_index = j * u_vertex + (i + 1) % u_vertex;
-	//		p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
-	//		p4_index = (j + 1) * u_vertex + i;
-
-	//		//float curr_rad = rad * cos(phi * j);
-	//		float curr_rad = rad * sin(phi * j);
-
-	//		data->vertices[p1_index].pos = { rad * sin(phi * j) * cos(psy * i), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * i) };
-	//		data->vertices[p2_index].pos = { rad * sin(phi * j) * cos(psy * (i + 1)), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * (i + 1)) };
-	//		data->vertices[p3_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * (i + 1)), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * (i + 1)) };
-	//		data->vertices[p4_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * i), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * i) };
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p2_index);
-	//		data->indices.push_back(p3_index);
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p3_index);
-	//		data->indices.push_back(p4_index);
-	//	}
+	calc_normale(data, normale_direction);
 }
 
 Geometry::Geometry()
@@ -325,50 +333,24 @@ void Plane::create(Vector3 _size, Vector3 _res)
 {
 	Vector3 _pos = {0.0f, 0.0f, 0.0f};
 
-	Vector3 dir_normale = { 0.0f, 1.0f, 0.0f };
+	/* dir =  \*/
+	Vector3 dir_normale = { -1.0f, 1.0f, 0.0f };
 
-	make_mesh(_pos, _size, *data, dir_normale);
+	// u on x; v on -z
+	//Vector3 u_vec(1.0f, 0.0f, 0.0f);
+	//Vector3 v_vec(0.0f, 0.0f, -1.0f);
+	//// u on x; v on y
+	//Vector3 u_vec(1.0f, 0.0f, 0.0f);
+	//Vector3 v_vec(0.0f, 1.0f, 0.0f);
+	// u on x and y; v on -z
+	Vector3 u_vec(1.0f, 1.0f, 0.0f);
+	Vector3 v_vec(0.0f, 0.0f, -1.0f);
+
+	Constructor plane(_pos, _size, u_vec, v_vec);
+
+	plane.make_mesh(*data, dir_normale);
 
 	data->color = { 1.0f, 1.0f, 0.0f };
-
-	// size = _size;
-	// pos = { size.x / 2.0f, 0.0f, size.z / 2.0f };
-	// res = _res.is_zero() ? size * 5 : _res;
-
-	// int u_square = static_cast<int>(res.x);
-	// int v_square = static_cast<int>(res.z);
-	// int u_vertex = u_square + 1;
-	// int v_vertex = v_square + 1;
-
-	// // Vertex buffer
-	// data->vertices = vector<Vertex>(u_vertex * v_vertex);
-	// float u_step = size.x / res.x;
-	// float v_step = size.z / res.z;
-	// int p1_index, p2_index, p3_index, p4_index;
-	// for (int j = 0; j < v_square; ++j)
-	// 	for (int i = 0; i < u_square; ++i)
-	// 	{
-	// 		p1_index = j * u_vertex + i;
-	// 		p2_index = j * u_vertex + i + 1;
-	// 		p3_index = (j + 1) * u_vertex + i + 1;
-	// 		p4_index = (j + 1) * u_vertex + i;
-
-	// 		data->vertices[p1_index].pos = { u_step * i, 0.0f, v_step * j };
-	// 		data->vertices[p2_index].pos = { u_step * (i + 1), 0.0f, v_step * j };
-	// 		data->vertices[p3_index].pos = { u_step * (i + 1), 0.0f, v_step * (j + 1) };
-	// 		data->vertices[p4_index].pos = { u_step * i, 0.0f, v_step * (j + 1) };
-
-	// 		data->indices.push_back(p1_index);
-	// 		data->indices.push_back(p2_index);
-	// 		data->indices.push_back(p3_index);
-
-	// 		data->indices.push_back(p1_index);
-	// 		data->indices.push_back(p3_index);
-	// 		data->indices.push_back(p4_index);
-	// 	}
-
-	// data->size = data->indices.size();
-	// data->def.color = { 0.0f, 0.5f, 0.5f, 0.0f };
 }
 
 

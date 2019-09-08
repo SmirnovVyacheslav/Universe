@@ -53,7 +53,7 @@ struct ObjectData
 	//ObjectDef      def;
 };
 
-void make_mesh(Vector3 pos, Vector3 size, ObjectData& data, Vector3 normale_direction);
+//void make_mesh(Vector3 pos, Vector3 size, ObjectData& data, Vector3 normale_direction);
 
 struct sq_index
 {
