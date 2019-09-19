@@ -4,6 +4,30 @@ int Object::obj_counter = 0;
 
 vector<Object*> objects;
 
+
+float rad_to_deg(float rad)
+{
+	return rad * 180 / pi;
+}
+
+float deg_to_rad(float deg)
+{
+	return deg * pi / 180;
+}
+
+
+struct Gen_Data
+{
+	Vector3 pos;
+	Vector3 u_vec;
+	Vector3 v_vec;
+	float u_size;
+	float v_size;
+	Vector3 normal;
+
+	Gen_Data() {};
+};
+
 class Constructor
 {
 	struct Edge
@@ -14,15 +38,17 @@ class Constructor
 	};
 
 public:
-
-	Constructor(Vector3 pos, Vector3 size, Vector3 u_vec, Vector3 v_vec);
-
+	Constructor() {};
 	~Constructor();
 
 	Vector3 get_value(int i, int j);
 
 	Vector3 u_vec;
 	Vector3 v_vec;
+	Vector3 u_step;
+	Vector3 v_step;
+	float u_size;
+	float v_size;
 
 	int u_square; // TODO make resolution calc
 	int v_square;
@@ -30,49 +56,44 @@ public:
 	int v_vertex;
 
 	Vector3 pos;
-	Vector3 size;
+	Vector3 normal;
 
-	void make_mesh(ObjectData& data, Vector3 normale_direction);
-	void calc_normale(ObjectData& data, Vector3 dir_normale, int start_index);
+	void set_data(Gen_Data& data);
+
+	void make_mesh(ObjectData& data);
+	void calc_normale(Vertex* data);
 
 	bool check_index(int index, int max);
 	Vector3 get_normale(Edge edge);
 
-	void make_edge(Vector3 pos, Vector3 size, Vector3 u_vec, Vector3 v_vec, ObjectData& data, Vector3 normale_direction);
+	void make_edge(ObjectData& data);
 
 	void make_triangle(ObjectData& data, Edge edge);
 };
 
-Constructor::Constructor(Vector3 pos, Vector3 size, Vector3 u_vec, Vector3 v_vec) : pos(pos), size(size), u_vec(u_vec), v_vec(v_vec)
+Constructor::~Constructor() {}
+
+void Constructor::set_data(Gen_Data& data)
 {
+	pos = data.pos;
+	u_vec = data.u_vec;
+	v_vec = data.v_vec;
+	u_size = data.u_size;
+	v_size = data.v_size;
+	normal = data.normal;
+
 	u_square = static_cast<int>(50); // TODO make resolution calc
 	v_square = static_cast<int>(50);
 	u_vertex = u_square + 1;
 	v_vertex = v_square + 1;
 
-	this->u_vec = u_vec * (size.x / float(u_square));
-	this->v_vec = v_vec * (size.z / float(v_square));
-}
-
-Constructor::~Constructor()
-{
-
+	u_step = u_vec * (u_size / float(u_square));
+	v_step = v_vec * (v_size / float(v_square));
 }
 
 Vector3 Constructor::get_value(int i, int j)
 {
-	return u_vec * i + v_vec * j;
-}
-
-
-float rad_to_deg(float rad)
-{
-	return rad * 180 / pi;
-}
-
-float deg_to_rad(float deg)
-{
-	return deg * pi / 180;
+	return u_step * i + v_step * j;
 }
 
 Vector3 Constructor::get_normale(Edge edge)
@@ -93,7 +114,7 @@ bool Constructor::check_index(int index, int max)
 	return true;
 }
 
-void Constructor::calc_normale(ObjectData& data, Vector3 dir_normale, int start_index)
+void Constructor::calc_normale(Vertex* data)
 {
 	for (int j = 0; j < v_vertex; ++j)
 	{
@@ -107,15 +128,15 @@ void Constructor::calc_normale(ObjectData& data, Vector3 dir_normale, int start_
 			{
 				//t1
 				near_egdes.push_back({
-					data.vertices[start_index + (j - 1) * u_vertex + i - 1].pos,
-					data.vertices[start_index + j * u_vertex + i].pos,
-					data.vertices[start_index + j * u_vertex + i - 1].pos
+					data[(j - 1) * u_vertex + i - 1].pos,
+					data[j * u_vertex + i].pos,
+					data[j * u_vertex + i - 1].pos
 				});
 				//t2
 				near_egdes.push_back({
-					data.vertices[start_index + (j - 1) * u_vertex + i - 1].pos,
-					data.vertices[start_index + (j - 1) * u_vertex + i].pos,
-					data.vertices[start_index + j * u_vertex + i].pos
+					data[(j - 1) * u_vertex + i - 1].pos,
+					data[(j - 1) * u_vertex + i].pos,
+					data[j * u_vertex + i].pos
 				});
 			}
 			// check t3
@@ -123,9 +144,9 @@ void Constructor::calc_normale(ObjectData& data, Vector3 dir_normale, int start_
 			{
 				//t3
 				near_egdes.push_back({
-					data.vertices[start_index + (j - 1) * u_vertex + i].pos,
-					data.vertices[start_index + j * u_vertex + i + 1].pos,
-					data.vertices[start_index + j * u_vertex + i].pos
+					data[(j - 1) * u_vertex + i].pos,
+					data[j * u_vertex + i + 1].pos,
+					data[j * u_vertex + i].pos
 				});
 			}
 			// check t4 & t5
@@ -133,25 +154,25 @@ void Constructor::calc_normale(ObjectData& data, Vector3 dir_normale, int start_
 			{
 				//t4
 				near_egdes.push_back({
-					data.vertices[start_index + j * u_vertex + i].pos,
-					data.vertices[start_index + j * u_vertex + i + 1].pos,
-					data.vertices[start_index + (j + 1) * u_vertex + i + 1].pos
+					data[j * u_vertex + i].pos,
+					data[j * u_vertex + i + 1].pos,
+					data[(j + 1) * u_vertex + i + 1].pos
 				});
 
 				//t5
 				near_egdes.push_back({
-					data.vertices[start_index + j * u_vertex + i].pos,
-					data.vertices[start_index + (j + 1) * u_vertex + i + 1].pos,
-					data.vertices[start_index + (j + 1) * u_vertex + i].pos
+					data[j * u_vertex + i].pos,
+					data[(j + 1) * u_vertex + i + 1].pos,
+					data[(j + 1) * u_vertex + i].pos
 				});
 			}
 			// check t6
 			if (check_index(j + 1, v_vertex) && check_index(i - 1, u_vertex))
 			{
 				near_egdes.push_back({
-					data.vertices[start_index + j * u_vertex + i - 1].pos,
-					data.vertices[start_index + j * u_vertex + i].pos,
-					data.vertices[start_index + (j + 1) * u_vertex + i].pos
+					data[j * u_vertex + i - 1].pos,
+					data[j * u_vertex + i].pos,
+					data[(j + 1) * u_vertex + i].pos
 				});
 			}
 			//t1 = (j - 1) * u    + i - 1;
@@ -178,21 +199,21 @@ void Constructor::calc_normale(ObjectData& data, Vector3 dir_normale, int start_
 				result_normale = result_normale + get_normale(edge);
 			}
 			result_normale = result_normale / near_egdes.size();
-			float angle = rad_to_deg(acos((result_normale & dir_normale) / (result_normale.length() * dir_normale.length())));
+			float angle = rad_to_deg(acos((result_normale & normal) / (result_normale.length() * normal.length())));
 			if (angle > 90)
 			{
 				result_normale = result_normale * -1;
 			}
-			data.vertices[start_index + j * u_vertex + i].normal = result_normale;
+			data[j * u_vertex + i].normal = result_normale;
 		}
 	}
 }
 
-void Constructor::make_mesh(ObjectData& data, Vector3 normale_direction)
+void Constructor::make_mesh(ObjectData& data)
 {
-	//data.vertices = vector<Vertex>(u_vertex * v_vertex);
 	int start_index = data.vertices.size();
 	data.vertices.resize(data.vertices.size() + u_vertex * v_vertex);
+	Vertex* vertex_data = &data.vertices[start_index];
 	int p1_index, p2_index, p3_index, p4_index;
 	for (int j = 0; j < v_square; ++j)
 	{
@@ -203,10 +224,10 @@ void Constructor::make_mesh(ObjectData& data, Vector3 normale_direction)
 			p3_index = (j + 1) * u_vertex + i + 1;
 			p4_index = (j + 1) * u_vertex + i;
 
-			data.vertices[start_index + p1_index].pos = pos + get_value(i, j);
-			data.vertices[start_index + p2_index].pos = pos + get_value(i + 1, j);
-			data.vertices[start_index + p3_index].pos = pos + get_value(i + 1, j + 1);
-			data.vertices[start_index + p4_index].pos = pos + get_value(i, j + 1);
+			vertex_data[p1_index].pos = pos + get_value(i, j);
+			vertex_data[p2_index].pos = pos + get_value(i + 1, j);
+			vertex_data[p3_index].pos = pos + get_value(i + 1, j + 1);
+			vertex_data[p4_index].pos = pos + get_value(i, j + 1);
 
 			data.indices.push_back(start_index + p1_index);
 			data.indices.push_back(start_index + p2_index);
@@ -215,8 +236,6 @@ void Constructor::make_mesh(ObjectData& data, Vector3 normale_direction)
 			data.indices.push_back(start_index + p1_index);
 			data.indices.push_back(start_index + p3_index);
 			data.indices.push_back(start_index + p4_index);
-
-			
 
 			/*if (wrap)
 			{
@@ -239,35 +258,29 @@ void Constructor::make_mesh(ObjectData& data, Vector3 normale_direction)
 	data.size = data.indices.size();
 
 	//Calc normales
-	calc_normale(data, normale_direction, start_index);
+	calc_normale(vertex_data);
 }
 
-void Constructor::make_edge(Vector3 pos, Vector3 size, Vector3 u_vec, Vector3 v_vec, ObjectData& data, Vector3 normale_direction)
+void Constructor::make_edge(ObjectData& data)
 {
-	u_square = static_cast<int>(5); // TODO make resolution calc
-	v_square = static_cast<int>(5);
-	u_vertex = u_square + 1;
-	v_vertex = v_square + 1;
+	make_mesh(data);
 
-	this->pos = pos;
-	this->size = size;
-	this->u_vec = u_vec * (size.x / float(5));
-	this->v_vec = v_vec * (size.z / float(5));
-	make_mesh(data, normale_direction);
+	float length = v_size;
+	Vector3 left_45_vec = (-1 * u_vec * length).rotate_on_y(deg_to_rad(45));
+	Vector3 left_45(pos + v_vec * v_size + left_45_vec);
 
-	float length = size.z;
-	Vector3 left_45_vec(-1 * u_vec * length);
-	left_45_vec.x = left_45_vec.x * cos(deg_to_rad(45)) + left_45_vec.z * sin(deg_to_rad(45));
-	left_45_vec.z = left_45_vec.x * -sin(deg_to_rad(45)) + left_45_vec.z * cos(deg_to_rad(45));
-	Vector3 left_45(pos + v_vec * size.z + left_45_vec);
+	Vector3 right_45_vec = (1 * u_vec * length).rotate_on_y(-deg_to_rad(45));
+	Vector3 right_45(pos + u_vec * u_size + v_vec * v_size + right_45_vec);
 
-	Vector3 right_45_vec(1 * u_vec * length);
-	right_45_vec.x = right_45_vec.x * cos(-deg_to_rad(45)) + right_45_vec.z * sin(-deg_to_rad(45));
-	right_45_vec.z = right_45_vec.x * -sin(-deg_to_rad(45)) + right_45_vec.z * cos(-deg_to_rad(45));
-	Vector3 right_45(pos + u_vec * size.x + v_vec * size.z + right_45_vec);
+	Edge a1;
+	a1.a = pos;
+	a1.b = pos + v_vec * v_size;
+	a1.c = left_45;
 
-	Edge a1{ Vector3(pos), Vector3(pos + v_vec * size.z) , Vector3(left_45) };
-	Edge a2{ Vector3(pos + u_vec * size.x), Vector3(pos + u_vec * size.x + v_vec * size.z) , Vector3(right_45) };
+	Edge a2;
+	a2.a = pos + u_vec * u_size;
+	a2.b = pos + u_vec * u_size + v_vec * v_size;
+	a2.c = right_45;
 
 	make_triangle(data, a1);
 	make_triangle(data, a2);
@@ -278,7 +291,6 @@ void Constructor::make_edge(Vector3 pos, Vector3 size, Vector3 u_vec, Vector3 v_
 void Constructor::make_triangle(ObjectData& data, Edge edge)
 {
 	int start_index = data.vertices.size();
-	//data.vertices.resize(data.vertices.size() + 3);
 	data.vertices.push_back(Vertex{ edge.a, get_normale(edge) });
 	data.vertices.push_back(Vertex{ edge.b, get_normale(edge) });
 	data.vertices.push_back(Vertex{ edge.c, get_normale(edge) });
@@ -384,27 +396,27 @@ Plane::~Plane()
 
 void Plane::create(Vector3 _size, Vector3 _res)
 {
-	Vector3 _pos = {0.0f, 0.0f, 0.0f};
+	Gen_Data plane_data;
+	plane_data.pos = { 0.0f, 0.0f, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.u_size = _size.x;
+	plane_data.v_size = _size.z;
+	plane_data.normal = { 0.0f, 1.0f, 0.0f };
 
-	/* dir =  \*/
-	//Vector3 dir_normale = { -1.0f, 1.0f, 0.0f };
-	Vector3 dir_normale = { 0.0f, 1.0f, 0.0f };
+	Constructor plane;
+	plane.set_data(plane_data);
 
-	// u on x; v on -z
-	Vector3 u_vec(1.0f, 0.0f, 0.0f);
-	Vector3 v_vec(0.0f, 0.0f, -1.0f);
-	//// u on x; v on y
-	//Vector3 u_vec(1.0f, 0.0f, 0.0f);
-	//Vector3 v_vec(0.0f, 1.0f, 0.0f);
-	//// u on x and y; v on -z
-	//Vector3 u_vec(1.0f, 1.0f, 0.0f);
-	//Vector3 v_vec(0.0f, 0.0f, -1.0f);
+	plane.make_mesh(*data);
 
-	Constructor plane(_pos, _size, u_vec, v_vec);
-
-	plane.make_mesh(*data, dir_normale);
-
-	plane.make_edge(_pos + (v_vec * _size.z), Vector3(_size.x, 1, 0.1), Vector3(1.0f, 0.0f, 0.0f), Vector3(0.0f, -1.0f, -1.0f), *data, { 0.0f, 1.0f, -1.0f });
+	plane_data.pos = plane_data.pos + (plane_data.v_vec * _size.z);
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, -1.0f, -1.0f };
+	plane_data.u_size = _size.x;
+	plane_data.v_size = 0.1;
+	plane_data.normal = { 0.0f, 1.0f, -1.0f };
+	plane.set_data(plane_data);
+	plane.make_edge(*data);
 
 	data->color = { 1.0f, 1.0f, 0.0f };
 }

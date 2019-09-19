@@ -182,6 +182,28 @@ bool Vector3::is_zero()
 	return x + y + z == 0.0f;
 }
 
+Vector3 Vector3::rotate_on_x(float angle)
+{
+	return Vector3(
+		x,
+		y * cos(angle) + z * -sin(angle),
+		y * sin(angle) + z * cos(angle));
+}
+Vector3 Vector3::rotate_on_y(float angle)
+{
+	return Vector3(
+		x * cos(angle) + z * sin(angle),
+		y,
+		x * -sin(angle) + z * cos(angle));
+}
+Vector3 Vector3::rotate_on_z(float angle)
+{
+	return Vector3(
+		x * cos(angle) + y * -sin(angle),
+		x * sin(angle) + y * cos(angle),
+		z);
+}
+
 
 float dist(Vector3 vecA, Vector3 vecB)
 {

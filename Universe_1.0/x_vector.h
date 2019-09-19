@@ -35,6 +35,10 @@ struct Vector3
 	operator Vector4();
 
 	bool is_zero();
+
+	Vector3 rotate_on_x(float angle);
+	Vector3 rotate_on_y(float angle);
+	Vector3 rotate_on_z(float angle);
 };
 
 Vector3 operator+(Vector3& vec, const float& num);
