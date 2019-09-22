@@ -32,7 +32,7 @@ class Camera
 
 	float xAngle = 0.0f;
 	float yAngle = -90.0f;
-	float radius = 3.0f;
+	float radius = 6.0f;
 	float sensitivity = 0.1f;
 
 	std::mutex camera_mutex;

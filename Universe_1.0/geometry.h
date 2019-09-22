@@ -16,10 +16,21 @@ using std::mutex;
 using std::map;
 using std::unique_ptr;
 using std::shared_ptr;
+using std::string;
 
 static const float pi = 3.14159265358979323846f;  /* pi */
 
 class Object;
+
+struct Size
+{
+	float u;
+	float v;
+	float w;
+
+	Size() {};
+	Size(float u, float v, float w) : u(u), v(v), w(w) {};
+};
 
 struct Material
 {
@@ -95,7 +106,7 @@ public:
 	Object(Object* base);
 	virtual ~Object();
 
-	virtual void create(Vector3 size, Vector3 res = {0.0f, 0.0f, 0.0f}) = 0;
+	virtual void create(Size size) = 0;
 
 	int get_id();
 
@@ -132,7 +143,7 @@ public:
 	Plane(Object* base = nullptr);
 	~Plane();
 
-	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+	virtual void create(Size size);
 };
 
 class Cube : public Object
@@ -141,7 +152,7 @@ public:
 	Cube(Object* base = nullptr);
 	~Cube();
 
-	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+	virtual void create(Size size);
 };
 
 class Person : public Object
@@ -150,7 +161,7 @@ public:
 	Person(Object* base = nullptr);
 	~Person();
 
-	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+	virtual void create(Size size);
 };
 
 class Landscape : public Object
@@ -159,7 +170,7 @@ public:
 	Landscape(Object* base = nullptr);
 	~Landscape();
 
-	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+	virtual void create(Size size);
 };
 
 class Sphere : public Object
@@ -168,7 +179,7 @@ public:
 	Sphere(Object* base = nullptr);
 	~Sphere();
 
-	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+	virtual void create(Size size);
 };
 
 class Cylinder : public Object
@@ -177,5 +188,5 @@ public:
 	Cylinder(Object* base = nullptr);
 	~Cylinder();
 
-	virtual void create(Vector3 size, Vector3 res = { 0.0f, 0.0f, 0.0f });
+	virtual void create(Size size);
 };

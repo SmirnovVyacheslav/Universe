@@ -2,8 +2,8 @@
 
 Camera::Camera(int wndWidth, int wndHeight)
 {
-	eye = XMVectorSet(0.0f, 1.0f, -1.0f, 0.0f);
-	at = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	eye = XMVectorSet(10.0f, 10.0f, -10.0f, 0.0f);
+	at = XMVectorSet(0.0f, 2.0f, 0.0f, 0.0f);
 	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
 	pos = Vector3(0.0f, 1.0f, -1.0f);
