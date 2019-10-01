@@ -27,9 +27,12 @@ struct Size
 	float u;
 	float v;
 	float w;
+	float rad;
 
 	Size() {};
 	Size(float u, float v, float w) : u(u), v(v), w(w) {};
+	Size(float u, float v, float w, float rad) : u(u), v(v), w(w), rad(rad) {};
+	Size(float w, float rad) : w(w), rad(rad) {};
 };
 
 struct Material

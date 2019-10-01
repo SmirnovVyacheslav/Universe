@@ -44,6 +44,8 @@ public:
 	{
 		transform_funcs["default"] = &Constructor::get_value_default;
 		transform_funcs["vary_y"] = &Constructor::get_value_vary_y;
+		transform_funcs["sphere"] = &Constructor::get_value_sphere;
+		transform_funcs["cylinder"] = &Constructor::get_value_cylinder;
 		get_value = transform_funcs["default"];
 
 		srand(rand_value);
@@ -52,6 +54,8 @@ public:
 
 	Vector3 get_value_default(int i, int j);
 	Vector3 get_value_vary_y(int i, int j);
+	Vector3 get_value_sphere(int i, int j);
+	Vector3 get_value_cylinder(int i, int j);
 
 	unsigned rand_value = 11;
 	float interval = 1.0f;
@@ -60,12 +64,20 @@ public:
 	Vector3 v_vec;
 	Vector3 u_step;
 	Vector3 v_step;
+	float w_step;
 	Size size;
 
 	int u_square; // TODO make resolution calc
 	int v_square;
 	int u_vertex;
 	int v_vertex;
+	int w_square;
+
+	bool wrap = false;
+	bool check_normale = true;
+	float teta;
+	float psy;
+	float phi;
 
 	Vector3 pos;
 	Vector3 normal;
@@ -79,6 +91,7 @@ public:
 	Vector3 get_normale(Edge edge);
 
 	void make_edge(ObjectData& data, float rotation_rule = 1.0f, int rotation_axis = 1);
+	void make_cap(ObjectData& data);
 
 	void make_triangle(ObjectData& data, Edge edge);
 
@@ -97,11 +110,17 @@ void Constructor::set_data(Gen_Data& data)
 
 	u_square = static_cast<int>(50); // TODO make resolution calc
 	v_square = static_cast<int>(50);
+	w_square = static_cast<int>(50);
 	u_vertex = u_square + 1;
 	v_vertex = v_square + 1;
 
 	u_step = u_vec * (size.u / float(u_square));
 	v_step = v_vec * (size.v / float(v_square));
+
+	teta = 2.0f * pi / u_square;
+	psy = 2.0f * pi / u_square;
+	phi = pi / v_square;
+	w_step = size.w / w_square;
 }
 
 void Constructor::set_transform_func(string name)
@@ -127,6 +146,18 @@ Vector3 Constructor::get_value_vary_y(int i, int j)
 		return u_step * i + v_step * j + Vector3(0.0f, y, 0.0f);
 	}
 	return get_value_default(i, j);
+}
+
+Vector3 Constructor::get_value_sphere(int i, int j)
+{
+	return Vector3(size.rad * sin(phi * j) * cos(psy * i),
+				   size.rad * cos(phi * j),
+				   size.rad * sin(phi * j) * sin(psy * i));
+}
+
+Vector3 Constructor::get_value_cylinder(int i, int j)
+{
+	return Vector3(size.rad * cos(teta * i), w_step * j, size.rad * sin(teta * i));
 }
 
 Vector3 Constructor::get_normale(Edge edge)
@@ -232,11 +263,16 @@ void Constructor::calc_normale(Vertex* data)
 				result_normale = result_normale + get_normale(edge);
 			}
 			result_normale = result_normale / near_egdes.size();
-			float angle = rad_to_deg(acos((result_normale & normal) / (result_normale.length() * normal.length())));
-			if (angle > 90)
+
+			if (check_normale)
 			{
-				result_normale = result_normale * -1;
+				float angle = rad_to_deg(acos((result_normale & normal) / (result_normale.length() * normal.length())));
+				if (angle > 90)
+				{
+					result_normale = result_normale * -1;
+				}
 			}
+
 			data[j * u_vertex + i].normal = result_normale;
 		}
 	}
@@ -252,25 +288,7 @@ void Constructor::make_mesh(ObjectData& data)
 	{
 		for (int i = 0; i < u_square; ++i)
 		{
-			p1_index = j * u_vertex + i;
-			p2_index = j * u_vertex + i + 1;
-			p3_index = (j + 1) * u_vertex + i + 1;
-			p4_index = (j + 1) * u_vertex + i;
-
-			vertex_data[p1_index].pos = pos + (this->*get_value)(i, j);
-			vertex_data[p2_index].pos = pos + (this->*get_value)(i + 1, j);
-			vertex_data[p3_index].pos = pos + (this->*get_value)(i + 1, j + 1);
-			vertex_data[p4_index].pos = pos + (this->*get_value)(i, j + 1);
-
-			data.indices.push_back(start_index + p1_index);
-			data.indices.push_back(start_index + p2_index);
-			data.indices.push_back(start_index + p3_index);
-
-			data.indices.push_back(start_index + p1_index);
-			data.indices.push_back(start_index + p3_index);
-			data.indices.push_back(start_index + p4_index);
-
-			/*if (wrap)
+			if (wrap)
 			{
 				p1_index = j * u_vertex + i;
 				p2_index = j * u_vertex + (i + 1) % u_vertex;
@@ -284,7 +302,19 @@ void Constructor::make_mesh(ObjectData& data)
 				p3_index = (j + 1) * u_vertex + i + 1;
 				p4_index = (j + 1) * u_vertex + i;
 			}
-			set_values(values, i, j);*/
+
+			vertex_data[p1_index].pos = pos + (this->*get_value)(i, j);
+			vertex_data[p2_index].pos = pos + (this->*get_value)(i + 1, j);
+			vertex_data[p3_index].pos = pos + (this->*get_value)(i + 1, j + 1);
+			vertex_data[p4_index].pos = pos + (this->*get_value)(i, j + 1);
+
+			data.indices.push_back(start_index + p1_index);
+			data.indices.push_back(start_index + p2_index);
+			data.indices.push_back(start_index + p3_index);
+
+			data.indices.push_back(start_index + p1_index);
+			data.indices.push_back(start_index + p3_index);
+			data.indices.push_back(start_index + p4_index);
 		}
 	}
 
@@ -358,12 +388,35 @@ void Constructor::make_triangle(ObjectData& data, Edge edge)
 	data.indices.push_back(start_index + 2);
 }
 
+void Constructor::make_cap(ObjectData& data)
+{
+	for (int i = 0; i < u_square; ++i)
+	{
+		Edge edge;
+		edge.a = pos + (this->*get_value)(i, 0);
+		edge.b = pos;
+		edge.c = pos + (this->*get_value)((i + 1) % u_square, 0);
 
+		make_triangle(data, edge);
+	}
+
+	for (int i = 0; i < u_square; ++i)
+	{
+		Edge edge;
+		edge.a = pos + (this->*get_value)(i, v_square - 1);
+		edge.b = pos + Vector3(0.0f, size.w, 0.0f);
+		edge.c = pos + (this->*get_value)((i + 1) % u_square, v_square - 1);
+
+		make_triangle(data, edge);
+	}
+
+	data.size = data.indices.size();
+}
 
 Geometry::Geometry()
 {
 	person = new Person();
-	person->create(Size(2.0f, 2.0f, 2.0f));
+	person->create(Size(2.0f, 2.0f, 1.0f, 1.0f));
 
 	landscape = new Landscape();
 	landscape->create(Size(200.0f, 200.0f, 0.0f));
@@ -647,7 +700,7 @@ Person::~Person()
 
 void Person::create(Size size)
 {
-	components.push_back(new Cube(this));
+	components.push_back(new Sphere(this));
 	components[0]->create(size);
 }
 
@@ -700,76 +753,22 @@ Sphere::~Sphere()
 
 void Sphere::create(Size size)
 {
-	//size = _size;
-	//pos = { size.x / 2.0f, 0.0f, size.z / 2.0f };
-	//res = _res.is_zero() ? size * 5 : _res;
+	Gen_Data plane_data;
+	plane_data.pos = { 0.0f, 3.0f, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.normal = { 0.0f, 1.0f, 0.0f };
 
-	//int u_square = static_cast<int>(res.x);
-	//int v_square = static_cast<int>(res.y);
-	//int u_vertex = u_square + 1;
-	//int v_vertex = v_square + 1;
+	Constructor plane;
+	plane.wrap = true;
+	plane.check_normale = false;
+	plane.set_data(plane_data);
+	plane.set_transform_func("sphere");
 
-	//float rad = size.x / 2.0f;
+	plane.make_mesh(*data);
 
-	//// Vertex buffer
-	//data->vertices = vector<Vertex>(u_vertex * v_vertex + 2);
-	//float u_step = size.x / res.x;
-	//float v_step = size.y / res.y;
-	//int p1_index, p2_index, p3_index, p4_index;
-	//float psy = 2.0f * pi / u_square;
-	//float phi = pi / v_square;
-	//for (int j = 0; j < v_square; ++j)
-	//	for (int i = 0; i < u_square; ++i)
-	//	{
-	//		p1_index = j * u_vertex + i;
-	//		p2_index = j * u_vertex + (i + 1) % u_vertex;
-	//		p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
-	//		p4_index = (j + 1) * u_vertex + i;
-
-	//		//float curr_rad = rad * cos(phi * j);
-	//		float curr_rad = rad * sin(phi * j);
-
-	//		data->vertices[p1_index].pos = { rad * sin(phi * j) * cos(psy * i), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * i) };
-	//		data->vertices[p2_index].pos = { rad * sin(phi * j) * cos(psy * (i + 1)), rad * cos(phi * j), rad * sin(phi * j) * sin(psy * (i + 1)) };
-	//		data->vertices[p3_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * (i + 1)), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * (i + 1)) };
-	//		data->vertices[p4_index].pos = { rad * sin(phi * (j + 1)) * cos(psy * i), rad * cos(phi * (j + 1)), rad * sin(phi * (j + 1)) * sin(psy * i) };
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p2_index);
-	//		data->indices.push_back(p3_index);
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p3_index);
-	//		data->indices.push_back(p4_index);
-	//	}
-
-	//for (int j = 0; j < 2; ++j)
-	//	for (int i = 0; i < u_square; ++i)
-	//	{
-	//		if (j)
-	//		{
-	//			p1_index = u_vertex * v_vertex;
-	//			p2_index = (i + 1) % u_vertex;
-	//			p3_index = i;
-
-	//			data->vertices[p1_index].pos = { 0.0f, 0.0f,0.0f };
-	//		}
-	//		else
-	//		{
-	//			p2_index = v_square * u_vertex + i;
-	//			p3_index = v_square * u_vertex + (i + 1) % u_vertex;
-	//			p3_index = u_vertex * v_vertex + 1;
-
-	//			data->vertices[p3_index].pos = { 0.0f, size.y, 0.0f };
-	//		}
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p2_index);
-	//		data->indices.push_back(p3_index);
-	//	}
-
-	data->size = data->indices.size();
-	//data->def.color = { 0.0f, 0.5f, 0.5f, 0.0f };
+	data->color = { 0.0f, 0.0f, 1.0f };
 }
 
 
@@ -786,72 +785,23 @@ Cylinder::~Cylinder()
 
 void Cylinder::create(Size size)
 {
-	//size = _size;
-	//pos = { size.x / 2.0f, 0.0f, size.z / 2.0f };
-	//res = _res.is_zero() ? size * 5 : _res;
+	Gen_Data plane_data;
+	plane_data.pos = { 0.0f, 3.0f, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.normal = { 0.0f, 1.0f, 0.0f };
 
-	//int u_square = static_cast<int>(res.x);
-	//int v_square = static_cast<int>(res.y);
-	//int u_vertex = u_square + 1;
-	//int v_vertex = v_square + 1;
+	Constructor plane;
+	plane.wrap = true;
+	plane.check_normale = false;
+	plane.set_data(plane_data);
+	plane.set_transform_func("cylinder");
 
-	//float rad = size.x / 2.0f;
+	plane.make_mesh(*data);
+	plane.make_cap(*data);
 
-	//// Vertex buffer
-	//data->vertices = vector<Vertex>(u_vertex * v_vertex + 2);
-	//float u_step = size.x / res.x;
-	//float v_step = size.y / res.y;
-	//int p1_index, p2_index, p3_index, p4_index;
-	//float teta = 2.0f * pi / u_square;
-	//for (int j = 0; j < v_square; ++j)
-	//	for (int i = 0; i < u_square; ++i)
-	//	{
-	//		p1_index = j * u_vertex + i;
-	//		p2_index = j * u_vertex + (i + 1) % u_vertex;
-	//		p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
-	//		p4_index = (j + 1) * u_vertex + i;
-
-	//		data->vertices[p1_index].pos = { rad * cos(teta * i), v_step * j, rad * sin(teta * i) };
-	//		data->vertices[p2_index].pos = { rad * cos(teta * (i + 1)), v_step * j, rad * sin(teta * (i + 1)) };
-	//		data->vertices[p3_index].pos = { rad * cos(teta * (i + 1)), v_step * (j + 1), rad * sin(teta * (i + 1)) };
-	//		data->vertices[p4_index].pos = { rad * cos(teta * i), v_step * (j + 1), rad * sin(teta * i) };
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p2_index);
-	//		data->indices.push_back(p3_index);
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p3_index);
-	//		data->indices.push_back(p4_index);
-	//	}
-
-	//for (int j = 0; j < 2; ++j)
-	//	for (int i = 0; i < u_square; ++i)
-	//	{
-	//		if (j)
-	//		{
-	//			p1_index = u_vertex * v_vertex;
-	//			p2_index = (i + 1) % u_vertex;
-	//			p3_index = i;
-
-	//			data->vertices[p1_index].pos = { 0.0f, 0.0f,0.0f };
-	//		}
-	//		else
-	//		{
-	//			p2_index = v_square * u_vertex + i;
-	//			p3_index = v_square * u_vertex + (i + 1) % u_vertex;
-	//			p3_index = u_vertex * v_vertex + 1;
-
-	//			data->vertices[p3_index].pos = {0.0f, size.y, 0.0f };
-	//		}
-
-	//		data->indices.push_back(p1_index);
-	//		data->indices.push_back(p2_index);
-	//		data->indices.push_back(p3_index);
-	//	}
-
-	//data->size = data->indices.size();
-	//data->def.color = { 0.0f, 0.5f, 0.5f, 0.0f };
+	data->color = { 0.0f, 0.0f, 1.0f };
 }
 
 
