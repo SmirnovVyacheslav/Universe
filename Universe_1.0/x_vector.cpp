@@ -222,6 +222,10 @@ float dist(Vector4 vecA, Vector4 vecB)
 	return sqrt((vecB.x - vecA.x) * (vecB.x - vecA.x) + (vecB.y - vecA.y) * (vecB.y - vecA.y) + (vecB.z - vecA.z) * (vecB.z - vecA.z) + (vecB.w - vecA.w) * (vecB.w - vecA.w));
 }
 
+float angle(Vector3 vecA, Vector3 vecB)
+{
+	return static_cast<float>(acos(static_cast<double>((vecA & vecB) / (vecA.length() * vecB.length()))));
+}
 
 
 Vector4& Vector4::operator=(const Vector4& vec)

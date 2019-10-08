@@ -60,6 +60,8 @@ float dist(Vector3 vecA, Vector4 vecB);
 float dist(Vector4 vecA, Vector3 vecB);
 float dist(Vector4 vecA, Vector4 vecB);
 
+float angle(Vector3 vecA, Vector3 vecB);
+
 struct Vector4
 {
 	float x = 0.0f;

@@ -7,12 +7,12 @@ vector<Object*> objects;
 
 float rad_to_deg(float rad)
 {
-	return rad * 180 / pi;
+	return rad * 180.0f / pi;
 }
 
 float deg_to_rad(float deg)
 {
-	return deg * pi / 180;
+	return deg * pi / 180.0f;
 }
 
 
@@ -22,7 +22,7 @@ struct Gen_Data
 	Vector3 u_vec;
 	Vector3 v_vec;
 	Size size;
-	Vector3 normal;
+	Vector3 back_vertex; // inside point for internal normale calc
 
 	Gen_Data() {};
 };
@@ -74,21 +74,21 @@ public:
 	int w_square;
 
 	bool wrap = false;
-	bool check_normale = true;
 	float teta;
 	float psy;
 	float phi;
 
 	Vector3 pos;
+	Vector3 back_vertex; // src point for internal normale calc
 	Vector3 normal;
 
 	void set_data(Gen_Data& data);
 
 	void make_mesh(ObjectData& data);
-	void calc_normale(Vertex* data);
+	void calc_normal(Vertex* data);
 
 	bool check_index(int index, int max);
-	Vector3 get_normale(Edge edge);
+	Vector3 get_normal(Edge edge, Vector3 vertex);
 
 	void make_edge(ObjectData& data, float rotation_rule = 1.0f, int rotation_axis = 1);
 	void make_cap(ObjectData& data);
@@ -106,7 +106,7 @@ void Constructor::set_data(Gen_Data& data)
 	u_vec = data.u_vec;
 	v_vec = data.v_vec;
 	size = data.size;
-	normal = data.normal;
+	back_vertex = data.back_vertex;
 
 	u_square = static_cast<int>(50); // TODO make resolution calc
 	v_square = static_cast<int>(50);
@@ -117,10 +117,10 @@ void Constructor::set_data(Gen_Data& data)
 	u_step = u_vec * (size.u / float(u_square));
 	v_step = v_vec * (size.v / float(v_square));
 
-	teta = 2.0f * pi / u_square;
-	psy = 2.0f * pi / u_square;
-	phi = pi / v_square;
-	w_step = size.w / w_square;
+	teta = 2.0f * pi / (float)u_square;
+	psy = 2.0f * pi / (float)u_square;
+	phi = pi / (float)v_square;
+	w_step = size.w / (float)w_square;
 }
 
 void Constructor::set_transform_func(string name)
@@ -160,8 +160,13 @@ Vector3 Constructor::get_value_cylinder(int i, int j)
 	return Vector3(size.rad * cos(teta * i), w_step * j, size.rad * sin(teta * i));
 }
 
-Vector3 Constructor::get_normale(Edge edge)
+Vector3 Constructor::get_normal(Edge edge, Vector3 vertex)
 {
+	normal = (vertex - back_vertex).normalize();
+	if (edge.a == edge.b || edge.a == edge.c || edge.b == edge.c)
+	{
+		return normal;
+	}
 	return ((edge.a - edge.b) ^ (edge.a - edge.c)).normalize();
 }
 
@@ -178,14 +183,14 @@ bool Constructor::check_index(int index, int max)
 	return true;
 }
 
-void Constructor::calc_normale(Vertex* data)
+void Constructor::calc_normal(Vertex* data)
 {
 	for (int j = 0; j < v_vertex; ++j)
 	{
 		for (int i = 0; i < u_vertex; ++i)
 		{
 			vector<Edge> near_egdes;
-			Vector3 result_normale = { 0.0f, 0.0f, 0.0f };
+			Vector3 vertex_normal = { 0.0f, 0.0f, 0.0f };
 
 			// check t1 & t2
 			if (check_index(j - 1, v_vertex) && check_index(i - 1, u_vertex))
@@ -239,41 +244,19 @@ void Constructor::calc_normale(Vertex* data)
 					data[(j + 1) * u_vertex + i].pos
 				});
 			}
-			//t1 = (j - 1) * u    + i - 1;
-			//	  j * u         + i;
-			//	  j * u         + i - 1;
-			//t2 = (j - 1) * u    + i - 1;
-			//	 (j - 1) * u    + i;
-			//	 j * u          + i;
-			//t3 = (j - 1) * u    + i;
-			//	 j * u          + i + 1;
-			//	 j * u          + i;
-			//t4 = j * u          + i;
-			//	 j * u          + i + 1;
-			//	 (j + 1) * u    + i + 1;
-			//t5 = j * u          + i;
-			//	 (j + 1) * u    + i + 1;
-			//	 (j + 1) * u    + i;
-			//t6 = j * u          + i - 1;
-			//	 j * u          + i;
-			//	 (j + 1) * u    + i;
 
 			for (auto edge : near_egdes)
 			{
-				result_normale = result_normale + get_normale(edge);
+				vertex_normal = vertex_normal + get_normal(edge, data[j * u_vertex + i].pos);
 			}
-			result_normale = result_normale / near_egdes.size();
-
-			if (check_normale)
+			vertex_normal = (vertex_normal / near_egdes.size()).normalize();
+			
+			if (rad_to_deg(angle(vertex_normal, normal)) > 90.0f)
 			{
-				float angle = rad_to_deg(acos((result_normale & normal) / (result_normale.length() * normal.length())));
-				if (angle > 90)
-				{
-					result_normale = result_normale * -1;
-				}
+				vertex_normal = vertex_normal * -1.0f;
 			}
 
-			data[j * u_vertex + i].normal = result_normale;
+			data[j * u_vertex + i].normal = vertex_normal;
 		}
 	}
 }
@@ -321,7 +304,7 @@ void Constructor::make_mesh(ObjectData& data)
 	data.size = data.indices.size();
 
 	//Calc normales
-	calc_normale(vertex_data);
+	calc_normal(vertex_data);
 }
 
 void Constructor::make_edge(ObjectData& data, float rotation_rule, int rotation_axis)
@@ -379,9 +362,9 @@ void Constructor::make_edge(ObjectData& data, float rotation_rule, int rotation_
 void Constructor::make_triangle(ObjectData& data, Edge edge)
 {
 	int start_index = data.vertices.size();
-	data.vertices.push_back(Vertex{ edge.a, get_normale(edge) });
-	data.vertices.push_back(Vertex{ edge.b, get_normale(edge) });
-	data.vertices.push_back(Vertex{ edge.c, get_normale(edge) });
+	data.vertices.push_back(Vertex{ edge.a, get_normal(edge, edge.a) });
+	data.vertices.push_back(Vertex{ edge.b, get_normal(edge, edge.b) });
+	data.vertices.push_back(Vertex{ edge.c, get_normal(edge, edge.c) });
 
 	data.indices.push_back(start_index);
 	data.indices.push_back(start_index + 1);
@@ -471,12 +454,12 @@ void Cube::create(Size size)
 	Vector3 v_vec = { 0.0f, 0.0f, -1.0f };
 	Vector3 tmp_pos;
 
+	plane_data.back_vertex = pos + (size.u / 2.0f);
 	// down
 	plane_data.pos = pos;
 	plane_data.u_vec = u_vec; // u on x; v on -z
 	plane_data.v_vec = v_vec;
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, -1.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_mesh(*data);
 
@@ -485,7 +468,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f };
 	plane_data.v_vec = { 0.0f, 1.0f, 1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 0.0f, -1.0f, 1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, -1.0f, 1);
 
@@ -494,7 +476,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f };
 	plane_data.v_vec = { 0.0f, 1.0f, -1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 0.0f, -1.0f, -1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, 1.0f, 1);
 
@@ -503,7 +484,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.v_vec = { -1.0f, 1.0f, 0.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { -1.0f, -1.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, 1.0f, 1);
 
@@ -512,7 +492,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.v_vec = { 1.0f, 1.0f, 0.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 1.0f, -1.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, -1.0f, 1);
 
@@ -523,7 +502,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f };
 	plane_data.v_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, 0.0f, 1.0f };
 	plane.set_data(plane_data);
 	plane.make_mesh(*data);
 
@@ -532,7 +510,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.v_vec = { -1.0f, 0.0f, -1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { -1.0f, 0.0f, -1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, 1.0f, 3);
 
@@ -541,7 +518,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.v_vec = { 1.0f, 0.0f, -1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 1.0f, 0.0f, -1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, -1.0f, 3);
 
@@ -554,7 +530,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f };
 	plane_data.v_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, 0.0f, -1.0f };
 	plane.set_data(plane_data);
 	plane.make_mesh(*data);
 
@@ -563,7 +538,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.v_vec = { -1.0f, 0.0f, 1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { -1.0f, 0.0f, 1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, 1.0f, 3);
 
@@ -572,7 +546,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.v_vec = { 1.0f, 0.0f, 1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 1.0f, 0.0f, 1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, -1.0f, 3);
 
@@ -584,7 +557,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.v_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.size = size;
-	plane_data.normal = { -1.0f, 0.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_mesh(*data);
 
@@ -596,7 +568,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.v_vec = { 0.0f, 1.0f, 0.0f };
 	plane_data.size = size;
-	plane_data.normal = { 1.0f, 0.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_mesh(*data);
 
@@ -608,7 +579,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f };
 	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, 1.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_mesh(*data);
 
@@ -617,7 +587,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f };
 	plane_data.v_vec = { 0.0f, -1.0f, 1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 0.0f, 1.0f, 1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, -1.0f);
 
@@ -626,7 +595,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f };
 	plane_data.v_vec = { 0.0f, -1.0f, -1.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 0.0f, 1.0f, -1.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, 1.0f);
 
@@ -635,7 +603,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.v_vec = { -1.0f, -1.0f, 0.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { -1.0f, 1.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, 1.0f);
 
@@ -644,7 +611,6 @@ void Cube::create(Size size)
 	plane_data.u_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.v_vec = { 1.0f, -1.0f, 0.0f };
 	plane_data.size.v = edge_size;
-	plane_data.normal = { 1.0f, 1.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data, -1.0f);
 
@@ -669,7 +635,7 @@ void Plane::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
 	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, 1.0f, 0.0f };
+	plane_data.back_vertex = { 0.0f, 0.0f, 0.0f };
 
 	Constructor plane;
 	plane.set_data(plane_data);
@@ -680,7 +646,7 @@ void Plane::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
 	plane_data.v_vec = { 0.0f, -1.0f, -1.0f };
 	plane_data.size.v = 0.1;
-	plane_data.normal = { 0.0f, 1.0f, -1.0f };
+	plane_data.back_vertex = { 0.0f, 0.0f, 0.0f };
 	plane.set_data(plane_data);
 	plane.make_edge(*data);
 
@@ -724,11 +690,11 @@ Landscape::~Landscape()
 void Landscape::create(Size size)
 {
 	Gen_Data plane_data;
-	plane_data.pos = { -50.0f, 0.0f, 50.0f };
+	plane_data.pos = { -50.0f, -10.0f, 50.0f };
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
 	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, 1.0f, 0.0f };
+	plane_data.back_vertex = { 0.0f, -20.0f, 0.0f };
 
 	Constructor plane;
 	plane.set_data(plane_data);
@@ -758,11 +724,11 @@ void Sphere::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
 	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, 1.0f, 0.0f };
+	plane_data.back_vertex = { 0.0f, 3.5f, 0.0f };
+	//plane_data.back_vertex.y = pos.y + (size.rad / 2.0f);
 
 	Constructor plane;
 	plane.wrap = true;
-	plane.check_normale = false;
 	plane.set_data(plane_data);
 	plane.set_transform_func("sphere");
 
@@ -790,11 +756,11 @@ void Cylinder::create(Size size)
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
 	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.size = size;
-	plane_data.normal = { 0.0f, 1.0f, 0.0f };
+	plane_data.back_vertex = pos;
+	plane_data.back_vertex.y = pos.y + (size.rad / 2.0f);
 
 	Constructor plane;
 	plane.wrap = true;
-	plane.check_normale = false;
 	plane.set_data(plane_data);
 	plane.set_transform_func("cylinder");
 
