@@ -193,3 +193,12 @@ public:
 
 	virtual void create(Size size);
 };
+
+class Cup : public Object
+{
+public:
+	Cup(Object* base = nullptr);
+	~Cup();
+
+	virtual void create(Size size);
+};

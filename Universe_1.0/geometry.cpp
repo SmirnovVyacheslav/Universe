@@ -24,6 +24,10 @@ struct Gen_Data
 	Size size;
 	Vector3 back_vertex; // inside point for internal normale calc
 
+	float start_rounding = 0;
+	float end_rounding = pi;
+	float rounding_rad = 0;
+
 	Gen_Data() {};
 };
 
@@ -46,6 +50,7 @@ public:
 		transform_funcs["vary_y"] = &Constructor::get_value_vary_y;
 		transform_funcs["sphere"] = &Constructor::get_value_sphere;
 		transform_funcs["cylinder"] = &Constructor::get_value_cylinder;
+		transform_funcs["rounding"] = &Constructor::get_value_rounding; //закругление
 		get_value = transform_funcs["default"];
 
 		srand(rand_value);
@@ -56,6 +61,7 @@ public:
 	Vector3 get_value_vary_y(int i, int j);
 	Vector3 get_value_sphere(int i, int j);
 	Vector3 get_value_cylinder(int i, int j);
+	Vector3 get_value_rounding(int i, int j);
 
 	unsigned rand_value = 11;
 	float interval = 1.0f;
@@ -78,6 +84,10 @@ public:
 	float psy;
 	float phi;
 
+	float start_rounding;
+	float rounding_rad;
+	string rounding_func = "sin";
+
 	Vector3 pos;
 	Vector3 back_vertex; // src point for internal normale calc
 	Vector3 normal;
@@ -92,6 +102,7 @@ public:
 
 	void make_edge(ObjectData& data, float rotation_rule = 1.0f, int rotation_axis = 1);
 	void make_cap(ObjectData& data);
+	void make_circle(ObjectData& data);
 
 	void make_triangle(ObjectData& data, Edge edge);
 
@@ -117,9 +128,12 @@ void Constructor::set_data(Gen_Data& data)
 	u_step = u_vec * (size.u / float(u_square));
 	v_step = v_vec * (size.v / float(v_square));
 
+	rounding_rad = data.rounding_rad;
+	start_rounding = data.start_rounding;
+
 	teta = 2.0f * pi / (float)u_square;
 	psy = 2.0f * pi / (float)u_square;
-	phi = pi / (float)v_square;
+	phi = (data.end_rounding - start_rounding) / (float)v_square;
 	w_step = size.w / (float)w_square;
 }
 
@@ -159,6 +173,23 @@ Vector3 Constructor::get_value_cylinder(int i, int j)
 {
 	return Vector3(size.rad * cos(teta * i), w_step * j, size.rad * sin(teta * i));
 }
+
+Vector3 Constructor::get_value_rounding(int i, int j)
+{
+	if (rounding_func == "sin")
+	{
+		return Vector3((size.rad + rounding_rad * sin(start_rounding + phi * j)) * cos(psy * i),
+			rounding_rad * cos(start_rounding + phi * j),
+			(size.rad + rounding_rad * sin(start_rounding + phi * j)) * sin(psy * i));
+	}
+	else
+	{
+		return Vector3((size.rad + rounding_rad * cos(start_rounding + phi * j)) * cos(psy * i),
+			w_step * j,
+			(size.rad + rounding_rad * cos(start_rounding + phi * j)) * sin(psy * i));
+	}
+}
+
 
 Vector3 Constructor::get_normal(Edge edge, Vector3 vertex)
 {
@@ -396,16 +427,37 @@ void Constructor::make_cap(ObjectData& data)
 	data.size = data.indices.size();
 }
 
+void Constructor::make_circle(ObjectData& data)
+{
+	for (int i = 0; i < u_square; ++i)
+	{
+		Edge edge;
+		edge.a = pos + (this->*get_value)(i, 0);
+		edge.b = pos;
+		edge.c = pos + (this->*get_value)((i + 1) % u_square, 0);
+
+		make_triangle(data, edge);
+	}
+
+	data.size = data.indices.size();
+}
+
+
+
 Geometry::Geometry()
 {
-	person = new Person();
-	person->create(Size(2.0f, 2.0f, 1.0f, 1.0f));
+	//person = new Person();
+	//person->create(Size(2.0f, 2.0f, 1.0f, 1.0f));
 
 	landscape = new Landscape();
 	landscape->create(Size(200.0f, 200.0f, 0.0f));
 
-	scene.push_back(person);
+	// scene.push_back(person);
 	scene.push_back(landscape);
+
+	Object* cup = new Cup;
+	cup->create(Size(2.0f, 2.0f, 2.0f, 1.0f));
+	scene.push_back(cup);
 }
 
 Geometry::~Geometry()
@@ -720,11 +772,11 @@ Sphere::~Sphere()
 void Sphere::create(Size size)
 {
 	Gen_Data plane_data;
-	plane_data.pos = { 0.0f, 3.0f, 0.0f };
+	plane_data.pos = { 2.0f, 3.0f, 0.0f };
 	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
 	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
 	plane_data.size = size;
-	plane_data.back_vertex = { 0.0f, 3.5f, 0.0f };
+	plane_data.back_vertex = { 2.0f, 3.5f, 0.0f };
 	//plane_data.back_vertex.y = pos.y + (size.rad / 2.0f);
 
 	Constructor plane;
@@ -766,6 +818,179 @@ void Cylinder::create(Size size)
 
 	plane.make_mesh(*data);
 	plane.make_cap(*data);
+
+	data->color = { 0.0f, 0.0f, 1.0f };
+}
+
+
+Cup::Cup(Object* _base) : Object(_base)
+{
+	data = new ObjectData;
+	objects.push_back(this);
+}
+
+Cup::~Cup()
+{
+	delete data;
+}
+
+void Cup::create(Size size)
+{
+	Gen_Data plane_data;
+	Constructor plane;
+
+	// small cylinder
+	plane_data.pos = { 0.0f, 0.0f, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.size.rad -= 0.1f;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("cylinder");
+	plane.make_mesh(*data);
+
+	// rounding for small cylinder
+	plane_data.pos = { 0.0f, 0.0f, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.size.w = 0.4f;
+	plane_data.rounding_rad = 0.4f;
+	plane_data.size.rad = size.rad - plane_data.rounding_rad - 0.1f;
+	plane_data.start_rounding = pi / 2.0f;
+	plane_data.end_rounding = pi;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("rounding");
+	plane.make_mesh(*data);
+	plane_data.start_rounding = 0.0f;
+	plane_data.end_rounding = pi;
+
+	//make down circle for small cylender
+	plane_data.pos = { 0.0f, -0.4, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.rounding_rad = 0.4f;
+	plane_data.size.rad = size.rad - plane_data.rounding_rad - 0.1f;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("cylinder");
+	plane.make_circle(*data);
+
+
+	// top rounding for large cylinder
+	plane_data.pos = { 0.0f, size.w, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.size.w = 0.2f;
+	plane_data.rounding_rad = 0.2f;
+	plane_data.size.rad = size.rad + 0.1;
+	plane_data.start_rounding = pi * 3.0f / 2.0f;
+	plane_data.end_rounding = pi * 2.0f;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("rounding");
+	plane.make_mesh(*data);
+	plane_data.start_rounding = 0.0f;
+	plane_data.end_rounding = pi;
+
+
+	plane_data.pos = { 0.0f, size.w, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.size.w = 0.2f;
+	plane_data.rounding_rad = 0.2f;
+	plane_data.size.rad = size.rad + 0.1f;
+	plane_data.start_rounding = 0.0f;
+	plane_data.end_rounding = pi / 2.0f;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("rounding");
+	plane.make_mesh(*data);
+	plane_data.start_rounding = 0.0f;
+	plane_data.end_rounding = pi;
+
+
+
+	// large cylinder
+	plane_data.pos = { 0.0f, -0.4f, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.size.w += 0.4;
+	plane_data.size.rad += 0.3f;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("cylinder");
+	plane.make_mesh(*data);
+
+	// rounding for large cylinder
+	plane_data.pos = { 0.0f, -0.4f, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.size.w = 0.2f;
+	plane_data.rounding_rad = 0.2f;
+	plane_data.size.rad = size.rad + 0.1;
+	plane_data.start_rounding = pi / 2.0f;
+	plane_data.end_rounding = pi;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("rounding");
+	plane.make_mesh(*data);
+	plane_data.start_rounding = 0.0f;
+	plane_data.end_rounding = pi;
+
+	//make down circle for large cylender
+	plane_data.pos = { 0.0f, -0.6, 0.0f };
+	plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	plane_data.size = size;
+	plane_data.size.rad = size.rad + 0.1f;
+	plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	plane.wrap = true;
+	plane.set_data(plane_data);
+	plane.set_transform_func("cylinder");
+	plane.make_circle(*data);
+
+
+	//// cup handle
+	//plane_data.pos = { 2.0f, 2.0f, 0.0f };
+	//plane_data.u_vec = { 1.0f, 0.0f, 0.0f }; // u on x; v on -z
+	//plane_data.v_vec = { 0.0f, 0.0f, -1.0f };
+	//plane_data.size = size;
+	//plane_data.size.w = 0.2f;
+	//plane_data.rounding_rad = 0.2f;
+	//plane_data.size.rad = size.rad + 0.1;
+	//plane_data.start_rounding = pi / 2.0f;
+	//plane_data.end_rounding = pi;
+	//plane_data.back_vertex = { 0.0f, 1.0f, 0.0f };
+
+	//plane.wrap = true;
+	//plane.set_data(plane_data);
+	//plane.set_transform_func("rounding");
+	//plane.make_mesh(*data);
+	//plane_data.start_rounding = 0.0f;
+	//plane_data.end_rounding = pi;
 
 	data->color = { 0.0f, 0.0f, 1.0f };
 }

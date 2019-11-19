@@ -33,23 +33,39 @@ bool DX_11::createDevice()
 	HRESULT result = S_OK;
 
 	UINT createDeviceFlags = 0;
-#ifdef _DEBUG
-	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-#endif
+//#ifdef _DEBUG
+//	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+//#endif
 
-	vector<D3D_DRIVER_TYPE> driverTypes
+	//vector<D3D_DRIVER_TYPE> driverTypes
+	//{
+	//	D3D_DRIVER_TYPE_HARDWARE,
+	//	D3D_DRIVER_TYPE_WARP,
+	//	D3D_DRIVER_TYPE_REFERENCE
+	//};
+	//
+	//vector<D3D_FEATURE_LEVEL> featureLevels
+	//{
+	//	D3D_FEATURE_LEVEL_11_0,
+	//	D3D_FEATURE_LEVEL_10_1,
+	//	D3D_FEATURE_LEVEL_10_0
+	//};
+
+	D3D_DRIVER_TYPE driverTypes[] =
 	{
 		D3D_DRIVER_TYPE_HARDWARE,
 		D3D_DRIVER_TYPE_WARP,
-		D3D_DRIVER_TYPE_REFERENCE
+		D3D_DRIVER_TYPE_REFERENCE,
 	};
-	
-	vector<D3D_FEATURE_LEVEL> featureLevels
+	UINT numDriverTypes = ARRAYSIZE(driverTypes);
+
+	D3D_FEATURE_LEVEL featureLevels[] =
 	{
 		D3D_FEATURE_LEVEL_11_0,
 		D3D_FEATURE_LEVEL_10_1,
-		D3D_FEATURE_LEVEL_10_0
+		D3D_FEATURE_LEVEL_10_0,
 	};
+	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
 
 	DXGI_SWAP_CHAIN_DESC swapChainDesc;
 	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
@@ -65,14 +81,30 @@ bool DX_11::createDevice()
 	swapChainDesc.SampleDesc.Quality = 0;
 	swapChainDesc.Windowed = TRUE;
 
-	for (auto type: driverTypes)
+	//if (D3D11CreateDeviceAndSwapChain(NULL, driverType, NULL, createDeviceFlags,
+	//	&featureLevels.front(), featureLevels.size(), D3D11_SDK_VERSION, &swapChainDesc,
+	//	&swapChain, &d3dDevice, &featureLevel, &immediateContext) < 0)
+	//	return false;
+	//	//if (result == S_OK)
+	//	//if (result = D3D11CreateDeviceAndSwapChain(NULL, driverType, NULL, createDeviceFlags,
+	//	//	&featureLevels.front(), featureLevels.size(), D3D11_SDK_VERSION, &swapChainDesc,
+	//	//	&swapChain, &d3dDevice, &featureLevel, &immediateContext) >= 0)
+	//	//	break;
+
+	for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
 	{
-		driverType = type;
-		if (result = D3D11CreateDeviceAndSwapChain(NULL, driverType, NULL, createDeviceFlags,
-			&featureLevels.front(), featureLevels.size(), D3D11_SDK_VERSION, &swapChainDesc,
-			&swapChain, &d3dDevice, &featureLevel, &immediateContext) >= 0)
+		driverType = driverTypes[driverTypeIndex];
+		result = D3D11CreateDeviceAndSwapChain(NULL, driverType, NULL, createDeviceFlags, featureLevels, numFeatureLevels,
+			D3D11_SDK_VERSION, &swapChainDesc, &swapChain, &d3dDevice, &featureLevel, &immediateContext);
+		if (SUCCEEDED(result))
 			break;
+		if (FAILED(result))
+		{
+			MessageBox(hWnd, L"Failed to create directX device and swapchain!",
+				L"Error", MB_ICONERROR);
+		}
 	}
+
 	if (result < 0) return false;
 
 	// Создание рендер-таргета
