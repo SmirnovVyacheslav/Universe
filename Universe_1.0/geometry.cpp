@@ -5,6 +5,38 @@ int Object::obj_counter = 0;
 vector<Object*> objects;
 
 
+Path::Path(vector<Vector3> control_points) : control_points(control_points)
+{
+
+}
+
+// TODO: complete function
+Vector3 Path::get_point(float t)
+{
+	Vector3 result(0.0f, 0.0f, 0.0f);
+	
+	for (int i = 0; i < control_points.size(); ++i)
+	{
+		Vector3 point = control_points[i];
+		result.x += point.x * factor(control_points.size()) / (factor(i) * factor(control_points.size() - i)) * pow(t, i) * pow((1 - t), control_points.size() - i);
+	}
+
+	return result;
+}
+
+float Path::factor(int n)
+{
+	if (n == 0 || n == 1)
+		return 1;
+
+	float result = 1;
+	for (int i = 1; i <= n; ++i)
+	{
+		result *= i;
+	}
+	return result;
+}
+
 float rad_to_deg(float rad)
 {
 	return rad * 180.0f / pi;

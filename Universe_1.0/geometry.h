@@ -22,6 +22,25 @@ static const float pi = 3.14159265358979323846f;  /* pi */
 
 class Object;
 
+// Bezier curve
+class Path
+{
+	vector<Vector3> control_points;
+
+	Path(vector<Vector3> control_points);
+
+	Vector3 get_point(float t);
+
+	float calc_point(int index);
+
+	float factor(int n);
+};
+
+class Shape
+{
+
+};
+
 struct Size
 {
 	float u;
