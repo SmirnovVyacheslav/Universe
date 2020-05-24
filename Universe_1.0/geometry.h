@@ -21,25 +21,61 @@ using std::string;
 static const float pi = 3.14159265358979323846f;  /* pi */
 
 class Object;
+struct ObjectData;
 
 // Bezier curve
-class Path
+class GeometryPath
 {
+
+public:
 	vector<Vector3> control_points;
 
-	Path(vector<Vector3> control_points);
+	GeometryPath(vector<Vector3> control_points);
 
 	Vector3 get_point(float t);
 
 	float calc_point(int index);
 
-	float factor(int n);
+	float factorial(int n);
 };
 
-class Shape
+struct Shape
 {
+	float len;
+	float angle;
 
+	Shape(float _len, float _angle);
 };
+
+struct GeometryShape
+{
+	vector<Shape> data;
+
+	GeometryShape();
+};
+
+
+class GeometryConstructor
+{
+	std::unique_ptr<GeometryPath> path;
+	std::unique_ptr<GeometryShape> shape;
+	Vector3 base_vec; // should be normalized
+
+	float step = 0.02f;
+	float eps = 0.001f;
+	bool wrap = true;
+
+public:
+	GeometryConstructor(std::unique_ptr<GeometryPath> _path,
+		std::unique_ptr<GeometryShape> _shape, Vector3 _base_vec);
+
+	~GeometryConstructor() {};
+
+	void make_mesh(ObjectData& data);
+
+	Vector3 rotate(Vector3 vec, Vector3 axis, float angle);
+};
+
 
 struct Size
 {
@@ -218,6 +254,15 @@ class Cup : public Object
 public:
 	Cup(Object* base = nullptr);
 	~Cup();
+
+	virtual void create(Size size);
+};
+
+class Test : public Object
+{
+public:
+	Test(Object* base = nullptr);
+	~Test();
 
 	virtual void create(Size size);
 };

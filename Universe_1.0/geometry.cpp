@@ -5,26 +5,40 @@ int Object::obj_counter = 0;
 vector<Object*> objects;
 
 
-Path::Path(vector<Vector3> control_points) : control_points(control_points)
+float rad_to_deg(float rad)
+{
+	return rad * 180.0f / pi;
+}
+
+float deg_to_rad(float deg)
+{
+	return deg * pi / 180.0f;
+}
+
+GeometryPath::GeometryPath(vector<Vector3> control_points) : control_points(control_points)
 {
 
 }
 
-// TODO: complete function
-Vector3 Path::get_point(float t)
+Vector3 GeometryPath::get_point(float t)
 {
 	Vector3 result(0.0f, 0.0f, 0.0f);
+	int n = control_points.size() - 1;
 	
 	for (int i = 0; i < control_points.size(); ++i)
 	{
 		Vector3 point = control_points[i];
-		result.x += point.x * factor(control_points.size()) / (factor(i) * factor(control_points.size() - i)) * pow(t, i) * pow((1 - t), control_points.size() - i);
+		
+		float binom_factor = factorial(n) / (factorial(i) * factorial(n - i));
+		float bernsteibn_polynom = binom_factor * pow(t, i) * pow(1.0f - t, n - i);
+
+		result = result + (point * bernsteibn_polynom);
 	}
 
 	return result;
 }
 
-float Path::factor(int n)
+float GeometryPath::factorial(int n)
 {
 	if (n == 0 || n == 1)
 		return 1;
@@ -37,14 +51,94 @@ float Path::factor(int n)
 	return result;
 }
 
-float rad_to_deg(float rad)
+
+Shape::Shape(float _len, float _angle) : len(_len), angle(_angle){}
+
+
+GeometryShape::GeometryShape()
 {
-	return rad * 180.0f / pi;
+	data = { Shape(2.0f, 0), Shape(2.0f, 90), Shape(2.0f, 180), Shape(2.0f, 270)};
+};
+
+GeometryConstructor::GeometryConstructor(std::unique_ptr<GeometryPath> _path,
+	std::unique_ptr<GeometryShape> _shape, Vector3 _base_vec) : path(std::move(_path)),
+	shape(std::move(_shape)), base_vec(_base_vec)
+{
+
 }
 
-float deg_to_rad(float deg)
+
+void GeometryConstructor::make_mesh(ObjectData& data)
 {
-	return deg * pi / 180.0f;
+	int shape_vertex_num = shape->data.size();
+	Vector3 prev_center;
+
+	for (float t = 0.0f; t < 1.0f; t += step)
+	{
+		Vector3 center = path->get_point(t);
+		if (!prev_center.is_zero())
+		{
+			base_vec = (base_vec + (center.normalize() - prev_center.normalize())).normalize();
+		}
+		prev_center = center;
+
+		int start_index = data.vertices.size();
+
+		Vector3 path_vec = (path->get_point(t + eps) - center).normalize();
+		for (Shape item : shape->data)
+		{
+			Vertex vertex;
+			vertex.pos = center + rotate(base_vec, path_vec, item.angle).normalize() * item.len;
+			data.vertices.push_back(vertex);
+		}
+
+		// Set indices, not required for first
+		if (t > eps)
+		{
+			for (int i = 0; i < (wrap ? shape_vertex_num : shape_vertex_num - 1); ++i)
+			{
+				int p1_index = start_index - shape_vertex_num + i;
+				int p2_index = start_index - shape_vertex_num + (i + 1) % shape_vertex_num;
+				int p3_index = start_index + (i + 1) % shape_vertex_num;
+				int p4_index = start_index + i;
+
+				data.indices.push_back(p1_index);
+				data.indices.push_back(p2_index);
+				data.indices.push_back(p3_index);
+
+				data.indices.push_back(p1_index);
+				data.indices.push_back(p3_index);
+				data.indices.push_back(p4_index);
+			}
+		}
+	}
+	data.size = data.indices.size();
+}
+
+
+Vector3 GeometryConstructor::rotate(Vector3 vec, Vector3 axis, float angle)
+{
+	angle = deg_to_rad(angle);
+	// Rotation matrix
+	vector<Vector3> matrix = {
+		Vector3(cos(angle) + (1 - cos(angle)) * axis.x * axis.x,
+				(1 - cos(angle)) * axis.x * axis.y - sin(angle) * axis.z,
+				(1 - cos(angle))* axis.x* axis.z + sin(angle) * axis.y),
+		Vector3((1 - cos(angle)) * axis.x * axis.y + sin(angle) * axis.z,
+				cos(angle) + (1 - cos(angle)) * axis.y * axis.y,
+				(1 - cos(angle))* axis.y * axis.z - sin(angle) * axis.x),
+		Vector3((1 - cos(angle)) * axis.x * axis.z - sin(angle) * axis.y,
+				(1 - cos(angle)) * axis.y * axis.z + sin(angle) * axis.x,
+				cos(angle) + (1 - cos(angle)) * axis.z * axis.z)
+	};
+
+	Vector3 result = {
+		matrix[0] & vec,
+		matrix[1] & vec,
+		matrix[2] & vec
+	};
+
+	return result;
 }
 
 
@@ -487,9 +581,13 @@ Geometry::Geometry()
 	// scene.push_back(person);
 	scene.push_back(landscape);
 
-	Object* cup = new Cup;
-	cup->create(Size(2.0f, 2.0f, 2.0f, 1.0f));
-	scene.push_back(cup);
+	//Object* cup = new Cup;
+	//cup->create(Size(2.0f, 2.0f, 2.0f, 1.0f));
+	//scene.push_back(cup);
+
+	Object* test = new Test;
+	test->create(Size(2.0f, 2.0f, 2.0f, 1.0f));
+	scene.push_back(test);
 }
 
 Geometry::~Geometry()
@@ -1023,6 +1121,30 @@ void Cup::create(Size size)
 	//plane.make_mesh(*data);
 	//plane_data.start_rounding = 0.0f;
 	//plane_data.end_rounding = pi;
+
+	data->color = { 0.0f, 0.0f, 1.0f };
+}
+
+
+Test::Test(Object* _base) : Object(_base)
+{
+	data = new ObjectData;
+	objects.push_back(this);
+}
+
+Test::~Test()
+{
+	delete data;
+}
+
+void Test::create(Size size)
+{
+	vector<Vector3> control_points = {Vector3(1.0f, -1.0f, -1.0f), Vector3(1.5f, 2.0f, -4.0f), Vector3(1.0f, 5.0f, -1.0f) };
+	Vector3 base_vec = Vector3(1.0f, 0.0f, 0.0f);
+	GeometryConstructor construstor(std::make_unique<GeometryPath>(control_points),
+		std::make_unique<GeometryShape>(), base_vec);
+
+	construstor.make_mesh(*data);
 
 	data->color = { 0.0f, 0.0f, 1.0f };
 }
