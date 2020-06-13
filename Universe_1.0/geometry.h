@@ -39,6 +39,22 @@ public:
 	float factorial(int n);
 };
 
+struct Vertex
+{
+	Vector3 pos;
+	Vector3 normal;
+	//Vector4 color;
+};
+
+struct ObjectData
+{
+	int            size;
+	vector<DWORD>  indices;
+	vector<Vertex> vertices;
+	Vector3 color;
+};
+
+
 struct Shape
 {
 	float len;
@@ -64,80 +80,60 @@ class GeometryConstructor
 	float step = 0.02f;
 	float eps = 0.001f;
 	bool wrap = true;
+	bool solid = true;
+
+	//temp
+	struct Edge
+	{
+		Vector3 a;
+		Vector3 b;
+		Vector3 c;
+	};
+
+	unsigned rand_value = 11;
+	float interval = 1.0f;
+	Vector3 pos = { -50.0f, -10.0f, 50.0f };
+	Vector3 normal;
+
+	Vector3 u_vec = { 1.0f, 0.0f, 0.0f };
+	Vector3 v_vec = { 0.0f, 0.0f, -1.0f };
+	Vector3 back_vertex = { 0.0f, -20.0f, 0.0f };
+
+	int u_square = static_cast<int>(50); // TODO make resolution calc
+	int v_square = static_cast<int>(50);
+	int w_square = static_cast<int>(50);
+	int u_vertex = u_square + 1;
+	int v_vertex = v_square + 1;
+
+	Vector3 u_step = u_vec * (200.0f / float(u_square));
+	Vector3 v_step = v_vec * (200.0f / float(v_square));
+
+	float teta = 2.0f * pi / (float)u_square;
+	float psy = 2.0f * pi / (float)u_square;
+	float w_step = 0.0f / (float)w_square;
+	//temp
 
 public:
+	GeometryConstructor();
 	GeometryConstructor(std::unique_ptr<GeometryPath> _path,
 		std::unique_ptr<GeometryShape> _shape, Vector3 _base_vec);
 
 	~GeometryConstructor() {};
 
 	void make_mesh(ObjectData& data);
+	// TODO remake
+	void make_plane(ObjectData& data);
+	Vector3 get_normal(Edge edge, Vector3 vertex);
+	bool check_index(int index, int max);
+	void calc_normal(Vertex* data);
+	Vector3 get_value(int i, int j);
+	Vector3 get_value_default(int i, int j);
+	void make_triangle(ObjectData& data, Edge edge);
+	// TODO remake
 
 	Vector3 rotate(Vector3 vec, Vector3 axis, float angle);
-};
 
-
-struct Size
-{
-	float u;
-	float v;
-	float w;
-	float rad;
-
-	Size() {};
-	Size(float u, float v, float w) : u(u), v(v), w(w) {};
-	Size(float u, float v, float w, float rad) : u(u), v(v), w(w), rad(rad) {};
-	Size(float w, float rad) : w(w), rad(rad) {};
-};
-
-struct Material
-{
-	float diffuse = 0.6f;
-	float mirror = 0.2f;
-	float absorption = 0.2f;
-};
-
-struct Vertex
-{
-	Vector3 pos;
-	Vector3 normal;
-	//Vector4 color;
-};
-
-struct ObjectDef
-{
-	Vector4 a;
-	Vector4 b;
-	Vector4 c;
-	Vector4 d;
-	Vector4 color = { 1.0f, 1.0f, 0.1f, 0.0f };
-};
-
-struct ObjectData
-{
-	int            size;
-	vector<DWORD>  indices;
-	vector<Vertex> vertices;
-	Vector3 color;
-	//ObjectDef      def;
-};
-
-//void make_mesh(Vector3 pos, Vector3 size, ObjectData& data, Vector3 normale_direction);
-
-struct sq_index
-{
-	int p1;
-	int p2;
-	int p3;
-	int p4;
-};
-
-struct sq_value
-{
-	Vector3 p1;
-	Vector3 p2;
-	Vector3 p3;
-	Vector3 p4;
+	Vector3 make_projection(Vector3 vec, Vector3 point_a, Vector3 normal);
 };
 
 
@@ -151,30 +147,18 @@ protected:
 	ObjectData*     data;
 	vector<Object*> components;
 
-	Vector3 size;
-
-	vector<Vector4> texture;
-	Material        material;
-
 	Vector3 pos;
-	Vector3 res;
 
 public:
 
 	Object(Object* base);
 	virtual ~Object();
 
-	virtual void create(Size size) = 0;
+	virtual void create() = 0;
 
 	int get_id();
 
 	ObjectData* get_data();
-
-	float getDiffuse();
-	float getMirror();
-	float getAbsorption();
-
-	Vector4 sampleTex();
 
 	void move_down();
 
@@ -182,7 +166,7 @@ public:
 
 class Geometry
 {
-	Object* person;
+	// Object* person;
 	Object* landscape;
 
 	vector<Object*> scene;
@@ -195,31 +179,13 @@ public:
 	vector<Object*>::iterator end();
 };
 
-class Plane : public Object
-{
-public:
-	Plane(Object* base = nullptr);
-	~Plane();
-
-	virtual void create(Size size);
-};
-
-class Cube : public Object
-{
-public:
-	Cube(Object* base = nullptr);
-	~Cube();
-
-	virtual void create(Size size);
-};
-
 class Person : public Object
 {
 public:
 	Person(Object* base = nullptr);
 	~Person();
 
-	virtual void create(Size size);
+	virtual void create();
 };
 
 class Landscape : public Object
@@ -228,34 +194,7 @@ public:
 	Landscape(Object* base = nullptr);
 	~Landscape();
 
-	virtual void create(Size size);
-};
-
-class Sphere : public Object
-{
-public:
-	Sphere(Object* base = nullptr);
-	~Sphere();
-
-	virtual void create(Size size);
-};
-
-class Cylinder : public Object
-{
-public:
-	Cylinder(Object* base = nullptr);
-	~Cylinder();
-
-	virtual void create(Size size);
-};
-
-class Cup : public Object
-{
-public:
-	Cup(Object* base = nullptr);
-	~Cup();
-
-	virtual void create(Size size);
+	virtual void create();
 };
 
 class Test : public Object
@@ -264,5 +203,5 @@ public:
 	Test(Object* base = nullptr);
 	~Test();
 
-	virtual void create(Size size);
+	virtual void create();
 };

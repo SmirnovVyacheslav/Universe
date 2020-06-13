@@ -14,12 +14,13 @@ Vector3& Vector3::operator=(const Vector3& vec)
 
 Vector3 Vector3::normalize()
 {
-	return Vector3(*this) * (1 / length());
+	float len = length();
+	return Vector3(x / len, y / len, z / len);
 }
 
 float Vector3::length()
 {
-	return static_cast<float>(sqrt(static_cast<double>(x * x + y * y + z * z)));
+	return static_cast<float>(sqrt(double(x) * double(x) + double(y) * double(y) + double(z) * double(z)));
 }
 
 Vector3 Vector3::trunc()
