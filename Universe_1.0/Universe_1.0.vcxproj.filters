@@ -33,10 +33,10 @@
     <ClCompile Include="engine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="x_vector.cpp">
+    <ClCompile Include="camera.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="camera.cpp">
+    <ClCompile Include="3d_math.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,10 +62,10 @@
     <ClInclude Include="external.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="x_vector.h">
+    <ClInclude Include="camera.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="camera.h">
+    <ClInclude Include="3d_math.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

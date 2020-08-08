@@ -1,5 +1,3 @@
-#pragma once
-
 #include <math.h>
 
 using Vector3 = struct Vector3;
@@ -12,14 +10,14 @@ struct Vector3
 	float z = 0.0f;
 
 	Vector3() {};
-	Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
+	Vector3(float x, float y, float z) : x(x), y(y), z(z) {};
+	Vector3(const Vector3& vec) = default;
 
-	Vector3& operator= (const Vector3& vec);
-
-	Vector3 normalize();
+	Vector3& normalize();
 
 	float length();
 
+	Vector3& operator= (const Vector3& vec);
 	Vector3 operator+(const Vector3& vec);
 	Vector3 operator-(const Vector3& vec);
 	Vector3 operator*(const Vector3& vec);
@@ -30,7 +28,7 @@ struct Vector3
 	bool operator==(const Vector3& vec);
 	bool operator!=(const Vector3& vec);
 
-	Vector3 trunc();
+	Vector3& trunc();
 
 	operator Vector4();
 

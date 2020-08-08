@@ -1,4 +1,5 @@
-#include"x_vector.h"
+#include "3d_math.h"
+
 
 Vector3& Vector3::operator=(const Vector3& vec)
 {
@@ -12,23 +13,29 @@ Vector3& Vector3::operator=(const Vector3& vec)
 	return *this;
 }
 
-Vector3 Vector3::normalize()
+Vector3& Vector3::normalize()
 {
 	float len = length();
-	return Vector3(x / len, y / len, z / len);
+	x /= len;
+	y /= len;
+	z /= len;
+	return *this;
 }
 
 float Vector3::length()
 {
-	return static_cast<float>(sqrt(double(x) * double(x) + double(y) * double(y) + double(z) * double(z)));
+	double _x = static_cast<double>(x);
+	double _y = static_cast<double>(y);
+	double _z = static_cast<double>(z);
+	return static_cast<float>(sqrt(_x * _x + _y * _y + _z * _z));
 }
 
-Vector3 Vector3::trunc()
+Vector3& Vector3::trunc()
 {
 	x = x > 1.0f ? 1.0f : x;
 	y = y > 1.0f ? 1.0f : y;
 	z = z > 1.0f ? 1.0f : z;
-	return Vector3(*this);
+	return *this;
 }
 
 Vector3 operator+(Vector3& vec, const float& num)
