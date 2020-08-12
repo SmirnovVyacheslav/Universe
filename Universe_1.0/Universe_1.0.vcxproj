@@ -135,7 +135,7 @@
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="lighting.cpp" />
     <ClCompile Include="win_api.cpp" />
-    <ClCompile Include="3d_math.cpp" />
+    <ClCompile Include="math_3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -146,7 +146,7 @@
     <ClInclude Include="lighting.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="win_api.h" />
-    <ClInclude Include="3d_math.h" />
+    <ClInclude Include="math_3d.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

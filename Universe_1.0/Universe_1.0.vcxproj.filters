@@ -36,7 +36,7 @@
     <ClCompile Include="camera.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="3d_math.cpp">
+    <ClCompile Include="math_3d.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +65,7 @@
     <ClInclude Include="camera.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="3d_math.h">
+    <ClInclude Include="math_3d.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
