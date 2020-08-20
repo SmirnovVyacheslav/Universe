@@ -13,6 +13,7 @@
 namespace math_3d
 {
 	const float eps = 0.00000001f;
+	const float pi = 3.14159265358979323846f;
 
 	using vector_3d = struct vector_3d;
 	using vector_4d = struct vector_4d;
