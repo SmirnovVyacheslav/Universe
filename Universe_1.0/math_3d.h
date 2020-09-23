@@ -18,6 +18,10 @@ namespace math_3d
 	using vector_3d = struct vector_3d;
 	using vector_4d = struct vector_4d;
 
+	float factorial(int n);
+	inline float radian_to_degree(float radian);
+	inline float degree_to_radian(float degree);
+
 	/**
 	* @class vector_3d
 	* 3D vector, can represent point or vector in 3D.

@@ -8,127 +8,112 @@
 
 ******************************************************************************/
 
-#include <vector>
-#include <Windows.h>
+// #include <vector>
+// #include <Windows.h>
 
-//#include <xnamath.h>
-#include <mutex>
-#include <memory>
-#include <map>
+// //#include <xnamath.h>
+// #include <mutex>
+// #include <memory>
+// #include <map>
 
 #include "math_3d.h"
 
 namespace geometry
 {
-	//using std::vector;
-	//using std::wstring;
-	//using std::mutex;
-	//using std::map;
-	//using std::unique_ptr;
-	//using std::shared_ptr;
-	//using std::string;
-
-	class Object;
-	struct ObjectData;
-
-	// Bezier curve
-	class GeometryPath
+	/**
+	* @struct vertex
+	* Base struct which represents single vertex
+	*/
+	struct vertex
 	{
-
-	public:
-		vector<Vector3> control_points;
-
-		GeometryPath(vector<Vector3> control_points);
-
-		Vector3 get_point(float t);
-
-		float calc_point(int index);
-
-		float factorial(int n);
+		math_3d::vector_3d pos;
+		math_3d::vector_3d normal;
 	};
 
-	struct Vertex
-	{
-		Vector3 pos;
-		Vector3 normal;
-		//Vector4 color;
-	};
-
-	struct ObjectData
+	/**
+	* @struct object_data
+	* Base struct which represents single object data
+	* Contains vector of vertices and indices
+	*/
+	struct object_data
 	{
 		int            size;
-		vector<DWORD>  indices;
-		vector<Vertex> vertices;
-		Vector3 color;
+		// vector<DWORD>  indices;
+		std::vector<unsigned long int>  indices;
+		std::vector<vertex> vertices;
+		math_3d::vector_3d color;
 	};
 
 
-	struct Shape
+	/**
+	* @class shape
+	* 3D shape which represents object slice.
+	* Idea is - have some start point, vector and
+	* have a vector of {length, angle} for each point
+	* It means that need to go from start point to
+	* vector * length rotated to angle
+	*/
+	class Shape
 	{
-		float len;
-		float angle;
+		using std::vector<std::tuple<float, float>> data_type;
 
-		Shape(float _len, float _angle);
+		bool wrap = true;
+		/**
+		 * Shape point data:
+		 *  - Length
+		 *  - Angle
+		 */
+		data_type data;
+
+	public:
+		Shape(std::string type, bool wrap);
+
+		data_type::iterator begin();
+		data_type::iterator end();
+		data_type::const_iterator begin();
+		data_type::const_iterator end();
+
+		int get_edges_number();
 	};
 
-	struct GeometryShape
+	/**
+	* @class Path
+	* 3D Path which represents object path.
+	* Implemented as Bezier curve of given
+	* control points.
+	*/
+	class Path
 	{
-		vector<Shape> data;
+		std::vector<math_3d::vector_3d> control_points;
 
-		GeometryShape();
+	public:
+
+		Path(std::vector<math_3d::vector_3d> control_points);
+
+		math_3d::vector_3d get_point(float t);
 	};
 
-
-	class GeometryConstructor
+	/**
+	* @class Generator
+	* 3D geometry objects generator.
+	*/
+	class Generator
 	{
-		std::unique_ptr<GeometryPath> path;
-		std::unique_ptr<GeometryShape> shape;
-		Vector3 base_vec; // should be normalized
+		std::unique_ptr<Path> path;
+		std::unique_ptr<Shape> shape;
+		math_3d::vector_3d base_vec;
 
 		float step = 0.02f;
 		float eps = 0.001f;
-		bool wrap = true;
 		bool solid = true;
 
-		//temp
-		struct Edge
-		{
-			Vector3 a;
-			Vector3 b;
-			Vector3 c;
-		};
-
-		unsigned rand_value = 11;
-		float interval = 1.0f;
-		Vector3 pos = { -50.0f, -10.0f, 50.0f };
-		Vector3 normal;
-
-		Vector3 u_vec = { 1.0f, 0.0f, 0.0f };
-		Vector3 v_vec = { 0.0f, 0.0f, -1.0f };
-		Vector3 back_vertex = { 0.0f, -20.0f, 0.0f };
-
-		int u_square = static_cast<int>(50); // TODO make resolution calc
-		int v_square = static_cast<int>(50);
-		int w_square = static_cast<int>(50);
-		int u_vertex = u_square + 1;
-		int v_vertex = v_square + 1;
-
-		Vector3 u_step = u_vec * (200.0f / float(u_square));
-		Vector3 v_step = v_vec * (200.0f / float(v_square));
-
-		float teta = 2.0f * pi / (float)u_square;
-		float psy = 2.0f * pi / (float)u_square;
-		float w_step = 0.0f / (float)w_square;
-		//temp
-
 	public:
-		GeometryConstructor();
-		GeometryConstructor(std::unique_ptr<GeometryPath> _path,
-			std::unique_ptr<GeometryShape> _shape, Vector3 _base_vec);
+		Generator();
+		Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, math_3d::vector_3d base_vec);
 
-		~GeometryConstructor() {};
+		~Generator() {};
 
-		void make_mesh(ObjectData& data);
+		void make_mesh(Object_Data& data);
 		// TODO remake
 		void make_plane(ObjectData& data);
 		Vector3 get_normal(Edge edge, Vector3 vertex);
@@ -142,8 +127,7 @@ namespace geometry
 		Vector3 rotate(Vector3 vec, Vector3 axis, float angle);
 
 		Vector3 make_projection(Vector3 vec, Vector3 point_a, Vector3 normal);
-	};
-
+	}
 
 	class Object
 	{

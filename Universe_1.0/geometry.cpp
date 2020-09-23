@@ -12,74 +12,60 @@
 
 namespace geometry
 {
-	int Object::obj_counter = 0;
-
-	vector<Object*> objects;
-
-
-	float rad_to_deg(float rad)
+	Shape::Shape(std::string type, bool wrap) : wrap(wrap)
 	{
-		return rad * 180.0f / pi;
+		if (type == "square")
+		{
+			data = { Shape(1.0f, 0), Shape(1.0f, 90), Shape(1.0f, 180), Shape(1.0f, 270) };
+		}
 	}
 
-	float deg_to_rad(float deg)
+	std::vector<std::tuple<float, float>>::iterator Shape::begin()
 	{
-		return deg * pi / 180.0f;
+		return data.begin();
+	}
+	std::vector<std::tuple<float, float>>::iterator Shape::end()
+	{
+		return data.end();
+	}
+	std::vector<std::tuple<float, float>>::const_iterator Shape::begin()
+	{
+		return data.cbegin();
+	}
+	std::vector<std::tuple<float, float>>::const_iterator Shape::end()
+	{
+		return data.cend();
 	}
 
-	GeometryPath::GeometryPath(vector<Vector3> control_points) : control_points(control_points) {}
-
-	Vector3 GeometryPath::get_point(float t)
+	int Shape::get_edges_number()
 	{
-		Vector3 result(0.0f, 0.0f, 0.0f);
+		return wrap ? data.size() : data.size() - 1;
+	}
+
+	Path::Path(std::vector<math_3d::vector_3d> control_points) : control_points(control_points) {}
+
+	math_3d::vector_3d Path::get_point(float t)
+	{
+		math_3d::vector_3d result;
 		int n = control_points.size() - 1;
 
 		for (int i = 0; i < control_points.size(); ++i)
 		{
-			Vector3 point = control_points[i];
+			float binom_factorial = math_3d::factorial(n) / (math_3d::factorial(i) * math_3d::factorial(n - i));
+			float bernsteibn_polynom = binom_factorial * pow(t, i) * pow(1.0f - t, n - i);
 
-			float binom_factor = factorial(n) / (factorial(i) * factorial(n - i));
-			float bernsteibn_polynom = binom_factor * pow(t, i) * pow(1.0f - t, n - i);
-
-			result = result + (point * bernsteibn_polynom);
+			result += control_points[i] * bernsteibn_polynom;
 		}
 
 		return result;
 	}
 
-	float GeometryPath::factorial(int n)
-	{
-		if (n == 0 || n == 1)
-			return 1;
+	Generator::Generator() {}
 
-		float result = 1;
-		for (int i = 1; i <= n; ++i)
-		{
-			result *= i;
-		}
-		return result;
-	}
+	Generator::Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, Vector3 base_vec) : path(std::move(path)),
+		shape(std::move(shape)), base_vec(base_vec) {}
 
-
-	Shape::Shape(float _len, float _angle) : len(_len), angle(_angle) {}
-
-
-	GeometryShape::GeometryShape()
-	{
-		data = { Shape(1.0f, 0), Shape(1.0f, 90), Shape(1.0f, 180), Shape(1.0f, 270) };
-	};
-
-	GeometryConstructor::GeometryConstructor() {}
-
-	GeometryConstructor::GeometryConstructor(std::unique_ptr<GeometryPath> _path,
-		std::unique_ptr<GeometryShape> _shape, Vector3 _base_vec) : path(std::move(_path)),
-		shape(std::move(_shape)), base_vec(_base_vec)
-	{
-
-	}
-
-
-	void GeometryConstructor::make_mesh(ObjectData& data)
+	void Generator::make_mesh(Object_Data& data)
 	{
 		int shape_vertex_num = shape->data.size();
 		// Vector3 prev_center;

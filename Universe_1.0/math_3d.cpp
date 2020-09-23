@@ -12,6 +12,29 @@
 
 namespace math_3d
 {
+	float factorial(int n)
+	{
+		if (n == 0 || n == 1)
+			return 1.0f;
+
+		float result = 1.0f;
+		for (int i = 1; i <= n; ++i)
+		{
+			result *= static_cast<float>(i);
+		}
+		return result;
+	}
+
+	float radian_to_degree(float radian)
+	{
+		return radian * 180.0f / pi;
+	}
+
+	float degree_to_radian(float degree)
+	{
+		return degree * pi / 180.0f;
+	}
+
 	bool vector_3d::is_zero()
 	{
 		return (x + y + z) < eps;
