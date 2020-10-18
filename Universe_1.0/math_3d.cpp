@@ -10,7 +10,7 @@
 
 #include "math_3d.h"
 
-namespace math_3d
+namespace Math_3d
 {
 	float factorial(int n)
 	{
@@ -35,12 +35,12 @@ namespace math_3d
 		return degree * pi / 180.0f;
 	}
 
-	bool vector_3d::is_zero()
+	bool Vector_3d::is_zero()
 	{
 		return (x + y + z) < eps;
 	}
 
-	float vector_3d::length()
+	float Vector_3d::length()
 	{
 		double _x = static_cast<double>(x);
 		double _y = static_cast<double>(y);
@@ -48,7 +48,7 @@ namespace math_3d
 		return static_cast<float>(sqrt(_x * _x + _y * _y + _z * _z));
 	}
 
-	vector_3d& vector_3d::normalize()
+	Vector_3d& Vector_3d::normalize()
 	{
 		float len = length();
 		x /= len;
@@ -57,7 +57,7 @@ namespace math_3d
 		return *this;
 	}
 
-	vector_3d& vector_3d::trunc()
+	Vector_3d& Vector_3d::trunc()
 	{
 		x = x > 1.0f ? 1.0f : x;
 		y = y > 1.0f ? 1.0f : y;
@@ -65,7 +65,7 @@ namespace math_3d
 		return *this;
 	}
 
-	vector_3d& vector_3d::operator=(const vector_3d& vec)
+	Vector_3d& Vector_3d::operator=(const Vector_3d& vec)
 	{
 		if (this != &vec)
 		{
@@ -77,42 +77,42 @@ namespace math_3d
 		return *this;
 	}
 
-	vector_3d& vector_3d::operator+=(const float& num)
+	Vector_3d& Vector_3d::operator+=(const float& num)
 	{
 		x += num; y += num; z += num;
 		return *this;
 	}
-	vector_3d& vector_3d::operator-=(const float& num)
+	Vector_3d& Vector_3d::operator-=(const float& num)
 	{
 		x -= num; y -= num; z -= num;
 		return *this;
 	}
-	vector_3d& vector_3d::operator*=(const float& num)
+	Vector_3d& Vector_3d::operator*=(const float& num)
 	{
 		x *= num; y *= num; z *= num;
 		return *this;
 	}
-	vector_3d& vector_3d::operator/=(const float& num)
+	Vector_3d& Vector_3d::operator/=(const float& num)
 	{
 		x /= num; y /= num; z /= num;
 		return *this;
 	}
-	vector_3d& vector_3d::operator+=(const vector_3d& vec)
+	Vector_3d& Vector_3d::operator+=(const Vector_3d& vec)
 	{
 		x += vec.x; y += vec.y; z += vec.z;
 		return *this;
 	}
-	vector_3d& vector_3d::operator-=(const vector_3d& vec)
+	Vector_3d& Vector_3d::operator-=(const Vector_3d& vec)
 	{
 		x -= vec.x; y -= vec.y; z -= vec.z;
 		return *this;
 	}
-	vector_3d& vector_3d::operator*=(const vector_3d& vec)
+	Vector_3d& Vector_3d::operator*=(const Vector_3d& vec)
 	{
 		x *= vec.x; y *= vec.y; z *= vec.z;
 		return *this;
 	}
-	vector_3d& vector_3d::operator/=(const vector_3d& vec)
+	Vector_3d& Vector_3d::operator/=(const Vector_3d& vec)
 	{
 		x /= vec.x; y /= vec.y; z /= vec.z;
 		return *this;
@@ -121,14 +121,14 @@ namespace math_3d
 	/**
 	 * Scalar cross product
 	 */
-	float vector_3d::operator&=(const vector_3d& vec)
+	float Vector_3d::operator&=(const Vector_3d& vec)
 	{
 		return x * vec.x + y * vec.y + z * vec.z;
 	}
 	/**
 	 * Vector cross product
 	 */
-	vector_3d& vector_3d::operator^=(const vector_3d& vec)
+	Vector_3d& Vector_3d::operator^=(const Vector_3d& vec)
 	{
 		x = y * vec.z - z * vec.y;
 		y = z * vec.x - x * vec.z;
@@ -136,45 +136,45 @@ namespace math_3d
 		return *this;
 	}
 
-	vector_3d::operator vector_4d()
+	Vector_3d::operator Vector_4d()
 	{
 		return { x, y, z, 0.0f };
 	}
 
-	vector_3d operator+(const vector_3d& vec_a, const vector_3d& vec_b)
+	Vector_3d operator+(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		return { vec_a.x + vec_b.x, vec_a.y + vec_b.y, vec_a.z + vec_b.z };
 	}
-	vector_3d operator-(const vector_3d& vec_a, const vector_3d& vec_b)
+	Vector_3d operator-(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		return { vec_a.x - vec_b.x, vec_a.y - vec_b.y, vec_a.z - vec_b.z };
 	}
-	vector_3d operator*(const vector_3d& vec_a, const vector_3d& vec_b)
+	Vector_3d operator*(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		return { vec_a.x * vec_b.x, vec_a.y * vec_b.y, vec_a.z * vec_b.z };
 	}
-	vector_3d operator/(const vector_3d& vec_a, const vector_3d& vec_b)
+	Vector_3d operator/(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		return { vec_a.x / vec_b.x, vec_a.y / vec_b.y, vec_a.z / vec_b.z };
 	}
 	/**
 	 * Scalar cross product
 	 */
-	float operator&(const vector_3d& vec_a, const vector_3d& vec_b)
+	float operator&(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		return vec_a.x * vec_b.x + vec_a.y * vec_b.y + vec_a.z * vec_b.z;
 	}
 	/**
 	 * Vector cross product
 	 */
-	vector_3d operator^(const vector_3d& vec_a, const vector_3d& vec_b)
+	Vector_3d operator^(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		return { vec_a.y * vec_b.z - vec_a.z * vec_b.y,
 				 vec_a.z * vec_b.x - vec_a.x * vec_b.z,
 				 vec_a.x * vec_b.y - vec_a.y * vec_b.x };
 	}
 
-	bool operator==(const vector_3d& vec_a, const vector_3d& vec_b)
+	bool operator==(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		if ((vec_a.x - vec_b.x) * (vec_a.x - vec_b.x) > eps)
 			return false;
@@ -187,45 +187,45 @@ namespace math_3d
 
 		return true;
 	}
-	bool operator!=(const vector_3d& vec_a, const vector_3d& vec_b)
+	bool operator!=(const Vector_3d& vec_a, const Vector_3d& vec_b)
 	{
 		return !(vec_a == vec_b);
 	}
 
-	vector_3d operator+(const float& num, const vector_3d& vec)
+	Vector_3d operator+(const float& num, const Vector_3d& vec)
 	{
 		return { num + vec.x, num + vec.y, num + vec.z };
 	}
-	vector_3d operator-(const float& num, const vector_3d& vec)
+	Vector_3d operator-(const float& num, const Vector_3d& vec)
 	{
 		return { num - vec.x, num - vec.y, num - vec.z };
 	}
-	vector_3d operator*(const float& num, const vector_3d& vec)
+	Vector_3d operator*(const float& num, const Vector_3d& vec)
 	{
 		return { num * vec.x, num * vec.y, num * vec.z };
 	}
-	vector_3d operator/(const float& num, const vector_3d& vec)
+	Vector_3d operator/(const float& num, const Vector_3d& vec)
 	{
 		return { num / vec.x, num / vec.y, num / vec.z };
 	}
-	vector_3d operator+(const vector_3d& vec, const float& num)
+	Vector_3d operator+(const Vector_3d& vec, const float& num)
 	{
 		return { vec.x + num, vec.y + num, vec.z + num };
 	}
-	vector_3d operator-(const vector_3d& vec, const float& num)
+	Vector_3d operator-(const Vector_3d& vec, const float& num)
 	{
 		return { vec.x - num, vec.y - num, vec.z - num };
 	}
-	vector_3d operator*(const vector_3d& vec, const float& num)
+	Vector_3d operator*(const Vector_3d& vec, const float& num)
 	{
 		return { vec.x * num, vec.y * num, vec.z * num };
 	}
-	vector_3d operator/(const vector_3d& vec, const float& num)
+	Vector_3d operator/(const Vector_3d& vec, const float& num)
 	{
 		return { vec.x / num, vec.y / num, vec.z / num };
 	}
 
-	float distance(vector_3d vec_a, vector_3d vec_b)
+	float distance(Vector_3d vec_a, Vector_3d vec_b)
 	{
 		double vec_a_x = static_cast<double>(vec_a.x);
 		double vec_a_y = static_cast<double>(vec_a.y);
@@ -237,15 +237,15 @@ namespace math_3d
 					(vec_b_y - vec_a_y) * (vec_b_y - vec_a_y) +
 					(vec_b_z - vec_a_z) * (vec_b_z - vec_a_z));
 	}
-	float distance(vector_3d vec_a, vector_4d vec_b)
+	float distance(Vector_3d vec_a, Vector_4d vec_b)
 	{
-		return distance(vec_a, static_cast<vector_3d>(vec_b));
+		return distance(vec_a, static_cast<Vector_3d>(vec_b));
 	}
-	float distance(vector_4d vec_a, vector_3d vec_b)
+	float distance(Vector_4d vec_a, Vector_3d vec_b)
 	{
-		return distance(static_cast<vector_3d>(vec_a), vec_b);
+		return distance(static_cast<Vector_3d>(vec_a), vec_b);
 	}
-	float distance(vector_4d vec_a, vector_4d vec_b)
+	float distance(Vector_4d vec_a, Vector_4d vec_b)
 	{
 		double vec_a_x = static_cast<double>(vec_a.x);
 		double vec_a_y = static_cast<double>(vec_a.y);
@@ -261,14 +261,14 @@ namespace math_3d
 					(vec_b_w - vec_a_w) * (vec_b_w - vec_a_w));
 	}
 
-	float angle(vector_3d vec_a, vector_3d vec_b)
+	float angle(Vector_3d vec_a, Vector_3d vec_b)
 	{
 		double arg = static_cast<double>((vec_a & vec_b) / (vec_a.length() * vec_b.length()));
 		return static_cast<float>(acos(arg));
 	}
 
 
-	float vector_4d::length()
+	float Vector_4d::length()
 	{
 		double _x = static_cast<double>(x);
 		double _y = static_cast<double>(y);
@@ -276,7 +276,7 @@ namespace math_3d
 		return static_cast<float>(sqrt(_x * _x + _y * _y + _z * _z));
 	}
 
-	vector_4d& vector_4d::normalize()
+	Vector_4d& Vector_4d::normalize()
 	{
 		float len = length();
 		x /= len;
@@ -285,7 +285,7 @@ namespace math_3d
 		return *this;
 	}
 
-	vector_4d& vector_4d::trunc()
+	Vector_4d& Vector_4d::trunc()
 	{
 		x = x > 1.0f ? 1.0f : x;
 		y = y > 1.0f ? 1.0f : y;
@@ -293,7 +293,7 @@ namespace math_3d
 		return *this;
 	}
 
-	vector_4d& vector_4d::operator=(const vector_4d& vec)
+	Vector_4d& Vector_4d::operator=(const Vector_4d& vec)
 	{
 		if (this != &vec)
 		{
@@ -306,70 +306,70 @@ namespace math_3d
 		return *this;
 	}
 
-	vector_4d& vector_4d::operator+=(const float& num)
+	Vector_4d& Vector_4d::operator+=(const float& num)
 	{
 		x += num; y += num; z += num;
 		return *this;
 	}
-	vector_4d& vector_4d::operator-=(const float& num)
+	Vector_4d& Vector_4d::operator-=(const float& num)
 	{
 		x -= num; y -= num; z -= num;
 		return *this;
 	}
-	vector_4d& vector_4d::operator*=(const float& num)
+	Vector_4d& Vector_4d::operator*=(const float& num)
 	{
 		x *= num; y *= num; z *= num;
 		return *this;
 	}
-	vector_4d& vector_4d::operator/=(const float& num)
+	Vector_4d& Vector_4d::operator/=(const float& num)
 	{
 		x /= num; y /= num; z /= num;
 		return *this;
 	}
-	vector_4d& vector_4d::operator+=(const vector_4d& vec)
+	Vector_4d& Vector_4d::operator+=(const Vector_4d& vec)
 	{
 		x += vec.x; y += vec.y; z += vec.z;
 		return *this;
 	}
-	vector_4d& vector_4d::operator-=(const vector_4d& vec)
+	Vector_4d& Vector_4d::operator-=(const Vector_4d& vec)
 	{
 		x -= vec.x; y -= vec.y; z -= vec.z;
 		return *this;
 	}
-	vector_4d& vector_4d::operator*=(const vector_4d& vec)
+	Vector_4d& Vector_4d::operator*=(const Vector_4d& vec)
 	{
 		x *= vec.x; y *= vec.y; z *= vec.z;
 		return *this;
 	}
-	vector_4d& vector_4d::operator/=(const vector_4d& vec)
+	Vector_4d& Vector_4d::operator/=(const Vector_4d& vec)
 	{
 		x /= vec.x; y /= vec.y; z /= vec.z;
 		return *this;
 	}
 
-	vector_4d::operator vector_3d()
+	Vector_4d::operator Vector_3d()
 	{
 		return { x, y, z };
 	}
 
-	vector_4d operator+(const vector_4d& vec_a, const vector_4d& vec_b)
+	Vector_4d operator+(const Vector_4d& vec_a, const Vector_4d& vec_b)
 	{
 		return { vec_a.x + vec_b.x, vec_a.y + vec_b.y, vec_a.z + vec_b.z, 1.0f };
 	}
-	vector_4d operator-(const vector_4d& vec_a, const vector_4d& vec_b)
+	Vector_4d operator-(const Vector_4d& vec_a, const Vector_4d& vec_b)
 	{
 		return { vec_a.x - vec_b.x, vec_a.y - vec_b.y, vec_a.z - vec_b.z, 1.0f };
 	}
-	vector_4d operator*(const vector_4d& vec_a, const vector_4d& vec_b)
+	Vector_4d operator*(const Vector_4d& vec_a, const Vector_4d& vec_b)
 	{
 		return { vec_a.x * vec_b.x, vec_a.y * vec_b.y, vec_a.z * vec_b.z, 1.0f };
 	}
-	vector_4d operator/(const vector_4d& vec_a, const vector_4d& vec_b)
+	Vector_4d operator/(const Vector_4d& vec_a, const Vector_4d& vec_b)
 	{
 		return { vec_a.x / vec_b.x, vec_a.y / vec_b.y, vec_a.z / vec_b.z, 1.0f };
 	}
 
-	bool operator==(const vector_4d& vec_a, const vector_4d& vec_b)
+	bool operator==(const Vector_4d& vec_a, const Vector_4d& vec_b)
 	{
 		if ((vec_a.x - vec_b.x) * (vec_a.x - vec_b.x) > eps)
 			return false;
@@ -382,40 +382,40 @@ namespace math_3d
 
 		return true;
 	}
-	bool operator!=(const vector_4d& vec_a, const vector_4d& vec_b)
+	bool operator!=(const Vector_4d& vec_a, const Vector_4d& vec_b)
 	{
 		return !(vec_a == vec_b);
 	}
 
-	vector_4d operator+(const float& num, const vector_4d& vec)
+	Vector_4d operator+(const float& num, const Vector_4d& vec)
 	{
 		return { num + vec.x, num + vec.y, num + vec.z, 1.0f };
 	}
-	vector_4d operator-(const float& num, const vector_4d& vec)
+	Vector_4d operator-(const float& num, const Vector_4d& vec)
 	{
 		return { num - vec.x, num - vec.y, num - vec.z, 1.0f };
 	}
-	vector_4d operator*(const float& num, const vector_4d& vec)
+	Vector_4d operator*(const float& num, const Vector_4d& vec)
 	{
 		return { num * vec.x, num * vec.y, num * vec.z, 1.0f };
 	}
-	vector_4d operator/(const float& num, const vector_4d& vec)
+	Vector_4d operator/(const float& num, const Vector_4d& vec)
 	{
 		return { num / vec.x, num / vec.y, num / vec.z, 1.0f };
 	}
-	vector_4d operator+(const vector_4d& vec, const float& num)
+	Vector_4d operator+(const Vector_4d& vec, const float& num)
 	{
 		return { vec.x + num, vec.y + num, vec.z + num, 1.0f };
 	}
-	vector_4d operator-(const vector_4d& vec, const float& num)
+	Vector_4d operator-(const Vector_4d& vec, const float& num)
 	{
 		return { vec.x - num, vec.y - num, vec.z - num, 1.0f };
 	}
-	vector_4d operator*(const vector_4d& vec, const float& num)
+	Vector_4d operator*(const Vector_4d& vec, const float& num)
 	{
 		return { vec.x * num, vec.y * num, vec.z * num, 1.0f };
 	}
-	vector_4d operator/(const vector_4d& vec, const float& num)
+	Vector_4d operator/(const Vector_4d& vec, const float& num)
 	{
 		return { vec.x / num, vec.y / num, vec.z / num, 1.0f };
 	}
