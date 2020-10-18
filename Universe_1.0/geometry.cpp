@@ -10,9 +10,10 @@
 
 #include "geometry.h"
 
-namespace geometry
+namespace Geometry
 {
-	Shape::Shape(std::string type, bool wrap) : wrap(wrap)
+	Shape::Shape(std::string type, bool wrap)
+	: wrap(wrap)
 	{
 		if (type == "square")
 		{
@@ -42,19 +43,20 @@ namespace geometry
 		return wrap ? data.size() : data.size() - 1;
 	}
 
-	Path::Path(std::vector<math_3d::vector_3d> control_points) : control_points(control_points) {}
+	Path::Path(std::vector<Math_3d::Vector_3d> control_points)
+	: control_points(control_points) {}
 
-	math_3d::vector_3d Path::get_point(float t)
+	Math_3d::Vector_3d Path::get_point(float t)
 	{
-		math_3d::vector_3d result;
+		Math_3d::Vector_3d result;
 		int n = control_points.size() - 1;
 
 		for (int i = 0; i < control_points.size(); ++i)
 		{
-			float binom_factorial = math_3d::factorial(n) / (math_3d::factorial(i) * math_3d::factorial(n - i));
-			float bernsteibn_polynom = binom_factorial * pow(t, i) * pow(1.0f - t, n - i);
+			float binom_factorial = Math_3d::factorial(n) / (Math_3d::factorial(i) * Math_3d::factorial(n - i));
+			float bernstein_polynom = binom_factorial * pow(t, i) * pow(1.0f - t, n - i);
 
-			result += control_points[i] * bernsteibn_polynom;
+			result += control_points[i] * bernstein_polynom;
 		}
 
 		return result;
@@ -62,23 +64,17 @@ namespace geometry
 
 	Generator::Generator() {}
 
-	Generator::Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, Vector3 base_vec) : path(std::move(path)),
-		shape(std::move(shape)), base_vec(base_vec) {}
+	Generator::Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, Vector3 base_vec)
+	: path(std::move(path)), shape(std::move(shape)), base_vec(base_vec) {}
 
 	void Generator::make_mesh(Object_Data& data)
 	{
 		int shape_vertex_num = shape->data.size();
-		// Vector3 prev_center;
 		int first_index = data.vertices.size();
 
 		for (float t = 0.0f; t < 1.0f; t += step)
 		{
 			Vector3 center = path->get_point(t);
-			/*if (!prev_center.is_zero())
-			{
-				base_vec = (base_vec + (center.normalize() - prev_center.normalize())).normalize();
-			}
-			prev_center = center;*/
 
 			int start_index = data.vertices.size();
 
@@ -122,8 +118,39 @@ namespace geometry
 		Vertex vertex;
 		vertex.pos = start;
 		data.vertices.push_back(vertex);
+		int split_points = 3;
+		float solid_step = 1.0 / static_cast<float>(split_points);
 		for (int i = 0; i < shape_vertex_num; ++i)
 		{
+			int a_index = first_index + i;
+			int a_index = first_index + (i + 1) % shape_vertex_num;
+			int c_index = last_index;
+
+			Math_3d::Vector_3d ab_vec = data.vertices[b_index] - data.vertices[b_index];
+			Math_3d::Vector_3d bc_vec = data.vertices[c_index] - data.vertices[b_index];
+			Math_3d::Vector_3d ac_vec = data.vertices[c_index] - data.vertices[a_index];
+
+			// A * * B
+			//  * * *
+			//   * *
+			//    C
+			// Loop via level
+			for (int j = 0; j < split_points + 2; ++j)
+			{
+				Math_3d::Vector_3d start_point = data.vertices[a_index] + ac_vec * solid_step * j;
+				// Loop via row
+				for (int k = 0; k < split_points + 2 - j; k++)
+				{
+					new_point = start_point + ab_vec * solid_step * k;
+					if (new_point != data.vertices[a_index] && new_point != data.vertices[b_index] && new_point != data.vertices[c_index])
+					{
+						Vertex new_vertex;
+						new_vertex.pos = new_point;
+						data.vertices.push_back(new_vertex);
+					}
+				}
+			}
+
 			int p1_index = first_index + i;
 			int p2_index = first_index + (i + 1) % shape_vertex_num;
 			int p3_index = last_index;

@@ -18,16 +18,16 @@
 
 #include "math_3d.h"
 
-namespace geometry
+namespace Geometry
 {
 	/**
-	* @struct vertex
+	* @struct Vertex
 	* Base struct which represents single vertex
 	*/
-	struct vertex
+	struct Vertex
 	{
-		math_3d::vector_3d pos;
-		math_3d::vector_3d normal;
+		Math_3d::Vector_3d pos;
+		Math_3d::Vector_3d normal;
 	};
 
 	/**
@@ -35,18 +35,18 @@ namespace geometry
 	* Base struct which represents single object data
 	* Contains vector of vertices and indices
 	*/
-	struct object_data
+	struct Object_Data
 	{
 		int            size;
 		// vector<DWORD>  indices;
 		std::vector<unsigned long int>  indices;
-		std::vector<vertex> vertices;
-		math_3d::vector_3d color;
+		std::vector<Vertex> vertices;
+		Math_3d::Vector_3d color;
 	};
 
 
 	/**
-	* @class shape
+	* @class Shape
 	* 3D shape which represents object slice.
 	* Idea is - have some start point, vector and
 	* have a vector of {length, angle} for each point
@@ -84,13 +84,13 @@ namespace geometry
 	*/
 	class Path
 	{
-		std::vector<math_3d::vector_3d> control_points;
+		std::vector<Math_3d::Vector_3d> control_points;
 
 	public:
 
-		Path(std::vector<math_3d::vector_3d> control_points);
+		Path(std::vector<Math_3d::Vector_3d> control_points);
 
-		math_3d::vector_3d get_point(float t);
+		Math_3d::Vector_3d get_point(float t);
 	};
 
 	/**
@@ -101,7 +101,7 @@ namespace geometry
 	{
 		std::unique_ptr<Path> path;
 		std::unique_ptr<Shape> shape;
-		math_3d::vector_3d base_vec;
+		Math_3d::Vector_3d base_vec;
 
 		float step = 0.02f;
 		float eps = 0.001f;
@@ -109,7 +109,7 @@ namespace geometry
 
 	public:
 		Generator();
-		Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, math_3d::vector_3d base_vec);
+		Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, Math_3d::Vector_3d base_vec);
 
 		~Generator() {};
 
