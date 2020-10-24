@@ -113,6 +113,7 @@ namespace Geometry
 
 		// Make solid
 		// TODO function make triangle!!!
+		// TODO refactor code!!!
 		// for fisrt
 		Vector3 start = path->get_point(0.0);
 		Vertex vertex;
@@ -135,6 +136,8 @@ namespace Geometry
 			//   * *
 			//    C
 			// Loop via level
+			// Add vertex
+			int sector_start_index = data.vertices.size();
 			for (int j = 0; j < split_points + 2; ++j)
 			{
 				Math_3d::Vector_3d start_point = data.vertices[a_index] + ac_vec * solid_step * j;
@@ -150,14 +153,44 @@ namespace Geometry
 					}
 				}
 			}
+			int sector_end_index = data.vertices.size();
 
-			int p1_index = first_index + i;
-			int p2_index = first_index + (i + 1) % shape_vertex_num;
-			int p3_index = last_index;
+			// Add indexies
+			int sub_row_index_start = 0;
+			for (int j = 0; j < split_points + 1; ++j)
+			{
+				for (int k = 0; k < (split_points * 2) + 1 - j * 2; ++k)
+				{
+					// Add low triangle
+					// 1   2
+					//   3
+					if (k % 2)
+					{
+						int p1_index = sector_start_index + sub_row_index_start + (k / 2);
+						int p2_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
+						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
 
-			data.indices.push_back(p1_index);
-			data.indices.push_back(p2_index);
-			data.indices.push_back(p3_index);
+						data.indices.push_back(p1_index);
+						data.indices.push_back(p2_index);
+						data.indices.push_back(p3_index);
+					}
+					// Add high triangle
+					//   1
+					// 2   3
+					else
+					{
+						int p1_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
+						int p2_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
+						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2) + 1;
+
+						data.indices.push_back(p1_index);
+						data.indices.push_back(p2_index);
+						data.indices.push_back(p3_index);
+					}
+					
+				}
+				sub_row_index_start += split_points + 2 - j;
+			}
 		}
 		// for last
 		Vector3 end = path->get_point(1.0);
@@ -169,9 +202,70 @@ namespace Geometry
 			int p2_index = last_index - shape_vertex_num + (i + 1) % shape_vertex_num;
 			int p3_index = last_index + 1;
 
-			data.indices.push_back(p1_index);
-			data.indices.push_back(p2_index);
-			data.indices.push_back(p3_index);
+			Math_3d::Vector_3d ab_vec = data.vertices[b_index] - data.vertices[b_index];
+			Math_3d::Vector_3d bc_vec = data.vertices[c_index] - data.vertices[b_index];
+			Math_3d::Vector_3d ac_vec = data.vertices[c_index] - data.vertices[a_index];
+
+			// A * * B
+			//  * * *
+			//   * *
+			//    C
+			// Loop via level
+			// Add vertex
+			int sector_start_index = data.vertices.size();
+			for (int j = 0; j < split_points + 2; ++j)
+			{
+				Math_3d::Vector_3d start_point = data.vertices[a_index] + ac_vec * solid_step * j;
+				// Loop via row
+				for (int k = 0; k < split_points + 2 - j; k++)
+				{
+					new_point = start_point + ab_vec * solid_step * k;
+					if (new_point != data.vertices[a_index] && new_point != data.vertices[b_index] && new_point != data.vertices[c_index])
+					{
+						Vertex new_vertex;
+						new_vertex.pos = new_point;
+						data.vertices.push_back(new_vertex);
+					}
+				}
+			}
+			int sector_end_index = data.vertices.size();
+
+			// Add indexies
+			int sub_row_index_start = 0;
+			for (int j = 0; j < split_points + 1; ++j)
+			{
+				for (int k = 0; k < (split_points * 2) + 1 - j * 2; ++k)
+				{
+					// Add low triangle
+					// 1   2
+					//   3
+					if (k % 2)
+					{
+						int p1_index = sector_start_index + sub_row_index_start + (k / 2);
+						int p2_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
+						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
+
+						data.indices.push_back(p1_index);
+						data.indices.push_back(p2_index);
+						data.indices.push_back(p3_index);
+					}
+					// Add high triangle
+					//   1
+					// 2   3
+					else
+					{
+						int p1_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
+						int p2_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
+						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2) + 1;
+
+						data.indices.push_back(p1_index);
+						data.indices.push_back(p2_index);
+						data.indices.push_back(p3_index);
+					}
+					
+				}
+				sub_row_index_start += split_points + 2 - j;
+			}
 		}
 
 		data.size = data.indices.size();
