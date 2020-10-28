@@ -35,6 +35,44 @@ namespace Math_3d
 		return degree * pi / 180.0f;
 	}
 
+	Vector_3d project_vector_to_plane(Vector_3d vector_to_project, Vector_3d plane_point, Vector_3d plane_normal)
+	{
+		// Need to make projection only for vector_end_point
+		Vector_3d vector_end_point = vector_to_project + plane_point;
+
+		// Make dot projection
+		float distance_to_plane = vector_to_project & normal;
+		Vector_3d plane_point_b = vector_end_point - (distance_to_plane * plane_normal);
+
+		// Construst new projection for vector
+		return plane_point_b - plane_point;
+	}
+
+	Vector_3d rotate_vector(Vector_3d vector, Vector_3d axis, float angle)
+	{
+		angle = degree_to_radian(angle);
+		// Rotation matrix
+		std::vector<Vector_3d> matrix = {
+			Vector_3d(cos(angle) + (1 - cos(angle)) * axis.x * axis.x,
+					 (1 - cos(angle)) * axis.x * axis.y - sin(angle) * axis.z,
+					 (1 - cos(angle)) * axis.x * axis.z + sin(angle) * axis.y),
+			Vector_3d((1 - cos(angle)) * axis.x * axis.y + sin(angle) * axis.z,
+					 cos(angle) + (1 - cos(angle)) * axis.y * axis.y,
+					 (1 - cos(angle)) * axis.y * axis.z - sin(angle) * axis.x),
+			Vector_3d((1 - cos(angle)) * axis.x * axis.z - sin(angle) * axis.y,
+					 (1 - cos(angle)) * axis.y * axis.z + sin(angle) * axis.x,
+					 cos(angle) + (1 - cos(angle)) * axis.z * axis.z)
+		};
+
+		Vector_3d result = {
+			matrix[0] & vector,
+			matrix[1] & vector,
+			matrix[2] & vector
+		};
+
+		return result;
+	}
+
 	bool Vector_3d::is_zero()
 	{
 		return (x + y + z) < eps;

@@ -70,10 +70,11 @@ namespace Geometry
 
 		data_type::iterator begin();
 		data_type::iterator end();
-		data_type::const_iterator begin();
-		data_type::const_iterator end();
+		data_type::const_iterator begin() const;
+		data_type::const_iterator end() const;
 
-		int get_edges_number();
+		int size() const;
+		int get_edges_number() const;
 	};
 
 	/**
@@ -90,7 +91,7 @@ namespace Geometry
 
 		Path(std::vector<Math_3d::Vector_3d> control_points);
 
-		Math_3d::Vector_3d get_point(float t);
+		Math_3d::Vector_3d get_point(float t) const;
 	};
 
 	/**
@@ -103,9 +104,10 @@ namespace Geometry
 		std::unique_ptr<Shape> shape;
 		Math_3d::Vector_3d base_vec;
 
-		float step = 0.02f;
-		float eps = 0.001f;
+		const float step = 0.02f;
+		const float path_delta = 0.01f;
 		bool solid = true;
+		int split_points = 3;
 
 	public:
 		Generator();
@@ -114,6 +116,8 @@ namespace Geometry
 		~Generator() {};
 
 		void make_mesh(Object_Data& data);
+
+
 		// TODO remake
 		void make_plane(ObjectData& data);
 		Vector3 get_normal(Edge edge, Vector3 vertex);
@@ -125,8 +129,6 @@ namespace Geometry
 		// TODO remake
 
 		Vector3 rotate(Vector3 vec, Vector3 axis, float angle);
-
-		Vector3 make_projection(Vector3 vec, Vector3 point_a, Vector3 normal);
 	}
 
 	class Object

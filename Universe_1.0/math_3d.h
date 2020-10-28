@@ -21,6 +21,11 @@ namespace Math_3d
 	float factorial(int n);
 	inline float radian_to_degree(float radian);
 	inline float degree_to_radian(float degree);
+	/**
+	 * Make projection of vector to plane
+	 */
+	Vector_3d project_vector_to_plane(Vector_3d vector_to_project, Vector_3d plane_point, Vector_3d plane_normal);
+	Vector_3d rotate_vector(Vector_3d vector, Vector_3d axis, float angle);
 
 	/**
 	* @class Vector_3d

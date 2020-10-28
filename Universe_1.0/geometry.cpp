@@ -38,6 +38,11 @@ namespace Geometry
 		return data.cend();
 	}
 
+	int Shape::size()
+	{
+		return data.size();
+	}
+
 	int Shape::get_edges_number()
 	{
 		return wrap ? data.size() : data.size() - 1;
@@ -64,39 +69,36 @@ namespace Geometry
 
 	Generator::Generator() {}
 
-	Generator::Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, Vector3 base_vec)
+	Generator::Generator(std::unique_ptr<Path> path, std::unique_ptr<Shape> shape, Math_3d::Vector_3d base_vec)
 	: path(std::move(path)), shape(std::move(shape)), base_vec(base_vec) {}
 
 	void Generator::make_mesh(Object_Data& data)
 	{
-		int shape_vertex_num = shape->data.size();
-		int first_index = data.vertices.size();
+		int object_start_index = data.vertices.size();
 
+		// Go through slices and apply shape to them
 		for (float t = 0.0f; t < 1.0f; t += step)
 		{
-			Vector3 center = path->get_point(t);
-
 			int start_index = data.vertices.size();
+			Math_3d::Vector_3d center = path->get_point(t);
 
-			Vector3 path_vec = (path->get_point(t + eps) - center).normalize();
-			base_vec = make_projection(base_vec, center, path_vec).normalize();
-			for (Shape item : shape->data)
+			Math_3d::Vector_3d path_vec = (path->get_point(t + path_delta) - center).normalize();
+			base_vec = Math_3d::project_vector_to_plane(base_vec, center, path_vec).normalize();
+			for (Shape &item : shape)
 			{
 				Vertex vertex;
-				Vector3 temp = rotate(base_vec, path_vec, item.angle).normalize() * item.len;
-				float temp2 = temp.length();
-				vertex.pos = center + (rotate(base_vec, path_vec, item.angle).normalize() * item.len);
+				vertex.pos = center + (Math_3d::rotate_vector(base_vec, path_vec, item.angle).normalize() * item.len);
 				data.vertices.push_back(vertex);
 			}
 
 			// Set indices, not required for first
-			if (t > eps)
+			if (t > path_delta)
 			{
-				for (int i = 0; i < (wrap ? shape_vertex_num : shape_vertex_num - 1); ++i)
+				for (int i = 0; i < shape.get_edges_number(); ++i)
 				{
-					int p1_index = start_index - shape_vertex_num + i;
-					int p2_index = start_index - shape_vertex_num + (i + 1) % shape_vertex_num;
-					int p3_index = start_index + (i + 1) % shape_vertex_num;
+					int p1_index = start_index - shape.size() + i;
+					int p2_index = start_index - shape.size() + (i + 1) % shape.size();
+					int p3_index = start_index + (i + 1) % shape.size();
 					int p4_index = start_index + i;
 
 					data.indices.push_back(p1_index);
@@ -109,212 +111,166 @@ namespace Geometry
 				}
 			}
 		}
-		int last_index = data.vertices.size();
+		int object_last_index = data.vertices.size();
 
 		// Make solid
-		// TODO function make triangle!!!
-		// TODO refactor code!!!
-		// for fisrt
-		Vector3 start = path->get_point(0.0);
-		Vertex vertex;
-		vertex.pos = start;
-		data.vertices.push_back(vertex);
-		int split_points = 3;
-		float solid_step = 1.0 / static_cast<float>(split_points);
-		for (int i = 0; i < shape_vertex_num; ++i)
+		if (solid)
 		{
-			int a_index = first_index + i;
-			int a_index = first_index + (i + 1) % shape_vertex_num;
-			int c_index = last_index;
-
-			Math_3d::Vector_3d ab_vec = data.vertices[b_index] - data.vertices[b_index];
-			Math_3d::Vector_3d bc_vec = data.vertices[c_index] - data.vertices[b_index];
-			Math_3d::Vector_3d ac_vec = data.vertices[c_index] - data.vertices[a_index];
-
-			// A * * B
-			//  * * *
-			//   * *
-			//    C
-			// Loop via level
-			// Add vertex
-			int sector_start_index = data.vertices.size();
-			for (int j = 0; j < split_points + 2; ++j)
+			// TODO function make triangle!!!
+			// TODO refactor code!!!
+			// Begin center vertex
+			Vertex vertex;
+			vertex.pos = path->get_point(0.0);
+			data.vertices.push_back(vertex);
+			// Add mesh for begin sector
+			float sector_step = 1.0f / static_cast<float>(split_points);
+			for (int i = 0; i < shape.size(); ++i)
 			{
-				Math_3d::Vector_3d start_point = data.vertices[a_index] + ac_vec * solid_step * j;
-				// Loop via row
-				for (int k = 0; k < split_points + 2 - j; k++)
+				int a_index = first_index + i;
+				int b_index = first_index + (i + 1) % shape.size();
+				int c_index = object_last_index;
+
+				Math_3d::Vector_3d ab_vec = data.vertices[b_index] - data.vertices[a_index];
+				Math_3d::Vector_3d bc_vec = data.vertices[c_index] - data.vertices[b_index];
+				Math_3d::Vector_3d ac_vec = data.vertices[c_index] - data.vertices[a_index];
+
+				// A * * B
+				//  * * *
+				//   * *
+				//    C
+				// Loop via level
+				// Add vertex
+				int start_index = data.vertices.size();
+				for (int j = 0; j < split_points + 2; ++j)
 				{
-					new_point = start_point + ab_vec * solid_step * k;
-					if (new_point != data.vertices[a_index] && new_point != data.vertices[b_index] && new_point != data.vertices[c_index])
+					Math_3d::Vector_3d start_point = data.vertices[a_index] + ac_vec * sector_step * j;
+					// Loop via row
+					for (int k = 0; k < split_points + 2 - j; k++)
 					{
-						Vertex new_vertex;
-						new_vertex.pos = new_point;
-						data.vertices.push_back(new_vertex);
+						new_point = start_point + ab_vec * sector_step * k;
+						if (new_point != data.vertices[a_index] && new_point != data.vertices[b_index] && new_point != data.vertices[c_index])
+						{
+							Vertex new_vertex;
+							new_vertex.pos = new_point;
+							data.vertices.push_back(new_vertex);
+						}
 					}
+				}
+
+				// Add indexies
+				int sub_row_index_start = 0;
+				for (int j = 0; j < split_points + 1; ++j)
+				{
+					for (int k = 0; k < (split_points * 2) + 1 - j * 2; ++k)
+					{
+						// Add low triangle
+						// 1   2
+						//   3
+						if (k % 2)
+						{
+							int p1_index = start_index + sub_row_index_start + (k / 2);
+							int p2_index = start_index + sub_row_index_start + (k / 2) + 1;
+							int p3_index = start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
+
+							data.indices.push_back(p1_index);
+							data.indices.push_back(p2_index);
+							data.indices.push_back(p3_index);
+						}
+						// Add high triangle
+						//   1
+						// 2   3
+						else
+						{
+							int p1_index = start_index + sub_row_index_start + (k / 2) + 1;
+							int p2_index = start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
+							int p3_index = start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2) + 1;
+
+							data.indices.push_back(p1_index);
+							data.indices.push_back(p2_index);
+							data.indices.push_back(p3_index);
+						}
+						
+					}
+					sub_row_index_start += split_points + 2 - j;
 				}
 			}
-			int sector_end_index = data.vertices.size();
-
-			// Add indexies
-			int sub_row_index_start = 0;
-			for (int j = 0; j < split_points + 1; ++j)
+			// End center vertex
+			vertex.pos = path->get_point(1.0);
+			data.vertices.push_back(vertex);
+			// Add mesh for end sector
+			for (int i = 0; i < shape.size(); ++i)
 			{
-				for (int k = 0; k < (split_points * 2) + 1 - j * 2; ++k)
+				int p1_index = last_index - shape.size() + i;
+				int p2_index = last_index - shape.size() + (i + 1) % shape.size();
+				int p3_index = last_index + 1;
+
+				Math_3d::Vector_3d ab_vec = data.vertices[b_index] - data.vertices[b_index];
+				Math_3d::Vector_3d bc_vec = data.vertices[c_index] - data.vertices[b_index];
+				Math_3d::Vector_3d ac_vec = data.vertices[c_index] - data.vertices[a_index];
+
+				// A * * B
+				//  * * *
+				//   * *
+				//    C
+				// Loop via level
+				// Add vertex
+				int start_index = data.vertices.size();
+				for (int j = 0; j < split_points + 2; ++j)
 				{
-					// Add low triangle
-					// 1   2
-					//   3
-					if (k % 2)
+					Math_3d::Vector_3d start_point = data.vertices[a_index] + ac_vec * sector_step * j;
+					// Loop via row
+					for (int k = 0; k < split_points + 2 - j; k++)
 					{
-						int p1_index = sector_start_index + sub_row_index_start + (k / 2);
-						int p2_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
-						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
-
-						data.indices.push_back(p1_index);
-						data.indices.push_back(p2_index);
-						data.indices.push_back(p3_index);
-					}
-					// Add high triangle
-					//   1
-					// 2   3
-					else
-					{
-						int p1_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
-						int p2_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
-						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2) + 1;
-
-						data.indices.push_back(p1_index);
-						data.indices.push_back(p2_index);
-						data.indices.push_back(p3_index);
-					}
-					
-				}
-				sub_row_index_start += split_points + 2 - j;
-			}
-		}
-		// for last
-		Vector3 end = path->get_point(1.0);
-		vertex.pos = end;
-		data.vertices.push_back(vertex);
-		for (int i = 0; i < shape_vertex_num; ++i)
-		{
-			int p1_index = last_index - shape_vertex_num + i;
-			int p2_index = last_index - shape_vertex_num + (i + 1) % shape_vertex_num;
-			int p3_index = last_index + 1;
-
-			Math_3d::Vector_3d ab_vec = data.vertices[b_index] - data.vertices[b_index];
-			Math_3d::Vector_3d bc_vec = data.vertices[c_index] - data.vertices[b_index];
-			Math_3d::Vector_3d ac_vec = data.vertices[c_index] - data.vertices[a_index];
-
-			// A * * B
-			//  * * *
-			//   * *
-			//    C
-			// Loop via level
-			// Add vertex
-			int sector_start_index = data.vertices.size();
-			for (int j = 0; j < split_points + 2; ++j)
-			{
-				Math_3d::Vector_3d start_point = data.vertices[a_index] + ac_vec * solid_step * j;
-				// Loop via row
-				for (int k = 0; k < split_points + 2 - j; k++)
-				{
-					new_point = start_point + ab_vec * solid_step * k;
-					if (new_point != data.vertices[a_index] && new_point != data.vertices[b_index] && new_point != data.vertices[c_index])
-					{
-						Vertex new_vertex;
-						new_vertex.pos = new_point;
-						data.vertices.push_back(new_vertex);
+						new_point = start_point + ab_vec * sector_step * k;
+						if (new_point != data.vertices[a_index] && new_point != data.vertices[b_index] && new_point != data.vertices[c_index])
+						{
+							Vertex new_vertex;
+							new_vertex.pos = new_point;
+							data.vertices.push_back(new_vertex);
+						}
 					}
 				}
-			}
-			int sector_end_index = data.vertices.size();
+				int sector_end_index = data.vertices.size();
 
-			// Add indexies
-			int sub_row_index_start = 0;
-			for (int j = 0; j < split_points + 1; ++j)
-			{
-				for (int k = 0; k < (split_points * 2) + 1 - j * 2; ++k)
+				// Add indexies
+				int sub_row_index_start = 0;
+				for (int j = 0; j < split_points + 1; ++j)
 				{
-					// Add low triangle
-					// 1   2
-					//   3
-					if (k % 2)
+					for (int k = 0; k < (split_points * 2) + 1 - j * 2; ++k)
 					{
-						int p1_index = sector_start_index + sub_row_index_start + (k / 2);
-						int p2_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
-						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
+						// Add low triangle
+						// 1   2
+						//   3
+						if (k % 2)
+						{
+							int p1_index = start_index + sub_row_index_start + (k / 2);
+							int p2_index = start_index + sub_row_index_start + (k / 2) + 1;
+							int p3_index = start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
 
-						data.indices.push_back(p1_index);
-						data.indices.push_back(p2_index);
-						data.indices.push_back(p3_index);
-					}
-					// Add high triangle
-					//   1
-					// 2   3
-					else
-					{
-						int p1_index = sector_start_index + sub_row_index_start + (k / 2) + 1;
-						int p2_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
-						int p3_index = sector_start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2) + 1;
+							data.indices.push_back(p1_index);
+							data.indices.push_back(p2_index);
+							data.indices.push_back(p3_index);
+						}
+						// Add high triangle
+						//   1
+						// 2   3
+						else
+						{
+							int p1_index = start_index + sub_row_index_start + (k / 2) + 1;
+							int p2_index = start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2);
+							int p3_index = start_index + sub_row_index_start + (split_points + 2 - j) + (k / 2) + 1;
 
-						data.indices.push_back(p1_index);
-						data.indices.push_back(p2_index);
-						data.indices.push_back(p3_index);
+							data.indices.push_back(p1_index);
+							data.indices.push_back(p2_index);
+							data.indices.push_back(p3_index);
+						}
 					}
-					
+					sub_row_index_start += split_points + 2 - j;
 				}
-				sub_row_index_start += split_points + 2 - j;
 			}
 		}
 
 		data.size = data.indices.size();
-	}
-
-
-	Vector3 GeometryConstructor::rotate(Vector3 vec, Vector3 axis, float angle)
-	{
-		angle = deg_to_rad(angle);
-		// Rotation matrix
-		vector<Vector3> matrix = {
-			Vector3(cos(angle) + (1 - cos(angle)) * axis.x * axis.x,
-					(1 - cos(angle)) * axis.x * axis.y - sin(angle) * axis.z,
-					(1 - cos(angle)) * axis.x * axis.z + sin(angle) * axis.y),
-			Vector3((1 - cos(angle)) * axis.x * axis.y + sin(angle) * axis.z,
-					cos(angle) + (1 - cos(angle)) * axis.y * axis.y,
-					(1 - cos(angle)) * axis.y * axis.z - sin(angle) * axis.x),
-			Vector3((1 - cos(angle)) * axis.x * axis.z - sin(angle) * axis.y,
-					(1 - cos(angle)) * axis.y * axis.z + sin(angle) * axis.x,
-					cos(angle) + (1 - cos(angle)) * axis.z * axis.z)
-		};
-
-		Vector3 result = {
-			matrix[0] & vec,
-			matrix[1] & vec,
-			matrix[2] & vec
-		};
-
-		return result;
-	}
-
-	Vector3 GeometryConstructor::make_projection(Vector3 vec, Vector3 point_a, Vector3 normal)
-	{
-		//Vector3 plane_point;
-		// point_a is already on the desired plane so need to make projection only for b
-		Vector3 point_b = vec + point_a;
-
-		// make dot projection
-		Vector3 vec_to_b = point_b - point_a;// vec
-		float dist = vec_to_b & normal;
-		//if (dist < 0.0f)
-		//{
-		Vector3 plane_point = point_b - (dist * normal);
-		//}
-		//else
-			//Vector3 plane_point = point_b - dist * normal;
-
-		// construst new projection for vector
-		return plane_point - point_a;
 	}
 
 	Vector3 GeometryConstructor::get_value_default(int i, int j)
