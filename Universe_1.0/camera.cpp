@@ -6,7 +6,7 @@ Camera::Camera(int wndWidth, int wndHeight)
 	at = XMVectorSet(0.0f, 2.0f, 0.0f, 0.0f);
 	up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
-	pos = Vector3(0.0f, 1.0f, -1.0f);
+	pos = Math_3d::Vector_3d(0.0f, 1.0f, -1.0f);
 
 	camera_def.a = { 0.0f, 0.0f, 0.0f, 0.0f };
 	camera_def.b = { 0.0f, 0.0f, 0.0f, 0.0f };
@@ -58,7 +58,7 @@ void Camera::move(int _x, int _y)
 	_view = XMMatrixLookAtLH(eye, at, up);
 	camera_mutex.unlock();
 
-	pos = Vector3(vx * radius, vy * radius, vz * radius);
+	pos = Math_3d::Vector_3d(vx * radius, vy * radius, vz * radius);
 
 
 	camera_def.a = { 0.0f, 0.0f, 0.0f, 0.0f };

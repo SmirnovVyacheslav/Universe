@@ -8,6 +8,9 @@
 
 ******************************************************************************/
 
+#pragma once
+#include <vector>
+
 #include <math.h>
 
 namespace Math_3d

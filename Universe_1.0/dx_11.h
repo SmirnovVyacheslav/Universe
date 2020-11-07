@@ -54,7 +54,7 @@ class DX_11
 		int           size;
 		ID3D11Buffer* vertexBuffer = nullptr;
 		ID3D11Buffer* indexBuffer = nullptr;
-		Vector4 color;
+		Math_3d::Vector_4d color;
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -92,13 +92,13 @@ class DX_11
 	int  wndHeight;
 
 	shared_ptr<Camera>   camera;
-	shared_ptr<Geometry> geometry;
+	shared_ptr<Geometry::Geometry> geometry;
 
 	Shader* shader;
 
 	XMMATRIX                mWorld;
 
-	vector<pair<ObjectData*, GPUData*>>           objects;
+	vector<pair<Geometry::Object_Data*, GPUData*>>           objects;
 
 	//vector<Vector4> object_def;
 	//vector<Vector4> object_color;
@@ -117,7 +117,7 @@ public:
 
 	void render();
 
-	void setGeometry(std::shared_ptr<Geometry> _geometry);
+	void setGeometry(std::shared_ptr<Geometry::Geometry> _geometry);
 
 	void setCamera(std::shared_ptr<Camera> _camera);
 

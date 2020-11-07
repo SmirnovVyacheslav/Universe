@@ -6,12 +6,12 @@
 #include"camera.h"
 #include"geometry.h"
 #include"lighting.h"
-#include"x_vector.h"
+#include"math_3d.h"
 
 class Engine
 {
 	std::unique_ptr<DX_11> device;
-	shared_ptr<Geometry> geometry;
+	shared_ptr<Geometry::Geometry> geometry;
 	shared_ptr<Camera> camera;
 	shared_ptr<Light> light;
 

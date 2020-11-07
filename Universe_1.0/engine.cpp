@@ -17,7 +17,7 @@ bool Engine::init()
 	camera.reset(new Camera(wnd_width, wnd_height));
 	device->setCamera(camera);
 
-	geometry.reset(new Geometry());
+	geometry.reset(new Geometry::Geometry());
 	device->setGeometry(geometry);
 
 	light.reset(new Light(geometry, camera));

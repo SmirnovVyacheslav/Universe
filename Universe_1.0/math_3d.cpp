@@ -41,7 +41,7 @@ namespace Math_3d
 		Vector_3d vector_end_point = vector_to_project + plane_point;
 
 		// Make dot projection
-		float distance_to_plane = vector_to_project & normal;
+		float distance_to_plane = vector_to_project & plane_normal;
 		Vector_3d plane_point_b = vector_end_point - (distance_to_plane * plane_normal);
 
 		// Construst new projection for vector

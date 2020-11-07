@@ -8,13 +8,12 @@
 
 ******************************************************************************/
 
-// #include <vector>
-// #include <Windows.h>
 
-// //#include <xnamath.h>
-// #include <mutex>
-// #include <memory>
-// #include <map>
+#pragma once
+#include <string>
+#include <vector>
+#include <tuple>
+#include <memory>
 
 #include "math_3d.h"
 
@@ -55,7 +54,7 @@ namespace Geometry
 	*/
 	class Shape
 	{
-		using std::vector<std::tuple<float, float>> data_type;
+		using data_type = std::vector<std::pair<float, float>>;
 
 		bool wrap = true;
 		/**
@@ -108,6 +107,9 @@ namespace Geometry
 		const float path_delta = 0.01f;
 		bool solid = true;
 		int split_points = 3;
+		float sector_step = 1.0f / static_cast<float>(split_points);
+
+		void make_solid(Object_Data& data, int start_index, int center_index);
 
 	public:
 		Generator();
@@ -119,17 +121,15 @@ namespace Geometry
 
 
 		// TODO remake
-		void make_plane(ObjectData& data);
+		/*void make_plane(ObjectData& data);
 		Vector3 get_normal(Edge edge, Vector3 vertex);
 		bool check_index(int index, int max);
 		void calc_normal(Vertex* data);
 		Vector3 get_value(int i, int j);
 		Vector3 get_value_default(int i, int j);
-		void make_triangle(ObjectData& data, Edge edge);
+		void make_triangle(ObjectData& data, Edge edge);*/
 		// TODO remake
-
-		Vector3 rotate(Vector3 vec, Vector3 axis, float angle);
-	}
+	};
 
 	class Object
 	{
@@ -138,10 +138,10 @@ namespace Geometry
 		static int obj_counter;
 
 		Object* base;
-		ObjectData* data;
-		vector<Object*> components;
+		Object_Data* data;
+		std::vector<Object*> components;
 
-		Vector3 pos;
+		Math_3d::Vector_3d pos;
 
 	public:
 
@@ -152,7 +152,7 @@ namespace Geometry
 
 		int get_id();
 
-		ObjectData* get_data();
+		Object_Data* get_data();
 
 		void move_down();
 
@@ -163,14 +163,14 @@ namespace Geometry
 		// Object* person;
 		Object* landscape;
 
-		vector<Object*> scene;
+		std::vector<Object*> scene;
 
 	public:
 		Geometry();
 		~Geometry();
 
-		vector<Object*>::iterator begin();
-		vector<Object*>::iterator end();
+		std::vector<Object*>::iterator begin();
+		std::vector<Object*>::iterator end();
 	};
 
 	class Person : public Object

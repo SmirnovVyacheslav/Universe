@@ -6,15 +6,15 @@
 #include <thread>
 #include <mutex>
 
-#include "x_vector.h"
+#include "math_3d.h"
 
 struct cameraDef
 {
-	Vector4 a;
-	Vector4 b;
-	Vector4 c;
-	Vector4 d;
-	Vector4 color = { 0.0f, 0.0f, 0.0f, 0.0f};
+	Math_3d::Vector_4d a;
+	Math_3d::Vector_4d b;
+	Math_3d::Vector_4d c;
+	Math_3d::Vector_4d d;
+	Math_3d::Vector_4d color = { 0.0f, 0.0f, 0.0f, 0.0f};
 };
 
 class Camera
@@ -24,8 +24,8 @@ class Camera
 	XMVECTOR at;
 	XMVECTOR up;
 
-	Vector3 pos;
-	Vector3 viewPoint;
+	Math_3d::Vector_3d pos;
+	Math_3d::Vector_3d viewPoint;
 
 	XMMATRIX _view;
 	XMMATRIX _projection;

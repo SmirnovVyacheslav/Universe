@@ -386,7 +386,7 @@ void DX_11::render()
 		immediateContext->PSSetConstantBuffers(0, 2, cbarr);
 
 		// Установка вершинного буфера
-		UINT stride = sizeof(Vertex);
+		UINT stride = sizeof(Geometry::Vertex);
 		UINT offset = 0;
 		immediateContext->IASetVertexBuffers(0, 1, &it.second->vertexBuffer, &stride, &offset);
 
@@ -409,7 +409,7 @@ void DX_11::render()
 	swapChain->Present(0, 0);
 }
 
-void DX_11::setGeometry(shared_ptr<Geometry> _geometry)
+void DX_11::setGeometry(shared_ptr<Geometry::Geometry> _geometry)
 {
 	//cameraDef camera_def = camera->get_def();
 
@@ -426,7 +426,7 @@ void DX_11::setGeometry(shared_ptr<Geometry> _geometry)
 
 	for (auto obj : *geometry)
 	{
-		ObjectData* objData = obj->get_data();
+		Geometry::Object_Data* objData = obj->get_data();
 
 		GPUData *gpuData = new GPUData;
 		objects.push_back(std::make_pair(objData, gpuData));
@@ -449,7 +449,7 @@ void DX_11::setGeometry(shared_ptr<Geometry> _geometry)
 
 		// Создание вершинного буфера
 		bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-		bufferDesc.ByteWidth = sizeof(Vertex) * objData->vertices.size();
+		bufferDesc.ByteWidth = sizeof(Geometry::Vertex) * objData->vertices.size();
 		bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		bufferDesc.MiscFlags = 0;
@@ -483,7 +483,7 @@ void DX_11::updateGeometry()
 	{
 		D3D11_MAPPED_SUBRESOURCE resource;
 		immediateContext->Map(it.second->vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
-		memcpy(resource.pData, &it.first->vertices[0], it.first->vertices.size() * sizeof(Vertex));
+		memcpy(resource.pData, &it.first->vertices[0], it.first->vertices.size() * sizeof(Geometry::Vertex));
 		immediateContext->Unmap(it.second->vertexBuffer, 0);
 	}
 }
