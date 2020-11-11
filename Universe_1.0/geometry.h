@@ -118,17 +118,6 @@ namespace Geometry
 		~Generator() {};
 
 		void make_mesh(Object_Data& data);
-
-
-		// TODO remake
-		/*void make_plane(ObjectData& data);
-		Vector3 get_normal(Edge edge, Vector3 vertex);
-		bool check_index(int index, int max);
-		void calc_normal(Vertex* data);
-		Vector3 get_value(int i, int j);
-		Vector3 get_value_default(int i, int j);
-		void make_triangle(ObjectData& data, Edge edge);*/
-		// TODO remake
 	};
 
 	class Object
@@ -161,7 +150,7 @@ namespace Geometry
 	class Geometry
 	{
 		// Object* person;
-		Object* landscape;
+		// Object* landscape;
 
 		std::vector<Object*> scene;
 
