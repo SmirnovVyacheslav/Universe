@@ -149,7 +149,7 @@ namespace Geometry
 
 	class Geometry
 	{
-		// Object* person;
+		Object* person;
 		// Object* landscape;
 
 		std::vector<Object*> scene;
@@ -176,15 +176,6 @@ namespace Geometry
 	public:
 		Landscape(Object* base = nullptr);
 		~Landscape();
-
-		virtual void create();
-	};
-
-	class Test : public Object
-	{
-	public:
-		Test(Object* base = nullptr);
-		~Test();
 
 		virtual void create();
 	};

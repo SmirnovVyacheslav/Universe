@@ -124,6 +124,7 @@ namespace Geometry
 
 		if (!solid)
 		{
+			data.size = data.indices.size();
 			return;
 		}
 
@@ -138,22 +139,29 @@ namespace Geometry
 		// Add mesh for begin sector
 		make_solid(data, object_first_index, object_last_index);
 		// Add mesh for end sector
-		make_solid(data, object_last_index - shape->size(), object_last_index + 1);
+		//make_solid(data, object_last_index - shape->size(), object_last_index + 1);
 
 		data.size = data.indices.size();
 	}
 
-	void Generator::make_solid(Object_Data& data, int start_index, int center_index)
+	void Generator::make_solid(Object_Data& data, int abc_start_index, int center_index)
 	{
+		int a_start_index = 0;
+		int b_start_index = split_points + 1;
+		int c_start_index = 0;
+		for (int i = 2; i <= split_points + 2; ++i)
+		{
+			c_start_index += i;
+		}
 		for (int i = 0; i < shape->size(); ++i)
 		{
-			int a_index = start_index + i;
-			int b_index = start_index + (i + 1) % shape->size();
+			int a_index = abc_start_index + i;
+			int b_index = abc_start_index + (i + 1) % shape->size();
 			int c_index = center_index;
 
-			Math_3d::Vector_3d ab_vec = data.vertices[b_index].pos - data.vertices[a_index].pos;
-			Math_3d::Vector_3d bc_vec = data.vertices[c_index].pos - data.vertices[b_index].pos;
-			Math_3d::Vector_3d ac_vec = data.vertices[c_index].pos - data.vertices[a_index].pos;
+			Math_3d::Vector_3d ab_vec = (data.vertices[b_index].pos - data.vertices[a_index].pos).normalize();
+			Math_3d::Vector_3d bc_vec = (data.vertices[c_index].pos - data.vertices[b_index].pos).normalize();
+			Math_3d::Vector_3d ac_vec = (data.vertices[c_index].pos - data.vertices[a_index].pos).normalize();
 
 			// A * * B
 			//  * * *
@@ -162,23 +170,38 @@ namespace Geometry
 			// Loop via level
 			// Add vertex
 			int start_index = data.vertices.size();
+			int count = 0;
 			for (int j = 0; j < split_points + 2; ++j)
 			{
 				Math_3d::Vector_3d start_point = data.vertices[a_index].pos + ac_vec * sector_step * j;
 				// Loop via row
 				for (int k = 0; k < split_points + 2 - j; k++)
 				{
-					Math_3d::Vector_3d new_point = start_point + ab_vec * sector_step * k;
-					if (new_point != data.vertices[a_index].pos && new_point != data.vertices[b_index].pos && new_point != data.vertices[c_index].pos)
+					if (count == a_start_index)
 					{
+						data.vertices.push_back(data.vertices[a_index]);
+					}
+					else if (count == b_start_index)
+					{
+						data.vertices.push_back(data.vertices[b_index]);
+					}
+					else if (count == c_start_index)
+					{
+						data.vertices.push_back(data.vertices[c_index]);
+					}
+					else
+					{
+						Math_3d::Vector_3d new_point = start_point + ab_vec * sector_step * k;
 						Vertex new_vertex;
 						new_vertex.pos = new_point;
 						data.vertices.push_back(new_vertex);
 					}
+					count++;
 				}
 			}
 
 			// Add indexies
+			count = 0;
 			int sub_row_index_start = 0;
 			for (int j = 0; j < split_points + 1; ++j)
 			{
@@ -187,7 +210,7 @@ namespace Geometry
 					// Add low triangle
 					// 1   2
 					//   3
-					if (k % 2)
+					if (!(k % 2))
 					{
 						int p1_index = start_index + sub_row_index_start + (k / 2);
 						int p2_index = start_index + sub_row_index_start + (k / 2) + 1;
@@ -210,7 +233,7 @@ namespace Geometry
 						data.indices.push_back(p2_index);
 						data.indices.push_back(p3_index);
 					}
-
+					count++;
 				}
 				sub_row_index_start += split_points + 2 - j;
 			}
@@ -220,15 +243,9 @@ namespace Geometry
 
 	Geometry::Geometry()
 	{
-		//person = new Person();
-
-		/*landscape = new Landscape();
-		landscape->create();
-		scene.push_back(landscape);*/
-
-		/*Object* test = new Test;
-		test->create();
-		scene.push_back(test);*/
+		person = new Person();
+		person->create();
+		scene.push_back(person);
 	}
 
 	Geometry::~Geometry()
@@ -250,19 +267,30 @@ namespace Geometry
 	}
 
 
-	Person::Person(Object* base) : Object(base) {}
+	Person::Person(Object* base) : Object(base)
+	{
+		data = new Object_Data;
+		objects.push_back(this);
+	}
 
 	Person::~Person()
 	{
-		for (auto obj : components)
-		{
-			delete obj;
-		}
+		delete data;
 	}
 
 	void Person::create()
 	{
+		std::vector<Math_3d::Vector_3d> control_points = { 
+			Math_3d::Vector_3d(1.0f, -5.0f, -1.0f),
+			Math_3d::Vector_3d(1.0f, 2.0f, -1.0f),
+			Math_3d::Vector_3d(1.0f, 3.0f, -1.0f) };
+		Math_3d::Vector_3d base_vec = Math_3d::Vector_3d(1.0f, 0.0f, 0.0f);
+		Generator mesh_generator(std::make_unique<Path>(control_points),
+			std::make_unique<Shape>(std::string("square"), true), base_vec);
 
+		mesh_generator.make_mesh(*data);
+
+		data->color = { 0.0f, 0.0f, 1.0f };
 	}
 
 
@@ -275,11 +303,6 @@ namespace Geometry
 	Landscape::~Landscape()
 	{
 		delete data;
-
-		for (auto obj : components)
-		{
-			delete obj;
-		}
 	}
 
 	void Landscape::create()
@@ -288,32 +311,7 @@ namespace Geometry
 	}
 
 
-	Test::Test(Object* _base) : Object(_base)
-	{
-		data = new Object_Data;
-		objects.push_back(this);
-	}
-
-	Test::~Test()
-	{
-		delete data;
-	}
-
-	void Test::create()
-	{
-		/*vector<Vector3> control_points = { Vector3(1.0f, -5.0f, -1.0f), Vector3(1.0f, 2.0f, -1.0f), Vector3(1.0f, 3.0f, -1.0f) };
-		Vector3 base_vec = Vector3(1.0f, 0.0f, 0.0f);
-		GeometryConstructor construstor(std::make_unique<GeometryPath>(control_points),
-			std::make_unique<GeometryShape>(), base_vec);
-
-		construstor.make_mesh(*data);
-
-		data->color = { 0.0f, 0.0f, 1.0f };*/
-	}
-
-
-
-	Object::Object(Object* _base) : base(_base)
+	Object::Object(Object* base) : base(base)
 	{
 		data = nullptr;
 		id = obj_counter++;
