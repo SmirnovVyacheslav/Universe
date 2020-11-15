@@ -138,10 +138,10 @@ namespace Geometry
 		data.vertices.push_back(vertex);
 
 		// Add mesh for begin sector
-		Math_3d::Vector_3d normal = path->get_point(0.0f) - path->get_point(path_delta);
+		Math_3d::Vector_3d normal = (path->get_point(0.0f) - path->get_point(path_delta)).normalize();
 		make_solid(data, object_first_index, object_last_index, normal);
 		// Add mesh for end sector
-		normal = path->get_point(1.0f) - path->get_point(1.0f - path_delta);
+		normal = (path->get_point(1.0f) - path->get_point(1.0f - path_delta)).normalize();
 		make_solid(data, object_last_index - shape->size(), object_last_index + 1, normal);
 
 		data.size = data.indices.size();
@@ -292,7 +292,7 @@ namespace Geometry
 
 		mesh_generator.make_mesh(*data);
 
-		data->color = { 0.0f, 0.0f, 1.0f };
+		data->color = { 0.0f, 100.0f, 150.0f };
 	}
 
 
