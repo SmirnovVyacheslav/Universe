@@ -20,10 +20,10 @@ namespace Geometry
 	{
 		if (type == "square")
 		{
-			data = { std::make_pair(1.0f, 0.0f),
-					 std::make_pair(1.0f, 90.0f),
-					 std::make_pair(1.0f, 180.0f),
-					 std::make_pair(1.0f, 270.0f) };
+			data = { std::make_pair(3.0f, 0.0f),
+					 std::make_pair(3.0f, 90.0f),
+					 std::make_pair(3.0f, 180.0f),
+					 std::make_pair(3.0f, 270.0f) };
 		}
 	}
 
@@ -139,7 +139,7 @@ namespace Geometry
 		// Add mesh for begin sector
 		make_solid(data, object_first_index, object_last_index);
 		// Add mesh for end sector
-		//make_solid(data, object_last_index - shape->size(), object_last_index + 1);
+		make_solid(data, object_last_index - shape->size(), object_last_index + 1);
 
 		data.size = data.indices.size();
 	}
@@ -159,9 +159,9 @@ namespace Geometry
 			int b_index = abc_start_index + (i + 1) % shape->size();
 			int c_index = center_index;
 
-			Math_3d::Vector_3d ab_vec = (data.vertices[b_index].pos - data.vertices[a_index].pos).normalize();
-			Math_3d::Vector_3d bc_vec = (data.vertices[c_index].pos - data.vertices[b_index].pos).normalize();
-			Math_3d::Vector_3d ac_vec = (data.vertices[c_index].pos - data.vertices[a_index].pos).normalize();
+			Math_3d::Vector_3d ab_vec = (data.vertices[b_index].pos - data.vertices[a_index].pos);
+			Math_3d::Vector_3d bc_vec = (data.vertices[c_index].pos - data.vertices[b_index].pos);
+			Math_3d::Vector_3d ac_vec = (data.vertices[c_index].pos - data.vertices[a_index].pos);
 
 			// A * * B
 			//  * * *
@@ -173,11 +173,11 @@ namespace Geometry
 			int count = 0;
 			for (int j = 0; j < split_points + 2; ++j)
 			{
-				Math_3d::Vector_3d start_point = data.vertices[a_index].pos + ac_vec * sector_step * j;
+				Math_3d::Vector_3d start_point = data.vertices[a_index].pos + ac_vec * sector_step * static_cast<float>(j);
 				// Loop via row
 				for (int k = 0; k < split_points + 2 - j; k++)
 				{
-					if (count == a_start_index)
+					/*if (count == a_start_index)
 					{
 						data.vertices.push_back(data.vertices[a_index]);
 					}
@@ -190,18 +190,17 @@ namespace Geometry
 						data.vertices.push_back(data.vertices[c_index]);
 					}
 					else
-					{
-						Math_3d::Vector_3d new_point = start_point + ab_vec * sector_step * k;
+					{*/
+						Math_3d::Vector_3d new_point = start_point + ab_vec * sector_step * static_cast<float>(k);
 						Vertex new_vertex;
 						new_vertex.pos = new_point;
 						data.vertices.push_back(new_vertex);
-					}
+					//}
 					count++;
 				}
 			}
 
 			// Add indexies
-			count = 0;
 			int sub_row_index_start = 0;
 			for (int j = 0; j < split_points + 1; ++j)
 			{
@@ -233,7 +232,6 @@ namespace Geometry
 						data.indices.push_back(p2_index);
 						data.indices.push_back(p3_index);
 					}
-					count++;
 				}
 				sub_row_index_start += split_points + 2 - j;
 			}
@@ -281,9 +279,9 @@ namespace Geometry
 	void Person::create()
 	{
 		std::vector<Math_3d::Vector_3d> control_points = { 
-			Math_3d::Vector_3d(1.0f, -5.0f, -1.0f),
-			Math_3d::Vector_3d(1.0f, 2.0f, -1.0f),
-			Math_3d::Vector_3d(1.0f, 3.0f, -1.0f) };
+			Math_3d::Vector_3d(0.0f, -2.0f, 0.0f),
+			//Math_3d::Vector_3d(1.0f, 2.0f, -1.0f),
+			Math_3d::Vector_3d(0.0f, 1.0f, 0.0f) };
 		Math_3d::Vector_3d base_vec = Math_3d::Vector_3d(1.0f, 0.0f, 0.0f);
 		Generator mesh_generator(std::make_unique<Path>(control_points),
 			std::make_unique<Shape>(std::string("square"), true), base_vec);

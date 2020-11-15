@@ -107,7 +107,7 @@ namespace Geometry
 		const float path_delta = 0.01f;
 		bool solid = true;
 		int split_points = 3;
-		float sector_step = 1.0f / static_cast<float>(split_points);
+		float sector_step = 1.0f / static_cast<float>(split_points + 1);
 
 		void make_solid(Object_Data& data, int start_index, int center_index);
 
