@@ -97,6 +97,7 @@ namespace Geometry
 				const float angle = item.second;
 
 				vertex.pos = center + (Math_3d::rotate_vector(base_vec, path_vec, angle).normalize() * length);
+				vertex.normal = (vertex.pos - center).normalize();
 				data.vertices.push_back(vertex);
 			}
 
@@ -137,14 +138,16 @@ namespace Geometry
 		data.vertices.push_back(vertex);
 
 		// Add mesh for begin sector
-		make_solid(data, object_first_index, object_last_index);
+		Math_3d::Vector_3d normal = path->get_point(0.0f) - path->get_point(path_delta);
+		make_solid(data, object_first_index, object_last_index, normal);
 		// Add mesh for end sector
-		make_solid(data, object_last_index - shape->size(), object_last_index + 1);
+		normal = path->get_point(1.0f) - path->get_point(1.0f - path_delta);
+		make_solid(data, object_last_index - shape->size(), object_last_index + 1, normal);
 
 		data.size = data.indices.size();
 	}
 
-	void Generator::make_solid(Object_Data& data, int abc_start_index, int center_index)
+	void Generator::make_solid(Object_Data& data, int abc_start_index, int center_index, Math_3d::Vector_3d normal)
 	{
 		int a_start_index = 0;
 		int b_start_index = split_points + 1;
@@ -194,6 +197,7 @@ namespace Geometry
 						Math_3d::Vector_3d new_point = start_point + ab_vec * sector_step * static_cast<float>(k);
 						Vertex new_vertex;
 						new_vertex.pos = new_point;
+						new_vertex.normal = normal;
 						data.vertices.push_back(new_vertex);
 					//}
 					count++;

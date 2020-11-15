@@ -109,7 +109,7 @@ namespace Geometry
 		int split_points = 3;
 		float sector_step = 1.0f / static_cast<float>(split_points + 1);
 
-		void make_solid(Object_Data& data, int start_index, int center_index);
+		void make_solid(Object_Data& data, int start_index, int center_index, Math_3d::Vector_3d normal);
 
 	public:
 		Generator();
