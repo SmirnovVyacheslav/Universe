@@ -101,7 +101,14 @@ VS_OUTPUT VS( float4 Pos : POSITION, float4 Normal: NORMAL)
     //}
     
 	//output.Color = light_color * color;
-	output.Color = dot(Normal, normalize(light_pos.xyz - Pos.xyz)) * light_color * color;
+
+    float ambientStrength = 0.4f;
+    float3 ambient = ambientStrength * light_color.xyz;
+
+    float3 result = ambient * color.xyz;
+    output.Color = float4(result, 1.0f);
+
+	// output.Color = dot(normalize(Normal), normalize(light_pos.xyz - Pos.xyz)) * light_color * color;
 
     return output;
 }
@@ -110,7 +117,7 @@ VS_OUTPUT VS( float4 Pos : POSITION, float4 Normal: NORMAL)
 //--------------------------------------------------------------------------------------
 // Pixel Shader
 //--------------------------------------------------------------------------------------
-float4 PS( VS_OUTPUT input ) : SV_Target
+float4 PS( VS_OUTPUT input ): SV_Target
 {
     return input.Color;
 }

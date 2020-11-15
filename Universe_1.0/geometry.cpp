@@ -292,7 +292,7 @@ namespace Geometry
 
 		mesh_generator.make_mesh(*data);
 
-		data->color = { 0.0f, 100.0f, 150.0f };
+		data->color = { 0.6f, 0.3f, 0.0f };
 	}
 
 
