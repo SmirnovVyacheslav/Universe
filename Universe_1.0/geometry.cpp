@@ -97,7 +97,7 @@ namespace Geometry
 				const float angle = item.second;
 
 				vertex.pos = center + (Math_3d::rotate_vector(base_vec, path_vec, angle).normalize() * length);
-				vertex.normal = (vertex.pos - center).normalize();
+				// vertex.normal = (vertex.pos - center).normalize();
 				data.vertices.push_back(vertex);
 			}
 
@@ -122,6 +122,8 @@ namespace Geometry
 			}
 		}
 		int object_last_index = data.vertices.size();
+
+		calc_normale(data, object_first_index);
 
 		if (!solid)
 		{
@@ -242,6 +244,40 @@ namespace Geometry
 		}
 	}
 
+	void Generator::calc_normale(Object_Data& data, int start_index)
+	{
+		int n_steps = static_cast<int>(1.0f / step);
+		int curr_index, up_index, down_index, left_index, right_index;
+		for (int i = 0; i < n_steps; ++i)
+		{
+			up_index = start_index + abs(i - 1) * shape->size();
+			down_index = start_index + ((i + 1) % n_steps == 0 ? i - 1 : i + 1) * shape->size();
+			for (int j = 0; j < shape->size(); ++j)
+			{
+				curr_index = start_index + i * shape->size() + j;
+				up_index += j;
+				down_index += j;
+				// If wrap
+				if (shape->size() == shape->get_edges_number())
+				{
+					left_index = start_index + i * shape->size() + (j - 1 < 0 ? shape->size() - 1 : j - 1);
+					right_index = start_index + i * shape->size() + (j + 1) % shape->size();
+				}
+				else
+				{
+					left_index = start_index + i * shape->size() + (j - 1 < 0 ? j + 1 : j - 1);
+					right_index = start_index + i * shape->size() + (j + 1 == shape->size() ? j - 1 : j + 1);
+				}
+
+				Math_3d::Vector_3d a_vec = data.vertices[up_index].pos - data.vertices[curr_index].pos;
+				Math_3d::Vector_3d b_vec = data.vertices[down_index].pos - data.vertices[curr_index].pos;
+				Math_3d::Vector_3d c_vec = data.vertices[left_index].pos - data.vertices[curr_index].pos;
+				Math_3d::Vector_3d d_vec = data.vertices[right_index].pos - data.vertices[curr_index].pos;
+
+				data.vertices[curr_index].normal = ((a_vec + b_vec + c_vec + d_vec) / 4.0f).normalize();
+			}
+		}
+	}
 
 	Geometry::Geometry()
 	{

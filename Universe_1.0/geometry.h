@@ -110,6 +110,7 @@ namespace Geometry
 		float sector_step = 1.0f / static_cast<float>(split_points + 1);
 
 		void make_solid(Object_Data& data, int start_index, int center_index, Math_3d::Vector_3d normal);
+		void calc_normale(Object_Data& data, int start_index);
 
 	public:
 		Generator();
