@@ -250,13 +250,11 @@ namespace Geometry
 		int curr_index, up_index, down_index, left_index, right_index;
 		for (int i = 0; i < n_steps; ++i)
 		{
-			up_index = start_index + abs(i - 1) * shape->size();
-			down_index = start_index + ((i + 1) % n_steps == 0 ? i - 1 : i + 1) * shape->size();
 			for (int j = 0; j < shape->size(); ++j)
 			{
 				curr_index = start_index + i * shape->size() + j;
-				up_index += j;
-				down_index += j;
+				up_index = start_index + (i - 1 < 0 ? i + 1 : i - 1) * shape->size() + j;
+				down_index = start_index + (i + 1 == n_steps ? i - 1 : i + 1) * shape->size() + j;
 				// If wrap
 				if (shape->size() == shape->get_edges_number())
 				{
@@ -269,12 +267,42 @@ namespace Geometry
 					right_index = start_index + i * shape->size() + (j + 1 == shape->size() ? j - 1 : j + 1);
 				}
 
-				Math_3d::Vector_3d a_vec = data.vertices[up_index].pos - data.vertices[curr_index].pos;
-				Math_3d::Vector_3d b_vec = data.vertices[down_index].pos - data.vertices[curr_index].pos;
-				Math_3d::Vector_3d c_vec = data.vertices[left_index].pos - data.vertices[curr_index].pos;
-				Math_3d::Vector_3d d_vec = data.vertices[right_index].pos - data.vertices[curr_index].pos;
+				Math_3d::Vector_3d path_normal = (data.vertices[curr_index].pos -
+												  path->get_point(static_cast<float>(i) * step)).normalize();
 
-				data.vertices[curr_index].normal = ((a_vec + b_vec + c_vec + d_vec) / 4.0f).normalize();
+				Math_3d::Vector_3d u_vec = (data.vertices[up_index].pos - data.vertices[curr_index].pos);
+				Math_3d::Vector_3d d_vec = (data.vertices[down_index].pos - data.vertices[curr_index].pos);
+				Math_3d::Vector_3d l_vec = (data.vertices[left_index].pos - data.vertices[curr_index].pos);
+				Math_3d::Vector_3d r_vec = (data.vertices[right_index].pos - data.vertices[curr_index].pos);
+
+				Math_3d::Vector_3d vec_1 = u_vec ^ l_vec;
+				if (Math_3d::radian_to_degree(Math_3d::angle(path_normal, vec_1)) > 90.0f)
+				{
+					vec_1 *= -1.0f;
+				}
+				Math_3d::Vector_3d vec_2 = u_vec ^ r_vec;
+				if (Math_3d::radian_to_degree(Math_3d::angle(path_normal, vec_2)) > 90.0f)
+				{
+					vec_2 *= -1.0f;
+				}
+				Math_3d::Vector_3d vec_3 = d_vec ^ l_vec;
+				if (Math_3d::radian_to_degree(Math_3d::angle(path_normal, vec_3)) > 90.0f)
+				{
+					vec_3 *= -1.0f;
+				}
+				Math_3d::Vector_3d vec_4 = d_vec ^ r_vec;
+				if (Math_3d::radian_to_degree(Math_3d::angle(path_normal, vec_4)) > 90.0f)
+				{
+					vec_4 *= -1.0f;
+				}
+				Math_3d::Vector_3d sum_vec = vec_1 + vec_2 + vec_3 + vec_4;
+				sum_vec = sum_vec.normalize();
+				data.vertices[curr_index].normal = sum_vec;
+
+				if (Math_3d::radian_to_degree(Math_3d::angle(path_normal, data.vertices[curr_index].normal)) > 90.0f)
+				{
+					data.vertices[curr_index].normal *= -1.0f;
+				}
 			}
 		}
 	}
