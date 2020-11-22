@@ -15,15 +15,46 @@ namespace Geometry
 	int Object::obj_counter = 0;
 	std::vector<Object*> objects;
 
-	Shape::Shape(std::string type, bool wrap)
-	: wrap(wrap)
+	Shape::Shape(std::string type, float size)
 	{
 		if (type == "square")
 		{
-			data = { std::make_pair(3.0f, 0.0f),
-					 std::make_pair(3.0f, 90.0f),
-					 std::make_pair(3.0f, 180.0f),
-					 std::make_pair(3.0f, 270.0f) };
+			wrap = true;
+			data = { std::make_pair(size, 0.0f),
+					 std::make_pair(size, 90.0f),
+					 std::make_pair(size, 180.0f),
+					 std::make_pair(size, 270.0f) };
+		}
+		else if (type == "plane")
+		{
+			// * - * - * - * - * - * - * - * - *
+			//  \   \   \   \  |  /   /   /   /
+			//                 *
+			//            start point
+			wrap = false;
+			int segments = 100;
+			float normal_size = 1.0f;
+			float step = 1.0f / static_cast<float>(segments);
+
+			Math_3d::Vector_3d start_point  = { 0.0f, 0.0f, 0.0f };
+			Math_3d::Vector_3d normal_vec   = { 0.0f, 1.0f * normal_size, 0.0f };
+			Math_3d::Vector_3d plane_vec    = { 1.0f, 0.0f, 0.0f };
+			Math_3d::Vector_3d center_point = start_point + normal_vec;
+
+			for (float t = -0.5f; t <= 0.5f; t += step)
+			{
+				float plane_length = static_cast<float>(abs(size * t));
+				Math_3d::Vector_3d plane_point = center_point + (size * t) * plane_vec;
+				Math_3d::Vector_3d bisector_vec = plane_point - start_point;
+
+				float bisector_length = bisector_vec.length();
+				float bisector_angle = Math_3d::radian_to_degree(Math_3d::angle(bisector_vec, normal_vec));
+				if (t < 0.0f)
+				{
+					bisector_angle *= -1.0f;
+				}
+				data.push_back(std::make_pair(bisector_length, bisector_angle));
+			}
 		}
 	}
 
@@ -304,9 +335,13 @@ namespace Geometry
 
 	Geometry::Geometry()
 	{
-		person = new Person();
+		person = new Person;
 		person->create();
 		scene.push_back(person);
+
+		landscape = new Landscape;
+		landscape->create();
+		scene.push_back(landscape);
 	}
 
 	Geometry::~Geometry()
@@ -347,7 +382,7 @@ namespace Geometry
 			Math_3d::Vector_3d(0.0f, 1.0f, 0.0f) };
 		Math_3d::Vector_3d base_vec = Math_3d::Vector_3d(1.0f, 0.0f, 0.0f);
 		Generator mesh_generator(std::make_unique<Path>(control_points),
-			std::make_unique<Shape>(std::string("square"), true), base_vec);
+								 std::make_unique<Shape>(std::string("square"), 3.0f), base_vec);
 
 		mesh_generator.make_mesh(*data);
 
@@ -368,7 +403,16 @@ namespace Geometry
 
 	void Landscape::create()
 	{
+		std::vector<Math_3d::Vector_3d> control_points = {
+			Math_3d::Vector_3d(-50.0f, -5.0f, 0.0f),
+			Math_3d::Vector_3d(50.0f, -5.0f, 0.0f) };
+		Math_3d::Vector_3d base_vec = Math_3d::Vector_3d(0.0f, 1.0f, 0.0f);
+		Generator mesh_generator(std::make_unique<Path>(control_points),
+			std::make_unique<Shape>(std::string("plane"), 100.0f), base_vec);
 
+		mesh_generator.make_mesh(*data);
+
+		data->color = { 0.0f, 0.3f, 0.4f };
 	}
 
 

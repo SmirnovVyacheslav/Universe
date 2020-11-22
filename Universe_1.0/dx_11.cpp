@@ -340,7 +340,7 @@ void DX_11::render()
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
 
-	localConstantBuffer.light_pos = { 100.0f, -10.0f, 100.0f, 0.0f };
+	localConstantBuffer.light_pos = { 50.0f, 70.0f, 50.0f, 0.0f };
 	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	//localConstantBuffer_2.plane_num.x = (float)object_color.size();

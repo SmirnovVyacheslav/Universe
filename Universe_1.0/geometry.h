@@ -65,7 +65,7 @@ namespace Geometry
 		data_type data;
 
 	public:
-		Shape(std::string type, bool wrap);
+		Shape(std::string type, float size);
 
 		data_type::iterator begin();
 		data_type::iterator end();
@@ -151,7 +151,7 @@ namespace Geometry
 	class Geometry
 	{
 		Object* person;
-		// Object* landscape;
+		Object* landscape;
 
 		std::vector<Object*> scene;
 
