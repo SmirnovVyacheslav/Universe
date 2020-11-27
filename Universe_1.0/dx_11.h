@@ -79,6 +79,8 @@ class DX_11
 	ConstantBuffer          localConstantBuffer;
 	ConstantBuffer_2          localConstantBuffer_2;
 
+	D3D11_VIEWPORT viewPort;
+
 	//============Создание поверхности для Z-буфера============
 	ID3D11DepthStencilState*      pDSState;
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
@@ -99,6 +101,22 @@ class DX_11
 	XMMATRIX                mWorld;
 
 	vector<pair<Geometry::Object_Data*, GPUData*>>           objects;
+
+
+	// Shadow map
+// ==================================================================
+	ID3D11Texture2D* m_shadowMap;
+
+	ID3D11DepthStencilView* m_shadowDepthView;
+	ID3D11ShaderResourceView* m_shadowResourceView;
+	ID3D11SamplerState* m_comparisonSampler_point;
+
+	ID3D11Buffer* m_lightViewProjectionBuffer;
+	XMFLOAT4X4 m_lightViewProjectionBufferData;
+
+	D3D11_VIEWPORT m_shadowViewport;
+
+	//===============================================================
 
 	//vector<Vector4> object_def;
 	//vector<Vector4> object_color;
