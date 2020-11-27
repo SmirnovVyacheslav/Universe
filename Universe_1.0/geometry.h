@@ -65,7 +65,7 @@ namespace Geometry
 		data_type data;
 
 	public:
-		Shape(std::string type, bool wrap);
+		Shape(std::string type, float size);
 
 		data_type::iterator begin();
 		data_type::iterator end();
@@ -107,9 +107,10 @@ namespace Geometry
 		const float path_delta = 0.01f;
 		bool solid = true;
 		int split_points = 3;
-		float sector_step = 1.0f / static_cast<float>(split_points);
+		float sector_step = 1.0f / static_cast<float>(split_points + 1);
 
-		void make_solid(Object_Data& data, int start_index, int center_index);
+		void make_solid(Object_Data& data, int start_index, int center_index, Math_3d::Vector_3d normal);
+		void calc_normale(Object_Data& data, int start_index);
 
 	public:
 		Generator();
@@ -118,17 +119,6 @@ namespace Geometry
 		~Generator() {};
 
 		void make_mesh(Object_Data& data);
-
-
-		// TODO remake
-		/*void make_plane(ObjectData& data);
-		Vector3 get_normal(Edge edge, Vector3 vertex);
-		bool check_index(int index, int max);
-		void calc_normal(Vertex* data);
-		Vector3 get_value(int i, int j);
-		Vector3 get_value_default(int i, int j);
-		void make_triangle(ObjectData& data, Edge edge);*/
-		// TODO remake
 	};
 
 	class Object
@@ -160,7 +150,7 @@ namespace Geometry
 
 	class Geometry
 	{
-		// Object* person;
+		Object* person;
 		Object* landscape;
 
 		std::vector<Object*> scene;
@@ -187,15 +177,6 @@ namespace Geometry
 	public:
 		Landscape(Object* base = nullptr);
 		~Landscape();
-
-		virtual void create();
-	};
-
-	class Test : public Object
-	{
-	public:
-		Test(Object* base = nullptr);
-		~Test();
 
 		virtual void create();
 	};

@@ -22,8 +22,8 @@ namespace Math_3d
 	using Vector_4d = struct Vector_4d;
 
 	float factorial(int n);
-	inline float radian_to_degree(float radian);
-	inline float degree_to_radian(float degree);
+	float radian_to_degree(float radian);
+	float degree_to_radian(float degree);
 	/**
 	 * Make projection of vector to plane
 	 */

@@ -176,7 +176,7 @@ namespace Math_3d
 
 	Vector_3d::operator Vector_4d()
 	{
-		return { x, y, z, 0.0f };
+		return { x, y, z, 1.0f };
 	}
 
 	Vector_3d operator+(const Vector_3d& vec_a, const Vector_3d& vec_b)

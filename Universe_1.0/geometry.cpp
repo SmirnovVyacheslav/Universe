@@ -15,15 +15,46 @@ namespace Geometry
 	int Object::obj_counter = 0;
 	std::vector<Object*> objects;
 
-	Shape::Shape(std::string type, bool wrap)
-	: wrap(wrap)
+	Shape::Shape(std::string type, float size)
 	{
 		if (type == "square")
 		{
-			data = { std::make_pair(1.0f, 0.0f),
-					 std::make_pair(1.0f, 90.0f),
-					 std::make_pair(1.0f, 180.0f),
-					 std::make_pair(1.0f, 270.0f) };
+			wrap = true;
+			data = { std::make_pair(size, 0.0f),
+					 std::make_pair(size, 90.0f),
+					 std::make_pair(size, 180.0f),
+					 std::make_pair(size, 270.0f) };
+		}
+		else if (type == "plane")
+		{
+			// * - * - * - * - * - * - * - * - *
+			//  \   \   \   \  |  /   /   /   /
+			//                 *
+			//            start point
+			wrap = false;
+			int segments = 100;
+			float normal_size = 1.0f;
+			float step = 1.0f / static_cast<float>(segments);
+
+			Math_3d::Vector_3d start_point  = { 0.0f, 0.0f, 0.0f };
+			Math_3d::Vector_3d normal_vec   = { 0.0f, 1.0f * normal_size, 0.0f };
+			Math_3d::Vector_3d plane_vec    = { 1.0f, 0.0f, 0.0f };
+			Math_3d::Vector_3d center_point = start_point + normal_vec;
+
+			for (float t = -0.5f; t <= 0.5f; t += step)
+			{
+				float plane_length = static_cast<float>(abs(size * t));
+				Math_3d::Vector_3d plane_point = center_point + (size * t) * plane_vec;
+				Math_3d::Vector_3d bisector_vec = plane_point - start_point;
+
+				float bisector_length = bisector_vec.length();
+				float bisector_angle = Math_3d::radian_to_degree(Math_3d::angle(bisector_vec, normal_vec));
+				if (t < 0.0f)
+				{
+					bisector_angle *= -1.0f;
+				}
+				data.push_back(std::make_pair(bisector_length, bisector_angle));
+			}
 		}
 	}
 
@@ -97,6 +128,7 @@ namespace Geometry
 				const float angle = item.second;
 
 				vertex.pos = center + (Math_3d::rotate_vector(base_vec, path_vec, angle).normalize() * length);
+				// vertex.normal = (vertex.pos - center).normalize();
 				data.vertices.push_back(vertex);
 			}
 
@@ -122,8 +154,11 @@ namespace Geometry
 		}
 		int object_last_index = data.vertices.size();
 
+		calc_normale(data, object_first_index);
+
 		if (!solid)
 		{
+			data.size = data.indices.size();
 			return;
 		}
 
@@ -136,24 +171,33 @@ namespace Geometry
 		data.vertices.push_back(vertex);
 
 		// Add mesh for begin sector
-		make_solid(data, object_first_index, object_last_index);
+		Math_3d::Vector_3d normal = (path->get_point(0.0f) - path->get_point(path_delta)).normalize();
+		make_solid(data, object_first_index, object_last_index, normal);
 		// Add mesh for end sector
-		make_solid(data, object_last_index - shape->size(), object_last_index + 1);
+		normal = (path->get_point(1.0f) - path->get_point(1.0f - path_delta)).normalize();
+		make_solid(data, object_last_index - shape->size(), object_last_index + 1, normal);
 
 		data.size = data.indices.size();
 	}
 
-	void Generator::make_solid(Object_Data& data, int start_index, int center_index)
+	void Generator::make_solid(Object_Data& data, int abc_start_index, int center_index, Math_3d::Vector_3d normal)
 	{
+		int a_start_index = 0;
+		int b_start_index = split_points + 1;
+		int c_start_index = 0;
+		for (int i = 2; i <= split_points + 2; ++i)
+		{
+			c_start_index += i;
+		}
 		for (int i = 0; i < shape->size(); ++i)
 		{
-			int a_index = start_index + i;
-			int b_index = start_index + (i + 1) % shape->size();
+			int a_index = abc_start_index + i;
+			int b_index = abc_start_index + (i + 1) % shape->size();
 			int c_index = center_index;
 
-			Math_3d::Vector_3d ab_vec = data.vertices[b_index].pos - data.vertices[a_index].pos;
-			Math_3d::Vector_3d bc_vec = data.vertices[c_index].pos - data.vertices[b_index].pos;
-			Math_3d::Vector_3d ac_vec = data.vertices[c_index].pos - data.vertices[a_index].pos;
+			Math_3d::Vector_3d ab_vec = (data.vertices[b_index].pos - data.vertices[a_index].pos);
+			Math_3d::Vector_3d bc_vec = (data.vertices[c_index].pos - data.vertices[b_index].pos);
+			Math_3d::Vector_3d ac_vec = (data.vertices[c_index].pos - data.vertices[a_index].pos);
 
 			// A * * B
 			//  * * *
@@ -162,19 +206,34 @@ namespace Geometry
 			// Loop via level
 			// Add vertex
 			int start_index = data.vertices.size();
+			int count = 0;
 			for (int j = 0; j < split_points + 2; ++j)
 			{
-				Math_3d::Vector_3d start_point = data.vertices[a_index].pos + ac_vec * sector_step * j;
+				Math_3d::Vector_3d start_point = data.vertices[a_index].pos + ac_vec * sector_step * static_cast<float>(j);
 				// Loop via row
 				for (int k = 0; k < split_points + 2 - j; k++)
 				{
-					Math_3d::Vector_3d new_point = start_point + ab_vec * sector_step * k;
-					if (new_point != data.vertices[a_index].pos && new_point != data.vertices[b_index].pos && new_point != data.vertices[c_index].pos)
+					/*if (count == a_start_index)
 					{
+						data.vertices.push_back(data.vertices[a_index]);
+					}
+					else if (count == b_start_index)
+					{
+						data.vertices.push_back(data.vertices[b_index]);
+					}
+					else if (count == c_start_index)
+					{
+						data.vertices.push_back(data.vertices[c_index]);
+					}
+					else
+					{*/
+						Math_3d::Vector_3d new_point = start_point + ab_vec * sector_step * static_cast<float>(k);
 						Vertex new_vertex;
 						new_vertex.pos = new_point;
+						new_vertex.normal = normal;
 						data.vertices.push_back(new_vertex);
-					}
+					//}
+					count++;
 				}
 			}
 
@@ -187,7 +246,7 @@ namespace Geometry
 					// Add low triangle
 					// 1   2
 					//   3
-					if (k % 2)
+					if (!(k % 2))
 					{
 						int p1_index = start_index + sub_row_index_start + (k / 2);
 						int p2_index = start_index + sub_row_index_start + (k / 2) + 1;
@@ -210,201 +269,79 @@ namespace Geometry
 						data.indices.push_back(p2_index);
 						data.indices.push_back(p3_index);
 					}
-
 				}
 				sub_row_index_start += split_points + 2 - j;
 			}
 		}
 	}
 
-	//Vector3 GeometryConstructor::get_value_default(int i, int j)
-	//{
-	//	return u_step * i + v_step * j;
-	//}
+	void Generator::calc_normale(Object_Data& data, int start_index)
+	{
+		int n_steps = static_cast<int>(1.0f / step);
+		int curr_index, up_index, down_index, left_index, right_index;
+		// Calc normales
+		//      *      - up_index   -    *
+		//                  |
+		//  left_index - curr_index - right_index
+		//                  |
+		//      *      - down_index -    *
 
-	//Vector3 GeometryConstructor::get_value(int i, int j)
-	//{
-	//	if (i > 0 && j > 0 && i < u_square && j < v_square)
-	//	{
-	//		float y = interval / float(RAND_MAX) * float(rand());
-	//		return u_step * i + v_step * j + Vector3(0.0f, y, 0.0f);
-	//	}
-	//	return get_value_default(i, j);
-	//}
+		for (int i = 0; i < n_steps; ++i)
+		{
+			for (int j = 0; j < shape->size(); ++j)
+			{
+				curr_index = start_index + i * shape->size() + j;
+				up_index = start_index + (i - 1 < 0 ? i + 1 : i - 1) * shape->size() + j;
+				down_index = start_index + (i + 1 == n_steps ? i - 1 : i + 1) * shape->size() + j;
+				// If wrap
+				if (shape->size() == shape->get_edges_number())
+				{
+					left_index = start_index + i * shape->size() + (j - 1 < 0 ? shape->size() - 1 : j - 1);
+					right_index = start_index + i * shape->size() + (j + 1) % shape->size();
+				}
+				else
+				{
+					left_index = start_index + i * shape->size() + (j - 1 < 0 ? j + 1 : j - 1);
+					right_index = start_index + i * shape->size() + (j + 1 == shape->size() ? j - 1 : j + 1);
+				}
 
+				Math_3d::Vector_3d path_normal = (data.vertices[curr_index].pos -
+												  path->get_point(static_cast<float>(i) * step)).normalize();
 
-	//Vector3 GeometryConstructor::get_normal(Edge edge, Vector3 vertex)
-	//{
-	//	normal = (vertex - back_vertex).normalize();
-	//	if (edge.a == edge.b || edge.a == edge.c || edge.b == edge.c)
-	//	{
-	//		return normal;
-	//	}
-	//	return ((edge.a - edge.b) ^ (edge.a - edge.c)).normalize();
-	//}
+				Math_3d::Vector_3d u_vec = data.vertices[up_index].pos - data.vertices[curr_index].pos;
+				Math_3d::Vector_3d d_vec = data.vertices[down_index].pos - data.vertices[curr_index].pos;
+				Math_3d::Vector_3d l_vec = data.vertices[left_index].pos - data.vertices[curr_index].pos;
+				Math_3d::Vector_3d r_vec = data.vertices[right_index].pos - data.vertices[curr_index].pos;
 
-	//bool GeometryConstructor::check_index(int index, int max)
-	//{
-	//	if (index < 0)
-	//	{
-	//		return false;
-	//	}
-	//	if (index >= max)
-	//	{
-	//		return false;
-	//	}
-	//	return true;
-	//}
+				auto check_normale = [path_normal](Math_3d::Vector_3d vec) -> Math_3d::Vector_3d
+				{
+					if (Math_3d::radian_to_degree(Math_3d::angle(path_normal, vec)) > 90.0f)
+					{
+						return vec * -1.0f;
+					}
+					return vec;
+				};
 
-	//void GeometryConstructor::calc_normal(Vertex* data)
-	//{
-	//	for (int j = 0; j < v_vertex; ++j)
-	//	{
-	//		for (int i = 0; i < u_vertex; ++i)
-	//		{
-	//			vector<Edge> near_egdes;
-	//			Vector3 vertex_normal = { 0.0f, 0.0f, 0.0f };
+				Math_3d::Vector_3d normale_1 = check_normale(u_vec ^ l_vec);
+				Math_3d::Vector_3d normale_2 = check_normale(u_vec ^ r_vec);
+				Math_3d::Vector_3d normale_3 = check_normale(d_vec ^ l_vec);
+				Math_3d::Vector_3d normale_4 = check_normale(d_vec ^ r_vec);
 
-	//			// check t1 & t2
-	//			if (check_index(j - 1, v_vertex) && check_index(i - 1, u_vertex))
-	//			{
-	//				//t1
-	//				near_egdes.push_back({
-	//					data[(j - 1) * u_vertex + i - 1].pos,
-	//					data[j * u_vertex + i].pos,
-	//					data[j * u_vertex + i - 1].pos
-	//					});
-	//				//t2
-	//				near_egdes.push_back({
-	//					data[(j - 1) * u_vertex + i - 1].pos,
-	//					data[(j - 1) * u_vertex + i].pos,
-	//					data[j * u_vertex + i].pos
-	//					});
-	//			}
-	//			// check t3
-	//			if (check_index(j - 1, v_vertex) && check_index(i + 1, u_vertex))
-	//			{
-	//				//t3
-	//				near_egdes.push_back({
-	//					data[(j - 1) * u_vertex + i].pos,
-	//					data[j * u_vertex + i + 1].pos,
-	//					data[j * u_vertex + i].pos
-	//					});
-	//			}
-	//			// check t4 & t5
-	//			if (check_index(j + 1, v_vertex) && check_index(i + 1, u_vertex))
-	//			{
-	//				//t4
-	//				near_egdes.push_back({
-	//					data[j * u_vertex + i].pos,
-	//					data[j * u_vertex + i + 1].pos,
-	//					data[(j + 1) * u_vertex + i + 1].pos
-	//					});
-
-	//				//t5
-	//				near_egdes.push_back({
-	//					data[j * u_vertex + i].pos,
-	//					data[(j + 1) * u_vertex + i + 1].pos,
-	//					data[(j + 1) * u_vertex + i].pos
-	//					});
-	//			}
-	//			// check t6
-	//			if (check_index(j + 1, v_vertex) && check_index(i - 1, u_vertex))
-	//			{
-	//				near_egdes.push_back({
-	//					data[j * u_vertex + i - 1].pos,
-	//					data[j * u_vertex + i].pos,
-	//					data[(j + 1) * u_vertex + i].pos
-	//					});
-	//			}
-
-	//			for (auto edge : near_egdes)
-	//			{
-	//				vertex_normal = vertex_normal + get_normal(edge, data[j * u_vertex + i].pos);
-	//			}
-	//			vertex_normal = (vertex_normal / near_egdes.size()).normalize();
-
-	//			if (rad_to_deg(angle(vertex_normal, normal)) > 90.0f)
-	//			{
-	//				vertex_normal = vertex_normal * -1.0f;
-	//			}
-
-	//			data[j * u_vertex + i].normal = vertex_normal;
-	//		}
-	//	}
-	//}
-
-	//void GeometryConstructor::make_plane(ObjectData& data)
-	//{
-	//	int start_index = data.vertices.size();
-	//	data.vertices.resize(data.vertices.size() + u_vertex * v_vertex);
-	//	Vertex* vertex_data = &data.vertices[start_index];
-	//	int p1_index, p2_index, p3_index, p4_index;
-	//	for (int j = 0; j < v_square; ++j)
-	//	{
-	//		for (int i = 0; i < u_square; ++i)
-	//		{
-	//			if (wrap)
-	//			{
-	//				p1_index = j * u_vertex + i;
-	//				p2_index = j * u_vertex + (i + 1) % u_vertex;
-	//				p3_index = (j + 1) * u_vertex + (i + 1) % u_vertex;
-	//				p4_index = (j + 1) * u_vertex + i;
-	//			}
-	//			else
-	//			{
-	//				p1_index = j * u_vertex + i;
-	//				p2_index = j * u_vertex + i + 1;
-	//				p3_index = (j + 1) * u_vertex + i + 1;
-	//				p4_index = (j + 1) * u_vertex + i;
-	//			}
-
-	//			vertex_data[p1_index].pos = pos + get_value(i, j);
-	//			vertex_data[p2_index].pos = pos + get_value(i + 1, j);
-	//			vertex_data[p3_index].pos = pos + get_value(i + 1, j + 1);
-	//			vertex_data[p4_index].pos = pos + get_value(i, j + 1);
-
-	//			data.indices.push_back(start_index + p1_index);
-	//			data.indices.push_back(start_index + p2_index);
-	//			data.indices.push_back(start_index + p3_index);
-
-	//			data.indices.push_back(start_index + p1_index);
-	//			data.indices.push_back(start_index + p3_index);
-	//			data.indices.push_back(start_index + p4_index);
-	//		}
-	//	}
-
-	//	data.size = data.indices.size();
-
-	//	//Calc normales
-	//	calc_normal(vertex_data);
-	//}
-
-	//void GeometryConstructor::make_triangle(ObjectData& data, Edge edge)
-	//{
-	//	int start_index = data.vertices.size();
-	//	data.vertices.push_back(Vertex{ edge.a, get_normal(edge, edge.a) });
-	//	data.vertices.push_back(Vertex{ edge.b, get_normal(edge, edge.b) });
-	//	data.vertices.push_back(Vertex{ edge.c, get_normal(edge, edge.c) });
-
-	//	data.indices.push_back(start_index);
-	//	data.indices.push_back(start_index + 1);
-	//	data.indices.push_back(start_index + 2);
-	//}
-
-
+				data.vertices[curr_index].normal = (normale_1 + normale_2 + normale_3 + normale_4).normalize();
+				data.vertices[curr_index].normal = check_normale(data.vertices[curr_index].normal);
+			}
+		}
+	}
 
 	Geometry::Geometry()
 	{
-		//person = new Person();
+		person = new Person;
+		person->create();
+		scene.push_back(person);
 
-		/*landscape = new Landscape();
+		landscape = new Landscape;
 		landscape->create();
-		scene.push_back(landscape);*/
-
-		/*Object* test = new Test;
-		test->create();
-		scene.push_back(test);*/
+		scene.push_back(landscape);
 	}
 
 	Geometry::~Geometry()
@@ -426,19 +363,30 @@ namespace Geometry
 	}
 
 
-	Person::Person(Object* base) : Object(base) {}
+	Person::Person(Object* base) : Object(base)
+	{
+		data = new Object_Data;
+		objects.push_back(this);
+	}
 
 	Person::~Person()
 	{
-		for (auto obj : components)
-		{
-			delete obj;
-		}
+		delete data;
 	}
 
 	void Person::create()
 	{
+		std::vector<Math_3d::Vector_3d> control_points = { 
+			Math_3d::Vector_3d(0.0f, -2.0f, 0.0f),
+			//Math_3d::Vector_3d(1.0f, 2.0f, -1.0f),
+			Math_3d::Vector_3d(0.0f, 1.0f, 0.0f) };
+		Math_3d::Vector_3d base_vec = Math_3d::Vector_3d(1.0f, 0.0f, 0.0f);
+		Generator mesh_generator(std::make_unique<Path>(control_points),
+								 std::make_unique<Shape>(std::string("square"), 3.0f), base_vec);
 
+		mesh_generator.make_mesh(*data);
+
+		data->color = { 0.6f, 0.3f, 0.0f };
 	}
 
 
@@ -451,49 +399,24 @@ namespace Geometry
 	Landscape::~Landscape()
 	{
 		delete data;
-
-		for (auto obj : components)
-		{
-			delete obj;
-		}
 	}
 
 	void Landscape::create()
 	{
-		/*GeometryConstructor construstor;
+		std::vector<Math_3d::Vector_3d> control_points = {
+			Math_3d::Vector_3d(-50.0f, -5.0f, 0.0f),
+			Math_3d::Vector_3d(50.0f, -5.0f, 0.0f) };
+		Math_3d::Vector_3d base_vec = Math_3d::Vector_3d(0.0f, 1.0f, 0.0f);
+		Generator mesh_generator(std::make_unique<Path>(control_points),
+			std::make_unique<Shape>(std::string("plane"), 100.0f), base_vec);
 
-		construstor.make_plane(*data);
+		mesh_generator.make_mesh(*data);
 
-		data->color = { 1.0f, 1.0f, 0.0f };*/
+		data->color = { 0.0f, 0.3f, 0.4f };
 	}
 
 
-	Test::Test(Object* _base) : Object(_base)
-	{
-		data = new Object_Data;
-		objects.push_back(this);
-	}
-
-	Test::~Test()
-	{
-		delete data;
-	}
-
-	void Test::create()
-	{
-		/*vector<Vector3> control_points = { Vector3(1.0f, -5.0f, -1.0f), Vector3(1.0f, 2.0f, -1.0f), Vector3(1.0f, 3.0f, -1.0f) };
-		Vector3 base_vec = Vector3(1.0f, 0.0f, 0.0f);
-		GeometryConstructor construstor(std::make_unique<GeometryPath>(control_points),
-			std::make_unique<GeometryShape>(), base_vec);
-
-		construstor.make_mesh(*data);
-
-		data->color = { 0.0f, 0.0f, 1.0f };*/
-	}
-
-
-
-	Object::Object(Object* _base) : base(_base)
+	Object::Object(Object* base) : base(base)
 	{
 		data = nullptr;
 		id = obj_counter++;
