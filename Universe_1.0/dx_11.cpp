@@ -28,6 +28,30 @@ DX_11::~DX_11()
 	if (m_rasterState) m_rasterState->Release();
 }
 
+bool DX_11::init()
+{
+
+	if (!createDevice())
+	{
+		return false;
+	}
+
+	if (!create_shaders())
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool DX_11::create_shaders()
+{
+	main_shader = new Shader;
+	createShader(L"shader.fx", main_shader);
+
+	return true;
+}
+
 bool DX_11::createDevice()
 {
 	HRESULT result = S_OK;
@@ -324,15 +348,6 @@ void DX_11::render()
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
 	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
 
-	// Update camera pos
-	//cameraDef camera_def = camera->get_def();
-
-	//object_def[0] = camera_def.a;
-	//object_def[1] = camera_def.b;
-	//object_def[2] = camera_def.c;
-	//object_def[3] = camera_def.d;
-	//object_color[0] = camera_def.color;
-
 	//
 	// Установка констант шейдера
 	//
@@ -343,14 +358,6 @@ void DX_11::render()
 	localConstantBuffer.light_pos = { 50.0f, 70.0f, 50.0f, 0.0f };
 	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-	//localConstantBuffer_2.plane_num.x = (float)object_color.size();
-	//localConstantBuffer_2.plane_num.y = 0.0f;
-
-	//memset(&localConstantBuffer.plane_def, 0, sizeof(localConstantBuffer.plane_def));
-	//memset(&localConstantBuffer.plane_color, 0, sizeof(localConstantBuffer.plane_color));
-	//memcpy(&localConstantBuffer.plane_def, &(object_def[0]), object_def.size() * sizeof(XMFLOAT4));
-	//memcpy(&localConstantBuffer.plane_color, &(object_color[0]), object_color.size() * sizeof(XMFLOAT4));
-
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
 	immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
 
@@ -359,8 +366,8 @@ void DX_11::render()
 	//
 	// Установка шейдера
 	//
-	immediateContext->VSSetShader(shader->vertexShader, NULL, 0);
-	immediateContext->PSSetShader(shader->pixelShader, NULL, 0);
+	immediateContext->VSSetShader(main_shader->vertexShader, NULL, 0);
+	immediateContext->PSSetShader(main_shader->pixelShader, NULL, 0);
 
 	//float i = 1.0f;
 	for (auto it : objects)
@@ -411,18 +418,7 @@ void DX_11::render()
 
 void DX_11::setGeometry(shared_ptr<Geometry::Geometry> _geometry)
 {
-	//cameraDef camera_def = camera->get_def();
-
-	//object_def.push_back(camera_def.a);
-	//object_def.push_back(camera_def.b);
-	//object_def.push_back(camera_def.c);
-	//object_def.push_back(camera_def.d);
-	//object_color.push_back(camera_def.color);
-
 	geometry =_geometry;
-
-	shader = new Shader;
-	createShader(L"shader.fx", shader);
 
 	for (auto obj : *geometry)
 	{
@@ -433,13 +429,6 @@ void DX_11::setGeometry(shared_ptr<Geometry::Geometry> _geometry)
 
 		gpuData->size = objData->size;
 		gpuData->color = objData->color;
-
-		// object shell
-		//object_def.push_back(objData->def.a);
-		//object_def.push_back(objData->def.b);
-		//object_def.push_back(objData->def.c);
-		//object_def.push_back(objData->def.d);
-		//object_color.push_back(objData->def.color);
 
 		D3D11_BUFFER_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(bufferDesc));

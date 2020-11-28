@@ -5,13 +5,13 @@ extern int wnd_height;
 
 Engine::Engine(HWND _hWnd) : hWnd(_hWnd)
 {
-
+	render_ctrl = 0;
 }
 
 bool Engine::init() 
 {
 	device.reset(new DX_11(hWnd));
-	if (!device->createDevice())
+	if (!device->init())
 		return false;
 
 	camera.reset(new Camera(wnd_width, wnd_height));

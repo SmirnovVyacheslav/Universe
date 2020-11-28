@@ -96,7 +96,9 @@ class DX_11
 	shared_ptr<Camera>   camera;
 	shared_ptr<Geometry::Geometry> geometry;
 
-	Shader* shader;
+	// Shaders
+	Shader* main_shader;
+	Shader* shadow_map_shader;
 
 	XMMATRIX                mWorld;
 
@@ -109,13 +111,17 @@ class DX_11
 
 	bool compileShader(std::wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlob** blobOut);
 
+	bool createDevice();
+
+	bool create_shaders();
+
 public:
 
 	DX_11(HWND _hWnd);
 
 	~DX_11();
 
-	bool createDevice();
+	bool init();
 
 	void render();
 
