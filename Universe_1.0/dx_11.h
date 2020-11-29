@@ -110,6 +110,8 @@ class DX_11
 	ID3D11Texture2D* m_shadowMap;
 	ID3D11DepthStencilView* m_shadowDepthView;
 	ID3D11ShaderResourceView* m_shadowResourceView;
+
+	// ID3D11RenderTargetView* renderTargetView = nullptr;
 	// Shadow_map
 	//=============================================================================
 
@@ -126,6 +128,7 @@ class DX_11
 	bool create_shadow_map_texture(int m_shadowMapDimension);
 	bool create_depth_stencil_view();
 	bool create_shader_resource_view();
+	bool create_render_target();
 	// Shadow_map
 	//=============================================================================
 

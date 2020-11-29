@@ -48,7 +48,7 @@ bool DX_11::init()
 	return true;
 }
 
-bool::DX_11::create_shadow_map_texture(int m_shadowMapDimension)
+bool DX_11::create_shadow_map_texture(int m_shadowMapDimension)
 {
 	D3D11_TEXTURE2D_DESC shadowMapDesc;
 	ZeroMemory(&shadowMapDesc, sizeof(D3D11_TEXTURE2D_DESC));
@@ -69,7 +69,7 @@ bool::DX_11::create_shadow_map_texture(int m_shadowMapDimension)
 	return true;
 }
 
-bool::DX_11::create_depth_stencil_view()
+bool DX_11::create_depth_stencil_view()
 {
 	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
 	ZeroMemory(&depthStencilViewDesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
@@ -86,7 +86,7 @@ bool::DX_11::create_depth_stencil_view()
 	return true;
 }
 
-bool::DX_11::create_shader_resource_view()
+bool DX_11::create_shader_resource_view()
 {
 	D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
 	ZeroMemory(&shaderResourceViewDesc, sizeof(D3D11_SHADER_RESOURCE_VIEW_DESC));
@@ -102,6 +102,36 @@ bool::DX_11::create_shader_resource_view()
 
 	return true;
 }
+
+//bool DX_11::create_render_target()
+//{
+//	HRESULT result = S_OK;
+//
+//	DXGI_SWAP_CHAIN_DESC swapChainDesc;
+//	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
+//	swapChainDesc.BufferCount = 1;
+//	swapChainDesc.BufferDesc.Width = wndWidth;
+//	swapChainDesc.BufferDesc.Height = wndHeight;
+//	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+//	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+//	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
+//	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+//	swapChainDesc.OutputWindow = hWnd;
+//	swapChainDesc.SampleDesc.Count = 1;
+//	swapChainDesc.SampleDesc.Quality = 0;
+//	swapChainDesc.Windowed = TRUE;
+//
+//	// Создание рендер-таргета
+//	ID3D11Texture2D* backBuffer = NULL;
+//	if (swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer) < 0)
+//		return false;
+//
+//	result = d3dDevice->CreateRenderTargetView(backBuffer, NULL, &renderTargetView);
+//	backBuffer->Release();
+//	if (result < 0) return false;
+//
+//	return true;
+//}
 
 bool DX_11::create_shaders()
 {
@@ -412,18 +442,18 @@ void DX_11::render()
 	// Shadow_map
 	//=============================================================================
 
-	//immediateContext->OMSetRenderTargets(
-	//	0,
-	//	nullptr,
-	//	m_shadowDepthView.Get()
-	//);
+	immediateContext->OMSetRenderTargets(
+		0,
+		nullptr,
+		m_shadowDepthView
+	);
 
-	////
-	//// Очистка рендер-таргета
-	////
-	//float ClearColor[4] = { 0.0f, 0.9f, 0.5f, 1.0f }; // цвет
-	//immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
-	//immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
+	//
+	// Очистка рендер-таргета
+	//
+	float ClearColor[4] = { 0.0f, 0.9f, 0.5f, 1.0f }; // цвет
+	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
+	immediateContext->ClearDepthStencilView(m_shadowDepthView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
 
 	////
 	//// Установка констант шейдера
@@ -490,10 +520,14 @@ void DX_11::render()
 	//=============================================================================
 
 
+
+	immediateContext->OMSetRenderTargets(1,          // One rendertarget view
+		&renderTargetView,      // Render target view, created earlier
+		depthStencilView);     // Depth stencil view for the render target
+
 	//
 	// Очистка рендер-таргета
 	//
-	float ClearColor[4] = { 0.0f, 0.9f, 0.5f, 1.0f }; // цвет
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
 	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
 
