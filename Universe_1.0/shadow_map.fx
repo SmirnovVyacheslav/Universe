@@ -12,17 +12,9 @@ cbuffer ConstantBuffer
 	matrix Projection;
 }
 
-//--------------------------------------------------------------------------------------
 struct VS_OUTPUT
 {
     float4 Pos : SV_POSITION;
-    float4 Color : COLOR0;
-};
-
-
-struct VS_OUTPUT
-{
-    float4 pos : SV_POSITION;
 };
 
 //--------------------------------------------------------------------------------------
@@ -40,4 +32,4 @@ VS_OUTPUT VS(float4 Pos : POSITION, float4 Normal : NORMAL)
 //--------------------------------------------------------------------------------------
 // Pixel Shaders
 //--------------------------------------------------------------------------------------
-void PS(SHADOW_PS_INPUT input) {}
+void PS(VS_OUTPUT input) {}

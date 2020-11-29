@@ -47,7 +47,16 @@ bool DX_11::init()
 bool DX_11::create_shaders()
 {
 	main_shader = new Shader;
-	createShader(L"shader.fx", main_shader);
+	if (!createShader(L"shader.fx", main_shader))
+	{
+		return false;
+	}
+
+	shadow_map_shader = new Shader;
+	if (!createShader(L"shadow_map.fx", shadow_map_shader))
+	{
+		return false;
+	}
 
 	return true;
 }
