@@ -41,6 +41,65 @@ bool DX_11::init()
 		return false;
 	}
 
+	create_shadow_map_texture(1024);
+	create_depth_stencil_view();
+	create_shader_resource_view();
+
+	return true;
+}
+
+bool::DX_11::create_shadow_map_texture(int m_shadowMapDimension)
+{
+	D3D11_TEXTURE2D_DESC shadowMapDesc;
+	ZeroMemory(&shadowMapDesc, sizeof(D3D11_TEXTURE2D_DESC));
+	shadowMapDesc.Format = DXGI_FORMAT_R24G8_TYPELESS;
+	shadowMapDesc.MipLevels = 1;
+	shadowMapDesc.ArraySize = 1;
+	shadowMapDesc.SampleDesc.Count = 1;
+	shadowMapDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_DEPTH_STENCIL;
+	shadowMapDesc.Height = static_cast<UINT>(m_shadowMapDimension);
+	shadowMapDesc.Width = static_cast<UINT>(m_shadowMapDimension);
+
+	HRESULT hr = d3dDevice->CreateTexture2D(
+		&shadowMapDesc,
+		nullptr,
+		&m_shadowMap
+	);
+
+	return true;
+}
+
+bool::DX_11::create_depth_stencil_view()
+{
+	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
+	ZeroMemory(&depthStencilViewDesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
+	depthStencilViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	depthStencilViewDesc.Texture2D.MipSlice = 0;
+
+	HRESULT hr = d3dDevice->CreateDepthStencilView(
+		m_shadowMap,
+		&depthStencilViewDesc,
+		&m_shadowDepthView
+	);
+
+	return true;
+}
+
+bool::DX_11::create_shader_resource_view()
+{
+	D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
+	ZeroMemory(&shaderResourceViewDesc, sizeof(D3D11_SHADER_RESOURCE_VIEW_DESC));
+	shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	shaderResourceViewDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+	shaderResourceViewDesc.Texture2D.MipLevels = 1;
+
+	HRESULT hr = d3dDevice->CreateShaderResourceView(
+		m_shadowMap,
+		&shaderResourceViewDesc,
+		&m_shadowResourceView
+	);
+
 	return true;
 }
 
@@ -350,6 +409,87 @@ bool DX_11::compileShader(wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlo
 //--------------------------------------------------------------------------------------
 void DX_11::render()
 {
+	// Shadow_map
+	//=============================================================================
+
+	//immediateContext->OMSetRenderTargets(
+	//	0,
+	//	nullptr,
+	//	m_shadowDepthView.Get()
+	//);
+
+	////
+	//// Очистка рендер-таргета
+	////
+	//float ClearColor[4] = { 0.0f, 0.9f, 0.5f, 1.0f }; // цвет
+	//immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
+	//immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
+
+	////
+	//// Установка констант шейдера
+	////
+	//localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
+	//localConstantBuffer.mView = XMMatrixTranspose(camera->view());
+	//localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
+
+	//localConstantBuffer.light_pos = { 50.0f, 70.0f, 50.0f, 0.0f };
+	//localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+	//immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+	//immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
+
+	//ID3D11Buffer* cbarr[2] = { constantBuffer , constantBuffer_2 };
+
+	////
+	//// Установка шейдера
+	////
+	//immediateContext->VSSetShader(main_shader->vertexShader, NULL, 0);
+	//immediateContext->PSSetShader(main_shader->pixelShader, NULL, 0);
+
+	////float i = 1.0f;
+	//for (auto it : objects)
+	//{
+	//	localConstantBuffer_2.color.x = it.second->color.x;
+	//	localConstantBuffer_2.color.y = it.second->color.y;
+	//	localConstantBuffer_2.color.z = it.second->color.z;
+	//	localConstantBuffer_2.color.w = it.second->color.w;
+	//	immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
+
+	//	////
+	//	//// Установка шейдера
+	//	////
+	//	//immediateContext->VSSetShader(it.second->shader->vertexShader, NULL, 0);
+	//	//immediateContext->PSSetShader(it.second->shader->pixelShader, NULL, 0);
+
+	//	//
+	//	// Установка констант шейдера
+	//	//
+	//	/*immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+	//	immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);*/
+	//	immediateContext->VSSetConstantBuffers(0, 2, cbarr);
+	//	immediateContext->PSSetConstantBuffers(0, 2, cbarr);
+
+	//	// Установка вершинного буфера
+	//	UINT stride = sizeof(Geometry::Vertex);
+	//	UINT offset = 0;
+	//	immediateContext->IASetVertexBuffers(0, 1, &it.second->vertexBuffer, &stride, &offset);
+
+	//	// Установка индексного буфера
+	//	immediateContext->IASetIndexBuffer(it.second->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+	//	// Установка типа примитив
+	//	immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//	//
+	//	// Рендер
+	//	//
+
+	//	immediateContext->DrawIndexed(it.second->size, 0, 0);
+	//}
+	// Shadow_map
+	//=============================================================================
+
+
 	//
 	// Очистка рендер-таргета
 	//

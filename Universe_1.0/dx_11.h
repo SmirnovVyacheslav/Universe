@@ -104,8 +104,14 @@ class DX_11
 
 	vector<pair<Geometry::Object_Data*, GPUData*>>           objects;
 
-	//vector<Vector4> object_def;
-	//vector<Vector4> object_color;
+	
+	// Shadow_map
+	//=============================================================================
+	ID3D11Texture2D* m_shadowMap;
+	ID3D11DepthStencilView* m_shadowDepthView;
+	ID3D11ShaderResourceView* m_shadowResourceView;
+	// Shadow_map
+	//=============================================================================
 
 	bool createShader(std::wstring path, Shader* shader);
 
@@ -114,6 +120,14 @@ class DX_11
 	bool createDevice();
 
 	bool create_shaders();
+
+	// Shadow_map
+	//=============================================================================
+	bool create_shadow_map_texture(int m_shadowMapDimension);
+	bool create_depth_stencil_view();
+	bool create_shader_resource_view();
+	// Shadow_map
+	//=============================================================================
 
 public:
 
