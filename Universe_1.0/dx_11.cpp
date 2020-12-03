@@ -441,6 +441,11 @@ void DX_11::render()
 {
 	// Shadow_map
 	//=============================================================================
+	//
+	// https://docs.microsoft.com/ru-ru/windows/uwp/gaming/implementing-depth-buffers-for-shadow-mapping
+	// https://takinginitiative.wordpress.com/2011/05/15/directx10-tutorial-10-shadow-mapping/
+	// http://www.rastertek.com/dx11tut48.html
+
 
 	immediateContext->OMSetRenderTargets(
 		0,
@@ -552,10 +557,11 @@ void DX_11::render()
 		//
 		// Установка констант шейдера
 		//
-		/*immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
-		immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);*/
 		immediateContext->VSSetConstantBuffers(0, 2, cbarr);
 		immediateContext->PSSetConstantBuffers(0, 2, cbarr);
+
+		// Set shader texture resource in the pixel shader.
+		immediateContext->PSSetShaderResources(0, 1, &m_shadowResourceView);
 
 		// Установка вершинного буфера
 		UINT stride = sizeof(Geometry::Vertex);
