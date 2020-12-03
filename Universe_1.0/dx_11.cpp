@@ -41,14 +41,14 @@ bool DX_11::init()
 		return false;
 	}
 
-	create_shadow_map_texture(1024);
+	create_shadow_map_texture();
 	create_depth_stencil_view();
 	create_shader_resource_view();
 
 	return true;
 }
 
-bool DX_11::create_shadow_map_texture(int m_shadowMapDimension)
+bool DX_11::create_shadow_map_texture()
 {
 	D3D11_TEXTURE2D_DESC shadowMapDesc;
 	ZeroMemory(&shadowMapDesc, sizeof(D3D11_TEXTURE2D_DESC));
@@ -57,8 +57,8 @@ bool DX_11::create_shadow_map_texture(int m_shadowMapDimension)
 	shadowMapDesc.ArraySize = 1;
 	shadowMapDesc.SampleDesc.Count = 1;
 	shadowMapDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_DEPTH_STENCIL;
-	shadowMapDesc.Height = static_cast<UINT>(m_shadowMapDimension);
-	shadowMapDesc.Width = static_cast<UINT>(m_shadowMapDimension);
+	shadowMapDesc.Height = static_cast<UINT>(wndHeight);
+	shadowMapDesc.Width = static_cast<UINT>(wndWidth);
 
 	HRESULT hr = d3dDevice->CreateTexture2D(
 		&shadowMapDesc,
@@ -455,67 +455,56 @@ void DX_11::render()
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
 	immediateContext->ClearDepthStencilView(m_shadowDepthView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
 
-	////
-	//// Установка констант шейдера
-	////
-	//localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
-	//localConstantBuffer.mView = XMMatrixTranspose(camera->view());
-	//localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
+	//
+	// Установка констант шейдера
+	//
+	// Light pos
+	XMVECTOR eye = XMVectorSet(50.0f, 70.0f, 50.0f, 0.0f);
+	XMVECTOR at = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	XMMATRIX light_view = XMMatrixLookAtLH(eye, at, up);
+	XMMATRIX light_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, (FLOAT)wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
+	localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
+	localConstantBuffer.mView = XMMatrixTranspose(light_view);
+	localConstantBuffer.mProjection = XMMatrixTranspose(light_projection);
 
-	//localConstantBuffer.light_pos = { 50.0f, 70.0f, 50.0f, 0.0f };
-	//localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	// Light pos
+	localConstantBuffer.light_pos = { 50.0f, 70.0f, 50.0f, 0.0f };
+	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-	//immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
-	//immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
+	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
 
-	//ID3D11Buffer* cbarr[2] = { constantBuffer , constantBuffer_2 };
+	//
+	// Установка шейдера
+	//
+	immediateContext->VSSetShader(shadow_map_shader->vertexShader, NULL, 0);
+	immediateContext->PSSetShader(shadow_map_shader->pixelShader, NULL, 0);
 
-	////
-	//// Установка шейдера
-	////
-	//immediateContext->VSSetShader(main_shader->vertexShader, NULL, 0);
-	//immediateContext->PSSetShader(main_shader->pixelShader, NULL, 0);
+	for (auto it : objects)
+	{
+		//
+		// Установка констант шейдера
+		//
+		immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+		immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);
 
-	////float i = 1.0f;
-	//for (auto it : objects)
-	//{
-	//	localConstantBuffer_2.color.x = it.second->color.x;
-	//	localConstantBuffer_2.color.y = it.second->color.y;
-	//	localConstantBuffer_2.color.z = it.second->color.z;
-	//	localConstantBuffer_2.color.w = it.second->color.w;
-	//	immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
+		// Установка вершинного буфера
+		UINT stride = sizeof(Geometry::Vertex);
+		UINT offset = 0;
+		immediateContext->IASetVertexBuffers(0, 1, &it.second->vertexBuffer, &stride, &offset);
 
-	//	////
-	//	//// Установка шейдера
-	//	////
-	//	//immediateContext->VSSetShader(it.second->shader->vertexShader, NULL, 0);
-	//	//immediateContext->PSSetShader(it.second->shader->pixelShader, NULL, 0);
+		// Установка индексного буфера
+		immediateContext->IASetIndexBuffer(it.second->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-	//	//
-	//	// Установка констант шейдера
-	//	//
-	//	/*immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
-	//	immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);*/
-	//	immediateContext->VSSetConstantBuffers(0, 2, cbarr);
-	//	immediateContext->PSSetConstantBuffers(0, 2, cbarr);
+		// Установка типа примитив
+		immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//	// Установка вершинного буфера
-	//	UINT stride = sizeof(Geometry::Vertex);
-	//	UINT offset = 0;
-	//	immediateContext->IASetVertexBuffers(0, 1, &it.second->vertexBuffer, &stride, &offset);
+		//
+		// Рендер
+		//
 
-	//	// Установка индексного буфера
-	//	immediateContext->IASetIndexBuffer(it.second->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-	//	// Установка типа примитив
-	//	immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	//	//
-	//	// Рендер
-	//	//
-
-	//	immediateContext->DrawIndexed(it.second->size, 0, 0);
-	//}
+		immediateContext->DrawIndexed(it.second->size, 0, 0);
+	}
 	// Shadow_map
 	//=============================================================================
 
@@ -552,7 +541,6 @@ void DX_11::render()
 	immediateContext->VSSetShader(main_shader->vertexShader, NULL, 0);
 	immediateContext->PSSetShader(main_shader->pixelShader, NULL, 0);
 
-	//float i = 1.0f;
 	for (auto it : objects)
 	{
 		localConstantBuffer_2.color.x = it.second->color.x;
@@ -560,12 +548,6 @@ void DX_11::render()
 		localConstantBuffer_2.color.z = it.second->color.z;
 		localConstantBuffer_2.color.w = it.second->color.w;
 		immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
-
-		////
-		//// Установка шейдера
-		////
-		//immediateContext->VSSetShader(it.second->shader->vertexShader, NULL, 0);
-		//immediateContext->PSSetShader(it.second->shader->pixelShader, NULL, 0);
 
 		//
 		// Установка констант шейдера

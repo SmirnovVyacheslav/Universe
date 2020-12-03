@@ -32,9 +32,6 @@ class DX_11
 		XMMATRIX mProjection;//128
 		XMFLOAT4 light_color;//144
 		XMFLOAT4 light_pos;//160
-		//XMFLOAT4 plane_def[80];//1120
-		//XMFLOAT4 plane_color[80];//2080
-		//XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
 	};
 
 	struct ConstantBuffer_2
@@ -125,10 +122,10 @@ class DX_11
 
 	// Shadow_map
 	//=============================================================================
-	bool create_shadow_map_texture(int m_shadowMapDimension);
+	bool create_shadow_map_texture();
 	bool create_depth_stencil_view();
 	bool create_shader_resource_view();
-	bool create_render_target();
+	// bool create_render_target();
 	// Shadow_map
 	//=============================================================================
 
