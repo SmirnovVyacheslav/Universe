@@ -3,131 +3,161 @@
 //--------------------------------------------------------------------------------------
 
 //static const float PI = 3.14159265f;
-//for PI you can also use acos(-1), works fine too.
 
 //--------------------------------------------------------------------------------------
 // Constant Buffer Variables
 //--------------------------------------------------------------------------------------
-cbuffer ConstantBuffer //: register( b0 )
+cbuffer ConstantBuffer
 {
-	matrix World;
-	matrix View;
-	matrix Projection;
+	matrix world;
+	matrix view;
+	matrix projection;
+    matrix light_view;
+    matrix light_projection;
     float4 light_color;
     float4 light_pos;
-	//float4 plane_def[80];
-    //float4 plane_color[80];
-    //float4 plane_num; //num, curr_obj, tmp_1, tmp_2
 }
 
-cbuffer ConstantBuffer //: register(b1)
+cbuffer ConstantBuffer
 {
-	float4 color;
-	//float4 plane_num; //num, curr_obj, tmp_1, tmp_2
+	float4 object_color;
 }
 
 //--------------------------------------------------------------------------------------
-struct VS_OUTPUT
+// Typedefs
+//--------------------------------------------------------------------------------------
+struct VS_Input
 {
-    float4 Pos : SV_POSITION;
-    float4 Color : COLOR0;
+    float4 pos    : POSITION;
+    float3 normal : NORMAL;
 };
 
-//bool is_shaded(float3 src, float3 dst)
-//{
-//    for (int i = 1; i < plane_num.x; ++i)
-//    {
-//        if ((float)i == plane_num.y)
-//            continue;
-//
-//        float3 a = plane_def[i * 4 + 0].xyz;
-//        float3 b = plane_def[i * 4 + 1].xyz;
-//        float3 c = plane_def[i * 4 + 2].xyz;
-//        float3 d = plane_def[i * 4 + 3].xyz;
-//      
-//        //Normal to plane
-//        float3 normal = normalize(cross(b - a, c - a));
-//        float3 v_to_p = a - src;
-//      
-//        //dst to plane using normal
-//        float dist = dot(normal, v_to_p);
-//        float3 src_v = dst - src;
-//      
-//        //Approx to plane with interseption
-//        float e_res = dot(normal, src_v);
-//      
-//        if (e_res != 0.0f) //one point
-//        {
-//            float3 cross_p = src + src_v * dist / e_res;
-//
-//            float3 vec_a = normalize(a - cross_p);
-//            float3 vec_b = normalize(b - cross_p);
-//            float3 vec_c = normalize(c - cross_p);
-//            float3 vec_d = normalize(d - cross_p);
-//
-//            float ab = dot(vec_a, vec_b);
-//            float bc = dot(vec_b, vec_c);
-//            float cd = dot(vec_c, vec_d);
-//            float da = dot(vec_d, vec_a);
-//
-//            float angle_sum = acos(ab) + acos(bc) + acos(cd) + acos(da);
-//			if (abs(angle_sum - 2.0f * acos(-1.0f)) < 0.01f)
-//            {
-//				if (distance(src, dst) > distance(src, cross_p))
-//					return true;
-//            }
-//        }
-//    }
-//
-//    return false;
-//}
+struct PS_Input
+{
+    float4 pos            : SV_POSITION;
+    float3 normal         : NORMAL;
+    float4 light_view_pos : TEXCOORD1;
+};
+
+
+//--------------------------------------------------------------------------------------
+// Textures
+//--------------------------------------------------------------------------------------
+Texture2D depth_map : register(t0);
+
+//--------------------------------------------------------------------------------------
+// Sample states
+//--------------------------------------------------------------------------------------
+SamplerState SampleTypeClamp : register(s0);
 
 //--------------------------------------------------------------------------------------
 // Vertex Shader
 //--------------------------------------------------------------------------------------
-VS_OUTPUT VS( float4 Pos : POSITION, float4 Normal: NORMAL)
+PS_Input VS(VS_Input input)
 {
-    VS_OUTPUT output;
+    PS_Input vs_output;
     
-    output.Pos = mul( Pos, World );
-    output.Pos = mul( output.Pos, View );
-    output.Pos = mul( output.Pos, Projection );
+    // Change the position vector to be 4 units for proper matrix calculations.
+    input.pos.w = 1.0f;
 
-	//output.Color = light_color * plane_color[(int)plane_num.y];
+    vs_output.pos = mul(input.pos, world);
+    vs_output.pos = mul(vs_output.pos, view);
+    vs_output.pos = mul(vs_output.pos, projection);
 
-    //if (is_shaded(light_pos.xyz, Pos.xyz))
-    //{
-    //    output.Color = float4(0.0f, 0.0f, 0.0f, 0.0f);
-    //}
-    
-	//output.Color = light_color * color;
+    // Calculate the position of the vertice as viewed by the light source.
+    vs_output.light_view_pos = mul(input.pos, world);
+    vs_output.light_view_pos = mul(vs_output.light_view_pos, light_view);
+    vs_output.light_view_pos = mul(vs_output.light_view_pos, light_projection);
 
-    // Ambient (background) color
-    float ambientStrength = 0.4f;
-    float3 ambient = ambientStrength * light_color.xyz;
+    // Calculate the normal vector against the world matrix only.
+    vs_output.normal = normalize(mul(input.normal, (float3x3)world));
+    // vs_output.normal = input.normal;
 
-    // Vars for diffuse color calc
-    float3 point_pos = mul(Pos, World).xyz;
-    float3 normal = normalize(Normal.xyz);
-    float3 light_vec = normalize(light_pos.xyz - point_pos.xyz);
-
-    // Calc color
-    float diff = max(dot(normal, light_vec), 0.0);
-    float3 diffuse = diff * light_color;
-
-    float3 result = (ambient + diffuse) * color.xyz;
-    output.Color = float4(result, 1.0f);
-
-	// output.Color = dot(normalize(Normal), normalize(light_pos.xyz - Pos.xyz)) * light_color * color;
-
-    return output;
+    return vs_output;
 }
 
 
 //--------------------------------------------------------------------------------------
 // Pixel Shader
 //--------------------------------------------------------------------------------------
-float4 PS( VS_OUTPUT input ): SV_Target
+float4 PS(PS_Input input): SV_TARGET
 {
-    return input.Color;
+    // Ambient (background) color
+    float ambientStrength = 0.4f;
+    float4 ambient_color = ambientStrength * light_color;
+
+    // Set the bias value for fixing the floating point precision issues.
+    float bias = 0.001f;
+    // Set the default output color to the ambient light value for all pixels.
+    float4 color = ambient_color;
+
+    // Calculate the projected texture coordinates.
+    float2 project_tex_coord;
+    project_tex_coord.x = input.light_view_pos.x / input.light_view_pos.w / 2.0f + 0.5f;
+    project_tex_coord.y = -input.light_view_pos.y / input.light_view_pos.w / 2.0f + 0.5f;
+
+    float depth_value;
+    float light_depth_value;
+    float light_intensity;
+
+    // Vars for diffuse color calc
+    float3 light_dir = light_pos.xyz - input.pos.xyz;
+    light_dir = normalize(light_dir);
+    light_dir = -light_dir;
+
+    // Determine if the projected coordinates are in the 0 to 1 range.  If so then this pixel is in the view of the light.
+    if ((saturate(project_tex_coord.x) == project_tex_coord.x) && (saturate(project_tex_coord.y) == project_tex_coord.y))
+    {
+        // Sample the shadow map depth value from the depth texture using the sampler at the projected texture coordinate location.
+        depth_value = depth_map.Sample(SampleTypeClamp, project_tex_coord).r;
+
+        // Calculate the depth of the light.
+        light_depth_value = input.light_view_pos.z / input.light_view_pos.w;
+
+        // Subtract the bias from the lightDepthValue.
+        light_depth_value = light_depth_value - bias;
+
+        // Compare the depth of the shadow map value and the depth of the light to determine whether to shadow or to light this pixel.
+        // If the light is in front of the object then light the pixel, if not then shadow this pixel since an object (occluder) is casting a shadow on it.
+        if (light_depth_value < depth_value)
+        {
+            // Calc color
+            //float diff = max(dot(normal, light_vec), 0.0);
+            //float3 diffuse = diff * light_color;
+
+            // Calculate the amount of light on this pixel.
+            // light_intensity = saturate(dot(input.normal, light_dir));
+            light_intensity = max(dot(input.normal, light_dir), 0.0);
+            color += light_color * light_intensity;
+            //if (light_intensity > 0.0f)
+            //{
+            //    // Determine the final diffuse color based on the diffuse color and the amount of light intensity.
+            //    color += (light_color * light_intensity);
+
+            //    // Saturate the final light color.
+            //    color = saturate(color);
+            //}
+        }
+    }
+    else
+    {
+        // If this is outside the area of shadow map range then draw things normally with regular lighting.
+        // light_intensity = saturate(dot(input.normal, light_dir));
+        light_intensity = max(dot(input.normal, light_dir), 0.0);
+        color += light_color * light_intensity;
+        /*if (light_intensity > 0.0f)
+        {
+            color += (light_color * light_intensity);
+            color = saturate(color);
+        }*/
+    }
+
+    // Sample the pixel color from the texture using the sampler at this texture coordinate location.
+    // textureColor = shaderTexture.Sample(SampleTypeWrap, input.tex);
+
+    // Combine the light and texture color.
+    // color = color * textureColor;
+    color = color * object_color;
+
+    return color;
 }

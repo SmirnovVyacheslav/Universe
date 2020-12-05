@@ -30,14 +30,15 @@ class DX_11
 		XMMATRIX mWorld;//0
 		XMMATRIX mView;//64
 		XMMATRIX mProjection;//128
-		XMFLOAT4 light_color;//144
-		XMFLOAT4 light_pos;//160
+		XMMATRIX light_view;
+		XMMATRIX light_projection;
+		XMFLOAT4 light_color;
+		XMFLOAT4 light_pos;
 	};
 
 	struct ConstantBuffer_2
 	{
 		XMFLOAT4 color;//obj color
-		//XMFLOAT4 plane_num;//2096 num, curr_obj, tmp_1, tmp_2
 	};
 
 	struct Shader

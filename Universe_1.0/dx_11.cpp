@@ -447,6 +447,10 @@ void DX_11::render()
 	// http://www.rastertek.com/dx11tut48.html
 
 
+	XMFLOAT4 light_pos = { 0.1f, 10.5f, 0.0f, 0.0f };
+	XMVECTOR light_pos_eye = { 0.1f, 10.5f, 0.0f, 0.0f };
+	XMFLOAT4 light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
+
 	immediateContext->OMSetRenderTargets(
 		0,
 		nullptr,
@@ -464,18 +468,18 @@ void DX_11::render()
 	// Установка констант шейдера
 	//
 	// Light pos
-	XMVECTOR eye = XMVectorSet(50.0f, 70.0f, 50.0f, 0.0f);
-	XMVECTOR at = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	XMVECTOR eye = light_pos_eye;
+	XMVECTOR at = XMVectorSet(0.0f, -0.5f, 0.0f, 0.0f);
 	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 	XMMATRIX light_view = XMMatrixLookAtLH(eye, at, up);
-	XMMATRIX light_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, (FLOAT)wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
+	XMMATRIX light_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, (FLOAT)wndWidth / (FLOAT)wndHeight, 1.0f, 100.0f);
 	localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
 	localConstantBuffer.mView = XMMatrixTranspose(light_view);
 	localConstantBuffer.mProjection = XMMatrixTranspose(light_projection);
 
 	// Light pos
-	localConstantBuffer.light_pos = { 50.0f, 70.0f, 50.0f, 0.0f };
-	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	localConstantBuffer.light_pos = light_pos;
+	localConstantBuffer.light_color = light_color;
 
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
 
@@ -531,9 +535,12 @@ void DX_11::render()
 	localConstantBuffer.mWorld = XMMatrixTranspose(mWorld);
 	localConstantBuffer.mView = XMMatrixTranspose(camera->view());
 	localConstantBuffer.mProjection = XMMatrixTranspose(camera->projection());
+	// Light pos
+	localConstantBuffer.light_view = XMMatrixTranspose(light_view);
+	localConstantBuffer.light_projection = XMMatrixTranspose(light_projection);
 
-	localConstantBuffer.light_pos = { 50.0f, 70.0f, 50.0f, 0.0f };
-	localConstantBuffer.light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	localConstantBuffer.light_pos = light_pos;
+	localConstantBuffer.light_color = light_color;
 
 	immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
 	immediateContext->UpdateSubresource(constantBuffer_2, 0, NULL, &localConstantBuffer_2, 0, 0);
