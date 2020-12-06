@@ -446,9 +446,11 @@ void DX_11::render()
 	// https://takinginitiative.wordpress.com/2011/05/15/directx10-tutorial-10-shadow-mapping/
 	// http://www.rastertek.com/dx11tut48.html
 
-
-	XMFLOAT4 light_pos = { 0.1f, 10.5f, 0.0f, 0.0f };
-	XMVECTOR light_pos_eye = { 0.1f, 10.5f, 0.0f, 0.0f };
+	// The light_eye should not be like {0.0f, 1.0f, 0.0f} or some like vectors with 2 zeros
+	// It cause incorrect computation of light_view = XMMatrixLookAtLH(eye, at, up)
+	Math_3d::Vector_3d light_eye = { 0.01f, 7.0f, 0.01f };
+	XMFLOAT4 light_pos = { light_eye.x, light_eye.y, light_eye.z, 0.0f };
+	XMVECTOR light_pos_eye = { light_eye.x, light_eye.y, light_eye.z, 0.0f };
 	XMFLOAT4 light_color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	immediateContext->OMSetRenderTargets(

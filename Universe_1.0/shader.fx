@@ -101,9 +101,7 @@ float4 PS(PS_Input input): SV_TARGET
     float light_intensity;
 
     // Vars for diffuse color calc
-    float3 light_dir = light_pos.xyz - input.pos.xyz;
-    light_dir = normalize(light_dir);
-    light_dir = -light_dir;
+    float3 light_dir = normalize(input.pos.xyz - light_pos.xyz);
 
     // Determine if the projected coordinates are in the 0 to 1 range.  If so then this pixel is in the view of the light.
     if ((saturate(project_tex_coord.x) == project_tex_coord.x) && (saturate(project_tex_coord.y) == project_tex_coord.y))
@@ -121,35 +119,17 @@ float4 PS(PS_Input input): SV_TARGET
         // If the light is in front of the object then light the pixel, if not then shadow this pixel since an object (occluder) is casting a shadow on it.
         if (light_depth_value < depth_value)
         {
-            // Calc color
-            //float diff = max(dot(normal, light_vec), 0.0);
-            //float3 diffuse = diff * light_color;
-
             // Calculate the amount of light on this pixel.
-            // light_intensity = saturate(dot(input.normal, light_dir));
-            light_intensity = max(dot(input.normal, light_dir), 0.0);
+            // light_intensity = abs(dot(input.normal, light_dir));
+            light_intensity = saturate(dot(input.normal, light_dir));
             color += light_color * light_intensity;
-            //if (light_intensity > 0.0f)
-            //{
-            //    // Determine the final diffuse color based on the diffuse color and the amount of light intensity.
-            //    color += (light_color * light_intensity);
-
-            //    // Saturate the final light color.
-            //    color = saturate(color);
-            //}
         }
     }
     else
     {
         // If this is outside the area of shadow map range then draw things normally with regular lighting.
-        // light_intensity = saturate(dot(input.normal, light_dir));
-        light_intensity = max(dot(input.normal, light_dir), 0.0);
+        light_intensity = saturate(dot(input.normal, light_dir));
         color += light_color * light_intensity;
-        /*if (light_intensity > 0.0f)
-        {
-            color += (light_color * light_intensity);
-            color = saturate(color);
-        }*/
     }
 
     // Sample the pixel color from the texture using the sampler at this texture coordinate location.

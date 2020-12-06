@@ -404,8 +404,8 @@ namespace Geometry
 	void Landscape::create()
 	{
 		std::vector<Math_3d::Vector_3d> control_points = {
-			Math_3d::Vector_3d(-50.0f, -5.0f, 0.0f),
-			Math_3d::Vector_3d(50.0f, -5.0f, 0.0f) };
+			Math_3d::Vector_3d(-50.0f, -7.0f, 0.0f),
+			Math_3d::Vector_3d(50.0f, -7.0f, 0.0f) };
 		Math_3d::Vector_3d base_vec = Math_3d::Vector_3d(0.0f, 1.0f, 0.0f);
 		Generator mesh_generator(std::make_unique<Path>(control_points),
 			std::make_unique<Shape>(std::string("plane"), 100.0f), base_vec);
