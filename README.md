@@ -1,2 +1,3 @@
-# Universe_1.0
-Some physics based simulation
+# Universe 0.1
+
+Game engine; Some physics based simulation
