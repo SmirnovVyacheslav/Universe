@@ -13,10 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\game">
+      <UniqueIdentifier>{4f03b92d-3a62-42aa-b04d-e6213084c1c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine">
+      <UniqueIdentifier>{6203783e-ad2d-42ee-9964-3f171a4191d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\game">
+      <UniqueIdentifier>{e7bee075-6bcf-4a62-bc6b-f0715203eaa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine">
+      <UniqueIdentifier>{a612ba96-b20b-42e3-9072-b543449d59dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine_api">
+      <UniqueIdentifier>{dffd2cdb-8baa-4c33-a52c-197af1b552f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\platform">
+      <UniqueIdentifier>{fee45bda-d7d0-440e-a3d1-18aacaa4f0d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\platform">
+      <UniqueIdentifier>{bca9814a-591c-4bb3-b0d0-ad56e5ed1b4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="game\src\game.cpp">
+      <Filter>Исходные файлы\game</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\engine_impl.cpp">
+      <Filter>Исходные файлы\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\properties.cpp">
+      <Filter>Исходные файлы\engine\platform</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game\src\game.h">
+      <Filter>Файлы заголовков\game</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\engine.h">
+      <Filter>Файлы заголовков\engine_api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\properties.h">
+      <Filter>Файлы заголовков\engine\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\engine_impl.h">
+      <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
