@@ -14,7 +14,9 @@
 namespace engine
 {
     /*************************************************************************/
-    t_engine::t_engine() : impl(g_engine_instance)
+    t_engine_impl g_engine_instance;
+    /*************************************************************************/
+    t_engine::t_engine()
     {
         g_engine_instance.initialize();
     }

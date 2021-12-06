@@ -21,7 +21,7 @@
 namespace engine
 {
     /*************************************************************************/
-    class t_engine_impl : public t_engine
+    class t_engine_impl
     {
     public:
         t_engine_impl();
@@ -34,7 +34,7 @@ namespace engine
         std::uint32_t ref_count = 0;
     };
     /*************************************************************************/
-    t_engine_impl g_engine_instance;
+    extern t_engine_impl g_engine_instance;
     /*************************************************************************/
 }
 

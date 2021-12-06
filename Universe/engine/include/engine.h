@@ -32,8 +32,6 @@ namespace engine
     private:
         t_engine(const t_engine&) = delete;
         t_engine& operator=(const t_engine&) = delete;
-
-        t_engine& impl;
     };
     /*************************************************************************/
 }
