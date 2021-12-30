@@ -1,7 +1,6 @@
 /******************************************************************************
      * File: game.h
      * Description: Main game interface
-     * Created: 07 Oct 2021
      * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
@@ -14,6 +13,12 @@
  * c_name = global constant
  * g_name = global variable
  * m_name = data type member
+ * 
+ * type_name = data type / class
+ * const_name = global constant
+ * global_name = global variable
+ * this.name = data type member
+ * interface = interface
  */
 
 #pragma once
@@ -25,19 +30,18 @@
 
 namespace game
 {
-    /*************************************************************************/
-    class t_game
+    // Interface
+    class type_game
     {
     public:
-        t_game();
-        ~t_game();
+        type_game();
+        ~type_game();
 
         void run();
 
     private:
-        engine::t_engine engine_instance;
+        engine::type_engine engine_instance;
     };
-    /*************************************************************************/
 }
 
 #endif

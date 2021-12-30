@@ -1,7 +1,6 @@
 /******************************************************************************
      * File: game.cpp
      * Description: Main game interface
-     * Created: 07 Oct 2021
      * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
@@ -12,22 +11,16 @@
 
 namespace game
 {
-    /*************************************************************************/
-    t_game::t_game()
+    type_game::type_game()
     {
-        //engine.reset(engine::type_engine::init());
-        // Prepare internal data
-        // Init engine
+        // Init
     };
-
-    t_game::~t_game()
+    type_game::~type_game()
     {
-        // teardown
+        // Teardown
     }
-
-    void t_game::run()
+    void type_game::run()
     {
-        
         // abstraction - platform
 
         // properties
@@ -45,5 +38,4 @@ namespace game
         // w.show_window()
         // destroy_window(w)
     };
-    /*************************************************************************/
 }

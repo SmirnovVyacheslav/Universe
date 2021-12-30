@@ -144,15 +144,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\engine_impl.cpp" />
-    <ClCompile Include="engine\src\platform\properties.cpp" />
+    <ClCompile Include="engine\src\window_impl.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\engine.h" />
+    <ClInclude Include="engine\include\window.h" />
     <ClInclude Include="engine\src\engine_impl.h" />
-    <ClInclude Include="engine\src\platform\properties.h" />
+    <ClInclude Include="engine\src\window_impl.h" />
     <ClInclude Include="game\src\game.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -45,8 +45,8 @@
     <ClCompile Include="engine\src\engine_impl.cpp">
       <Filter>Исходные файлы\engine</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\properties.cpp">
-      <Filter>Исходные файлы\engine\platform</Filter>
+    <ClCompile Include="engine\src\window_impl.cpp">
+      <Filter>Исходные файлы\engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,11 +56,17 @@
     <ClInclude Include="engine\include\engine.h">
       <Filter>Файлы заголовков\engine_api</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\properties.h">
-      <Filter>Файлы заголовков\engine\platform</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\engine_impl.h">
       <Filter>Файлы заголовков\engine</Filter>
     </ClInclude>
+    <ClInclude Include="engine\include\window.h">
+      <Filter>Файлы заголовков\engine_api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\window_impl.h">
+      <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

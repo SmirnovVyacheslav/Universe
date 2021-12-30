@@ -1,64 +1,55 @@
 /******************************************************************************
      * File: engine_impl.cpp
      * Description: Main engine interface implementation
-     * Created: 07 Oct 2021
      * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
-
 
 #include "engine_impl.h"
 
 
 namespace engine
 {
-    /*************************************************************************/
-    t_engine_impl g_engine_instance;
-    /*************************************************************************/
-    t_engine::t_engine()
+    type_engine::type_engine()
     {
-        g_engine_instance.initialize();
+        type_engine_impl::initialize();
+        windows_manager = type_engine_impl::instance->windows_manager_impl;
+    }
+    type_engine::~type_engine()
+    {
+        type_engine_impl::terminate();
     }
 
-    t_engine::~t_engine()
-    {
-        g_engine_instance.terminate();
-    }
-    /*************************************************************************/
-    t_engine_impl::t_engine_impl()
-    {
-        // Pass
-    }
 
-    t_engine_impl::~t_engine_impl()
+    type_engine_impl* type_engine_impl::instance = nullptr;
+
+
+    type_engine_impl::type_engine_impl()
     {
-        if (ref_count != 0)
+        // Initialize code
+    }
+    type_engine_impl::~type_engine_impl()
+    {
+        // Terminate code
+    }
+    void type_engine_impl::initialize()
+    {
+        if (instance == nullptr)
         {
-            ref_count = 1;
-            terminate();
-        }
-    }
-
-    bool t_engine_impl::initialize()
-    {
-        if (ref_count == 0)
-        {
-            // Initialize code
+            instance = new type_engine_impl;
         }
 
-        ref_count++;
-        return true;
+        instance->ref_count++;
     }
-
-    bool t_engine_impl::terminate()
+    void type_engine_impl::terminate()
     {
-        ref_count--;
-        if (ref_count == 0)
+        instance->ref_count--;
+
+        if (instance->ref_count == 0)
         {
-            // Terminate code
+            instance->~type_engine_impl();
+            instance = nullptr;
         }
-        return true;
     }
-    /*************************************************************************/
 }
