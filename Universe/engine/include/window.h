@@ -19,10 +19,9 @@ namespace engine
         class type_window
         {
         public:
-            //TBD
+            virtual ~type_window() = default;
         protected:
             type_window() = default;
-            virtual ~type_window() = default;
         };
 
 
@@ -30,7 +29,7 @@ namespace engine
         class type_windows_manager
         {
         public:
-            //TBD
+            virtual type_window& create_window() = 0;
         protected:
             type_windows_manager() = default;
             virtual ~type_windows_manager() = default;

@@ -18,21 +18,16 @@
 
 namespace engine
 {
-    class type_engine_impl
+    class type_engine_impl: public type_engine
     {
     public:
-        static type_engine_impl* instance;
-
-        window::type_windows_manager_impl* windows_manager_impl = nullptr;
-
-        static void initialize();
-        static void terminate();
+        static type_engine_impl& instance();
 
     private:
         type_engine_impl();
         ~type_engine_impl();
-
-        std::uint32_t ref_count = 0;
+        type_engine_impl(const type_engine_impl&) = delete;
+        type_engine_impl& operator=(const type_engine_impl&) = delete;
     };
 }
 

@@ -13,17 +13,24 @@ namespace engine
 {
     type_engine::type_engine()
     {
-        type_engine_impl::initialize();
-        windows_manager = type_engine_impl::instance->windows_manager_impl;
+        // Initialize code
     }
     type_engine::~type_engine()
     {
-        type_engine_impl::terminate();
+        // Terminate code
     }
-
-
-    type_engine_impl* type_engine_impl::instance = nullptr;
-
+    type_engine& type_engine::initialize()
+    {
+        return type_engine_impl::instance();
+    }
+    type_engine& type_engine::instance()
+    {
+        return type_engine_impl::instance();
+    }
+    void type_engine::terminate()
+    {
+        // Terminate code
+    }
 
     type_engine_impl::type_engine_impl()
     {
@@ -33,23 +40,9 @@ namespace engine
     {
         // Terminate code
     }
-    void type_engine_impl::initialize()
+    type_engine_impl& type_engine_impl::instance()
     {
-        if (instance == nullptr)
-        {
-            instance = new type_engine_impl;
-        }
-
-        instance->ref_count++;
-    }
-    void type_engine_impl::terminate()
-    {
-        instance->ref_count--;
-
-        if (instance->ref_count == 0)
-        {
-            instance->~type_engine_impl();
-            instance = nullptr;
-        }
+        static type_engine_impl engine_instance;
+        return engine_instance;
     }
 }

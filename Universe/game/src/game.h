@@ -40,7 +40,7 @@ namespace game
         void run();
 
     private:
-        engine::type_engine engine_instance;
+        engine::type_engine& engine_instance;
     };
 }
 

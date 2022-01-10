@@ -39,11 +39,13 @@ namespace engine
 
         type_window_ui::type_window_ui(type_window_impl* window_impl) : window_impl(window_impl)
         {
-            this->window_impl++;
+            //++(this->window_impl);
+            this->window_impl->ref_count++;
         }
         type_window_ui::~type_window_ui()
         {
-            this->window_impl--;
+            //--(this->window_impl);
+            this->window_impl->ref_count--;
         }
 
 
@@ -54,6 +56,13 @@ namespace engine
         type_windows_manager_impl::~type_windows_manager_impl()
         {
             // Terminate code
+        }
+        type_window& type_windows_manager_impl::create_window()
+        {
+            type_window_impl* new_window = new type_window_impl;
+            windows_map[1] = new_window;
+            type_window* new_window_ui = new type_window_ui(new_window);
+            return *new_window_ui;
         }
     }
 }

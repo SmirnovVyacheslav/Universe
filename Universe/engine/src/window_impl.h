@@ -11,6 +11,7 @@
 #define WINDOW_IMPL_H
 
 #include <cstdint>
+#include <map>
 
 #include "../include/window.h"
 
@@ -27,8 +28,9 @@ namespace engine
 
             type_window_impl& operator++();
             type_window_impl& operator--();
-        private:
             std::uint32_t ref_count = 0;
+        private:
+            //std::uint32_t ref_count = 0;
         };
 
 
@@ -47,6 +49,11 @@ namespace engine
         public:
             type_windows_manager_impl();
             ~type_windows_manager_impl();
+
+            type_window& create_window();
+
+        private:
+            std::map<std::uint32_t, type_window_impl*> windows_map;
         };
     }
 }

@@ -34,12 +34,13 @@ namespace engine
     class type_engine
     {
     public:
+        static type_engine& initialize();
+        static type_engine& instance();
+        static void terminate();
+
+    protected:
         type_engine();
         ~type_engine();
-
-        window::type_windows_manager* windows_manager = nullptr;
-
-    private:
         type_engine(const type_engine&) = delete;
         type_engine& operator=(const type_engine&) = delete;
     };
