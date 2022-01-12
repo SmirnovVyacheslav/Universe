@@ -20,27 +20,11 @@ namespace engine
 {
     namespace window
     {
-        class type_window_impl
+        class type_window_impl: public type_window
         {
         public:
             type_window_impl();
             ~type_window_impl();
-
-            type_window_impl& operator++();
-            type_window_impl& operator--();
-            std::uint32_t ref_count = 0;
-        private:
-            //std::uint32_t ref_count = 0;
-        };
-
-
-        class type_window_ui : public type_window
-        {
-        public:
-            type_window_ui(type_window_impl* window_impl);
-            ~type_window_ui();
-        private:
-            type_window_impl* window_impl = nullptr;
         };
 
 

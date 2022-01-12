@@ -11,13 +11,14 @@
 
 namespace engine
 {
-    type_engine::type_engine()
+    type_engine::type_engine() : windows_manager(*(new window::type_windows_manager_impl))
     {
         // Initialize code
     }
     type_engine::~type_engine()
     {
         // Terminate code
+        dynamic_cast<window::type_windows_manager_impl*>(&windows_manager)->~type_windows_manager_impl();
     }
     type_engine& type_engine::initialize()
     {

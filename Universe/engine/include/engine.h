@@ -33,6 +33,8 @@ namespace engine
         static type_engine& instance();
         static void terminate();
 
+        window::type_windows_manager& windows_manager;
+
     protected:
         type_engine();
         ~type_engine();

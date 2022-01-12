@@ -21,32 +21,6 @@ namespace engine
         {
             // Terminate code
         }
-        type_window_impl& type_window_impl::operator++()
-        {
-            ref_count++;
-            return *this;
-        }
-        type_window_impl& type_window_impl::operator--()
-        {
-            ref_count--;
-            if (ref_count == 0)
-            {
-                delete this;
-            }
-            return *this;
-        }
-
-
-        type_window_ui::type_window_ui(type_window_impl* window_impl) : window_impl(window_impl)
-        {
-            //++(this->window_impl);
-            this->window_impl->ref_count++;
-        }
-        type_window_ui::~type_window_ui()
-        {
-            //--(this->window_impl);
-            this->window_impl->ref_count--;
-        }
 
 
         type_windows_manager_impl::type_windows_manager_impl()
@@ -61,8 +35,7 @@ namespace engine
         {
             type_window_impl* new_window = new type_window_impl;
             windows_map[1] = new_window;
-            type_window* new_window_ui = new type_window_ui(new_window);
-            return *new_window_ui;
+            return *new_window;
         }
     }
 }

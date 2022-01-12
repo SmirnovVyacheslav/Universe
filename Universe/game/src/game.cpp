@@ -21,6 +21,7 @@ namespace game
     }
     void type_game::run()
     {
-        // Run code 
+        // Run code
+        engine::window::type_window& window_instance = engine_instance.windows_manager.create_window();
     };
 }
