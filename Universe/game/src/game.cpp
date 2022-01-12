@@ -17,7 +17,7 @@ namespace game
     };
     type_game::~type_game()
     {
-        // Terminate code
+        engine_instance.terminate();
     }
     void type_game::run()
     {

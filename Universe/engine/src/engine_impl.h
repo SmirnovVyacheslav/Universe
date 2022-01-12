@@ -10,8 +10,6 @@
 #ifndef ENGINE_IMPL_H
 #define ENGINE_IMPL_H
 
-#include <cstdint>
-
 #include "../include/engine.h"
 #include "window_impl.h"
 
@@ -21,9 +19,12 @@ namespace engine
     class type_engine_impl: public type_engine
     {
     public:
-        static type_engine_impl& instance();
+        static type_engine_impl& initialize();
+        static void terminate();
 
     private:
+        static type_engine_impl* instance;
+
         type_engine_impl();
         ~type_engine_impl();
         type_engine_impl(const type_engine_impl&) = delete;

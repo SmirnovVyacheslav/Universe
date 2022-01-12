@@ -9,16 +9,11 @@
 /* ***************************************************************************
  * Name convention
  * ***************************************************************************
- * t_name = data type / class
- * c_name = global constant
- * g_name = global variable
- * m_name = data type member
- *
- * type_name = data type / class
- * const_name = global constant
+ * type_name   = data type / class
+ * const_name  = global constant
  * global_name = global variable
- * this.name = data type member
- * interface = interface
+ * this.name   = data type member
+ * interface   = interface
  */
 
 #pragma once

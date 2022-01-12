@@ -21,17 +21,19 @@ namespace engine
     }
     type_engine& type_engine::initialize()
     {
-        return type_engine_impl::instance();
+        return type_engine_impl::initialize();
     }
     type_engine& type_engine::instance()
     {
-        return type_engine_impl::instance();
+        return type_engine_impl::initialize();
     }
     void type_engine::terminate()
     {
-        // Terminate code
+        type_engine_impl::terminate();
     }
 
+
+    type_engine_impl* type_engine_impl::instance = nullptr;
     type_engine_impl::type_engine_impl()
     {
         // Initialize code
@@ -40,9 +42,17 @@ namespace engine
     {
         // Terminate code
     }
-    type_engine_impl& type_engine_impl::instance()
+    type_engine_impl& type_engine_impl::initialize()
     {
-        static type_engine_impl engine_instance;
-        return engine_instance;
+        if (instance == nullptr)
+        {
+            instance = new type_engine_impl;
+        }
+        return *instance;
+    }
+    void type_engine_impl::terminate()
+    {
+        instance->~type_engine_impl();
+        instance = nullptr;
     }
 }
