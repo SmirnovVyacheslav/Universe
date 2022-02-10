@@ -44,3 +44,10 @@ namespace engine
 }
 
 #endif
+
+// error handle
+// print in log and other register output
+// error code, severity and message
+// clean resource
+// throw exception
+// client should catch for call function

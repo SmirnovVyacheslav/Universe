@@ -1,32 +1,37 @@
 /******************************************************************************
-     * File: platform/window.h
+     * File: platform/window_impl.h
      * Description: Platform window implementation
-     * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
+     * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-#pragma once
-#ifndef PLATFOM_WINDOW_H
-#define PLATFOM_WINDOW_H
+#include "../macros.h"
 
-#include<memory>
+#pragma once
+#ifdef PLATFORM_WINDOWS
+
+#ifndef PLATFORM_WINDOW_IMPL_H
+#define PLATFORM_WINDOW_IMPL_H
+
+#include <windows.h>
+
 
 namespace engine
 {
     namespace platform
     {
-        class type_window
+        class window_impl
         {
         public:
-            type_window();
-            ~type_window();
+            window_impl();
+            ~window_impl();
 
         private:
-            class type_window_impl;
-            std::unique_ptr<type_window_impl> window_impl;
+            HWND id;
         };
     }
 }
 
+#endif
 #endif

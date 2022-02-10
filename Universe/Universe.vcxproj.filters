@@ -34,6 +34,12 @@
     <Filter Include="Файлы заголовков\engine\platform">
       <UniqueIdentifier>{bca9814a-591c-4bb3-b0d0-ad56e5ed1b4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\engine\platform\windows">
+      <UniqueIdentifier>{60747bb1-0303-492a-93fe-a192bca04b1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\platform\windows">
+      <UniqueIdentifier>{d90b5a65-51ec-4e68-960e-e366708cd036}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -47,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\window_impl.cpp">
       <Filter>Исходные файлы\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\windows\window.cpp">
+      <Filter>Исходные файлы\engine\platform\windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\window_impl.h">
       <Filter>Файлы заголовков\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window.h">
+      <Filter>Файлы заголовков\engine\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

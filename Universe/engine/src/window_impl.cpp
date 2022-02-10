@@ -7,6 +7,7 @@
 ******************************************************************************/
 
 #include "window_impl.h"
+#include "platform/window.h"
 
 
 namespace engine
@@ -16,6 +17,7 @@ namespace engine
         type_window_impl::type_window_impl()
         {
             // Initialize code
+            platform::type_window new_window;
         }
         type_window_impl::~type_window_impl()
         {

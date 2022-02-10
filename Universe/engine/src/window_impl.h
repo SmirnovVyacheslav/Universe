@@ -10,7 +10,6 @@
 #ifndef WINDOW_IMPL_H
 #define WINDOW_IMPL_H
 
-#include <cstdint>
 #include <map>
 
 #include "../include/window.h"
