@@ -1,5 +1,5 @@
 /******************************************************************************
-     * File: platform/windows/window.cpp
+     * File: platform/windows/window_impl.cpp
      * Description: Platform window implementation
      * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
@@ -8,14 +8,14 @@
 
 #include "window_impl.h"
 
+#ifdef PLATFORM_WINDOWS
+
 
 namespace engine
 {
     namespace platform
     {
-        LRESULT CALLBACK msg_handler(HWND, UINT, WPARAM, LPARAM);
-
-        type_window::type_window()
+        window_impl::window_impl()
         {
             // Register class
             WNDCLASSEX wcex;
@@ -38,16 +38,17 @@ namespace engine
             //instance = inst;
             RECT rc = { 0, 0, 533, 400 };
             AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-            window = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+            id = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
                 rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, NULL, NULL);
-            if (!window);
+            if (!id);
                 //return E_FAIL;
 
-            ShowWindow(window, SW_SHOW);
+            ShowWindow(id, SW_SHOW);
 
             //return S_OK;
         }
-        type_window::~type_window()
+
+        window_impl::~window_impl()
         {
 
         }
@@ -161,3 +162,5 @@ namespace engine
         }
     }
 }
+
+#endif

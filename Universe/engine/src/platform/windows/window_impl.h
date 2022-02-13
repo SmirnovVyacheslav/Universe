@@ -1,5 +1,5 @@
 /******************************************************************************
-     * File: platform/window_impl.h
+     * File: platform/windows/window_impl.h
      * Description: Platform window implementation
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
