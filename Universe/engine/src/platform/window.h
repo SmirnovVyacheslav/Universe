@@ -1,7 +1,7 @@
 /******************************************************************************
-     * File: platform/window.h
+     * File: platform.window.h
      * Description: Platform window implementation
-     * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
+     * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
@@ -12,6 +12,7 @@
 
 #include<memory>
 
+
 namespace engine
 {
     namespace platform
@@ -21,6 +22,25 @@ namespace engine
         public:
             type_window();
             ~type_window();
+
+            //// Register class
+            //WNDCLASSEX wcex;
+            //wcex.cbSize = sizeof(WNDCLASSEX);
+            //wcex.style = CS_HREDRAW | CS_VREDRAW;
+            //wcex.lpfnWndProc = msg_handler;
+            //wcex.cbClsExtra = 0;
+            //wcex.cbWndExtra = 0;
+            //wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+            //wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+            //wcex.lpszMenuName = NULL;
+            //wcex.lpszClassName = L"Header";
+            //if (!RegisterClassEx(&wcex));
+            ////return E_FAIL;
+            //// Create window
+            //RECT rc = { 0, 0, 533, 400 };
+            //AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+
+            // ShowWindow(id, SW_SHOW);
 
         private:
             class type_window_impl;

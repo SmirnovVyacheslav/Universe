@@ -1,7 +1,7 @@
 /******************************************************************************
-     * File: platform/windows/window_impl.cpp
+     * File: platform.windows.window_impl.cpp
      * Description: Platform window implementation
-     * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
+     * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
@@ -15,149 +15,64 @@ namespace engine
 {
     namespace platform
     {
-        window_impl::window_impl()
+        window_impl::window_impl(std::wstring class_name, std::wstring window_name)
         {
-            // Register class
-            WNDCLASSEX wcex;
-            wcex.cbSize = sizeof(WNDCLASSEX);
-            wcex.style = CS_HREDRAW | CS_VREDRAW;
-            wcex.lpfnWndProc = msg_handler;
-            wcex.cbClsExtra = 0;
-            wcex.cbWndExtra = 0;
-            //wcex.hInstance = inst;
-            //wcex.hIcon = LoadIcon(inst, (LPCTSTR)IDI_ICON);
-            wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-            wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-            wcex.lpszMenuName = NULL;
-            wcex.lpszClassName = L"Header";
-            //wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_ICON);
-            if (!RegisterClassEx(&wcex));
-                //return E_FAIL;
-
-            // Create window
-            //instance = inst;
-            RECT rc = { 0, 0, 533, 400 };
-            AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-            id = CreateWindow(L"Header", L"Universe_1.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-                rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, NULL, NULL);
-            if (!id);
-                //return E_FAIL;
-
-            ShowWindow(id, SW_SHOW);
-
-            //return S_OK;
+            LPCTSTR class_name_LPCTSTR = static_cast<LPCTSTR>(class_name.c_str());
+            LPCTSTR window_name_LPCTSTR = static_cast<LPCTSTR>(window_name.c_str());
+            id = CreateWindow(
+                class_name_LPCTSTR,  // Class name
+                window_name_LPCTSTR, // Name
+                WS_OVERLAPPEDWINDOW, // Style
+                CW_USEDEFAULT,       // Horizontal position
+                CW_USEDEFAULT,       // Vertical position
+                CW_USEDEFAULT,       // Width
+                CW_USEDEFAULT,       // Height
+                NULL,                // Parent handler
+                NULL,                // Menu handler
+                NULL,                // Module handler
+                NULL                 // Window creation data
+            );
+            if (!id)
+            {
+                throw std::wstring(L"Failed to create window");
+            }
         }
 
         window_impl::~window_impl()
         {
-
+            DestroyWindow(id);
         }
 
 
-        LRESULT CALLBACK msg_handler(HWND wnd, UINT message, WPARAM w_param, LPARAM l_param)
+
+
+        LRESULT CALLBACK window_proceure(HWND id, UINT message, WPARAM w_value, LPARAM l_value)
         {
-            //static bool alt = true;
-
-            PAINTSTRUCT ps;
-            HDC device_context;
-
             switch (message)
             {
-            case WM_MOUSEMOVE:
-                /*if (alt)
-                {
-                    int x = GET_X_LPARAM(l_param);
-                    int y = GET_Y_LPARAM(l_param);
+            case WM_CREATE:
+                // Initialize the window. 
+                return 0;
 
-                    if (half_wnd_width == x && half_wnd_height == y)
-                    {
-                        break;
-                    }
-
-                    int diff_x = x - half_wnd_width;
-                    int diff_y = half_wnd_height - y;
-
-                    engine->moveCamera(diff_x, diff_y);
-
-                    POINT pt;
-                    pt.x = half_wnd_width;
-                    pt.y = half_wnd_height;
-                    ClientToScreen(wnd, &pt);
-                    SetCursorPos(pt.x, pt.y);
-                }*/
-
-                break;
             case WM_PAINT:
-                //device_context = BeginPaint(wnd, &ps);
-                //EndPaint(wnd, &ps);
-                break;
-
-            case WM_DESTROY:
-                PostQuitMessage(0);
-                break;
-
-            case WM_ACTIVATE:
-            {
-                /*if (LOWORD(w_param) != WA_INACTIVE && alt)
-                {
-                    lock_cursor(wnd);
-                }
-                else
-                {
-                    free_cursor(wnd);
-                }*/
-            } break;
-
-            case WM_KEYDOWN:
-            case WM_SYSKEYDOWN:
-            {
-                /*switch (wParam)
-                {
-
-                }*/
-            }
-            break;
-
-            case WM_KEYUP:
-            case WM_SYSKEYUP:
-            {
-                switch (w_param)
-                {
-                case VK_MENU:
-                {
-                    /*alt = alt ? false : true;
-                    if (alt)
-                    {
-                        lock_cursor(wnd);
-                    }
-                    else
-                    {
-                        free_cursor(wnd);
-                    }*/
-                }
-                break;
-                }
-            }
-            break;
+                // Paint the window's client area. 
+                return 0;
 
             case WM_SIZE:
-            {
-                //if (engine)
-                //    engine->resize();
-            }
-            break;
+                // Set the size and position of the window. 
+                return 0;
 
-            case WM_MOVE:
-            {
-                //if (engine)
-                //    engine->resize();
-            }
-            break;
+            case WM_DESTROY:
+                // Clean up window-specific data objects. 
+                return 0;
+
+                // 
+                // Process other messages.
+                // 
 
             default:
-                return DefWindowProc(wnd, message, w_param, l_param);
+                return DefWindowProc(id, message, w_value, l_value);
             }
-
             return 0;
         }
     }
