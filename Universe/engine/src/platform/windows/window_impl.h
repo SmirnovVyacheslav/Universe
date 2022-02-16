@@ -10,7 +10,6 @@
 
 #pragma once
 #ifdef PLATFORM_WINDOWS
-
 #ifndef PLATFORM_WINDOW_IMPL_H
 #define PLATFORM_WINDOW_IMPL_H
 
@@ -37,6 +36,25 @@ namespace engine
 
 
         LRESULT CALLBACK window_proceure(HWND id, UINT message, WPARAM w_value, LPARAM l_value);
+
+
+
+
+        class window_class
+        {
+        public:
+            window_class();
+            ~window_class();
+        };
+
+
+
+        class init
+        {
+        public:
+            init();
+            ~init();
+        };
     }
 }
 

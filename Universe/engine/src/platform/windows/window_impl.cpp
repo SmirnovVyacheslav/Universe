@@ -75,6 +75,49 @@ namespace engine
             }
             return 0;
         }
+
+
+
+
+        window_class::window_class(LRESULT CALLBACK window_proceure)
+        {
+            WNDCLASSEX init_data;
+
+            init_data.cbSize = sizeof(WNDCLASSEX);            // Size of structure
+            init_data.style = CS_HREDRAW | CS_VREDRAW;        // Redraw if size changes
+            init_data.lpfnWndProc = window_proceure;
+            init_data.cbClsExtra = 0;                         // no extra class memory 
+            init_data.cbWndExtra = 0;                          // no extra window memory 
+            wcx.hInstance = hinstance;         // handle to instance 
+            wcx.hIcon = LoadIcon(NULL,
+                IDI_APPLICATION);              // predefined app. icon 
+            wcx.hCursor = LoadCursor(NULL,
+                IDC_ARROW);                    // predefined arrow 
+            wcx.hbrBackground = GetStockObject(
+                WHITE_BRUSH);                  // white background brush 
+            wcx.lpszMenuName = "MainMenu";    // name of menu resource 
+            wcx.lpszClassName = "MainWClass";  // name of window class 
+            if (!RegisterClassEx(&class_structure));
+            //return E_FAIL;
+        }
+
+        window_class::~window_class()
+        {
+
+        }
+
+
+
+        init::init()
+        {
+
+        }
+
+
+        init::~init()
+        {
+
+        }
     }
 }
 
