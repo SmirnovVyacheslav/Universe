@@ -79,31 +79,32 @@ namespace engine
 
 
 
-        window_class::window_class(LRESULT CALLBACK window_proceure)
+        window_class::window_class(std::wstring name, LRESULT (*window_proceure)(HWND, UINT, WPARAM, LPARAM)) : name(name)
         {
             WNDCLASSEX init_data;
+            name_LPCTSTR = static_cast<LPCTSTR>(name.c_str());
 
-            init_data.cbSize = sizeof(WNDCLASSEX);            // Size of structure
-            init_data.style = CS_HREDRAW | CS_VREDRAW;        // Redraw if size changes
-            init_data.lpfnWndProc = window_proceure;
-            init_data.cbClsExtra = 0;                         // no extra class memory 
-            init_data.cbWndExtra = 0;                          // no extra window memory 
-            wcx.hInstance = hinstance;         // handle to instance 
-            wcx.hIcon = LoadIcon(NULL,
-                IDI_APPLICATION);              // predefined app. icon 
-            wcx.hCursor = LoadCursor(NULL,
-                IDC_ARROW);                    // predefined arrow 
-            wcx.hbrBackground = GetStockObject(
-                WHITE_BRUSH);                  // white background brush 
-            wcx.lpszMenuName = "MainMenu";    // name of menu resource 
-            wcx.lpszClassName = "MainWClass";  // name of window class 
-            if (!RegisterClassEx(&class_structure));
-            //return E_FAIL;
+            init_data.cbSize = sizeof(WNDCLASSEX);                                      // Size of structure
+            init_data.style = CS_HREDRAW | CS_VREDRAW;                                  // Redraw if size changes
+            init_data.lpfnWndProc = window_proceure;                                    // Window procedure
+            init_data.cbClsExtra = 0;                                                   // No extra class memory
+            init_data.cbWndExtra = 0;                                                   // No extra window memory
+            init_data.hInstance = GetModuleHandle(nullptr);                             // Instance handler
+            init_data.hIcon = LoadIcon(NULL, IDI_APPLICATION);                          // Predefined icon
+            init_data.hCursor = LoadCursor(NULL,IDC_ARROW);                             // Predefined arrow
+            init_data.hbrBackground = static_cast<HBRUSH>(GetStockObject(WHITE_BRUSH)); // White background brush
+            init_data.lpszMenuName = NULL;                                              // Name of menu resource
+            init_data.lpszClassName = name_LPCTSTR;                              // Name of window class
+
+            if (!RegisterClassEx(&init_data))
+            {
+                throw std::wstring(L"Failed to register window class");
+            }
         }
 
         window_class::~window_class()
         {
-
+            UnregisterClass(name_LPCTSTR, GetModuleHandle(nullptr));
         }
 
 

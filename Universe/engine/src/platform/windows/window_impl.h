@@ -17,7 +17,7 @@
 
 #include <windows.h>
 
-
+//LRESULT CALLBACK window_proceure(HWND id, UINT message, WPARAM w_value, LPARAM l_value);
 namespace engine
 {
     namespace platform
@@ -43,8 +43,11 @@ namespace engine
         class window_class
         {
         public:
-            window_class();
+            window_class(std::wstring name, LRESULT(*window_proceure)(HWND, UINT, WPARAM, LPARAM));
             ~window_class();
+        private:
+            std::wstring name;
+            LPCTSTR name_LPCTSTR;
         };
 
 
