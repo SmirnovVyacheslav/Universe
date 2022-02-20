@@ -15,13 +15,13 @@ namespace engine
 {
     namespace platform
     {
-        window_impl::window_impl(std::wstring class_name, std::wstring window_name)
+        window_impl::window_impl(window_class& window_class_, std::wstring window_name)
         {
-            LPCTSTR class_name_LPCTSTR = static_cast<LPCTSTR>(class_name.c_str());
+            //LPCTSTR class_name_LPCTSTR = static_cast<LPCTSTR>(class_name.c_str());
             LPCTSTR window_name_LPCTSTR = static_cast<LPCTSTR>(window_name.c_str());
             id = CreateWindow(
                 class_name_LPCTSTR,  // Class name
-                window_name_LPCTSTR, // Name
+                window_class_, // Name
                 WS_OVERLAPPEDWINDOW, // Style
                 CW_USEDEFAULT,       // Horizontal position
                 CW_USEDEFAULT,       // Vertical position

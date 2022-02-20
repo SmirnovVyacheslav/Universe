@@ -1,5 +1,5 @@
 /******************************************************************************
-     * File: platform.platform.h
+     * File: platform.platform_api.h
      * Description: Platform API
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
@@ -7,8 +7,10 @@
 ******************************************************************************/
 
 #pragma once
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#ifndef PLATFORM_PLATFORM_API_H
+#define PLATFORM_PLATFORM_API_H
+
+#include <memory>
 
 
 namespace engine
@@ -22,6 +24,8 @@ namespace engine
             ~platform_api();
 
         private:
+            class platform_data;
+            std::shared_ptr<platform_data> data;
         };
     }
 }
