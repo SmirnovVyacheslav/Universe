@@ -118,7 +118,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)engine;$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,7 +135,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)engine;$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,6 +149,8 @@
     <ClCompile Include="engine\src\platform\platform_api.cpp" />
     <ClCompile Include="engine\src\platform\window.cpp" />
     <ClCompile Include="engine\src\platform\windows\platform_data.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window\descriptor.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window\handler.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\window_impl.cpp" />
     <ClCompile Include="game\src\game.cpp" />
@@ -162,6 +164,8 @@
     <ClInclude Include="engine\src\platform\platform_api.h" />
     <ClInclude Include="engine\src\platform\window.h" />
     <ClInclude Include="engine\src\platform\windows\platform_data.h" />
+    <ClInclude Include="engine\src\platform\windows\window\descriptor.h" />
+    <ClInclude Include="engine\src\platform\windows\window\handler.h" />
     <ClInclude Include="engine\src\platform\windows\window_impl.h" />
     <ClInclude Include="engine\src\window_impl.h" />
     <ClInclude Include="game\src\game.h" />
