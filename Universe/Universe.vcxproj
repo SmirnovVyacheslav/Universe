@@ -146,8 +146,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\engine_impl.cpp" />
-    <ClCompile Include="engine\src\platform\platform.cpp" />
+    <ClCompile Include="engine\src\platform\platform_api.cpp" />
     <ClCompile Include="engine\src\platform\window.cpp" />
+    <ClCompile Include="engine\src\platform\windows\platform_data.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\window_impl.cpp" />
     <ClCompile Include="game\src\game.cpp" />
@@ -158,8 +159,9 @@
     <ClInclude Include="engine\include\window.h" />
     <ClInclude Include="engine\src\engine_impl.h" />
     <ClInclude Include="engine\src\platform\macros.h" />
-    <ClInclude Include="engine\src\platform\platform.h" />
+    <ClInclude Include="engine\src\platform\platform_api.h" />
     <ClInclude Include="engine\src\platform\window.h" />
+    <ClInclude Include="engine\src\platform\windows\platform_data.h" />
     <ClInclude Include="engine\src\platform\windows\window_impl.h" />
     <ClInclude Include="engine\src\window_impl.h" />
     <ClInclude Include="game\src\game.h" />

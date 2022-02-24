@@ -60,8 +60,11 @@
     <ClCompile Include="engine\src\platform\window.cpp">
       <Filter>Исходные файлы\engine\platform</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\platform.cpp">
+    <ClCompile Include="engine\src\platform\platform_api.cpp">
       <Filter>Исходные файлы\engine\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\windows\platform_data.cpp">
+      <Filter>Исходные файлы\engine\platform\windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +92,11 @@
     <ClInclude Include="engine\src\platform\macros.h">
       <Filter>Файлы заголовков\engine\platform</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\platform.h">
+    <ClInclude Include="engine\src\platform\platform_api.h">
       <Filter>Файлы заголовков\engine\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\windows\platform_data.h">
+      <Filter>Файлы заголовков\engine\platform\windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

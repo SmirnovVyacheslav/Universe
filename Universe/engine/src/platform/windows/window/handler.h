@@ -1,31 +1,28 @@
 /******************************************************************************
-     * File: platform.platform_api.cpp
-     * Description: Platform API
+     * File: src/platform/windows/window/handler.h
+     * Description: Window handler
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-#include "macros.h"
-#include "platform_api.h"
+#include "src/platform/macros.h"
 
+#pragma once
 #ifdef PLATFORM_WINDOWS
+#ifndef PLATFORM_WINDOW_HANDLER_H
+#define PLATFORM_WINDOW_HANDLER_H
+
+#include <windows.h>
 
 
 namespace engine
 {
     namespace platform
     {
-        platform_api::platform_api()
-        {
-
-        }
-
-        platform_api::~platform_api()
-        {
-
-        }
+        LRESULT CALLBACK default_handler(HWND id, UINT message, WPARAM w_value, LPARAM l_value);
     }
 }
 
+#endif
 #endif

@@ -17,6 +17,8 @@ namespace engine
 {
     namespace platform
     {
+        class platform_data;
+
         class platform_api
         {
         public:
@@ -24,7 +26,6 @@ namespace engine
             ~platform_api();
 
         private:
-            class platform_data;
             std::shared_ptr<platform_data> data;
         };
     }
