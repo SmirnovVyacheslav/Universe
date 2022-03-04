@@ -1,12 +1,12 @@
 /******************************************************************************
-     * File: src/platform/windows/window/handler.h
+     * File: src/platform/windows/window_impl/window_handler.h
      * Description: Window handler
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-#include "src/platform/macros.h"
+#include "src/platform/macros_def.h"
 
 #pragma once
 #ifdef PLATFORM_WINDOWS

@@ -1,32 +1,37 @@
 /******************************************************************************
-     * File: platform.windows.platform_data.h
-     * Description: Platform data
+     * File: src/platform/windows/window_impl/window_impl.h
+     * Description: Platform window implementation
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-#include "../macros.h"
+#include "src/platform/macros_def.h"
 
 #pragma once
 #ifdef PLATFORM_WINDOWS
-#ifndef PLATFORM_PLATFORM_DATA_H
-#define PLATFORM_PLATFORM_DATA_H
+#ifndef PLATFORM_WINDOW_IMPL_H
+#define PLATFORM_WINDOW_IMPL_H
 
-#include <memory>
+#include <string>
 
+#include <windows.h>
+
+#include "window_data.h"
 
 namespace engine
 {
     namespace platform
     {
-        class platform_data
+        class window_impl
         {
         public:
-            platform_data();
-            ~platform_data();
+            window_impl(std::wstring window_name, window_data window_data);
+            ~window_impl();
 
         private:
+            std::wstring name;
+            HWND id;
         };
     }
 }

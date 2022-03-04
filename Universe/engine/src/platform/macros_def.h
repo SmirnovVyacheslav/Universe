@@ -1,5 +1,5 @@
 /******************************************************************************
-     * File: platform/macros.h
+     * File: platform/macros_def.h
      * Description: Platform macros define
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
@@ -7,6 +7,7 @@
 ******************************************************************************/
 
 #pragma once
+
 
 // Windows
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)

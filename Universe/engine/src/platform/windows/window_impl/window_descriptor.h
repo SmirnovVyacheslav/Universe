@@ -1,12 +1,12 @@
 /******************************************************************************
-     * File: src/platform/windows/window/descriptor.h
+     * File: src/platform/windows/window_impl/window_descriptor.h
      * Description: Window desciptor
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-#include "src/platform/macros.h"
+#include "src/platform/macros_def.h"
 
 #pragma once
 #ifdef PLATFORM_WINDOWS
@@ -22,11 +22,13 @@ namespace engine
 {
     namespace platform
     {
-        class descriptor
+        class window_descriptor
         {
         public:
-            descriptor(std::wstring name, LRESULT(*handler)(HWND, UINT, WPARAM, LPARAM));
-            ~descriptor();
+            window_descriptor(std::wstring name, LRESULT(*handler)(HWND, UINT, WPARAM, LPARAM));
+            ~window_descriptor();
+
+            std::wstring descriptor_name();
 
         private:
             std::wstring name;
