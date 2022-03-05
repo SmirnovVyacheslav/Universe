@@ -14,16 +14,18 @@
 #define PLATFORM_WINDOW_IMPL_H
 
 #include <string>
+#include <memory>
 
 #include <windows.h>
 
 #include "window_data.h"
+#include "src/platform/window_ui.h"
 
 namespace engine
 {
     namespace platform
     {
-        class window_impl
+        class window_impl: public window_ui
         {
         public:
             window_impl(std::wstring window_name, window_data window_data);

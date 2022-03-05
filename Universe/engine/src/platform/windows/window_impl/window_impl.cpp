@@ -15,6 +15,12 @@ namespace engine
 {
     namespace platform
     {
+        std::shared_ptr<window_ui> window_ui::create(std::wstring name)
+        {
+            return std::make_shared<window_impl>(name, );
+        }
+
+
         window_impl::window_impl(std::wstring window_name, window_data window_data) : name(window_name)
         {
             id = CreateWindow(

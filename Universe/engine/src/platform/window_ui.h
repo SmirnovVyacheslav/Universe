@@ -1,5 +1,5 @@
 /******************************************************************************
-     * File: platform.window.h
+     * File: src/platform/window_ui.h
      * Description: Platform window implementation
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
@@ -7,34 +7,25 @@
 ******************************************************************************/
 
 #pragma once
-#ifndef PLATFOM_WINDOW_H
-#define PLATFOM_WINDOW_H
+#ifndef PLATFOM_WINDOW_UI_H
+#define PLATFOM_WINDOW_UI_H
 
-#include<memory>
+#include <string>
+#include <memory>
 
 
 namespace engine
 {
     namespace platform
     {
-        class window_impl;
-
-
-
-
-        class window
+        class window_ui
         {
         public:
-            window();
-            ~window();
-            //// Create window
-            //RECT rc = { 0, 0, 533, 400 };
-            //AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+            static std::shared_ptr<window_ui> create(std::wstring name);
+            virtual ~window_ui() = default;
 
-            // ShowWindow(id, SW_SHOW);
-
-        private:
-            std::unique_ptr<window_impl> window_impl;
+        protected:
+            window_ui() = default;
         };
     }
 }

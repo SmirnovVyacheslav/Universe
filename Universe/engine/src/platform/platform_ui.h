@@ -1,14 +1,14 @@
 /******************************************************************************
-     * File: platform.platform_api.h
-     * Description: Platform API
+     * File: src/platform/platform_ui.h
+     * Description: Platform UI
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
 #pragma once
-#ifndef PLATFORM_PLATFORM_API_H
-#define PLATFORM_PLATFORM_API_H
+#ifndef PLATFORM_UI_H
+#define PLATFORM_UI_H
 
 #include <memory>
 
@@ -17,16 +17,14 @@ namespace engine
 {
     namespace platform
     {
-        class platform_data;
-
-        class platform_api
+        class platform_ui
         {
         public:
-            platform_api();
-            ~platform_api();
+            static std::shared_ptr<platform_ui> create();
+            virtual ~platform_ui();
 
-        private:
-            std::shared_ptr<platform_data> data;
+        protected:
+            platform_ui();
         };
     }
 }
