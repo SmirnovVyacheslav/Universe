@@ -20,7 +20,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "../../engine/include/engine.h"
+#include <memory>
+
+#include "engine_ui.h"
 
 
 namespace game
@@ -35,7 +37,7 @@ namespace game
         void run();
 
     private:
-        engine::type_engine& engine_instance;
+        std::shared_ptr<engine::engine_ui> engine_instance;
     };
 }
 

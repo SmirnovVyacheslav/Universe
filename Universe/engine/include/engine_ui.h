@@ -1,5 +1,5 @@
 /******************************************************************************
-     * File: engine.h
+     * File: engine_ui.h
      * Description: Main engine interface
      * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
@@ -17,29 +17,33 @@
  */
 
 #pragma once
-#ifndef ENGINE_H
-#define ENGINE_H
+#ifndef ENGINE_UI_H
+#define ENGINE_UI_H
 
-#include "window.h"
+#include <memory>
+#include <string>
+
+#include "window_ui.h"
 
 
 namespace engine
 {
-    // Interface
-    class type_engine
+    class engine_ui
     {
     public:
-        static type_engine& initialize();
-        static type_engine& instance();
-        static void terminate();
+        //static type_engine& initialize();
+        //static type_engine& instance();
+        //static void terminate();
+        static std::shared_ptr<engine_ui> create();
 
-        window::type_windows_manager& windows_manager;
+        virtual std::shared_ptr<window::window_ui> create_window(std::wstring name) = 0;
+        //window::type_windows_manager& windows_manager;
 
     protected:
-        type_engine();
-        ~type_engine();
-        type_engine(const type_engine&) = delete;
-        type_engine& operator=(const type_engine&) = delete;
+        engine_ui() = default;
+        ~engine_ui() = default;
+        //type_engine(const type_engine&) = delete;
+        //type_engine& operator=(const type_engine&) = delete;
     };
 }
 

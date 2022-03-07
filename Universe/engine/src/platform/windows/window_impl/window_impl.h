@@ -28,7 +28,7 @@ namespace engine
         class window_impl: public window_ui
         {
         public:
-            window_impl(std::wstring window_name, window_data window_data);
+            window_impl(std::wstring window_name, std::shared_ptr<window_data> window_data);
             ~window_impl();
 
         private:

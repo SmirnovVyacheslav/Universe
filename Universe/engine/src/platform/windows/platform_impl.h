@@ -14,8 +14,11 @@
 #define PLATFORM_IMLP_H
 
 #include <memory>
+#include <string>
 
 #include "src/platform/platform_ui.h"
+#include "src/platform/windows/window_impl/window_data.h"
+#include "src/platform/windows/window_impl/window_impl.h"
 
 
 namespace engine
@@ -28,8 +31,10 @@ namespace engine
             platform_impl();
             ~platform_impl();
 
+            std::shared_ptr<window_ui> create_window(std::wstring name);
+
         private:
-            //gg
+            std::shared_ptr<window_data> window_data_instance;
         };
     }
 }

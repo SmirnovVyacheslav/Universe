@@ -28,7 +28,7 @@ namespace engine
             data.cbClsExtra = 0;
             data.cbWndExtra = 0;
             // Instance handler
-            data.hInstance = GetModuleHandle(nullptr);
+            //data.hInstance = GetModuleHandle(nullptr);
             // Window icon and cursor
             data.hIcon = LoadIcon(NULL, IDI_APPLICATION);
             data.hCursor = LoadCursor(NULL, IDC_ARROW);

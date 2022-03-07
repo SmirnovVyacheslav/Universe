@@ -11,17 +11,18 @@
 
 namespace game
 {
-    type_game::type_game() : engine_instance(engine::type_engine::initialize())
+    type_game::type_game() : engine_instance(engine::engine_ui::create())
     {
         // Initialize code
     };
     type_game::~type_game()
     {
-        engine_instance.terminate();
+        //ff
     }
     void type_game::run()
     {
         // Run code
-        engine::window::type_window& window_instance = engine_instance.windows_manager.create_window();
+        //engine::window::type_window& window_instance = engine_instance.windows_manager.create_window();
+        engine_instance->create_window(L"Main");
     };
 }

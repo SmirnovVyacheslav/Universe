@@ -21,7 +21,6 @@ namespace engine
         class window_ui
         {
         public:
-            static std::shared_ptr<window_ui> create(std::wstring name);
             virtual ~window_ui() = default;
 
         protected:

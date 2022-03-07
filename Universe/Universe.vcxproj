@@ -146,27 +146,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\engine_impl.cpp" />
-    <ClCompile Include="engine\src\platform\platform_api.cpp" />
-    <ClCompile Include="engine\src\platform\window.cpp" />
-    <ClCompile Include="engine\src\platform\windows\platform_data.cpp" />
-    <ClCompile Include="engine\src\platform\windows\window\descriptor.cpp" />
-    <ClCompile Include="engine\src\platform\windows\window\handler.cpp" />
-    <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
-    <ClCompile Include="engine\src\window_impl.cpp" />
+    <ClCompile Include="engine\src\platform\windows\platform_impl.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl\window_data.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl\window_handler.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp" />
+    <ClCompile Include="engine\src\window_impl_m.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\include\engine.h" />
-    <ClInclude Include="engine\include\window.h" />
+    <ClInclude Include="engine\include\engine_ui.h" />
+    <ClInclude Include="engine\include\window_ui.h" />
     <ClInclude Include="engine\src\engine_impl.h" />
-    <ClInclude Include="engine\src\platform\macros.h" />
-    <ClInclude Include="engine\src\platform\platform_api.h" />
-    <ClInclude Include="engine\src\platform\window.h" />
-    <ClInclude Include="engine\src\platform\windows\platform_data.h" />
-    <ClInclude Include="engine\src\platform\windows\window\descriptor.h" />
-    <ClInclude Include="engine\src\platform\windows\window\handler.h" />
-    <ClInclude Include="engine\src\platform\windows\window_impl.h" />
+    <ClInclude Include="engine\src\platform\macros_def.h" />
+    <ClInclude Include="engine\src\platform\platform_ui.h" />
+    <ClInclude Include="engine\src\platform\windows\platform_impl.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl\window_data.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl\window_descriptor.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl\window_handler.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h" />
+    <ClInclude Include="engine\src\platform\window_ui.h" />
     <ClInclude Include="engine\src\window_impl.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
