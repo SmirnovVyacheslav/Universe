@@ -22,23 +22,13 @@ namespace engine
     class engine_impl: public engine_ui
     {
     public:
-        //static type_engine_impl& initialize();
-        //static void terminate();
-
         engine_impl();
         ~engine_impl();
 
-        std::shared_ptr<window::window_ui> create_window(std::wstring name);
+        window_ptr create_window(std::wstring name);
 
     private:
-        std::shared_ptr<platform::platform_ui> platform_instance;
-        
-        //static type_engine_impl* instance;
-
-        /*type_engine_impl();
-        ~type_engine_impl();
-        type_engine_impl(const type_engine_impl&) = delete;
-        type_engine_impl& operator=(const type_engine_impl&) = delete;*/
+        platform::platform_ptr platform_instance;
     };
 }
 

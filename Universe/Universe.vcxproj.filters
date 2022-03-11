@@ -25,26 +25,38 @@
     <Filter Include="Файлы заголовков\engine">
       <UniqueIdentifier>{a612ba96-b20b-42e3-9072-b543449d59dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine_api">
-      <UniqueIdentifier>{dffd2cdb-8baa-4c33-a52c-197af1b552f1}</UniqueIdentifier>
+    <Filter Include="Файлы заголовков\engine\src">
+      <UniqueIdentifier>{f951b113-b2d9-44b7-9175-6f815997e088}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\platform">
-      <UniqueIdentifier>{fee45bda-d7d0-440e-a3d1-18aacaa4f0d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\platform">
+    <Filter Include="Файлы заголовков\engine\src\platform">
       <UniqueIdentifier>{bca9814a-591c-4bb3-b0d0-ad56e5ed1b4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine\platform\windows">
+    <Filter Include="Файлы заголовков\engine\src\platform\windows">
       <UniqueIdentifier>{60747bb1-0303-492a-93fe-a192bca04b1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\platform\windows">
+    <Filter Include="Файлы заголовков\engine\src\platform\windows\window_impl">
+      <UniqueIdentifier>{4fedeabc-3ff7-4e07-8c67-82550e659812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\include">
+      <UniqueIdentifier>{dffd2cdb-8baa-4c33-a52c-197af1b552f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src">
+      <UniqueIdentifier>{8c784e9f-ea0f-42ca-a0b2-92493240e1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\platform">
+      <UniqueIdentifier>{fee45bda-d7d0-440e-a3d1-18aacaa4f0d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\platform\windows">
       <UniqueIdentifier>{d90b5a65-51ec-4e68-960e-e366708cd036}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\platform\windows\window_impl">
+    <Filter Include="Исходные файлы\engine\src\platform\windows\window_impl">
       <UniqueIdentifier>{37f8dda2-db12-4811-977a-de133f6cfaf4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine\platform\windows\window_impl">
-      <UniqueIdentifier>{4fedeabc-3ff7-4e07-8c67-82550e659812}</UniqueIdentifier>
+    <Filter Include="Файлы заголовков\engine\src\core">
+      <UniqueIdentifier>{8900db0e-e36a-42ca-8bb4-d4ff5afe08f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\core">
+      <UniqueIdentifier>{8ccb3e17-2433-422c-abdc-79ea3aff6028}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,26 +66,26 @@
     <ClCompile Include="game\src\game.cpp">
       <Filter>Исходные файлы\game</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\engine_impl.cpp">
-      <Filter>Исходные файлы\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\window_impl_m.cpp">
-      <Filter>Исходные файлы\engine</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\platform\windows\platform_impl.cpp">
-      <Filter>Исходные файлы\engine\platform\windows</Filter>
+      <Filter>Исходные файлы\engine\src\platform\windows</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl\window_data.cpp">
-      <Filter>Исходные файлы\engine\platform\windows\window_impl</Filter>
+      <Filter>Исходные файлы\engine\src\platform\windows\window_impl</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp">
-      <Filter>Исходные файлы\engine\platform\windows\window_impl</Filter>
+      <Filter>Исходные файлы\engine\src\platform\windows\window_impl</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl\window_handler.cpp">
-      <Filter>Исходные файлы\engine\platform\windows\window_impl</Filter>
+      <Filter>Исходные файлы\engine\src\platform\windows\window_impl</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp">
-      <Filter>Исходные файлы\engine\platform\windows\window_impl</Filter>
+      <Filter>Исходные файлы\engine\src\platform\windows\window_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\engine_impl.cpp">
+      <Filter>Исходные файлы\engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\window_impl_m.cpp">
+      <Filter>Исходные файлы\engine\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,40 +93,40 @@
       <Filter>Файлы заголовков\game</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\engine_ui.h">
-      <Filter>Файлы заголовков\engine_api</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\engine_impl.h">
-      <Filter>Файлы заголовков\engine</Filter>
+      <Filter>Файлы заголовков\engine\include</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\window_ui.h">
-      <Filter>Файлы заголовков\engine_api</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\window_impl.h">
-      <Filter>Файлы заголовков\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\window_ui.h">
-      <Filter>Файлы заголовков\engine\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\macros_def.h">
-      <Filter>Файлы заголовков\engine\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\platform_ui.h">
-      <Filter>Файлы заголовков\engine\platform</Filter>
+      <Filter>Файлы заголовков\engine\include</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\platform\windows\platform_impl.h">
-      <Filter>Файлы заголовков\engine\platform\windows</Filter>
+      <Filter>Файлы заголовков\engine\src\platform\windows</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_data.h">
-      <Filter>Файлы заголовков\engine\platform\windows\window_impl</Filter>
+    <ClInclude Include="engine\src\platform\windows\window_impl\platform_window_descriptor.h">
+      <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_descriptor.h">
-      <Filter>Файлы заголовков\engine\platform\windows\window_impl</Filter>
+    <ClInclude Include="engine\src\platform\windows\window_impl\platform_window_handler.h">
+      <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_handler.h">
-      <Filter>Файлы заголовков\engine\platform\windows\window_impl</Filter>
+    <ClInclude Include="engine\src\platform\windows\window_impl\platform_window_impl.h">
+      <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h">
-      <Filter>Файлы заголовков\engine\platform\windows\window_impl</Filter>
+    <ClInclude Include="engine\src\window_impl.h">
+      <Filter>Файлы заголовков\engine\src</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\engine_impl.h">
+      <Filter>Файлы заголовков\engine\src</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform_ui.h">
+      <Filter>Файлы заголовков\engine\src</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\windows\window_impl\platform_window_data.h">
+      <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\platform_macros.h">
+      <Filter>Файлы заголовков\engine\src\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\platform_window_ui.h">
+      <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

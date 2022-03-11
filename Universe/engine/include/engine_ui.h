@@ -28,30 +28,20 @@
 
 namespace engine
 {
+    using engine_ptr=std::shared_ptr<engine_ui>;
+
     class engine_ui
     {
     public:
-        //static type_engine& initialize();
-        //static type_engine& instance();
-        //static void terminate();
-        static std::shared_ptr<engine_ui> create();
+        virtual ~engine_ui() = default;
 
-        virtual std::shared_ptr<window::window_ui> create_window(std::wstring name) = 0;
-        //window::type_windows_manager& windows_manager;
+        static engine_ptr create();
+
+        virtual window_ptr create_window(std::wstring name) = 0;
 
     protected:
         engine_ui() = default;
-        ~engine_ui() = default;
-        //type_engine(const type_engine&) = delete;
-        //type_engine& operator=(const type_engine&) = delete;
     };
 }
 
 #endif
-
-// error handle
-// print in log and other register output
-// error code, severity and message
-// clean resource
-// throw exception
-// client should catch for call function

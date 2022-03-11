@@ -20,6 +20,8 @@ namespace engine
 {
     namespace platform
     {
+        using platform_ptr = std::shared_ptr<platform::platform_ui>;
+
         class platform_ui
         {
         public:
