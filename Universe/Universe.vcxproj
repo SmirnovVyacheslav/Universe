@@ -119,6 +119,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)engine;$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,6 +148,9 @@
   <ItemGroup>
     <ClCompile Include="engine\src\engine_impl.cpp" />
     <ClCompile Include="engine\src\platform\windows\platform_impl.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl\window_handler.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp" />
     <ClCompile Include="engine\src\window_impl_m.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
@@ -155,10 +159,13 @@
     <ClInclude Include="engine\include\engine_ui.h" />
     <ClInclude Include="engine\include\window_ui.h" />
     <ClInclude Include="engine\src\engine_impl.h" />
-    <ClInclude Include="engine\src\platform\sp_macros_def.h" />
-    <ClInclude Include="engine\src\platform\windows\spw_platform_impl.h" />
-    <ClInclude Include="engine\src\platform\sp_window_ui.h" />
-    <ClInclude Include="engine\src\platform_ui.h" />
+    <ClInclude Include="engine\src\platform\macros_def.h" />
+    <ClInclude Include="engine\src\platform\platform_ui.h" />
+    <ClInclude Include="engine\src\platform\windows\platform_impl.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl\window_descriptor.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl\window_handler.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h" />
+    <ClInclude Include="engine\src\platform\window_ui.h" />
     <ClInclude Include="engine\src\window_impl.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
