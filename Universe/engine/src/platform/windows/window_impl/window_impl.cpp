@@ -15,11 +15,11 @@ namespace engine
 {
     namespace platform
     {
-        window_impl::window_impl(std::wstring window_name, std::shared_ptr<window_data> window_data) : name(window_name)
+		window_obj_impl::window_obj_impl(std::wstring window_name, std::shared_ptr<window_descriptor> window_descriptor) : name(window_name)
         {
             id = CreateWindow(
                 // Window class name
-                static_cast<LPCTSTR>(window_data->default_descriptor_name().c_str()),
+                static_cast<LPCTSTR>(window_descriptor->descriptor_name().c_str()),
                 // Window name
                 static_cast<LPCTSTR>(window_name.c_str()),
                 // Style
@@ -47,43 +47,34 @@ namespace engine
             }
         }
 
-        window_impl::~window_impl()
+		window_obj_impl::~window_obj_impl()
         {
             DestroyWindow(id);
         }
-    }
-}
-
-#endif
-
-/******************************************************************************
-	 * File: src/platform/windows/window_impl/window_data.cpp
-	 * Description: Window data
-	 * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
-	 * Author: Vyacheslav Smirnov
-	 * Email: necrolazy@gmail.com
-******************************************************************************/
-
-#include "window_data.h"
-
-#ifdef PLATFORM_WINDOWS
 
 
-namespace engine
-{
-	namespace platform
-	{
-		window_data::window_data() :
+		window_mng_ptr window_mng_ui::create()
+		{
+			return std::make_shared<window_mng_impl>();
+		}
+
+
+		window_mng_impl::window_mng_impl() :
 			default_descriptor(window_descriptor(std::wstring(L"default_class"), default_handler))
 		{}
 
-		window_data::~window_data() {}
+		window_mng_impl::~window_mng_impl() {}
 
-		std::wstring window_data::default_descriptor_name()
+		window_obj_ptr window_mng_impl::create_window(std::wstring name)
+		{
+			return std::make_shared<window_obj_impl>(name, default_descriptor);
+		}
+
+		std::wstring window_mng_impl::default_descriptor_name()
 		{
 			return default_descriptor.descriptor_name();
 		}
-	}
+    }
 }
 
 #endif

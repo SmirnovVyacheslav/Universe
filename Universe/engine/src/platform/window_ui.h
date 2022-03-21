@@ -1,6 +1,6 @@
 /******************************************************************************
      * File: src/platform/window_ui.h
-     * Description: Platform window implementation
+     * Description: Platform window interface
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
@@ -18,14 +18,35 @@ namespace engine
 {
     namespace platform
     {
-        class window_ui
+		class window_obj_ui;
+		class window_mng_ui;
+
+		using window_obj_ptr = std::shared_ptr<window_obj_ui>;
+		using window_mng_ptr = std::shared_ptr<window_mng_ui>;
+
+
+        class window_obj_ui
         {
         public:
-            virtual ~window_ui() = default;
+            virtual ~window_obj_ui() = default;
 
         protected:
-            window_ui() = default;
+			window_obj_ui() = default;
         };
+
+
+		class window_mng_ui
+		{
+		public:
+			virtual ~window_mng_ui() = default;
+
+			static window_mng_ptr create();
+
+			virtual window_obj_ptr create_window(std::wstring name) = 0;
+
+		protected:
+			window_mng_ui() = default;
+		};
     }
 }
 
