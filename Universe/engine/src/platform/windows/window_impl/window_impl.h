@@ -18,8 +18,8 @@
 
 #include <windows.h>
 
-#include "window_descriptor.h"
 #include "window_handler.h"
+#include "window_descriptor.h"
 
 #include "src/platform/window_ui.h"
 

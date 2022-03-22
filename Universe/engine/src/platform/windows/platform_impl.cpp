@@ -15,19 +15,15 @@ namespace engine
 {
     namespace platform
     {
-        platform_impl::platform_impl() : window_data_instance(std::make_shared<window_data>()) {}
+		platform_mng_impl::platform_mng_impl() {}
 
-        platform_impl::~platform_impl() {}
+		platform_mng_impl::~platform_mng_impl() {}
 
-        std::shared_ptr<platform_ui> platform_ui::create()
-        {
-            return std::make_shared<platform_impl>();
-        }
 
-        std::shared_ptr<window_ui> platform_impl::create_window(std::wstring name)
-        {
-            return std::make_shared<window_impl>(name, window_data_instance);
-        }
+		platform_mng_ptr platform_mng_ui::create()
+		{
+			return std::make_shared<platform_mng_impl>();
+		}
     }
 }
 

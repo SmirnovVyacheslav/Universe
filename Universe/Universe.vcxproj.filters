@@ -66,9 +66,6 @@
     <ClCompile Include="engine\src\engine_impl.cpp">
       <Filter>Исходные файлы\engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\window_impl_m.cpp">
-      <Filter>Исходные файлы\engine\src</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp">
       <Filter>Исходные файлы\engine\src\platform\windows\window_impl</Filter>
     </ClCompile>
@@ -77,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp">
       <Filter>Исходные файлы\engine\src\platform\windows\window_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\platform_ui.cpp">
+      <Filter>Исходные файлы\engine\src\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\window_impl.cpp">
+      <Filter>Исходные файлы\engine\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

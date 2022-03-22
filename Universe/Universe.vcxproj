@@ -147,11 +147,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\engine_impl.cpp" />
+    <ClCompile Include="engine\src\platform\platform_ui.cpp" />
     <ClCompile Include="engine\src\platform\windows\platform_impl.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl\window_handler.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp" />
-    <ClCompile Include="engine\src\window_impl_m.cpp" />
+    <ClCompile Include="engine\src\window_impl.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
