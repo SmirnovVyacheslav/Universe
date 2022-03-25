@@ -19,16 +19,14 @@
 
 namespace engine
 {
-    class engine_impl: public engine_ui
+    class engine_mng_impl: public engine_mng_ui
     {
     public:
-        engine_impl();
-        ~engine_impl();
-
-        window_ptr create_window(std::wstring name);
+		engine_mng_impl();
+        ~engine_mng_impl();
 
     private:
-        platform::platform_ptr platform_instance;
+        platform::platform_mng_ptr platform_instance;
     };
 }
 

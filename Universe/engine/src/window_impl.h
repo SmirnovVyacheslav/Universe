@@ -15,20 +15,37 @@
 
 #include "window_ui.h"
 #include "src/platform/platform_ui.h"
-#include "src/platform/window_ui.h"
 
 
 namespace engine
 {
-    class window_impl: public window_ui
+	class window_obj_impl;
+	class window_mng_impl;
+
+
+    class window_obj_impl: public window_obj_ui
     {
     public:
-        window_impl(std::shared_ptr<platform::platform_ui> platform_instance, std::wstring name);
-        ~window_impl();
+		window_obj_impl(platform::platform_mng_ptr platform_instance, std::wstring name);
+        ~window_obj_impl();
+
     private:
         std::wstring name;
-        std::shared_ptr<platform::window_ui> window_instance;
+        platform::window_obj_ptr window_instance;
     };
+
+
+	class window_mng_impl : public window_mng_ui
+	{
+	public:
+		window_mng_impl(platform::platform_mng_ptr platform_instance);
+		~window_mng_impl();
+
+		window_obj_ptr create_window(std::wstring name);
+
+	private:
+		platform::platform_mng_ptr platform_instance;
+	};
 }
 
 #endif

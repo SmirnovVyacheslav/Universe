@@ -31,7 +31,7 @@ namespace engine
 
             static platform_mng_ptr create();
 
-			window_mng_ptr window_mng;
+			const window_mng_ptr window_mng;
 
         protected:
 			platform_mng_ui();

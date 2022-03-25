@@ -28,19 +28,22 @@
 
 namespace engine
 {
-    using engine_ptr=std::shared_ptr<engine_ui>;
+	class engine_mng_ui;
+	
+	using engine_mng_ptr=std::shared_ptr<engine_mng_ui>;
 
-    class engine_ui
+
+    class engine_mng_ui
     {
     public:
-        virtual ~engine_ui() = default;
+        virtual ~engine_mng_ui() = default;
 
-        static engine_ptr create();
+        static engine_mng_ptr create();
 
-        virtual window_ptr create_window(std::wstring name) = 0;
+		window_mng_ptr window_mng;
 
     protected:
-        engine_ui() = default;
+		engine_mng_ui() = default;
     };
 }
 

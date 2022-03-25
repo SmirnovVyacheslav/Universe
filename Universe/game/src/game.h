@@ -37,7 +37,7 @@ namespace game
         void run();
 
     private:
-        std::shared_ptr<engine::engine_ui> engine_instance;
+        std::shared_ptr<engine::engine_mng_ui> engine_instance;
     };
 }
 

@@ -35,7 +35,7 @@ namespace engine
 		class window_obj_impl : public window_obj_ui
 		{
 		public:
-			window_obj_impl(std::wstring window_name, std::shared_ptr<window_descriptor> window_descriptor);
+			window_obj_impl(std::wstring window_name, window_descriptor window_descriptor);
 			~window_obj_impl();
 
 		private:

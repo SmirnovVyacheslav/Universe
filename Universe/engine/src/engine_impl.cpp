@@ -11,17 +11,16 @@
 
 namespace engine
 {
-    engine_ptr engine_ui::create()
+	engine_mng_ptr engine_mng_ui::create()
     {
-        return std::make_shared<engine_impl>();
+        return std::make_shared<engine_mng_impl>();
     }
 
-    engine_impl::engine_impl() : platform_instance(platform::platform_ui::create()) {}
+	engine_mng_impl::engine_mng_impl() :
+		platform_instance(platform::platform_mng_ui::create())
+	{
+		window_mng = window_mng_ui::create(platform_instance);
+	}
 
-    engine_impl::~engine_impl() {}
-
-    window_ptr engine_impl::create_window(std::wstring name)
-    {
-        return std::make_shared<window_impl>(platform_instance, name);
-    }
+	engine_mng_impl::~engine_mng_impl() {}
 }

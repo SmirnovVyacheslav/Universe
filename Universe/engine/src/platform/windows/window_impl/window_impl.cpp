@@ -15,11 +15,11 @@ namespace engine
 {
     namespace platform
     {
-		window_obj_impl::window_obj_impl(std::wstring window_name, std::shared_ptr<window_descriptor> window_descriptor) : name(window_name)
+		window_obj_impl::window_obj_impl(std::wstring window_name, window_descriptor window_descriptor) : name(window_name)
         {
             id = CreateWindow(
                 // Window class name
-                static_cast<LPCTSTR>(window_descriptor->descriptor_name().c_str()),
+                static_cast<LPCTSTR>(window_descriptor.descriptor_name().c_str()),
                 // Window name
                 static_cast<LPCTSTR>(window_name.c_str()),
                 // Style

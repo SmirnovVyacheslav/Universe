@@ -11,7 +11,7 @@
 
 namespace game
 {
-    type_game::type_game() : engine_instance(engine::engine_ui::create())
+    type_game::type_game() : engine_instance(engine::engine_mng_ui::create())
     {
         // Initialize code
     };
@@ -23,6 +23,6 @@ namespace game
     {
         // Run code
         //engine::window::type_window& window_instance = engine_instance.windows_manager.create_window();
-        engine_instance->create_window(L"Main");
+        engine_instance->window_mng->create_window(L"Main");
     };
 }
