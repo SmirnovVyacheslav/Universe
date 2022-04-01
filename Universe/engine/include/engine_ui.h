@@ -6,19 +6,11 @@
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-/* ***************************************************************************
- * Name convention
- * ***************************************************************************
- * type_name   = data type / class
- * const_name  = global constant
- * global_name = global variable
- * this.name   = data type member
- * interface   = interface
- */
 
 #pragma once
 #ifndef ENGINE_UI_H
 #define ENGINE_UI_H
+
 
 #include <memory>
 #include <string>
@@ -30,6 +22,7 @@ namespace engine
 {
 	class engine_mng_ui;
 	
+
 	using engine_mng_ptr=std::shared_ptr<engine_mng_ui>;
 
 

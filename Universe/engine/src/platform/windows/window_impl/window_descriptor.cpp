@@ -1,12 +1,13 @@
 /******************************************************************************
-     * File: src/platform/windows/window_impl/window_descriptor.cpp
-     * Description: Window desciptor
+     * Description: Window desciptor impl
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
+
 #include "window_descriptor.h"
+
 
 #ifdef PLATFORM_WINDOWS
 
@@ -45,10 +46,12 @@ namespace engine
             }
         }
 
+
         window_descriptor::~window_descriptor()
         {
             UnregisterClass(static_cast<LPCTSTR>(name.c_str()), GetModuleHandle(nullptr));
         }
+
 
         std::wstring window_descriptor::descriptor_name()
         {

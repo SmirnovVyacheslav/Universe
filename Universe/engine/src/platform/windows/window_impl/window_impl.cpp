@@ -1,12 +1,13 @@
 /******************************************************************************
-     * File: src/platform/windows/window_impl/window_impl.cpp
      * Description: Platform window implementation
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
+
 #include "window_impl.h"
+
 
 #ifdef PLATFORM_WINDOWS
 
@@ -47,6 +48,7 @@ namespace engine
             }
         }
 
+
 		window_obj_impl::~window_obj_impl()
         {
             DestroyWindow(id);
@@ -63,12 +65,15 @@ namespace engine
 			default_descriptor(window_descriptor(std::wstring(L"default_class"), default_handler))
 		{}
 
+
 		window_mng_impl::~window_mng_impl() {}
+
 
 		window_obj_ptr window_mng_impl::create_window(std::wstring name)
 		{
 			return std::make_shared<window_obj_impl>(name, default_descriptor);
 		}
+
 
 		std::wstring window_mng_impl::default_descriptor_name()
 		{

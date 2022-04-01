@@ -1,10 +1,10 @@
 /******************************************************************************
-	 * File: src/platform/platform_ui.cpp
 	 * Description: Platform UI
 	 * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
 	 * Author: Vyacheslav Smirnov
 	 * Email: necrolazy@gmail.com
 ******************************************************************************/
+
 
 #include "platform_ui.h"
 

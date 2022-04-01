@@ -1,17 +1,19 @@
 /******************************************************************************
-     * File: src/platform/windows/window_impl/window_handler.h
-     * Description: Window handler
+     * Description: Window handler ui
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
+
 #include "src/platform/macros_def.h"
+
 
 #pragma once
 #ifdef PLATFORM_WINDOWS
 #ifndef PLATFORM_WINDOW_HANDLER_H
 #define PLATFORM_WINDOW_HANDLER_H
+
 
 #include <windows.h>
 

@@ -1,17 +1,19 @@
 /******************************************************************************
-     * File: src/platform/windows/window_impl/window_impl.h
-     * Description: Platform window implementation
+     * Description: Platform window implementation ui
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
+
 #include "src/platform/macros_def.h"
+
 
 #pragma once
 #ifdef PLATFORM_WINDOWS
 #ifndef PLATFORM_WINDOW_IMPL_H
 #define PLATFORM_WINDOW_IMPL_H
+
 
 #include <string>
 #include <memory>

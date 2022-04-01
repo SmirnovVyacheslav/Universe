@@ -1,10 +1,10 @@
 /******************************************************************************
-     * File: src/platform/macros_def.h
      * Description: Platform macros define
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
+
 
 #pragma once
 

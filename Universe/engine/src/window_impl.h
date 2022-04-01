@@ -1,14 +1,15 @@
 /******************************************************************************
-     * File: src/window_impl.h
      * Description: Windows implementation
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
+
 #pragma once
 #ifndef WINDOW_IMPL_H
 #define WINDOW_IMPL_H
+
 
 #include <memory>
 #include <string>

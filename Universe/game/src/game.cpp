@@ -22,7 +22,6 @@ namespace game
     void type_game::run()
     {
         // Run code
-        //engine::window::type_window& window_instance = engine_instance.windows_manager.create_window();
         engine_instance->window_mng->create_window(L"Main");
     };
 }

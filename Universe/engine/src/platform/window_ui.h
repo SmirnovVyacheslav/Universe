@@ -1,14 +1,15 @@
 /******************************************************************************
-     * File: src/platform/window_ui.h
-     * Description: Platform window interface
+     * Description: Platform window ui
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
+
 #pragma once
 #ifndef PLATFOM_WINDOW_UI_H
 #define PLATFOM_WINDOW_UI_H
+
 
 #include <string>
 #include <memory>
@@ -20,6 +21,7 @@ namespace engine
     {
 		class window_obj_ui;
 		class window_mng_ui;
+
 
 		using window_obj_ptr = std::shared_ptr<window_obj_ui>;
 		using window_mng_ptr = std::shared_ptr<window_mng_ui>;

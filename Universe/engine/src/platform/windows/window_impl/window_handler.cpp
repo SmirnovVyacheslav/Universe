@@ -1,12 +1,13 @@
 /******************************************************************************
-     * File: src/platform/windows/window_impl/window_handler.cpp
-     * Description: Window handler
+     * Description: Window handler impl
      * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
+
 #include "window_handler.h"
+
 
 #ifdef PLATFORM_WINDOWS
 
