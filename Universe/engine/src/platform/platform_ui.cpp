@@ -11,8 +11,9 @@
 
 namespace engine
 {
-	namespace platform
-	{
-		platform_mng_ui::platform_mng_ui() : window_mng(window_mng_ui::create()) {}
-	}
+    namespace platform
+    {
+        platform_mng_ui::platform_mng_ui() : window_mng(window_mng_ui::create())
+        {}
+    }
 }

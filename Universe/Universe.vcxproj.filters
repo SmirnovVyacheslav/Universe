@@ -119,6 +119,9 @@
     <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h">
       <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
     </ClInclude>
+    <ClInclude Include="engine\include\std_include.h">
+      <Filter>Файлы заголовков\engine\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

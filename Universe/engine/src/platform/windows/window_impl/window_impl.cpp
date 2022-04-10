@@ -16,7 +16,7 @@ namespace engine
 {
     namespace platform
     {
-		window_obj_impl::window_obj_impl(std::wstring window_name, window_descriptor window_descriptor) : name(window_name)
+        window_obj_impl::window_obj_impl(std::wstring window_name, window_descriptor window_descriptor) : name(window_name)
         {
             id = CreateWindow(
                 // Window class name
@@ -49,36 +49,36 @@ namespace engine
         }
 
 
-		window_obj_impl::~window_obj_impl()
+        window_obj_impl::~window_obj_impl()
         {
             DestroyWindow(id);
         }
 
 
-		window_mng_ptr window_mng_ui::create()
-		{
-			return std::make_shared<window_mng_impl>();
-		}
+        window_mng_ptr window_mng_ui::create()
+        {
+            return std::make_shared<window_mng_impl>();
+        }
 
 
-		window_mng_impl::window_mng_impl() :
-			default_descriptor(window_descriptor(std::wstring(L"default_class"), default_handler))
-		{}
+        window_mng_impl::window_mng_impl() :
+            default_descriptor(window_descriptor(std::wstring(L"default_class"), default_handler))
+        {}
 
 
-		window_mng_impl::~window_mng_impl() {}
+        window_mng_impl::~window_mng_impl() {}
 
 
-		window_obj_ptr window_mng_impl::create_window(std::wstring name)
-		{
-			return std::make_shared<window_obj_impl>(name, default_descriptor);
-		}
+        window_obj_ptr window_mng_impl::create_window(std::wstring name)
+        {
+            return std::make_shared<window_obj_impl>(name, default_descriptor);
+        }
 
 
-		std::wstring window_mng_impl::default_descriptor_name()
-		{
-			return default_descriptor.descriptor_name();
-		}
+        std::wstring window_mng_impl::default_descriptor_name()
+        {
+            return default_descriptor.descriptor_name();
+        }
     }
 }
 

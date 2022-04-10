@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\engine_ui.h" />
+    <ClInclude Include="engine\include\std_include.h" />
     <ClInclude Include="engine\include\window_ui.h" />
     <ClInclude Include="engine\src\engine_impl.h" />
     <ClInclude Include="engine\src\platform\macros_def.h" />

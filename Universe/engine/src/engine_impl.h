@@ -5,17 +5,12 @@
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-
 #pragma once
 #ifndef ENGINE_IMPL_H
 #define ENGINE_IMPL_H
 
-
-#include <memory>
-
 #include "engine_ui.h"
 #include "window_impl.h"
-
 #include "src/platform/platform_ui.h"
 
 
@@ -24,12 +19,13 @@ namespace engine
     class engine_mng_impl: public engine_mng_ui
     {
     public:
-		engine_mng_impl();
+        static engine_mng_impl engine_mng;
+
+        engine_mng_impl();
         ~engine_mng_impl();
 
     private:
-        platform::platform_mng_ptr platform_instance;
+        const platform::platform_mng_ptr platform_mng;
     };
 }
-
 #endif

@@ -11,8 +11,6 @@
 #define PLATFORM_UI_H
 
 
-#include <memory>
-
 #include "src/platform/window_ui.h"
 
 
@@ -20,23 +18,26 @@ namespace engine
 {
     namespace platform
     {
-		class platform_mng_ui;
+        class platform_mng_ui;
 
 
-		using platform_mng_ptr = std::shared_ptr<platform_mng_ui>;
+        using platform_mng_ptr = std::shared_ptr<platform_mng_ui>;
 
 
         class platform_mng_ui
         {
         public:
-			virtual ~platform_mng_ui() = default;
+
+            const window_mng_ptr window_mng;
+
 
             static platform_mng_ptr create();
 
-			const window_mng_ptr window_mng;
+            virtual ~platform_mng_ui() = default;
 
         protected:
-			platform_mng_ui();
+
+            platform_mng_ui();
         };
     }
 }
