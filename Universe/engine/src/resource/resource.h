@@ -14,21 +14,27 @@ namespace engine
     class resource
     {
     public:
-        add("mesh", id);
-        load("file", id);
-        get("mesh", id);
+        set(resource_type, resource_id, object_id);
+        // _load("file", id);
+        get(resource_type, object_id);
 
-        void add_mesh(int id, mesh mesh_inst);
+        // enum
+        // "mesh" - 1
+        // "shader" - 2
+
+        //void add_mesh(int id, mesh mesh_inst);
         // void load_mesh();
-        mesh get_mesh(int id);
-        void add_shader(int id, shader shader_inst);
-        shader get_shader(int id);
+        //mesh get_mesh(int id);
+        //void add_shader(int id, shader shader_inst);
+        //shader get_shader(int id);
 
     private:
-        map<int id, mesh*> mesh;
-        map<int id, shader*> shader;
-        map<int id - mesh id, mesh> mesh;
-        map<int id - shader id, shader> shader;
+        map<resource_type, map<int id, recource*>> resources_map;
+        map<int object_id, map<resource_type, resource_id>> object_map;
+        //map<int id, mesh*> mesh;
+        //map<int id, shader*> shader;
+        //map<int id - mesh id, mesh> mesh;
+        //map<int id - shader id, shader> shader;
 
         // To other place
         map<id, string> id_string;
@@ -36,6 +42,11 @@ namespace engine
 
         resource();
         ~resource();
+    };
+
+    class mesh_resource
+    {
+
     };
 
     // To cpp
