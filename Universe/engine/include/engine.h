@@ -5,7 +5,7 @@
 #define ENGINE_UI_H
 
 
-namespace engine_ui
+namespace engine
 {
     class engine
     {

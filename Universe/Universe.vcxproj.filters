@@ -34,6 +34,9 @@
     <Filter Include="Исходные файлы\engine\src">
       <UniqueIdentifier>{8c784e9f-ea0f-42ca-a0b2-92493240e1e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\engine\src\ui">
+      <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -42,10 +45,16 @@
     <ClCompile Include="game\src\game.cpp">
       <Filter>Исходные файлы\game</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\ui\engine_impl.cpp">
+      <Filter>Исходные файлы\engine\src\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
       <Filter>Файлы заголовков\game</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\engine_ui.h">
+      <Filter>Файлы заголовков\engine\include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

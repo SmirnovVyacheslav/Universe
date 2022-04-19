@@ -4,6 +4,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "engine_ui.h"
+
 
 namespace game
 {
@@ -14,6 +16,9 @@ namespace game
         ~game();
 
         void run();
+
+    private:
+        engine_ui::engine engine_inst;
     };
 }
 #endif
