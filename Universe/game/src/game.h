@@ -7,7 +7,7 @@
 #include "engine_ui.h"
 
 
-namespace game
+namespace game_ui
 {
     class game
     {

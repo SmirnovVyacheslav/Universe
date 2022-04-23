@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[])
 {
-    game::game game_inst;
+    game_ui::game game_inst;
     game_inst.run();
 
     return 0;

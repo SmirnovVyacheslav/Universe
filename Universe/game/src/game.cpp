@@ -3,7 +3,7 @@
 #include "game.h"
 
 
-namespace game
+namespace game_ui
 {
     game::game()
     {
@@ -17,6 +17,7 @@ namespace game
 
     void game::run()
     {
-        // Execution code
+        engine_inst.add_object();
+        engine_inst.start_render();
     };
 }

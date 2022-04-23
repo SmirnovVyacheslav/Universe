@@ -37,6 +37,12 @@
     <Filter Include="Исходные файлы\engine\src\ui">
       <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\engine\src\render">
+      <UniqueIdentifier>{5c32d19e-e2eb-436d-b8e3-a7151a2538e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\render">
+      <UniqueIdentifier>{81da8570-7758-48dd-95d6-f5d43ed9b9cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -48,6 +54,9 @@
     <ClCompile Include="engine\src\ui\engine_impl.cpp">
       <Filter>Исходные файлы\engine\src\ui</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\render\render.cpp">
+      <Filter>Исходные файлы\engine\src\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -55,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="engine\include\engine_ui.h">
       <Filter>Файлы заголовков\engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\render.h">
+      <Filter>Файлы заголовков\engine\src\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,10 @@ namespace engine_ui
         ~engine();
 
         void add_object();
-        void render();
+        void start_render();
+
+    private:
+
     };
 }
 #endif

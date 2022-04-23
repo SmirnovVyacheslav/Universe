@@ -146,12 +146,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\src\render\render.cpp" />
     <ClCompile Include="engine\src\ui\engine_impl.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\engine_ui.h" />
+    <ClInclude Include="engine\src\render\render.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
   <ItemGroup>

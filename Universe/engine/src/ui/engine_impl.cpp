@@ -1,6 +1,7 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "engine_ui.h"
+#include "src/render/render.h"
 
 namespace engine_ui
 {
@@ -19,8 +20,8 @@ namespace engine_ui
 
     }
 
-    void engine::render()
+    void engine::start_render()
     {
-
+        engine::render
     }
 }
