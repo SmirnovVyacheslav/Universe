@@ -5,19 +5,21 @@
 #define ENGINE_UI_H
 
 
-namespace engine_ui
+namespace engine
 {
-    class engine
-    {
-    public:
-        engine();
-        ~engine();
+	namespace ui
+	{
+		class engine_ui
+		{
+		public:
+			engine_ui();
+			~engine_ui();
 
-        void add_object();
-        void start_render();
+			void add_object();
+			void start_render();
 
-    private:
-
-    };
+		private:
+		};
+	}
 }
 #endif

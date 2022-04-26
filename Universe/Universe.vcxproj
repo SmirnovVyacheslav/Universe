@@ -147,7 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\render\render.cpp" />
-    <ClCompile Include="engine\src\ui\engine_impl.cpp" />
+    <ClCompile Include="engine\src\ui\engine_ui.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>

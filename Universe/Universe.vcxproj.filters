@@ -51,11 +51,11 @@
     <ClCompile Include="game\src\game.cpp">
       <Filter>Исходные файлы\game</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\ui\engine_impl.cpp">
-      <Filter>Исходные файлы\engine\src\ui</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\render\render.cpp">
       <Filter>Исходные файлы\engine\src\render</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\ui\engine_ui.cpp">
+      <Filter>Исходные файлы\engine\src\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

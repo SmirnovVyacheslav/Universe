@@ -18,7 +18,7 @@ namespace game_ui
         void run();
 
     private:
-        engine_ui::engine engine_inst;
+        engine::ui::engine_ui engine_inst;
     };
 }
 #endif
