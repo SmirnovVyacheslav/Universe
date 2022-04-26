@@ -49,6 +49,12 @@
     <Filter Include="Файлы заголовков\engine\src\scene">
       <UniqueIdentifier>{0ca1284e-eaff-4281-959e-7f659ad97fe6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\engine\src\object">
+      <UniqueIdentifier>{c4f6c92e-23c4-43fc-a75a-2b65a2a95682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\object">
+      <UniqueIdentifier>{21bdd525-560b-40d6-95b3-de7583734f96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -66,6 +72,9 @@
     <ClCompile Include="engine\src\scene\scene.cpp">
       <Filter>Исходные файлы\engine\src\scene</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\object\object.cpp">
+      <Filter>Исходные файлы\engine\src\object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -79,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\scene\scene.h">
       <Filter>Файлы заголовков\engine\src\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\object\object.h">
+      <Filter>Файлы заголовков\engine\src\object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

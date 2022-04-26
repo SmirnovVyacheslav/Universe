@@ -4,6 +4,8 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "src/object/object.h"
+
 
 namespace engine
 {
@@ -17,6 +19,8 @@ namespace engine
 	private:
 		scene() = default;
 		~scene() = default;
+
+
 	};
 }
 #endif
