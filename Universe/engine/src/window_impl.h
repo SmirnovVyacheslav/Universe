@@ -1,7 +1,6 @@
 /******************************************************************************
-     * File: window_impl.h
      * Description: Windows implementation
-     * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
+     * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
@@ -10,36 +9,34 @@
 #ifndef WINDOW_IMPL_H
 #define WINDOW_IMPL_H
 
-#include <cstdint>
-#include <map>
-
-#include "../include/window.h"
+#include "window_ui.h"
+#include "src/platform/platform_ui.h"
 
 
 namespace engine
 {
-    namespace window
+    class window_obj_impl: public window_obj_ui
     {
-        class type_window_impl: public type_window
-        {
-        public:
-            type_window_impl();
-            ~type_window_impl();
-        };
+    public:
+        window_obj_impl(platform::window_obj_ptr platform_window);
+        ~window_obj_impl();
+
+    private:
+        const platform::window_obj_ptr platform_window;
+    };
 
 
-        class type_windows_manager_impl : public type_windows_manager
-        {
-        public:
-            type_windows_manager_impl();
-            ~type_windows_manager_impl();
+    class window_mng_impl : public window_mng_ui
+    {
+    public:
+        window_mng_impl(platform::platform_mng_ptr platform_mng);
+        ~window_mng_impl();
 
-            type_window& create_window();
+        window_obj_ptr create_window(std::wstring name);
 
-        private:
-            std::map<std::uint32_t, type_window_impl*> windows_map;
-        };
-    }
+    private:
+        const platform::platform_mng_ptr platform_mng;
+    };
 }
 
 #endif

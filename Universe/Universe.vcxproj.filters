@@ -25,14 +25,23 @@
     <Filter Include="Файлы заголовков\engine">
       <UniqueIdentifier>{a612ba96-b20b-42e3-9072-b543449d59dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine_api">
+    <Filter Include="Файлы заголовков\engine\src">
+      <UniqueIdentifier>{f951b113-b2d9-44b7-9175-6f815997e088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\include">
       <UniqueIdentifier>{dffd2cdb-8baa-4c33-a52c-197af1b552f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\platform">
-      <UniqueIdentifier>{fee45bda-d7d0-440e-a3d1-18aacaa4f0d2}</UniqueIdentifier>
+    <Filter Include="Исходные файлы\engine\src">
+      <UniqueIdentifier>{8c784e9f-ea0f-42ca-a0b2-92493240e1e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine\platform">
-      <UniqueIdentifier>{bca9814a-591c-4bb3-b0d0-ad56e5ed1b4c}</UniqueIdentifier>
+    <Filter Include="Исходные файлы\engine\src\ui">
+      <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\render">
+      <UniqueIdentifier>{5c32d19e-e2eb-436d-b8e3-a7151a2538e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\render">
+      <UniqueIdentifier>{81da8570-7758-48dd-95d6-f5d43ed9b9cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,28 +51,22 @@
     <ClCompile Include="game\src\game.cpp">
       <Filter>Исходные файлы\game</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\engine_impl.cpp">
-      <Filter>Исходные файлы\engine</Filter>
+    <ClCompile Include="engine\src\render\render.cpp">
+      <Filter>Исходные файлы\engine\src\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\window_impl.cpp">
-      <Filter>Исходные файлы\engine</Filter>
+    <ClCompile Include="engine\src\ui\engine_ui.cpp">
+      <Filter>Исходные файлы\engine\src\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
       <Filter>Файлы заголовков\game</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\engine.h">
-      <Filter>Файлы заголовков\engine_api</Filter>
+    <ClInclude Include="engine\include\engine_ui.h">
+      <Filter>Файлы заголовков\engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\engine_impl.h">
-      <Filter>Файлы заголовков\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\include\window.h">
-      <Filter>Файлы заголовков\engine_api</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\window_impl.h">
-      <Filter>Файлы заголовков\engine</Filter>
+    <ClInclude Include="engine\src\render\render.h">
+      <Filter>Файлы заголовков\engine\src\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,14 +7,19 @@
 
 namespace engine
 {
-    class engine
-    {
-    public:
-        engine();
-        ~engine();
+	namespace ui
+	{
+		class engine_ui
+		{
+		public:
+			engine_ui();
+			~engine_ui();
 
-        void add_object();
-        void render();
-    };
+			void add_object();
+			void start_render();
+
+		private:
+		};
+	}
 }
 #endif

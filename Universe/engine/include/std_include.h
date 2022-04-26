@@ -1,18 +1,15 @@
 /******************************************************************************
-     * File: platform/properties.cpp
-     * Description: Main platform properties
-     * Created: 07 Oct 2021
+     * Description: STD include
      * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
      * Author: Vyacheslav Smirnov
      * Email: necrolazy@gmail.com
 ******************************************************************************/
 
-#include "properties.h"
+#pragma once
+#ifndef STD_INCLUDE_H
+#define STD_INCLUDE_H
 
-namespace engine
-{
-    namespace platform
-    {
-        // Pass
-    }
-}
+#include <memory>
+#include <string>
+
+#endif

@@ -1,2 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="game::type_game" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAQAAAAAAAAAAAAAQAAAAAAAAAAAAAg=</HashCode>
+      <FileName>game\src\game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::engine_mng_impl" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAgQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>engine\src\engine_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::window_obj_impl" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAkAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>engine\src\window_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::window_mng_impl" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAgAQAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>engine\src\window_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::engine_mng_ui" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAQ=</HashCode>
+      <FileName>engine\include\engine_ui.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::window_obj_ui" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>engine\include\window_ui.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::window_mng_ui" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAgAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAA=</HashCode>
+      <FileName>engine\include\window_ui.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::platform::platform_mng_ui" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAABAAACAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>engine\src\platform\platform_ui.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::platform::window_obj_ui" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>engine\src\platform\window_ui.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::platform::window_mng_ui" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAgAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAA=</HashCode>
+      <FileName>engine\src\platform\window_ui.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::platform::platform_mng_impl" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>engine\src\platform\windows\platform_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::platform::window_descriptor" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAEAAAAAAAAAAAEIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>engine\src\platform\windows\window_impl\window_descriptor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::platform::window_obj_impl" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAEAAAgAAAAAAAAAgA=</HashCode>
+      <FileName>engine\src\platform\windows\window_impl\window_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="engine::platform::window_mng_impl" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAIAAQAAAAAAQAAAAAAAAAAAAAE=</HashCode>
+      <FileName>engine\src\platform\windows\window_impl\window_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

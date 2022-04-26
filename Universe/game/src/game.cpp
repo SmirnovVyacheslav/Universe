@@ -1,27 +1,23 @@
-/******************************************************************************
-     * File: game.cpp
-     * Description: Main game interface
-     * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
-     * Author: Vyacheslav Smirnov
-     * Email: necrolazy@gmail.com
-******************************************************************************/
+// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "game.h"
 
 
-namespace game
+namespace game_ui
 {
-    type_game::type_game() : engine_instance(engine::type_engine::initialize())
+    game::game()
     {
         // Initialize code
     };
-    type_game::~type_game()
+
+    game::~game()
     {
-        engine_instance.terminate();
+        // Termination code
     }
-    void type_game::run()
+
+    void game::run()
     {
-        // Run code
-        engine::window::type_window& window_instance = engine_instance.windows_manager.create_window();
+        engine_inst.add_object();
+        engine_inst.start_render();
     };
 }

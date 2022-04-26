@@ -1,20 +1,12 @@
-/******************************************************************************
-     * File: main.cpp
-     * Description: Entry point
-     * Copyright: (C) 2021 Vyacheslav Smirnov, All rights reserved.
-     * Author: Vyacheslav Smirnov
-     * Email: necrolazy@gmail.com
-******************************************************************************/
+// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "game.h"
 
 
 int main(int argc, char* argv[])
 {
-    // Game entry point
-    game::type_game game_instance;
-
-    game_instance.run();
+    game_ui::game game_inst;
+    game_inst.run();
 
     return 0;
 }
