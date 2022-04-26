@@ -20,7 +20,7 @@ namespace engine
 		scene() = default;
 		~scene() = default;
 
-
+		object* square;
 	};
 }
 #endif

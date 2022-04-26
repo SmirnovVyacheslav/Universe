@@ -9,6 +9,6 @@ namespace engine
 
 	void scene::add_object()
 	{
-
+		square = new object;
 	}
 }
