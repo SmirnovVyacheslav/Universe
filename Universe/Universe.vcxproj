@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\render\render.cpp" />
+    <ClCompile Include="engine\src\scene\scene.cpp" />
     <ClCompile Include="engine\src\ui\engine_ui.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="engine\include\engine_ui.h" />
     <ClInclude Include="engine\src\render\render.h" />
+    <ClInclude Include="engine\src\scene\scene.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
   <ItemGroup>

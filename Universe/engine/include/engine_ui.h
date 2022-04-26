@@ -12,13 +12,11 @@ namespace engine
 		class engine_ui
 		{
 		public:
-			engine_ui();
-			~engine_ui();
+			engine_ui() = default;
+			~engine_ui() = default;
 
 			void add_object();
 			void start_render();
-
-		private:
 		};
 	}
 }
