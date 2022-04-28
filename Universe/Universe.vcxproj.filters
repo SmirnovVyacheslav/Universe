@@ -55,6 +55,12 @@
     <Filter Include="Файлы заголовков\engine\src\object">
       <UniqueIdentifier>{21bdd525-560b-40d6-95b3-de7583734f96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\engine\src\platfom">
+      <UniqueIdentifier>{abdae529-326a-4bb4-a50a-d0eba00d47e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\platform">
+      <UniqueIdentifier>{a9a32978-4f16-4961-97d2-a9561c081f70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -91,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\object\object.h">
       <Filter>Файлы заголовков\engine\src\object</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\std_types.h">
+      <Filter>Файлы заголовков\engine\src\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\stl.h">
+      <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
