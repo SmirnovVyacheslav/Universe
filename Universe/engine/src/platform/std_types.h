@@ -5,12 +5,15 @@
 #define STD_TYPES_H
 
 #include <cstdint>
+#include <string>
 
 
 namespace engine
 {
-	using boolen = bool;
+	using boolean = bool;
 	using integer = int32_t;
 	using real = float;
+
+	using string = std::string;
 }
 #endif
