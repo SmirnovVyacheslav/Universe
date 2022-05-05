@@ -10,10 +10,11 @@
 
 namespace engine
 {
-	using boolean = bool;
-	using integer = int32_t;
-	using real = float;
+    using boolean = bool;
+    using integer = int32_t;
+    using real = float;
 
-	using string = std::string;
+    using string = std::string;
+    using unicode = string;
 }
 #endif

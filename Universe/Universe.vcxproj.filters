@@ -104,6 +104,12 @@
     <ClInclude Include="engine\src\platform\stl.h">
       <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
+    <ClInclude Include="engine\src\platform\container.h">
+      <Filter>Файлы заголовков\engine\src\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\platform_def.h">
+      <Filter>Файлы заголовков\engine\src\platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
