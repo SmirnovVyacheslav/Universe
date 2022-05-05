@@ -9,18 +9,18 @@
 
 namespace engine
 {
-	class scene
-	{
-	public:
-		static scene inst;
+    class scene
+    {
+    public:
+        static scene inst;
 
-		void add_object();
+        void add_object();
 
-	private:
-		scene() = default;
-		~scene() = default;
+    private:
+        scene() = default;
+        ~scene() = default;
 
-		object* square;
-	};
+        object* square;
+    };
 }
 #endif

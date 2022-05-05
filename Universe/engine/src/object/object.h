@@ -7,11 +7,11 @@
 
 namespace engine
 {
-	class object
-	{
-	public:
-		object() = default;
-		~object() = default;
-	};
+    class object
+    {
+    public:
+        object() = default;
+        ~object() = default;
+    };
 }
 #endif

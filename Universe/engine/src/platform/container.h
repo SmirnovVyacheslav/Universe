@@ -4,13 +4,19 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
 
+#include "src/platform/toolkit/stl/stl.h"
+
 
 namespace engine
 {
-    template <class type>
-    class map
+    namespace platform
     {
-
-    };
+        template <class key, class value>
+        class map
+        {
+        private:
+            stl::map<key, value> impl;
+        };
+    }
 }
 #endif
