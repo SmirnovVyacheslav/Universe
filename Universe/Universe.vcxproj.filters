@@ -67,6 +67,12 @@
     <Filter Include="Файлы заголовков\engine\src\platform\toolkit\stl">
       <UniqueIdentifier>{77685b53-2b59-4690-aa2e-7ebb46750577}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\engine\src\core">
+      <UniqueIdentifier>{32bb5d43-d07f-464f-8fe2-f2d7679c6958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\core">
+      <UniqueIdentifier>{99e039be-9900-40e5-8e68-34473bd4a681}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -86,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\object\object.cpp">
       <Filter>Исходные файлы\engine\src\object</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\core\object_id.cpp">
+      <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\toolkit\stl\stl.h">
       <Filter>Файлы заголовков\engine\src\platform\toolkit\stl</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\object_id.h">
+      <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,17 +7,17 @@
 
 namespace engine
 {
-	namespace ui
-	{
-		class engine_ui
-		{
-		public:
-			engine_ui() = default;
-			~engine_ui() = default;
+    namespace ui
+    {
+        class engine_ui
+        {
+        public:
+            engine_ui() = default;
+            ~engine_ui() = default;
 
-			void add_object();
-			void start_render();
-		};
-	}
+            void add_object();
+            void start_render();
+        };
+    }
 }
 #endif
