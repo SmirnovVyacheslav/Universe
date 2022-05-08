@@ -4,11 +4,11 @@
 
 namespace engine
 {
-	scene scene::inst = scene();
+    scene scene::inst = scene();
 
 
-	void scene::add_object()
-	{
-		square = new object;
-	}
+    void scene::add_object()
+    {
+        square = new object;
+    }
 }

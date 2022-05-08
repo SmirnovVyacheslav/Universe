@@ -7,16 +7,16 @@
 
 namespace engine
 {
-	namespace ui
-	{
-		void engine_ui::add_object()
-		{
-			engine::scene::inst.add_object();
-		}
+    namespace ui
+    {
+        void engine_ui::add_object()
+        {
+            engine::scene::inst.add_object();
+        }
 
-		void engine_ui::start_render()
-		{
-			engine::render::inst.start_render();
-		}
-	}
+        void engine_ui::start_render()
+        {
+            engine::render::inst.start_render();
+        }
+    }
 }
