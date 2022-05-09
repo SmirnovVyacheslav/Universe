@@ -79,14 +79,14 @@ namespace engine
         return static_cast<float>(sqrt(_x * _x + _y * _y + _z * _z));
     }*/
 
-    vector_3& vector_3::normalize()
+   /* vector_3& vector_3::normalize()
     {
         float len = length();
         x /= len;
         y /= len;
         z /= len;
         return *this;
-    }
+    }*/
 
     vector_3& vector_3::trunc()
     {
@@ -268,14 +268,14 @@ namespace engine
             (vec_b_y - vec_a_y) * (vec_b_y - vec_a_y) +
             (vec_b_z - vec_a_z) * (vec_b_z - vec_a_z));
     }*/
-    float distance(vector_3 vec_a, vector_4 vec_b)
+    /*float distance(vector_3 vec_a, vector_4 vec_b)
     {
         return distance(vec_a, static_cast<vector_3>(vec_b));
     }
     float distance(vector_4 vec_a, vector_3 vec_b)
     {
         return distance(static_cast<vector_3>(vec_a), vec_b);
-    }
+    }*/
     /*float distance(vector_4 vec_a, vector_4 vec_b)
     {
         double vec_a_x = static_cast<double>(vec_a.x);
@@ -307,14 +307,14 @@ namespace engine
         return static_cast<float>(sqrt(_x * _x + _y * _y + _z * _z));
     }*/
 
-    vector_4& vector_4::normalize()
+    /*vector_4& vector_4::normalize()
     {
         float len = length();
         x /= len;
         y /= len;
         z /= len;
         return *this;
-    }
+    }*/
 
     vector_4& vector_4::trunc()
     {

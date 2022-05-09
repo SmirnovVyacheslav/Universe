@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\src\core\math.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
     <ClCompile Include="engine\src\render\render.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\engine_ui.h" />
+    <ClInclude Include="engine\src\core\math.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
     <ClInclude Include="engine\src\object\object.h" />
     <ClInclude Include="engine\src\platform\container.h" />

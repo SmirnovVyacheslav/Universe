@@ -33,7 +33,7 @@ namespace engine
 
         bool is_zero();
         // float length();
-        vector_3& normalize();
+        // vector_3& normalize();
         vector_3& trunc();
 
         vector_3& operator=(const vector_3& vec);
@@ -85,8 +85,8 @@ namespace engine
     vector_3 operator/(const vector_3& vec, const float& num);
 
     // float distance(vector_3 vec_a, vector_3 vec_b);
-    float distance(vector_3 vec_a, vector_4 vec_b);
-    float distance(vector_4 vec_a, vector_3 vec_b);
+    // float distance(vector_3 vec_a, vector_4 vec_b);
+    // float distance(vector_4 vec_a, vector_3 vec_b);
     // float distance(vector_4 vec_a, vector_4 vec_b);
 
     // float angle(vector_3 vec_a, vector_3 vec_b);
@@ -104,7 +104,7 @@ namespace engine
         vector_4(const vector_4& vec) = default;
 
         // float length();
-        vector_4& normalize();
+        // vector_4& normalize();
         vector_4& trunc();
 
         vector_4& operator= (const vector_4& vec);
