@@ -150,6 +150,7 @@
     <ClCompile Include="engine\src\core\object_id.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
     <ClCompile Include="engine\src\render\render.cpp" />
+    <ClCompile Include="engine\src\resource\mesh.cpp" />
     <ClCompile Include="engine\src\scene\scene.cpp" />
     <ClCompile Include="engine\src\ui\engine_ui.cpp" />
     <ClCompile Include="game\src\game.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="engine\src\platform\std_types.h" />
     <ClInclude Include="engine\src\platform\toolkit\stl\stl.h" />
     <ClInclude Include="engine\src\render\render.h" />
+    <ClInclude Include="engine\src\resource\mesh.h" />
     <ClInclude Include="engine\src\scene\scene.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>

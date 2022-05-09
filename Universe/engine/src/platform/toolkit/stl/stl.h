@@ -7,6 +7,7 @@
 #ifndef STL_H
 #define STL_H
 
+#include <vector>
 #include <unordered_map>
 
 
@@ -21,6 +22,14 @@ namespace engine
             {
             private:
                 std::unordered_map<key, value> impl;
+            };
+
+
+            template <class type>
+            class vector
+            {
+            private:
+                std::vector<type> impl;
             };
         }
     }

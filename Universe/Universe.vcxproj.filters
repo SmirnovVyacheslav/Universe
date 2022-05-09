@@ -73,6 +73,12 @@
     <Filter Include="Исходные файлы\engine\src\core">
       <UniqueIdentifier>{99e039be-9900-40e5-8e68-34473bd4a681}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\engine\src\resource">
+      <UniqueIdentifier>{ec58de07-f4b7-4497-842f-ae66c05be26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\resource">
+      <UniqueIdentifier>{d873a567-3408-491a-9444-34372753379c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -98,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\core\math.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\resource\mesh.cpp">
+      <Filter>Исходные файлы\engine\src\resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\math.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\resource\mesh.h">
+      <Filter>Файлы заголовков\engine\src\resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

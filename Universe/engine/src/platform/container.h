@@ -17,6 +17,14 @@ namespace engine
         private:
             stl::map<key, value> impl;
         };
+
+
+        template <class type>
+        class vector
+        {
+        private:
+            stl::vector<type> impl;
+        };
     }
 }
 #endif
