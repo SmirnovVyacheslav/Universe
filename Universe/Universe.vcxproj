@@ -163,7 +163,6 @@
     <ClInclude Include="engine\src\object\object.h" />
     <ClInclude Include="engine\src\platform\container.h" />
     <ClInclude Include="engine\src\platform\platform_def.h" />
-    <ClInclude Include="engine\src\platform\std_types.h" />
     <ClInclude Include="engine\src\platform\toolkit\stl\stl.h" />
     <ClInclude Include="engine\src\render\render.h" />
     <ClInclude Include="engine\src\resource\mesh.h" />

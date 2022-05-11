@@ -4,7 +4,6 @@
 #ifndef OBJECT_ID_H
 #define OBJECT_ID_H
 
-#include "src/platform/std_types.h"
 #include "src/platform/container.h"
 
 
@@ -15,13 +14,13 @@ namespace engine
     public:
         static object_id inst;
 
-        integer get_object_id();
+        int get_object_id();
 
     private:
         object_id() = default;
         ~object_id() = default;
 
-        integer next_id;
+        int next_id;
     };
 }
 #endif

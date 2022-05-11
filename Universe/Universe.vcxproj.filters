@@ -125,9 +125,6 @@
     <ClInclude Include="engine\src\object\object.h">
       <Filter>Файлы заголовков\engine\src\object</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\std_types.h">
-      <Filter>Файлы заголовков\engine\src\platform</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\platform\container.h">
       <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>

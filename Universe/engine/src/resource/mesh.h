@@ -6,7 +6,6 @@
 
 #include "src/core/math.h"
 #include "src/platform/container.h"
-#include "src/platform/std_types.h"
 
 
 namespace engine
@@ -26,7 +25,7 @@ namespace engine
         ~mesh() = default;
 
     private:
-        integer size;
+        int size;
         platform::vector<vertex> vertices;
         platform::vector<unsigned long int> indices;
     };

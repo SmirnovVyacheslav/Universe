@@ -4,8 +4,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "src/platform/std_types.h"
-
 
 namespace engine
 {
@@ -16,7 +14,7 @@ namespace engine
         ~object() = default;
 
     private:
-        integer id;
+        int id;
     };
 }
 #endif

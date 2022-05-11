@@ -7,7 +7,7 @@ namespace engine
     object_id object_id::inst = object_id();
 
 
-    integer object_id::get_object_id()
+    int object_id::get_object_id()
     {
         return next_id++;
     }
