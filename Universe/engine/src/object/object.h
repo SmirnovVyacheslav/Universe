@@ -4,6 +4,8 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include "src/resource/mesh.h"
+
 
 namespace engine
 {
@@ -15,6 +17,7 @@ namespace engine
 
     private:
         int id;
+        mesh square;
     };
 }
 #endif

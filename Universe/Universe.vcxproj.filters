@@ -61,12 +61,6 @@
     <Filter Include="Файлы заголовков\engine\src\platform">
       <UniqueIdentifier>{a9a32978-4f16-4961-97d2-a9561c081f70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\toolkit">
-      <UniqueIdentifier>{58080c63-57d7-4e9f-b839-c2fd175293aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\toolkit\stl">
-      <UniqueIdentifier>{77685b53-2b59-4690-aa2e-7ebb46750577}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\engine\src\core">
       <UniqueIdentifier>{32bb5d43-d07f-464f-8fe2-f2d7679c6958}</UniqueIdentifier>
     </Filter>
@@ -127,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\platform_def.h">
       <Filter>Файлы заголовков\engine\src\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\toolkit\stl\stl.h">
-      <Filter>Файлы заголовков\engine\src\platform\toolkit\stl</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\object_id.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
