@@ -14,10 +14,10 @@ namespace engine
 
         void start_render();
 
-        //void create_device(api);
+        //void set_api();
+        //void create_device();
+        //void compile_shader();
         //void set_geometry(int id);
-        //void start_render();
-        //void stop_render();
 
     private:
         render() = default;

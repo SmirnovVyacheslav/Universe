@@ -73,6 +73,18 @@
     <Filter Include="Исходные файлы\engine\src\resource">
       <UniqueIdentifier>{d873a567-3408-491a-9444-34372753379c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\engine\src\platform\toolkit">
+      <UniqueIdentifier>{d70bb918-afe7-4a63-b9ac-c7c11ea13528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\platform\toolkit\directx">
+      <UniqueIdentifier>{4f0d0a61-3c4b-4414-b68a-6cf609075e00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\platfom\toolkit">
+      <UniqueIdentifier>{1290129c-c97d-4070-8f0d-dc47b7c75c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\platfom\toolkit\directx">
+      <UniqueIdentifier>{fc279e49-318a-4a83-80a3-aeeab3c5f9c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -102,6 +114,9 @@
     <ClCompile Include="engine\src\resource\mesh.cpp">
       <Filter>Исходные файлы\engine\src\resource</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\platform\toolkit\directx\directx.cpp">
+      <Filter>Исходные файлы\engine\src\platfom\toolkit\directx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -130,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\resource\mesh.h">
       <Filter>Файлы заголовков\engine\src\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\toolkit\directx\directx.h">
+      <Filter>Файлы заголовков\engine\src\platform\toolkit\directx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
