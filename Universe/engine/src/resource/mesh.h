@@ -5,7 +5,7 @@
 #define MESH_H
 
 #include "src/core/math.h"
-#include "src/platform/container.h"
+#include <vector>
 
 
 namespace engine
@@ -15,19 +15,25 @@ namespace engine
     public:
         vertex() = default;
         ~vertex() = default;
+
+        vertex(vector_3 pos, vector_4 color);
+
+    private:
+        vector_3 pos;
+        vector_4 color;
     };
 
 
     class mesh
     {
     public:
-        mesh() = default;
+        mesh();
         ~mesh() = default;
 
     private:
         int size;
-        platform::vector<vertex> vertices;
-        platform::vector<unsigned long int> indices;
+        std::vector<vertex> vertices;
+        std::vector<unsigned long int> indices;
     };
 }
 #endif
