@@ -9,7 +9,7 @@
 #include "window_handler.h"
 
 
-#ifdef PLATFORM_WINDOWS
+#ifdef WINDOWS
 
 
 namespace engine

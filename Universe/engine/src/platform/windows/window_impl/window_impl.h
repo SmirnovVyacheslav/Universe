@@ -37,6 +37,8 @@ namespace engine
 
             ~window_obj_impl();
 
+            HWND get_hwnd();
+
         private:
 
             std::wstring name;

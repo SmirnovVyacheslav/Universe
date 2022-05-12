@@ -7,8 +7,14 @@
 
 namespace engine
 {
+    platform::window_mng_ptr window_mng_inst = platform::window_mng_ui::create();
+    platform::window_obj_ptr window_inst = window_mng_inst->create_window(L"Engine");
+    HWND hWnd = window_inst->get_hwnd();
+
     void createDevice()
     {
+
+
         HRESULT result = S_OK;
 
         UINT createDeviceFlags = 0;

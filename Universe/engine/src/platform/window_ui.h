@@ -14,6 +14,8 @@
 #include <string>
 #include <memory>
 
+#include <windows.h>
+
 
 namespace engine
 {
@@ -32,6 +34,8 @@ namespace engine
         public:
 
             virtual ~window_obj_ui() = default;
+
+            virtual HWND get_hwnd() = 0;
 
         protected:
 

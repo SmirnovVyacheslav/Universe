@@ -9,7 +9,7 @@
 #include "window_descriptor.h"
 
 
-#ifdef PLATFORM_WINDOWS
+#ifdef WINDOWS
 
 
 namespace engine

@@ -19,6 +19,8 @@
 #include <unordered_map>
 #include <xnamath.h>
 
+#include "src/platform/window_ui.h"
+
 
 namespace engine
 {
@@ -54,9 +56,9 @@ namespace engine
     D3D11_RASTERIZER_DESC rasterDesc;
     ID3D11RasterizerState* m_rasterState;
 
-    HWND hWnd;
-    int  wndWidth;
-    int  wndHeight;
+    // HWND hWnd;
+    int  wndWidth = 800;
+    int  wndHeight = 600;
 
     XMMATRIX                mWorld;
     XMMATRIX                g_World;

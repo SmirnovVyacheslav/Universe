@@ -9,7 +9,7 @@
 #include "window_impl.h"
 
 
-#ifdef PLATFORM_WINDOWS
+#ifdef WINDOWS
 
 
 namespace engine
@@ -78,6 +78,12 @@ namespace engine
         std::wstring window_mng_impl::default_descriptor_name()
         {
             return default_descriptor.descriptor_name();
+        }
+
+
+        HWND window_obj_impl::get_hwnd()
+        {
+            return id;
         }
     }
 }
