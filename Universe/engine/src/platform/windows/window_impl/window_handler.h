@@ -6,11 +6,11 @@
 ******************************************************************************/
 
 
-#include "src/platform/macros_def.h"
+#include "src/platform/platform_def.h"
 
 
 #pragma once
-#ifdef PLATFORM_WINDOWS
+#ifdef WINDOWS
 #ifndef PLATFORM_WINDOW_HANDLER_H
 #define PLATFORM_WINDOW_HANDLER_H
 
