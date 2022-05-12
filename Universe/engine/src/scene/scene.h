@@ -15,6 +15,7 @@ namespace engine
         static scene inst;
 
         void add_object();
+        object* get_object();
 
     private:
         scene() = default;

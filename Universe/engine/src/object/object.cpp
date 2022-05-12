@@ -11,4 +11,9 @@ namespace engine
     {
         //
     }
+
+    mesh object::get_mesh()
+    {
+        return square;
+    }
 }

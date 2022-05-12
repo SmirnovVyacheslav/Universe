@@ -14,17 +14,9 @@ namespace engine
 
         void start_render();
 
-        //void set_api();
-        //void create_device();
-        //void compile_shader();
-        //void set_geometry(int id);
-
     private:
         render() = default;
         ~render() = default;
-
-        //arr device* device_inst;
-        //arr ids;
     };
 }
 #endif

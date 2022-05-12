@@ -254,5 +254,86 @@ namespace engine
 
         return true;
     }
+
+
+    void setGeometry()
+    {
+        D3D11_BUFFER_DESC bufferDesc;
+        ZeroMemory(&bufferDesc, sizeof(bufferDesc));
+
+        D3D11_SUBRESOURCE_DATA InitData;
+        ZeroMemory(&InitData, sizeof(InitData));
+
+        // Создание вершинного буфера
+        bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+        bufferDesc.ByteWidth = sizeof(vertex) * 8;
+        bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+        bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+        bufferDesc.MiscFlags = 0;
+
+        InitData.pSysMem = &scene::inst.get_object()->get_mesh().get_vertex();
+        if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &g_pVertexBuffer) < 0)
+            return;
+
+        // Создание индексного буфера
+        bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+        bufferDesc.ByteWidth = sizeof(DWORD) * scene::inst.get_object()->get_mesh().get_size();
+        bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+        bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+        bufferDesc.MiscFlags = 0;
+
+        InitData.pSysMem = &scene::inst.get_object()->get_mesh().get_indice();
+        if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &g_pIndexBuffer) < 0)
+            return;
+
+        // Установка типа примитив
+        immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+        // Установка матриц
+        g_World = XMMatrixIdentity();
+        XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+        XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+        XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+        g_View = XMMatrixLookAtLH(Eye, At, Up);
+        g_Projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, wndWidth / (FLOAT)wndHeight, 0.01f, 100.0f);
+    }
+
+
+    void render()
+    {
+        //
+        // Установка трансформации для куба
+        //
+        g_World = XMMatrixRotationY(3.14159f / 4.0f);
+
+        //
+        // Очистка рендер-таргета
+        //
+        float ClearColor[4] = { 0.0f, 0.9f, 0.5f, 1.0f }; // цвет
+        immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
+        immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0.0f);
+
+        //
+        // Установка констант шейдера
+        //
+        ConstantBuffer cb;
+        cb.mWorld = XMMatrixTranspose(g_World);
+        cb.mView = XMMatrixTranspose(g_View);
+        cb.mProjection = XMMatrixTranspose(g_Projection);
+        immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &cb, 0, 0);
+
+        //
+        // Рендер куба
+        //
+        immediateContext->VSSetShader(g_pVertexShader, NULL, 0);
+        immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+        immediateContext->PSSetShader(g_pPixelShader, NULL, 0);
+        immediateContext->DrawIndexed(36, 0, 0);       // 36 вершин образуют 12 полигонов, по три вершины на полигон
+
+        //
+        // Вывод на экран содержимого рендер-таргета
+        //
+        swapChain->Present(0, 0);
+    }
 }
 #endif

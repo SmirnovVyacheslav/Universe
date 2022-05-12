@@ -20,6 +20,8 @@
 #include <xnamath.h>
 
 #include "src/platform/window_ui.h"
+#include "src/resource/mesh.h"
+#include "src/scene/scene.h"
 
 
 namespace engine
@@ -48,6 +50,11 @@ namespace engine
     ID3D11Buffer* constantBuffer = nullptr;
     ConstantBuffer          localConstantBuffer;
 
+
+    ID3D11Buffer* g_pVertexBuffer = NULL;
+    ID3D11Buffer* g_pIndexBuffer = NULL;
+
+
     //============Создание поверхности для Z-буфера============
     ID3D11DepthStencilState* pDSState;
     D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
@@ -60,7 +67,6 @@ namespace engine
     int  wndWidth = 800;
     int  wndHeight = 600;
 
-    XMMATRIX                mWorld;
     XMMATRIX                g_World;
     XMMATRIX                g_View;
     XMMATRIX                g_Projection;

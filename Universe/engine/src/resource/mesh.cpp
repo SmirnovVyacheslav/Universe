@@ -50,4 +50,21 @@ namespace engine
 
         size = 36;
     }
+
+    vertex& mesh::get_vertex()
+    {
+        return vertices[0];
+    }
+
+
+    unsigned long int& mesh::get_indice()
+    {
+        return indices[0];
+    }
+
+
+    int mesh::get_size()
+    {
+        return size;
+    }
 }

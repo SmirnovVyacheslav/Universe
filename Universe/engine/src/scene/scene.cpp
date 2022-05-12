@@ -11,4 +11,9 @@ namespace engine
     {
         square = new object;
     }
+
+    object* scene::get_object()
+    {
+        return square;
+    }
 }

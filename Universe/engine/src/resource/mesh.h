@@ -29,6 +29,9 @@ namespace engine
     public:
         mesh();
         ~mesh() = default;
+        vertex& get_vertex();
+        unsigned long int& get_indice();
+        int get_size();
 
     private:
         int size;
