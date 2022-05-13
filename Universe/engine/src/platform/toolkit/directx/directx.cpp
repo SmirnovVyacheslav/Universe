@@ -306,22 +306,20 @@ namespace engine
         ZeroMemory(&InitData, sizeof(InitData));
 
         // Создание вершинного буфера
-        bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+        bufferDesc.Usage = D3D11_USAGE_DEFAULT;
         bufferDesc.ByteWidth = sizeof(vertex) * 8;
         bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-        bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-        bufferDesc.MiscFlags = 0;
+        bufferDesc.CPUAccessFlags = 0;
 
         InitData.pSysMem = &scene::inst.get_object()->get_mesh().get_vertex();
         if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &g_pVertexBuffer) < 0)
             return;
 
         // Создание индексного буфера
-        bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-        bufferDesc.ByteWidth = sizeof(DWORD) * scene::inst.get_object()->get_mesh().get_size();
+        bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+        bufferDesc.ByteWidth = sizeof(WORD) * scene::inst.get_object()->get_mesh().get_size();
         bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-        bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-        bufferDesc.MiscFlags = 0;
+        bufferDesc.CPUAccessFlags = 0;
 
         InitData.pSysMem = &scene::inst.get_object()->get_mesh().get_indice();
         if (d3dDevice->CreateBuffer(&bufferDesc, &InitData, &g_pIndexBuffer) < 0)
@@ -357,18 +355,39 @@ namespace engine
         //
         // Установка констант шейдера
         //
-        ConstantBuffer cb;
-        cb.mWorld = XMMatrixTranspose(g_World);
-        cb.mView = XMMatrixTranspose(g_View);
-        cb.mProjection = XMMatrixTranspose(g_Projection);
-        immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &cb, 0, 0);
+        localConstantBuffer.mWorld = XMMatrixTranspose(g_World);
+        localConstantBuffer.mView = XMMatrixTranspose(g_View);
+        localConstantBuffer.mProjection = XMMatrixTranspose(g_Projection);
+        immediateContext->UpdateSubresource(constantBuffer, 0, NULL, &localConstantBuffer, 0, 0);
+
+
+        //
+        // Установка шейдера
+        //
+        immediateContext->VSSetShader(g_pVertexShader, NULL, 0);
+        immediateContext->PSSetShader(g_pPixelShader, NULL, 0);
+
+        //
+        // Установка констант шейдера
+        //
+        immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
+        immediateContext->PSSetConstantBuffers(0, 1, &constantBuffer);
+
+
+        // Установка вершинного буфера
+        UINT stride = sizeof(vertex);
+        UINT offset = 0;
+        immediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
+
+        // Установка индексного буфера
+        immediateContext->IASetIndexBuffer(g_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+        // Установка типа примитив
+        immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
         //
         // Рендер куба
         //
-        immediateContext->VSSetShader(g_pVertexShader, NULL, 0);
-        immediateContext->VSSetConstantBuffers(0, 1, &constantBuffer);
-        immediateContext->PSSetShader(g_pPixelShader, NULL, 0);
         immediateContext->DrawIndexed(36, 0, 0);       // 36 вершин образуют 12 полигонов, по три вершины на полигон
 
         //
