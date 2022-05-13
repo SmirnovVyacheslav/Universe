@@ -10,6 +10,12 @@ namespace engine
 
     void render::start_render()
     {
-
+        createDevice();
+        createShader();
+        setGeometry();
+        while (true)
+        {
+            do_render();
+        }
     }
 }

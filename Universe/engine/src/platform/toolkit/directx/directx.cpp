@@ -56,8 +56,6 @@ namespace engine
 
     void createDevice()
     {
-
-
         HRESULT result = S_OK;
 
         UINT createDeviceFlags = 0;
@@ -342,7 +340,7 @@ namespace engine
     }
 
 
-    void render()
+    void do_render()
     {
         //
         // Установка трансформации для куба

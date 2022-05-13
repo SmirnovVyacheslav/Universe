@@ -36,7 +36,9 @@ namespace engine
 
     void createDevice();
     bool createShader();
+    void setGeometry();
     bool compileShader(std::wstring path, LPCSTR type, LPCSTR shaderModel, ID3DBlob** blobOut);
+    void do_render();
 }
 #endif
 #endif
