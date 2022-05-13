@@ -46,6 +46,8 @@ namespace engine
             {
                 throw std::wstring(L"Failed to create window");
             }
+
+            ShowWindow(id, SW_SHOWNORMAL);
         }
 
 
