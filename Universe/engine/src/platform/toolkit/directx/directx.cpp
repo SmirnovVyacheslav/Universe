@@ -58,6 +58,11 @@ namespace engine
     {
         HRESULT result = S_OK;
 
+        RECT wndSize;
+        GetClientRect(hWnd, &wndSize);
+        wndWidth = static_cast<int>(wndSize.right - wndSize.left);
+        wndHeight = static_cast<int>(wndSize.bottom - wndSize.top);
+
         UINT createDeviceFlags = 0;
 
         D3D_DRIVER_TYPE driverTypes[] =
@@ -106,7 +111,8 @@ namespace engine
 
         // Создание рендер-таргета
         ID3D11Texture2D* backBuffer = NULL;
-        if (swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer) < 0);
+        if (swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer) < 0)
+            return;
 
         result = d3dDevice->CreateRenderTargetView(backBuffer, NULL, &renderTargetView);
         backBuffer->Release();
@@ -124,7 +130,8 @@ namespace engine
         descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
         descDepth.CPUAccessFlags = 0;
         descDepth.MiscFlags = 0;
-        if (d3dDevice->CreateTexture2D(&descDepth, NULL, &depthStencil));
+        if (d3dDevice->CreateTexture2D(&descDepth, NULL, &depthStencil))
+            return;
 
 
         D3D11_DEPTH_STENCIL_DESC dsDesc;
@@ -166,7 +173,7 @@ namespace engine
         if (d3dDevice->CreateDepthStencilView(depthStencil, // Depth stencil texture
             &descDSV, // Depth stencil desc
             &depthStencilView))  // [out] Depth stencil view
-            ;
+            return;
 
         // Bind the depth stencil view
         immediateContext->OMSetRenderTargets(1,          // One rendertarget view
@@ -211,7 +218,7 @@ namespace engine
         bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
         bufferDesc.CPUAccessFlags = 0;
         if (d3dDevice->CreateBuffer(&bufferDesc, NULL, &constantBuffer) < 0)
-            ;
+            return;
     }
 
 

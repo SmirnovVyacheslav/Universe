@@ -30,9 +30,9 @@ namespace engine
                 // Vertical position
                 CW_USEDEFAULT,
                 // Width
-                CW_USEDEFAULT,
+                800, //CW_USEDEFAULT,
                 // Height
-                CW_USEDEFAULT,
+                600, //CW_USEDEFAULT,
                 // Parent handler
                 NULL,
                 // Menu handler
