@@ -5,5 +5,14 @@
 
 namespace engine
 {
-    //
+    class string_map {
+    public:
+        static string_map inst;
+
+    private:
+        string_map() = default;
+        ~string_map() = default;
+    };
+
+    string_map string_map::inst = string_map();
 }
