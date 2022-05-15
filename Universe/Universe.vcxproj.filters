@@ -141,6 +141,12 @@
     <ClCompile Include="engine\src\core\string.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\core\map.cpp">
+      <Filter>Исходные файлы\engine\src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\core\array.cpp">
+      <Filter>Исходные файлы\engine\src\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -186,6 +192,12 @@
       <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\string.h">
+      <Filter>Файлы заголовков\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\map.h">
+      <Filter>Файлы заголовков\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\array.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
   </ItemGroup>
