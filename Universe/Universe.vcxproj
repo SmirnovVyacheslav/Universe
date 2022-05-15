@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="engine\src\core\math.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
+    <ClCompile Include="engine\src\core\string.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
     <ClCompile Include="engine\src\platform\toolkit\directx\directx.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="engine\include\engine_ui.h" />
     <ClInclude Include="engine\src\core\math.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
+    <ClInclude Include="engine\src\core\string.h" />
     <ClInclude Include="engine\src\object\object.h" />
     <ClInclude Include="engine\src\platform\platform_def.h" />
     <ClInclude Include="engine\src\platform\toolkit\directx\directx.h" />

@@ -138,6 +138,9 @@
     <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp">
       <Filter>Исходные файлы\engine\src\platfom\windows\window_impl</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\core\string.cpp">
+      <Filter>Исходные файлы\engine\src\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h">
       <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\string.h">
+      <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
