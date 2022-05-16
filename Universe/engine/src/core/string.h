@@ -5,6 +5,7 @@
 #define STRING_H
 
 #include <cstdint>
+#include <string>
 
 
 namespace engine
@@ -12,11 +13,11 @@ namespace engine
     class string
     {
     public:
-        string() = default;
-        ~string() = default;
+        string(const std::u32string value);
+        ~string();
 
     private:
-        std::int32_t id;
+        const std::int32_t id;
     };
 }
 #endif

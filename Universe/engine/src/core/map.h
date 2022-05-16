@@ -10,7 +10,9 @@ namespace engine
     template <class key, class value>
     class map
     {
-        //
+    public:
+        map() = default;
+        ~map() = default;
     };
 }
 #endif
