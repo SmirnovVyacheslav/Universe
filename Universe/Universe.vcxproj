@@ -151,8 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="engine\src\core\array.cpp" />
-    <ClCompile Include="engine\src\core\map.cpp" />
     <ClCompile Include="engine\src\core\math.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
     <ClCompile Include="engine\src\core\string.cpp" />

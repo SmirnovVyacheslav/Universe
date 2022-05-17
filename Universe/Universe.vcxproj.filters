@@ -141,12 +141,6 @@
     <ClCompile Include="engine\src\core\string.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\map.cpp">
-      <Filter>Исходные файлы\engine\src\core</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\array.cpp">
-      <Filter>Исходные файлы\engine\src\core</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">

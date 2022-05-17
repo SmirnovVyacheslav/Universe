@@ -26,7 +26,15 @@ namespace engine
 
     std::int32_t string_map::add(const std::u32string value)
     {
-        return 0;
+        if (str_id_map.contains(value))
+        {
+            return str_id_map[value];
+        }
+
+        id_counter++;
+        id_str_map.add(id_counter, value);
+        str_id_map.add(value, id_counter);
+        return id_counter;
     }
 
 
