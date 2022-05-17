@@ -16,7 +16,10 @@ namespace engine
         map() = default;
         ~map() = default;
 
-        bool contain(const t_key key);
+        void add(const t_key key, const t_value value);
+        bool contains(const t_key key);
+
+        t_value& operator[](const t_key key) const;
 
     private:
         std::unordered_map<t_key, t_value> impl;
