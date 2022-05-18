@@ -13,12 +13,15 @@ namespace engine
     class string
     {
     public:
-        string(const std::u32string value);
+        string(const std::u8string value);
         ~string();
 
-        std::string u8();
-        std::u16string u16();
-        std::u32string u32();
+        std::string str();
+        std::u8string u8_str();
+        std::u16string u16_str();
+        std::u32string u32_str();
+
+        const char* c_str();
 
     private:
         const std::int32_t id;

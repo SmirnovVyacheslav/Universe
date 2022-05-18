@@ -1,7 +1,8 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "string.h"
+#include "array.h"
 #include "map.h"
+#include "string.h"
 
 
 namespace engine
@@ -10,8 +11,8 @@ namespace engine
     public:
         static string_map inst;
 
-        std::int32_t add(const std::u32string value);
-        std::u32string get(const std::int32_t id);
+        std::int32_t add(const std::u8string value);
+        std::u8string get(const std::int32_t id);
 
     private:
         string_map() = default;
@@ -19,13 +20,14 @@ namespace engine
 
         std::int32_t id_counter = 0;
 
-        map<std::int32_t, std::u32string> id_str_map;
-        map<std::u32string, std::int32_t> str_id_map;
+        map<std::int32_t, std::u8string> id_str_map;
+        map<std::u8string, std::int32_t> str_id_map;
+        array<std::u8string> str_array;
     };
 
     string_map string_map::inst = string_map();
 
-    std::int32_t string_map::add(const std::u32string value)
+    std::int32_t string_map::add(const std::u8string value)
     {
         if (str_id_map.contains(value))
         {
@@ -38,7 +40,7 @@ namespace engine
         return id_counter;
     }
 
-    std::u32string string_map::get(const std::int32_t id)
+    std::u8string string_map::get(const std::int32_t id)
     {
         if (id_str_map.contains(id))
         {
@@ -49,7 +51,7 @@ namespace engine
     }
 
 
-    class string_converter
+    /*class string_converter
     {
     public:
         static std::string u32_u8(const std::u32string str);
@@ -68,28 +70,38 @@ namespace engine
     std::u16string string_converter::u32_u16(const std::u32string str)
     {
         return std::u16string();
-    }
+    }*/
 
 
-    string::string(const std::u32string value) :
+    string::string(const std::u8string value) :
         id(string_map::inst.add(value))
     {}
 
     string::~string()
     {}
 
-    std::string string::u8()
+    std::string string::str()
     {
-        return string_converter::u32_u8(string_map::inst.get(id));
+        return std::string(c_str());
     }
 
-    std::u16string string::u16()
-    {
-        return string_converter::u32_u16(string_map::inst.get(id));
-    }
-
-    std::u32string string::u32()
+    std::u8string string::u8_str()
     {
         return string_map::inst.get(id);
+    }
+
+    std::u16string string::u16_str()
+    {
+        return std::u16string();
+    }
+
+    std::u32string string::u32_str()
+    {
+        return std::u32string();
+    }
+
+    const char* string::c_str()
+    {
+        return reinterpret_cast<const char*>(string_map::inst.get(id).c_str());
     }
 }
