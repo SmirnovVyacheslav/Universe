@@ -43,7 +43,8 @@ namespace engine
     template <class type>
     type& array<type>::operator[](const std::int32_t index)
     {
-        return impl[(impl.size() + index % impl.size()) % impl.size()];
+        std::int32_t size = impl.size();
+        return impl[(size + index % size) % size];
     }
 }
 #endif
