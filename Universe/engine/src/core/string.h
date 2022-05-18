@@ -16,6 +16,10 @@ namespace engine
         string(const std::u32string value);
         ~string();
 
+        std::string u8();
+        std::u16string u16();
+        std::u32string u32();
+
     private:
         const std::int32_t id;
     };
