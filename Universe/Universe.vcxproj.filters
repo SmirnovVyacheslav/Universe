@@ -73,18 +73,6 @@
     <Filter Include="Исходные файлы\engine\src\resource">
       <UniqueIdentifier>{d873a567-3408-491a-9444-34372753379c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\toolkit">
-      <UniqueIdentifier>{d70bb918-afe7-4a63-b9ac-c7c11ea13528}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\toolkit\directx">
-      <UniqueIdentifier>{4f0d0a61-3c4b-4414-b68a-6cf609075e00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\toolkit">
-      <UniqueIdentifier>{1290129c-c97d-4070-8f0d-dc47b7c75c54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\toolkit\directx">
-      <UniqueIdentifier>{fc279e49-318a-4a83-80a3-aeeab3c5f9c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\engine\src\platfom\windows">
       <UniqueIdentifier>{a45a1506-ba1b-42d6-a81a-195f8e1370fd}</UniqueIdentifier>
     </Filter>
@@ -96,6 +84,24 @@
     </Filter>
     <Filter Include="Файлы заголовков\engine\src\platform\windows\window_impl">
       <UniqueIdentifier>{041bb0d8-fc33-4fce-a21a-b4d3f473cda9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\platform\api">
+      <UniqueIdentifier>{e17d1546-8a58-4636-91f1-55b47b989edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\platform\api\graphics">
+      <UniqueIdentifier>{2179dfa5-24e4-4af1-971e-ae8921e24afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\platfom\api">
+      <UniqueIdentifier>{1d3ec0bc-7140-4767-8399-6cb4aa6f271b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\platfom\api\graphics">
+      <UniqueIdentifier>{584652d3-092c-47fa-9027-c3cddae05d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\platfom\api\graphics\directx">
+      <UniqueIdentifier>{5899fda9-a791-4663-96fa-e8fdefaf0796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\platform\api\graphics\directx">
+      <UniqueIdentifier>{7700a326-1131-4a72-a917-0f5f1be569b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +132,6 @@
     <ClCompile Include="engine\src\resource\mesh.cpp">
       <Filter>Исходные файлы\engine\src\resource</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\toolkit\directx\directx.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\toolkit\directx</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp">
       <Filter>Исходные файлы\engine\src\platfom\windows\window_impl</Filter>
     </ClCompile>
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\core\string.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\api\graphics\directx\directx.cpp">
+      <Filter>Исходные файлы\engine\src\platfom\api\graphics\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +176,6 @@
     <ClInclude Include="engine\src\resource\mesh.h">
       <Filter>Файлы заголовков\engine\src\resource</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\toolkit\directx\directx.h">
-      <Filter>Файлы заголовков\engine\src\platform\toolkit\directx</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\platform\window_ui.h">
       <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
@@ -193,6 +196,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\array.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\graphics\directx\directx.h">
+      <Filter>Файлы заголовков\engine\src\platform\api\graphics\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\graphics.h">
+      <Filter>Файлы заголовков\engine\src\platform\api</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
