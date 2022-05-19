@@ -26,6 +26,32 @@
 
 namespace engine
 {
+    class directx
+    {
+    public:
+        directx() = default;
+        ~directx() = default;
+
+        void create_device();
+        void create_window();
+
+    private:
+        platform::window_obj_ptr window_inst;
+
+        HWND window_handler;
+
+        std::int32_t window_width = 800;
+        std::int32_t window_height = 600;
+
+        std::int32_t refresh_rate = 60;
+
+        DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
+
+        ID3D11Device* d3dDevice = nullptr;
+        ID3D11DeviceContext* immediateContext = nullptr;
+        IDXGISwapChain* swapChain = nullptr;
+    };
+    
     struct ConstantBuffer
     {
         XMMATRIX mWorld;

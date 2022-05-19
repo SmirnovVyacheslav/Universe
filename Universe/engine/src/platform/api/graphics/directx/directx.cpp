@@ -7,6 +7,55 @@
 
 namespace engine
 {
+    void directx::create_window()
+    {
+        platform::window_mng_ptr window_mng_inst = platform::window_mng_ui::create();
+        window_inst = window_mng_inst->create_window(L"Engine");
+        window_handler = window_inst->get_hwnd();
+    }
+
+
+    void directx::create_device()
+    {
+        create_window();
+
+        DXGI_SWAP_CHAIN_DESC swap_chain_desription;
+        ZeroMemory(&swap_chain_desription, sizeof(swap_chain_desription));
+        swap_chain_desription.BufferCount = 1;
+        swap_chain_desription.BufferDesc.Width = window_width;
+        swap_chain_desription.BufferDesc.Height = window_height;
+        swap_chain_desription.BufferDesc.Format = dxgi_format;
+        swap_chain_desription.BufferDesc.RefreshRate.Numerator = refresh_rate;
+        swap_chain_desription.BufferDesc.RefreshRate.Denominator = 1;
+        swap_chain_desription.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+        swap_chain_desription.OutputWindow = window_handler;
+        swap_chain_desription.SampleDesc.Count = 1;
+        swap_chain_desription.SampleDesc.Quality = 0;
+        swap_chain_desription.Windowed = TRUE;
+
+        D3D_FEATURE_LEVEL FeatureLevels = D3D_FEATURE_LEVEL_11_0;
+
+        HRESULT hr = S_OK;
+        D3D_FEATURE_LEVEL FeatureLevel;
+
+        if (FAILED(hr = D3D11CreateDeviceAndSwapChain(NULL,
+            D3D_DRIVER_TYPE_REFERENCE,
+            NULL,
+            0,
+            &FeatureLevels,
+            1,
+            D3D11_SDK_VERSION,
+            &swap_chain_desription,
+            &swapChain,
+            &d3dDevice,
+            &FeatureLevel,
+            &immediateContext)))
+        {
+            return;
+        }
+    }
+
+
     D3D_DRIVER_TYPE         driverType = D3D_DRIVER_TYPE_HARDWARE;
     D3D_FEATURE_LEVEL       featureLevel = D3D_FEATURE_LEVEL_11_0;
 
