@@ -16,12 +16,11 @@ namespace engine
         string(const std::u8string value);
         ~string();
 
-        std::string str();
+        std::string s_str();
+        std::wstring w_str();
         std::u8string u8_str();
         std::u16string u16_str();
         std::u32string u32_str();
-
-        const char* c_str();
 
     private:
         const std::int32_t id;

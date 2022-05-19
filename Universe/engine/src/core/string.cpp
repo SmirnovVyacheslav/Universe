@@ -58,9 +58,19 @@ namespace engine
     string::~string()
     {}
 
-    std::string string::str()
+    std::string string::s_str()
     {
-        return std::string(c_str());
+        return std::string(reinterpret_cast<const char*>(string_map::inst.get(id).c_str()));
+    }
+
+    std::wstring string::w_str()
+    {
+        if (sizeof(wchar_t) == size_t(2))
+        {
+            return std::wstring(reinterpret_cast<const wchar_t*>(u16_str().c_str()));
+        }
+
+        return std::wstring(reinterpret_cast<const wchar_t*>(u32_str().c_str()));
     }
 
     std::u8string string::u8_str()
@@ -135,10 +145,5 @@ namespace engine
         }
 
         return utf32;
-    }
-
-    const char* string::c_str()
-    {
-        return reinterpret_cast<const char*>(string_map::inst.get(id).c_str());
     }
 }
