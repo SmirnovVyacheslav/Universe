@@ -13,7 +13,7 @@ namespace engine
     class string
     {
     public:
-        string(const std::u8string value);
+        string(std::u8string& value);
         ~string();
 
         std::string s_str();

@@ -17,10 +17,10 @@ namespace engine
         map() = default;
         ~map() = default;
 
-        void add(const t_key key, const t_value value);
-        bool contains(const t_key key);
+        void add(t_key& key, t_value& value);
+        bool contains(t_key& key);
 
-        t_value& operator[](const t_key key);
+        t_value& operator[](t_key& key);
 
     private:
         std::unordered_map<t_key, t_value> impl;
@@ -29,21 +29,21 @@ namespace engine
 
 
     template <class t_key, class t_value>
-    void map<t_key, t_value>::add(const t_key key, const t_value value)
+    void map<t_key, t_value>::add(t_key& key, t_value& value)
     {
         impl[key] = value;
     }
 
 
     template <class t_key, class t_value>
-    bool map<t_key, t_value>::contains(const t_key key)
+    bool map<t_key, t_value>::contains(t_key& key)
     {
         return impl.contains(key);
     }
 
 
     template <class t_key, class t_value>
-    t_value& map<t_key, t_value>::operator[](const t_key key)
+    t_value& map<t_key, t_value>::operator[](t_key& key)
     {
         if (contains(key))
         {

@@ -11,8 +11,8 @@ namespace engine
     public:
         static string_map inst;
 
-        std::int32_t add(const std::u8string value);
-        std::u8string get(const std::int32_t id);
+        std::int32_t add(std::u8string& value);
+        std::u8string get(std::int32_t id);
 
     private:
         string_map() = default;
@@ -22,12 +22,11 @@ namespace engine
 
         map<std::int32_t, std::u8string> id_str_map;
         map<std::u8string, std::int32_t> str_id_map;
-        array<std::u8string> str_array;
     };
 
     string_map string_map::inst = string_map();
 
-    std::int32_t string_map::add(const std::u8string value)
+    std::int32_t string_map::add(std::u8string& value)
     {
         if (str_id_map.contains(value))
         {
@@ -40,7 +39,7 @@ namespace engine
         return id_counter;
     }
 
-    std::u8string string_map::get(const std::int32_t id)
+    std::u8string string_map::get(std::int32_t id)
     {
         if (id_str_map.contains(id))
         {
@@ -51,7 +50,7 @@ namespace engine
     }
 
 
-    string::string(const std::u8string value) :
+    string::string(std::u8string& value) :
         id(string_map::inst.add(value))
     {}
 

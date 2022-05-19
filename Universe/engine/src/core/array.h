@@ -14,10 +14,10 @@ namespace engine
     class array
     {
     public:
-        array(std::int32_t size = 0);
+        array(const std::int32_t size = 0);
         ~array() = default;
 
-        void append(const type& item);
+        void append(type& item);
 
         type& operator[](const std::int32_t index);
 
@@ -27,14 +27,14 @@ namespace engine
 
 
     template <class type>
-    array<type>::array(std::int32_t size)
+    array<type>::array(const std::int32_t size)
     {
         impl.reserve(size);
     }
 
 
     template <class type>
-    void array<type>::append(const type& item)
+    void array<type>::append(type& item)
     {
         impl.push_back(item);
     }
