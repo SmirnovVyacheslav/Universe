@@ -1,9 +1,4 @@
-/******************************************************************************
-     * Description: Window handler ui
-     * Copyright: (C) 2022 Vyacheslav Smirnov, All rights reserved.
-     * Author: Vyacheslav Smirnov
-     * Email: necrolazy@gmail.com
-******************************************************************************/
+// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 
 
 #include "src/platform/platform_def.h"

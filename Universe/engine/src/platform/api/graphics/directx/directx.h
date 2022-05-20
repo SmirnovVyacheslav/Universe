@@ -36,8 +36,6 @@ namespace engine
         void create_window();
 
     private:
-        platform::window_obj_ptr window_inst;
-
         HWND window_handler;
 
         std::int32_t window_width = 800;

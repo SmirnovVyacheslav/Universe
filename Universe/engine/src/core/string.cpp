@@ -50,7 +50,7 @@ namespace engine
     }
 
 
-    string::string(std::u8string& value) :
+    string::string(std::u8string value) :
         id(string_map::inst.add(value))
     {}
 

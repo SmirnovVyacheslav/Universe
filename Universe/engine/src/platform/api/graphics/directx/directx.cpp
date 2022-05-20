@@ -9,9 +9,8 @@ namespace engine
 {
     void directx::create_window()
     {
-        platform::window_mng_ptr window_mng_inst = platform::window_mng_ui::create();
-        window_inst = window_mng_inst->create_window(L"Engine");
-        window_handler = window_inst->get_hwnd();
+        platform::window::create_window(string(std::u8string(u8"Engine")));
+        window_handler = reinterpret_cast<HWND>(platform::window::get_handler());
     }
 
 
@@ -96,15 +95,12 @@ namespace engine
     ID3D11VertexShader* g_pVertexShader = NULL;
     ID3D11PixelShader* g_pPixelShader = NULL;
 
-    platform::window_mng_ptr window_mng_inst = platform::window_mng_ui::create();
-    platform::window_obj_ptr window_inst = window_mng_inst->create_window(L"Engine");
-    HWND hWnd = window_inst->get_hwnd();
-
-
-
 
     void createDevice()
     {
+        platform::window::create_window(string(std::u8string(u8"Engine")));
+        HWND hWnd = reinterpret_cast<HWND>(platform::window::get_handler());
+
         HRESULT result = S_OK;
 
         RECT wndSize;
