@@ -176,7 +176,7 @@
     <ClInclude Include="engine\src\resource\mesh.h">
       <Filter>Файлы заголовков\engine\src\resource</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\window_ui.h">
+    <ClInclude Include="engine\src\platform\window.h">
       <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\platform\windows\window_impl\window_descriptor.h">

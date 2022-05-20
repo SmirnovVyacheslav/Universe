@@ -180,7 +180,7 @@
     <ClInclude Include="engine\src\platform\windows\window_impl\window_descriptor.h" />
     <ClInclude Include="engine\src\platform\windows\window_impl\window_handler.h" />
     <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h" />
-    <ClInclude Include="engine\src\platform\window_ui.h" />
+    <ClInclude Include="engine\src\platform\window.h" />
     <ClInclude Include="engine\src\render\render.h" />
     <ClInclude Include="engine\src\resource\mesh.h" />
     <ClInclude Include="engine\src\scene\scene.h" />

@@ -19,7 +19,7 @@
 #include <unordered_map>
 #include <xnamath.h>
 
-#include "src/platform/window_ui.h"
+#include "src/platform/window.h"
 #include "src/resource/mesh.h"
 #include "src/scene/scene.h"
 
