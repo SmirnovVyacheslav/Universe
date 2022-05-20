@@ -25,6 +25,20 @@ namespace engine
 {
     namespace platform
     {
+        class window_impl
+        {
+        public:
+            window_impl(string name);
+            ~window_impl();
+
+            HWND get_handler();
+
+        private:
+            HWND id;
+            string name;
+        };
+
+
         class window_obj_impl;
         class window_mng_impl;
 
