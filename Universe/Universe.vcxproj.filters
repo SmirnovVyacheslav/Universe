@@ -147,6 +147,9 @@
     <ClCompile Include="engine\src\platform\api\graphics\directx\directx.cpp">
       <Filter>Исходные файлы\engine\src\platfom\api\graphics\directx</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\core\config.cpp">
+      <Filter>Исходные файлы\engine\src\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\api\graphics.h">
       <Filter>Файлы заголовков\engine\src\platform\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\config.h">
+      <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
