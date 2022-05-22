@@ -4,8 +4,6 @@
 #ifndef OBJECT_ID_H
 #define OBJECT_ID_H
 
-#include "src/platform/container.h"
-
 
 namespace engine
 {

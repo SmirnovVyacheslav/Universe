@@ -13,7 +13,7 @@ namespace engine
 {
     struct graphics_settings
     {
-        string window_name = string(std::u8string(u8"CEngine"));
+        string window_name = string(std::u8string(u8"Engine"));
 
         std::int32_t window_width = 800;
         std::int32_t window_height = 600;
@@ -28,9 +28,10 @@ namespace engine
         static config inst;
 
         static const graphics_settings& get_graphics_settings();
+        static void initialize();
 
     private:
-        graphics_settings graphics_settings_inst;
+        graphics_settings* graphics_settings_inst;
 
         config() = default;
         ~config() = default;

@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\core\config.cpp" />
+    <ClCompile Include="engine\src\core\main.cpp" />
     <ClCompile Include="engine\src\core\math.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
     <ClCompile Include="engine\src\core\string.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="engine\include\engine_ui.h" />
     <ClInclude Include="engine\src\core\array.h" />
     <ClInclude Include="engine\src\core\config.h" />
+    <ClInclude Include="engine\src\core\main.h" />
     <ClInclude Include="engine\src\core\map.h" />
     <ClInclude Include="engine\src\core\math.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
