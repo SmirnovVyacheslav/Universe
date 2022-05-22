@@ -12,8 +12,8 @@ namespace engine
         class engine_ui
         {
         public:
-            engine_ui() = default;
-            ~engine_ui() = default;
+            engine_ui();
+            ~engine_ui();
 
             void add_object();
             void start_render();
