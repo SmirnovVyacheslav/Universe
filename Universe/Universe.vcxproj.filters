@@ -150,7 +150,7 @@
     <ClCompile Include="engine\src\core\config.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\main.cpp">
+    <ClCompile Include="engine\src\core\initialize.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
   </ItemGroup>
@@ -212,7 +212,7 @@
     <ClInclude Include="engine\src\core\config.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\main.h">
+    <ClInclude Include="engine\src\core\initialize.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
   </ItemGroup>

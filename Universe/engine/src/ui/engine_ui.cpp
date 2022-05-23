@@ -1,7 +1,7 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "engine_ui.h"
-#include "src/core/main.h"
+#include "src/core/initialize.h"
 #include "src/scene/scene.h"
 #include "src/render/render.h"
 
