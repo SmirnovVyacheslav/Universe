@@ -175,6 +175,7 @@
     <ClInclude Include="engine\src\core\initialize.h" />
     <ClInclude Include="engine\src\core\map.h" />
     <ClInclude Include="engine\src\core\math.h" />
+    <ClInclude Include="engine\src\core\memory.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
     <ClInclude Include="engine\src\core\string.h" />
     <ClInclude Include="engine\src\object\object.h" />

@@ -215,6 +215,9 @@
     <ClInclude Include="engine\src\core\initialize.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
+    <ClInclude Include="engine\src\core\memory.h">
+      <Filter>Файлы заголовков\engine\src\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
