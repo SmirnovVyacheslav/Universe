@@ -1,28 +1,24 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
 #pragma once
-#ifndef MEMORY_H
-#define MEMORY_H
 
 
-namespace engine
-{
+namespace engine {
     template<class type_name>
-    class lead_ptr
-    {
-    public:
-        explicit lead_ptr() = default;
-        ~lead_ptr() = default;
+    class lead_ptr {
+        public:
+            lead_ptr() = default;
+            ~lead_ptr() = default;
 
-    private:
-        type_name* obj;
+            lead_ptr(lead_ptr&& src_ptr) = default;
+            lead_ptr(const lead_ptr& src_ptr) = delete;
+
+            lead_ptr& operator=(lead_ptr&& src_ptr) = default;
+            lead_ptr& operator=(const lead_ptr& src_ptr) = delete;
+        private:
+            type_name* obj_ptr;
     };
-
-
     template<class type_name>
-    class slave_ptr
-    {
+    class slave_ptr {
 
     };
 }
-#endif
