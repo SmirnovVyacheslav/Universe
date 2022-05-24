@@ -19,6 +19,16 @@ namespace engine {
     };
     template<class type_name>
     class slave_ptr {
+        friend class lead_ptr<type_name>;
+        public:
+            ~slave_ptr() = default;
 
+            slave_ptr(slave_ptr&& src_ptr) = default;
+            slave_ptr(const slave_ptr& src_ptr) = default;
+
+            slave_ptr& operator=(slave_ptr&& src_ptr) = default;
+            slave_ptr& operator=(const slave_ptr& src_ptr) = default;
+        private:
+            slave_ptr() = default;
     };
 }
