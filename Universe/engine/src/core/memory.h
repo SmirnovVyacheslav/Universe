@@ -9,11 +9,11 @@ namespace engine {
             lead_ptr() = default;
             ~lead_ptr() = default;
 
-            lead_ptr(lead_ptr&& src_ptr) = default;
-            lead_ptr(const lead_ptr& src_ptr) = delete;
+            lead_ptr(lead_ptr&& src) = default;
+            lead_ptr(const lead_ptr& src) = delete;
 
-            lead_ptr& operator=(lead_ptr&& src_ptr) = default;
-            lead_ptr& operator=(const lead_ptr& src_ptr) = delete;
+            lead_ptr& operator=(lead_ptr&& src) = default;
+            lead_ptr& operator=(const lead_ptr& src) = delete;
         private:
             type_name* obj_ptr;
     };
@@ -23,11 +23,11 @@ namespace engine {
         public:
             ~slave_ptr() = default;
 
-            slave_ptr(slave_ptr&& src_ptr) = default;
-            slave_ptr(const slave_ptr& src_ptr) = default;
+            slave_ptr(slave_ptr&& src) = default;
+            slave_ptr(const slave_ptr& src) = default;
 
-            slave_ptr& operator=(slave_ptr&& src_ptr) = default;
-            slave_ptr& operator=(const slave_ptr& src_ptr) = default;
+            slave_ptr& operator=(slave_ptr&& src) = default;
+            slave_ptr& operator=(const slave_ptr& src) = default;
         private:
             slave_ptr() = default;
     };

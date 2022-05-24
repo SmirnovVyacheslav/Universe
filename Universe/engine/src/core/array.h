@@ -1,50 +1,46 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
 #pragma once
-#ifndef ARRAY_H
-#define ARRAY_H
-
 #include <vector>
 #include <cstdint>
 
 
-namespace engine
-{
-    template <class type>
-    class array
-    {
-    public:
-        array(const std::int32_t size = 0);
-        ~array() = default;
+namespace engine {
+    template <class type_name>
+    class array {
+        public:
+            explicit array(size_t size = 0);
+            ~array() = default;
 
-        void append(type& item);
+            array(array&& src) = default;
+            array(const array& src) = default;
 
-        type& operator[](const std::int32_t index);
+            array& operator=(array&& src_ptr) = default;
+            array& operator=(const array& src_ptr) = default;
 
-    private:
-        std::vector<type> impl;
+            type_name& operator[](std::int32_t index);
+
+            void append(type_name&& item);
+            void append(const type_name& item);
+        private:
+            std::vector<type_name> data;
     };
 
 
-    template <class type>
-    array<type>::array(const std::int32_t size)
-    {
-        impl.reserve(size);
+    template <class type_name>
+    array<type_name>::array(size_t size) {
+        data.reserve(size);
     }
-
-
-    template <class type>
-    void array<type>::append(type& item)
-    {
-        impl.push_back(item);
+    template <class type_name>
+    type_name& array<type_name>::operator[](std::int32_t index) {
+        std::int32_t size = static_cast<std::int32_t>(data.size());
+        return data[(size + index % size) % size];
     }
-
-
-    template <class type>
-    type& array<type>::operator[](const std::int32_t index)
-    {
-        std::int32_t size = impl.size();
-        return impl[(size + index % size) % size];
+    template <class type_name>
+    void array<type_name>::append(type_name&& item) {
+        data.push_back(std::move(item));
+    }
+    template <class type_name>
+    void array<type_name>::append(const type_name& item) {
+        data.push_back(item);
     }
 }
-#endif
