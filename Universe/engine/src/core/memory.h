@@ -70,6 +70,9 @@ namespace engine {
     template<class type_name>
     template<class... type_args>
     void lead_ptr<type_name>::create_object(const type_args&... args) {
+        if (obj_ptr != nullptr) {
+            delete obj_ptr;
+        }
         obj_ptr = new type_name(args...);
     }
     template<class type_name>
