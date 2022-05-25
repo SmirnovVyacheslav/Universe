@@ -7,6 +7,7 @@
 #include <cstdint>
 
 #include "string.h"
+#include "memory.h"
 
 
 namespace engine
@@ -27,11 +28,11 @@ namespace engine
     public:
         static config inst;
 
-        static const graphics_settings& get_graphics_settings();
+        static slave_ptr<graphics_settings>& get_graphics_settings();
         static void initialize();
 
     private:
-        graphics_settings* graphics_settings_inst;
+        lead_ptr<graphics_settings> graphics_settings_inst;
 
         config() = default;
         ~config() = default;
