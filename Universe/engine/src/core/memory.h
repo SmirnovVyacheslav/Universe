@@ -1,8 +1,15 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include "array.h"
 
 
 namespace engine {
+    template<class type_name>
+    class lead_ptr;
+    template<class type_name>
+    class slave_ptr;
+
+
     template<class type_name>
     class lead_ptr {
         public:
@@ -16,6 +23,7 @@ namespace engine {
             lead_ptr& operator=(const lead_ptr& src) = delete;
         private:
             type_name* obj_ptr;
+            array< slave_ptr<type_name> > slave_ptr_list;
     };
     template<class type_name>
     class slave_ptr {
