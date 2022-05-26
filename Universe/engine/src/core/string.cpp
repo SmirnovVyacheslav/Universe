@@ -1,96 +1,74 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
 #include "array.h"
 #include "map.h"
 #include "string.h"
 
 
-namespace engine
-{
+namespace engine {
     class string_map {
-    public:
-        static string_map inst;
+        public:
+            static std::int32_t add(const std::u8string& value);
+            static std::u8string& get(const std::int32_t id);
+        private:
+            static string_map inst;
 
-        std::int32_t add(std::u8string& value);
-        std::u8string get(std::int32_t id);
+            std::int32_t id_counter = 0;
+            map<std::int32_t, std::u8string> id_str_map;
+            map<std::u8string, std::int32_t> str_id_map;
 
-    private:
-        string_map() = default;
-        ~string_map() = default;
-
-        std::int32_t id_counter = 0;
-
-        map<std::int32_t, std::u8string> id_str_map;
-        map<std::u8string, std::int32_t> str_id_map;
+            string_map() = default;
+            ~string_map() = default;
     };
+
 
     string_map string_map::inst = string_map();
 
-    std::int32_t string_map::add(std::u8string& value)
-    {
-        if (str_id_map.contains(value))
-        {
-            return str_id_map[value];
+
+    std::int32_t string_map::add(const std::u8string& value) {
+        if (inst.str_id_map.contains(value)) {
+            return inst.str_id_map[value];
         }
 
-        id_counter++;
-        id_str_map.add(id_counter, value);
-        str_id_map.add(value, id_counter);
-        return id_counter;
+        inst.id_counter++;
+        inst.id_str_map.add(inst.id_counter, value);
+        inst.str_id_map.add(value, inst.id_counter);
+        return inst.id_counter;
     }
-
-    std::u8string string_map::get(std::int32_t id)
-    {
-        if (id_str_map.contains(id))
-        {
-            return id_str_map[id];
+    std::u8string& string_map::get(const std::int32_t id) {
+        if (inst.id_str_map.contains(id)) {
+            return inst.id_str_map[id];
         }
-
         throw std::invalid_argument("Id does not exist");
     }
 
 
-    string::string(std::u8string value) :
-        id(string_map::inst.add(value))
-    {}
-
-    string::~string()
-    {}
-
-    std::string string::s_str()
-    {
-        return std::string(reinterpret_cast<const char*>(string_map::inst.get(id).c_str()));
+    string::string(const char8_t* value) :
+        id(string_map::add(std::u8string(value))) {
     }
-
-    std::wstring string::w_str()
-    {
-        if (sizeof(wchar_t) == size_t(2))
-        {
+    string::string(const std::u8string& value) :
+        id(string_map::add(value)) {
+    }
+    std::string string::s_str() {
+        return std::string(reinterpret_cast<const char*>(string_map::get(id).c_str()));
+    }
+    std::wstring string::w_str() {
+        if (sizeof(wchar_t) == size_t(2)) {
             return std::wstring(reinterpret_cast<const wchar_t*>(u16_str().c_str()));
         }
-
         return std::wstring(reinterpret_cast<const wchar_t*>(u32_str().c_str()));
     }
-
-    std::u8string string::u8_str()
-    {
-        return string_map::inst.get(id);
+    std::u8string string::u8_str() {
+        return string_map::get(id);
     }
-
-    std::u16string string::u16_str()
-    {
+    std::u16string string::u16_str() {
         std::u16string utf16;
         std::u32string utf32 = u32_str();
 
-        for (std::int32_t i = 0; i < utf32.size(); ++i)
-        {
+        for (size_t i = 0; i < utf32.size(); ++i) {
             unsigned long unicode = utf32[i];
-            if (unicode <= 0xFFFF)
-            {
+            if (unicode <= 0xFFFF) {
                 utf16 += static_cast<char16_t>(unicode);
-            }
-            else
-            {
+            } else {
                 unicode -= 0x10000;
                 utf16 += static_cast<char16_t>((unicode >> 10) + 0xD800);
                 utf16 += static_cast<char16_t>((unicode & 0x3FF) + 0xDC00);
@@ -98,17 +76,14 @@ namespace engine
         }
         return utf16;
     }
-
-    std::u32string string::u32_str()
-    {
+    std::u32string string::u32_str() {
         std::u32string utf32;
-        std::u8string utf8 = string_map::inst.get(id);
+        std::u8string utf8 = string_map::get(id);
 
-        for (std::int32_t i = 0; i < utf8.length(); ++i) {
+        for (size_t i = 0; i < utf8.length(); ++i) {
             unsigned char ctrl_char = static_cast<unsigned char>(utf8[i]);
 
-            if (ctrl_char <= 0x7f)
-            {
+            if (ctrl_char <= 0x7f) {
                 utf32.push_back(utf8[i]);
             }
             else if (ctrl_char < 0xe0) {
@@ -142,7 +117,6 @@ namespace engine
                 utf32.push_back(((a & 0x01) << 30) + ((b & 0x3f) << 24) + ((c & 0x3f) << 18) + ((d & 0x3f) << 12) + ((e & 0x3f) << 6) + (utf8[i] & 0x3f));
             }
         }
-
         return utf32;
     }
 }
