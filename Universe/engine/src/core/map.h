@@ -1,56 +1,47 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
 #pragma once
-#ifndef MAP_H
-#define MAP_H
-
 #include <stdexcept>
 #include <unordered_map>
 
 
-namespace engine
-{
-    template <class t_key, class t_value>
-    class map
-    {
-    public:
-        map() = default;
-        ~map() = default;
+namespace engine {
+    template <class type_name_key, class type_name_value>
+    class map {
+        public:
+            map() = default;
+            ~map() = default;
+            map(map&& src) = default;
+            map(const map& src) = default;
 
-        void add(t_key& key, t_value& value);
-        bool contains(t_key& key);
+            bool contains(const type_name_key& key);
+            void add(type_name_key&& key, type_name_value&& value);
+            void add(const type_name_key& key, const type_name_value& value);
 
-        t_value& operator[](t_key& key);
-
-    private:
-        std::unordered_map<t_key, t_value> impl;
+            map& operator=(map&& src) = default;
+            map& operator=(const map& src) = default;
+            type_name_value& operator[](const type_name_key& key);
+        private:
+            std::unordered_map<type_name_key, type_name_value> data;
     };
 
 
-
-    template <class t_key, class t_value>
-    void map<t_key, t_value>::add(t_key& key, t_value& value)
-    {
-        impl[key] = value;
+    template <class type_name_key, class type_name_value>
+    bool map<type_name_key, type_name_value>::contains(const type_name_key& key) {
+        return data.contains(key);
     }
-
-
-    template <class t_key, class t_value>
-    bool map<t_key, t_value>::contains(t_key& key)
-    {
-        return impl.contains(key);
+    template <class type_name_key, class type_name_value>
+    void map<type_name_key, type_name_value>::add(type_name_key&& key, type_name_value&& value) {
+        data[std::move(key)] = std::move(value);
     }
-
-
-    template <class t_key, class t_value>
-    t_value& map<t_key, t_value>::operator[](t_key& key)
-    {
-        if (contains(key))
-        {
-            return impl[key];
+    template <class type_name_key, class type_name_value>
+    void map<type_name_key, type_name_value>::add(const type_name_key& key, const type_name_value& value) {
+        data[key] = value;
+    }
+    template <class type_name_key, class type_name_value>
+    type_name_value& map<type_name_key, type_name_value>::operator[](const type_name_key& key) {
+        if (contains(key)) {
+            return data[key];
         }
-
         throw std::invalid_argument("Key does not exist");
     }
 }
-#endif
