@@ -7,7 +7,7 @@ namespace engine {
 
 
     void config::initialize() {
-        inst.graphics_settings_inst.create_object();
+        inst.graphics_settings_inst.initialize();
     }
     slave_ptr<graphics_settings>& config::get_graphics_settings() {
         return config::inst.graphics_settings_inst.create_slave_ptr();

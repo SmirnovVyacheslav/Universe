@@ -13,34 +13,33 @@ namespace engine {
 
     template<class type_name>
     class lead_ptr {
+        friend class lead_ptr<type_name>;
         public:
             lead_ptr() = default;
             ~lead_ptr();
-
             lead_ptr(lead_ptr&& src) = default;
-            lead_ptr(const lead_ptr& src) = delete;
+            lead_ptr(const lead_ptr & src) = delete;
+
+            template<class... type_args>
+            void initialize(const type_args&... args);
+            slave_ptr<type_name>& create_slave_ptr();
 
             type_name* operator->();
             lead_ptr& operator=(lead_ptr&& src) = default;
             lead_ptr& operator=(const lead_ptr& src) = delete;
-
-            template<class... type_args>
-            void create_object(const type_args&... args);
-
-            slave_ptr<type_name>& create_slave_ptr();
-            void destroy_slave_ptr(const slave_ptr<type_name>* ptr);
-            void add_slave_ptr(const slave_ptr<type_name>* ptr);
-            void update_slave_ptr(const slave_ptr<type_name>* old_ptr, const slave_ptr<type_name>* new_ptr);
         private:
             type_name* obj_ptr = nullptr;
             array< slave_ptr<type_name>* > slave_ptr_list;
+
+            void destroy_slave_ptr(const slave_ptr<type_name>* ptr);
+            void add_slave_ptr(const slave_ptr<type_name>* ptr);
+            void update_slave_ptr(const slave_ptr<type_name>* old_ptr, const slave_ptr<type_name>* new_ptr);
     };
     template<class type_name>
     class slave_ptr {
         friend class lead_ptr<type_name>;
         public:
             ~slave_ptr();
-
             slave_ptr(slave_ptr&& src);
             slave_ptr(const slave_ptr& src);
 
@@ -64,12 +63,8 @@ namespace engine {
         delete obj_ptr;
     }
     template<class type_name>
-    type_name* lead_ptr<type_name>::operator->() {
-        return obj_ptr;
-    }
-    template<class type_name>
     template<class... type_args>
-    void lead_ptr<type_name>::create_object(const type_args&... args) {
+    void lead_ptr<type_name>::initialize(const type_args&... args) {
         if (obj_ptr != nullptr) {
             delete obj_ptr;
         }
@@ -91,6 +86,10 @@ namespace engine {
     template<class type_name>
     void lead_ptr<type_name>::update_slave_ptr(const slave_ptr<type_name>* old_ptr, const slave_ptr<type_name>* new_ptr) {
         slave_ptr_list[slave_ptr_list.find_index(old_ptr)] = new_ptr;
+    }
+    template<class type_name>
+    type_name* lead_ptr<type_name>::operator->() {
+        return obj_ptr;
     }
 
 
