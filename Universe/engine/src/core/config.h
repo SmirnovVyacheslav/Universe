@@ -6,21 +6,23 @@
 
 
 namespace engine {
-    struct graphics_settings {
-        string window_name = string(std::u8string(u8"Engine"));
-
+    struct core_config {
+        string window_name = string(u8"Engine");
+    };
+    struct video_config {
         std::int32_t window_width = 800;
         std::int32_t window_height = 600;
         std::int32_t refresh_rate = 60;
     };
     class config {
         public:
-            static config inst;
-
             static void initialize();
-            static slave_ptr<graphics_settings>& get_graphics_settings();
+            static const slave_ptr<core_config>& core();
+            static const slave_ptr<video_config>& video();
         private:
-            lead_ptr<graphics_settings> graphics_settings_inst;
+            static config inst;
+            lead_ptr<core_config> core_ptr;
+            lead_ptr<video_config> video_ptr;
 
             config() = default;
             ~config() = default;

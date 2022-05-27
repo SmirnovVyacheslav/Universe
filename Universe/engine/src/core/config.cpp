@@ -7,9 +7,13 @@ namespace engine {
 
 
     void config::initialize() {
-        inst.graphics_settings_inst.initialize();
+        inst.core_ptr.initialize();
+        inst.video_ptr.initialize();
     }
-    slave_ptr<graphics_settings>& config::get_graphics_settings() {
-        return config::inst.graphics_settings_inst.create_slave_ptr();
+    const slave_ptr<core_config>& config::core() {
+        return config::inst.core_ptr.create_slave_ptr();
+    }
+    const slave_ptr<video_config>& config::video() {
+        return config::inst.video_ptr.create_slave_ptr();
     }
 }
