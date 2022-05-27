@@ -17,8 +17,8 @@ namespace engine {
     class config {
         public:
             static void initialize();
-            static const slave_ptr<core_config>& core();
-            static const slave_ptr<video_config>& video();
+            static slave_ptr<core_config>& core();
+            static slave_ptr<video_config>& video();
         private:
             static config inst;
             lead_ptr<core_config> core_ptr;
@@ -26,5 +26,9 @@ namespace engine {
 
             config() = default;
             ~config() = default;
+            config(config&& src) = delete;
+            config(const config& src) = delete;
+            config& operator=(config&& src) = delete;
+            config& operator=(const config& src) = delete;
     };
 }

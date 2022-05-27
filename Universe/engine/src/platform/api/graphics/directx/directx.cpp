@@ -9,8 +9,8 @@ namespace engine
 {
     void directx::create_window()
     {
-        platform::window::create_window(string(std::u8string(u8"Engine")));
-        window_handler = reinterpret_cast<HWND>(platform::window::get_handler());
+        platform::window::create_window();
+        window_handler = reinterpret_cast<HWND>(platform::window::id());
     }
 
 
@@ -98,8 +98,8 @@ namespace engine
 
     void createDevice()
     {
-        platform::window::create_window(string(std::u8string(u8"Engine")));
-        HWND hWnd = reinterpret_cast<HWND>(platform::window::get_handler());
+        platform::window::create_window();
+        HWND hWnd = reinterpret_cast<HWND>(platform::window::id());
 
         HRESULT result = S_OK;
 

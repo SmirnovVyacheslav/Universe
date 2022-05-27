@@ -13,15 +13,16 @@ namespace engine {
             string(string&& src) = default;
             string(const string& src) = default;
 
-            std::string s_str();
-            std::wstring w_str();
-            std::u8string u8_str();
-            std::u16string u16_str();
-            std::u32string u32_str();
+            std::string s_str() const;
+            std::wstring w_str() const;
+            std::u8string u8_str() const;
+            std::u16string u16_str() const;
+            std::u32string u32_str() const;
 
             string& operator=(string&& src) = default;
             string& operator=(const string& src) = default;
         private:
-            std::int32_t id;
+            string() = delete;
+            std::int32_t id = -1;
     };
 }

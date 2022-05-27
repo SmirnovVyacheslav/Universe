@@ -158,9 +158,8 @@
     <ClCompile Include="engine\src\core\string.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
     <ClCompile Include="engine\src\platform\api\graphics\directx\directx.cpp" />
-    <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp" />
-    <ClCompile Include="engine\src\platform\windows\window_impl\window_handler.cpp" />
-    <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp" />
+    <ClCompile Include="engine\src\platform\window.cpp" />
+    <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\render\render.cpp" />
     <ClCompile Include="engine\src\resource\mesh.cpp" />
     <ClCompile Include="engine\src\scene\scene.cpp" />
@@ -182,9 +181,7 @@
     <ClInclude Include="engine\src\platform\api\graphics.h" />
     <ClInclude Include="engine\src\platform\api\graphics\directx\directx.h" />
     <ClInclude Include="engine\src\platform\platform_def.h" />
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_descriptor.h" />
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_handler.h" />
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h" />
+    <ClInclude Include="engine\src\platform\windows\window_impl.h" />
     <ClInclude Include="engine\src\platform\window.h" />
     <ClInclude Include="engine\src\render\render.h" />
     <ClInclude Include="engine\src\resource\mesh.h" />

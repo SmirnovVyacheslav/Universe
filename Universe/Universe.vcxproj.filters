@@ -76,14 +76,8 @@
     <Filter Include="Исходные файлы\engine\src\platfom\windows">
       <UniqueIdentifier>{a45a1506-ba1b-42d6-a81a-195f8e1370fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\windows\window_impl">
-      <UniqueIdentifier>{8d47ee40-e57c-47dc-b653-d6ccd1b76cd1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\engine\src\platform\windows">
       <UniqueIdentifier>{4b02610d-b6a6-4a14-9b10-f75aee399a7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\windows\window_impl">
-      <UniqueIdentifier>{041bb0d8-fc33-4fce-a21a-b4d3f473cda9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы заголовков\engine\src\platform\api">
       <UniqueIdentifier>{e17d1546-8a58-4636-91f1-55b47b989edc}</UniqueIdentifier>
@@ -132,15 +126,6 @@
     <ClCompile Include="engine\src\resource\mesh.cpp">
       <Filter>Исходные файлы\engine\src\resource</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\windows\window_impl\window_descriptor.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\windows\window_impl</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\platform\windows\window_impl\window_handler.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\windows\window_impl</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\platform\windows\window_impl\window_impl.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\windows\window_impl</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\string.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
@@ -152,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="engine\src\core\initialize.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\windows\window_impl.cpp">
+      <Filter>Исходные файлы\engine\src\platfom\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\window.cpp">
+      <Filter>Исходные файлы\engine\src\platfom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,15 +176,6 @@
     <ClInclude Include="engine\src\platform\window.h">
       <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_descriptor.h">
-      <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_handler.h">
-      <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl\window_impl.h">
-      <Filter>Файлы заголовков\engine\src\platform\windows\window_impl</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\string.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
@@ -217,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\memory.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\windows\window_impl.h">
+      <Filter>Файлы заголовков\engine\src\platform\windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,10 @@ namespace engine {
 
             string_map() = default;
             ~string_map() = default;
+            string_map(string_map&& src) = delete;
+            string_map(const string_map& src) = delete;
+            string_map& operator=(string_map&& src) = delete;
+            string_map& operator=(const string_map& src) = delete;
     };
 
 
@@ -48,19 +52,19 @@ namespace engine {
     string::string(const std::u8string& value) :
         id(string_map::add(value)) {
     }
-    std::string string::s_str() {
+    std::string string::s_str() const {
         return std::string(reinterpret_cast<const char*>(string_map::get(id).c_str()));
     }
-    std::wstring string::w_str() {
+    std::wstring string::w_str() const {
         if (sizeof(wchar_t) == size_t(2)) {
             return std::wstring(reinterpret_cast<const wchar_t*>(u16_str().c_str()));
         }
         return std::wstring(reinterpret_cast<const wchar_t*>(u32_str().c_str()));
     }
-    std::u8string string::u8_str() {
+    std::u8string string::u8_str() const {
         return string_map::get(id);
     }
-    std::u16string string::u16_str() {
+    std::u16string string::u16_str() const {
         std::u16string utf16;
         std::u32string utf32 = u32_str();
 
@@ -76,7 +80,7 @@ namespace engine {
         }
         return utf16;
     }
-    std::u32string string::u32_str() {
+    std::u32string string::u32_str() const {
         std::u32string utf32;
         std::u8string utf8 = string_map::get(id);
 

@@ -1,6 +1,7 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include <stdexcept>
+#include <type_traits>
 #include "array.h"
 
 
@@ -117,7 +118,7 @@ namespace engine {
         if (obj_ptr == nullptr) {
             throw std::invalid_argument("Main object was deleted");
         }
-        return obj_ptr;
+        return obj_ptr->operator->();
     }
     template<class type_name>
     slave_ptr<type_name>& slave_ptr<type_name>::operator=(slave_ptr&& src) {

@@ -1,40 +1,29 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
-
 #pragma once
-#ifndef PLATFOM_WINDOW_UI_H
-#define PLATFOM_WINDOW_UI_H
-
 #include "src/core/string.h"
+#include "src/core/memory.h"
+#include "src/core/config.h"
 
 
-#include <string>
-#include <memory>
-
-#include <windows.h>
-
-
-namespace engine
-{
-    namespace platform
-    {
+namespace engine {
+    namespace platform {
         class window_impl;
 
-        class window
-        {
-        public:
-            static window inst;
 
-            static void create_window(string name);
-            static void* get_handler();
+        class window {
+            public:
+                static void create_window();
+                static void* id();
+            private:
+                static window inst;
+                lead_ptr<window_impl> impl;
 
-        private:
-            window_impl* window_inst;
-
-            window() = default;
-            ~window() = default;
+                window() = default;
+                ~window() = default;
+                window(window&& src) = delete;
+                window(const window& src) = delete;
+                window& operator=(window&& src) = delete;
+                window& operator=(const window& src) = delete;
         };
     }
 }
-
-#endif

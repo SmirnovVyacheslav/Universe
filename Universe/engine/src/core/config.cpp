@@ -10,10 +10,10 @@ namespace engine {
         inst.core_ptr.initialize();
         inst.video_ptr.initialize();
     }
-    const slave_ptr<core_config>& config::core() {
+    slave_ptr<core_config>& config::core() {
         return config::inst.core_ptr.create_slave_ptr();
     }
-    const slave_ptr<video_config>& config::video() {
+    slave_ptr<video_config>& config::video() {
         return config::inst.video_ptr.create_slave_ptr();
     }
 }
