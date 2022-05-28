@@ -1,5 +1,6 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #include "window_impl.h"
+
 #ifdef WINDOWS
 
 

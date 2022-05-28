@@ -27,7 +27,7 @@ namespace engine
 
         void engine_ui::start_render()
         {
-            engine::render::inst.start_render();
+            engine::render::start_render();
         }
     }
 }
