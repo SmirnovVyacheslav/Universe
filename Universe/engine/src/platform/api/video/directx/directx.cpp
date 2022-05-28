@@ -1,56 +1,71 @@
 ﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "directx.h"
+#include <stdexcept>
 
 #ifdef WINDOWS
 
 
 namespace engine
 {
-    void directx::create_window()
-    {
-        platform::window::create_window();
-        window_handler = reinterpret_cast<HWND>(platform::window::id());
+    directx::~directx() {
+        clear_resource(immediate_context);
+
+        release_resource(swap_chain);
+        release_resource(immediate_context);
+        release_resource(device);
     }
+    void directx::create_window() {
+        platform::window::create_window();
+    }
+    DXGI_SWAP_CHAIN_DESC directx::create_swap_chain_data() {
+        DXGI_SWAP_CHAIN_DESC swap_chain_data;
+        ZeroMemory(&swap_chain_data, sizeof(swap_chain_data));
 
+        swap_chain_data.BufferCount = 1;
+        swap_chain_data.BufferDesc.Width = config::video()->window_width;
+        swap_chain_data.BufferDesc.Height = config::video()->window_height;
+        swap_chain_data.BufferDesc.Format = dxgi_format;
+        swap_chain_data.BufferDesc.RefreshRate.Numerator = config::video()->refresh_rate;
+        swap_chain_data.BufferDesc.RefreshRate.Denominator = 1;
+        swap_chain_data.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+        swap_chain_data.OutputWindow = reinterpret_cast<HWND>(platform::window::id());
+        swap_chain_data.SampleDesc.Count = 1;
+        swap_chain_data.SampleDesc.Quality = 0;
+        swap_chain_data.Windowed = TRUE;
 
-    void directx::create_device()
-    {
+        return swap_chain_data;
+    }
+    void directx::create_device() {
         create_window();
-
-        DXGI_SWAP_CHAIN_DESC swap_chain_desription;
-        ZeroMemory(&swap_chain_desription, sizeof(swap_chain_desription));
-        swap_chain_desription.BufferCount = 1;
-        swap_chain_desription.BufferDesc.Width = window_width;
-        swap_chain_desription.BufferDesc.Height = window_height;
-        swap_chain_desription.BufferDesc.Format = dxgi_format;
-        swap_chain_desription.BufferDesc.RefreshRate.Numerator = refresh_rate;
-        swap_chain_desription.BufferDesc.RefreshRate.Denominator = 1;
-        swap_chain_desription.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        swap_chain_desription.OutputWindow = window_handler;
-        swap_chain_desription.SampleDesc.Count = 1;
-        swap_chain_desription.SampleDesc.Quality = 0;
-        swap_chain_desription.Windowed = TRUE;
-
-        D3D_FEATURE_LEVEL FeatureLevels = D3D_FEATURE_LEVEL_11_0;
-
-        HRESULT hr = S_OK;
-        D3D_FEATURE_LEVEL FeatureLevel;
-
-        if (FAILED(hr = D3D11CreateDeviceAndSwapChain(NULL,
-            D3D_DRIVER_TYPE_REFERENCE,
+        DXGI_SWAP_CHAIN_DESC swap_chain_data = create_swap_chain_data();
+        HRESULT result = D3D11CreateDeviceAndSwapChain(
+            NULL,
+            driver_type,
             NULL,
             0,
-            &FeatureLevels,
+            &requested_feature_level,
             1,
             D3D11_SDK_VERSION,
-            &swap_chain_desription,
-            &swapChain,
-            &d3dDevice,
-            &FeatureLevel,
-            &immediateContext)))
-        {
-            return;
+            &swap_chain_data,
+            &swap_chain,
+            &device,
+            &created_feature_level,
+            &immediate_context);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create device");
+        }
+    }
+    template<class type_name>
+    void directx::clear_resource(type_name* resource_ptr) {
+        if (resource_ptr) {
+            resource_ptr->ClearState();
+        }
+    }
+    template<class type_name>
+    void directx::release_resource(type_name* resource_ptr) {
+        if (resource_ptr) {
+            resource_ptr->Release();
         }
     }
 

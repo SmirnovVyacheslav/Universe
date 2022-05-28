@@ -10,12 +10,14 @@ namespace engine
 
     void render::start_render()
     {
-        createDevice();
+        directx directx_api;
+        directx_api.create_device();
+        /*createDevice();
         createShader();
         setGeometry();
         while (true)
         {
             do_render();
-        }
+        }*/
     }
 }
