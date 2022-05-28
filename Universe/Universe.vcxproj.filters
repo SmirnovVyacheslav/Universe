@@ -82,19 +82,19 @@
     <Filter Include="Файлы заголовков\engine\src\platform\api">
       <UniqueIdentifier>{e17d1546-8a58-4636-91f1-55b47b989edc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\api\graphics">
-      <UniqueIdentifier>{2179dfa5-24e4-4af1-971e-ae8921e24afb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\engine\src\platfom\api">
       <UniqueIdentifier>{1d3ec0bc-7140-4767-8399-6cb4aa6f271b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\api\graphics">
+    <Filter Include="Исходные файлы\engine\src\platfom\api\video">
       <UniqueIdentifier>{584652d3-092c-47fa-9027-c3cddae05d87}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\api\graphics\directx">
+    <Filter Include="Исходные файлы\engine\src\platfom\api\video\directx">
       <UniqueIdentifier>{5899fda9-a791-4663-96fa-e8fdefaf0796}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\api\graphics\directx">
+    <Filter Include="Файлы заголовков\engine\src\platform\api\video">
+      <UniqueIdentifier>{2179dfa5-24e4-4af1-971e-ae8921e24afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\platform\api\video\directx">
       <UniqueIdentifier>{7700a326-1131-4a72-a917-0f5f1be569b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -129,9 +129,6 @@
     <ClCompile Include="engine\src\core\string.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\api\graphics\directx\directx.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\api\graphics\directx</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\config.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
@@ -143,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\platform\window.cpp">
       <Filter>Исходные файлы\engine\src\platfom</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\api\video\directx\directx.cpp">
+      <Filter>Исходные файлы\engine\src\platfom\api\video\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,12 +185,6 @@
     <ClInclude Include="engine\src\core\array.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\api\graphics\directx\directx.h">
-      <Filter>Файлы заголовков\engine\src\platform\api\graphics\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\graphics.h">
-      <Filter>Файлы заголовков\engine\src\platform\api</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\config.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
@@ -202,6 +196,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\windows\window_impl.h">
       <Filter>Файлы заголовков\engine\src\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video.h">
+      <Filter>Файлы заголовков\engine\src\platform\api\video</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\directx.h">
+      <Filter>Файлы заголовков\engine\src\platform\api\video\directx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
