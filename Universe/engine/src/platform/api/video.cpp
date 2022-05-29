@@ -3,6 +3,12 @@
 
 
 namespace engine {
+    video video::inst = video();
+
+
+    void video::initialize() {
+        //
+    }
     void video::create_device() {
         //
     }
