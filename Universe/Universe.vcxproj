@@ -157,6 +157,7 @@
     <ClCompile Include="engine\src\core\object_id.cpp" />
     <ClCompile Include="engine\src\core\string.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
+    <ClCompile Include="engine\src\platform\api\video.cpp" />
     <ClCompile Include="engine\src\platform\api\video\directx\directx.cpp" />
     <ClCompile Include="engine\src\platform\window.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />

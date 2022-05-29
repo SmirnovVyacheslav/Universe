@@ -144,6 +144,9 @@
     <ClCompile Include="engine\src\platform\api\video\directx\directx.cpp">
       <Filter>Исходные файлы\engine\src\platfom\api\video\directx</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\platform\api\video.cpp">
+      <Filter>Исходные файлы\engine\src\platfom\api</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
