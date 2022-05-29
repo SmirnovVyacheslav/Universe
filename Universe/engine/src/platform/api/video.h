@@ -3,13 +3,20 @@
 
 
 namespace engine {
+    class video_api {
+        public:
+            virtual void create_device() = 0;
+        protected:
+            video_api() = default;
+            ~video_api() = default;
+    };
     class video {
-    public:
-        video() = default;
-        ~video() = default;
+        public:
+            video() = default;
+            ~video() = default;
 
-        void create_device();
-    private:
-        //
+            void create_device();
+        private:
+            //
     };
 }

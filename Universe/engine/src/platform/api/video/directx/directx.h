@@ -1,6 +1,7 @@
 ﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/platform/platform_def.h"
+#include "src/platform/api/video.h"
 
 #ifdef WINDOWS
 #include <d3d11.h>
@@ -10,7 +11,7 @@
 
 
 namespace engine {
-    class directx {
+    class directx : public video_api {
         public:
             directx() = default;
             ~directx();
