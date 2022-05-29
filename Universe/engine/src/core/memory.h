@@ -22,6 +22,8 @@ namespace engine {
 
             template<class... type_args>
             void initialize(const type_args&... args);
+            template<class type_name_derivative, class... type_args>
+            void initialize_derivative(const type_args&... args);
             slave_ptr<type_name>& create_slave_ptr();
 
             type_name* operator->();
@@ -69,6 +71,14 @@ namespace engine {
             delete obj_ptr;
         }
         obj_ptr = new type_name(args...);
+    }
+    template<class type_name>
+    template<class type_name_derivative, class... type_args>
+    void lead_ptr<type_name>::initialize_derivative(const type_args&... args) {
+        if (obj_ptr != nullptr) {
+            delete obj_ptr;
+        }
+        obj_ptr = new type_name_derivative(args...);
     }
     template<class type_name>
     slave_ptr<type_name>& lead_ptr<type_name>::create_slave_ptr() {
