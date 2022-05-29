@@ -35,4 +35,14 @@ namespace engine {
             void release_resource(type_name* resource_ptr);
     };
 }
+#else
+namespace engine {
+    class directx {
+    public:
+        directx() = default;
+        ~directx() = default;
+    private:
+        //
+    };
+}
 #endif
