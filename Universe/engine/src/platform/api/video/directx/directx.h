@@ -16,6 +16,7 @@ namespace engine {
             directx() = default;
             ~directx();
 
+			bool available();
             void create_device();
         private:
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -38,12 +39,13 @@ namespace engine {
 }
 #else
 namespace engine {
-    class directx {
+    class directx : public video_api {
     public:
         directx() = default;
         ~directx() = default;
-    private:
-        //
+
+		bool available();
+		void create_device();
     };
 }
 #endif
