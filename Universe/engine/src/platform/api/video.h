@@ -21,7 +21,7 @@ namespace engine {
             void create_device();
         private:
             static video inst;
-            std::int32_t actual_api_index;
+            std::int32_t actual_api_index = 0;
             array< lead_ptr<video_api> > api_list;
 
             video() = default;
