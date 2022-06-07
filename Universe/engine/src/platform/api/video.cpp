@@ -11,6 +11,8 @@ namespace engine {
     void video::initialize() {
 		api_list.append(lead_ptr<video_api>());
 		api_list[0].initialize_derivative<directx>();
+
+		set_actual_api();
     }
     void video::create_device() {
 		api_list[actual_api_index]->create_device();
