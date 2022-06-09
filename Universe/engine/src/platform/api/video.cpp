@@ -9,21 +9,21 @@ namespace engine {
 
 
     void video::initialize() {
-		api_list.append(lead_ptr<video_api>());
-		api_list[0].initialize_derivative<directx>();
+        api_list.append(lead_ptr<video_api>());
+        api_list[0].initialize_derivative<directx>();
 
-		set_actual_api();
+        set_actual_api();
     }
     void video::create_device() {
-		api_list[actual_api_index]->create_device();
+        api_list[actual_api_index]->create_device();
     }
-	void video::set_actual_api() {
-		for (std::int32_t i = 0; i < api_list.size(); ++i) {
-			if (api_list[i]->available()) {
-				actual_api_index = i;
-				return;
-			}
-		}
-		throw std::invalid_argument("No video api available");
-	}
+    void video::set_actual_api() {
+        for (std::int32_t i = 0; i < api_list.size(); ++i) {
+            if (api_list[i]->available()) {
+                actual_api_index = i;
+                return;
+            }
+        }
+        throw std::invalid_argument("No video api available");
+    }
 }

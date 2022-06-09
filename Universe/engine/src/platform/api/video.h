@@ -11,7 +11,7 @@ namespace engine {
         public:
             video_api() = default;
             ~video_api() = default;
-			virtual bool available() = 0;
+            virtual bool available() = 0;
             virtual void create_device() = 0;
     };
     class video {
@@ -26,6 +26,6 @@ namespace engine {
 
             video() = default;
             ~video() = default;
-			void set_actual_api();
+            void set_actual_api();
     };
 }
