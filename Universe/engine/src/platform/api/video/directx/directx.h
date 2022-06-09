@@ -16,7 +16,7 @@ namespace engine {
             directx() = default;
             ~directx();
 
-			bool available();
+            bool available();
             void create_device();
         private:
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -44,8 +44,8 @@ namespace engine {
         directx() = default;
         ~directx() = default;
 
-		bool available();
-		void create_device();
+        bool available();
+        void create_device();
     };
 }
 #endif

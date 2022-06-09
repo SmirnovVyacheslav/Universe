@@ -9,13 +9,13 @@ namespace engine {
 
 
     void video::initialize() {
-        api_list.append(lead_ptr<video_api>());
-        api_list[0].initialize_derivative<directx>();
+        inst.api_list.append(lead_ptr<video_api>());
+        inst.api_list[0].initialize_derivative<directx>();
 
-        set_actual_api();
+        inst.set_actual_api();
     }
     void video::create_device() {
-        api_list[actual_api_index]->create_device();
+        inst.api_list[inst.actual_api_index]->create_device();
     }
     void video::set_actual_api() {
         for (std::int32_t i = 0; i < api_list.size(); ++i) {

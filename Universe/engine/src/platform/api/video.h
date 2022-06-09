@@ -16,9 +16,9 @@ namespace engine {
     };
     class video {
         public:
-            void initialize();
+            static void initialize();
 
-            void create_device();
+            static void create_device();
         private:
             static video inst;
             std::int32_t actual_api_index = 0;

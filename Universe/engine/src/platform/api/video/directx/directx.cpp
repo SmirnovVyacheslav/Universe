@@ -16,9 +16,9 @@ namespace engine
         release_resource(immediate_context);
         release_resource(device);
     }
-	bool directx::available() {
-		return true;
-	}
+    bool directx::available() {
+        return true;
+    }
     void directx::create_device() {
         create_window();
         DXGI_SWAP_CHAIN_DESC swap_chain_data = create_swap_chain_data();
@@ -75,10 +75,10 @@ namespace engine
 }
 #else
 namespace engine {
-	bool directx::available() {
-		return false;
-	}
-	void directx::create_device() {
-	}
+    bool directx::available() {
+        return false;
+    }
+    void directx::create_device() {
+    }
 }
 #endif
