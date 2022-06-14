@@ -28,8 +28,10 @@ namespace engine {
             ID3D11Device* device = nullptr;
             ID3D11DeviceContext* immediate_context = nullptr;
             IDXGISwapChain* swap_chain = nullptr;
+            ID3D11RenderTargetView* render_target_view = nullptr;
 
             void create_window();
+            void create_render_target();
             DXGI_SWAP_CHAIN_DESC create_swap_chain_data();
             template<class type_name>
             void clear_resource(type_name* resource_ptr);

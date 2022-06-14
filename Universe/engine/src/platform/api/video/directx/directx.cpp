@@ -38,9 +38,27 @@ namespace engine
         if (FAILED(result)) {
             throw std::invalid_argument("Failed to create device");
         }
+
+        create_render_target();
     }
     void directx::create_window() {
         platform::window::create_window();
+    }
+    void directx::create_render_target() {
+        ID3D11Texture2D* back_buffer = NULL;
+
+        HRESULT result = swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&back_buffer);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to get back buffer");
+        }
+
+        result = device->CreateRenderTargetView(back_buffer, NULL, &render_target_view);
+        back_buffer->Release();
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to get back buffer");
+        }
+
+        immediate_context->OMSetRenderTargets(1, &render_target_view, 0);
     }
     DXGI_SWAP_CHAIN_DESC directx::create_swap_chain_data() {
         DXGI_SWAP_CHAIN_DESC swap_chain_data;
