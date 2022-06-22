@@ -18,6 +18,7 @@ namespace engine {
 
             bool available();
             void create_device();
+            void render();
         private:
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
@@ -29,6 +30,8 @@ namespace engine {
             ID3D11DeviceContext* immediate_context = nullptr;
             IDXGISwapChain* swap_chain = nullptr;
             ID3D11RenderTargetView* render_target_view = nullptr;
+
+            float background_color[4] = { 0.0f, 0.9f, 0.5f, 1.0f };
 
             void create_window();
             void create_render_target();

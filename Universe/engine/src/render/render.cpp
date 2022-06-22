@@ -9,5 +9,8 @@ namespace engine {
 
     void render::start_render() {
         video::create_device();
+        while (true) {
+            video::render();
+        }
     }
 }

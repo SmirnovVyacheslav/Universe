@@ -17,6 +17,9 @@ namespace engine {
     void video::create_device() {
         inst.api_list[inst.actual_api_index]->create_device();
     }
+    void video::render() {
+        inst.api_list[inst.actual_api_index]->render();
+    }
     void video::set_actual_api() {
         for (std::int32_t i = 0; i < api_list.size(); ++i) {
             if (api_list[i]->available()) {

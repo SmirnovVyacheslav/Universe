@@ -9,16 +9,18 @@
 namespace engine {
     class video_api {
         public:
-            video_api() = default;
             ~video_api() = default;
             virtual bool available() = 0;
             virtual void create_device() = 0;
+            virtual void render() = 0;
+        protected:
+            video_api() = default;
     };
     class video {
         public:
             static void initialize();
-
             static void create_device();
+            static void render();
         private:
             static video inst;
             std::int32_t actual_api_index = 0;

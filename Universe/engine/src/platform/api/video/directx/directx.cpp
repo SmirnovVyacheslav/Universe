@@ -12,6 +12,7 @@ namespace engine
     directx::~directx() {
         clear_resource(immediate_context);
 
+        release_resource(render_target_view);
         release_resource(swap_chain);
         release_resource(immediate_context);
         release_resource(device);
@@ -40,6 +41,10 @@ namespace engine
         }
 
         create_render_target();
+    }
+    void directx::render() {
+        immediate_context->ClearRenderTargetView(render_target_view, background_color);
+        swap_chain->Present(0, 0);
     }
     void directx::create_window() {
         platform::window::create_window();
