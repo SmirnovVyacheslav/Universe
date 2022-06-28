@@ -63,7 +63,24 @@ namespace engine
         set_transformation_matrix();
     }
     void directx::render() {
+        world = XMMatrixRotationY(3.14159f / 4.0f);
+
         immediate_context->ClearRenderTargetView(render_target_view, background_color);
+        immediate_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+        local_constant_buffer cb;
+        cb.mWorld = XMMatrixTranspose(world);
+        cb.mView = XMMatrixTranspose(view);
+        cb.mProjection = XMMatrixTranspose(projection);
+        immediate_context->UpdateSubresource(constant_buffer, 0, NULL, &cb, 0, 0);
+
+        immediate_context->VSSetShader(vertex_shader, NULL, 0);
+        immediate_context->VSSetConstantBuffers(0, 1, &constant_buffer);
+        immediate_context->PSSetShader(pixel_shader, NULL, 0);
+        immediate_context->PSSetConstantBuffers(0, 1, &constant_buffer);
+
+        immediate_context->DrawIndexed(36, 0, 0);
+
         swap_chain->Present(0, 0);
     }
     void directx::create_window() {
