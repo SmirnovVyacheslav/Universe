@@ -52,6 +52,8 @@ namespace engine
         create_depth_stencil_view();
         setup_view_port();
 
+        immediate_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
         create_vertex_shader();
         create_pixel_shader();
     }
