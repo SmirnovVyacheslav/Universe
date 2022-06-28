@@ -42,6 +42,13 @@ namespace engine {
             ID3D11Buffer* index_buffer = nullptr;
             ID3D11Buffer* constant_buffer = nullptr;
 
+            string shader_path = u8"C:\\Private\\Projects\\Universe\\Universe\\engine\\src\\shader\\shader.fx";
+            string vertex_shader_entry_point = u8"VS";
+            string vertex_shader_model = u8"vs_4_0";
+            string pixel_shader_entry_point = u8"PS";
+            string pixel_shader_model = u8"ps_4_0";
+
+
             float background_color[4] = { 0.0f, 0.9f, 0.5f, 1.0f };
 
             void create_window();
@@ -50,6 +57,9 @@ namespace engine {
             void create_depth_stencil();
             void create_depth_stencil_view();
             void setup_view_port();
+            void create_vertex_shader();
+            void create_pixel_shader();
+            void create_vertex_layout(ID3DBlob* vertex_blob);
             ID3DBlob* compile_shader_from_file(string path, string shader_entry_point, string shader_model);
             template<class type_name>
             void clear_resource(type_name* resource_ptr);

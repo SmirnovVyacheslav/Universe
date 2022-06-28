@@ -141,6 +141,45 @@ namespace engine
 
         immediate_context->RSSetViewports(1, &view_port);
     }
+    void directx::create_vertex_shader() {
+        ID3DBlob* vertex_blob = compile_shader_from_file(shader_path, vertex_shader_entry_point, vertex_shader_model);
+
+        HRESULT result = device->CreateVertexShader(vertex_blob->GetBufferPointer(), vertex_blob->GetBufferSize(), NULL, &vertex_shader);
+        if (FAILED(result)) {
+            vertex_blob->Release();
+            throw std::invalid_argument("Failed to create vertex shader");
+        }
+
+        create_vertex_layout(vertex_blob);
+        vertex_blob->Release();
+    }
+    void directx::create_pixel_shader() {
+        ID3DBlob* pixel_blob = compile_shader_from_file(shader_path, pixel_shader_entry_point, pixel_shader_model);
+
+        HRESULT result = device->CreatePixelShader(pixel_blob->GetBufferPointer(), pixel_blob->GetBufferSize(), NULL, &pixel_shader);
+        pixel_blob->Release();
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create pixel shader");
+        }
+    }
+    void directx::create_vertex_layout(ID3DBlob* vertex_blob) {
+        D3D11_INPUT_ELEMENT_DESC layout[] = {
+            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        };
+        UINT layout_size = ARRAYSIZE(layout);
+
+        HRESULT result = device->CreateInputLayout(layout,
+                                                   layout_size,
+                                                   vertex_blob->GetBufferPointer(),
+                                                   vertex_blob->GetBufferSize(),
+                                                   &vertex_layout);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create input layout");
+        }
+
+        immediate_context->IASetInputLayout(vertex_layout);
+    }
     ID3DBlob* directx::compile_shader_from_file(string path, string shader_entry_point, string shader_model) {
         ID3DBlob* error_blob = nullptr;
         ID3DBlob* output_blob = nullptr;
