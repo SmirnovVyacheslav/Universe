@@ -44,6 +44,10 @@ namespace engine {
                 XMMATRIX mView;
                 XMMATRIX mProjection;
             };
+            XMMATRIX world;
+            XMMATRIX view;
+            XMMATRIX projection;
+
 
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
             DXGI_FORMAT depth_stencil_format = DXGI_FORMAT_D24_UNORM_S8_UINT;

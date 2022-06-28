@@ -272,7 +272,12 @@ namespace engine
         }
     }
     void directx::set_transformation_matrix() {
-
+        world = XMMatrixIdentity();
+        XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+        XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+        XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+        view = XMMatrixLookAtLH(Eye, At, Up);
+        projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, config::video()->window_width / static_cast<float>(config::video()->window_height), 0.01f, 100.0f);
     }
     template<class type_name>
     void directx::clear_resource(type_name* resource_ptr) {
