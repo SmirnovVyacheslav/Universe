@@ -11,6 +11,7 @@
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <windows.h>
+#include <xnamath.h>
 
 
 namespace engine {
@@ -23,7 +24,7 @@ namespace engine {
             void create_device();
             void render();
         private:
-            struct matrix {
+            /*struct matrix {
                 vector_4 data[4];
 
                 matrix(vector_4 a1, vector_4 a2, vector_4 a3, vector_4 a4) {
@@ -37,6 +38,11 @@ namespace engine {
                 matrix mWorld;
                 matrix mView;
                 matrix mProjection;
+            };*/
+            struct local_constant_buffer {
+                XMMATRIX mWorld;
+                XMMATRIX mView;
+                XMMATRIX mProjection;
             };
 
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
