@@ -21,6 +21,7 @@ namespace engine {
             void render();
         private:
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
+            DXGI_FORMAT depth_stencil_format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
             D3D_FEATURE_LEVEL created_feature_level = D3D_FEATURE_LEVEL_11_0;
             D3D_FEATURE_LEVEL requested_feature_level = D3D_FEATURE_LEVEL_11_0;
@@ -30,12 +31,17 @@ namespace engine {
             ID3D11DeviceContext* immediate_context = nullptr;
             IDXGISwapChain* swap_chain = nullptr;
             ID3D11RenderTargetView* render_target_view = nullptr;
+            ID3D11Texture2D* depth_stencil = nullptr;
+            ID3D11DepthStencilView* depth_stencil_view = nullptr;
 
             float background_color[4] = { 0.0f, 0.9f, 0.5f, 1.0f };
 
             void create_window();
             void create_render_target();
             DXGI_SWAP_CHAIN_DESC create_swap_chain_data();
+            void create_depth_stencil();
+            void create_depth_stencil_view();
+            void setup_view_port();
             template<class type_name>
             void clear_resource(type_name* resource_ptr);
             template<class type_name>

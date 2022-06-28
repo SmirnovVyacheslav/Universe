@@ -41,6 +41,9 @@ namespace engine
         }
 
         create_render_target();
+        create_depth_stencil();
+        create_depth_stencil_view();
+        setup_view_port();
     }
     void directx::render() {
         immediate_context->ClearRenderTargetView(render_target_view, background_color);
@@ -82,6 +85,54 @@ namespace engine
         swap_chain_data.Windowed = TRUE;
 
         return swap_chain_data;
+    }
+    void directx::create_depth_stencil() {
+        D3D11_TEXTURE2D_DESC depth_stencil_data;
+        ZeroMemory(&depth_stencil_data, sizeof(depth_stencil_data));
+
+        depth_stencil_data.Width = config::video()->window_width;
+        depth_stencil_data.Height = config::video()->window_height;
+        depth_stencil_data.MipLevels = 1;
+        depth_stencil_data.ArraySize = 1;
+        depth_stencil_data.Format = depth_stencil_format;
+        depth_stencil_data.SampleDesc.Count = 1;
+        depth_stencil_data.SampleDesc.Quality = 0;
+        depth_stencil_data.Usage = D3D11_USAGE_DEFAULT;
+        depth_stencil_data.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+        depth_stencil_data.CPUAccessFlags = 0;
+        depth_stencil_data.MiscFlags = 0;
+
+        HRESULT result = device->CreateTexture2D(&depth_stencil_data, NULL, &depth_stencil);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create depth stencil source");
+        }
+    }
+    void directx::create_depth_stencil_view() {
+        D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_data;
+        ZeroMemory(&depth_stencil_view_data, sizeof(depth_stencil_view_data));
+
+        depth_stencil_view_data.Format = depth_stencil_format;
+        depth_stencil_view_data.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+        depth_stencil_view_data.Texture2D.MipSlice = 0;
+
+        HRESULT result = device->CreateDepthStencilView(depth_stencil, &depth_stencil_view_data, &depth_stencil_view);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create depth stencil view");
+        }
+
+        immediate_context->OMSetRenderTargets(1, &render_target_view, depth_stencil_view);
+    }
+    void directx::setup_view_port() {
+        D3D11_VIEWPORT view_port;
+
+        view_port.Width = static_cast<float>(config::video()->window_width);
+        view_port.Height = static_cast<float>(config::video()->window_height);
+        view_port.MinDepth = 0.0f;
+        view_port.MaxDepth = 1.0f;
+        view_port.TopLeftX = 0;
+        view_port.TopLeftY = 0;
+
+        immediate_context->RSSetViewports(1, &view_port);
     }
     template<class type_name>
     void directx::clear_resource(type_name* resource_ptr) {
