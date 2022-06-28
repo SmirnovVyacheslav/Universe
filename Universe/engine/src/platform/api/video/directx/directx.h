@@ -47,6 +47,10 @@ namespace engine {
             XMMATRIX world;
             XMMATRIX view;
             XMMATRIX projection;
+            struct SimpleVertex {
+                XMFLOAT3 Pos;
+                XMFLOAT4 Color;
+            };
 
 
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;

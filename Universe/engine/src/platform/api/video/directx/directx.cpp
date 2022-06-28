@@ -234,27 +234,61 @@ namespace engine
         return output_blob;
     }
     void directx::create_vertex_buffer() {
+        SimpleVertex vertices[] = {
+            { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },
+            { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
+            { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },
+            { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+            { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },
+            { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+            { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
+        };
+
         D3D11_BUFFER_DESC buffer_data;
         ZeroMemory(&buffer_data, sizeof(buffer_data));
 
         buffer_data.Usage = D3D11_USAGE_DEFAULT;
-        buffer_data.ByteWidth = sizeof(vertex) * 8;
+        // buffer_data.ByteWidth = sizeof(vertex) * 8;
+        buffer_data.ByteWidth = sizeof(SimpleVertex) * 8;
         buffer_data.BindFlags = D3D11_BIND_VERTEX_BUFFER;
         buffer_data.CPUAccessFlags = 0;
 
         D3D11_SUBRESOURCE_DATA init_data;
         ZeroMemory(&init_data, sizeof(init_data));
-        init_data.pSysMem = &(scene::inst.get_object()->get_mesh().get_vertex());
+        // init_data.pSysMem = &(scene::inst.get_object()->get_mesh().get_vertex());
+        init_data.pSysMem = vertices;
         HRESULT result = device->CreateBuffer(&buffer_data, &init_data, &vertex_buffer);
         if (FAILED(result)) {
             throw std::invalid_argument("Failed to create vertex buffer");
         }
 
-        UINT stride = sizeof(vertex);
+        // UINT stride = sizeof(vertex);
+        UINT stride = sizeof(SimpleVertex);
         UINT offset = 0;
         immediate_context->IASetVertexBuffers(0, 1, &vertex_buffer, &stride, &offset);
     }
     void directx::create_index_buffer() {
+        WORD indices[] = {
+            3,1,0,
+            2,1,3,
+
+            0,5,4,
+            1,5,0,
+
+            3,4,7,
+            0,4,3,
+
+            1,6,5,
+            2,6,1,
+
+            2,7,6,
+            3,7,2,
+
+            6,4,5,
+            7,4,6,
+        };
+
         D3D11_BUFFER_DESC buffer_data;
         ZeroMemory(&buffer_data, sizeof(buffer_data));
 
@@ -265,7 +299,8 @@ namespace engine
 
         D3D11_SUBRESOURCE_DATA init_data;
         ZeroMemory(&init_data, sizeof(init_data));
-        init_data.pSysMem = &(scene::inst.get_object()->get_mesh().get_indice());
+        // init_data.pSysMem = &(scene::inst.get_object()->get_mesh().get_indice());
+        init_data.pSysMem = indices;
 
         HRESULT result = device->CreateBuffer(&buffer_data, &init_data, &index_buffer);
         if (FAILED(result)) {
