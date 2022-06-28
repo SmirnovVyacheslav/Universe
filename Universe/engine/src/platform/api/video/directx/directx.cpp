@@ -141,6 +141,32 @@ namespace engine
 
         immediate_context->RSSetViewports(1, &view_port);
     }
+    ID3DBlob* directx::compile_shader_from_file(string path, string shader_entry_point, string shader_model) {
+        ID3DBlob* error_blob = nullptr;
+        ID3DBlob* output_blob = nullptr;
+        DWORD shader_flags = D3DCOMPILE_ENABLE_STRICTNESS;
+
+        HRESULT result = D3DX11CompileFromFile(path.w_str().c_str(),
+                                               NULL,
+                                               NULL,
+                                               shader_entry_point.s_str().c_str(),
+                                               shader_model.s_str().c_str(),
+                                               shader_flags,
+                                               0,
+                                               NULL,
+                                               &output_blob,
+                                               &error_blob,
+                                               NULL);
+        if (FAILED(result)) {
+            if (error_blob) {
+                OutputDebugStringA(static_cast<char*>(error_blob->GetBufferPointer()));
+                error_blob->Release();
+            }
+            throw std::invalid_argument("Failed to compiler shader");
+        }
+        if (error_blob) error_blob->Release();
+        return output_blob;
+    }
     template<class type_name>
     void directx::clear_resource(type_name* resource_ptr) {
         if (resource_ptr) {
