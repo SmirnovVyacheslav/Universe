@@ -1,6 +1,8 @@
 ﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/string.h"
+#include "src/core/math.h"
+#include "src/scene/scene.h"
 #include "src/platform/platform_def.h"
 #include "src/platform/api/video.h"
 
@@ -60,6 +62,10 @@ namespace engine {
             void create_vertex_shader();
             void create_pixel_shader();
             void create_vertex_layout(ID3DBlob* vertex_blob);
+            void create_vertex_buffer();
+            void create_index_buffer();
+            void create_shader_constant_buffer();
+            void set_transformation_matrix();
             ID3DBlob* compile_shader_from_file(string path, string shader_entry_point, string shader_model);
             template<class type_name>
             void clear_resource(type_name* resource_ptr);
