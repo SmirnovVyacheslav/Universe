@@ -22,7 +22,7 @@ namespace engine {
         private:
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
-            D3D_FEATURE_LEVEL created_feature_level;
+            D3D_FEATURE_LEVEL created_feature_level = D3D_FEATURE_LEVEL_11_0;
             D3D_FEATURE_LEVEL requested_feature_level = D3D_FEATURE_LEVEL_11_0;
             D3D_DRIVER_TYPE driver_type = D3D_DRIVER_TYPE_HARDWARE;
 
