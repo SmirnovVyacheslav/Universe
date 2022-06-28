@@ -51,6 +51,9 @@ namespace engine
         create_depth_stencil();
         create_depth_stencil_view();
         setup_view_port();
+
+        create_vertex_shader();
+        create_pixel_shader();
     }
     void directx::render() {
         immediate_context->ClearRenderTargetView(render_target_view, background_color);
