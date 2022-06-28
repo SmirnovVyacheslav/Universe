@@ -34,6 +34,13 @@ namespace engine {
             ID3D11Texture2D* depth_stencil = nullptr;
             ID3D11DepthStencilView* depth_stencil_view = nullptr;
 
+            ID3D11VertexShader* vertex_shader = nullptr;
+            ID3D11PixelShader* pixel_shader = nullptr;
+            ID3D11InputLayout* vertex_layout = nullptr;
+            ID3D11Buffer* vertex_buffer = nullptr;
+            ID3D11Buffer* index_buffer = nullptr;
+            ID3D11Buffer* constant_buffer = nullptr;
+
             float background_color[4] = { 0.0f, 0.9f, 0.5f, 1.0f };
 
             void create_window();

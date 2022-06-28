@@ -12,6 +12,13 @@ namespace engine
     directx::~directx() {
         clear_resource(immediate_context);
 
+        release_resource(constant_buffer);
+        release_resource(vertex_buffer);
+        release_resource(index_buffer);
+        release_resource(vertex_layout);
+        release_resource(vertex_shader);
+        release_resource(pixel_shader);
+
         release_resource(render_target_view);
         release_resource(swap_chain);
         release_resource(immediate_context);
