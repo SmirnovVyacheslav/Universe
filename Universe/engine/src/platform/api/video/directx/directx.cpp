@@ -258,7 +258,18 @@ namespace engine
         immediate_context->IASetIndexBuffer(index_buffer, DXGI_FORMAT_R16_UINT, 0);
     }
     void directx::create_shader_constant_buffer() {
+        D3D11_BUFFER_DESC buffer_data;
+        ZeroMemory(&buffer_data, sizeof(buffer_data));
 
+        buffer_data.Usage = D3D11_USAGE_DEFAULT;
+        buffer_data.ByteWidth = sizeof(local_constant_buffer);
+        buffer_data.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        buffer_data.CPUAccessFlags = 0;
+
+        HRESULT result = device->CreateBuffer(&buffer_data, NULL, &constant_buffer);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create shader constant buffer");
+        }
     }
     void directx::set_transformation_matrix() {
 

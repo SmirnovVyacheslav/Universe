@@ -23,6 +23,22 @@ namespace engine {
             void create_device();
             void render();
         private:
+            struct matrix {
+                vector_4 data[4];
+
+                matrix(vector_4 a1, vector_4 a2, vector_4 a3, vector_4 a4) {
+                    data[0] = a1;
+                    data[1] = a2;
+                    data[2] = a3;
+                    data[3] = a4;
+                }
+            };
+            struct local_constant_buffer {
+                matrix mWorld;
+                matrix mView;
+                matrix mProjection;
+            };
+
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
             DXGI_FORMAT depth_stencil_format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
