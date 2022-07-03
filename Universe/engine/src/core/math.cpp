@@ -385,19 +385,19 @@ namespace engine
 
     vector_4 operator+(const vector_4& vec_a, const vector_4& vec_b)
     {
-        return { vec_a.x + vec_b.x, vec_a.y + vec_b.y, vec_a.z + vec_b.z, 1.0f };
+        return { vec_a.x + vec_b.x, vec_a.y + vec_b.y, vec_a.z + vec_b.z, vec_a.w + vec_b.w };
     }
     vector_4 operator-(const vector_4& vec_a, const vector_4& vec_b)
     {
-        return { vec_a.x - vec_b.x, vec_a.y - vec_b.y, vec_a.z - vec_b.z, 1.0f };
+        return { vec_a.x - vec_b.x, vec_a.y - vec_b.y, vec_a.z - vec_b.z, vec_a.w - vec_b.w };
     }
     vector_4 operator*(const vector_4& vec_a, const vector_4& vec_b)
     {
-        return { vec_a.x * vec_b.x, vec_a.y * vec_b.y, vec_a.z * vec_b.z, 1.0f };
+        return { vec_a.x * vec_b.x, vec_a.y * vec_b.y, vec_a.z * vec_b.z, vec_a.w * vec_b.w };
     }
     vector_4 operator/(const vector_4& vec_a, const vector_4& vec_b)
     {
-        return { vec_a.x / vec_b.x, vec_a.y / vec_b.y, vec_a.z / vec_b.z, 1.0f };
+        return { vec_a.x / vec_b.x, vec_a.y / vec_b.y, vec_a.z / vec_b.z, vec_a.w / vec_b.w };
     }
 
     bool operator==(const vector_4& vec_a, const vector_4& vec_b)

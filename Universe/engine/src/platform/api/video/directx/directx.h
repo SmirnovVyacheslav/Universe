@@ -24,7 +24,7 @@ namespace engine {
             void create_device();
             void render();
         private:
-            /*struct matrix {
+            struct matrix {
                 vector_4 data[4];
 
                 matrix(vector_4 a1, vector_4 a2, vector_4 a3, vector_4 a4) {
@@ -33,12 +33,21 @@ namespace engine {
                     data[2] = a3;
                     data[3] = a4;
                 }
+                void identity() {
+                    data[0] = vector_4(1.0f, 0.0f, 0.0f, 0.0f);
+                    data[1] = vector_4(0.0f, 1.0f, 0.0f, 0.0f);
+                    data[2] = vector_4(1.0f, 0.0f, 1.0f, 0.0f);
+                    data[3] = vector_4(1.0f, 0.0f, 0.0f, 1.0f);
+                }
+                void lool_at(vector_4 eye_position, vector_4 focus_position, vector_4 up_direction) {
+                    vector_4 eye_direction = focus_position - eye_position;
+                }
             };
-            struct local_constant_buffer {
+            struct local_constant_buffer_test {
                 matrix mWorld;
                 matrix mView;
                 matrix mProjection;
-            };*/
+            };
             struct local_constant_buffer {
                 XMMATRIX mWorld;
                 XMMATRIX mView;
