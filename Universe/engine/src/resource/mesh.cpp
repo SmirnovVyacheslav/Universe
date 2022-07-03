@@ -27,25 +27,24 @@ namespace engine
             { vector_3(-1.0f, -1.0f, 1.0f), vector_4(0.0f, 0.0f, 0.0f, 1.0f) },
         };
 
-        indices = 
-        {
-        3,1,0,
-        2,1,3,
+        indices =  {
+            3,1,0,
+            2,1,3,
 
-        0,5,4,
-        1,5,0,
+            0,5,4,
+            1,5,0,
 
-        3,4,7,
-        0,4,3,
+            3,4,7,
+            0,4,3,
 
-        1,6,5,
-        2,6,1,
+            1,6,5,
+            2,6,1,
 
-        2,7,6,
-        3,7,2,
+            2,7,6,
+            3,7,2,
 
-        6,4,5,
-        7,4,6,
+            6,4,5,
+            7,4,6,
         };
 
         size = 36;
@@ -57,7 +56,7 @@ namespace engine
     }
 
 
-    unsigned long int& mesh::get_indice()
+    unsigned short& mesh::get_indice()
     {
         return indices[0];
     }

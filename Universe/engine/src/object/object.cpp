@@ -12,7 +12,7 @@ namespace engine
         //
     }
 
-    mesh object::get_mesh()
+    mesh& object::get_mesh()
     {
         return square;
     }

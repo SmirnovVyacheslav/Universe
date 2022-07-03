@@ -30,13 +30,13 @@ namespace engine
         mesh();
         ~mesh() = default;
         vertex& get_vertex();
-        unsigned long int& get_indice();
+        unsigned short& get_indice();
         int get_size();
 
     private:
         int size;
         std::vector<vertex> vertices;
-        std::vector<unsigned long int> indices;
+        std::vector<unsigned short> indices;
     };
 }
 #endif

@@ -14,7 +14,7 @@ namespace engine
     public:
         object();
         ~object() = default;
-        mesh get_mesh();
+        mesh& get_mesh();
 
     private:
         int id;
