@@ -55,6 +55,22 @@ namespace engine {
                     data[2] = vector_4(x_axis.z, y_axis.z, z_axis.z, 0.0f);
                     data[3] = vector_4(-(x_axis & eye), -(y_axis & eye), -(z_axis & eye), 1.0f);
                 }
+                void projection(float aspect_ratio) {
+                    float fov_angle_y = 1.570796327f;
+                    float near_z = 0.01f;
+                    float far_z = 100.0f;
+
+                    float fov_sin = sin(static_cast<double>(0.5f) * static_cast<double>(fov_angle_y));
+                    float fov_cos = cos(static_cast<double>(0.5f) * static_cast<double>(fov_angle_y));
+
+                    float height = fov_cos / fov_sin;
+                    float width = height / aspect_ratio;
+
+                    data[0] = vector_4(width, 0.0f, 0.0f, 0.0f);
+                    data[1] = vector_4(0.0f, height, 0.0f, 0.0f);
+                    data[2] = vector_4(0.0f, 0.0f, far_z / (near_z - far_z), -1.0f);
+                    data[3] = vector_4(0.0f, 0.0f, data[2].z * near_z, 0.0f);
+                }
             };
             struct local_constant_buffer_test {
                 matrix mWorld;
