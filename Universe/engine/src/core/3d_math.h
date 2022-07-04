@@ -47,7 +47,7 @@ namespace engine
         vector_3& operator*=(const vector_3& vec);
         vector_3& operator/=(const vector_3& vec);
         /**
-         * Scalar cross product
+         * Scalar dot product
          * a = (x1, y1, z1); b = (x2, y2, z2)
          * a & b =
          * x1 * x2 + y1 * y2 + z1 * z2

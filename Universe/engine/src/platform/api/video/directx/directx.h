@@ -39,10 +39,15 @@ namespace engine {
                     data[2] = vector_4(1.0f, 0.0f, 1.0f, 0.0f);
                     data[3] = vector_4(1.0f, 0.0f, 0.0f, 1.0f);
                 }
-                void lool_at(vector_3 eye_position, vector_3 target_position, vector_3 up_direction) {
-                    vector_3 forward = (eye_position - target_position).normalize();
-                    vector_3 right = eye_position - target_position;
-                    vector_3 up = eye_position - target_position;
+                void lool_at(vector_3 eye, vector_3 target, vector_3 up) {
+                    vector_3 z_axis = (eye - target).normalize();
+                    vector_3 x_axis = (up ^ z_axis).normalize();
+                    vector_3 y_axis = z_axis ^ x_axis;
+
+                    data[0] = vector_4(x_axis.x, y_axis.x, z_axis.x, 0.0f);
+                    data[1] = vector_4(x_axis.y, y_axis.y, z_axis.y, 0.0f);
+                    data[2] = vector_4(x_axis.z, y_axis.z, z_axis.z, 0.0f);
+                    data[3] = vector_4(-(x_axis & eye), -(y_axis & eye), -(z_axis & eye), 1.0f);
                 }
             };
             struct local_constant_buffer_test {

@@ -150,7 +150,7 @@ namespace engine
     }
 
     /**
-     * Scalar cross product
+     * Scalar dot product
      */
     float vector_3::operator&=(const vector_3& vec)
     {
