@@ -32,8 +32,8 @@ namespace engine
         vector_3(const vector_3& vec) = default;
 
         bool is_zero();
-        // float length();
-        // vector_3& normalize();
+         float length();
+         vector_3& normalize();
         vector_3& trunc();
 
         vector_3& operator=(const vector_3& vec);
@@ -103,8 +103,8 @@ namespace engine
         vector_4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {};
         vector_4(const vector_4& vec) = default;
 
-        // float length();
-        // vector_4& normalize();
+         float length();
+         vector_4& normalize();
         vector_4& trunc();
 
         vector_4& operator= (const vector_4& vec);

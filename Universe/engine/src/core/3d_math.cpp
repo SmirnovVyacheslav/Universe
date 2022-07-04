@@ -1,6 +1,6 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
-#include "math.h"
+#include <math.h>
+#include "3d_math.h"
 
 
 namespace engine
@@ -71,22 +71,22 @@ namespace engine
         return (x + y + z) < eps;
     }
 
-    /*float vector_3::length()
+    float vector_3::length()
     {
         double _x = static_cast<double>(x);
         double _y = static_cast<double>(y);
         double _z = static_cast<double>(z);
         return static_cast<float>(sqrt(_x * _x + _y * _y + _z * _z));
-    }*/
+    }
 
-   /* vector_3& vector_3::normalize()
+    vector_3& vector_3::normalize()
     {
         float len = length();
         x /= len;
         y /= len;
         z /= len;
         return *this;
-    }*/
+    }
 
     vector_3& vector_3::trunc()
     {
@@ -299,22 +299,22 @@ namespace engine
     }*/
 
 
-    /*float vector_4::length()
+    float vector_4::length()
     {
         double _x = static_cast<double>(x);
         double _y = static_cast<double>(y);
         double _z = static_cast<double>(z);
         return static_cast<float>(sqrt(_x * _x + _y * _y + _z * _z));
-    }*/
+    }
 
-    /*vector_4& vector_4::normalize()
+    vector_4& vector_4::normalize()
     {
         float len = length();
         x /= len;
         y /= len;
         z /= len;
         return *this;
-    }*/
+    }
 
     vector_4& vector_4::trunc()
     {

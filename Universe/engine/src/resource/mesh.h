@@ -4,7 +4,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "src/core/math.h"
+#include "src/core/3d_math.h"
 #include <vector>
 
 

@@ -1,7 +1,7 @@
 ﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/string.h"
-#include "src/core/math.h"
+#include "src/core/3d_math.h"
 #include "src/scene/scene.h"
 #include "src/platform/platform_def.h"
 #include "src/platform/api/video.h"
@@ -39,8 +39,10 @@ namespace engine {
                     data[2] = vector_4(1.0f, 0.0f, 1.0f, 0.0f);
                     data[3] = vector_4(1.0f, 0.0f, 0.0f, 1.0f);
                 }
-                void lool_at(vector_4 eye_position, vector_4 focus_position, vector_4 up_direction) {
-                    vector_4 eye_direction = focus_position - eye_position;
+                void lool_at(vector_3 eye_position, vector_3 target_position, vector_3 up_direction) {
+                    vector_3 forward = (eye_position - target_position).normalize();
+                    vector_3 right = eye_position - target_position;
+                    vector_3 up = eye_position - target_position;
                 }
             };
             struct local_constant_buffer_test {
