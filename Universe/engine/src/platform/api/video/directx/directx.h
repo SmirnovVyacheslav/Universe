@@ -11,7 +11,6 @@
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <windows.h>
-#include <xnamath.h>
 
 
 namespace engine {
@@ -39,6 +38,16 @@ namespace engine {
                     data[2] = a3;
                     data[3] = a4;
                 }
+                matrix& operator=(const matrix& m) {
+                    if (this != &m) {
+                        data[0] = m.data[0];
+                        data[1] = m.data[1];
+                        data[2] = m.data[2];
+                        data[3] = m.data[3];
+                    }
+
+                    return *this;
+                }
                 void identity() {
                     data[0] = vector_4(1.0f, 0.0f, 0.0f, 0.0f);
                     data[1] = vector_4(0.0f, 1.0f, 0.0f, 0.0f);
@@ -60,8 +69,8 @@ namespace engine {
                     float near_z = 0.01f;
                     float far_z = 100.0f;
 
-                    float fov_sin = sin(static_cast<double>(0.5f) * static_cast<double>(fov_angle_y));
-                    float fov_cos = cos(static_cast<double>(0.5f) * static_cast<double>(fov_angle_y));
+                    float fov_sin = sinf(0.5f * fov_angle_y);
+                    float fov_cos = cosf(0.5f * fov_angle_y);
 
                     float height = fov_cos / fov_sin;
                     float width = height / aspect_ratio;
@@ -72,8 +81,8 @@ namespace engine {
                     data[3] = vector_4(0.0f, 0.0f, data[2].z * near_z, 0.0f);
                 }
                 void rotation_y(float angle) {
-                    float sin_angle = sin(static_cast<double>(angle));
-                    float cos_angle = cos(static_cast<double>(angle));
+                    float sin_angle = sinf(angle);
+                    float cos_angle = cosf(angle);
 
                     data[0] = vector_4(cos_angle,  0.0f, sin_angle, 0.0f);
                     data[1] = vector_4(0.0f,       1.0f, 0.0f,      0.0f);
@@ -92,19 +101,14 @@ namespace engine {
                     data[3] = vector_4(row_0.w, row_1.w, row_2.w, row_3.w);
                 }
             };
-            struct local_constant_buffer_test {
+            struct local_constant_buffer {
                 matrix mWorld;
                 matrix mView;
                 matrix mProjection;
             };
-            struct local_constant_buffer {
-                XMMATRIX mWorld;
-                XMMATRIX mView;
-                XMMATRIX mProjection;
-            };
-            XMMATRIX world;
-            XMMATRIX view;
-            XMMATRIX projection;
+            matrix world;
+            matrix view;
+            matrix projection;
 
 
             DXGI_FORMAT dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
