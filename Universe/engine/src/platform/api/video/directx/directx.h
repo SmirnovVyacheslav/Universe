@@ -71,6 +71,15 @@ namespace engine {
                     data[2] = vector_4(0.0f, 0.0f, far_z / (near_z - far_z), -1.0f);
                     data[3] = vector_4(0.0f, 0.0f, data[2].z * near_z, 0.0f);
                 }
+                void rotation_y(float angle) {
+                    float sin_angle = sin(static_cast<double>(angle));
+                    float cos_angle = cos(static_cast<double>(angle));
+
+                    data[0] = vector_4(cos_angle,  0.0f, sin_angle, 0.0f);
+                    data[1] = vector_4(0.0f,       1.0f, 0.0f,      0.0f);
+                    data[2] = vector_4(-sin_angle, 0.0f, cos_angle, 0.0f);
+                    data[3] = vector_4(0.0f,       0.0f, 0.0f,      1.0f);
+                }
             };
             struct local_constant_buffer_test {
                 matrix mWorld;
