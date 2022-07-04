@@ -80,6 +80,17 @@ namespace engine {
                     data[2] = vector_4(-sin_angle, 0.0f, cos_angle, 0.0f);
                     data[3] = vector_4(0.0f,       0.0f, 0.0f,      1.0f);
                 }
+                void transpose() {
+                    vector_4 row_0 = data[0];
+                    vector_4 row_1 = data[1];
+                    vector_4 row_2 = data[2];
+                    vector_4 row_3 = data[3];
+
+                    data[0] = vector_4(row_0.x, row_1.x, row_2.x, row_3.x);
+                    data[1] = vector_4(row_0.y, row_1.y, row_2.y, row_3.y);
+                    data[2] = vector_4(row_0.z, row_1.z, row_2.z, row_3.z);
+                    data[3] = vector_4(row_0.w, row_1.w, row_2.w, row_3.w);
+                }
             };
             struct local_constant_buffer_test {
                 matrix mWorld;
