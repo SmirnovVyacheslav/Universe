@@ -27,6 +27,12 @@ namespace engine {
             struct matrix {
                 vector_4 data[4];
 
+                matrix() {
+                    data[0] = vector_4(0.0f, 0.0f, 0.0f, 0.0f);
+                    data[1] = vector_4(0.0f, 0.0f, 0.0f, 0.0f);
+                    data[2] = vector_4(0.0f, 0.0f, 0.0f, 0.0f);
+                    data[3] = vector_4(0.0f, 0.0f, 0.0f, 0.0f);
+                }
                 matrix(vector_4 a1, vector_4 a2, vector_4 a3, vector_4 a4) {
                     data[0] = a1;
                     data[1] = a2;
@@ -36,8 +42,8 @@ namespace engine {
                 void identity() {
                     data[0] = vector_4(1.0f, 0.0f, 0.0f, 0.0f);
                     data[1] = vector_4(0.0f, 1.0f, 0.0f, 0.0f);
-                    data[2] = vector_4(1.0f, 0.0f, 1.0f, 0.0f);
-                    data[3] = vector_4(1.0f, 0.0f, 0.0f, 1.0f);
+                    data[2] = vector_4(0.0f, 0.0f, 1.0f, 0.0f);
+                    data[3] = vector_4(0.0f, 0.0f, 0.0f, 1.0f);
                 }
                 void lool_at(vector_3 eye, vector_3 target, vector_3 up) {
                     vector_3 z_axis = (eye - target).normalize();
