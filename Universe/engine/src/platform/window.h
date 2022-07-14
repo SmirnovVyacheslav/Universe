@@ -1,8 +1,8 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/string.h"
-#include "src/core/memory.h"
 #include "src/core/config.h"
+#include "src/core/memory/smart_ptr.h"
 
 
 namespace engine {

@@ -2,7 +2,7 @@
 #pragma once
 #include <cstdint>
 #include "string.h"
-#include "memory.h"
+#include "src/core/memory/smart_ptr.h"
 
 
 namespace engine {

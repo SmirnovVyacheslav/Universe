@@ -2,7 +2,7 @@
 #pragma once
 #include <cstdint>
 #include "src/core/array.h"
-#include "src/core/memory.h"
+#include "src/core/memory/smart_ptr.h"
 
 
 
