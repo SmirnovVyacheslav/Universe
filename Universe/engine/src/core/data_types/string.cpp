@@ -1,7 +1,7 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-#include "array.h"
-#include "map.h"
 #include "string.h"
+#include "src/core/data_types/array.h"
+#include "src/core/data_types/map.h"
 
 
 namespace engine {

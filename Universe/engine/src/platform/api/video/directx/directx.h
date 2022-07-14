@@ -1,6 +1,6 @@
 ﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/string.h"
+#include "src/core/data_types/string.h"
 #include "src/core/3d_math.h"
 #include "src/scene/scene.h"
 #include "src/platform/platform_def.h"

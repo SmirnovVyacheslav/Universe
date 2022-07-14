@@ -141,9 +141,6 @@
     <ClCompile Include="engine\src\resource\mesh.cpp">
       <Filter>Исходные файлы\engine\src\resource</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\string.cpp">
-      <Filter>Исходные файлы\engine\src\core</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\config.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
@@ -161,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\platform\api\video.cpp">
       <Filter>Исходные файлы\engine\src\platfom\api</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\core\data_types\string.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,15 +194,6 @@
     <ClInclude Include="engine\src\platform\window.h">
       <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\string.h">
-      <Filter>Файлы заголовков\engine\src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\map.h">
-      <Filter>Файлы заголовков\engine\src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\array.h">
-      <Filter>Файлы заголовков\engine\src\core</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\config.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
@@ -223,6 +214,15 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
       <Filter>Файлы заголовков\engine\src\core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\array.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\map.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\string.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
