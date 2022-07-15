@@ -5,6 +5,18 @@
 
 namespace engine {
     template <uint_32 size>
+    struct vector;
+    union vector_3;
+    union vector_4;
+
+
+    template <uint_32 size>
+    using vector = struct vector;
+    using vector_3 = union vector_3;
+    using vector_4 = union vector_4;
+
+
+    template <uint_32 size>
     struct vector {
         real_32[size] data;
     };
