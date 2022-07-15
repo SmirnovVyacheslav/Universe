@@ -2,10 +2,12 @@
 
 #include "mesh.h"
 #include "src/core/3d_math.h"
+#include "src/core/data_types/vector_3.h"
 
 
 namespace engine
 {
+    vector_3_tmp tmp_vec(1.0f, 2.0f, 3.0f);
     vertex::vertex(vector_3 pos, vector_4 color) :
         pos(pos), color(color)
     {
