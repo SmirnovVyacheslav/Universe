@@ -1,24 +1,13 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include <functional>
 #include "src/core/math/const.h"
 
 
 namespace engine {
     template <uint_32 size>
-    struct vector;
-    union vector_3;
-    union vector_4;
-
-
-    template <uint_32 size>
-    using vector = struct vector;
-    using vector_3 = union vector_3;
-    using vector_4 = union vector_4;
-
-
-    template <uint_32 size>
     struct vector {
-        real_32[size] data;
+        real_32 data[size];
 
         vector();
         ~vector() = default;
@@ -42,45 +31,7 @@ namespace engine {
             return vec_res;
         }
     };
-    union vector_3 {
-        vector<static_cast<uint_32>(3)> data;
-        struct {
-            real_32 x;
-            real_32 y;
-            real_32 z;
-        };
 
-        vector_3() = default;
-        vector_3(real_32 x, real_32 y, real_32 z);
-        ~vector_3() = default;
-        vector_3(vector_3&& src) = default;
-        vector_3(const vector_3& src) = default;
-
-        vector_3& operator=(vector_3&& src) = default;
-        vector_3& operator=(const vector_3& src) = default;
-        real_32& operator[](const int_32 index);
-
-
-    };
-    union vector_4 {
-        vector<static_cast<uint_32>(4)> data;
-        struct {
-            real_32 x;
-            real_32 y;
-            real_32 z;
-            real_32 w;
-        };
-
-        vector_4() = default;
-        vector_4(real_32 x, real_32 y, real_32 z, real_32 w);
-        ~vector_4() = default;
-        vector_4(vector_4&& src) = default;
-        vector_4(const vector_4& src) = default;
-
-        vector_4& operator=(vector_4&& src) = default;
-        vector_4& operator=(const vector_4& src) = default;
-        real_32& operator[](const int_32 index);
-    };
 
 
     template <uint_32 size>
@@ -94,22 +45,6 @@ namespace engine {
         int_32 size_int_32 = static_cast<int_32>(size);
         return data[(size_int_32 + index % size_int_32) % size_int_32];
     }
-
-
-    vector_3::vector_3(real_32 x, real_32 y, real_32 z) : x(x), y(y), z(z) {
-    }
-    real_32& vector_3::operator[](const int_32 index) {
-        return data[index];
-    }
-
-
-    vector_4::vector_4(real_32 x, real_32 y, real_32 z, real_32 w) : x(x), y(y), z(z), w(w) {
-    }
-    real_32& vector_4::operator[](const int_32 index) {
-        return data[index];
-    }
-
-
     template <uint_32 size>
     vector<size> operator+(const vector<size>& vec_a, const vector<size>& vec_b) {
         vector<size> vec_res;
@@ -206,7 +141,5 @@ namespace engine {
     template <uint_32 size>
     real_32 operator*(const vector<size>& vec_a, const vector<size>& vec_b);
     template <uint_32 size>
-    vector_3 operator^(const vector<size>& vec_a, const vector<size>& vec_b);
-
-
+    vector<size> operator^(const vector<size>& vec_a, const vector<size>& vec_b);
 }
