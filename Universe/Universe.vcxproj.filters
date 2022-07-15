@@ -162,6 +162,12 @@
     <ClCompile Include="engine\src\core\data_types\string.cpp">
       <Filter>Исходные файлы\engine\src\core\data_types</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\core\data_types\vector_3.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_types</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\core\data_types\vector_4.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -237,6 +243,15 @@
       <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_types\vertex.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\math\const.h">
+      <Filter>Файлы заголовков\engine\src\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\vector_3.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\vector_4.h">
       <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
     </ClInclude>
   </ItemGroup>
