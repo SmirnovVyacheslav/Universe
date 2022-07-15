@@ -224,6 +224,21 @@
     <ClInclude Include="engine\src\core\data_types\string.h">
       <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
     </ClInclude>
+    <ClInclude Include="engine\src\core\math\vector.h">
+      <Filter>Файлы заголовков\engine\src\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\math\matrix.h">
+      <Filter>Файлы заголовков\engine\src\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\vector.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\matrix.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_types\vertex.h">
+      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
