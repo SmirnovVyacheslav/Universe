@@ -20,6 +20,6 @@ namespace engine {
 
         vector_3_tmp& operator=(vector_3_tmp&& src) = default;
         vector_3_tmp& operator=(const vector_3_tmp& src) = default;
-        real_32& operator[](const int_32 index);
+        //real_32& operator[](const int_32 index);
     };
 }

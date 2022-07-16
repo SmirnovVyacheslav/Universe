@@ -7,7 +7,13 @@
 
 namespace engine
 {
-    vector_3_tmp tmp_vec(1.0f, 2.0f, 3.0f);
+    //vector_3_tmp tmp_vec(1.0f, 2.0f, 3.0f);
+    //vector_3_tmp tmp_vec_2(1.0f, 3.0f, 3.0f);
+    //// vector_3_tmp tmp_vec_3 = tmp_vec + tmp_vec_2;
+
+    vector<static_cast<uint_32>(3)> tmp_vec;
+    vector<static_cast<uint_32>(3)> tmp_vec_2;
+    vector<static_cast<uint_32>(3)> tmp_vec_3 = tmp_vec + tmp_vec_2;
     vertex::vertex(vector_3 pos, vector_4 color) :
         pos(pos), color(color)
     {
