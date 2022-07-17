@@ -132,7 +132,7 @@ namespace engine {
             ID3D11Buffer* index_buffer = nullptr;
             ID3D11Buffer* constant_buffer = nullptr;
 
-			string shader_path = u8"engine\\src\\shader\\shader.fx";
+            string shader_path = u8"engine\\src\\shader\\shader.fx";
             string vertex_shader_entry_point = u8"VS";
             string vertex_shader_model = u8"vs_4_0";
             string pixel_shader_entry_point = u8"PS";
