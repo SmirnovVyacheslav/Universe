@@ -2,7 +2,7 @@
 
 #include "mesh.h"
 #include "src/core/3d_math.h"
-#include "src/core/data_types/vector_3.h"
+#include "src/core/data_type/vector_3.h"
 
 
 namespace engine

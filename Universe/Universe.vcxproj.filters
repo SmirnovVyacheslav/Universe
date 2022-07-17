@@ -103,14 +103,14 @@
     <Filter Include="Исходные файлы\engine\src\core\math">
       <UniqueIdentifier>{bfe4bcb3-b9fa-43f3-9855-d9f0ca954060}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\engine\src\core\data_types">
-      <UniqueIdentifier>{ade26dc7-f97d-4199-b274-d4468ef1a43e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\core\data_types">
-      <UniqueIdentifier>{18ae79be-7245-4b7f-bb0e-ad071793bccb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\engine\src\core\memory">
       <UniqueIdentifier>{9e96e594-60bb-4bb7-8df3-b2c358ff274c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\engine\src\core\data_type">
+      <UniqueIdentifier>{18ae79be-7245-4b7f-bb0e-ad071793bccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\engine\src\core\data_type">
+      <UniqueIdentifier>{ade26dc7-f97d-4199-b274-d4468ef1a43e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,17 +159,17 @@
     <ClCompile Include="engine\src\platform\api\video.cpp">
       <Filter>Исходные файлы\engine\src\platfom\api</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_types\string.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_types</Filter>
+    <ClCompile Include="engine\src\core\data_type\string.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_types\vector_3.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_types</Filter>
+    <ClCompile Include="engine\src\core\data_type\vector.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_types\vector_4.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_types</Filter>
+    <ClCompile Include="engine\src\core\data_type\vector_3.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_types\vector.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_types</Filter>
+    <ClCompile Include="engine\src\core\data_type\vector_4.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,20 +218,8 @@
     <ClInclude Include="engine\src\platform\api\video\directx\directx.h">
       <Filter>Файлы заголовков\engine\src\platform\api\video\directx</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\std.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
       <Filter>Файлы заголовков\engine\src\core\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\array.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\map.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\string.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\math\vector.h">
       <Filter>Файлы заголовков\engine\src\core\math</Filter>
@@ -239,23 +227,35 @@
     <ClInclude Include="engine\src\core\math\matrix.h">
       <Filter>Файлы заголовков\engine\src\core\math</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\vector.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\matrix.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\vertex.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\math\const.h">
       <Filter>Файлы заголовков\engine\src\core\math</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\vector_3.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    <ClInclude Include="engine\src\core\data_type\array.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\data_types\vector_4.h">
-      <Filter>Файлы заголовков\engine\src\core\data_types</Filter>
+    <ClInclude Include="engine\src\core\data_type\map.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\matrix.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\std.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\string.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vector.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vector_3.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vector_4.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vertex.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include <cstdint>
-#include "src/core/data_types/string.h"
+#include "src/core/data_type/string.h"
 #include "src/core/memory/smart_ptr.h"
 
 

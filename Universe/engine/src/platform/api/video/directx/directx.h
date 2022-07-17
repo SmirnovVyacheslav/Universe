@@ -1,6 +1,6 @@
 ﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/data_types/string.h"
+#include "src/core/data_type/string.h"
 #include "src/core/3d_math.h"
 #include "src/scene/scene.h"
 #include "src/platform/platform_def.h"
@@ -132,7 +132,7 @@ namespace engine {
             ID3D11Buffer* index_buffer = nullptr;
             ID3D11Buffer* constant_buffer = nullptr;
 
-            string shader_path = u8"C:\\Private\\Projects\\Universe\\Universe\\engine\\src\\shader\\shader.fx";
+			string shader_path = u8"engine\\src\\shader\\shader.fx";
             string vertex_shader_entry_point = u8"VS";
             string vertex_shader_model = u8"vs_4_0";
             string pixel_shader_entry_point = u8"PS";
