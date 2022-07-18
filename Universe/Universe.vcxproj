@@ -153,7 +153,6 @@
   <ItemGroup>
     <ClCompile Include="engine\src\core\config.cpp" />
     <ClCompile Include="engine\src\core\data_type\string.cpp" />
-    <ClCompile Include="engine\src\core\data_type\vector.cpp" />
     <ClCompile Include="engine\src\core\data_type\vector_3.cpp" />
     <ClCompile Include="engine\src\core\data_type\vector_4.cpp" />
     <ClCompile Include="engine\src\core\initialize.cpp" />

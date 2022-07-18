@@ -7,9 +7,12 @@
 
 namespace engine
 {
-    //vector_3_tmp tmp_vec(1.0f, 2.0f, 3.0f);
-    //vector_3_tmp tmp_vec_2(1.0f, 3.0f, 3.0f);
-    //// vector_3_tmp tmp_vec_3 = tmp_vec + tmp_vec_2;
+    vector_3_tmp tmp_vec_20(1.0f, 2.0f, 3.0f);
+    vector_3_tmp tmp_vec_21(1.0f, 3.0f, 3.0f);
+    vector_3_tmp tmp_vec_22 = tmp_vec_20 + tmp_vec_21;
+    vector_3_tmp tmp_vec_23 = tmp_vec_20 - tmp_vec_21;
+    real_32 tmp_vec_24 = tmp_vec_20 * tmp_vec_21;
+    vector_3_tmp tmp_vec_25 = tmp_vec_20 ^ tmp_vec_21;
 
     vector<static_cast<uint_32>(3)> tmp_vec;
     vector<static_cast<uint_32>(3)> tmp_vec_2;

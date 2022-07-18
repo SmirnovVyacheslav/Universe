@@ -162,9 +162,6 @@
     <ClCompile Include="engine\src\core\data_type\string.cpp">
       <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\vector.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\data_type\vector_3.cpp">
       <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
