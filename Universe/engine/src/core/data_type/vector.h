@@ -1,7 +1,6 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/math/const.h"
-//#include "src/core/math/vector.h"
 
 
 namespace engine {
@@ -39,7 +38,6 @@ namespace engine {
     //const vector<static_cast<uint_32>(3)> operator^(const vector<static_cast<uint_32>(3)>& vec_a, const vector<static_cast<uint_32>(3)>& vec_b);
 
 
-
     template <uint_32 size>
     struct vector {
         real_32 data[size];
@@ -55,36 +53,20 @@ namespace engine {
         const real_32& operator[](const int_32 index) const;
 
         friend const vector<size> operator+ <size> (const vector<size>& vec_a, const vector<size>& vec_b);
+        friend const vector<size> operator- <size> (const vector<size>& vec_a, const vector<size>& vec_b);
+        friend const vector<size> operator+ <size> (const vector<size>& vec, const real_32& num);
+        friend const vector<size> operator- <size> (const vector<size>& vec, const real_32& num);
+        friend const vector<size> operator* <size> (const vector<size>& vec, const real_32& num);
+        friend const vector<size> operator/ <size> (const vector<size>& vec, const real_32& num);
+        friend const vector<size> operator+ <size> (const real_32& num, const vector<size>& vec);
+        friend const vector<size> operator- <size> (const real_32& num, const vector<size>& vec);
+        friend const vector<size> operator* <size> (const real_32& num, const vector<size>& vec);
+        friend const vector<size> operator/ <size> (const real_32& num, const vector<size>& vec);
+        friend bool operator== <size> (const vector<size>& vec_a, const vector<size>& vec_b);
+        friend bool operator!= <size> (const vector<size>& vec_a, const vector<size>& vec_b);
+        // Scalar product
+        friend const real_32 operator* <size> (const vector<size>& vec_a, const vector<size>& vec_b);
     };
-    //template <uint_32 size>
-    //const vector<size> operator+(const vector<size>& vec_a, const vector<size>& vec_b);
-    //template <uint_32 size>
-    //const vector<size> operator-(const vector<size>& vec_a, const vector<size>& vec_b);
-    //template <uint_32 size>
-    //const vector<size> operator+(const vector<size>& vec, const real_32& num);
-    //template <uint_32 size>
-    //const vector<size> operator-(const vector<size>& vec, const real_32& num);
-    //template <uint_32 size>
-    //const vector<size> operator*(const vector<size>& vec, const real_32& num);
-    //template <uint_32 size>
-    //const vector<size> operator/(const vector<size>& vec, const real_32& num);
-    //template <uint_32 size>
-    //const vector<size> operator+(const real_32& num, const vector<size>& vec);
-    //template <uint_32 size>
-    //const vector<size> operator-(const real_32& num, const vector<size>& vec);
-    //template <uint_32 size>
-    //const vector<size> operator*(const real_32& num, const vector<size>& vec);
-    //template <uint_32 size>
-    //const vector<size> operator/(const real_32& num, const vector<size>& vec);
-    //template <uint_32 size>
-    //bool operator==(const vector<size>& vec_a, const vector<size>& vec_b);
-    //template <uint_32 size>
-    //bool operator!=(const vector<size>& vec_a, const vector<size>& vec_b);
-    //// Scalar product
-    //template <uint_32 size>
-    //const real_32 operator*(const vector<size>& vec_a, const vector<size>& vec_b);
-    //// Vector product
-    //const vector<static_cast<uint_32>(3)> operator^(const vector<static_cast<uint_32>(3)>& vec_a, const vector<static_cast<uint_32>(3)>& vec_b);
 
 
     template <uint_32 size>

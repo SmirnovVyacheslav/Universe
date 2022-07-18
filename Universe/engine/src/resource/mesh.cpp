@@ -14,6 +14,17 @@ namespace engine
     vector<static_cast<uint_32>(3)> tmp_vec;
     vector<static_cast<uint_32>(3)> tmp_vec_2;
     vector<static_cast<uint_32>(3)> tmp_vec_3 = tmp_vec + tmp_vec_2;
+    vector<static_cast<uint_32>(3)> tmp_vec_4 = tmp_vec - tmp_vec_2;
+    vector<static_cast<uint_32>(3)> tmp_vec_5 = tmp_vec + 1.0f;
+    vector<static_cast<uint_32>(3)> tmp_vec_6 = tmp_vec + 1.0f;
+    vector<static_cast<uint_32>(3)> tmp_vec_7 = tmp_vec * 1.0f;
+    vector<static_cast<uint_32>(3)> tmp_vec_8 = tmp_vec / 1.0f;
+    vector<static_cast<uint_32>(3)> tmp_vec_9 = 1.0f + tmp_vec_2;
+    vector<static_cast<uint_32>(3)> tmp_vec_10 = 1.0f + tmp_vec_2;
+    vector<static_cast<uint_32>(3)> tmp_vec_11 = 1.0f * tmp_vec_2;
+    vector<static_cast<uint_32>(3)> tmp_vec_12 = 1.0f / tmp_vec_2;
+    bool tmp_vec_13 = tmp_vec == tmp_vec_2;
+    bool tmp_vec_14 = tmp_vec != tmp_vec_2;
     vertex::vertex(vector_3 pos, vector_4 color) :
         pos(pos), color(color)
     {
