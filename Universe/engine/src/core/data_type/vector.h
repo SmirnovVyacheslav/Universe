@@ -71,9 +71,6 @@ namespace engine {
         friend bool operator!= <size> (const vector<size>& vec_a, const vector<size>& vec_b);
         // Scalar product
         friend const real_32 operator* <size> (const vector<size>& vec_a, const vector<size>& vec_b);
-
-        //friend const real_32 length <size> (const vector<size>& vec);
-        //friend const vector<size> normalize <size> (const vector<size>& vec);
     };
 
 

@@ -39,4 +39,6 @@ namespace engine {
     bool operator!=(const vector_4_tmp& vec_a, const vector_4_tmp& vec_b);
     // Scalar product
     const real_32 operator*(const vector_4_tmp& vec_a, const vector_4_tmp& vec_b);
+    const real_32 length(const vector_4_tmp& vec);
+    const vector_4_tmp normalize(const vector_4_tmp& vec);
 }

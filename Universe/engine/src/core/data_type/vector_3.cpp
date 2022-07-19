@@ -62,4 +62,12 @@ namespace engine {
                  vec_a.z * vec_b.x - vec_a.x * vec_b.z,
                  vec_a.x * vec_b.y - vec_a.y * vec_b.x };
     }
+
+
+    const real_32 length(const vector_3_tmp& vec) {
+        return length(vec.data);
+    }
+    const vector_3_tmp normalize(const vector_3_tmp& vec) {
+        return normalize(vec.data);
+    }
 }

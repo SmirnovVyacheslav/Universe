@@ -56,4 +56,12 @@ namespace engine {
     const real_32 operator*(const vector_4_tmp& vec_a, const vector_4_tmp& vec_b) {
         return vec_a.data * vec_b.data;
     }
+
+
+    const real_32 length(const vector_4_tmp& vec) {
+        return length(vec.data);
+    }
+    const vector_4_tmp normalize(const vector_4_tmp& vec) {
+        return normalize(vec.data);
+    }
 }

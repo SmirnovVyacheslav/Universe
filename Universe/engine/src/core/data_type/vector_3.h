@@ -40,4 +40,6 @@ namespace engine {
     const real_32 operator*(const vector_3_tmp& vec_a, const vector_3_tmp& vec_b);
     // Vector product
     const vector_3_tmp operator^(const vector_3_tmp& vec_a, const vector_3_tmp& vec_b);
+    const real_32 length(const vector_3_tmp& vec);
+    const vector_3_tmp normalize(const vector_3_tmp& vec);
 }
