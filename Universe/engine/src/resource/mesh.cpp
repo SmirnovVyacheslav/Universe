@@ -5,7 +5,7 @@
 
 namespace engine
 {
-    vertex::vertex(vector_3 pos, vector_4 color) :
+    vertex::vertex(vector_3_tmp pos, vector_4_tmp color) :
         pos(pos), color(color)
     {
         //
@@ -16,14 +16,14 @@ namespace engine
     {
         vertices =
         {
-            { vector_3(-1.0f, 1.0f, -1.0f), vector_4(0.0f, 0.0f, 1.0f, 1.0f) },
-            { vector_3(1.0f, 1.0f, -1.0f), vector_4(0.0f, 1.0f, 0.0f, 1.0f) },
-            { vector_3(1.0f, 1.0f, 1.0f), vector_4(0.0f, 1.0f, 1.0f, 1.0f) },
-            { vector_3(-1.0f, 1.0f, 1.0f), vector_4(1.0f, 0.0f, 0.0f, 1.0f) },
-            { vector_3(-1.0f, -1.0f, -1.0f), vector_4(1.0f, 0.0f, 1.0f, 1.0f) },
-            { vector_3(1.0f, -1.0f, -1.0f), vector_4(1.0f, 1.0f, 0.0f, 1.0f) },
-            { vector_3(1.0f, -1.0f, 1.0f), vector_4(1.0f, 1.0f, 1.0f, 1.0f) },
-            { vector_3(-1.0f, -1.0f, 1.0f), vector_4(0.0f, 0.0f, 0.0f, 1.0f) },
+            { vector_3_tmp(-1.0f, 1.0f, -1.0f), vector_4_tmp(0.0f, 0.0f, 1.0f, 1.0f) },
+            { vector_3_tmp(1.0f, 1.0f, -1.0f), vector_4_tmp(0.0f, 1.0f, 0.0f, 1.0f) },
+            { vector_3_tmp(1.0f, 1.0f, 1.0f), vector_4_tmp(0.0f, 1.0f, 1.0f, 1.0f) },
+            { vector_3_tmp(-1.0f, 1.0f, 1.0f), vector_4_tmp(1.0f, 0.0f, 0.0f, 1.0f) },
+            { vector_3_tmp(-1.0f, -1.0f, -1.0f), vector_4_tmp(1.0f, 0.0f, 1.0f, 1.0f) },
+            { vector_3_tmp(1.0f, -1.0f, -1.0f), vector_4_tmp(1.0f, 1.0f, 0.0f, 1.0f) },
+            { vector_3_tmp(1.0f, -1.0f, 1.0f), vector_4_tmp(1.0f, 1.0f, 1.0f, 1.0f) },
+            { vector_3_tmp(-1.0f, -1.0f, 1.0f), vector_4_tmp(0.0f, 0.0f, 0.0f, 1.0f) },
         };
 
         indices =  {

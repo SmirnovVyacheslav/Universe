@@ -4,7 +4,9 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "src/core/3d_math.h"
+//#include "src/core/3d_math.h"
+#include "src/core/data_type/vector_3.h"
+#include "src/core/data_type/vector_4.h"
 #include <vector>
 
 
@@ -16,11 +18,11 @@ namespace engine
         vertex() = default;
         ~vertex() = default;
 
-        vertex(vector_3 pos, vector_4 color);
+        vertex(vector_3_tmp pos, vector_4_tmp color);
 
     private:
-        vector_3 pos;
-        vector_4 color;
+        vector_3_tmp pos;
+        vector_4_tmp color;
     };
 
 

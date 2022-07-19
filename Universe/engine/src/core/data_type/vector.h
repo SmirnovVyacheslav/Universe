@@ -1,5 +1,7 @@
 // Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include <math.h>
+#include <stdexcept>
 #include "src/core/math/const.h"
 
 
@@ -35,6 +37,11 @@ namespace engine {
     template <uint_32 size>
     const real_32 operator*(const vector<size>& vec_a, const vector<size>& vec_b);
 
+    template <uint_32 size>
+    const real_32 length(const vector<size>& vec);
+    template <uint_32 size>
+    const vector<size> normalize(const vector<size>& vec);
+
 
     template <uint_32 size>
     struct vector {
@@ -64,6 +71,9 @@ namespace engine {
         friend bool operator!= <size> (const vector<size>& vec_a, const vector<size>& vec_b);
         // Scalar product
         friend const real_32 operator* <size> (const vector<size>& vec_a, const vector<size>& vec_b);
+
+        //friend const real_32 length <size> (const vector<size>& vec);
+        //friend const vector<size> normalize <size> (const vector<size>& vec);
     };
 
 
@@ -127,6 +137,9 @@ namespace engine {
     }
     template <uint_32 size>
     const vector<size> operator/(const vector<size>& vec, const real_32& num) {
+        if (num < eps_tmp) {
+            throw std::invalid_argument("Division by zero");
+        }
         vector<size> vec_res;
         for (uint_32 i = 0; i < size; ++i) {
             vec_res[i] = vec[i] / num;
@@ -161,6 +174,9 @@ namespace engine {
     const vector<size> operator/(const real_32& num, const vector<size>& vec) {
         vector<size> vec_res;
         for (uint_32 i = 0; i < size; ++i) {
+            if (vec[i] < eps_tmp) {
+                throw std::invalid_argument("Division by zero");
+            }
             vec_res[i] = num / vec[i];
         }
         return vec_res;
@@ -186,5 +202,19 @@ namespace engine {
             result += vec_a[i] * vec_b[i];
         }
         return result;
+    }
+
+
+    template <uint_32 size>
+    const real_32 length(const vector<size>& vec) {
+        return sqrtf(vec * vec);
+    }
+    template <uint_32 size>
+    const vector<size> normalize(const vector<size>& vec) {
+        real_32 vec_length = length(vec);
+        if (vec_length < eps_tmp) {
+            throw std::invalid_argument("Vector length is zero - division by zero");
+        }
+        return vec / vec_length;
     }
 }
