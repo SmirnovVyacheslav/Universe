@@ -135,9 +135,6 @@
     <ClCompile Include="engine\src\core\object_id.cpp">
       <Filter>Исходные файлы\engine\src\core</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\3d_math.cpp">
-      <Filter>Исходные файлы\engine\src\core</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\resource\mesh.cpp">
       <Filter>Исходные файлы\engine\src\resource</Filter>
     </ClCompile>
@@ -189,9 +186,6 @@
       <Filter>Файлы заголовков\engine\src\platform</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\object_id.h">
-      <Filter>Файлы заголовков\engine\src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\3d_math.h">
       <Filter>Файлы заголовков\engine\src\core</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\resource\mesh.h">

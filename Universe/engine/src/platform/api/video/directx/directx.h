@@ -1,7 +1,6 @@
 ﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/data_type/string.h"
-#include "src/core/3d_math.h"
 #include "src/scene/scene.h"
 #include "src/platform/platform_def.h"
 #include "src/platform/api/video.h"
@@ -55,14 +54,14 @@ namespace engine {
                     data[3] = vector_4(0.0f, 0.0f, 0.0f, 1.0f);
                 }
                 void lool_at(vector_3 eye, vector_3 target, vector_3 up) {
-                    vector_3 z_axis = (eye - target).normalize();
-                    vector_3 x_axis = (up ^ z_axis).normalize();
+                    vector_3 z_axis = normalize(eye - target);
+                    vector_3 x_axis = normalize(up ^ z_axis);
                     vector_3 y_axis = z_axis ^ x_axis;
 
                     data[0] = vector_4(x_axis.x, y_axis.x, z_axis.x, 0.0f);
                     data[1] = vector_4(x_axis.y, y_axis.y, z_axis.y, 0.0f);
                     data[2] = vector_4(x_axis.z, y_axis.z, z_axis.z, 0.0f);
-                    data[3] = vector_4(-(x_axis & eye), -(y_axis & eye), -(z_axis & eye), 1.0f);
+                    data[3] = vector_4(-(x_axis * eye), -(y_axis * eye), -(z_axis * eye), 1.0f);
                 }
                 void projection(float aspect_ratio) {
                     float fov_angle_y = 1.570796327f;
@@ -75,10 +74,10 @@ namespace engine {
                     float height = fov_cos / fov_sin;
                     float width = height / aspect_ratio;
 
-                    data[0] = vector_4(width, 0.0f, 0.0f, 0.0f);
-                    data[1] = vector_4(0.0f, height, 0.0f, 0.0f);
-                    data[2] = vector_4(0.0f, 0.0f, far_z / (near_z - far_z), -1.0f);
-                    data[3] = vector_4(0.0f, 0.0f, data[2].z * near_z, 0.0f);
+                    data[0] = vector_4(width, 0.0f,   0.0f,                      0.0f);
+                    data[1] = vector_4(0.0f,  height, 0.0f,                      0.0f);
+                    data[2] = vector_4(0.0f,  0.0f,   far_z / (near_z - far_z), -1.0f);
+                    data[3] = vector_4(0.0f,  0.0f,   data[2].z * near_z,        0.0f);
                 }
                 void rotation_y(float angle) {
                     float sin_angle = sinf(angle);
