@@ -27,9 +27,9 @@ namespace engine {
     };
     const matrix_4 matrix_identity();
     const matrix_4 matrix_look_at(const vector_3& eye, const vector_3& target, const vector_3& up);
-   /* const matrix_4 matrix_projection();
+    const matrix_4 matrix_projection(const real_32 aspect_ratio);
     const matrix_4 matrix_rotation_x(const real_32 angle);
     const matrix_4 matrix_rotation_y(const real_32 angle);
     const matrix_4 matrix_rotation_z(const real_32 angle);
-    const matrix_4 matrix_transpose(const matrix_4& src);*/
+    const matrix_4 matrix_transpose(const matrix_4& src);
 }
