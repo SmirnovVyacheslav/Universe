@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\core\config.cpp" />
+    <ClCompile Include="engine\src\core\data_type\matrix_4.cpp" />
     <ClCompile Include="engine\src\core\data_type\string.cpp" />
     <ClCompile Include="engine\src\core\data_type\vector_3.cpp" />
     <ClCompile Include="engine\src\core\data_type\vector_4.cpp" />
@@ -174,7 +175,7 @@
     <ClInclude Include="engine\src\core\config.h" />
     <ClInclude Include="engine\src\core\data_type\array.h" />
     <ClInclude Include="engine\src\core\data_type\map.h" />
-    <ClInclude Include="engine\src\core\data_type\matrix.h" />
+    <ClInclude Include="engine\src\core\data_type\matrix_4.h" />
     <ClInclude Include="engine\src\core\data_type\std.h" />
     <ClInclude Include="engine\src\core\data_type\string.h" />
     <ClInclude Include="engine\src\core\data_type\vector.h" />
