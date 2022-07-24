@@ -63,18 +63,13 @@ namespace engine
         set_transformation_matrix();
     }
     void directx::render() {
-        world.rotation_y(3.14159f / 4.0f);
-
         immediate_context->ClearRenderTargetView(render_target_view, background_color);
         immediate_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
         local_constant_buffer cb;
-        cb.mWorld = world;
-        cb.mView = view;
-        cb.mProjection = projection;
-        cb.mWorld.transpose();
-        cb.mView.transpose();
-        cb.mProjection.transpose();
+        cb.mWorld = matrix_transpose(world);
+        cb.mView = matrix_transpose(view);
+        cb.mProjection = matrix_transpose(projection);
         immediate_context->UpdateSubresource(constant_buffer, 0, NULL, &cb, 0, 0);
 
         immediate_context->VSSetShader(vertex_shader, NULL, 0);
@@ -292,12 +287,12 @@ namespace engine
         }
     }
     void directx::set_transformation_matrix() {
-        world.identity();
+        world = matrix_rotation_y(3.14159f / 4.0f);
         vector_3 eye(0.0f, 1.0f, -5.0f);
         vector_3 at(0.0f, 1.0f, 0.0f);
         vector_3 up(0.0f, 1.0f, 0.0f);
-        view.lool_at(eye, at, up);
-        projection.projection(config::video()->window_width / static_cast<float>(config::video()->window_height));
+        view = matrix_look_at(eye, at, up);
+        projection = matrix_projection(config::video()->window_width / static_cast<float>(config::video()->window_height));
     }
     template<class type_name>
     void directx::clear_resource(type_name* resource_ptr) {

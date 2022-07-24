@@ -134,7 +134,7 @@ namespace engine {
     }
     template <uint_32 size>
     const vector<size> operator/(const vector<size>& vec, const real_32& num) {
-        if (num < eps_tmp) {
+        if (num < eps) {
             throw std::invalid_argument("Division by zero");
         }
         vector<size> vec_res;
@@ -171,7 +171,7 @@ namespace engine {
     const vector<size> operator/(const real_32& num, const vector<size>& vec) {
         vector<size> vec_res;
         for (uint_32 i = 0; i < size; ++i) {
-            if (vec[i] < eps_tmp) {
+            if (vec[i] < eps) {
                 throw std::invalid_argument("Division by zero");
             }
             vec_res[i] = num / vec[i];
@@ -181,7 +181,7 @@ namespace engine {
     template <uint_32 size>
     bool operator==(const vector<size>& vec_a, const vector<size>& vec_b) {
         for (uint_32 i = 0; i < size; ++i) {
-            if ((vec_a[i] - vec_b[i]) * (vec_a[i] - vec_b[i]) > eps_tmp) {
+            if ((vec_a[i] - vec_b[i]) * (vec_a[i] - vec_b[i]) > eps) {
                 return false;
             }
         }
@@ -209,7 +209,7 @@ namespace engine {
     template <uint_32 size>
     const vector<size> normalize(const vector<size>& vec) {
         real_32 vec_length = length(vec);
-        if (vec_length < eps_tmp) {
+        if (vec_length < eps) {
             throw std::invalid_argument("Vector length is zero - division by zero");
         }
         return vec / vec_length;
