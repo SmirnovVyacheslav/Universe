@@ -168,6 +168,9 @@
     <ClCompile Include="engine\src\core\data_type\matrix_4.cpp">
       <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\core\data_type\vertex.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">

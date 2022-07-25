@@ -156,6 +156,7 @@
     <ClCompile Include="engine\src\core\data_type\string.cpp" />
     <ClCompile Include="engine\src\core\data_type\vector_3.cpp" />
     <ClCompile Include="engine\src\core\data_type\vector_4.cpp" />
+    <ClCompile Include="engine\src\core\data_type\vertex.cpp" />
     <ClCompile Include="engine\src\core\initialize.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
