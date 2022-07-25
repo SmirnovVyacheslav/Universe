@@ -184,8 +184,6 @@
     <ClInclude Include="engine\src\core\data_type\vertex.h" />
     <ClInclude Include="engine\src\core\initialize.h" />
     <ClInclude Include="engine\src\core\math\const.h" />
-    <ClInclude Include="engine\src\core\math\matrix.h" />
-    <ClInclude Include="engine\src\core\math\vector.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
     <ClInclude Include="engine\src\object\object.h" />

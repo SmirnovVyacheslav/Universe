@@ -215,12 +215,6 @@
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
       <Filter>Файлы заголовков\engine\src\core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\math\vector.h">
-      <Filter>Файлы заголовков\engine\src\core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\math\matrix.h">
-      <Filter>Файлы заголовков\engine\src\core\math</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\math\const.h">
       <Filter>Файлы заголовков\engine\src\core\math</Filter>
     </ClInclude>
