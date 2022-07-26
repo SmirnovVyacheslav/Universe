@@ -1,4 +1,4 @@
-﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
+﻿// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "render.h"
 #include "src/platform/api/video.h"
 #include "src/platform/platform_def.h"

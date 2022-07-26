@@ -1,11 +1,10 @@
-﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
+﻿// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/data_type/string.h"
 #include "src/core/data_type/matrix_4.h"
 #include "src/scene/scene.h"
 #include "src/platform/platform_def.h"
 #include "src/platform/api/video.h"
-
 #ifdef WINDOWS
 #include <d3d11.h>
 #include <d3dx11.h>

@@ -1,7 +1,6 @@
-// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/platform/platform_def.h"
-
 #ifdef WINDOWS
 #include <windows.h>
 #include "src/platform/window.h"

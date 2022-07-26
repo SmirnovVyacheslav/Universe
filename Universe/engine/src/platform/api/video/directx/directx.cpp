@@ -1,14 +1,12 @@
-﻿// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
+﻿// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "directx.h"
-
 #ifdef WINDOWS
 #include <stdexcept>
 #include "src/core/config.h"
 #include "src/platform/window.h"
 
 
-namespace engine
-{
+namespace engine {
     directx::~directx() {
         clear_resource(immediate_context);
 

@@ -1,22 +1,15 @@
-// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "game.h"
 
 
-namespace game_ui
-{
-    game::game()
-    {
+namespace game_ui {
+    game::game() {
         // Initialize code
     };
-
-    game::~game()
-    {
+    game::~game() {
         // Termination code
     }
-
-    void game::run()
-    {
+    void game::run() {
         engine_inst.add_object();
         engine_inst.start_render();
     };

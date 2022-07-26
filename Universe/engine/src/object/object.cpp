@@ -1,19 +1,13 @@
-// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
-
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "object.h"
 #include "src/core/object_id.h"
 
 
-namespace engine
-{
+namespace engine {
     object::object() :
-        id(object_id::inst.get_object_id())
-    {
-        //
+        id(object_id::inst.get_object_id()) {
     }
-
-    mesh& object::get_mesh()
-    {
+    mesh& object::get_mesh() {
         return square;
     }
 }

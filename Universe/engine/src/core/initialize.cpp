@@ -1,4 +1,4 @@
-// Copyright: (C) 2021-2022 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "initialize.h"
 #include "config.h"
 #include "src/platform/api/video.h"
@@ -10,6 +10,5 @@ namespace engine {
         video::initialize();
     }
     void terminate() {
-        //
     }
 }
