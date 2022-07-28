@@ -1,0 +1,6 @@
+mesh:
+    cube
+shader:
+    basic_shader
+color:
+    red
