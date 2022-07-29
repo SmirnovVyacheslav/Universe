@@ -16,4 +16,7 @@ namespace engine {
     slave_ptr<video_config>& config::video() {
         return config::inst.video_ptr.create_slave_ptr();
     }
+    slave_ptr<resource_config>& config::resource() {
+        return config::inst.resource_ptr.create_slave_ptr();
+    }
 }
