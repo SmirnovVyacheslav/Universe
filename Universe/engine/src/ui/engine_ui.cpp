@@ -3,6 +3,7 @@
 #include "src/core/initialize.h"
 #include "src/scene/scene.h"
 #include "src/render/render.h"
+#include "src/resource/resource.h"
 
 
 namespace engine {
@@ -14,7 +15,7 @@ namespace engine {
             terminate();
         }
         void engine_ui::load() {
-            //
+            resource::load();
         }
         void engine_ui::add_object() {
             engine::scene::inst.add_object();
