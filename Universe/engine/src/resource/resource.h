@@ -16,5 +16,7 @@ namespace engine {
 
             resource& operator=(resource&& src) = delete;
             resource& operator=(const resource& src) = delete;
+
+            void load_mesh();
     };
 }
