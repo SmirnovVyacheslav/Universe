@@ -1,4 +1,5 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+#include <sstream>
 #include "string.h"
 #include "src/core/data_type/array.h"
 #include "src/core/data_type/map.h"
@@ -46,6 +47,9 @@ namespace engine {
     }
 
 
+    string::string() :
+        id(string_map::add(u8"")) {
+    }
     string::string(const char8_t* value) :
         id(string_map::add(std::u8string(value))) {
     }
@@ -122,5 +126,16 @@ namespace engine {
             }
         }
         return utf32;
+    }
+
+
+    std::istream& operator>>(std::istream& in_stream, string& str) {
+        std::string std_str;
+        in_stream >> std_str;
+        str = string(reinterpret_cast<const char8_t*>(std_str.c_str()));
+        return in_stream;
+    }
+    std::ostream& operator<<(std::ostream& out_stream, const string& str) {
+        return out_stream;
     }
 }

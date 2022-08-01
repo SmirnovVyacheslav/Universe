@@ -2,11 +2,15 @@
 #pragma once
 #include <cstdint>
 #include <string>
+#include <iostream>
 
 
 namespace engine {
     class string {
+        friend std::istream& operator>>(std::istream& in_stream, string& str);
+        friend std::ostream& operator<<(std::ostream& out_stream, const string& str);
         public:
+            string();
             string(const char8_t* value);
             string(const std::u8string& value);
             ~string() = default;
@@ -22,7 +26,6 @@ namespace engine {
             string& operator=(string&& src) = default;
             string& operator=(const string& src) = default;
         private:
-            string() = delete;
             std::int32_t id = -1;
     };
 }
