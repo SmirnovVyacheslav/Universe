@@ -1,6 +1,6 @@
 # Universe
 
-Game engine; Some physics based simulation
+Game engine
 
 ## Build
 
