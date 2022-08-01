@@ -36,6 +36,11 @@ namespace engine {
     // Scalar product
     template <uint_32 size>
     const real_32 operator*(const vector<size>& vec_a, const vector<size>& vec_b);
+    template <uint_32 size>
+    std::istream& operator>>(std::istream& in_stream, vector<size>& vec);
+    template <uint_32 size>
+    std::ostream& operator<<(std::ostream& out_stream, const vector<size>& vec);
+
 
     template <uint_32 size>
     const real_32 length(const vector<size>& vec);
@@ -71,6 +76,8 @@ namespace engine {
         friend bool operator!= <size> (const vector<size>& vec_a, const vector<size>& vec_b);
         // Scalar product
         friend const real_32 operator* <size> (const vector<size>& vec_a, const vector<size>& vec_b);
+        friend std::istream& operator>> <size>(std::istream& in_stream, vector<size>& vec);
+        friend std::ostream& operator<< <size> (std::ostream& out_stream, const vector<size>& vec);
     };
 
 
@@ -200,6 +207,22 @@ namespace engine {
         }
         return result;
     }
+    template <uint_32 size>
+    std::istream& operator>>(std::istream& in_stream, vector<size>& vec) {
+        for (uint_32 i = 0; i < size; ++i) {
+            in_stream >> vec[i];
+        }
+        return in_stream;
+    }
+    template <uint_32 size>
+    std::ostream& operator<<(std::ostream& out_stream, const vector<size>& vec) {
+        for (uint_32 i = 0; i < size; ++i) {
+            out_stream << vec[i] << " ";
+        }
+        out_stream << std::endl;
+        return out_stream;
+    }
+
 
 
     template <uint_32 size>
