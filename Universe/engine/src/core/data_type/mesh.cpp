@@ -17,9 +17,16 @@ namespace engine {
 
     void read_vertices(std::istream& in_stream, mesh& mesh_obj) {
         string str;
-        // str >> in_stream;
+        in_stream >> str;
+        if (str != string(u8"vertices")) {
+            throw std::invalid_argument("Incorrect file format");
+        }
 
-        // if ()
+        uint_32 vertices_num = 0;
+        in_stream >> vertices_num;
+        for (uint_32 i = 0; i < vertices_num; ++i) {
+            //
+        }
     }
     void read_indices(std::istream& in_stream, mesh& mesh_obj) {
         //

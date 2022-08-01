@@ -7,6 +7,8 @@
 
 namespace engine {
     class string {
+        friend bool operator==(const string& str_a, const string& str_b);
+        friend bool operator!=(const string& str_a, const string& str_b);
         friend std::istream& operator>>(std::istream& in_stream, string& str);
         friend std::ostream& operator<<(std::ostream& out_stream, const string& str);
         public:
