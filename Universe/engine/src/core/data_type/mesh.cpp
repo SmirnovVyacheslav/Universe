@@ -29,6 +29,20 @@ namespace engine {
             in_stream >> vertex_vec;
             mesh_obj.vertex_array.append(vertex(vertex_vec, vector_4(0.0f, 0.0f, 1.0f, 1.0f)));
         }
+
+        in_stream >> str;
+        if (str != string(u8"indices")) {
+            throw std::invalid_argument("Incorrect file format");
+        }
+
+        uint_32 indices_num = 0;
+        in_stream >> indices_num;
+        uint_16 index;
+        for (uint_32 i = 0; i < indices_num; ++i) {
+            in_stream >> index;
+            mesh_obj.index_array.append(index);
+        }
+
         return in_stream;
     }
     std::ostream& operator<<(std::ostream& out_stream, const mesh& mesh_obj) {
