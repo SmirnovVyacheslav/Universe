@@ -58,8 +58,14 @@ namespace engine {
     const real_32 operator*(const vector_4& vec_a, const vector_4& vec_b) {
         return vec_a.data * vec_b.data;
     }
-
-
+    std::istream& operator>>(std::istream& in_stream, vector_4& vec) {
+        in_stream >> vec.data;
+        return in_stream;
+    }
+    std::ostream& operator<<(std::ostream& out_stream, const vector_4& vec) {
+        out_stream << vec.data;
+        return out_stream;
+    }
     const real_32 length(const vector_4& vec) {
         return length(vec.data);
     }

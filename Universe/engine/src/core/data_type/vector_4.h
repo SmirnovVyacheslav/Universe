@@ -39,6 +39,8 @@ namespace engine {
     bool operator!=(const vector_4& vec_a, const vector_4& vec_b);
     // Scalar product
     const real_32 operator*(const vector_4& vec_a, const vector_4& vec_b);
+    std::istream& operator>>(std::istream& in_stream, vector_4& vec);
+    std::ostream& operator<<(std::ostream& out_stream, const vector_4& vec);
     const real_32 length(const vector_4& vec);
     const vector_4 normalize(const vector_4& vec);
 }

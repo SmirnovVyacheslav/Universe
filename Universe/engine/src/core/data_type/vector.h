@@ -2,6 +2,7 @@
 #pragma once
 #include <math.h>
 #include <stdexcept>
+#include <iostream>
 #include "src/core/math/const.h"
 
 

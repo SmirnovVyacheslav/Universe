@@ -40,6 +40,8 @@ namespace engine {
     const real_32 operator*(const vector_3& vec_a, const vector_3& vec_b);
     // Vector product
     const vector_3 operator^(const vector_3& vec_a, const vector_3& vec_b);
+    std::istream& operator>>(std::istream& in_stream, vector_3& vec);
+    std::ostream& operator<<(std::ostream& out_stream, const vector_3& vec);
     const real_32 length(const vector_3& vec);
     const vector_3 normalize(const vector_3& vec);
 }

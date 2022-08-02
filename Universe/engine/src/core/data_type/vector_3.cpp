@@ -64,8 +64,14 @@ namespace engine {
                  vec_a.z * vec_b.x - vec_a.x * vec_b.z,
                  vec_a.x * vec_b.y - vec_a.y * vec_b.x };
     }
-
-
+    std::istream& operator>>(std::istream& in_stream, vector_3& vec) {
+        in_stream >> vec.data;
+        return in_stream;
+    }
+    std::ostream& operator<<(std::ostream& out_stream, const vector_3& vec) {
+        out_stream << vec.data;
+        return out_stream;
+    }
     const real_32 length(const vector_3& vec) {
         return length(vec.data);
     }
