@@ -82,6 +82,9 @@ namespace engine {
     }
     template<class type_name>
     slave_ptr<type_name>& lead_ptr<type_name>::create_slave_ptr() {
+        if (obj_ptr == nullptr) {
+            throw std::invalid_argument("Main object was not initialized");
+        }
         slave_ptr_list.append(new slave_ptr(this));
         return *slave_ptr_list[-1];
     }
@@ -99,6 +102,9 @@ namespace engine {
     }
     template<class type_name>
     type_name* lead_ptr<type_name>::operator->() {
+        if (obj_ptr == nullptr) {
+            throw std::invalid_argument("Main object was not initialized");
+        }
         return obj_ptr;
     }
 
