@@ -15,7 +15,7 @@ namespace engine {
     }
 
 
-    void read_vertices(std::istream& in_stream, mesh& mesh_obj) {
+    std::istream& operator>>(std::istream& in_stream, mesh& mesh_obj) {
         string str;
         in_stream >> str;
         if (str != string(u8"vertices")) {
@@ -24,16 +24,11 @@ namespace engine {
 
         uint_32 vertices_num = 0;
         in_stream >> vertices_num;
+        vector_3 vertex_vec;
         for (uint_32 i = 0; i < vertices_num; ++i) {
-            //
+            in_stream >> vertex_vec;
+            mesh_obj.vertex_array.append(vertex(vertex_vec, vector_4(0.0f, 0.0f, 1.0f, 1.0f)));
         }
-    }
-    void read_indices(std::istream& in_stream, mesh& mesh_obj) {
-        //
-    }
-    std::istream& operator>>(std::istream& in_stream, mesh& mesh_obj) {
-        read_vertices(in_stream, mesh_obj);
-        read_indices(in_stream, mesh_obj);
         return in_stream;
     }
     std::ostream& operator<<(std::ostream& out_stream, const mesh& mesh_obj) {
