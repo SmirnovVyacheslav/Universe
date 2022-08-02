@@ -3,7 +3,7 @@
 
 
 namespace engine {
-    vertex::vertex(const vector_3& pos, const vector_4& color) :
+    vertex_tmp::vertex_tmp(const vector_3& pos, const vector_4& color) :
         pos(pos), color(color) {
     }
 }

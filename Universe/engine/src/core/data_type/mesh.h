@@ -6,23 +6,23 @@
 
 
 namespace engine {
-    class mesh {
-        friend std::istream& operator>>(std::istream& in_stream, mesh& mesh_obj);
-        friend std::ostream& operator<<(std::ostream& out_stream, const mesh& mesh_obj);
+    class mesh_tmp {
+        friend std::istream& operator>>(std::istream& in_stream, mesh_tmp& mesh_obj);
+        friend std::ostream& operator<<(std::ostream& out_stream, const mesh_tmp& mesh_obj);
         public:
-            mesh() = default;
-            ~mesh() = default;
-            mesh(mesh&& src) = default;
-            mesh(const mesh& src) = default;
+            mesh_tmp() = default;
+            ~mesh_tmp() = default;
+            mesh_tmp(mesh_tmp&& src) = default;
+            mesh_tmp(const mesh_tmp& src) = default;
 
-            mesh& operator=(mesh&& src) = default;
-            mesh& operator=(const mesh& src) = default;
+            mesh_tmp& operator=(mesh_tmp&& src) = default;
+            mesh_tmp& operator=(const mesh_tmp& src) = default;
 
             uint_32 size();
-            vertex& vertices();
+            vertex_tmp& vertices();
             uint_16& indices();
         private:
-            array<vertex> vertex_array;
+            array<vertex_tmp> vertex_array;
             array<uint_16> index_array;
     };
 }

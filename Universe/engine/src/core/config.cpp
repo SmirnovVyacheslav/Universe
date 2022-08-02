@@ -9,6 +9,7 @@ namespace engine {
     void config::initialize() {
         inst.core_ptr.initialize();
         inst.video_ptr.initialize();
+        inst.resource_ptr.initialize();
     }
     slave_ptr<core_config>& config::core() {
         return config::inst.core_ptr.create_slave_ptr();
