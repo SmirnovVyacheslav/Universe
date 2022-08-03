@@ -14,11 +14,15 @@ namespace engine {
         resource::inst.load_mesh();
     }
     void resource::load_mesh() {
-        mesh_tmp mesh_inst;
+        mesh_tmp mesh_obj;
         std::ifstream mesh_file;
         for (const auto& mesh_file_path : std::filesystem::directory_iterator(config::resource()->mesh_path.s_str())) {
+            string file_name = mesh_file_path.path().filename().u8string();
+            mesh_map.add(file_name, lead_ptr<mesh_tmp>());
+            mesh_map[file_name].initialize();
+
             mesh_file.open(mesh_file_path);
-            mesh_file >> mesh_inst;
+            mesh_file >> *mesh_map[file_name];
             mesh_file.close();
         }
     }

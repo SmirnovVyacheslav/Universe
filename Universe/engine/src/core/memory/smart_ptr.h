@@ -27,6 +27,7 @@ namespace engine {
             slave_ptr<type_name>& create_slave_ptr();
 
             type_name* operator->();
+            type_name& operator*();
             lead_ptr& operator=(lead_ptr&& src) = default;
             lead_ptr& operator=(const lead_ptr& src) = delete;
         private:
@@ -106,6 +107,13 @@ namespace engine {
             throw std::invalid_argument("Main object was not initialized");
         }
         return obj_ptr;
+    }
+    template<class type_name>
+    type_name& lead_ptr<type_name>::operator*() {
+        if (obj_ptr == nullptr) {
+            throw std::invalid_argument("Main object was not initialized");
+        }
+        return *obj_ptr;
     }
 
 

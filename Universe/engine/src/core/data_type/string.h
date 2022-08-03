@@ -3,10 +3,12 @@
 #include <cstdint>
 #include <string>
 #include <iostream>
+#include <functional>
 
 
 namespace engine {
     class string {
+        friend struct std::hash<engine::string>;
         friend bool operator==(const string& str_a, const string& str_b);
         friend bool operator!=(const string& str_a, const string& str_b);
         friend std::istream& operator>>(std::istream& in_stream, string& str);
@@ -29,5 +31,13 @@ namespace engine {
             string& operator=(const string& src) = default;
         private:
             std::int32_t id = -1;
+    };
+}
+namespace std {
+    template<>
+    struct std::hash<engine::string> {
+        size_t operator()(const engine::string& str) const {
+            return str.id;
+        }
     };
 }
