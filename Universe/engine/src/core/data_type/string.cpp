@@ -1,35 +1,35 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include <sstream>
 #include "string.h"
-#include "src/core/data_type/array.h"
-#include "src/core/data_type/map.h"
+#include "map.h"
 
 
 namespace engine {
     class string_map {
         public:
-            static std::int32_t add(const std::u8string& value);
-            static std::u8string& get(const std::int32_t id);
+            static int_32 add(const std::u8string& value);
+            static std::u8string& get(const int_32 id);
         private:
             static string_map inst;
 
-            std::int32_t id_counter = 0;
-            map<std::int32_t, std::u8string> id_str_map;
-            map<std::u8string, std::int32_t> str_id_map;
+            int_32 id_counter = 0;
+            map<int_32, std::u8string> id_str_map;
+            map<std::u8string, int_32> str_id_map;
 
             string_map() = default;
-            ~string_map() = default;
             string_map(string_map&& src) = delete;
             string_map(const string_map& src) = delete;
+
             string_map& operator=(string_map&& src) = delete;
             string_map& operator=(const string_map& src) = delete;
+
+            ~string_map() = default;
     };
 
 
     string_map string_map::inst = string_map();
 
 
-    std::int32_t string_map::add(const std::u8string& value) {
+    int_32 string_map::add(const std::u8string& value) {
         if (inst.str_id_map.contains(value)) {
             return inst.str_id_map[value];
         }
@@ -39,7 +39,7 @@ namespace engine {
         inst.str_id_map.add(value, inst.id_counter);
         return inst.id_counter;
     }
-    std::u8string& string_map::get(const std::int32_t id) {
+    std::u8string& string_map::get(const int_32 id) {
         if (inst.id_str_map.contains(id)) {
             return inst.id_str_map[id];
         }

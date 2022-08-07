@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include <cstdint>
+#include "std.h"
 #include <string>
 #include <iostream>
 #include <functional>
@@ -17,7 +17,6 @@ namespace engine {
             string();
             string(const char8_t* value);
             string(const std::u8string& value);
-            ~string() = default;
             string(string&& src) = default;
             string(const string& src) = default;
 
@@ -29,15 +28,17 @@ namespace engine {
 
             string& operator=(string&& src) = default;
             string& operator=(const string& src) = default;
+
+            ~string() = default;
         private:
-            std::int32_t id = -1;
+            int_32 id = -1;
     };
 }
 namespace std {
     template<>
     struct std::hash<engine::string> {
         size_t operator()(const engine::string& str) const {
-            return str.id;
+            return static_cast<size_t>(str.id);
         }
     };
 }
