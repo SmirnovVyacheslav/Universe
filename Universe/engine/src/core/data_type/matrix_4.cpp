@@ -9,7 +9,11 @@ namespace engine {
     const real_32 projection_back_z = 100.0f;
 
 
-    matrix_4::matrix_4() {
+    matrix_4::matrix_4() :
+        row_1({ 0.0f, 0.0f, 0.0f, 0.0f }),
+        row_2({ 0.0f, 0.0f, 0.0f, 0.0f }),
+        row_3({ 0.0f, 0.0f, 0.0f, 0.0f }),
+        row_4({ 0.0f, 0.0f, 0.0f, 0.0f }) {
     }
     matrix_4::matrix_4(vector_4 row_1, vector_4 row_2, vector_4 row_3, vector_4 row_4) :
         row_1(row_1), row_2(row_2), row_3(row_3), row_4(row_4) {

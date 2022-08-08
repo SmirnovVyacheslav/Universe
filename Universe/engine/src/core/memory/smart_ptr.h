@@ -1,7 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include <stdexcept>
+#include "src/core/data_type/std.h"
 #include "src/core/data_type/array.h"
+#include <stdexcept>
 
 
 namespace engine {
@@ -16,7 +17,6 @@ namespace engine {
         friend class lead_ptr<type_name>;
         public:
             lead_ptr() = default;
-            ~lead_ptr();
             lead_ptr(lead_ptr&& src) = default;
             lead_ptr(const lead_ptr & src) = delete;
 
@@ -26,10 +26,12 @@ namespace engine {
             void initialize_derivative(const type_args&... args);
             slave_ptr<type_name>& create_slave_ptr();
 
-            type_name* operator->();
-            type_name& operator*();
             lead_ptr& operator=(lead_ptr&& src) = default;
             lead_ptr& operator=(const lead_ptr& src) = delete;
+            type_name* operator->();
+            type_name& operator*();
+
+            ~lead_ptr();
         private:
             type_name* obj_ptr = nullptr;
             array< slave_ptr<type_name>* > slave_ptr_list;
@@ -42,13 +44,14 @@ namespace engine {
     class slave_ptr {
         friend class lead_ptr<type_name>;
         public:
-            ~slave_ptr();
             slave_ptr(slave_ptr&& src);
             slave_ptr(const slave_ptr& src);
 
-            type_name* operator->();
             slave_ptr& operator=(slave_ptr&& src);
             slave_ptr& operator=(const slave_ptr& src);
+            type_name* operator->();
+
+            ~slave_ptr();
         private:
             lead_ptr<type_name>* obj_ptr;
 
@@ -56,15 +59,6 @@ namespace engine {
     };
 
 
-    template<class type_name>
-    lead_ptr<type_name>::~lead_ptr() {
-        for (std::int32_t i = 0; i < slave_ptr_list.size(); ++i) {
-            if (slave_ptr_list[i] != nullptr) {
-                slave_ptr_list[i]->obj_ptr = nullptr;
-            }
-        }
-        delete obj_ptr;
-    }
     template<class type_name>
     template<class... type_args>
     void lead_ptr<type_name>::initialize(const type_args&... args) {
@@ -115,15 +109,20 @@ namespace engine {
         }
         return *obj_ptr;
     }
+    template<class type_name>
+    lead_ptr<type_name>::~lead_ptr() {
+        for (int_32 i = 0; i < slave_ptr_list.size(); ++i) {
+            if (slave_ptr_list[i] != nullptr) {
+                slave_ptr_list[i]->obj_ptr = nullptr;
+            }
+        }
+        delete obj_ptr;
+    }
 
 
     template<class type_name>
     slave_ptr<type_name>::slave_ptr(lead_ptr<type_name>* obj_ptr) :
         obj_ptr(obj_ptr) {
-    }
-    template<class type_name>
-    slave_ptr<type_name>::~slave_ptr() {
-        obj_ptr->destroy_slave_ptr(this);
     }
     template<class type_name>
     slave_ptr<type_name>::slave_ptr(slave_ptr&& src) {
@@ -135,13 +134,6 @@ namespace engine {
     slave_ptr<type_name>::slave_ptr(const slave_ptr& src) {
         obj_ptr = src.obj_ptr;
         obj_ptr->add_slave_ptr(this);
-    }
-    template<class type_name>
-    type_name* slave_ptr<type_name>::operator->() {
-        if (obj_ptr == nullptr) {
-            throw std::invalid_argument("Main object was deleted");
-        }
-        return obj_ptr->operator->();
     }
     template<class type_name>
     slave_ptr<type_name>& slave_ptr<type_name>::operator=(slave_ptr&& src) {
@@ -159,5 +151,16 @@ namespace engine {
             obj_ptr->add_slave_ptr(this);
         }
         return *this;
+    }
+    template<class type_name>
+    type_name* slave_ptr<type_name>::operator->() {
+        if (obj_ptr == nullptr) {
+            throw std::invalid_argument("Main object was deleted");
+        }
+        return obj_ptr->operator->();
+    }
+    template<class type_name>
+    slave_ptr<type_name>::~slave_ptr() {
+        obj_ptr->destroy_slave_ptr(this);
     }
 }

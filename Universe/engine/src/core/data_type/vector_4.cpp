@@ -3,7 +3,7 @@
 
 
 namespace engine {
-    vector_4::vector_4() {
+    vector_4::vector_4() : x(0.0f), y(0.0f), z(0.0f), w(0.0f) {
     }
     vector_4::vector_4(real_32 x, real_32 y, real_32 z, real_32 w) : x(x), y(y), z(z), w(w) {
     }

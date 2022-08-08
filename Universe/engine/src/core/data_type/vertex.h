@@ -9,12 +9,13 @@ namespace engine {
         public:
             vertex_tmp() = default;
             vertex_tmp(const vector_3& pos, const vector_4& color);
-            ~vertex_tmp() = default;
             vertex_tmp(vertex_tmp&& src) = default;
             vertex_tmp(const vertex_tmp& src) = default;
 
             vertex_tmp& operator=(vertex_tmp&& src) = default;
             vertex_tmp& operator=(const vertex_tmp& src) = default;
+
+            ~vertex_tmp() = default;
         private:
             vector_3 pos;
             vector_4 color;
