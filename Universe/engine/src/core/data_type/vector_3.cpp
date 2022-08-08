@@ -7,7 +7,7 @@ namespace engine {
     }
     vector_3::vector_3(real_32 x, real_32 y, real_32 z) : x(x), y(y), z(z) {
     }
-    vector_3::vector_3(const vector<static_cast<uint_32>(3)> vec) {
+    vector_3::vector_3(const vector<3> vec) {
         data = vec;
     }
     real_32& vector_3::operator[](const int_32 index) {
@@ -18,6 +18,12 @@ namespace engine {
     }
 
 
+    const real_32 length(const vector_3& vec) {
+        return length(vec.data);
+    }
+    const vector_3 normalize(const vector_3& vec) {
+        return normalize(vec.data);
+    }
     const vector_3 operator+(const vector_3& vec_a, const vector_3& vec_b) {
         return vec_a.data + vec_b.data;
     }
@@ -71,11 +77,5 @@ namespace engine {
     std::ostream& operator<<(std::ostream& out_stream, const vector_3& vec) {
         out_stream << vec.data;
         return out_stream;
-    }
-    const real_32 length(const vector_3& vec) {
-        return length(vec.data);
-    }
-    const vector_3 normalize(const vector_3& vec) {
-        return normalize(vec.data);
     }
 }

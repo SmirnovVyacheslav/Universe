@@ -7,7 +7,7 @@ namespace engine {
     }
     vector_4::vector_4(real_32 x, real_32 y, real_32 z, real_32 w) : x(x), y(y), z(z), w(w) {
     }
-    vector_4::vector_4(const vector<static_cast<uint_32>(4)> vec) {
+    vector_4::vector_4(const vector<4> vec) {
         data = vec;
     }
     real_32& vector_4::operator[](const int_32 index) {
@@ -18,6 +18,12 @@ namespace engine {
     }
 
 
+    const real_32 length(const vector_4& vec) {
+        return length(vec.data);
+    }
+    const vector_4 normalize(const vector_4& vec) {
+        return normalize(vec.data);
+    }
     const vector_4 operator+(const vector_4& vec_a, const vector_4& vec_b) {
         return vec_a.data + vec_b.data;
     }
@@ -65,11 +71,5 @@ namespace engine {
     std::ostream& operator<<(std::ostream& out_stream, const vector_4& vec) {
         out_stream << vec.data;
         return out_stream;
-    }
-    const real_32 length(const vector_4& vec) {
-        return length(vec.data);
-    }
-    const vector_4 normalize(const vector_4& vec) {
-        return normalize(vec.data);
     }
 }
