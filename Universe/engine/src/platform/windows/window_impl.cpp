@@ -1,15 +1,20 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "window_impl.h"
+#include "src/core/config.h"
 #ifdef WINDOWS
 
 
 namespace engine {
     namespace platform {
-        void* window::id() {
-            return inst.impl->id();
+        window::window() {
         }
         void window::create_window() {
             inst.impl.initialize(config::core()->window_name);
+        }
+        void* window::id() {
+            return inst.impl->id();
+        }
+        window::~window() {
         }
 
 
@@ -40,18 +45,18 @@ namespace engine {
         }
 
 
-        window_impl::window_impl(const string& name) :
+        window::window_impl::window_impl(const string& name) :
             window_name(name) {
             create_window();
             show_window();
         }
-        window_impl::~window_impl() {
+        window::window_impl::~window_impl() {
             destroy_window();
         }
-        HWND window_impl::id() {
+        HWND window::window_impl::id() {
             return window_id;
         }
-        void window_impl::create_window() {
+        void window::window_impl::create_window() {
             register_window_class();
 
             window_id = CreateWindow(
@@ -71,14 +76,14 @@ namespace engine {
                 throw string(u8"Failed to create window");
             }
         }
-        void window_impl::show_window() {
+        void window::window_impl::show_window() {
             ShowWindow(window_id, SW_SHOWNORMAL);
         }
-        void window_impl::destroy_window() {
+        void window::window_impl::destroy_window() {
             DestroyWindow(window_id);
             unregister_window_class();
         }
-        void window_impl::register_window_class() {
+        void window::window_impl::register_window_class() {
             WNDCLASSEX data;
             std::wstring name = window_class_name.w_str();
 
@@ -97,7 +102,7 @@ namespace engine {
                 throw string(u8"Failed to register window class");
             }
         }
-        void window_impl::unregister_window_class() {
+        void window::window_impl::unregister_window_class() {
             UnregisterClass(static_cast<LPCTSTR>(window_class_name.w_str().c_str()), GetModuleHandle(nullptr));
         }
     }
