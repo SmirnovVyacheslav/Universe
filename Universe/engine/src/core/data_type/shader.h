@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include "string.h"
 #include <iostream>
 
 
@@ -16,5 +17,7 @@ namespace engine {
             shader& operator=(const shader& src) = default;
 
             ~shader() = default;
+        private:
+            string code;
     };
 }
