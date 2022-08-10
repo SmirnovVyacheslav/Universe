@@ -50,6 +50,12 @@ namespace engine {
     string::string() :
         id(string_map::add(u8"")) {
     }
+    string::string(const char* value) :
+        id(string_map::add(std::u8string(reinterpret_cast<const char8_t*>(value)))) {
+    }
+    string::string(const std::string& value) :
+        id(string_map::add(std::u8string(reinterpret_cast<const char8_t*>(value.c_str())))) {
+    }
     string::string(const char8_t* value) :
         id(string_map::add(std::u8string(value))) {
     }

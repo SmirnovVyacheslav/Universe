@@ -12,9 +12,9 @@ namespace engine {
 
     void resource::load() {
         resource::inst.load_mesh();
+        resource::inst.load_shader();
     }
     void resource::load_mesh() {
-        mesh_tmp mesh_obj;
         std::ifstream mesh_file;
         for (const auto& mesh_file_path : std::filesystem::directory_iterator(config::resource()->mesh_path.s_str())) {
             string file_name = mesh_file_path.path().filename().u8string();
@@ -24,6 +24,18 @@ namespace engine {
             mesh_file.open(mesh_file_path);
             mesh_file >> *mesh_map[file_name];
             mesh_file.close();
+        }
+    }
+    void resource::load_shader() {
+        std::ifstream shader_file;
+        for (const auto& shader_file_path : std::filesystem::directory_iterator(config::resource()->shader_path.s_str())) {
+            string file_name = shader_file_path.path().filename().u8string();
+            shader_map.add(file_name, lead_ptr<shader>());
+            shader_map[file_name].initialize();
+
+            shader_file.open(shader_file_path);
+            shader_file >> *shader_map[file_name];
+            shader_file.close();
         }
     }
 }

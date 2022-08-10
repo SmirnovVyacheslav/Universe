@@ -15,6 +15,8 @@ namespace engine {
         friend std::ostream& operator<<(std::ostream& out_stream, const string& str);
         public:
             string();
+            string(const char* value);
+            string(const std::string& value);
             string(const char8_t* value);
             string(const std::u8string& value);
             string(string&& src) = default;

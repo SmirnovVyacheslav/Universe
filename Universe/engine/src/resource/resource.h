@@ -2,6 +2,7 @@
 #pragma once
 #include "src/core/data_type/map.h"
 #include "src/core/data_type/mesh.h"
+#include "src/core/data_type/shader.h"
 #include "src/core/data_type/string.h"
 #include "src/core/memory/smart_ptr.h"
 
@@ -13,6 +14,7 @@ namespace engine {
         private:
             static resource inst;
             map<string, lead_ptr<mesh_tmp>> mesh_map;
+            map<string, lead_ptr<shader>> shader_map;
 
             resource() = default;
             ~resource() = default;
@@ -23,5 +25,6 @@ namespace engine {
             resource& operator=(const resource& src) = delete;
 
             void load_mesh();
+            void load_shader();
     };
 }

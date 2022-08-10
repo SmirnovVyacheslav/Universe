@@ -4,7 +4,7 @@
 
 namespace engine {
     std::istream& operator>>(std::istream& in_stream, shader& shader_obj) {
-        in_stream >> shader_obj.code;
+        shader_obj.code = string(std::string(std::istreambuf_iterator<char>(in_stream), std::istreambuf_iterator<char>()));
         return in_stream;
     }
     std::ostream& operator<<(std::ostream& out_stream, const shader& shader_obj) {
