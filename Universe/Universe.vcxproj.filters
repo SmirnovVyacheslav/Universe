@@ -180,6 +180,9 @@
     <ClCompile Include="engine\src\core\data_type\shader.cpp">
       <Filter>Исходные файлы\engine\src\core\data_type</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\core\data_type\model.cpp">
+      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -264,6 +267,9 @@
       <Filter>Файлы заголовков\engine\src\resource</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\shader.h">
+      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\model.h">
       <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
     </ClInclude>
   </ItemGroup>
