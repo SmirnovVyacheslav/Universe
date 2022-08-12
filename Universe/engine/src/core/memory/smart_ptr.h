@@ -14,7 +14,7 @@ namespace engine {
 
     template<class type_name>
     class lead_ptr {
-        friend class lead_ptr<type_name>;
+        friend class slave_ptr<type_name>;
         public:
             lead_ptr() = default;
             lead_ptr(lead_ptr&& src) = default;
@@ -85,7 +85,7 @@ namespace engine {
     }
     template<class type_name>
     void lead_ptr<type_name>::destroy_slave_ptr(const slave_ptr<type_name>* ptr) {
-        slave_ptr_list[slave_ptr_list.find_index(ptr)] = nullptr;
+        // slave_ptr_list[slave_ptr_list.find_index(ptr)] = nullptr;
     }
     template<class type_name>
     void lead_ptr<type_name>::add_slave_ptr(const slave_ptr<type_name>* ptr) {
