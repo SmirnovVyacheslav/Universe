@@ -21,9 +21,9 @@ namespace engine {
             lead_ptr(const lead_ptr & src) = delete;
 
             template<class... type_args>
-            void initialize(const type_args&... args);
+            void initialize(type_args&&... args);
             template<class type_name_derivative, class... type_args>
-            void initialize_derivative(const type_args&... args);
+            void initialize_derivative(type_args&&... args);
             slave_ptr<type_name>& create_slave_ptr();
 
             lead_ptr& operator=(lead_ptr&& src) = default;
@@ -53,7 +53,7 @@ namespace engine {
 
             ~slave_ptr();
         private:
-            lead_ptr<type_name>* obj_ptr;
+            lead_ptr<type_name>* obj_ptr = nullptr;
 
             slave_ptr(lead_ptr<type_name>* obj_ptr);
     };
@@ -61,19 +61,19 @@ namespace engine {
 
     template<class type_name>
     template<class... type_args>
-    void lead_ptr<type_name>::initialize(const type_args&... args) {
+    void lead_ptr<type_name>::initialize(type_args&&... args) {
         if (obj_ptr != nullptr) {
             delete obj_ptr;
         }
-        obj_ptr = new type_name(args...);
+        obj_ptr = new type_name(std::forward<type_args>(args)...);
     }
     template<class type_name>
     template<class type_name_derivative, class... type_args>
-    void lead_ptr<type_name>::initialize_derivative(const type_args&... args) {
+    void lead_ptr<type_name>::initialize_derivative(type_args&&... args) {
         if (obj_ptr != nullptr) {
             delete obj_ptr;
         }
-        obj_ptr = new type_name_derivative(args...);
+        obj_ptr = new type_name_derivative(std::forward<type_args>(args)...);
     }
     template<class type_name>
     slave_ptr<type_name>& lead_ptr<type_name>::create_slave_ptr() {
