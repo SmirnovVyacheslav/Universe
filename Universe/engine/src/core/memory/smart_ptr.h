@@ -37,9 +37,9 @@ namespace engine {
             array<slave_ptr<type_name>*> slave_ptr_array;
 
             void terminate();
-            void destroy_slave_ptr(const slave_ptr<type_name>* ptr);
-            void add_slave_ptr(const slave_ptr<type_name>* ptr);
-            void update_slave_ptr(const slave_ptr<type_name>* old_ptr, const slave_ptr<type_name>* new_ptr);
+            void destroy_slave_ptr(slave_ptr<type_name>* ptr);
+            void add_slave_ptr(slave_ptr<type_name>* ptr);
+            void update_slave_ptr(slave_ptr<type_name>* old_ptr, slave_ptr<type_name>* new_ptr);
     };
     template<class type_name>
     class slave_ptr {
@@ -95,15 +95,15 @@ namespace engine {
         return *slave_ptr_array[-1];
     }
     template<class type_name>
-    void lead_ptr<type_name>::destroy_slave_ptr(const slave_ptr<type_name>* ptr) {
-        // slave_ptr_array[slave_ptr_array.find_index(ptr)] = nullptr;
+    void lead_ptr<type_name>::destroy_slave_ptr(slave_ptr<type_name>* ptr) {
+        slave_ptr_array[slave_ptr_array.find_index(ptr)] = nullptr;
     }
     template<class type_name>
-    void lead_ptr<type_name>::add_slave_ptr(const slave_ptr<type_name>* ptr) {
+    void lead_ptr<type_name>::add_slave_ptr(slave_ptr<type_name>* ptr) {
         slave_ptr_array.append(ptr);
     }
     template<class type_name>
-    void lead_ptr<type_name>::update_slave_ptr(const slave_ptr<type_name>* old_ptr, const slave_ptr<type_name>* new_ptr) {
+    void lead_ptr<type_name>::update_slave_ptr(slave_ptr<type_name>* old_ptr, slave_ptr<type_name>* new_ptr) {
         slave_ptr_array[slave_ptr_array.find_index(old_ptr)] = new_ptr;
     }
     template<class type_name>
@@ -144,6 +144,9 @@ namespace engine {
     template<class type_name>
     slave_ptr<type_name>& slave_ptr<type_name>::operator=(slave_ptr&& src) {
         if (this != &src) {
+            if (obj_ptr != nullptr) {
+                obj_ptr->destroy_slave_ptr();
+            }
             obj_ptr = src.obj_ptr;
             obj_ptr->update_slave_ptr(&src, this);
             src.obj_ptr = nullptr;
@@ -153,6 +156,9 @@ namespace engine {
     template<class type_name>
     slave_ptr<type_name>& slave_ptr<type_name>::operator=(const slave_ptr& src) {
         if (this != &src) {
+            if (obj_ptr != nullptr) {
+                obj_ptr->destroy_slave_ptr();
+            }
             obj_ptr = src.obj_ptr;
             obj_ptr->add_slave_ptr(this);
         }
@@ -168,5 +174,6 @@ namespace engine {
     template<class type_name>
     slave_ptr<type_name>::~slave_ptr() {
         obj_ptr->destroy_slave_ptr(this);
+        obj_ptr = nullptr;
     }
 }
