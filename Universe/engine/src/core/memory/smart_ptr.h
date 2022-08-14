@@ -36,6 +36,7 @@ namespace engine {
             type_name* obj_ptr = nullptr;
             array<slave_ptr<type_name>*> slave_ptr_array;
 
+            void terminate();
             void destroy_slave_ptr(const slave_ptr<type_name>* ptr);
             void add_slave_ptr(const slave_ptr<type_name>* ptr);
             void update_slave_ptr(const slave_ptr<type_name>* old_ptr, const slave_ptr<type_name>* new_ptr);
@@ -63,7 +64,7 @@ namespace engine {
     template<class... type_args>
     void lead_ptr<type_name>::initialize(type_args&&... args) {
         if (obj_ptr != nullptr) {
-            delete obj_ptr;
+            terminate();
         }
         obj_ptr = new type_name(std::forward<type_args>(args)...);
     }
@@ -71,9 +72,19 @@ namespace engine {
     template<class type_name_derivative, class... type_args>
     void lead_ptr<type_name>::initialize_derivative(type_args&&... args) {
         if (obj_ptr != nullptr) {
-            delete obj_ptr;
+            terminate();
         }
         obj_ptr = new type_name_derivative(std::forward<type_args>(args)...);
+    }
+    template<class type_name>
+    void lead_ptr<type_name>::terminate() {
+        for (int_32 i = 0; i < slave_ptr_array.size(); ++i) {
+            if (slave_ptr_array[i] != nullptr) {
+                slave_ptr_array[i]->obj_ptr = nullptr;
+            }
+        }
+        delete obj_ptr;
+        obj_ptr = nullptr;
     }
     template<class type_name>
     slave_ptr<type_name>& lead_ptr<type_name>::create_slave_ptr() {
@@ -111,12 +122,7 @@ namespace engine {
     }
     template<class type_name>
     lead_ptr<type_name>::~lead_ptr() {
-        for (int_32 i = 0; i < slave_ptr_array.size(); ++i) {
-            if (slave_ptr_array[i] != nullptr) {
-                slave_ptr_array[i]->obj_ptr = nullptr;
-            }
-        }
-        delete obj_ptr;
+        terminate();
     }
 
 
