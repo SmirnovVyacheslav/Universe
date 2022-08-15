@@ -17,6 +17,7 @@ namespace engine {
     struct resource_config {
         string mesh_path = u8"game/resource/mesh";
         string shader_path = u8"game/resource/shader";
+        string model_path = u8"game/resource/model";
     };
     class config {
         public:

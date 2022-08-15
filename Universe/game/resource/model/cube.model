@@ -1,6 +1,6 @@
 mesh
-    cube
+    cube.mesh
 shader
-    basic_shader
+    basic_shader.fx
 color
     red

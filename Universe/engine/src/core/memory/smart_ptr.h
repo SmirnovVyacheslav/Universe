@@ -45,6 +45,7 @@ namespace engine {
     class slave_ptr {
         friend class lead_ptr<type_name>;
         public:
+            slave_ptr();
             slave_ptr(slave_ptr&& src);
             slave_ptr(const slave_ptr& src);
 
@@ -126,6 +127,10 @@ namespace engine {
     }
 
 
+    template<class type_name>
+    slave_ptr<type_name>::slave_ptr() :
+        obj_ptr(nullptr) {
+    }
     template<class type_name>
     slave_ptr<type_name>::slave_ptr(lead_ptr<type_name>* obj_ptr) :
         obj_ptr(obj_ptr) {

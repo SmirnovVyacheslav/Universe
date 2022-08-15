@@ -13,6 +13,7 @@ namespace engine {
     void resource::load() {
         resource::inst.load_mesh();
         resource::inst.load_shader();
+        resource::inst.load_model();
     }
     slave_ptr<mesh_tmp>& resource::mesh_prt(const string name) {
         return resource::inst.mesh_map[name].create_slave_ptr();
@@ -45,6 +46,18 @@ namespace engine {
             shader_file.open(shader_file_path);
             shader_file >> *shader_map[file_name];
             shader_file.close();
+        }
+    }
+    void resource::load_model() {
+        std::ifstream model_file;
+        for (const auto& model_file_path: std::filesystem::directory_iterator(config::resource()->model_path.s_str())) {
+            string file_name = model_file_path.path().filename().u8string();
+            model_map.add(file_name, lead_ptr <model>());
+            model_map[file_name].initialize();
+
+            model_file.open(model_file_path);
+            model_file >> *model_map[file_name];
+            model_file.close();
         }
     }
 }

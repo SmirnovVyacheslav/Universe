@@ -31,5 +31,6 @@ namespace engine {
 
             void load_mesh();
             void load_shader();
+            void load_model();
     };
 }
