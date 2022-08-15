@@ -52,7 +52,7 @@ namespace engine {
         std::ifstream model_file;
         for (const auto& model_file_path: std::filesystem::directory_iterator(config::resource()->model_path.s_str())) {
             string file_name = model_file_path.path().filename().u8string();
-            model_map.add(file_name, lead_ptr <model>());
+            model_map.add(file_name, lead_ptr<model>());
             model_map[file_name].initialize();
 
             model_file.open(model_file_path);
