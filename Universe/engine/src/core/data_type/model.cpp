@@ -11,14 +11,14 @@ namespace engine {
             throw std::invalid_argument("Incorrect file format");
         }
         in_stream >> str;
-        // model_obj.model_mesh = resource::mesh_prt(str);
+        model_obj.model_mesh = resource::mesh_prt(str);
 
         in_stream >> str;
         if (str != string(u8"shader")) {
             throw std::invalid_argument("Incorrect file format");
         }
         in_stream >> str;
-        // model_obj.model_shader = resource::shader_prt(str);
+        model_obj.model_shader = resource::shader_prt(str);
 
         in_stream >> str;
         if (str != string(u8"color")) {

@@ -145,7 +145,7 @@ namespace engine {
     slave_ptr<type_name>& slave_ptr<type_name>::operator=(slave_ptr&& src) {
         if (this != &src) {
             if (obj_ptr != nullptr) {
-                obj_ptr->destroy_slave_ptr();
+                obj_ptr->destroy_slave_ptr(this);
             }
             obj_ptr = src.obj_ptr;
             obj_ptr->update_slave_ptr(&src, this);
@@ -157,7 +157,7 @@ namespace engine {
     slave_ptr<type_name>& slave_ptr<type_name>::operator=(const slave_ptr& src) {
         if (this != &src) {
             if (obj_ptr != nullptr) {
-                obj_ptr->destroy_slave_ptr();
+                obj_ptr->destroy_slave_ptr(this);
             }
             obj_ptr = src.obj_ptr;
             obj_ptr->add_slave_ptr(this);
