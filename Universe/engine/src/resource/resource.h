@@ -4,6 +4,7 @@
 #include "src/core/data_type/mesh.h"
 #include "src/core/data_type/shader.h"
 #include "src/core/data_type/model.h"
+#include "src/core/data_type/scene.h"
 #include "src/core/data_type/string.h"
 #include "src/core/memory/smart_ptr.h"
 
@@ -15,11 +16,13 @@ namespace engine {
             static slave_ptr<mesh_tmp>& mesh_prt(const string name);
             static slave_ptr<shader>& shader_prt(const string name);
             static slave_ptr<model>& model_prt(const string name);
+            static slave_ptr<scene_tmp>& scene_prt(const string name);
         private:
             static resource inst;
             map<string, lead_ptr<mesh_tmp>> mesh_map;
             map<string, lead_ptr<shader>> shader_map;
             map<string, lead_ptr<model>> model_map;
+            map<string, lead_ptr<scene_tmp>> scene_map;
 
             resource() = default;
             ~resource() = default;
@@ -32,5 +35,6 @@ namespace engine {
             void load_mesh();
             void load_shader();
             void load_model();
+            void load_scene();
     };
 }

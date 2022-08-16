@@ -18,6 +18,7 @@ namespace engine {
         string mesh_path = u8"game/resource/mesh";
         string shader_path = u8"game/resource/shader";
         string model_path = u8"game/resource/model";
+        string scene_path = u8"game/resource/scene";
     };
     class config {
         public:

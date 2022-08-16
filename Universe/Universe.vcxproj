@@ -155,6 +155,7 @@
     <ClCompile Include="engine\src\core\data_type\matrix_4.cpp" />
     <ClCompile Include="engine\src\core\data_type\mesh.cpp" />
     <ClCompile Include="engine\src\core\data_type\model.cpp" />
+    <ClCompile Include="engine\src\core\data_type\scene.cpp" />
     <ClCompile Include="engine\src\core\data_type\shader.cpp" />
     <ClCompile Include="engine\src\core\data_type\string.cpp" />
     <ClCompile Include="engine\src\core\data_type\vector_3.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="engine\src\core\data_type\matrix_4.h" />
     <ClInclude Include="engine\src\core\data_type\mesh.h" />
     <ClInclude Include="engine\src\core\data_type\model.h" />
+    <ClInclude Include="engine\src\core\data_type\scene.h" />
     <ClInclude Include="engine\src\core\data_type\shader.h" />
     <ClInclude Include="engine\src\core\data_type\std.h" />
     <ClInclude Include="engine\src\core\data_type\string.h" />

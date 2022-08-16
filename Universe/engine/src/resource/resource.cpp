@@ -14,6 +14,7 @@ namespace engine {
         resource::inst.load_mesh();
         resource::inst.load_shader();
         resource::inst.load_model();
+        resource::inst.load_scene();
     }
     slave_ptr<mesh_tmp>& resource::mesh_prt(const string name) {
         return resource::inst.mesh_map[name].create_slave_ptr();
@@ -23,6 +24,9 @@ namespace engine {
     }
     slave_ptr<model>& resource::model_prt(const string name) {
         return resource::inst.model_map[name].create_slave_ptr();
+    }
+    slave_ptr<scene_tmp>& resource::scene_prt(const string name) {
+        return resource::inst.scene_map[name].create_slave_ptr();
     }
     void resource::load_mesh() {
         std::ifstream mesh_file;
@@ -58,6 +62,18 @@ namespace engine {
             model_file.open(model_file_path);
             model_file >> *model_map[file_name];
             model_file.close();
+        }
+    }
+    void resource::load_scene() {
+        std::ifstream scene_file;
+        for (const auto& scene_file_path : std::filesystem::directory_iterator(config::resource()->scene_path.s_str())) {
+            string file_name = scene_file_path.path().filename().u8string();
+            scene_map.add(file_name, lead_ptr<scene_tmp>());
+            scene_map[file_name].initialize();
+
+            scene_file.open(scene_file_path);
+            scene_file >> *scene_map[file_name];
+            scene_file.close();
         }
     }
 }
