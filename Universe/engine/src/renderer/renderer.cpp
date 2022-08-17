@@ -1,5 +1,6 @@
 ﻿// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "render.h"
+#include "renderer.h"
+#include "src/resource/resource.h"
 #include "src/platform/api/video.h"
 #include "src/platform/platform_def.h"
 #ifdef WINDOWS
@@ -7,10 +8,10 @@
 
 
 namespace engine {
-    render render::inst = render();
+    renderer renderer::inst = renderer();
 
 
-    void render::start_render() {
+    void renderer::render() {
         video::create_device();
 
         MSG msg = { 0 };
@@ -23,6 +24,7 @@ namespace engine {
             }
             else
             {
+                resource::scene_prt(u8"scene_01.scene")->render();
                 video::render();
             }
         }
