@@ -15,6 +15,8 @@ namespace engine {
             model(model&& src) = default;
             model(const model& src) = default;
 
+            void render();
+
             model& operator=(model&& src) = default;
             model& operator=(const model& src) = default;
 

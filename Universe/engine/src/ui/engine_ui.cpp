@@ -17,6 +17,9 @@ namespace engine {
         void engine_ui::load() {
             resource::load();
         }
+        void engine_ui::render() {
+            engine::resource::scene_prt(u8"scene_01.scene")->render();
+        }
         void engine_ui::add_object() {
             engine::scene::inst.add_object();
         }

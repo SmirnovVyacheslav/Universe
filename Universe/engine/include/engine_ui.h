@@ -10,6 +10,7 @@ namespace engine {
                 ~engine_ui();
 
                 void load();
+                void render();
                 void add_object();
                 void start_render();
         };

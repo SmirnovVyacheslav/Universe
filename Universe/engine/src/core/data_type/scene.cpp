@@ -4,6 +4,13 @@
 
 
 namespace engine {
+    void scene_tmp::render() {
+        for (int_32 i = 0; i < model_array.size(); ++i) {
+            model_array[i]->render();
+        }
+    }
+
+
     std::istream& operator>>(std::istream& in_stream, scene_tmp& scene_obj) {
         string str;
         in_stream >> str;

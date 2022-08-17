@@ -15,6 +15,8 @@ namespace engine {
         scene_tmp(scene_tmp&& src) = default;
         scene_tmp(const scene_tmp& src) = default;
 
+        void render();
+
         scene_tmp& operator=(scene_tmp&& src) = default;
         scene_tmp& operator=(const scene_tmp& src) = default;
 

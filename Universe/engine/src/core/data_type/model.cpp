@@ -4,6 +4,11 @@
 
 
 namespace engine {
+    void model::render() {
+        //
+    }
+
+
     std::istream& operator>>(std::istream& in_stream, model& model_obj) {
         string str;
         in_stream >> str;
