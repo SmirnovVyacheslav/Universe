@@ -76,6 +76,7 @@ namespace engine {
             void create_shader_constant_buffer();
             void set_transformation_matrix();
             ID3DBlob* compile_shader_from_file(string path, string shader_entry_point, string shader_model);
+            ID3DBlob* compile_shader_from_string(string shader_code, string shader_entry_point, string shader_model);
             template<class type_name>
             void clear_resource(type_name* resource_ptr);
             template<class type_name>

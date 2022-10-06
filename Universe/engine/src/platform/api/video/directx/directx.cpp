@@ -224,7 +224,34 @@ namespace engine {
                 OutputDebugStringA(static_cast<char*>(error_blob->GetBufferPointer()));
                 error_blob->Release();
             }
-            throw std::invalid_argument("Failed to compiler shader");
+            throw std::invalid_argument("Failed to compile shader");
+        }
+        if (error_blob) error_blob->Release();
+        return output_blob;
+    }
+    ID3DBlob* directx::compile_shader_from_string(string shader_code, string shader_entry_point, string shader_model) {
+        ID3DBlob* error_blob = nullptr;
+        ID3DBlob* output_blob = nullptr;
+        DWORD shader_flags = D3DCOMPILE_ENABLE_STRICTNESS;
+
+        HRESULT result = D3DCompile(
+            shader_code.w_str().c_str(),
+            shader_code.w_str().length(),
+            nullptr,
+            nullptr,
+            nullptr,
+            shader_entry_point.s_str().c_str(),
+            shader_model.s_str().c_str(),
+            shader_flags,
+            0,
+            &output_blob,
+            &error_blob);
+        if (FAILED(result)) {
+            if (error_blob) {
+                OutputDebugStringA(static_cast<char*>(error_blob->GetBufferPointer()));
+                error_blob->Release();
+            }
+            throw std::invalid_argument("Failed to compile shader");
         }
         if (error_blob) error_blob->Release();
         return output_blob;
