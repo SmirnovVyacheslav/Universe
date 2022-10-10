@@ -12,8 +12,6 @@ namespace engine {
 
 
     void renderer::render() {
-        video::create_device();
-
         MSG msg = { 0 };
         while (WM_QUIT != msg.message)
         {

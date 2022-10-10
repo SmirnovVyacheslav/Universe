@@ -52,11 +52,11 @@ namespace engine {
 
         immediate_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-        create_vertex_shader();
-        create_pixel_shader();
+        //create_vertex_shader();
+        //create_pixel_shader();
 
-        create_vertex_buffer();
-        create_index_buffer();
+        //create_vertex_buffer();
+        //create_index_buffer();
         create_shader_constant_buffer();
         set_transformation_matrix();
     }
@@ -70,12 +70,12 @@ namespace engine {
         cb.mProjection = matrix_transpose(projection);
         immediate_context->UpdateSubresource(constant_buffer, 0, NULL, &cb, 0, 0);
 
-        immediate_context->VSSetShader(vertex_shader, NULL, 0);
-        immediate_context->VSSetConstantBuffers(0, 1, &constant_buffer);
-        immediate_context->PSSetShader(pixel_shader, NULL, 0);
-        immediate_context->PSSetConstantBuffers(0, 1, &constant_buffer);
+        //immediate_context->VSSetShader(vertex_shader, NULL, 0);
+        //immediate_context->VSSetConstantBuffers(0, 1, &constant_buffer);
+        //immediate_context->PSSetShader(pixel_shader, NULL, 0);
+        //immediate_context->PSSetConstantBuffers(0, 1, &constant_buffer);
 
-        immediate_context->DrawIndexed(36, 0, 0);
+        //immediate_context->DrawIndexed(36, 0, 0);
 
         swap_chain->Present(0, 0);
     }

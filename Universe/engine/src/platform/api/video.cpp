@@ -13,6 +13,7 @@ namespace engine {
         inst.api_list[0].initialize_derivative<directx>();
 
         inst.set_actual_api();
+        inst.create_device();
     }
     void video::create_device() {
         inst.api_list[inst.actual_api_index]->create_device();

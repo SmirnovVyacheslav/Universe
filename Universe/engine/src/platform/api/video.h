@@ -19,7 +19,7 @@ namespace engine {
     class video {
         public:
             static void initialize();
-            static void create_device();
+
             static void render();
         private:
             static video inst;
@@ -28,6 +28,7 @@ namespace engine {
 
             video() = default;
             ~video() = default;
+            void create_device();
             void set_actual_api();
     };
 }
