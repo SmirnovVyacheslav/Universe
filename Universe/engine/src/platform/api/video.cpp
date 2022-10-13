@@ -30,4 +30,10 @@ namespace engine {
         }
         throw std::invalid_argument("No video api available");
     }
+    void* video::create_vertex_shader(string shader_code) {
+        return inst.api_list[inst.actual_api_index]->create_vertex_shader(shader_code);
+    }
+    void* video::create_pixel_shader(string shader_code) {
+        return inst.api_list[inst.actual_api_index]->create_pixel_shader(shader_code);
+    }
 }

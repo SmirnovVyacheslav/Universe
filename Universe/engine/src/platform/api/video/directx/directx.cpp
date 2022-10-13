@@ -14,8 +14,8 @@ namespace engine {
         release_resource(vertex_buffer);
         release_resource(index_buffer);
         release_resource(vertex_layout);
-        release_resource(vertex_shader);
-        release_resource(pixel_shader);
+        //release_resource(vertex_shader);
+        //release_resource(pixel_shader);
 
         release_resource(render_target_view);
         release_resource(swap_chain);
@@ -52,13 +52,37 @@ namespace engine {
 
         immediate_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-        //create_vertex_shader();
-        //create_pixel_shader();
-
         //create_vertex_buffer();
         //create_index_buffer();
         create_shader_constant_buffer();
         set_transformation_matrix();
+    }
+    void* directx::create_vertex_shader(string shader_code) {
+        ID3D11VertexShader* vertex_shader = nullptr;
+        ID3DBlob* vertex_blob = compile_shader_from_string(shader_code, vertex_shader_entry_point, vertex_shader_model);
+
+        HRESULT result = device->CreateVertexShader(vertex_blob->GetBufferPointer(), vertex_blob->GetBufferSize(), NULL, &vertex_shader);
+        if (FAILED(result)) {
+            vertex_blob->Release();
+            throw std::invalid_argument("Failed to create vertex shader");
+        }
+
+        create_vertex_layout(vertex_blob);
+        vertex_blob->Release();
+
+        return vertex_shader;
+    }
+    void* directx::create_pixel_shader(string shader_code) {
+        ID3D11PixelShader* pixel_shader = nullptr;
+        ID3DBlob* pixel_blob = compile_shader_from_string(shader_code, pixel_shader_entry_point, pixel_shader_model);
+
+        HRESULT result = device->CreatePixelShader(pixel_blob->GetBufferPointer(), pixel_blob->GetBufferSize(), NULL, &pixel_shader);
+        pixel_blob->Release();
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create pixel shader");
+        }
+
+        return pixel_shader;
     }
     void directx::render() {
         immediate_context->ClearRenderTargetView(render_target_view, background_color);
@@ -163,27 +187,6 @@ namespace engine {
         view_port.TopLeftY = 0;
 
         immediate_context->RSSetViewports(1, &view_port);
-    }
-    void directx::create_vertex_shader() {
-        ID3DBlob* vertex_blob = compile_shader_from_file(shader_path, vertex_shader_entry_point, vertex_shader_model);
-
-        HRESULT result = device->CreateVertexShader(vertex_blob->GetBufferPointer(), vertex_blob->GetBufferSize(), NULL, &vertex_shader);
-        if (FAILED(result)) {
-            vertex_blob->Release();
-            throw std::invalid_argument("Failed to create vertex shader");
-        }
-
-        create_vertex_layout(vertex_blob);
-        vertex_blob->Release();
-    }
-    void directx::create_pixel_shader() {
-        ID3DBlob* pixel_blob = compile_shader_from_file(shader_path, pixel_shader_entry_point, pixel_shader_model);
-
-        HRESULT result = device->CreatePixelShader(pixel_blob->GetBufferPointer(), pixel_blob->GetBufferSize(), NULL, &pixel_shader);
-        pixel_blob->Release();
-        if (FAILED(result)) {
-            throw std::invalid_argument("Failed to create pixel shader");
-        }
     }
     void directx::create_vertex_layout(ID3DBlob* vertex_blob) {
         D3D11_INPUT_ELEMENT_DESC layout[] = {

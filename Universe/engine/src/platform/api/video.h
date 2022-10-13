@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/data_type/array.h"
+#include "src/core/data_type/string.h"
 #include "src/core/memory/smart_ptr.h"
 #include <cstdint>
 
@@ -13,6 +14,8 @@ namespace engine {
 
             virtual bool available() = 0;
             virtual void create_device() = 0;
+            virtual void* create_vertex_shader(string shader_code) = 0;
+            virtual void* create_pixel_shader(string shader_code) = 0;
             virtual void render() = 0;
 
             video_api& operator=(video_api&& src) = delete;
@@ -28,7 +31,8 @@ namespace engine {
             video(const video& src) = delete;
 
             static void initialize();
-            // static void* compile_shader();
+            static void* create_vertex_shader(string shader_code);
+            static void* create_pixel_shader(string shader_code);
             static void render();
 
             video& operator=(video&& src) = delete;

@@ -20,6 +20,8 @@ namespace engine {
 
             bool available();
             void create_device();
+            void* create_vertex_shader(string shader_code);
+            void* create_pixel_shader(string shader_code);
             void render();
         private:
             struct local_constant_buffer {
@@ -46,8 +48,6 @@ namespace engine {
             ID3D11Texture2D* depth_stencil = nullptr;
             ID3D11DepthStencilView* depth_stencil_view = nullptr;
 
-            ID3D11VertexShader* vertex_shader = nullptr;
-            ID3D11PixelShader* pixel_shader = nullptr;
             ID3D11InputLayout* vertex_layout = nullptr;
             ID3D11Buffer* vertex_buffer = nullptr;
             ID3D11Buffer* index_buffer = nullptr;
@@ -68,8 +68,6 @@ namespace engine {
             void create_depth_stencil();
             void create_depth_stencil_view();
             void setup_view_port();
-            void create_vertex_shader();
-            void create_pixel_shader();
             void create_vertex_layout(ID3DBlob* vertex_blob);
             void create_vertex_buffer();
             void create_index_buffer();
