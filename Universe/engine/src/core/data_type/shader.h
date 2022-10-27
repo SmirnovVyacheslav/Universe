@@ -19,5 +19,7 @@ namespace engine {
             ~shader() = default;
         private:
             string code;
+            void* vertex_shader;
+            void* pixel_shader;
     };
 }

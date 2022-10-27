@@ -84,6 +84,12 @@ namespace engine {
 
         return pixel_shader;
     }
+    void directx::destroy_vertex_shader(void* shader_obj) {
+        //
+    }
+    void directx::destroy_pixel_shader(void* shader_obj) {
+        //
+    }
     void directx::render() {
         immediate_context->ClearRenderTargetView(render_target_view, background_color);
         immediate_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);

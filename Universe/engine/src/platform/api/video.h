@@ -16,6 +16,8 @@ namespace engine {
             virtual void create_device() = 0;
             virtual void* create_vertex_shader(string shader_code) = 0;
             virtual void* create_pixel_shader(string shader_code) = 0;
+            virtual void destroy_vertex_shader(void* shader_obj) = 0;
+            virtual void destroy_pixel_shader(void* shader_obj) = 0;
             virtual void render() = 0;
 
             video_api& operator=(video_api&& src) = delete;
@@ -33,6 +35,8 @@ namespace engine {
             static void initialize();
             static void* create_vertex_shader(string shader_code);
             static void* create_pixel_shader(string shader_code);
+            static void destroy_vertex_shader(void* shader_obj);
+            static void destroy_pixel_shader(void* shader_obj);
             static void render();
 
             video& operator=(video&& src) = delete;

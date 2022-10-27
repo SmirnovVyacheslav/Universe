@@ -36,4 +36,10 @@ namespace engine {
     void* video::create_pixel_shader(string shader_code) {
         return inst.api_list[inst.actual_api_index]->create_pixel_shader(shader_code);
     }
+    void video::destroy_vertex_shader(void* shader_obj) {
+        inst.api_list[inst.actual_api_index]->destroy_vertex_shader(shader_obj);
+    }
+    void video::destroy_pixel_shader(void* shader_obj) {
+        inst.api_list[inst.actual_api_index]->destroy_pixel_shader(shader_obj);
+    }
 }

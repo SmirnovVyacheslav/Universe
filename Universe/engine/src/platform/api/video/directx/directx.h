@@ -22,6 +22,8 @@ namespace engine {
             void create_device();
             void* create_vertex_shader(string shader_code);
             void* create_pixel_shader(string shader_code);
+            void destroy_vertex_shader(void* shader_obj);
+            void destroy_pixel_shader(void* shader_obj);
             void render();
         private:
             struct local_constant_buffer {
