@@ -1,282 +1,237 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Файлы заголовков">
+    <Filter Include="include">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Файлы ресурсов">
+    <Filter Include="include\engine">
+      <UniqueIdentifier>{a612ba96-b20b-42e3-9072-b543449d59dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\game">
+      <UniqueIdentifier>{4f03b92d-3a62-42aa-b04d-e6213084c1c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine">
+      <UniqueIdentifier>{6203783e-ad2d-42ee-9964-3f171a4191d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src">
+      <UniqueIdentifier>{8c784e9f-ea0f-42ca-a0b2-92493240e1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\ui">
+      <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\scene">
+      <UniqueIdentifier>{bff12756-1d8c-4200-8e58-07b73505e78e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\object">
+      <UniqueIdentifier>{c4f6c92e-23c4-43fc-a75a-2b65a2a95682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\platfom">
+      <UniqueIdentifier>{abdae529-326a-4bb4-a50a-d0eba00d47e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\platfom\windows">
+      <UniqueIdentifier>{a45a1506-ba1b-42d6-a81a-195f8e1370fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\platfom\api">
+      <UniqueIdentifier>{1d3ec0bc-7140-4767-8399-6cb4aa6f271b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\platfom\api\video">
+      <UniqueIdentifier>{584652d3-092c-47fa-9027-c3cddae05d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\platfom\api\video\directx">
+      <UniqueIdentifier>{5899fda9-a791-4663-96fa-e8fdefaf0796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\core">
+      <UniqueIdentifier>{99e039be-9900-40e5-8e68-34473bd4a681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\core\math">
+      <UniqueIdentifier>{bfe4bcb3-b9fa-43f3-9855-d9f0ca954060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\core\data_type">
+      <UniqueIdentifier>{ade26dc7-f97d-4199-b274-d4468ef1a43e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\resource">
+      <UniqueIdentifier>{d873a567-3408-491a-9444-34372753379c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\src\renderer">
+      <UniqueIdentifier>{81da8570-7758-48dd-95d6-f5d43ed9b9cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\game">
-      <UniqueIdentifier>{4f03b92d-3a62-42aa-b04d-e6213084c1c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine">
-      <UniqueIdentifier>{6203783e-ad2d-42ee-9964-3f171a4191d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\game">
-      <UniqueIdentifier>{e7bee075-6bcf-4a62-bc6b-f0715203eaa8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine">
-      <UniqueIdentifier>{a612ba96-b20b-42e3-9072-b543449d59dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src">
-      <UniqueIdentifier>{f951b113-b2d9-44b7-9175-6f815997e088}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\include">
-      <UniqueIdentifier>{dffd2cdb-8baa-4c33-a52c-197af1b552f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src">
-      <UniqueIdentifier>{8c784e9f-ea0f-42ca-a0b2-92493240e1e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\ui">
-      <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\scene">
-      <UniqueIdentifier>{bff12756-1d8c-4200-8e58-07b73505e78e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\scene">
-      <UniqueIdentifier>{0ca1284e-eaff-4281-959e-7f659ad97fe6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\object">
-      <UniqueIdentifier>{c4f6c92e-23c4-43fc-a75a-2b65a2a95682}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\object">
-      <UniqueIdentifier>{21bdd525-560b-40d6-95b3-de7583734f96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom">
-      <UniqueIdentifier>{abdae529-326a-4bb4-a50a-d0eba00d47e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform">
-      <UniqueIdentifier>{a9a32978-4f16-4961-97d2-a9561c081f70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\core">
-      <UniqueIdentifier>{32bb5d43-d07f-464f-8fe2-f2d7679c6958}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\core">
-      <UniqueIdentifier>{99e039be-9900-40e5-8e68-34473bd4a681}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\resource">
-      <UniqueIdentifier>{ec58de07-f4b7-4497-842f-ae66c05be26f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\resource">
-      <UniqueIdentifier>{d873a567-3408-491a-9444-34372753379c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\windows">
-      <UniqueIdentifier>{a45a1506-ba1b-42d6-a81a-195f8e1370fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\windows">
-      <UniqueIdentifier>{4b02610d-b6a6-4a14-9b10-f75aee399a7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\api">
-      <UniqueIdentifier>{e17d1546-8a58-4636-91f1-55b47b989edc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\api">
-      <UniqueIdentifier>{1d3ec0bc-7140-4767-8399-6cb4aa6f271b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\api\video">
-      <UniqueIdentifier>{584652d3-092c-47fa-9027-c3cddae05d87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\platfom\api\video\directx">
-      <UniqueIdentifier>{5899fda9-a791-4663-96fa-e8fdefaf0796}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\api\video">
-      <UniqueIdentifier>{2179dfa5-24e4-4af1-971e-ae8921e24afb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\platform\api\video\directx">
-      <UniqueIdentifier>{7700a326-1131-4a72-a917-0f5f1be569b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\core\math">
-      <UniqueIdentifier>{49ce97cd-d20a-48d6-883e-707281585b3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\core\math">
-      <UniqueIdentifier>{bfe4bcb3-b9fa-43f3-9855-d9f0ca954060}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\core\memory">
+    <Filter Include="src\engine\src\core\memory">
       <UniqueIdentifier>{9e96e594-60bb-4bb7-8df3-b2c358ff274c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\core\data_type">
-      <UniqueIdentifier>{18ae79be-7245-4b7f-bb0e-ad071793bccb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\core\data_type">
-      <UniqueIdentifier>{ade26dc7-f97d-4199-b274-d4468ef1a43e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\engine\src\renderer">
-      <UniqueIdentifier>{5c32d19e-e2eb-436d-b8e3-a7151a2538e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\engine\src\renderer">
-      <UniqueIdentifier>{81da8570-7758-48dd-95d6-f5d43ed9b9cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="game\src\game.cpp">
-      <Filter>Исходные файлы\game</Filter>
+      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\ui\engine_ui.cpp">
-      <Filter>Исходные файлы\engine\src\ui</Filter>
+      <Filter>src\engine\src\ui</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\scene\scene.cpp">
-      <Filter>Исходные файлы\engine\src\scene</Filter>
+      <Filter>src\engine\src\scene</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\object\object.cpp">
-      <Filter>Исходные файлы\engine\src\object</Filter>
+      <Filter>src\engine\src\object</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\object_id.cpp">
-      <Filter>Исходные файлы\engine\src\core</Filter>
+      <Filter>src\engine\src\core</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\resource\mesh.cpp">
-      <Filter>Исходные файлы\engine\src\resource</Filter>
+      <Filter>src\engine\src\resource</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\config.cpp">
-      <Filter>Исходные файлы\engine\src\core</Filter>
+      <Filter>src\engine\src\core</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\initialize.cpp">
-      <Filter>Исходные файлы\engine\src\core</Filter>
+      <Filter>src\engine\src\core</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\windows</Filter>
+      <Filter>src\engine\src\platfom\windows</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\window.cpp">
-      <Filter>Исходные файлы\engine\src\platfom</Filter>
+      <Filter>src\engine\src\platfom</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\api\video\directx\directx.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\api\video\directx</Filter>
+      <Filter>src\engine\src\platfom\api\video\directx</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\api\video.cpp">
-      <Filter>Исходные файлы\engine\src\platfom\api</Filter>
+      <Filter>src\engine\src\platfom\api</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\string.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\vector_3.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\vector_4.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\matrix_4.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\vertex.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\mesh.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\resource\resource.cpp">
-      <Filter>Исходные файлы\engine\src\resource</Filter>
+      <Filter>src\engine\src\resource</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\shader.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\model.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\data_type\scene.cpp">
-      <Filter>Исходные файлы\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\renderer\renderer.cpp">
-      <Filter>Исходные файлы\engine\src\renderer</Filter>
+      <Filter>src\engine\src\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game\src\game.h">
-      <Filter>Файлы заголовков\game</Filter>
+    <ClInclude Include="engine\src\core\memory\smart_ptr.h">
+      <Filter>src\engine\src\core\memory</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\engine_ui.h">
-      <Filter>Файлы заголовков\engine\include</Filter>
+      <Filter>include\engine</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\scene\scene.h">
-      <Filter>Файлы заголовков\engine\src\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\object\object.h">
-      <Filter>Файлы заголовков\engine\src\object</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\platform_def.h">
-      <Filter>Файлы заголовков\engine\src\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\object_id.h">
-      <Filter>Файлы заголовков\engine\src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\resource\mesh.h">
-      <Filter>Файлы заголовков\engine\src\resource</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\window.h">
-      <Filter>Файлы заголовков\engine\src\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\config.h">
-      <Filter>Файлы заголовков\engine\src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\initialize.h">
-      <Filter>Файлы заголовков\engine\src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl.h">
-      <Filter>Файлы заголовков\engine\src\platform\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video.h">
-      <Filter>Файлы заголовков\engine\src\platform\api\video</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video\directx\directx.h">
-      <Filter>Файлы заголовков\engine\src\platform\api\video\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\memory\smart_ptr.h">
-      <Filter>Файлы заголовков\engine\src\core\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\math\const.h">
-      <Filter>Файлы заголовков\engine\src\core\math</Filter>
+    <ClInclude Include="game\src\game.h">
+      <Filter>src\game</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\array.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\map.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\std.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\string.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vector.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vector_3.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vector_4.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vertex.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\matrix_4.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\mesh.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\resource\resource.h">
-      <Filter>Файлы заголовков\engine\src\resource</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\shader.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\model.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\scene.h">
-      <Filter>Файлы заголовков\engine\src\core\data_type</Filter>
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\shader.h">
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\std.h">
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\string.h">
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vector.h">
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vector_3.h">
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vector_4.h">
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\data_type\vertex.h">
+      <Filter>src\engine\src\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\math\const.h">
+      <Filter>src\engine\src\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\config.h">
+      <Filter>src\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\initialize.h">
+      <Filter>src\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\object_id.h">
+      <Filter>src\engine\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\object\object.h">
+      <Filter>src\engine\src\object</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\directx.h">
+      <Filter>src\engine\src\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video.h">
+      <Filter>src\engine\src\platfom\api\video</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\windows\window_impl.h">
+      <Filter>src\engine\src\platfom\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\platform_def.h">
+      <Filter>src\engine\src\platfom</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window.h">
+      <Filter>src\engine\src\platfom</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\renderer\renderer.h">
-      <Filter>Файлы заголовков\engine\src\renderer</Filter>
+      <Filter>src\engine\src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\resource\mesh.h">
+      <Filter>src\engine\src\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\resource\resource.h">
+      <Filter>src\engine\src\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\scene\scene.h">
+      <Filter>src\engine\src\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
