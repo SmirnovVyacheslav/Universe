@@ -85,10 +85,16 @@ namespace engine {
         return pixel_shader;
     }
     void directx::destroy_vertex_shader(void* shader_obj) {
-        //
+        ID3D11VertexShader* vertex_shader = reinterpret_cast<ID3D11VertexShader*>(shader_obj);
+        if (vertex_shader) {
+            vertex_shader->Release();
+        }
     }
     void directx::destroy_pixel_shader(void* shader_obj) {
-        //
+        ID3D11PixelShader* pixel_shader = reinterpret_cast<ID3D11PixelShader*>(shader_obj);
+        if (pixel_shader) {
+            pixel_shader->Release();
+        }
     }
     void directx::render() {
         immediate_context->ClearRenderTargetView(render_target_view, background_color);
