@@ -2,7 +2,11 @@
 #pragma once
 #include "src/core/data_type/std.h"
 #include "src/core/data_type/string.h"
+#include "src/core/data_type/map.h"
 #include "src/core/memory/smart_ptr.h"
+#include <iostream>
+#include <fstream>
+#include <filesystem>
 
 
 namespace engine {
@@ -23,20 +27,27 @@ namespace engine {
     class config {
         public:
             static void initialize();
+            template<class type_name>
+            static string resource_path();
             static slave_ptr<core_config>& core();
             static slave_ptr<video_config>& video();
-            static slave_ptr<resource_config>& resource();
         private:
-            static config inst;
+            const string config_path = u8"game/config/game.config";
+            map<string, string> resource_path_map;
             lead_ptr<core_config> core_ptr;
             lead_ptr<video_config> video_ptr;
-            lead_ptr<resource_config> resource_ptr;
+            // lead_ptr<resource_config> resource_ptr;
 
             config() = default;
-            ~config() = default;
             config(config&& src) = delete;
             config(const config& src) = delete;
+
+            static config& get_inst();
+            void initialize_resource(std::ifstream& config_file);
+
             config& operator=(config&& src) = delete;
             config& operator=(const config& src) = delete;
+
+            ~config() = default;
     };
 }

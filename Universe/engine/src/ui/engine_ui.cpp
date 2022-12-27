@@ -14,8 +14,8 @@ namespace engine {
         engine_ui::~engine_ui() {
             terminate();
         }
-        void engine_ui::load() {
-            resource::load();
+        void engine_ui::initialize_resource() {
+            resource::initialize();
         }
         void engine_ui::add_object() {
             engine::scene::inst.add_object();

@@ -10,8 +10,8 @@ namespace game_ui {
         // Termination code
     }
     void game::run() {
-        engine_inst.load();
-        engine_inst.add_object();
-        engine_inst.render();
+        engine_inst.initialize_resource();
+        // engine_inst.add_object();
+        // engine_inst.render();
     };
 }

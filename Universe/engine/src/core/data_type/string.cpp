@@ -9,7 +9,7 @@ namespace engine {
             static int_32 add(const std::u8string& value);
             static std::u8string& get(const int_32 id);
         private:
-            static string_map inst;
+            static string_map& get_inst();
 
             int_32 id_counter = 0;
             map<int_32, std::u8string> id_str_map;
@@ -26,10 +26,10 @@ namespace engine {
     };
 
 
-    string_map string_map::inst = string_map();
-
+    static string_map* string_map_inst = nullptr;
 
     int_32 string_map::add(const std::u8string& value) {
+        string_map& inst = string_map::get_inst();
         if (inst.str_id_map.contains(value)) {
             return inst.str_id_map[value];
         }
@@ -40,11 +40,20 @@ namespace engine {
         return inst.id_counter;
     }
     std::u8string& string_map::get(const int_32 id) {
+        string_map& inst = string_map::get_inst();
         if (inst.id_str_map.contains(id)) {
             return inst.id_str_map[id];
         }
         throw std::invalid_argument("Id does not exist");
     }
+    string_map& string_map::get_inst() {
+        static string_map inst;
+        if (string_map_inst == nullptr) {
+            string_map_inst = new string_map;
+        }
+        return *string_map_inst;
+    }
+    
 
 
     string::string() :

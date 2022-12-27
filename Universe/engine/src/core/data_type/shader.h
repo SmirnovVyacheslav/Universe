@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "string.h"
+#include "class_name.h"
 #include <iostream>
 
 
@@ -22,4 +23,8 @@ namespace engine {
             void* vertex_shader;
             void* pixel_shader;
     };
+
+
+    template<>
+    string class_name<shader>();
 }

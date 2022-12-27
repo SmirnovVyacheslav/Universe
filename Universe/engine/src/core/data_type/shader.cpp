@@ -11,4 +11,10 @@ namespace engine {
     std::ostream& operator<<(std::ostream& out_stream, const shader& shader_obj) {
         return out_stream;
     }
+
+
+    template<>
+    string class_name<shader>() {
+        return "shader";
+    }
 }
