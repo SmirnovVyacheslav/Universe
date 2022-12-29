@@ -1,14 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "model.h"
 #include "src/resource/resource.h"
+
+#include "model.h"
 
 
 namespace engine {
     void model::render() {
-        //
     }
-
-
     std::istream& operator>>(std::istream& in_stream, model& model_obj) {
         string str;
         in_stream >> str;

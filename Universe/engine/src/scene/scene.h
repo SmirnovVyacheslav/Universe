@@ -5,15 +5,21 @@
 
 namespace engine {
     class scene {
-        public:
-            static scene inst;
+    public:
+        static scene inst;
 
-            void add_object();
-            object* get_object();
-        private:
-            scene() = default;
-            ~scene() = default;
+        void add_object();
+        object* get_object();
+    private:
+        object* square;
 
-            object* square;
+        scene() = default;
+        scene(scene&& src) = default;
+        scene(const scene& src) = default;
+
+        scene& operator=(scene&& src) = default;
+        scene& operator=(const scene& src) = default;
+
+        ~scene() = default;
     };
 }

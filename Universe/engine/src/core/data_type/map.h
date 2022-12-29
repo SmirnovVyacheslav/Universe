@@ -1,63 +1,55 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include <unordered_map>
 #include <stdexcept>
+#include <unordered_map>
 
 
 namespace engine {
-    template <class type_name_key, class type_name_value>
-    class map {
-        public:
-            map() = default;
-            map(map&& src) = default;
-            map(const map& src) = default;
+    template <typename K, typename V> class map {
+    public:
+        map() = default;
+        map(map&& src) = default;
+        map(const map& src) = default;
 
-            bool contains(const type_name_key& key) const;
-            void add(type_name_key&& key, type_name_value&& value);
-            void add(const type_name_key& key, type_name_value&& value);
-            void add(type_name_key&& key, const type_name_value& value);
-            void add(const type_name_key& key, const type_name_value& value);
+        bool contains(const K& key) const;
+        void add(K&& key, V&& value);
+        void add(const K& key, V&& value);
+        void add(K&& key, const V& value);
+        void add(const K& key, const V& value);
 
-            map& operator=(map&& src) = default;
-            map& operator=(const map& src) = default;
-            type_name_value& operator[](const type_name_key& key);
-            const type_name_value& operator[](const type_name_key& key) const;
+        map& operator=(map&& src) = default;
+        map& operator=(const map& src) = default;
+        V& operator[](const K& key);
+        const V& operator[](const K& key) const;
 
-            ~map() = default;
-        private:
-            std::unordered_map<type_name_key, type_name_value> data;
+        ~map() = default;
+    private:
+        std::unordered_map<K, V> data;
     };
 
 
-    template <class type_name_key, class type_name_value>
-    bool map<type_name_key, type_name_value>::contains(const type_name_key& key) const {
+    template <typename K, typename V> bool map<K, V>::contains(const K& key) const {
         return data.contains(key);
     }
-    template <class type_name_key, class type_name_value>
-    void map<type_name_key, type_name_value>::add(type_name_key&& key, type_name_value&& value) {
+    template <typename K, typename V> void map<K, V>::add(K&& key, V&& value) {
         data[std::move(key)] = std::move(value);
     }
-    template <class type_name_key, class type_name_value>
-    void map<type_name_key, type_name_value>::add(const type_name_key& key, type_name_value&& value) {
+    template <typename K, typename V> void map<K, V>::add(const K& key, V&& value) {
         data[key] = std::move(value);
     }
-    template <class type_name_key, class type_name_value>
-    void map<type_name_key, type_name_value>::add(type_name_key&& key, const type_name_value& value) {
+    template <typename K, typename V> void map<K, V>::add(K&& key, const V& value) {
         data[std::move(key)] = value;
     }
-    template <class type_name_key, class type_name_value>
-    void map<type_name_key, type_name_value>::add(const type_name_key& key, const type_name_value& value) {
+    template <typename K, typename V> void map<K, V>::add(const K& key, const V& value) {
         data[key] = value;
     }
-    template <class type_name_key, class type_name_value>
-    type_name_value& map<type_name_key, type_name_value>::operator[](const type_name_key& key) {
+    template <typename K, typename V> V& map<K, V>::operator[](const K& key) {
         if (contains(key)) {
             return data[key];
         }
         throw std::invalid_argument("Key does not exist");
     }
-    template <class type_name_key, class type_name_value>
-    const type_name_value& map<type_name_key, type_name_value>::operator[](const type_name_key& key) const {
+    template <typename K, typename V> const V& map<K, V>::operator[](const K& key) const {
         if (contains(key)) {
             return data[key];
         }

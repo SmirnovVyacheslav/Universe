@@ -7,8 +7,6 @@
 
 namespace engine {
     class shader {
-        friend std::istream& operator>>(std::istream& in_stream, shader& shader_obj);
-        friend std::ostream& operator<<(std::ostream& out_stream, const shader& shader_obj);
         public:
             shader() = default;
             shader(shader&& src) = default;
@@ -22,9 +20,10 @@ namespace engine {
             string code;
             void* vertex_shader;
             void* pixel_shader;
+        friend std::istream& operator>>(std::istream& in_stream, shader& shader_obj);
+        friend std::ostream& operator<<(std::ostream& out_stream, const shader& shader_obj);
     };
 
 
-    template<>
-    string class_name<shader>();
+    template<> string class_name<shader>();
 }

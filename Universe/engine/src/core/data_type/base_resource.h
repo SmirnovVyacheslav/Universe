@@ -4,18 +4,17 @@
 
 namespace engine {
     class base_resource {
-        public:
-            virtual void load() = 0;
-            virtual void initialize() = 0;
-        protected:
-            base_resource() = default;
-            base_resource(base_resource&& src) = default;
-            base_resource(const base_resource& src) = default;
+    public:
+        virtual void load() = 0;
+        virtual void initialize() = 0;
+    protected:
+        base_resource() = default;
+        base_resource(base_resource&& src) = default;
+        base_resource(const base_resource& src) = default;
 
-            base_resource& operator=(base_resource&& src) = default;
-            base_resource& operator=(const base_resource& src) = default;
+        base_resource& operator=(base_resource&& src) = default;
+        base_resource& operator=(const base_resource& src) = default;
 
-            virtual ~base_resource() = default;
-        private:
+        virtual ~base_resource() = default;
     };
 }

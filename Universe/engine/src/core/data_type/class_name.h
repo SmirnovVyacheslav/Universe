@@ -4,6 +4,5 @@
 
 
 namespace engine {
-    template <class type_name>
-    string class_name();
+    template <typename T> string class_name();
 }
