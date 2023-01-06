@@ -1,12 +1,13 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+
 #include "src/core/data_type/std.h"
 #include "src/core/data_type/string.h"
 #include "src/core/data_type/map.h"
 #include "src/core/memory/smart_ptr.h"
-#include <iostream>
-#include <fstream>
-#include <filesystem>
 
 
 namespace engine {
@@ -24,6 +25,8 @@ namespace engine {
         string model_path = u8"game/resource/model";
         string scene_path = u8"game/resource/scene";
     };
+
+
     class config {
         public:
             static void initialize();
@@ -36,7 +39,6 @@ namespace engine {
             map<string, string> resource_path_map;
             lead_ptr<core_config> core_ptr;
             lead_ptr<video_config> video_ptr;
-            // lead_ptr<resource_config> resource_ptr;
 
             config() = default;
             config(config&& src) = delete;

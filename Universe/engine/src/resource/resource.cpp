@@ -1,9 +1,11 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include "resource.h"
+
 #include "src/core/config.h"
+
+#include "resource.h"
 
 
 namespace engine {

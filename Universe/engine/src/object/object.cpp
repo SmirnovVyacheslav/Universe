@@ -1,6 +1,7 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "object.h"
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include "src/core/object_id.h"
+
+#include "object.h"
 
 
 namespace engine {

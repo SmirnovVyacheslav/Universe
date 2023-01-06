@@ -5,7 +5,8 @@
 
 
 namespace engine {
-    template <typename K, typename V> class map {
+    template <typename K, typename V>
+    class map {
     public:
         map() = default;
         map(map&& src) = default;
@@ -28,28 +29,35 @@ namespace engine {
     };
 
 
-    template <typename K, typename V> bool map<K, V>::contains(const K& key) const {
+    template <typename K, typename V>
+    bool map<K, V>::contains(const K& key) const {
         return data.contains(key);
     }
-    template <typename K, typename V> void map<K, V>::add(K&& key, V&& value) {
+    template <typename K, typename V>
+    void map<K, V>::add(K&& key, V&& value) {
         data[std::move(key)] = std::move(value);
     }
-    template <typename K, typename V> void map<K, V>::add(const K& key, V&& value) {
+    template <typename K, typename V>
+    void map<K, V>::add(const K& key, V&& value) {
         data[key] = std::move(value);
     }
-    template <typename K, typename V> void map<K, V>::add(K&& key, const V& value) {
+    template <typename K, typename V>
+    void map<K, V>::add(K&& key, const V& value) {
         data[std::move(key)] = value;
     }
-    template <typename K, typename V> void map<K, V>::add(const K& key, const V& value) {
+    template <typename K, typename V>
+    void map<K, V>::add(const K& key, const V& value) {
         data[key] = value;
     }
-    template <typename K, typename V> V& map<K, V>::operator[](const K& key) {
+    template <typename K, typename V>
+    V& map<K, V>::operator[](const K& key) {
         if (contains(key)) {
             return data[key];
         }
         throw std::invalid_argument("Key does not exist");
     }
-    template <typename K, typename V> const V& map<K, V>::operator[](const K& key) const {
+    template <typename K, typename V>
+    const V& map<K, V>::operator[](const K& key) const {
         if (contains(key)) {
             return data[key];
         }

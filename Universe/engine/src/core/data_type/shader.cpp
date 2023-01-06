@@ -1,6 +1,7 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "shader.h"
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include "src/platform/api/video.h"
+
+#include "shader.h"
 
 
 namespace engine {

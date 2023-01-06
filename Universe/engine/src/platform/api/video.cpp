@@ -1,7 +1,9 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "video.h"
-#include "video/directx/directx.h"
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include <stdexcept>
+
+#include "video/directx/directx.h"
+
+#include "video.h"
 
 
 namespace engine {

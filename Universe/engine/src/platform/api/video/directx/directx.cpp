@@ -1,7 +1,9 @@
-﻿// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "directx.h"
-#ifdef WINDOWS
+﻿// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include <stdexcept>
+
+#include "directx.h"
+
+#ifdef WINDOWS
 #include "src/core/config.h"
 #include "src/platform/window.h"
 

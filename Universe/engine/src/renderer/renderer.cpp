@@ -1,8 +1,10 @@
-﻿// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "renderer.h"
+﻿// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include "src/resource/resource.h"
 #include "src/platform/api/video.h"
 #include "src/platform/platform_def.h"
+
+#include "renderer.h"
+
 #ifdef WINDOWS
 #include <windows.h>
 

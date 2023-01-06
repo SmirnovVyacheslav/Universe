@@ -1,32 +1,31 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "string.h"
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include "map.h"
+#include "string.h"
 
 
 namespace engine {
     class string_map {
-        public:
-            static int_32 add(const std::u8string& value);
-            static std::u8string& get(const int_32 id);
-        private:
-            static string_map& get_inst();
+    public:
+        static int_32 add(const std::u8string& value);
+        static std::u8string& get(const int_32 id);
+    private:
+        static string_map& get_inst();
 
-            int_32 id_counter = 0;
-            map<int_32, std::u8string> id_str_map;
-            map<std::u8string, int_32> str_id_map;
+        int_32 id_counter = 0;
+        map<int_32, std::u8string> id_str_map;
+        map<std::u8string, int_32> str_id_map;
 
-            string_map() = default;
-            string_map(string_map&& src) = delete;
-            string_map(const string_map& src) = delete;
+        string_map() = default;
+        string_map(string_map&& src) = delete;
+        string_map(const string_map& src) = delete;
 
-            string_map& operator=(string_map&& src) = delete;
-            string_map& operator=(const string_map& src) = delete;
+        string_map& operator=(string_map&& src) = delete;
+        string_map& operator=(const string_map& src) = delete;
 
-            ~string_map() = default;
+        ~string_map() = default;
     };
-
-
     static string_map* string_map_inst = nullptr;
+
 
     int_32 string_map::add(const std::u8string& value) {
         string_map& inst = string_map::get_inst();
@@ -53,7 +52,6 @@ namespace engine {
         }
         return *string_map_inst;
     }
-    
 
 
     string::string() :

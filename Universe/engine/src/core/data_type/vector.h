@@ -1,10 +1,11 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include <iostream>
+#include <math.h>
+#include <stdexcept>
+
 #include "std.h"
 #include "src/core/math/const.h"
-#include <math.h>
-#include <iostream>
-#include <stdexcept>
 
 
 namespace engine {

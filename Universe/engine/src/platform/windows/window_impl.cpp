@@ -1,6 +1,8 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "window_impl.h"
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include "src/core/config.h"
+
+#include "window_impl.h"
+
 #ifdef WINDOWS
 
 

@@ -1,4 +1,4 @@
-// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "std.h"
 #include "vector.h"
@@ -26,6 +26,8 @@ namespace engine {
 
         ~vector_3() = default;
     };
+
+
     const real_32 length(const vector_3& vec);
     const vector_3 normalize(const vector_3& vec);
     const vector_3 operator+(const vector_3& vec_a, const vector_3& vec_b);
