@@ -19,18 +19,12 @@ namespace engine {
         int_32 window_height = 600;
         int_32 refresh_rate = 60;
     };
-    struct resource_config {
-        string mesh_path = u8"game/resource/mesh";
-        string shader_path = u8"game/resource/shader";
-        string model_path = u8"game/resource/model";
-        string scene_path = u8"game/resource/scene";
-    };
 
 
     class config {
         public:
             static void initialize();
-            template<class type_name>
+            template<typename T>
             static string resource_path();
             static slave_ptr<core_config>& core();
             static slave_ptr<video_config>& video();

@@ -41,9 +41,9 @@ namespace engine {
             line = std_line;
         }
     }
-    template<class type_name>
+    template<typename T>
     string config::resource_path() {
-        return resource_path_map[class_name<type_name>()];
+        return resource_path_map[T::name()];
     }
     slave_ptr<core_config>& config::core() {
         config& inst = config::get_inst();
