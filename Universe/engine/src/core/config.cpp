@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <sstream>
 
 #include "config.h"
 
@@ -19,19 +20,25 @@ namespace engine {
     }
     void config::initialize_resource(std::ifstream& config_file) {
         string line;
-        config_file >> line;
+        std::string std_line;
+        std::getline(config_file, std_line);
+        line = std_line;
         while (line != u8"[resource]") {
-            config_file >> line;
+            std::getline(config_file, std_line);
+            line = std_line;
         }
 
         string resource_type;
         string resource_path;
-        config_file >> resource_type;
-        config_file >> resource_path;
-        while (resource_type != u8"" && resource_path != u8"") {
+        std::istringstream input;
+        std::getline(config_file, std_line);
+        line = std_line;
+        while (line != u8"[end]") {
+            input.str(std_line);
+            input >> resource_type >> resource_path;
             resource_path_map.add(resource_type, resource_path);
-            config_file >> resource_type;
-            config_file >> resource_path;
+            std::getline(config_file, std_line);
+            line = std_line;
         }
     }
     template<class type_name>
