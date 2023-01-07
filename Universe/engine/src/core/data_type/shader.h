@@ -2,7 +2,6 @@
 #pragma once
 #include <iostream>
 
-#include "class_name.h"
 #include "string.h"
 
 
@@ -12,6 +11,8 @@ namespace engine {
         shader() = default;
         shader(shader&& src) = default;
         shader(const shader& src) = default;
+
+        static string name();
 
         shader& operator=(shader&& src) = default;
         shader& operator=(const shader& src) = default;
@@ -25,8 +26,4 @@ namespace engine {
         friend std::istream& operator>>(std::istream& in_stream, shader& shader_obj);
         friend std::ostream& operator<<(std::ostream& out_stream, const shader& shader_obj);
     };
-
-
-    template<>
-    string class_name<shader>();
 }

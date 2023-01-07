@@ -152,7 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\core\config.cpp" />
-    <ClCompile Include="engine\src\core\data_type\class_name.cpp" />
     <ClCompile Include="engine\src\core\data_type\matrix_4.cpp" />
     <ClCompile Include="engine\src\core\data_type\mesh.cpp" />
     <ClCompile Include="engine\src\core\data_type\model.cpp" />
@@ -182,7 +181,6 @@
     <ClInclude Include="engine\src\core\config.h" />
     <ClInclude Include="engine\src\core\data_type\array.h" />
     <ClInclude Include="engine\src\core\data_type\base_resource.h" />
-    <ClInclude Include="engine\src\core\data_type\class_name.h" />
     <ClInclude Include="engine\src\core\data_type\map.h" />
     <ClInclude Include="engine\src\core\data_type\matrix_4.h" />
     <ClInclude Include="engine\src\core\data_type\mesh.h" />

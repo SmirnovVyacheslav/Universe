@@ -138,9 +138,6 @@
     <ClCompile Include="engine\src\renderer\renderer.cpp">
       <Filter>src\engine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\class_name.cpp">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
@@ -234,9 +231,6 @@
       <Filter>src\engine\scene</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\base_resource.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\class_name.h">
       <Filter>src\engine\core\data_type</Filter>
     </ClInclude>
   </ItemGroup>
