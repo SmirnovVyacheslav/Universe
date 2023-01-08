@@ -24,7 +24,7 @@ namespace engine {
 
         ~model() = default;
     private:
-        slave_ptr<mesh_tmp> model_mesh;
+        slave_ptr<mesh> model_mesh;
         slave_ptr<shader> model_shader;
 
         friend std::istream& operator>>(std::istream& in_stream, model& model_obj);

@@ -4,21 +4,21 @@
 
 
 namespace engine {
-    string mesh_tmp::name() {
+    string mesh::name() {
         return u8"mesh";
     }
-    uint_32 mesh_tmp::size() {
+    uint_32 mesh::size() {
         return index_array.size();
     }
-    vertex_tmp& mesh_tmp::vertices() {
+    vertex_tmp& mesh::vertices() {
         return vertex_array[0];
     }
-    uint_16& mesh_tmp::indices() {
+    uint_16& mesh::indices() {
         return index_array[0];
     }
 
 
-    std::istream& operator>>(std::istream& in_stream, mesh_tmp& mesh_obj) {
+    std::istream& operator>>(std::istream& in_stream, mesh& mesh_obj) {
         string str;
         in_stream >> str;
         if (str != string(u8"vertices")) {
@@ -48,7 +48,7 @@ namespace engine {
 
         return in_stream;
     }
-    std::ostream& operator<<(std::ostream& out_stream, const mesh_tmp& mesh_obj) {
+    std::ostream& operator<<(std::ostream& out_stream, const mesh& mesh_obj) {
         return out_stream;
     }
 }

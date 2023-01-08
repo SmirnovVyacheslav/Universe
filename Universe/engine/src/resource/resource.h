@@ -14,17 +14,17 @@ namespace engine {
     class resource {
     public:
         static void initialize();
-        static slave_ptr<mesh_tmp>& mesh_prt(const string name);
+        static slave_ptr<mesh>& mesh_prt(const string name);
         static slave_ptr<shader>& shader_prt(const string name);
         static slave_ptr<model>& model_prt(const string name);
-        static slave_ptr<scene_tmp>& scene_prt(const string name);
+        static slave_ptr<scene>& scene_prt(const string name);
     private:
         static resource inst;
         // map<string, lead_ptr<base_resource>> resource_map;
-        map<string, lead_ptr<mesh_tmp>> mesh_map;
+        map<string, lead_ptr<mesh>> mesh_map;
         map<string, lead_ptr<shader>> shader_map;
         map<string, lead_ptr<model>> model_map;
-        map<string, lead_ptr<scene_tmp>> scene_map;
+        map<string, lead_ptr<scene>> scene_map;
 
         resource() = default;
         resource(resource&& src) = delete;

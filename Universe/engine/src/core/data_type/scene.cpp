@@ -4,17 +4,17 @@
 
 
 namespace engine {
-    string scene_tmp::name() {
+    string scene::name() {
         return u8"scene";
     }
-    void scene_tmp::render() {
+    void scene::render() {
         for (int_32 i = 0; i < model_array.size(); ++i) {
             model_array[i]->render();
         }
     }
 
 
-    std::istream& operator>>(std::istream& in_stream, scene_tmp& scene_obj) {
+    std::istream& operator>>(std::istream& in_stream, scene& scene_obj) {
         string str;
         in_stream >> str;
         if (str != string(u8"model")) {
@@ -28,7 +28,7 @@ namespace engine {
 
         return in_stream;
     }
-    std::ostream& operator<<(std::ostream& out_stream, const scene_tmp& scene_obj) {
+    std::ostream& operator<<(std::ostream& out_stream, const scene& scene_obj) {
         return out_stream;
     }
 }

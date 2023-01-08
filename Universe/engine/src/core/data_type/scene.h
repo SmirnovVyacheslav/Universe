@@ -10,24 +10,24 @@
 
 
 namespace engine {
-    class scene_tmp {
+    class scene {
     public:
-        scene_tmp() = default;
-        scene_tmp(scene_tmp&& src) = default;
-        scene_tmp(const scene_tmp& src) = default;
+        scene() = default;
+        scene(scene&& src) = default;
+        scene(const scene& src) = default;
 
         static string name();
 
         void render();
 
-        scene_tmp& operator=(scene_tmp&& src) = default;
-        scene_tmp& operator=(const scene_tmp& src) = default;
+        scene& operator=(scene&& src) = default;
+        scene& operator=(const scene& src) = default;
 
-        ~scene_tmp() = default;
+        ~scene() = default;
     private:
         array<slave_ptr<model>> model_array;
 
-        friend std::istream& operator>>(std::istream& in_stream, scene_tmp& scene_obj);
-        friend std::ostream& operator<<(std::ostream& out_stream, const scene_tmp& scene_obj);
+        friend std::istream& operator>>(std::istream& in_stream, scene& scene_obj);
+        friend std::ostream& operator<<(std::ostream& out_stream, const scene& scene_obj);
     };
 }

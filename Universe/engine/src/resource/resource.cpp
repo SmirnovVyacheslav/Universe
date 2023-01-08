@@ -31,7 +31,7 @@ namespace engine {
             model_file.close();
         }*/
     }
-    slave_ptr<mesh_tmp>& resource::mesh_prt(const string name) {
+    slave_ptr<mesh>& resource::mesh_prt(const string name) {
         return resource::inst.mesh_map[name].create_slave_ptr();
     }
     slave_ptr<shader>& resource::shader_prt(const string name) {
@@ -40,7 +40,7 @@ namespace engine {
     slave_ptr<model>& resource::model_prt(const string name) {
         return resource::inst.model_map[name].create_slave_ptr();
     }
-    slave_ptr<scene_tmp>& resource::scene_prt(const string name) {
+    slave_ptr<scene>& resource::scene_prt(const string name) {
         return resource::inst.scene_map[name].create_slave_ptr();
     }
     //void resource::load_mesh() {
