@@ -169,9 +169,7 @@
     <ClCompile Include="engine\src\platform\window.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\renderer\renderer.cpp" />
-    <ClCompile Include="engine\src\resource\mesh.cpp" />
     <ClCompile Include="engine\src\resource\resource.cpp" />
-    <ClCompile Include="engine\src\scene\scene.cpp" />
     <ClCompile Include="engine\src\ui\engine_ui.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
@@ -204,9 +202,7 @@
     <ClInclude Include="engine\src\platform\windows\window_impl.h" />
     <ClInclude Include="engine\src\platform\window.h" />
     <ClInclude Include="engine\src\renderer\renderer.h" />
-    <ClInclude Include="engine\src\resource\mesh.h" />
     <ClInclude Include="engine\src\resource\resource.h" />
-    <ClInclude Include="engine\src\scene\scene.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
   <ItemGroup>

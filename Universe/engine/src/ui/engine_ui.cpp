@@ -1,6 +1,5 @@
 // Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #include "src/core/initialize.h"
-#include "src/scene/scene.h"
 #include "src/renderer/renderer.h"
 #include "src/resource/resource.h"
 
@@ -17,9 +16,6 @@ namespace engine {
         }
         void engine_ui::initialize_resource() {
             resource::initialize();
-        }
-        void engine_ui::add_object() {
-            engine::scene::inst.add_object();
         }
         void engine_ui::render() {
             engine::renderer::render();

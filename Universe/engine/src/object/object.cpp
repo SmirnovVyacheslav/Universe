@@ -8,7 +8,4 @@ namespace engine {
     object::object() :
         id(object_id::inst.get_object_id()) {
     }
-    mesh& object::get_mesh() {
-        return square;
-    }
 }

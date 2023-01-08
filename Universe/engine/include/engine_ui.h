@@ -11,7 +11,6 @@ namespace engine {
                 engine_ui(const engine_ui& src) = default;
 
                 void initialize_resource();
-                void add_object();
                 void render();
 
                 engine_ui& operator=(engine_ui&& src) = default;

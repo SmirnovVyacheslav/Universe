@@ -2,7 +2,6 @@
 #pragma once
 #include "src/core/data_type/string.h"
 #include "src/core/data_type/matrix_4.h"
-#include "src/scene/scene.h"
 #include "src/platform/platform_def.h"
 #include "src/platform/api/video.h"
 

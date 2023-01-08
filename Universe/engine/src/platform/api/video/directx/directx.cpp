@@ -274,7 +274,7 @@ namespace engine {
         return output_blob;
     }
     void directx::create_vertex_buffer() {
-        D3D11_BUFFER_DESC buffer_data;
+        /*D3D11_BUFFER_DESC buffer_data;
         ZeroMemory(&buffer_data, sizeof(buffer_data));
 
         buffer_data.Usage = D3D11_USAGE_DEFAULT;
@@ -292,10 +292,10 @@ namespace engine {
 
         UINT stride = sizeof(vertex);
         UINT offset = 0;
-        immediate_context->IASetVertexBuffers(0, 1, &vertex_buffer, &stride, &offset);
+        immediate_context->IASetVertexBuffers(0, 1, &vertex_buffer, &stride, &offset);*/
     }
     void directx::create_index_buffer() {
-        D3D11_BUFFER_DESC buffer_data;
+        /*D3D11_BUFFER_DESC buffer_data;
         ZeroMemory(&buffer_data, sizeof(buffer_data));
 
         buffer_data.Usage = D3D11_USAGE_DEFAULT;
@@ -312,7 +312,7 @@ namespace engine {
             throw std::invalid_argument("Failed to create index buffer");
         }
 
-        immediate_context->IASetIndexBuffer(index_buffer, DXGI_FORMAT_R16_UINT, 0);
+        immediate_context->IASetIndexBuffer(index_buffer, DXGI_FORMAT_R16_UINT, 0);*/
     }
     void directx::create_shader_constant_buffer() {
         D3D11_BUFFER_DESC buffer_data;

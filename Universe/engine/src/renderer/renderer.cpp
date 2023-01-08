@@ -24,7 +24,6 @@ namespace engine {
             }
             else
             {
-                resource::scene_prt(u8"scene_01.scene")->render();
                 video::render();
             }
         }

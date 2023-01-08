@@ -58,9 +58,6 @@
     <Filter Include="src\engine\resource">
       <UniqueIdentifier>{d873a567-3408-491a-9444-34372753379c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\scene">
-      <UniqueIdentifier>{bff12756-1d8c-4200-8e58-07b73505e78e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\ui">
       <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
     </Filter>
@@ -75,17 +72,11 @@
     <ClCompile Include="engine\src\ui\engine_ui.cpp">
       <Filter>src\engine\ui</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\scene\scene.cpp">
-      <Filter>src\engine\scene</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\object\object.cpp">
       <Filter>src\engine\object</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\object_id.cpp">
       <Filter>src\engine\core</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\resource\mesh.cpp">
-      <Filter>src\engine\resource</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\config.cpp">
       <Filter>src\engine\core</Filter>
@@ -221,14 +212,8 @@
     <ClInclude Include="engine\src\renderer\renderer.h">
       <Filter>src\engine\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\resource\mesh.h">
-      <Filter>src\engine\resource</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\resource\resource.h">
       <Filter>src\engine\resource</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\scene\scene.h">
-      <Filter>src\engine\scene</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\base_resource.h">
       <Filter>src\engine\core\data_type</Filter>

@@ -11,7 +11,5 @@ namespace game_ui {
     }
     void game::run() {
         engine_inst.initialize_resource();
-        // engine_inst.add_object();
-        // engine_inst.render();
     };
 }
