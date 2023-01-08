@@ -4,6 +4,9 @@
 
 
 namespace engine {
+    string mesh_tmp::name() {
+        return u8"mesh";
+    }
     uint_32 mesh_tmp::size() {
         return index_array.size();
     }

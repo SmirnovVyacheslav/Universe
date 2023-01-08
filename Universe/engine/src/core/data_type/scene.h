@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "model.h"
+#include "string.h"
 #include "src/core/data_type/array.h"
 #include "src/core/memory/smart_ptr.h"
 
@@ -14,6 +15,8 @@ namespace engine {
         scene_tmp() = default;
         scene_tmp(scene_tmp&& src) = default;
         scene_tmp(const scene_tmp& src) = default;
+
+        static string name();
 
         void render();
 

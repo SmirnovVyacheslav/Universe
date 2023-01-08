@@ -4,6 +4,7 @@
 
 #include "mesh.h"
 #include "shader.h"
+#include "string.h"
 #include "src/core/memory/smart_ptr.h"
 
 
@@ -13,6 +14,8 @@ namespace engine {
         model() = default;
         model(model&& src) = default;
         model(const model& src) = default;
+
+        static string name();
 
         void render();
 

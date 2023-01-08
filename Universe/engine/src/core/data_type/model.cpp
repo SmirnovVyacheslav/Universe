@@ -5,6 +5,9 @@
 
 
 namespace engine {
+    string model::name() {
+        return u8"model";
+    }
     void model::render() {
     }
     std::istream& operator>>(std::istream& in_stream, model& model_obj) {

@@ -5,6 +5,7 @@
 #include "array.h"
 #include "std.h"
 #include "vertex.h"
+#include "string.h"
 
 
 namespace engine {
@@ -13,6 +14,8 @@ namespace engine {
         mesh_tmp() = default;
         mesh_tmp(mesh_tmp&& src) = default;
         mesh_tmp(const mesh_tmp& src) = default;
+
+        static string name();
 
         uint_32 size();
         vertex_tmp& vertices();
