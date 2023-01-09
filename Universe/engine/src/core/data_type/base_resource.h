@@ -1,11 +1,11 @@
 // Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-
+#include "string.h"
 
 namespace engine {
     class base_resource {
     public:
-        virtual void load() = 0;
+        virtual void load(string file) = 0;
         virtual void initialize() = 0;
     protected:
         base_resource() = default;

@@ -1,11 +1,22 @@
 // Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+
 #include "mesh.h"
-#include "string.h"
 
 
 namespace engine {
     string mesh::name() {
         return u8"mesh";
+    }
+    void mesh::load(string file) {
+        std::ifstream input_stream;
+        input_stream.open(file.u8_str());
+        input_stream >> *this;
+        input_stream.close();
+    }
+    void mesh::initialize() {
     }
     uint_32 mesh::size() {
         return index_array.size();

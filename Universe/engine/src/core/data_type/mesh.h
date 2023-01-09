@@ -3,13 +3,14 @@
 #include <iostream>
 
 #include "array.h"
+#include "base_resource.h"
 #include "std.h"
 #include "vertex.h"
 #include "string.h"
 
 
 namespace engine {
-    class mesh {
+    class mesh : public base_resource {
     public:
         mesh() = default;
         mesh(mesh&& src) = default;
@@ -17,6 +18,8 @@ namespace engine {
 
         static string name();
 
+        void load(string file);
+        void initialize();
         uint_32 size();
         vertex_tmp& vertices();
         uint_16& indices();

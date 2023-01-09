@@ -2,17 +2,21 @@
 #pragma once
 #include <iostream>
 
+#include "base_resource.h"
 #include "string.h"
 
 
 namespace engine {
-    class shader {
+    class shader : public base_resource {
     public:
         shader() = default;
         shader(shader&& src) = default;
         shader(const shader& src) = default;
 
         static string name();
+
+        void load(string file);
+        void initialize();
 
         shader& operator=(shader&& src) = default;
         shader& operator=(const shader& src) = default;

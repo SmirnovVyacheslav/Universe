@@ -2,6 +2,7 @@
 #pragma once
 #include <iostream>
 
+#include "base_resource.h"
 #include "model.h"
 #include "string.h"
 #include "src/core/data_type/array.h"
@@ -10,7 +11,7 @@
 
 
 namespace engine {
-    class scene {
+    class scene : public base_resource {
     public:
         scene() = default;
         scene(scene&& src) = default;
@@ -18,6 +19,8 @@ namespace engine {
 
         static string name();
 
+        void load(string file);
+        void initialize();
         void render();
 
         scene& operator=(scene&& src) = default;

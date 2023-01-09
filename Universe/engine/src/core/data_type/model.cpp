@@ -1,4 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+
 #include "src/resource/resource.h"
 
 #include "model.h"
@@ -7,6 +11,14 @@
 namespace engine {
     string model::name() {
         return u8"model";
+    }
+    void model::load(string file) {
+        std::ifstream input_stream;
+        input_stream.open(file.u8_str());
+        input_stream >> *this;
+        input_stream.close();
+    }
+    void model::initialize() {
     }
     void model::render() {
     }

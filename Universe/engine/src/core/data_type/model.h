@@ -2,6 +2,7 @@
 #pragma once
 #include <iostream>
 
+#include "base_resource.h"
 #include "mesh.h"
 #include "shader.h"
 #include "string.h"
@@ -9,7 +10,7 @@
 
 
 namespace engine {
-    class model {
+    class model : public base_resource {
     public:
         model() = default;
         model(model&& src) = default;
@@ -17,6 +18,8 @@ namespace engine {
 
         static string name();
 
+        void load(string file);
+        void initialize();
         void render();
 
         model& operator=(model&& src) = default;
