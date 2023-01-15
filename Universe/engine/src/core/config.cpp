@@ -34,16 +34,13 @@ namespace engine {
         std::getline(config_file, std_line);
         line = std_line;
         while (line != u8"[end]") {
+            input.clear();
             input.str(std_line);
             input >> resource_type >> resource_path;
             resource_path_map.add(resource_type, resource_path);
             std::getline(config_file, std_line);
             line = std_line;
         }
-    }
-    template<typename T>
-    string config::resource_path() {
-        return resource_path_map[T::name()];
     }
     slave_ptr<core_config>& config::core() {
         config& inst = config::get_inst();

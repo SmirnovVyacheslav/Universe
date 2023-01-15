@@ -46,4 +46,11 @@ namespace engine {
 
             ~config() = default;
     };
+
+
+    template<typename T>
+    string config::resource_path() {
+        config& inst = config::get_inst();
+        return inst.resource_path_map[T::name()];
+    }
 }
