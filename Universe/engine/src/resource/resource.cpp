@@ -13,10 +13,10 @@ namespace engine {
 
 
     void resource::initialize() {
-        resource::inst.load_mesh();
-        resource::inst.load_shader();
-        resource::inst.load_model();
-        resource::inst.load_scene();
+        resource::inst.initialize_mesh();
+        resource::inst.initialize_shader();
+        resource::inst.initialize_model();
+        resource::inst.initialize_scene();
     }
     slave_ptr<mesh>& resource::mesh_prt(const string name) {
         return resource::inst.mesh_map[name].create_slave_ptr();
@@ -30,7 +30,7 @@ namespace engine {
     slave_ptr<scene>& resource::scene_prt(const string name) {
         return resource::inst.scene_map[name].create_slave_ptr();
     }
-    void resource::load_mesh() {
+    void resource::initialize_mesh() {
         std::ifstream mesh_file;
         for (const auto& mesh_file_path : std::filesystem::directory_iterator(config::resource_path<mesh>().s_str())) {
             string file_name = mesh_file_path.path().filename().u8string();
@@ -40,9 +40,11 @@ namespace engine {
             mesh_file.open(mesh_file_path);
             mesh_file >> *mesh_map[file_name];
             mesh_file.close();
+
+            mesh_map[file_name]->initialize();
         }
     }
-    void resource::load_shader() {
+    void resource::initialize_shader() {
         std::ifstream shader_file;
         for (const auto& shader_file_path : std::filesystem::directory_iterator(config::resource_path<shader>().s_str())) {
             string file_name = shader_file_path.path().filename().u8string();
@@ -52,9 +54,11 @@ namespace engine {
             shader_file.open(shader_file_path);
             shader_file >> *shader_map[file_name];
             shader_file.close();
+
+            shader_map[file_name]->initialize();
         }
     }
-    void resource::load_model() {
+    void resource::initialize_model() {
         std::ifstream model_file;
         for (const auto& model_file_path: std::filesystem::directory_iterator(config::resource_path<model>().s_str())) {
             string file_name = model_file_path.path().filename().u8string();
@@ -64,9 +68,11 @@ namespace engine {
             model_file.open(model_file_path);
             model_file >> *model_map[file_name];
             model_file.close();
+
+            model_map[file_name]->initialize();
         }
     }
-    void resource::load_scene() {
+    void resource::initialize_scene() {
         std::ifstream scene_file;
         for (const auto& scene_file_path : std::filesystem::directory_iterator(config::resource_path<scene>().s_str())) {
             string file_name = scene_file_path.path().filename().u8string();
@@ -76,6 +82,8 @@ namespace engine {
             scene_file.open(scene_file_path);
             scene_file >> *scene_map[file_name];
             scene_file.close();
+
+            scene_map[file_name]->initialize();
         }
     }
 }

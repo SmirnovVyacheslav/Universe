@@ -28,10 +28,10 @@ namespace engine {
         resource(resource&& src) = delete;
         resource(const resource& src) = delete;
 
-        void load_mesh();
-        void load_shader();
-        void load_model();
-        void load_scene();
+        void initialize_mesh();
+        void initialize_shader();
+        void initialize_model();
+        void initialize_scene();
 
         resource& operator=(resource&& src) = delete;
         resource& operator=(const resource& src) = delete;
