@@ -252,8 +252,8 @@ namespace engine {
         DWORD shader_flags = D3DCOMPILE_ENABLE_STRICTNESS;
 
         HRESULT result = D3DCompile(
-            shader_code.w_str().c_str(),
-            shader_code.w_str().length(),
+            shader_code.s_str().c_str(),
+            shader_code.s_str().length(),
             nullptr,
             nullptr,
             nullptr,

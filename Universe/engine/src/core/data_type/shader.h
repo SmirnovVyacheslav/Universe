@@ -21,7 +21,7 @@ namespace engine {
         shader& operator=(shader&& src) = default;
         shader& operator=(const shader& src) = default;
 
-        ~shader() = default;
+        ~shader();
     private:
         string code;
         void* vertex_shader;

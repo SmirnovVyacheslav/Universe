@@ -19,6 +19,12 @@ namespace engine {
         input_stream.close();
     }
     void shader::initialize() {
+        vertex_shader = video::create_vertex_shader(code);
+        pixel_shader = video::create_pixel_shader(code);
+    }
+    shader::~shader() {
+        video::destroy_vertex_shader(vertex_shader);
+        video::destroy_pixel_shader(pixel_shader);
     }
     std::istream& operator>>(std::istream& in_stream, shader& shader_obj) {
         shader_obj.code = string(std::string(std::istreambuf_iterator<char>(in_stream), std::istreambuf_iterator<char>()));
