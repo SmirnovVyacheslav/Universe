@@ -21,7 +21,7 @@ namespace engine {
         void load(string file);
         void initialize();
         uint_32 size();
-        vertex_tmp& vertices();
+        vertex& vertices();
         uint_16& indices();
 
         mesh& operator=(mesh&& src) = default;
@@ -29,7 +29,7 @@ namespace engine {
 
         ~mesh() = default;
     private:
-        array<vertex_tmp> vertex_array;
+        array<vertex> vertex_array;
         array<uint_16> index_array;
 
         friend std::istream& operator>>(std::istream& in_stream, mesh& mesh_obj);

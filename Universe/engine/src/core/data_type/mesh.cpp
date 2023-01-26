@@ -21,7 +21,7 @@ namespace engine {
     uint_32 mesh::size() {
         return index_array.size();
     }
-    vertex_tmp& mesh::vertices() {
+    vertex& mesh::vertices() {
         return vertex_array[0];
     }
     uint_16& mesh::indices() {
@@ -41,7 +41,7 @@ namespace engine {
         vector_3 vertex_vec;
         for (uint_32 i = 0; i < vertices_num; ++i) {
             in_stream >> vertex_vec;
-            mesh_obj.vertex_array.append(vertex_tmp(vertex_vec, vector_4(0.0f, 0.0f, 1.0f, 1.0f)));
+            mesh_obj.vertex_array.append(vertex(vertex_vec, vector_4(0.0f, 0.0f, 1.0f, 1.0f)));
         }
 
         in_stream >> str;

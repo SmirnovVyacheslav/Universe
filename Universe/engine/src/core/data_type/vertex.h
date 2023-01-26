@@ -5,17 +5,17 @@
 
 
 namespace engine {
-    class vertex_tmp {
+    class vertex {
     public:
-        vertex_tmp() = default;
-        vertex_tmp(const vector_3& pos, const vector_4& color);
-        vertex_tmp(vertex_tmp&& src) = default;
-        vertex_tmp(const vertex_tmp& src) = default;
+        vertex() = default;
+        vertex(const vector_3& pos, const vector_4& color);
+        vertex(vertex&& src) = default;
+        vertex(const vertex& src) = default;
 
-        vertex_tmp& operator=(vertex_tmp&& src) = default;
-        vertex_tmp& operator=(const vertex_tmp& src) = default;
+        vertex& operator=(vertex&& src) = default;
+        vertex& operator=(const vertex& src) = default;
 
-        ~vertex_tmp() = default;
+        ~vertex() = default;
     private:
         vector_3 pos;
         vector_4 color;
