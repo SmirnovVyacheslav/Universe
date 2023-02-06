@@ -9,6 +9,44 @@
 
 
 namespace engine {
+    // Context
+    ID3D11Device* device = nullptr;
+    ID3D11DeviceContext* immediate_context = nullptr;
+    IDXGISwapChain* swap_chain = nullptr;
+
+
+    // Device config
+    IDXGIAdapter* adapter = nullptr;
+    D3D_DRIVER_TYPE driver_type = D3D_DRIVER_TYPE_HARDWARE;
+    HMODULE software_rasterizer = nullptr;
+    UINT runtime_layer_flags = 0;
+    D3D_FEATURE_LEVEL feature_levels = D3D_FEATURE_LEVEL_11_0;
+    UINT feature_levels_number = 1;
+    UINT sdk_version = D3D11_SDK_VERSION;
+    D3D_FEATURE_LEVEL* supported_feature_level = nullptr;
+
+    void initialize_device(DXGI_SWAP_CHAIN_DESC swap_chain_data)
+    {
+        HRESULT result = D3D11CreateDeviceAndSwapChain(
+            adapter,
+            driver_type,
+            software_rasterizer,
+            runtime_layer_flags,
+            &feature_levels,
+            feature_levels_number,
+            sdk_version,
+            &swap_chain_data,
+            &swap_chain,
+            &device,
+            supported_feature_level,
+            &immediate_context);
+
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to initialize device");
+        }
+    }
+
+
     directx::~directx() {
         clear_resource(immediate_context);
 

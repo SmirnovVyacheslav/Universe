@@ -13,6 +13,25 @@
 
 
 namespace engine {
+    void initialize_device();
+
+
+    class manager_public_api {
+    };
+
+    class shader_local_platform {
+    };
+
+    class prework_init {
+    };
+
+    class dx_config_file {
+    };
+
+    class device {
+    };
+
+
     class directx : public video_api {
     public:
         directx() = default;
