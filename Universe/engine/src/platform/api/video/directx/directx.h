@@ -13,7 +13,8 @@
 
 
 namespace engine {
-    void initialize_device();
+    DXGI_SWAP_CHAIN_DESC create_swap_chain_data();
+    void initialize_device(DXGI_SWAP_CHAIN_DESC swap_chain_data);
 
 
     class manager_public_api {

@@ -14,6 +14,40 @@ namespace engine {
     ID3D11DeviceContext* immediate_context = nullptr;
     IDXGISwapChain* swap_chain = nullptr;
 
+    // Swap chain data config
+    UINT buffer_count = 1;
+    // BufferDes
+    UINT buffer_width = 128;
+    UINT buffer_haight = 256;
+    DXGI_FORMAT buffer_format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    // RefreshRate
+    UINT buffer_numerator = 60;
+    UINT buffer_denominator = 1;
+    DXGI_USAGE buffer_usage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+    // SampleDesc
+    UINT buffer_sample_count = 1;
+    UINT buffer_sample_quality = 0;
+    BOOL buffer_windowed = TRUE;
+
+    DXGI_SWAP_CHAIN_DESC create_swap_chain_data(HWND output_window, UINT buffer_width, UINT buffer_haight) {
+        DXGI_SWAP_CHAIN_DESC swap_chain_data;
+        ZeroMemory(&swap_chain_data, sizeof(swap_chain_data));
+
+        swap_chain_data.BufferCount = buffer_count;
+        swap_chain_data.BufferDesc.Width = buffer_width;
+        swap_chain_data.BufferDesc.Height = buffer_haight;
+        swap_chain_data.BufferDesc.Format = buffer_format;
+        swap_chain_data.BufferDesc.RefreshRate.Numerator = buffer_numerator;
+        swap_chain_data.BufferDesc.RefreshRate.Denominator = buffer_denominator;
+        swap_chain_data.BufferUsage = buffer_usage;
+        swap_chain_data.OutputWindow = output_window;
+        swap_chain_data.SampleDesc.Count = buffer_sample_count;
+        swap_chain_data.SampleDesc.Quality = buffer_sample_quality;
+        swap_chain_data.Windowed = buffer_windowed;
+
+        return swap_chain_data;
+    }
+
 
     // Device config
     IDXGIAdapter* adapter = nullptr;
