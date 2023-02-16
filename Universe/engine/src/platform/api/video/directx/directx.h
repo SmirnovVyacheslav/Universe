@@ -13,24 +13,12 @@
 
 
 namespace engine {
-    DXGI_SWAP_CHAIN_DESC create_swap_chain_data();
+    DXGI_SWAP_CHAIN_DESC create_swap_chain_data(HWND output_window, UINT buffer_width, UINT buffer_haight);
     void initialize_device(DXGI_SWAP_CHAIN_DESC swap_chain_data);
-
-
-    class manager_public_api {
-    };
-
-    class shader_local_platform {
-    };
-
-    class prework_init {
-    };
-
-    class dx_config_file {
-    };
-
-    class device {
-    };
+    ID3D11Texture2D* get_back_buffer();
+    void release_back_buffer(ID3D11Texture2D* back_buffer);
+    void create_render_target_view(ID3D11Texture2D* back_buffer);
+    void set_render_target_view();
 
 
     class directx : public video_api {

@@ -13,6 +13,7 @@ namespace engine {
     ID3D11Device* device = nullptr;
     ID3D11DeviceContext* immediate_context = nullptr;
     IDXGISwapChain* swap_chain = nullptr;
+    ID3D11RenderTargetView* render_target_view = nullptr;
 
     // Swap chain data config
     UINT buffer_count = 1;
@@ -80,6 +81,28 @@ namespace engine {
         }
     }
 
+    ID3D11Texture2D* get_back_buffer() {
+        ID3D11Texture2D* back_buffer = NULL;
+        HRESULT result = swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&back_buffer);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to get back buffer");
+        }
+        return back_buffer;
+    }
+    void release_back_buffer(ID3D11Texture2D* back_buffer) {
+        back_buffer->Release();
+    }
+    void create_render_target_view(ID3D11Texture2D* back_buffer) {
+        HRESULT result = device->CreateRenderTargetView(back_buffer, NULL, &render_target_view);
+        back_buffer->Release();
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to get back buffer");
+        }
+    }
+    void set_render_target_view() {
+        // bind
+        immediate_context->OMSetRenderTargets(1, &render_target_view, 0);
+    }
 
     directx::~directx() {
         clear_resource(immediate_context);
