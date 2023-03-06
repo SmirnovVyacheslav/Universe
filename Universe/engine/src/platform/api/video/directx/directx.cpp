@@ -14,6 +14,7 @@ namespace engine {
     ID3D11DeviceContext* immediate_context = nullptr;
     IDXGISwapChain* swap_chain = nullptr;
     ID3D11RenderTargetView* render_target_view = nullptr;
+    ID3D11DepthStencilView* depth_stencil_view = nullptr;
 
     // Swap chain data config
     UINT buffer_count = 1;
@@ -99,10 +100,99 @@ namespace engine {
             throw std::invalid_argument("Failed to get back buffer");
         }
     }
+
+    ID3D11Texture2D* create_texture_2d(D3D11_TEXTURE2D_DESC description, D3D11_SUBRESOURCE_DATA initial_data) {
+        ID3D11Texture2D* texture = nullptr;
+        HRESULT result = device->CreateTexture2D(&description, &initial_data, &texture);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create depth stencil source");
+        }
+        return texture;
+    }
+
+    // Depth stencil surface data
+    UINT depth_stencil_width = 128;
+    UINT depth_stencil_height = 256;
+    UINT depth_stencil_map_levels = 1;
+    UINT depth_stencil_array_size = 1;
+    DXGI_FORMAT depth_stencil_format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    // DXGI_SAMPLE_DESC
+    UINT depth_stencil_dxgi_sample_count = 1;
+    UINT depth_stencil_dxgi_sample_quality = 0;
+    //
+    D3D11_USAGE depth_stencil_usage = D3D11_USAGE_DEFAULT;
+    UINT depth_stencil_bind_flags = D3D11_BIND_DEPTH_STENCIL;
+    UINT depth_stencil_cpu_access_falgs = 0;
+    UINT depth_stencil_misc_flags = 0;
+    // Depth stencil view data
+    DXGI_FORMAT depth_stencil_view_fromat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    D3D11_DSV_DIMENSION depth_stencil_view_dimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+    // D3D11_TEX2D_DSV subresource
+    UINT depth_stencil_textrue_2d_mip_slice = 0;
+    //
+    D3D11_TEXTURE2D_DESC create_depth_stensil_surface() {
+        D3D11_TEXTURE2D_DESC depth_stencil_surface;
+        ZeroMemory(&depth_stencil_surface, sizeof(depth_stencil_surface));
+
+        depth_stencil_surface.Width = depth_stencil_width;
+        depth_stencil_surface.Height = depth_stencil_height;
+        depth_stencil_surface.MipLevels = depth_stencil_map_levels;
+        depth_stencil_surface.ArraySize = depth_stencil_array_size;
+        depth_stencil_surface.Format = depth_stencil_format;
+        depth_stencil_surface.SampleDesc.Count = depth_stencil_dxgi_sample_count;
+        depth_stencil_surface.SampleDesc.Quality = depth_stencil_dxgi_sample_quality;
+        depth_stencil_surface.Usage = depth_stencil_usage;
+        depth_stencil_surface.BindFlags = depth_stencil_bind_flags;
+        depth_stencil_surface.CPUAccessFlags = depth_stencil_cpu_access_falgs;
+        depth_stencil_surface.MiscFlags = depth_stencil_misc_flags;
+
+        return depth_stencil_surface;
+    }
+    D3D11_DEPTH_STENCIL_VIEW_DESC create_depth_stencil_data() {
+        D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_data;
+        ZeroMemory(&depth_stencil_view_data, sizeof(depth_stencil_view_data));
+
+        depth_stencil_view_data.Format = depth_stencil_view_fromat;
+        depth_stencil_view_data.ViewDimension = depth_stencil_view_dimension;
+        depth_stencil_view_data.Texture2D.MipSlice = depth_stencil_textrue_2d_mip_slice;
+        
+        return depth_stencil_view_data;
+    }
+    void create_depth_stencil_view(ID3D11Texture2D* depth_stencil_surface, D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_data) {
+        HRESULT result = device->CreateDepthStencilView(depth_stencil_surface, &depth_stencil_view_data, &depth_stencil_view);
+        if (FAILED(result)) {
+            throw std::invalid_argument("Failed to create depth stencil view");
+        }
+    }
+
     void set_render_target_view() {
         // bind
-        immediate_context->OMSetRenderTargets(1, &render_target_view, 0);
+        immediate_context->OMSetRenderTargets(1, &render_target_view, depth_stencil_view);
     }
+
+    // viewport data
+    FLOAT view_port_width = 128;
+    FLOAT view_port_height = 256;
+    FLOAT view_port_min_depth = 0.0f;
+    FLOAT view_port_max_depth = 1.0f;
+    FLOAT view_port_top_left_x = 0;
+    FLOAT view_port_top_left_y = 0;
+    D3D11_VIEWPORT create_viewport() {
+        D3D11_VIEWPORT view_port;
+
+        view_port.Width = view_port_width;
+        view_port.Height = view_port_height;
+        view_port.MinDepth = view_port_min_depth;
+        view_port.MaxDepth = view_port_max_depth;
+        view_port.TopLeftX = view_port_top_left_x;
+        view_port.TopLeftY = view_port_top_left_y;
+
+        return view_port;
+    }
+    void set_viewport(D3D11_VIEWPORT view_port) {
+        immediate_context->RSSetViewports(1, &view_port);
+    }
+
 
     directx::~directx() {
         clear_resource(immediate_context);
