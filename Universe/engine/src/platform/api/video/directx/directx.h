@@ -13,19 +13,6 @@
 
 
 namespace engine {
-    DXGI_SWAP_CHAIN_DESC create_swap_chain_data(HWND output_window, UINT buffer_width, UINT buffer_haight);
-    void initialize_device(DXGI_SWAP_CHAIN_DESC swap_chain_data);
-    ID3D11Texture2D* get_back_buffer();
-    void release_back_buffer(ID3D11Texture2D* back_buffer);
-    void create_render_target_view(ID3D11Texture2D* back_buffer);
-    ID3D11Texture2D* create_texture_2d(D3D11_TEXTURE2D_DESC description, D3D11_SUBRESOURCE_DATA initial_data);
-    D3D11_TEXTURE2D_DESC create_depth_stensil_surface();
-    D3D11_DEPTH_STENCIL_VIEW_DESC create_depth_stencil_data();
-    void create_depth_stencil_view(ID3D11Texture2D* depth_stencil_surface, D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_data);
-    void set_render_target_view();
-    D3D11_VIEWPORT create_viewport();
-    void set_viewport(D3D11_VIEWPORT view_port);
-
     class directx : public video_api {
     public:
         directx() = default;

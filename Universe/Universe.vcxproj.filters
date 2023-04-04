@@ -61,6 +61,18 @@
     <Filter Include="src\engine\ui">
       <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\gdi">
+      <UniqueIdentifier>{2c745b3f-d2c7-4428-bd50-e57ccece3e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\gdi">
+      <UniqueIdentifier>{4b8901a6-d8e6-4f1b-8850-a73ce46b3aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\gdi\direct_x">
+      <UniqueIdentifier>{77757273-2ec5-4358-b419-63029ce3410b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\llr">
+      <UniqueIdentifier>{66c73c69-8e7d-466d-9f23-5bb6f96f72fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -128,6 +140,15 @@
     </ClCompile>
     <ClCompile Include="engine\src\renderer\renderer.cpp">
       <Filter>src\engine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\api\video\directx\device.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\gdi\device.cpp">
+      <Filter>src\engine\gdi</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\gdi\gdi.cpp">
+      <Filter>src\engine\gdi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +238,33 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\base_resource.h">
       <Filter>src\engine\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\gdi.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\gdi_cfg.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\swap_chain.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\device.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\gdi\gdi.h">
+      <Filter>src\engine\gdi</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\gdi\device.h">
+      <Filter>src\engine\gdi</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\gdi\direct_x\device_direct_x.h">
+      <Filter>src\engine\platfom\gdi\direct_x</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\gdi\gdi_cfg.h">
+      <Filter>src\engine\gdi</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\llr\llr.h">
+      <Filter>src\engine\llr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
