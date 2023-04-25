@@ -165,6 +165,7 @@
     <ClCompile Include="engine\src\core\object_id.cpp" />
     <ClCompile Include="engine\src\gdi\device.cpp" />
     <ClCompile Include="engine\src\gdi\gdi.cpp" />
+    <ClCompile Include="engine\src\gsi\gsi.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
     <ClCompile Include="engine\src\platform\api\video.cpp" />
     <ClCompile Include="engine\src\platform\api\video\directx\device.cpp" />
@@ -201,7 +202,7 @@
     <ClInclude Include="engine\src\gdi\device.h" />
     <ClInclude Include="engine\src\gdi\gdi.h" />
     <ClInclude Include="engine\src\gdi\gdi_cfg.h" />
-    <ClInclude Include="engine\src\llr\llr.h" />
+    <ClInclude Include="engine\src\gsi\gsi.h" />
     <ClInclude Include="engine\src\object\object.h" />
     <ClInclude Include="engine\src\platform\api\video.h" />
     <ClInclude Include="engine\src\platform\api\video\directx\device.h" />

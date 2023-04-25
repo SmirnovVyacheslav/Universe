@@ -6,17 +6,17 @@
 
 namespace engine {
     class t_gdi {
-    public:
+        public:
         t_gdi() = default;
         t_gdi(t_gdi&& r_src) = delete;
         t_gdi(const t_gdi& cr_src) = delete;
         ~t_gdi() = default;
 
-    public:
+        public:
         t_gdi& operator=(t_gdi&& r_src) = delete;
         t_gdi& operator=(const t_gdi& cr_src) = delete;
 
-    public:
+        public:
         void mf_c_gdi(const t_gdi_cfg* cr_gdi_cfg);
         void mf_d_gdi();
         // create shader
@@ -26,7 +26,7 @@ namespace engine {
         // device
         // config
  
-    private:
+        private:
         t_device* mp_device;
         t_gdi_cfg* mp_gdi_cfg;
     };

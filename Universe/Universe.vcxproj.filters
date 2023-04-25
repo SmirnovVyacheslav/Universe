@@ -70,7 +70,7 @@
     <Filter Include="src\engine\platfom\gdi\direct_x">
       <UniqueIdentifier>{77757273-2ec5-4358-b419-63029ce3410b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\llr">
+    <Filter Include="src\engine\gsi">
       <UniqueIdentifier>{66c73c69-8e7d-466d-9f23-5bb6f96f72fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -149,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\gdi\gdi.cpp">
       <Filter>src\engine\gdi</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\gsi\gsi.cpp">
+      <Filter>src\engine\gsi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -263,8 +266,8 @@
     <ClInclude Include="engine\src\gdi\gdi_cfg.h">
       <Filter>src\engine\gdi</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\llr\llr.h">
-      <Filter>src\engine\llr</Filter>
+    <ClInclude Include="engine\src\gsi\gsi.h">
+      <Filter>src\engine\gsi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
