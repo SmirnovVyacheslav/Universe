@@ -7,4 +7,10 @@ namespace engine {
     void gsi::init() {
         //
     }
+    void gsi::smf_c_gsi() {
+        inst.mo_gdi.mf_c_gdi(&inst.mo_gdi_cfg);
+    }
+    void gsi::smf_d_gsi() {
+        inst.mo_gdi.mf_d_gdi();
+    }
 }

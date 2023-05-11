@@ -10,7 +10,8 @@
 // c = const
 // m = member
 // g = global
-// _c_ = construct
+// s = static
+// _c_ = create
 // _d_ = destroy
 
 namespace engine {
@@ -23,5 +24,5 @@ namespace engine {
         virtual void mf_d_device();
     };
 
-    t_device* gf_c_device();
+    //t_device* gf_c_device(const t_gdi_cfg& cr_dgi_cfg);
 }

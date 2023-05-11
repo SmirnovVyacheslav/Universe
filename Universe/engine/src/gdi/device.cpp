@@ -15,7 +15,7 @@
 // _d_ = destroy
 
 namespace engine {
-    t_device* gf_c_device() {
+    t_device* gf_c_device(const t_gdi_cfg& cr_dgi_cfg) {
         return new t_device_direct_x();
     }
 }

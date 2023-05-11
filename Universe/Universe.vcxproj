@@ -170,6 +170,7 @@
     <ClCompile Include="engine\src\platform\api\video.cpp" />
     <ClCompile Include="engine\src\platform\api\video\directx\device.cpp" />
     <ClCompile Include="engine\src\platform\api\video\directx\directx.cpp" />
+    <ClCompile Include="engine\src\platform\gdi\direct_x\device_direct_x.cpp" />
     <ClCompile Include="engine\src\platform\window.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\renderer\renderer.cpp" />

@@ -5,10 +5,12 @@
 
 namespace engine {
     class t_device {
-    private:
+    protected:
         t_device() = default;
     public:
         virtual ~t_device() = default;
+        virtual void mf_c_device() = 0;
+        virtual void mf_d_device() = 0;
 
     public:
         t_device(t_device&& r_src) = delete;
@@ -18,5 +20,5 @@ namespace engine {
     };
 
 
-    t_device* gf_c_device(const t_dgi_cfg& cr_dgi_cfg);
+    t_device* gf_c_device(const t_gdi_cfg& cr_dgi_cfg);
 }

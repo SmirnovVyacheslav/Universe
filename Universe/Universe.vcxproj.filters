@@ -153,6 +153,9 @@
     <ClCompile Include="engine\src\gsi\gsi.cpp">
       <Filter>src\engine\gsi</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\platform\gdi\direct_x\device_direct_x.cpp">
+      <Filter>src\engine\platfom\gdi\direct_x</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
