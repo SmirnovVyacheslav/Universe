@@ -70,7 +70,7 @@
     <Filter Include="src\engine\platfom\gdi\direct_x">
       <UniqueIdentifier>{77757273-2ec5-4358-b419-63029ce3410b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\gsi">
+    <Filter Include="src\engine\gri">
       <UniqueIdentifier>{66c73c69-8e7d-466d-9f23-5bb6f96f72fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -150,11 +150,11 @@
     <ClCompile Include="engine\src\gdi\gdi.cpp">
       <Filter>src\engine\gdi</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\gsi\gsi.cpp">
-      <Filter>src\engine\gsi</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\platform\gdi\direct_x\device_direct_x.cpp">
       <Filter>src\engine\platfom\gdi\direct_x</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\gri\gri.cpp">
+      <Filter>src\engine\gri</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,8 +269,11 @@
     <ClInclude Include="engine\src\gdi\gdi_cfg.h">
       <Filter>src\engine\gdi</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\gsi\gsi.h">
-      <Filter>src\engine\gsi</Filter>
+    <ClInclude Include="engine\src\gri\gri.h">
+      <Filter>src\engine\gri</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\defines.h">
+      <Filter>src\engine\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

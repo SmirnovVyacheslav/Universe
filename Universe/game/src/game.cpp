@@ -1,16 +1,16 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "game.h"
-#include "src/gsi/gsi.h"
+#include "src/gri/gri.h"
 
 
 namespace game_ui {
     game::game() {
         // Initialize code
-        engine::gsi::smf_c_gsi();
+        engine::t_gri::smf_c_gri();
     };
     game::~game() {
         // Termination code
-        engine::gsi::smf_d_gsi();
+        engine::t_gri::smf_d_gri();
     }
     void game::run() {
         // engine_inst.initialize_resource();
