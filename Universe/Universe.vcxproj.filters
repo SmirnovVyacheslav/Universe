@@ -73,6 +73,9 @@
     <Filter Include="src\engine\gri">
       <UniqueIdentifier>{66c73c69-8e7d-466d-9f23-5bb6f96f72fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\gdi\dx">
+      <UniqueIdentifier>{447b361b-a770-487d-888b-6131fd2dca9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -144,9 +147,6 @@
     <ClCompile Include="engine\src\platform\api\video\directx\device.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\gdi\device.cpp">
-      <Filter>src\engine\gdi</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\gdi\gdi.cpp">
       <Filter>src\engine\gdi</Filter>
     </ClCompile>
@@ -155,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\gri\gri.cpp">
       <Filter>src\engine\gri</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\gdi\dx\dx_device.cpp">
+      <Filter>src\engine\gdi\dx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\defines.h">
       <Filter>src\engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\gdi\dx\dx_device.h">
+      <Filter>src\engine\gdi\dx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

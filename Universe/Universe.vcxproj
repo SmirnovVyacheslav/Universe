@@ -163,7 +163,7 @@
     <ClCompile Include="engine\src\core\data_type\vertex.cpp" />
     <ClCompile Include="engine\src\core\initialize.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
-    <ClCompile Include="engine\src\gdi\device.cpp" />
+    <ClCompile Include="engine\src\gdi\dx\dx_device.cpp" />
     <ClCompile Include="engine\src\gdi\gdi.cpp" />
     <ClCompile Include="engine\src\gri\gri.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
@@ -202,6 +202,7 @@
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
     <ClInclude Include="engine\src\gdi\device.h" />
+    <ClInclude Include="engine\src\gdi\dx\dx_device.h" />
     <ClInclude Include="engine\src\gdi\gdi.h" />
     <ClInclude Include="engine\src\gdi\gdi_cfg.h" />
     <ClInclude Include="engine\src\gri\gri.h" />
