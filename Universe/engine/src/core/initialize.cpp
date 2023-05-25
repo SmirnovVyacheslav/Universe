@@ -2,14 +2,14 @@
 #include "initialize.h"
 #include "config.h"
 #include "src/platform/api/video.h"
-#include "src/gsi/gsi.h"
+#include "src/gri/gri.h"
 
 
 namespace engine {
     void initialize() {
         config::initialize();
-        video::initialize();
-        gsi::init();
+        //video::initialize();
+        t_gri::smf_c_gri();
     }
     void terminate() {
     }

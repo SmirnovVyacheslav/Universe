@@ -10,6 +10,6 @@ namespace engine
     {
         static t_device* smf_c_direct_x(const t_gdi_cfg& cr_dgi_cfg);
 
-        virtual ~t_device() pvf;
+        virtual ~t_device() = default; //pvf;
     };
 }

@@ -19,6 +19,6 @@ namespace engine
         static void smf_c_gri();
         static void smf_d_gri();
 
-        virtual ~t_gri() pvf;
+        virtual ~t_gri() = default; //pvf;
     };
 }

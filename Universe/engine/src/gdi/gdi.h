@@ -11,6 +11,6 @@ namespace engine
         static t_gdi* smf_c_gdi(const t_gdi_cfg* cr_gdi_cfg);
         //static void smf_d_gdi();
 
-        virtual ~t_gdi() pvf;
+        virtual ~t_gdi() = default; //pvf;
     };
 }
