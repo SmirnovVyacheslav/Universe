@@ -6,7 +6,8 @@
 //
 //namespace engine
 //{
-//    interface t_device
+//    // interface t_device
+//    struct t_device
 //    {
 //        static t_device* smf_c_direct_x(const t_gdi_cfg& cr_dgi_cfg);
 //

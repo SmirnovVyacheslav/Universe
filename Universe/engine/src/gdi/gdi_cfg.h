@@ -6,7 +6,8 @@
 
 namespace engine
 {
-    interface t_gdi_cfg
+    // interface t_gdi_cfg
+    struct t_gdi_cfg
     {
         int_32 mo_width = 128;
         int_32 mo_height = 256;

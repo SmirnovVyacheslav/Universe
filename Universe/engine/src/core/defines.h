@@ -4,4 +4,4 @@
 // pure virtual function
 #define pvf = 0
 
-#define interface struct
+//#define interface struct
