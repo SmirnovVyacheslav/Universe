@@ -202,7 +202,6 @@
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
     <ClInclude Include="engine\src\gdi\device.h" />
-    <ClInclude Include="engine\src\gdi\dx\dx_device.h" />
     <ClInclude Include="engine\src\gdi\gdi.h" />
     <ClInclude Include="engine\src\gdi\gdi_cfg.h" />
     <ClInclude Include="engine\src\gri\gri.h" />

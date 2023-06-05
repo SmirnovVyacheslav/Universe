@@ -4,7 +4,6 @@
 #include "src/gdi/gdi.h"
 #include "src/gdi/gdi_cfg.h"
 
-#include "src/core/config.h"
 #include "src/platform/window.h"
 
 
@@ -30,12 +29,8 @@ namespace engine
 
     void t_gri::smf_c_gri()
     {
-        smf_d_gri();
-        t_gri_impl::mp_inst = new t_gri_impl;
-    }
-    void t_gri::smf_d_gri()
-    {
         delete t_gri_impl::mp_inst;
+        t_gri_impl::mp_inst = new t_gri_impl;
     }
 
 
