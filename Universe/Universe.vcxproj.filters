@@ -73,7 +73,7 @@
     <Filter Include="src\engine\gri">
       <UniqueIdentifier>{66c73c69-8e7d-466d-9f23-5bb6f96f72fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\gdi\dx">
+    <Filter Include="src\engine\gdi\directx">
       <UniqueIdentifier>{447b361b-a770-487d-888b-6131fd2dca9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -153,11 +153,11 @@
     <ClCompile Include="engine\src\gri\gri.cpp">
       <Filter>src\engine\gri</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\gdi\dx\dx_device.cpp">
-      <Filter>src\engine\gdi\dx</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\platform\api\video\directx\device.cpp">
       <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\gdi\directx\device_directx.cpp">
+      <Filter>src\engine\gdi\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

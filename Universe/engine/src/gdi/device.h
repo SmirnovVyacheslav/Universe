@@ -9,7 +9,7 @@ namespace engine
     // interface t_device
     struct t_device
     {
-        static t_device* smf_c_direct_x(const t_gdi_cfg& cr_dgi_cfg);
+        static t_device* smf_c_directx(const t_gdi_cfg& cr_dgi_cfg);
 
         virtual ~t_device() = default; //pvf;
     };

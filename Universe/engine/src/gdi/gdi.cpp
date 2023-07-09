@@ -39,7 +39,7 @@ namespace engine
 
 
     t_gdi_impl::t_gdi_impl(const t_gdi_cfg* cr_gdi_cfg) {
-        mp_direct_x = t_device::smf_c_direct_x(*cr_gdi_cfg);
+        mp_direct_x = t_device::smf_c_directx(*cr_gdi_cfg);
     }
     t_gdi_impl::~t_gdi_impl() {
         delete mp_direct_x;
