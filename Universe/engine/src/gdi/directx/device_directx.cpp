@@ -12,65 +12,72 @@
 
 namespace engine
 {
-    class t_device_directx : public t_device
+    class device_directx_t : public t_device
     {
-        public:    t_device_directx(const t_gdi_cfg* cr_gdi_cfg);
-        public:    t_device_directx(t_device_directx&& r_src) = delete;
-        public:    t_device_directx(const t_device_directx& cr_src) = delete;
-        public:    ~t_device_directx() = default;
+    public:
+        device_directx_t(const t_gdi_cfg* gdi_cfg);
+        device_directx_t(device_directx_t&& src) = delete;
+        device_directx_t(const device_directx_t& src) = delete;
 
-        public:    t_device_directx& operator=(t_device_directx&& r_src) = delete;
-        public:    t_device_directx& operator=(const t_device_directx& cr_src) = delete;
+        device_directx_t& operator=(device_directx_t&& src) = delete;
+        device_directx_t& operator=(const device_directx_t& src) = delete;
 
-        private:   ID3D11Device* mp_device = nullptr;
-        private:   ID3D11DeviceContext* mp_device_context = nullptr;
-        private:   IDXGISwapChain* mp_swap_chain = nullptr;
-        private:   ID3D11RenderTargetView* mp_render_target_view = nullptr;
-        private:   ID3D11DepthStencilView* mp_depth_stencil_view = nullptr;
+        ~device_directx_t() = default;
+
+    private:
+        ID3D11Device* device = nullptr;
+        ID3D11DeviceContext* device_context = nullptr;
+        IDXGISwapChain* swap_chain = nullptr;
+
+        void create_device(const t_gdi_cfg* gdi_cfg);
     };
 
 
     t_device* t_device::smf_c_directx(const t_gdi_cfg& cr_dgi_cfg)
     {
-        return new t_device_directx(&cr_dgi_cfg);
+        return new device_directx_t(&cr_dgi_cfg);
     }
 
+    device_directx_t::device_directx_t(const t_gdi_cfg* gdi_cfg)
+    {
+        create_device(gdi_cfg);
+    }
 
-    t_device_directx::t_device_directx(const t_gdi_cfg* cr_gdi_cfg)
+    void device_directx_t::create_device(const t_gdi_cfg* gdi_cfg)
     {
         DXGI_SWAP_CHAIN_DESC swap_chain_desc;
         ZeroMemory(&swap_chain_desc, sizeof(swap_chain_desc));
 
         swap_chain_desc.BufferCount = 1;
-        swap_chain_desc.BufferDesc.Width = cr_gdi_cfg->mo_width;
-        swap_chain_desc.BufferDesc.Height = cr_gdi_cfg->mo_height;
+        swap_chain_desc.BufferDesc.Width = gdi_cfg->mo_width;
+        swap_chain_desc.BufferDesc.Height = gdi_cfg->mo_height;
         swap_chain_desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-        swap_chain_desc.BufferDesc.RefreshRate.Numerator = cr_gdi_cfg->mo_refresh;
+        swap_chain_desc.BufferDesc.RefreshRate.Numerator = gdi_cfg->mo_refresh;
         swap_chain_desc.BufferDesc.RefreshRate.Denominator = 1;
         swap_chain_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        swap_chain_desc.OutputWindow = reinterpret_cast<HWND>(cr_gdi_cfg->mp_window_handler);
+        swap_chain_desc.OutputWindow = reinterpret_cast<HWND>(gdi_cfg->mp_window_handler);
         swap_chain_desc.SampleDesc.Count = 1;
         swap_chain_desc.SampleDesc.Quality = 0;
         swap_chain_desc.Windowed = TRUE;
 
-
-        D3D_DRIVER_TYPE driver_type = D3D_DRIVER_TYPE_HARDWARE;
-        D3D_FEATURE_LEVEL created_feature_level = D3D_FEATURE_LEVEL_11_0;
-        D3D_FEATURE_LEVEL requested_feature_level = D3D_FEATURE_LEVEL_11_0;
-        HRESULT result = D3D11CreateDeviceAndSwapChain(
+        HRESULT result = D3D11CreateDeviceAndSwapChain
+        (
             NULL,
-            driver_type,
+            D3D_DRIVER_TYPE_HARDWARE,
             NULL,
             0,
-            &requested_feature_level,
-            1,
+            NULL,
+            0,
             D3D11_SDK_VERSION,
             &swap_chain_desc,
-            &mp_swap_chain,
-            &mp_device,
-            &created_feature_level,
-            &mp_device_context);
-        if (FAILED(result)) {
+            &swap_chain,
+            &device,
+            NULL,
+            &device_context
+        );
+
+        if (FAILED(result))
+        {
             throw std::invalid_argument("Failed to create device");
         }
     }
