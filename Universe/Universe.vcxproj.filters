@@ -278,6 +278,9 @@
     <ClInclude Include="engine\src\core\defines.h">
       <Filter>src\engine\core</Filter>
     </ClInclude>
+    <ClInclude Include="engine\src\platform\definition.h">
+      <Filter>src\engine\platfom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

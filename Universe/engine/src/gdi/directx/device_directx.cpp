@@ -1,14 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/gdi/device.h"
-#include "src/gdi/gdi_cfg.h"
-
 #include <stdexcept>
 
+#include "src/gdi/device.h"
+#include "src/platform/definition.h"
 
+#ifdef PLATFORM_WINDOWS
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <windows.h>
+
 
 namespace engine
 {
@@ -82,3 +83,39 @@ namespace engine
         }
     }
 }
+#else
+namespace engine
+{
+    class device_directx_t : public t_device
+    {
+    public:
+        device_directx_t(const t_gdi_cfg* gdi_cfg);
+        device_directx_t(device_directx_t&& src) = delete;
+        device_directx_t(const device_directx_t& src) = delete;
+
+        device_directx_t& operator=(device_directx_t&& src) = delete;
+        device_directx_t& operator=(const device_directx_t& src) = delete;
+
+        ~device_directx_t() = default;
+
+    private:
+        void create_device(const t_gdi_cfg* gdi_cfg);
+    };
+
+
+    t_device* t_device::smf_c_directx(const t_gdi_cfg& cr_dgi_cfg)
+    {
+        return new device_directx_t(&cr_dgi_cfg);
+    }
+
+    device_directx_t::device_directx_t(const t_gdi_cfg* gdi_cfg)
+    {
+        create_device(gdi_cfg);
+    }
+
+    void device_directx_t::create_device(const t_gdi_cfg* gdi_cfg)
+    {
+        throw std::invalid_argument("Failed to create device");
+    }
+}
+#endif

@@ -212,6 +212,7 @@
     <ClInclude Include="engine\src\platform\api\video\directx\gdi.h" />
     <ClInclude Include="engine\src\platform\api\video\directx\gdi_cfg.h" />
     <ClInclude Include="engine\src\platform\api\video\directx\swap_chain.h" />
+    <ClInclude Include="engine\src\platform\definition.h" />
     <ClInclude Include="engine\src\platform\gdi\direct_x\device_direct_x.h" />
     <ClInclude Include="engine\src\platform\platform_def.h" />
     <ClInclude Include="engine\src\platform\windows\window_impl.h" />
