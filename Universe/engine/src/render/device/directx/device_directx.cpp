@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include <stdexcept>
 
-#include "src/gdi/device.h"
+#include "src/render/device/device.h"
 #include "src/platform/definition.h"
 
 #ifdef PLATFORM_WINDOWS
@@ -11,12 +11,14 @@
 #include <windows.h>
 
 
-namespace engine
+namespace engine::render::device
 {
-    class device_directx_t : public t_device
+    class device_directx_t : public device_t
     {
+        abstract_impl(device_directx_t)
+
     public:
-        device_directx_t(const t_gdi_cfg* gdi_cfg);
+        device_directx_t(const cfg_t* cfg);
         device_directx_t(device_directx_t&& src) = delete;
         device_directx_t(const device_directx_t& src) = delete;
 
@@ -30,33 +32,33 @@ namespace engine
         ID3D11DeviceContext* device_context = nullptr;
         IDXGISwapChain* swap_chain = nullptr;
 
-        void create_device(const t_gdi_cfg* gdi_cfg);
+        void create_device(const cfg_t* cfg);
     };
 
 
-    t_device* t_device::smf_c_directx(const t_gdi_cfg& cr_dgi_cfg)
+    device_t* device_t::initialize(const cfg_t& cfg)
     {
-        return new device_directx_t(&cr_dgi_cfg);
+        return new device_directx_t(&cfg);
     }
 
-    device_directx_t::device_directx_t(const t_gdi_cfg* gdi_cfg)
+    device_directx_t::device_directx_t(const cfg_t* cfg)
     {
-        create_device(gdi_cfg);
+        create_device(cfg);
     }
 
-    void device_directx_t::create_device(const t_gdi_cfg* gdi_cfg)
+    void device_directx_t::create_device(const cfg_t* cfg)
     {
         DXGI_SWAP_CHAIN_DESC swap_chain_desc;
         ZeroMemory(&swap_chain_desc, sizeof(swap_chain_desc));
 
         swap_chain_desc.BufferCount = 1;
-        swap_chain_desc.BufferDesc.Width = gdi_cfg->mo_width;
-        swap_chain_desc.BufferDesc.Height = gdi_cfg->mo_height;
+        swap_chain_desc.BufferDesc.Width = cfg->width;
+        swap_chain_desc.BufferDesc.Height = cfg->height;
         swap_chain_desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-        swap_chain_desc.BufferDesc.RefreshRate.Numerator = gdi_cfg->mo_refresh;
+        swap_chain_desc.BufferDesc.RefreshRate.Numerator = cfg->refresh;
         swap_chain_desc.BufferDesc.RefreshRate.Denominator = 1;
         swap_chain_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        swap_chain_desc.OutputWindow = reinterpret_cast<HWND>(gdi_cfg->mp_window_handler);
+        swap_chain_desc.OutputWindow = reinterpret_cast<HWND>(cfg->window_handler);
         swap_chain_desc.SampleDesc.Count = 1;
         swap_chain_desc.SampleDesc.Quality = 0;
         swap_chain_desc.Windowed = TRUE;
@@ -86,10 +88,10 @@ namespace engine
 #else
 namespace engine
 {
-    class device_directx_t : public t_device
+    class device_directx_t : public device_t
     {
     public:
-        device_directx_t(const t_gdi_cfg* gdi_cfg);
+        device_directx_t(const cfg_t* cfg);
         device_directx_t(device_directx_t&& src) = delete;
         device_directx_t(const device_directx_t& src) = delete;
 
@@ -99,21 +101,21 @@ namespace engine
         ~device_directx_t() = default;
 
     private:
-        void create_device(const t_gdi_cfg* gdi_cfg);
+        void create_device(const cfg_t* cfg);
     };
 
 
-    t_device* t_device::smf_c_directx(const t_gdi_cfg& cr_dgi_cfg)
+    device_t* device_t::initialize(const cfg_t& cfg)
     {
-        return new device_directx_t(&cr_dgi_cfg);
+        return new device_directx_t(&cfg);
     }
 
-    device_directx_t::device_directx_t(const t_gdi_cfg* gdi_cfg)
+    device_directx_t::device_directx_t(const cfg_t* cfg)
     {
-        create_device(gdi_cfg);
+        create_device(cfg);
     }
 
-    void device_directx_t::create_device(const t_gdi_cfg* gdi_cfg)
+    void device_directx_t::create_device(const cfg_t* cfg)
     {
         throw std::invalid_argument("Failed to create device");
     }

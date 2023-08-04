@@ -163,9 +163,6 @@
     <ClCompile Include="engine\src\core\data_type\vertex.cpp" />
     <ClCompile Include="engine\src\core\initialize.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
-    <ClCompile Include="engine\src\gdi\directx\device_directx.cpp" />
-    <ClCompile Include="engine\src\gdi\gdi.cpp" />
-    <ClCompile Include="engine\src\gri\gri.cpp" />
     <ClCompile Include="engine\src\object\object.cpp" />
     <ClCompile Include="engine\src\platform\api\video.cpp" />
     <ClCompile Include="engine\src\platform\api\video\directx\device.cpp" />
@@ -174,6 +171,9 @@
     <ClCompile Include="engine\src\platform\window.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\renderer\renderer.cpp" />
+    <ClCompile Include="engine\src\render\api.cpp" />
+    <ClCompile Include="engine\src\render\device\api.cpp" />
+    <ClCompile Include="engine\src\render\device\directx\device_directx.cpp" />
     <ClCompile Include="engine\src\resource\resource.cpp" />
     <ClCompile Include="engine\src\ui\engine_ui.cpp" />
     <ClCompile Include="game\src\game.cpp" />
@@ -197,14 +197,11 @@
     <ClInclude Include="engine\src\core\data_type\vector_4.h" />
     <ClInclude Include="engine\src\core\data_type\vertex.h" />
     <ClInclude Include="engine\src\core\defines.h" />
+    <ClInclude Include="engine\src\core\definition.h" />
     <ClInclude Include="engine\src\core\initialize.h" />
     <ClInclude Include="engine\src\core\math\const.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
-    <ClInclude Include="engine\src\gdi\device.h" />
-    <ClInclude Include="engine\src\gdi\gdi.h" />
-    <ClInclude Include="engine\src\gdi\gdi_cfg.h" />
-    <ClInclude Include="engine\src\gri\gri.h" />
     <ClInclude Include="engine\src\object\object.h" />
     <ClInclude Include="engine\src\platform\api\video.h" />
     <ClInclude Include="engine\src\platform\api\video\directx\device.h" />
@@ -218,6 +215,10 @@
     <ClInclude Include="engine\src\platform\windows\window_impl.h" />
     <ClInclude Include="engine\src\platform\window.h" />
     <ClInclude Include="engine\src\renderer\renderer.h" />
+    <ClInclude Include="engine\src\render\api.h" />
+    <ClInclude Include="engine\src\render\device\api.h" />
+    <ClInclude Include="engine\src\render\device\cfg.h" />
+    <ClInclude Include="engine\src\render\device\device.h" />
     <ClInclude Include="engine\src\resource\resource.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>

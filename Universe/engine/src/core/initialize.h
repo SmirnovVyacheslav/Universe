@@ -1,8 +1,9 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
 
-namespace engine {
+namespace engine
+{
     void initialize();
     void terminate();
 }

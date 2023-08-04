@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "game.h"
-#include "src/gri/gri.h"
+//#include "src/gri/gri.h"
 
 
 namespace game_ui {

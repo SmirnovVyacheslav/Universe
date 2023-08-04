@@ -2,21 +2,24 @@
 #pragma once
 
 
-namespace engine {
-    namespace ui {
-        class engine_ui {
-            public:
-                engine_ui();
-                engine_ui(engine_ui&& src) = default;
-                engine_ui(const engine_ui& src) = default;
+namespace engine
+{
+    namespace ui
+    {
+        class engine_ui
+        {
+        public:
+            engine_ui();
+            engine_ui(engine_ui&& src) = default;
+            engine_ui(const engine_ui& src) = default;
 
-                void initialize_resource();
-                void render();
+            void initialize_resource();
+            void render();
 
-                engine_ui& operator=(engine_ui&& src) = default;
-                engine_ui& operator=(const engine_ui& src) = default;
+            engine_ui& operator=(engine_ui&& src) = default;
+            engine_ui& operator=(const engine_ui& src) = default;
 
-                ~engine_ui();
+            ~engine_ui();
         };
     }
 }
