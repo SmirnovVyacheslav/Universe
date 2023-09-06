@@ -76,6 +76,18 @@
     <Filter Include="src\engine\render\device\directx">
       <UniqueIdentifier>{447b361b-a770-487d-888b-6131fd2dca9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\platfom\window">
+      <UniqueIdentifier>{c550a0b9-57e2-4116-a184-becd5d391611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\window\windows">
+      <UniqueIdentifier>{c4095c30-55e1-42c0-a7ab-618f43c25523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\def">
+      <UniqueIdentifier>{14e14479-d7a1-4500-80f8-a84b8761f703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\def">
+      <UniqueIdentifier>{145adc21-3b65-4812-810d-115f118487fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -158,6 +170,12 @@
     </ClCompile>
     <ClCompile Include="engine\src\render\device\directx\device_directx.cpp">
       <Filter>src\engine\render\device\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\platform.cpp">
+      <Filter>src\engine\platfom</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\window\windows\window.cpp">
+      <Filter>src\engine\platfom\window\windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +301,33 @@
     </ClInclude>
     <ClInclude Include="engine\src\render\device\device.h">
       <Filter>src\engine\render\device</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\platform.h">
+      <Filter>src\engine\platfom</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\window.h">
+      <Filter>src\engine\platfom\window</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\def\abstract.h">
+      <Filter>src\engine\core\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\def\platform.h">
+      <Filter>src\engine\platfom\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\windows\config.cpp">
+      <Filter>src\engine\platfom\window\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\def\target.h">
+      <Filter>src\engine\platfom\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\config.h">
+      <Filter>src\engine\platfom\window</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\windows\handler.h">
+      <Filter>src\engine\platfom\window\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\windows\config.h">
+      <Filter>src\engine\platfom\window\windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
