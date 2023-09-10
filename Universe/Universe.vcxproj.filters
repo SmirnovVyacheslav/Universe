@@ -174,7 +174,7 @@
     <ClCompile Include="engine\src\platform\platform.cpp">
       <Filter>src\engine\platfom</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\window\windows\window.cpp">
+    <ClCompile Include="engine\src\platform\window\windows\window_impl.cpp">
       <Filter>src\engine\platfom\window\windows</Filter>
     </ClCompile>
   </ItemGroup>
@@ -308,14 +308,11 @@
     <ClInclude Include="engine\src\platform\window\window.h">
       <Filter>src\engine\platfom\window</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\def\abstract.h">
+    <ClInclude Include="engine\src\core\def\abstract_class.h">
       <Filter>src\engine\core\def</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\platform\def\platform.h">
       <Filter>src\engine\platfom\def</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\window\windows\config.cpp">
-      <Filter>src\engine\platfom\window\windows</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\platform\def\target.h">
       <Filter>src\engine\platfom\def</Filter>
@@ -323,10 +320,13 @@
     <ClInclude Include="engine\src\platform\window\config.h">
       <Filter>src\engine\platfom\window</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\window\windows\handler.h">
+    <ClInclude Include="engine\src\platform\window\windows\window_handler.h">
       <Filter>src\engine\platfom\window\windows</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\window\windows\config.h">
+    <ClInclude Include="engine\src\platform\window\windows\window_config.h">
+      <Filter>src\engine\platfom\window\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\windows\window_impl.h">
       <Filter>src\engine\platfom\window\windows</Filter>
     </ClInclude>
   </ItemGroup>

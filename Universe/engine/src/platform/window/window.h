@@ -1,14 +1,14 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/def/abstract.h"
+#include "src/core/def/abstract_class.h"
 #include "src/platform/window/config.h"
 
 
 namespace engine::platform::window
 {
-    struct window
+    abstract_class window
     {
-        abstract(window)
+        abstract_def(window)
 
         virtual void* id();
     };

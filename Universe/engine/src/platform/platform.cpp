@@ -1,43 +1,41 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/platform/api.h"
+#include "src/platform/platform.h"
 
 
 namespace engine::platform
 {
-    class impl : public api
+    class platform_impl : public platform
     {
-        abstract_impl(impl)
+        abstract_impl(platform_impl)
 
     public:
-        static impl* inst;
+        platform_impl();
+        platform_impl(platform_impl&& src) = delete;
+        platform_impl(const platform_impl& src) = delete;
 
-        impl();
-        impl(impl&& src) = delete;
-        impl(const impl& src) = delete;
+        platform_impl& operator=(platform_impl&& src) = delete;
+        platform_impl& operator=(const platform_impl& src) = delete;
 
-        impl& operator=(impl&& src) = delete;
-        impl& operator=(const impl& src) = delete;
-
-        ~impl();
+        ~platform_impl();
 
     private:
         //
     };
-    impl* impl::inst = nullptr;
+    platform_impl* inst = nullptr;
 
 
-    void api::initialize()
+    void init()
     {
-        delete impl::inst;
-        impl::inst = new impl;
+        delete inst;
+        inst = new platform_impl;
     }
 
 
-    impl::impl()
+    platform_impl::platform_impl()
     {
         //
     }
-    impl::~impl()
+    platform_impl::~platform_impl()
     {
         //
     }

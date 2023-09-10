@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;platform_windows;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)engine;$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
@@ -171,7 +171,7 @@
     <ClCompile Include="engine\src\platform\gdi\direct_x\device_direct_x.cpp" />
     <ClCompile Include="engine\src\platform\window.cpp" />
     <ClCompile Include="engine\src\platform\windows\window_impl.cpp" />
-    <ClCompile Include="engine\src\platform\window\windows\window.cpp" />
+    <ClCompile Include="engine\src\platform\window\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\renderer\renderer.cpp" />
     <ClCompile Include="engine\src\render\api.cpp" />
     <ClCompile Include="engine\src\render\device\api.cpp" />
@@ -200,7 +200,7 @@
     <ClInclude Include="engine\src\core\data_type\vertex.h" />
     <ClInclude Include="engine\src\core\defines.h" />
     <ClInclude Include="engine\src\core\definition.h" />
-    <ClInclude Include="engine\src\core\def\abstract.h" />
+    <ClInclude Include="engine\src\core\def\abstract_class.h" />
     <ClInclude Include="engine\src\core\initialize.h" />
     <ClInclude Include="engine\src\core\math\const.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
@@ -222,9 +222,9 @@
     <ClInclude Include="engine\src\platform\window.h" />
     <ClInclude Include="engine\src\platform\window\window.h" />
     <ClInclude Include="engine\src\platform\window\config.h" />
-    <ClInclude Include="engine\src\platform\window\windows\config.cpp" />
-    <ClInclude Include="engine\src\platform\window\windows\config.h" />
-    <ClInclude Include="engine\src\platform\window\windows\handler.h" />
+    <ClInclude Include="engine\src\platform\window\windows\window_config.h" />
+    <ClInclude Include="engine\src\platform\window\windows\window_handler.h" />
+    <ClInclude Include="engine\src\platform\window\windows\window_impl.h" />
     <ClInclude Include="engine\src\renderer\renderer.h" />
     <ClInclude Include="engine\src\render\api.h" />
     <ClInclude Include="engine\src\render\device\api.h" />
