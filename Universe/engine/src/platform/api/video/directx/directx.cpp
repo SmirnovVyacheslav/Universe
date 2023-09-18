@@ -118,7 +118,7 @@ namespace engine {
         swap_chain->Present(0, 0);
     }
     void directx::create_window() {
-        platform::window::create_window();
+        //platform::window::create_window();
     }
     void directx::create_render_target() {
         ID3D11Texture2D* back_buffer = NULL;
@@ -147,7 +147,7 @@ namespace engine {
         swap_chain_data.BufferDesc.RefreshRate.Numerator = config::video()->refresh_rate;
         swap_chain_data.BufferDesc.RefreshRate.Denominator = 1;
         swap_chain_data.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        swap_chain_data.OutputWindow = reinterpret_cast<HWND>(platform::window::id());
+        swap_chain_data.OutputWindow = nullptr;//reinterpret_cast<HWND>(platform::window::id());
         swap_chain_data.SampleDesc.Count = 1;
         swap_chain_data.SampleDesc.Quality = 0;
         swap_chain_data.Windowed = TRUE;

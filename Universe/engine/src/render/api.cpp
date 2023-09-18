@@ -2,7 +2,7 @@
 #include "src/render/api.h"
 #include "src/render/device/cfg.h"
 #include "src/render/device/api.h"
-#include "src/platform/window.h"
+#include "src/platform/platform.h"
 
 
 namespace engine::render
@@ -32,15 +32,15 @@ namespace engine::render
 
     void api_t::initialize()
     {
-        delete api_impl_t::inst;
+        //delete api_impl_t::inst;
         api_impl_t::inst = new api_impl_t;
     }
 
 
     api_impl_t::api_impl_t()
     {
-        platform::window::create_window();
-        device_cfg.window_handler = reinterpret_cast<void*>(platform::window::id());
+        //platform::window::create_window();
+        device_cfg.window_handler = reinterpret_cast<void*>(platform::inst_def->id());
         device_api = device::api_t::initialize(&device_cfg);
     }
     api_impl_t::~api_impl_t()

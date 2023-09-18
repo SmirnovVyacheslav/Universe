@@ -10,7 +10,7 @@ namespace engine::platform::window
     {
         abstract_def(window)
 
-        virtual void* id();
+        virtual void* id() = 0;
     };
 
     window* init(config* cfg);

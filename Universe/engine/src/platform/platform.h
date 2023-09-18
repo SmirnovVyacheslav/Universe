@@ -8,7 +8,12 @@ namespace engine::platform
     abstract_class platform
     {
         abstract_def(platform)
+
+        virtual void* id() = 0;
     };
 
+    extern platform* inst_def;
+
     void init();
+    void term();
 }
