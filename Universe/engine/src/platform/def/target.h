@@ -2,8 +2,4 @@
 #pragma once
 
 
-namespace engine
-{
-    void initialize();
-    void terminate();
-}
+#define target_windows

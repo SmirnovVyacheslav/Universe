@@ -1,14 +1,19 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
-#include "initialize.h"
-#include "config.h"
-#include "src/platform/api/video.h"
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+#include "src/core/initialize.h"
+#include "src/core/config.h"
+#include "src/render/api.h"
+#include "src/platform/platform.h"
 
 
-namespace engine {
-    void initialize() {
+namespace engine
+{
+    void initialize()
+    {
         config::initialize();
-        video::initialize();
+        platform::init();
+        render::api_t::initialize();
     }
-    void terminate() {
-    }
+
+    void terminate()
+    {}
 }

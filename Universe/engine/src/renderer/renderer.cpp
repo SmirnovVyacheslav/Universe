@@ -10,7 +10,7 @@
 
 
 namespace engine {
-    renderer renderer::inst = renderer();
+    //renderer renderer::inst = renderer();
 
 
     void renderer::render() {
@@ -24,7 +24,7 @@ namespace engine {
             }
             else
             {
-                video::render();
+                //video::render();
             }
         }
     }

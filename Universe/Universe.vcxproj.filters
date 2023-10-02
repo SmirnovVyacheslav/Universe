@@ -61,6 +61,33 @@
     <Filter Include="src\engine\ui">
       <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\platfom\gdi">
+      <UniqueIdentifier>{4b8901a6-d8e6-4f1b-8850-a73ce46b3aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\gdi\direct_x">
+      <UniqueIdentifier>{77757273-2ec5-4358-b419-63029ce3410b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render">
+      <UniqueIdentifier>{66c73c69-8e7d-466d-9f23-5bb6f96f72fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\device">
+      <UniqueIdentifier>{2c745b3f-d2c7-4428-bd50-e57ccece3e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\device\directx">
+      <UniqueIdentifier>{447b361b-a770-487d-888b-6131fd2dca9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\window">
+      <UniqueIdentifier>{c550a0b9-57e2-4116-a184-becd5d391611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\window\windows">
+      <UniqueIdentifier>{c4095c30-55e1-42c0-a7ab-618f43c25523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\def">
+      <UniqueIdentifier>{14e14479-d7a1-4500-80f8-a84b8761f703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\def">
+      <UniqueIdentifier>{145adc21-3b65-4812-810d-115f118487fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -128,6 +155,27 @@
     </ClCompile>
     <ClCompile Include="engine\src\renderer\renderer.cpp">
       <Filter>src\engine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\gdi\direct_x\device_direct_x.cpp">
+      <Filter>src\engine\platfom\gdi\direct_x</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\api\video\directx\device.cpp">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\api.cpp">
+      <Filter>src\engine\render</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\device\api.cpp">
+      <Filter>src\engine\render\device</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\device\directx\device_directx.cpp">
+      <Filter>src\engine\render\device\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\platform.cpp">
+      <Filter>src\engine\platfom</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\window\windows\window_impl.cpp">
+      <Filter>src\engine\platfom\window\windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +265,69 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\data_type\base_resource.h">
       <Filter>src\engine\core\data_type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\gdi.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\gdi_cfg.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\swap_chain.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\video\directx\device.h">
+      <Filter>src\engine\platfom\api\video\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\gdi\direct_x\device_direct_x.h">
+      <Filter>src\engine\platfom\gdi\direct_x</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\defines.h">
+      <Filter>src\engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\definition.h">
+      <Filter>src\engine\platfom</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\api.h">
+      <Filter>src\engine\render</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\definition.h">
+      <Filter>src\engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\device\api.h">
+      <Filter>src\engine\render\device</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\device\cfg.h">
+      <Filter>src\engine\render\device</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\device\device.h">
+      <Filter>src\engine\render\device</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\platform.h">
+      <Filter>src\engine\platfom</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\window.h">
+      <Filter>src\engine\platfom\window</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\def\abstract_class.h">
+      <Filter>src\engine\core\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\def\platform.h">
+      <Filter>src\engine\platfom\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\def\target.h">
+      <Filter>src\engine\platfom\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\config.h">
+      <Filter>src\engine\platfom\window</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\windows\window_handler.h">
+      <Filter>src\engine\platfom\window\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\windows\window_config.h">
+      <Filter>src\engine\platfom\window\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\window\windows\window_impl.h">
+      <Filter>src\engine\platfom\window\windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
