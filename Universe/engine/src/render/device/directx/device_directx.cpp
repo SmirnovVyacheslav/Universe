@@ -2,9 +2,8 @@
 #include <stdexcept>
 
 #include "src/render/device/device.h"
-#include "src/platform/definition.h"
 
-#ifdef PLATFORM_WINDOWS
+#ifdef platform_windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
