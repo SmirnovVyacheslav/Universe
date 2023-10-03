@@ -159,6 +159,7 @@
     <ClCompile Include="engine\src\core\data_type\vertex.cpp" />
     <ClCompile Include="engine\src\core\initialize.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
+    <ClCompile Include="engine\src\platform\impl\core\core_impl.cpp" />
     <ClCompile Include="engine\src\platform\platform.cpp" />
     <ClCompile Include="engine\src\platform\window\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\render\api.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="engine\src\core\math\const.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
+    <ClInclude Include="engine\src\platform\core_api.h" />
     <ClInclude Include="engine\src\platform\platform.h" />
     <ClInclude Include="engine\src\platform\window\window.h" />
     <ClInclude Include="engine\src\platform\window\config.h" />
