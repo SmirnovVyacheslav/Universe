@@ -4,9 +4,9 @@
 #include <fstream>
 #include <filesystem>
 
-#include "src/core/data_type/std.h"
-#include "src/core/data_type/string.h"
-#include "src/core/data_type/map.h"
+#include "src/core/type/std.h"
+#include "src/core/type/string.h"
+#include "src/core/type/map.h"
 #include "src/core/memory/smart_ptr.h"
 
 
@@ -15,9 +15,9 @@ namespace engine {
         string window_name = u8"Engine";
     };
     struct video_config {
-        int_32 window_width = 800;
-        int_32 window_height = 600;
-        int_32 refresh_rate = 60;
+        int32 window_width = 800;
+        int32 window_height = 600;
+        int32 refresh_rate = 60;
     };
 
 

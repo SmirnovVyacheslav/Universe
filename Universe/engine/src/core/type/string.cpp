@@ -6,14 +6,14 @@
 namespace engine {
     class string_map {
     public:
-        static int_32 add(const std::u8string& value);
-        static std::u8string& get(const int_32 id);
+        static int32 add(const std::u8string& value);
+        static std::u8string& get(const int32 id);
     private:
         static string_map& get_inst();
 
-        int_32 id_counter = 0;
-        map<int_32, std::u8string> id_str_map;
-        map<std::u8string, int_32> str_id_map;
+        int32 id_counter = 0;
+        map<int32, std::u8string> id_str_map;
+        map<std::u8string, int32> str_id_map;
 
         string_map() = default;
         string_map(string_map&& src) = delete;
@@ -27,7 +27,7 @@ namespace engine {
     static string_map* string_map_inst = nullptr;
 
 
-    int_32 string_map::add(const std::u8string& value) {
+    int32 string_map::add(const std::u8string& value) {
         string_map& inst = string_map::get_inst();
         if (inst.str_id_map.contains(value)) {
             return inst.str_id_map[value];
@@ -38,7 +38,7 @@ namespace engine {
         inst.str_id_map.add(value, inst.id_counter);
         return inst.id_counter;
     }
-    std::u8string& string_map::get(const int_32 id) {
+    std::u8string& string_map::get(const int32 id) {
         string_map& inst = string_map::get_inst();
         if (inst.id_str_map.contains(id)) {
             return inst.id_str_map[id];

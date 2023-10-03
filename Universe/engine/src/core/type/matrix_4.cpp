@@ -3,10 +3,10 @@
 
 
 namespace engine {
-    const int_32 matrix_size = 4;
-    const real_32 fov_angle_y = 1.570796327f;
-    const real_32 projection_front_z = 0.01f;
-    const real_32 projection_back_z = 100.0f;
+    const int32 matrix_size = 4;
+    const real32 fov_angle_y = 1.570796327f;
+    const real32 projection_front_z = 0.01f;
+    const real32 projection_back_z = 100.0f;
 
 
     matrix_4::matrix_4() :
@@ -18,10 +18,10 @@ namespace engine {
     matrix_4::matrix_4(vector_4 row_1, vector_4 row_2, vector_4 row_3, vector_4 row_4) :
         row_1(row_1), row_2(row_2), row_3(row_3), row_4(row_4) {
     }
-    vector_4& matrix_4::operator[](const int_32 index) {
+    vector_4& matrix_4::operator[](const int32 index) {
         return data[(matrix_size + index % matrix_size) % matrix_size];
     }
-    const vector_4& matrix_4::operator[](const int_32 index) const {
+    const vector_4& matrix_4::operator[](const int32 index) const {
         return data[(matrix_size + index % matrix_size) % matrix_size];
     }
 
@@ -46,13 +46,13 @@ namespace engine {
             vector_4(-(x_axis * eye), -(y_axis * eye), -(z_axis * eye), 1.0f)
         };
     }
-    const matrix_4 matrix_projection(const real_32 aspect_ratio) {
-        real_32 fov_sin = sinf(0.5f * fov_angle_y);
-        real_32 fov_cos = cosf(0.5f * fov_angle_y);
+    const matrix_4 matrix_projection(const real32 aspect_ratio) {
+        real32 fov_sin = sinf(0.5f * fov_angle_y);
+        real32 fov_cos = cosf(0.5f * fov_angle_y);
 
-        real_32 height = fov_cos / fov_sin;
-        real_32 width = height / aspect_ratio;
-        real_32 projection_ratio = projection_back_z / (projection_front_z - projection_back_z);
+        real32 height = fov_cos / fov_sin;
+        real32 width = height / aspect_ratio;
+        real32 projection_ratio = projection_back_z / (projection_front_z - projection_back_z);
 
         return {
             vector_4(width, 0.0f,   0.0f,                                  0.0f),
@@ -61,9 +61,9 @@ namespace engine {
             vector_4(0.0f,  0.0f,   projection_ratio * projection_front_z, 0.0f)
         };
     }
-    const matrix_4 matrix_rotation_x(const real_32 angle) {
-        real_32 sin_angle = sinf(angle);
-        real_32 cos_angle = cosf(angle);
+    const matrix_4 matrix_rotation_x(const real32 angle) {
+        real32 sin_angle = sinf(angle);
+        real32 cos_angle = cosf(angle);
 
         return {
             vector_4(1.0f, 0.0f,       0.0f,      0.0f),
@@ -72,9 +72,9 @@ namespace engine {
             vector_4(0.0f, 0.0f,       0.0f,      1.0f)
         };
     }
-    const matrix_4 matrix_rotation_y(const real_32 angle) {
-        real_32 sin_angle = sinf(angle);
-        real_32 cos_angle = cosf(angle);
+    const matrix_4 matrix_rotation_y(const real32 angle) {
+        real32 sin_angle = sinf(angle);
+        real32 cos_angle = cosf(angle);
 
         return {
             vector_4(cos_angle,  0.0f, sin_angle, 0.0f),
@@ -83,9 +83,9 @@ namespace engine {
             vector_4(0.0f,       0.0f, 0.0f,      1.0f)
         };
     }
-    const matrix_4 matrix_rotation_z(const real_32 angle) {
-        real_32 sin_angle = sinf(angle);
-        real_32 cos_angle = cosf(angle);
+    const matrix_4 matrix_rotation_z(const real32 angle) {
+        real32 sin_angle = sinf(angle);
+        real32 cos_angle = cosf(angle);
 
         return {
             vector_4(cos_angle, -sin_angle, 0.0f, 0.0f),

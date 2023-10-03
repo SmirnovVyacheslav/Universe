@@ -29,7 +29,7 @@ namespace engine {
 
         ~string() = default;
     private:
-        int_32 id = -1;
+        int32 id = -1;
 
         friend struct std::hash<engine::string>;
         friend bool operator==(const string& str_a, const string& str_b);

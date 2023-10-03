@@ -2,8 +2,8 @@
 #pragma once
 #include <stdexcept>
 
-#include "src/core/data_type/std.h"
-#include "src/core/data_type/array.h"
+#include "src/core/type/std.h"
+#include "src/core/type/array.h"
 
 
 namespace engine {
@@ -82,7 +82,7 @@ namespace engine {
     }
     template<typename T>
     void lead_ptr<T>::terminate() {
-        for (int_32 i = 0; i < slave_ptr_array.size(); ++i) {
+        for (int32 i = 0; i < slave_ptr_array.size(); ++i) {
             if (slave_ptr_array[i] != nullptr) {
                 slave_ptr_array[i]->obj_ptr = nullptr;
             }

@@ -5,20 +5,20 @@
 namespace engine {
     vector_3::vector_3() : x(0.0f), y(0.0f), z(0.0f) {
     }
-    vector_3::vector_3(real_32 x, real_32 y, real_32 z) : x(x), y(y), z(z) {
+    vector_3::vector_3(real32 x, real32 y, real32 z) : x(x), y(y), z(z) {
     }
     vector_3::vector_3(const vector<3> vec) {
         data = vec;
     }
-    real_32& vector_3::operator[](const int_32 index) {
+    real32& vector_3::operator[](const int32 index) {
         return data[index];
     }
-    const real_32& vector_3::operator[](const int_32 index) const {
+    const real32& vector_3::operator[](const int32 index) const {
         return data[index];
     }
 
 
-    const real_32 length(const vector_3& vec) {
+    const real32 length(const vector_3& vec) {
         return length(vec.data);
     }
     const vector_3 normalize(const vector_3& vec) {
@@ -30,28 +30,28 @@ namespace engine {
     const vector_3 operator-(const vector_3& vec_a, const vector_3& vec_b) {
         return vec_a.data - vec_b.data;
     }
-    const vector_3 operator+(const vector_3& vec, const real_32& num) {
+    const vector_3 operator+(const vector_3& vec, const real32& num) {
         return vec.data + num;
     }
-    const vector_3 operator-(const vector_3& vec, const real_32& num) {
+    const vector_3 operator-(const vector_3& vec, const real32& num) {
         return vec.data - num;
     }
-    const vector_3 operator*(const vector_3& vec, const real_32& num) {
+    const vector_3 operator*(const vector_3& vec, const real32& num) {
         return vec.data * num;
     }
-    const vector_3 operator/(const vector_3& vec, const real_32& num) {
+    const vector_3 operator/(const vector_3& vec, const real32& num) {
         return vec.data / num;
     }
-    const vector_3 operator+(const real_32& num, const vector_3& vec) {
+    const vector_3 operator+(const real32& num, const vector_3& vec) {
         return num + vec.data;
     }
-    const vector_3 operator-(const real_32& num, const vector_3& vec) {
+    const vector_3 operator-(const real32& num, const vector_3& vec) {
         return num - vec.data;
     }
-    const vector_3 operator*(const real_32& num, const vector_3& vec) {
+    const vector_3 operator*(const real32& num, const vector_3& vec) {
         return num * vec.data;
     }
-    const vector_3 operator/(const real_32& num, const vector_3& vec) {
+    const vector_3 operator/(const real32& num, const vector_3& vec) {
         return num / vec.data;
     }
     bool operator==(const vector_3& vec_a, const vector_3& vec_b) {
@@ -61,7 +61,7 @@ namespace engine {
         return vec_a.data != vec_b.data;
     }
     // Scalar product
-    const real_32 operator*(const vector_3& vec_a, const vector_3& vec_b) {
+    const real32 operator*(const vector_3& vec_a, const vector_3& vec_b) {
         return vec_a.data * vec_b.data;
     }
     // Vector product

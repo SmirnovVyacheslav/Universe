@@ -152,14 +152,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\core\config.cpp" />
-    <ClCompile Include="engine\src\core\data_type\matrix_4.cpp" />
-    <ClCompile Include="engine\src\core\data_type\string.cpp" />
-    <ClCompile Include="engine\src\core\data_type\vector_3.cpp" />
-    <ClCompile Include="engine\src\core\data_type\vector_4.cpp" />
-    <ClCompile Include="engine\src\core\data_type\vertex.cpp" />
     <ClCompile Include="engine\src\core\initialize.cpp" />
     <ClCompile Include="engine\src\core\object_id.cpp" />
+    <ClCompile Include="engine\src\core\type\matrix_4.cpp" />
+    <ClCompile Include="engine\src\core\type\string.cpp" />
+    <ClCompile Include="engine\src\core\type\vector_3.cpp" />
+    <ClCompile Include="engine\src\core\type\vector_4.cpp" />
+    <ClCompile Include="engine\src\core\type\vertex.cpp" />
     <ClCompile Include="engine\src\platform\impl\core\core_impl.cpp" />
+    <ClCompile Include="engine\src\platform\impl\window\window_impl.cpp" />
     <ClCompile Include="engine\src\platform\platform.cpp" />
     <ClCompile Include="engine\src\platform\window\windows\window_impl.cpp" />
     <ClCompile Include="engine\src\render\api.cpp" />
@@ -172,21 +173,20 @@
   <ItemGroup>
     <ClInclude Include="engine\include\engine_ui.h" />
     <ClInclude Include="engine\src\core\config.h" />
-    <ClInclude Include="engine\src\core\data_type\array.h" />
-    <ClInclude Include="engine\src\core\data_type\base_resource.h" />
-    <ClInclude Include="engine\src\core\data_type\map.h" />
-    <ClInclude Include="engine\src\core\data_type\matrix_4.h" />
-    <ClInclude Include="engine\src\core\data_type\std.h" />
-    <ClInclude Include="engine\src\core\data_type\string.h" />
-    <ClInclude Include="engine\src\core\data_type\vector.h" />
-    <ClInclude Include="engine\src\core\data_type\vector_3.h" />
-    <ClInclude Include="engine\src\core\data_type\vector_4.h" />
-    <ClInclude Include="engine\src\core\data_type\vertex.h" />
     <ClInclude Include="engine\src\core\def\abstract_class.h" />
     <ClInclude Include="engine\src\core\initialize.h" />
     <ClInclude Include="engine\src\core\math\const.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\object_id.h" />
+    <ClInclude Include="engine\src\core\type\array.h" />
+    <ClInclude Include="engine\src\core\type\map.h" />
+    <ClInclude Include="engine\src\core\type\matrix_4.h" />
+    <ClInclude Include="engine\src\core\type\std.h" />
+    <ClInclude Include="engine\src\core\type\string.h" />
+    <ClInclude Include="engine\src\core\type\vector.h" />
+    <ClInclude Include="engine\src\core\type\vector_3.h" />
+    <ClInclude Include="engine\src\core\type\vector_4.h" />
+    <ClInclude Include="engine\src\core\type\vertex.h" />
     <ClInclude Include="engine\src\platform\core_api.h" />
     <ClInclude Include="engine\src\platform\platform.h" />
     <ClInclude Include="engine\src\platform\window\window.h" />
@@ -194,6 +194,7 @@
     <ClInclude Include="engine\src\platform\window\windows\window_config.h" />
     <ClInclude Include="engine\src\platform\window\windows\window_handler.h" />
     <ClInclude Include="engine\src\platform\window\windows\window_impl.h" />
+    <ClInclude Include="engine\src\platform\window_api.h" />
     <ClInclude Include="engine\src\render\api.h" />
     <ClInclude Include="engine\src\render\device\api.h" />
     <ClInclude Include="engine\src\render\device\cfg.h" />
