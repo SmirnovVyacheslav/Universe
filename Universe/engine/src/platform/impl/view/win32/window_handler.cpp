@@ -1,11 +1,13 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#ifdef platform_windows
-#include <windows.h>
+#include "src/platform/impl/view/win32/window_handler.h"
 
-namespace engine::platform::window
+
+namespace engine::platform::view::win32
 {
-    LRESULT CALLBACK event_handler(HWND id, UINT message, WPARAM w_value, LPARAM l_value) {
+    #ifdef platform_windows
+
+    LRESULT CALLBACK window_handler(HWND id, UINT message, WPARAM w_value, LPARAM l_value) {
         PAINTSTRUCT ps;
         HDC hdc;
 
@@ -30,7 +32,6 @@ namespace engine::platform::window
         }
         return 0;
     }
+
+    #endif
 }
-
-#endif
-

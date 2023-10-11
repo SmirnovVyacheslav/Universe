@@ -2,7 +2,7 @@
 #pragma once
 
 
-namespace engine::platform::core
+namespace engine::platform
 {
     void init();
     void term();

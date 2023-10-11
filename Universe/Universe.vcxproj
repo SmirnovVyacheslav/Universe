@@ -159,13 +159,12 @@
     <ClCompile Include="engine\src\core\type\vector_3.cpp" />
     <ClCompile Include="engine\src\core\type\vector_4.cpp" />
     <ClCompile Include="engine\src\core\type\vertex.cpp" />
-    <ClCompile Include="engine\src\platform\impl\core\core_impl.cpp" />
-    <ClCompile Include="engine\src\platform\impl\window\window_impl.cpp" />
-    <ClCompile Include="engine\src\platform\platform.cpp" />
-    <ClCompile Include="engine\src\platform\window\windows\window_impl.cpp" />
-    <ClCompile Include="engine\src\render\api.cpp" />
-    <ClCompile Include="engine\src\render\device\api.cpp" />
-    <ClCompile Include="engine\src\render\device\directx\device_directx.cpp" />
+    <ClCompile Include="engine\src\platform\impl\core\core.cpp" />
+    <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp" />
+    <ClCompile Include="engine\src\platform\impl\render\render.cpp" />
+    <ClCompile Include="engine\src\platform\impl\view\view.cpp" />
+    <ClCompile Include="engine\src\platform\impl\view\win32\window_handler.cpp" />
+    <ClCompile Include="engine\src\platform\impl\view\win32\window_impl.cpp" />
     <ClCompile Include="engine\src\ui\engine_ui.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
@@ -187,18 +186,15 @@
     <ClInclude Include="engine\src\core\type\vector_3.h" />
     <ClInclude Include="engine\src\core\type\vector_4.h" />
     <ClInclude Include="engine\src\core\type\vertex.h" />
-    <ClInclude Include="engine\src\platform\core_api.h" />
-    <ClInclude Include="engine\src\platform\platform.h" />
-    <ClInclude Include="engine\src\platform\window\window.h" />
-    <ClInclude Include="engine\src\platform\window\config.h" />
-    <ClInclude Include="engine\src\platform\window\windows\window_config.h" />
-    <ClInclude Include="engine\src\platform\window\windows\window_handler.h" />
-    <ClInclude Include="engine\src\platform\window\windows\window_impl.h" />
-    <ClInclude Include="engine\src\platform\window_api.h" />
-    <ClInclude Include="engine\src\render\api.h" />
-    <ClInclude Include="engine\src\render\device\api.h" />
-    <ClInclude Include="engine\src\render\device\cfg.h" />
-    <ClInclude Include="engine\src\render\device\device.h" />
+    <ClInclude Include="engine\src\platform\api\core.h" />
+    <ClInclude Include="engine\src\platform\api\render.h" />
+    <ClInclude Include="engine\src\platform\api\view.h" />
+    <ClInclude Include="engine\src\platform\impl\render\directx\device_impl.h" />
+    <ClInclude Include="engine\src\platform\impl\render\device.h" />
+    <ClInclude Include="engine\src\platform\impl\view\win32\window_config.h" />
+    <ClInclude Include="engine\src\platform\impl\view\win32\window_handler.h" />
+    <ClInclude Include="engine\src\platform\impl\view\win32\window_impl.h" />
+    <ClInclude Include="engine\src\platform\impl\view\window.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
   <ItemGroup>

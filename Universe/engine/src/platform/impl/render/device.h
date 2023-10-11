@@ -3,12 +3,10 @@
 #include "src/core/def/abstract_class.h"
 
 
-namespace engine::render
+namespace engine::platform::render
 {
-    struct api_t
+    abstract_class device
     {
-        abstract_def(api_t)
-
-        static void initialize();
+        abstract_def(device)
     };
 }
