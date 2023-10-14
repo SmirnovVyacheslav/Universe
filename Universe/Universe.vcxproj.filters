@@ -28,65 +28,41 @@
     <Filter Include="src\engine\core\math">
       <UniqueIdentifier>{bfe4bcb3-b9fa-43f3-9855-d9f0ca954060}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\core\data_type">
-      <UniqueIdentifier>{ade26dc7-f97d-4199-b274-d4468ef1a43e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\core\memory">
       <UniqueIdentifier>{9e96e594-60bb-4bb7-8df3-b2c358ff274c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\object">
-      <UniqueIdentifier>{c4f6c92e-23c4-43fc-a75a-2b65a2a95682}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\platfom">
       <UniqueIdentifier>{abdae529-326a-4bb4-a50a-d0eba00d47e2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\platfom\windows">
-      <UniqueIdentifier>{a45a1506-ba1b-42d6-a81a-195f8e1370fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platfom\api">
-      <UniqueIdentifier>{1d3ec0bc-7140-4767-8399-6cb4aa6f271b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platfom\api\video">
-      <UniqueIdentifier>{584652d3-092c-47fa-9027-c3cddae05d87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platfom\api\video\directx">
-      <UniqueIdentifier>{5899fda9-a791-4663-96fa-e8fdefaf0796}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\renderer">
-      <UniqueIdentifier>{81da8570-7758-48dd-95d6-f5d43ed9b9cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\resource">
-      <UniqueIdentifier>{d873a567-3408-491a-9444-34372753379c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\ui">
       <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platfom\gdi">
-      <UniqueIdentifier>{4b8901a6-d8e6-4f1b-8850-a73ce46b3aef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platfom\gdi\direct_x">
-      <UniqueIdentifier>{77757273-2ec5-4358-b419-63029ce3410b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render">
-      <UniqueIdentifier>{66c73c69-8e7d-466d-9f23-5bb6f96f72fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\device">
-      <UniqueIdentifier>{2c745b3f-d2c7-4428-bd50-e57ccece3e47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\device\directx">
-      <UniqueIdentifier>{447b361b-a770-487d-888b-6131fd2dca9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platfom\window">
-      <UniqueIdentifier>{c550a0b9-57e2-4116-a184-becd5d391611}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platfom\window\windows">
-      <UniqueIdentifier>{c4095c30-55e1-42c0-a7ab-618f43c25523}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\core\def">
       <UniqueIdentifier>{14e14479-d7a1-4500-80f8-a84b8761f703}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\platfom\def">
-      <UniqueIdentifier>{145adc21-3b65-4812-810d-115f118487fe}</UniqueIdentifier>
+    <Filter Include="src\engine\core\type">
+      <UniqueIdentifier>{ade26dc7-f97d-4199-b274-d4468ef1a43e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\api">
+      <UniqueIdentifier>{e7259197-b0a8-4ba9-8b69-b81fb00a188d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\impl">
+      <UniqueIdentifier>{859a08ee-2ada-4bfe-a2ce-66e42bd5b41b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\impl\core">
+      <UniqueIdentifier>{748555d2-2043-4f50-bf17-b71c33a5095d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\impl\render">
+      <UniqueIdentifier>{1ed48c16-5fc3-4b78-91bc-d64457e7da09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\impl\view">
+      <UniqueIdentifier>{aa3bfbbd-7770-4b9c-8e08-d81ec517053c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\impl\view\win32">
+      <UniqueIdentifier>{06cab83e-e95f-42f7-96c6-b6c44096efeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\impl\render\directx">
+      <UniqueIdentifier>{062dfc1d-ff76-4dfc-9bba-58060d0074cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,83 +75,41 @@
     <ClCompile Include="engine\src\ui\engine_ui.cpp">
       <Filter>src\engine\ui</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\object\object.cpp">
-      <Filter>src\engine\object</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\object_id.cpp">
-      <Filter>src\engine\core</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\config.cpp">
-      <Filter>src\engine\core</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\initialize.cpp">
       <Filter>src\engine\core</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\windows\window_impl.cpp">
-      <Filter>src\engine\platfom\windows</Filter>
+    <ClCompile Include="engine\src\platform\impl\core\core.cpp">
+      <Filter>src\engine\platfom\impl\core</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\window.cpp">
-      <Filter>src\engine\platfom</Filter>
+    <ClCompile Include="engine\src\platform\impl\view\view.cpp">
+      <Filter>src\engine\platfom\impl\view</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\api\video\directx\directx.cpp">
-      <Filter>src\engine\platfom\api\video\directx</Filter>
+    <ClCompile Include="engine\src\platform\impl\view\win32\window_handler.cpp">
+      <Filter>src\engine\platfom\impl\view\win32</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\api\video.cpp">
-      <Filter>src\engine\platfom\api</Filter>
+    <ClCompile Include="engine\src\platform\impl\view\win32\window_impl.cpp">
+      <Filter>src\engine\platfom\impl\view\win32</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\string.cpp">
-      <Filter>src\engine\core\data_type</Filter>
+    <ClCompile Include="engine\src\platform\impl\render\render.cpp">
+      <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\vector_3.cpp">
-      <Filter>src\engine\core\data_type</Filter>
+    <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\vector_4.cpp">
-      <Filter>src\engine\core\data_type</Filter>
+    <ClCompile Include="engine\src\core\type\matrix_4.cpp">
+      <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\matrix_4.cpp">
-      <Filter>src\engine\core\data_type</Filter>
+    <ClCompile Include="engine\src\core\type\string.cpp">
+      <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\vertex.cpp">
-      <Filter>src\engine\core\data_type</Filter>
+    <ClCompile Include="engine\src\core\type\vector_3.cpp">
+      <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\mesh.cpp">
-      <Filter>src\engine\core\data_type</Filter>
+    <ClCompile Include="engine\src\core\type\vector_4.cpp">
+      <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\resource\resource.cpp">
-      <Filter>src\engine\resource</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\shader.cpp">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\model.cpp">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\data_type\scene.cpp">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\renderer\renderer.cpp">
-      <Filter>src\engine\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\platform\gdi\direct_x\device_direct_x.cpp">
-      <Filter>src\engine\platfom\gdi\direct_x</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\platform\api\video\directx\device.cpp">
-      <Filter>src\engine\platfom\api\video\directx</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\render\api.cpp">
-      <Filter>src\engine\render</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\render\device\api.cpp">
-      <Filter>src\engine\render\device</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\render\device\directx\device_directx.cpp">
-      <Filter>src\engine\render\device\directx</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\platform\platform.cpp">
-      <Filter>src\engine\platfom</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\platform\window\windows\window_impl.cpp">
-      <Filter>src\engine\platfom\window\windows</Filter>
+    <ClCompile Include="engine\src\core\type\vertex.cpp">
+      <Filter>src\engine\core\type</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,149 +122,68 @@
     <ClInclude Include="game\src\game.h">
       <Filter>src\game</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\array.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\map.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\matrix_4.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\mesh.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\model.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\scene.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\shader.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\std.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\string.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vector.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vector_3.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vector_4.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\vertex.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\math\const.h">
       <Filter>src\engine\core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\config.h">
-      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\initialize.h">
       <Filter>src\engine\core</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\object_id.h">
-      <Filter>src\engine\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\object\object.h">
-      <Filter>src\engine\object</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video\directx\directx.h">
-      <Filter>src\engine\platfom\api\video\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video.h">
-      <Filter>src\engine\platfom\api\video</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\windows\window_impl.h">
-      <Filter>src\engine\platfom\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\platform_def.h">
-      <Filter>src\engine\platfom</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\window.h">
-      <Filter>src\engine\platfom</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\renderer\renderer.h">
-      <Filter>src\engine\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\resource\resource.h">
-      <Filter>src\engine\resource</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\data_type\base_resource.h">
-      <Filter>src\engine\core\data_type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video\directx\gdi.h">
-      <Filter>src\engine\platfom\api\video\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video\directx\gdi_cfg.h">
-      <Filter>src\engine\platfom\api\video\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video\directx\swap_chain.h">
-      <Filter>src\engine\platfom\api\video\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\api\video\directx\device.h">
-      <Filter>src\engine\platfom\api\video\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\gdi\direct_x\device_direct_x.h">
-      <Filter>src\engine\platfom\gdi\direct_x</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\defines.h">
-      <Filter>src\engine\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\definition.h">
-      <Filter>src\engine\platfom</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\render\api.h">
-      <Filter>src\engine\render</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\definition.h">
-      <Filter>src\engine\core</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\render\device\api.h">
-      <Filter>src\engine\render\device</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\render\device\cfg.h">
-      <Filter>src\engine\render\device</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\render\device\device.h">
-      <Filter>src\engine\render\device</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\platform.h">
-      <Filter>src\engine\platfom</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\platform\window\window.h">
-      <Filter>src\engine\platfom\window</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\def\abstract_class.h">
       <Filter>src\engine\core\def</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\def\platform.h">
-      <Filter>src\engine\platfom\def</Filter>
+    <ClInclude Include="engine\src\platform\api\core.h">
+      <Filter>src\engine\platfom\api</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\def\target.h">
-      <Filter>src\engine\platfom\def</Filter>
+    <ClInclude Include="engine\src\platform\api\render.h">
+      <Filter>src\engine\platfom\api</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\window\config.h">
-      <Filter>src\engine\platfom\window</Filter>
+    <ClInclude Include="engine\src\platform\api\view.h">
+      <Filter>src\engine\platfom\api</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\window\windows\window_handler.h">
-      <Filter>src\engine\platfom\window\windows</Filter>
+    <ClInclude Include="engine\src\platform\impl\view\window.h">
+      <Filter>src\engine\platfom\impl\view</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\window\windows\window_config.h">
-      <Filter>src\engine\platfom\window\windows</Filter>
+    <ClInclude Include="engine\src\platform\impl\view\win32\window_config.h">
+      <Filter>src\engine\platfom\impl\view\win32</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\window\windows\window_impl.h">
-      <Filter>src\engine\platfom\window\windows</Filter>
+    <ClInclude Include="engine\src\platform\impl\view\win32\window_handler.h">
+      <Filter>src\engine\platfom\impl\view\win32</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClInclude Include="engine\src\platform\impl\view\win32\window_impl.h">
+      <Filter>src\engine\platfom\impl\view\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\render\device.h">
+      <Filter>src\engine\platfom\impl\render</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\render\directx\device_impl.h">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\array.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\map.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\matrix_4.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\std.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\string.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\vector.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\vector_3.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\vector_4.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\type\vertex.h">
+      <Filter>src\engine\core\type</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
