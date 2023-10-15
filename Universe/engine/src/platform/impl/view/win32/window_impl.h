@@ -10,6 +10,12 @@
 #include <windows.h>
 #endif
 
+#define ____________________public____________________ public:
+#define ____________________private___________________ private:
+#define ____________________protected_________________ protected:
+#define ____________________define____________________
+#define ____________________friend____________________
+
 
 namespace engine::platform::view::win32
 {
@@ -17,9 +23,9 @@ namespace engine::platform::view::win32
 
     class window_impl : public window
     {
+        ____________________define____________________
         abstract_impl(window_impl)
-
-    public:
+        ____________________public____________________
         window_impl();
         window_impl(window_impl&& src) = delete;
         window_impl(const window_impl& src) = delete;
@@ -30,8 +36,7 @@ namespace engine::platform::view::win32
         window_impl& operator=(const window_impl& src) = delete;
 
         ~window_impl();
-
-    private:
+        ____________________private___________________
         HWND hwnd;
         view_config view_cfg;
         window_config window_cfg;
@@ -48,9 +53,9 @@ namespace engine::platform::view::win32
 
     class window_impl : public window
     {
+        ____________________define____________________
         abstract_impl(window_impl)
-
-    public:
+        ____________________public____________________
         window_impl() = deault;
         window_impl(window_impl&& src) = delete;
         window_impl(const window_impl& src) = delete;

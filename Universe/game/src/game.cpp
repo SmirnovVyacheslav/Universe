@@ -2,14 +2,20 @@
 #include "game.h"
 
 
-namespace game_ui {
-    game::game() {
+namespace game_ui
+{
+    game::game()
+    {
         // Initialize code
     };
-    game::~game() {
+
+    game::~game()
+    {
         // Termination code
     }
-    void game::run() {
+
+    void game::run()
+    {
         // Game code
     };
 }

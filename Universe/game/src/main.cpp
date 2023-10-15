@@ -2,7 +2,8 @@
 #include "game.h"
 
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     game_ui::game game_inst;
     game_inst.run();
 

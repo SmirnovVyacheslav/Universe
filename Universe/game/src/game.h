@@ -1,10 +1,13 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+// engine
 #include "engine_ui.h"
 
 
-namespace game_ui {
-    class game {
+namespace game_ui
+{
+    class game
+    {
     public:
         game();
         game(game&& src) = default;

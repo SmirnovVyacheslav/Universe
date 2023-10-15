@@ -1,16 +1,18 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
-#include "src/core/initialize.h"
-
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "engine_ui.h"
 
+#include "src/core/initialize.h"
 
-namespace engine {
-    namespace ui {
-        engine_ui::engine_ui() {
-            initialize();
-        }
-        engine_ui::~engine_ui() {
-            terminate();
-        }
+
+namespace engine::ui
+{
+    engine_ui::engine_ui()
+    {
+        initialize();
+    }
+
+    engine_ui::~engine_ui()
+    {
+        terminate();
     }
 }
