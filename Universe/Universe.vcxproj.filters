@@ -185,5 +185,8 @@
     <ClInclude Include="engine\src\core\type\vertex.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
+    <ClInclude Include="engine\src\core\def\class_format.h">
+      <Filter>src\engine\core\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="engine\include\engine_ui.h" />
     <ClInclude Include="engine\src\core\def\abstract_class.h" />
+    <ClInclude Include="engine\src\core\def\class_format.h" />
     <ClInclude Include="engine\src\core\initialize.h" />
     <ClInclude Include="engine\src\core\math\const.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />

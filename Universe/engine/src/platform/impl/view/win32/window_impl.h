@@ -1,6 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include "src/core/def/class_format.h"
 #include "src/core/def/abstract_class.h"
+
 #include "src/platform/api/view.h"
 #include "src/platform/impl/view/window.h"
 #include "src/platform/impl/view/win32/window_config.h"
@@ -10,12 +12,6 @@
 #include <windows.h>
 #endif
 
-#define ____________________public____________________ public:
-#define ____________________private___________________ private:
-#define ____________________protected_________________ protected:
-#define ____________________define____________________
-#define ____________________friend____________________
-
 
 namespace engine::platform::view::win32
 {
@@ -23,7 +19,6 @@ namespace engine::platform::view::win32
 
     class window_impl : public window
     {
-        ____________________define____________________
         abstract_impl(window_impl)
         ____________________public____________________
         window_impl();
@@ -53,7 +48,6 @@ namespace engine::platform::view::win32
 
     class window_impl : public window
     {
-        ____________________define____________________
         abstract_impl(window_impl)
         ____________________public____________________
         window_impl() = deault;

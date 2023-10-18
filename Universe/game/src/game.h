@@ -3,12 +3,18 @@
 // engine
 #include "engine_ui.h"
 
+#define ____________________public____________________ public:
+#define ____________________private___________________ private:
+#define ____________________protected_________________ protected:
+#define ____________________define____________________
+#define ____________________friend____________________
+
 
 namespace game_ui
 {
     class game
     {
-    public:
+        ____________________public____________________
         game();
         game(game&& src) = default;
         game(const game & src) = default;
@@ -19,7 +25,7 @@ namespace game_ui
         game& operator=(const game& src) = default;
 
         ~game();
-    private:
+        ____________________private___________________
         engine::ui::engine_ui engine_inst;
     };
 }
