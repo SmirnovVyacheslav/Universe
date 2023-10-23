@@ -6,11 +6,13 @@
 
 namespace engine::ui
 {
+    // engine_ui ()
     engine_ui::engine_ui()
     {
         initialize();
     }
 
+    // ~engine_ui ()
     engine_ui::~engine_ui()
     {
         terminate();

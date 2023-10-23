@@ -1,10 +1,11 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-// system
 #include <vector>
 #include <stdexcept>
-// engine
-#include "std.h"
+
+#include "src/core/def/class_format.h"
+
+#include "src/core/type/std.h"
 
 
 namespace engine
@@ -12,7 +13,7 @@ namespace engine
     template <typename T>
     class array
     {
-    public:
+        ____________________public____________________
         array(int32 size = 0);
         array(array&& src) = default;
         array(const array& src) = default;
@@ -28,12 +29,12 @@ namespace engine
         const T& operator[](const int32 index) const;
 
         ~array() = default;
-    private:
+        ____________________private___________________
         std::vector<T> data;
     };
 
 
-    // array (size)
+    // array (int32 size) -> int32
     template <typename T>
     array<T>::array(int32 size)
     {
@@ -44,28 +45,28 @@ namespace engine
         data.reserve(static_cast<size_t>(size));
     }
 
-    // size ()
+    // size const () -> int32
     template<typename T>
     int32 array<T>::size() const
     {
         return static_cast<int32>(data.size());
     }
 
-    // append (item)
+    // append (T&& item) -> void
     template <typename T>
     void array<T>::append(T&& item)
     {
         data.push_back(std::move(item));
     }
 
-    // append const (item)
+    // append (const T& item) -> void
     template <typename T>
     void array<T>::append(const T& item)
     {
         data.push_back(item);
     }
 
-    // find_index (item)
+    // find_index (const T& item) -> int32
     template<typename T>
     int32 array<T>::find_index(const T& item)
     {
@@ -79,14 +80,14 @@ namespace engine
         throw std::invalid_argument("Item does not exist");
     }
 
-    // [] (index)
+    // [] (const int32 index) -> T&
     template <typename T>
     T& array<T>::operator[](const int32 index)
     {
         return data[(size() + index % size()) % size()];
     }
 
-    // [] const (index)
+    // [] const (const int32 index) -> const T&
     template <typename T>
     const T& array<T>::operator[](const int32 index) const
     {

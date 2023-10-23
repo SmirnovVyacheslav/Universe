@@ -1,12 +1,14 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "std.h"
-#include "vector_3.h"
-#include "vector_4.h"
+#include "src/core/type/std.h"
+#include "src/core/type/vector_3.h"
+#include "src/core/type/vector_4.h"
 
 
-namespace engine {
-    union matrix_4 {
+namespace engine
+{
+    union matrix_4
+    {
         vector_4 data[4];
         struct {
             vector_4 row_1;

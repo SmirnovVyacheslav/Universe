@@ -1,15 +1,19 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include <iostream>
 #include <functional>
 #include <string>
 
-#include "std.h"
+#include "src/core/def/class_format.h"
+
+#include "src/core/type/std.h"
 
 
-namespace engine {
-    class string {
-    public:
+namespace engine
+{
+    class string
+    {
+        ____________________public____________________
         string();
         string(const char* value);
         string(const std::string& value);
@@ -28,7 +32,7 @@ namespace engine {
         string& operator=(const string& src) = default;
 
         ~string() = default;
-    private:
+        ____________________private___________________
         int32 id = -1;
 
         friend struct std::hash<engine::string>;
@@ -38,10 +42,14 @@ namespace engine {
         friend std::ostream& operator<<(std::ostream& out_stream, const string& str);
     };
 }
-namespace std {
+
+namespace std
+{
     template<>
-    struct std::hash<engine::string> {
-        size_t operator()(const engine::string& str) const {
+    struct std::hash<engine::string>
+    {
+        size_t operator()(const engine::string& str) const
+        {
             return static_cast<size_t>(str.id);
         }
     };

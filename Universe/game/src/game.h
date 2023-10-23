@@ -1,13 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-// engine
-#include "engine_ui.h"
+#include "src/core/def/class_format.h"
 
-#define ____________________public____________________ public:
-#define ____________________private___________________ private:
-#define ____________________protected_________________ protected:
-#define ____________________define____________________
-#define ____________________friend____________________
+#include "engine_ui.h"
 
 
 namespace game_ui

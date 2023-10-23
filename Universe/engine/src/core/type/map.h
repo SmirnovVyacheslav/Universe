@@ -3,11 +3,15 @@
 #include <stdexcept>
 #include <unordered_map>
 
+#include "src/core/def/class_format.h"
 
-namespace engine {
+
+namespace engine
+{
     template <typename K, typename V>
-    class map {
-    public:
+    class map
+    {
+        ____________________public____________________
         map() = default;
         map(map&& src) = default;
         map(const map& src) = default;
@@ -24,41 +28,62 @@ namespace engine {
         const V& operator[](const K& key) const;
 
         ~map() = default;
-    private:
+        ____________________private___________________
         std::unordered_map<K, V> data;
     };
 
 
+    // contains (const K& key) -> bool
     template <typename K, typename V>
-    bool map<K, V>::contains(const K& key) const {
+    bool map<K, V>::contains(const K& key) const
+    {
         return data.contains(key);
     }
+
+    // add (K&& key, V&& value) -> void
     template <typename K, typename V>
-    void map<K, V>::add(K&& key, V&& value) {
+    void map<K, V>::add(K&& key, V&& value)
+    {
         data[std::move(key)] = std::move(value);
     }
+
+    // add add(const K& key, V&& value) -> void
     template <typename K, typename V>
     void map<K, V>::add(const K& key, V&& value) {
         data[key] = std::move(value);
     }
+
+    // add (K&& key, const V& value) -> void
     template <typename K, typename V>
-    void map<K, V>::add(K&& key, const V& value) {
+    void map<K, V>::add(K&& key, const V& value)
+    {
         data[std::move(key)] = value;
     }
+
+    // add (const K& key, const V& value) -> void
     template <typename K, typename V>
-    void map<K, V>::add(const K& key, const V& value) {
+    void map<K, V>::add(const K& key, const V& value)
+    {
         data[key] = value;
     }
+
+    // [] (const K& key) -> V&
     template <typename K, typename V>
-    V& map<K, V>::operator[](const K& key) {
-        if (contains(key)) {
+    V& map<K, V>::operator[](const K& key)
+    {
+        if (contains(key))
+        {
             return data[key];
         }
         throw std::invalid_argument("Key does not exist");
     }
+
+    // [] const (const K& key) -> const V&
     template <typename K, typename V>
-    const V& map<K, V>::operator[](const K& key) const {
-        if (contains(key)) {
+    const V& map<K, V>::operator[](const K& key) const
+    {
+        if (contains(key))
+        {
             return data[key];
         }
         throw std::invalid_argument("Key does not exist");
