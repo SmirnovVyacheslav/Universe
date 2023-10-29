@@ -4,7 +4,6 @@
 #include <stdexcept>
 
 #include "src/core/def/class_format.h"
-
 #include "src/core/type/std.h"
 
 
@@ -34,7 +33,6 @@ namespace engine
     };
 
 
-    // array (int32 size) -> int32
     template <typename T>
     array<T>::array(int32 size)
     {
@@ -45,28 +43,24 @@ namespace engine
         data.reserve(static_cast<size_t>(size));
     }
 
-    // size const () -> int32
     template<typename T>
     int32 array<T>::size() const
     {
         return static_cast<int32>(data.size());
     }
 
-    // append (T&& item) -> void
     template <typename T>
     void array<T>::append(T&& item)
     {
         data.push_back(std::move(item));
     }
 
-    // append (const T& item) -> void
     template <typename T>
     void array<T>::append(const T& item)
     {
         data.push_back(item);
     }
 
-    // find_index (const T& item) -> int32
     template<typename T>
     int32 array<T>::find_index(const T& item)
     {
@@ -80,14 +74,12 @@ namespace engine
         throw std::invalid_argument("Item does not exist");
     }
 
-    // [] (const int32 index) -> T&
     template <typename T>
     T& array<T>::operator[](const int32 index)
     {
         return data[(size() + index % size()) % size()];
     }
 
-    // [] const (const int32 index) -> const T&
     template <typename T>
     const T& array<T>::operator[](const int32 index) const
     {

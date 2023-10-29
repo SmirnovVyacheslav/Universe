@@ -14,9 +14,7 @@ namespace engine::platform::render::directx
     }
 
     device_impl::~device_impl()
-    {
-        //
-    }
+    {}
 
     void device_impl::create_device()
     {

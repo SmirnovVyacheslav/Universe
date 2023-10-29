@@ -2,7 +2,6 @@
 #include "src/core/type/string.h"
 
 #include "src/core/def/class_format.h"
-
 #include "src/core/type/map.h"
 
 
@@ -33,7 +32,6 @@ namespace engine
     static string_map* string_map_inst = nullptr;
 
 
-    // add (const std::u8string& value) -> int32
     int32 string_map::add(const std::u8string& value)
     {
         string_map& inst = string_map::get_inst();
@@ -48,7 +46,6 @@ namespace engine
         return inst.id_counter;
     }
 
-    // get (const int32 id) -> std::u8string&
     std::u8string& string_map::get(const int32 id)
     {
         string_map& inst = string_map::get_inst();
@@ -59,7 +56,6 @@ namespace engine
         throw std::invalid_argument("Id does not exist");
     }
 
-    // get_inst () -> string_map&
     string_map& string_map::get_inst()
     {
         static string_map inst;
@@ -71,38 +67,31 @@ namespace engine
     }
 
 
-    // string ()
     string::string() :
         id(string_map::add(u8""))
     {}
 
-    // string (const char* value)
     string::string(const char* value) :
         id(string_map::add(std::u8string(reinterpret_cast<const char8_t*>(value))))
     {}
 
-    // string (const std::string& value)
     string::string(const std::string& value) :
         id(string_map::add(std::u8string(reinterpret_cast<const char8_t*>(value.c_str()))))
     {}
 
-    // string (const char8_t* value)
     string::string(const char8_t* value) :
         id(string_map::add(std::u8string(value)))
     {}
 
-    // string (const std::u8string& value)
     string::string(const std::u8string& value) :
         id(string_map::add(value))
     {}
 
-    // s_str const () -> std::string
     std::string string::s_str() const
     {
         return std::string(reinterpret_cast<const char*>(string_map::get(id).c_str()));
     }
 
-    // :w_str const () -> std::wstring
     std::wstring string::w_str() const
     {
         if (sizeof(wchar_t) == size_t(2))
@@ -112,13 +101,11 @@ namespace engine
         return std::wstring(reinterpret_cast<const wchar_t*>(u32_str().c_str()));
     }
 
-    // u8_str const () -> std::u8string
     std::u8string string::u8_str() const
     {
         return string_map::get(id);
     }
 
-    // u16_str const () -> std::u16string
     std::u16string string::u16_str() const
     {
         std::u16string utf16;
@@ -141,7 +128,6 @@ namespace engine
         return utf16;
     }
 
-    // u32_str const () -> std::u32string
     std::u32string string::u32_str() const
     {
         std::u32string utf32;
@@ -195,19 +181,16 @@ namespace engine
     }
 
 
-    // == (const string& str_a, const string& str_b) -> bool
     bool operator==(const string& str_a, const string& str_b)
     {
         return str_a.id == str_b.id;
     }
 
-    // != (const string& str_a, const string& str_b) -> bool
     bool operator!=(const string& str_a, const string& str_b)
     {
         return str_a.id != str_b.id;
     }
 
-    // >> (std::istream& in_stream, string& str) -> std::istream&
     std::istream& operator>>(std::istream& in_stream, string& str)
     {
         std::string std_str;
@@ -216,7 +199,6 @@ namespace engine
         return in_stream;
     }
 
-    // << (std::ostream& out_stream, const string& str) -> std::ostream&
     std::ostream& operator<<(std::ostream& out_stream, const string& str)
     {
         return out_stream;

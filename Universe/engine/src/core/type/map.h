@@ -33,41 +33,35 @@ namespace engine
     };
 
 
-    // contains (const K& key) -> bool
     template <typename K, typename V>
     bool map<K, V>::contains(const K& key) const
     {
         return data.contains(key);
     }
 
-    // add (K&& key, V&& value) -> void
     template <typename K, typename V>
     void map<K, V>::add(K&& key, V&& value)
     {
         data[std::move(key)] = std::move(value);
     }
 
-    // add add(const K& key, V&& value) -> void
     template <typename K, typename V>
     void map<K, V>::add(const K& key, V&& value) {
         data[key] = std::move(value);
     }
 
-    // add (K&& key, const V& value) -> void
     template <typename K, typename V>
     void map<K, V>::add(K&& key, const V& value)
     {
         data[std::move(key)] = value;
     }
 
-    // add (const K& key, const V& value) -> void
     template <typename K, typename V>
     void map<K, V>::add(const K& key, const V& value)
     {
         data[key] = value;
     }
 
-    // [] (const K& key) -> V&
     template <typename K, typename V>
     V& map<K, V>::operator[](const K& key)
     {
@@ -78,7 +72,6 @@ namespace engine
         throw std::invalid_argument("Key does not exist");
     }
 
-    // [] const (const K& key) -> const V&
     template <typename K, typename V>
     const V& map<K, V>::operator[](const K& key) const
     {

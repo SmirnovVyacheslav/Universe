@@ -39,7 +39,8 @@ namespace engine::platform::view::win32
             window_cfg.handler,
             window_cfg.creation_data
         );
-        if (!hwnd) {
+        if (!hwnd)
+        {
             throw string(u8"Failed to create window");
         }
     }
@@ -70,7 +71,8 @@ namespace engine::platform::view::win32
         data.lpszMenuName = window_class_cfg.menu_name;
         data.lpszClassName = static_cast<LPCTSTR>(name.c_str());
 
-        if (!RegisterClassEx(&data)) {
+        if (!RegisterClassEx(&data))
+        {
             throw string(u8"Failed to register window class");
         }
     }

@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/core/def/abstract_class.h"
+#include "src/core/def/class_format.h"
 #include "src/platform/api/render.h"
 #include "src/platform/impl/render/device.h"
 
@@ -19,8 +20,7 @@ namespace engine::platform::render::directx
     class device_impl : public device
     {
         abstract_impl(device_impl)
-
-    public:
+        ____________________public____________________
         device_impl();
         device_impl(device_impl&& src) = delete;
         device_impl(const device_impl& src) = delete;
@@ -29,8 +29,7 @@ namespace engine::platform::render::directx
         device_impl& operator=(const device_impl& src) = delete;
 
         ~device_impl();
-
-    private:
+        ____________________private___________________
         render_config render_cfg;
 
         ID3D11Device* device = nullptr;
@@ -45,8 +44,7 @@ namespace engine::platform::render::directx
     class device_impl : public device
     {
         abstract_impl(device_impl)
-
-    public:
+        ____________________public____________________
         device_impl() = default;
         device_impl(device_impl&& src) = delete;
         device_impl(const device_impl& src) = delete;

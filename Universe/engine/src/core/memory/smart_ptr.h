@@ -3,7 +3,6 @@
 #include <stdexcept>
 
 #include "src/core/def/class_format.h"
-
 #include "src/core/type/std.h"
 #include "src/core/type/array.h"
 
@@ -69,7 +68,6 @@ namespace engine
         friend class lead_ptr<T>;
     };
 
-    // initialize (A&&... args) -> void
     template<typename T>
     template<typename... A>
     void lead_ptr<T>::initialize(A&&... args)
@@ -81,7 +79,6 @@ namespace engine
         obj_ptr = new T(std::forward<A>(args)...);
     }
 
-    // initialize_derivative (A&&... args) -> void
     template<typename T>
     template<typename D, typename... A>
     void lead_ptr<T>::initialize_derivative(A&&... args)
@@ -93,7 +90,6 @@ namespace engine
         obj_ptr = new D(std::forward<A>(args)...);
     }
 
-    // terminate () -> void
     template<typename T>
     void lead_ptr<T>::terminate()
     {
@@ -108,7 +104,6 @@ namespace engine
         obj_ptr = nullptr;
     }
 
-    // create_slave_ptr () -> slave_ptr<T>&
     template<typename T>
     slave_ptr<T>& lead_ptr<T>::create_slave_ptr()
     {
@@ -120,28 +115,24 @@ namespace engine
         return *slave_ptr_array[-1];
     }
 
-    // destroy_slave_ptr (slave_ptr<T>* ptr) -> void
     template<typename T>
     void lead_ptr<T>::destroy_slave_ptr(slave_ptr<T>* ptr)
     {
         slave_ptr_array[slave_ptr_array.find_index(ptr)] = nullptr;
     }
 
-    // add_slave_ptr (slave_ptr<T>* ptr) -> void
     template<typename T>
     void lead_ptr<T>::add_slave_ptr(slave_ptr<T>* ptr)
     {
         slave_ptr_array.append(ptr);
     }
 
-    // update_slave_ptr (slave_ptr<T>* old_ptr, slave_ptr<T>* new_ptr) -> void
     template<typename T>
     void lead_ptr<T>::update_slave_ptr(slave_ptr<T>* old_ptr, slave_ptr<T>* new_ptr)
     {
         slave_ptr_array[slave_ptr_array.find_index(old_ptr)] = new_ptr;
     }
 
-    // -> () -> T*
     template<typename T>
     T* lead_ptr<T>::operator->()
     {
@@ -152,7 +143,6 @@ namespace engine
         return obj_ptr;
     }
 
-    // * () -> T&
     template<typename T>
     T& lead_ptr<T>::operator*()
     {
@@ -163,7 +153,6 @@ namespace engine
         return *obj_ptr;
     }
 
-    // ~lead_ptr ()
     template<typename T>
     lead_ptr<T>::~lead_ptr()
     {
@@ -171,15 +160,12 @@ namespace engine
     }
 
 
-    // slave_ptr ()
     template<typename T>
     slave_ptr<T>::slave_ptr() : obj_ptr(nullptr) {}
 
-    // slave_ptr (lead_ptr<T>* obj_ptr)
     template<typename T>
     slave_ptr<T>::slave_ptr(lead_ptr<T>* obj_ptr) : obj_ptr(obj_ptr) {}
 
-    // slave_ptr (slave_ptr&& src)
     template<typename T>
     slave_ptr<T>::slave_ptr(slave_ptr&& src)
     {
@@ -188,7 +174,6 @@ namespace engine
         src.obj_ptr = nullptr;
     }
 
-    // slave_ptr (const slave_ptr& src)
     template<typename T>
     slave_ptr<T>::slave_ptr(const slave_ptr& src)
     {
@@ -196,7 +181,6 @@ namespace engine
         obj_ptr->add_slave_ptr(this);
     }
 
-    // = (slave_ptr&& src) -> slave_ptr<T>&
     template<typename T>
     slave_ptr<T>& slave_ptr<T>::operator=(slave_ptr&& src)
     {
@@ -213,7 +197,6 @@ namespace engine
         return *this;
     }
 
-    // = (const slave_ptr& src) -> slave_ptr<T>&
     template<typename T>
     slave_ptr<T>& slave_ptr<T>::operator=(const slave_ptr& src)
     {
@@ -229,7 +212,6 @@ namespace engine
         return *this;
     }
 
-    // -> () -> T*
     template<typename T>
     T* slave_ptr<T>::operator->()
     {
@@ -240,7 +222,6 @@ namespace engine
         return obj_ptr->operator->();
     }
 
-    // ~slave_ptr ()
     template<typename T>
     slave_ptr<T>::~slave_ptr()
     {

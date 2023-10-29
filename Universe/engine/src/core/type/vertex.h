@@ -1,12 +1,14 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "vector_3.h"
-#include "vector_4.h"
+#include "src/core/type/vector_3.h"
+#include "src/core/type/vector_4.h"
+#include "src/core/def/class_format.h"
 
-
-namespace engine {
-    class vertex {
-    public:
+namespace engine
+{
+    class vertex
+    {
+        ____________________public____________________
         vertex() = default;
         vertex(const vector_3& pos, const vector_4& color);
         vertex(vertex&& src) = default;
@@ -16,7 +18,7 @@ namespace engine {
         vertex& operator=(const vertex& src) = default;
 
         ~vertex() = default;
-    private:
+        ____________________private___________________
         vector_3 pos;
         vector_4 color;
     };

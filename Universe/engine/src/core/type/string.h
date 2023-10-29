@@ -5,7 +5,6 @@
 #include <string>
 
 #include "src/core/def/class_format.h"
-
 #include "src/core/type/std.h"
 
 

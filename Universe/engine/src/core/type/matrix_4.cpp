@@ -10,7 +10,6 @@ namespace engine
     const real32 projection_back_z = 100.0f;
 
 
-    // matrix_4 ()
     matrix_4::matrix_4() :
         row_1({ 0.0f, 0.0f, 0.0f, 0.0f }),
         row_2({ 0.0f, 0.0f, 0.0f, 0.0f }),
@@ -18,24 +17,20 @@ namespace engine
         row_4({ 0.0f, 0.0f, 0.0f, 0.0f })
     {}
 
-    // matrix_4 (vector_4 row_1, vector_4 row_2, vector_4 row_3, vector_4 row_4)
     matrix_4::matrix_4(vector_4 row_1, vector_4 row_2, vector_4 row_3, vector_4 row_4) :
         row_1(row_1), row_2(row_2), row_3(row_3), row_4(row_4)
     {}
 
-    // [] (const int32 index) -> vector_4&
     vector_4& matrix_4::operator[](const int32 index)
     {
         return data[(matrix_size + index % matrix_size) % matrix_size];
     }
 
-    // [] const (const int32 index) -> const vector_4&
     const vector_4& matrix_4::operator[](const int32 index) const {
         return data[(matrix_size + index % matrix_size) % matrix_size];
     }
 
 
-    // matrix_identity () -> const matrix_4
     const matrix_4 matrix_identity()
     {
         return
@@ -47,7 +42,6 @@ namespace engine
         };
     }
 
-    // matrix_look_at (const vector_3& eye, const vector_3& target, const vector_3& up) -> const matrix_4
     const matrix_4 matrix_look_at(const vector_3& eye, const vector_3& target, const vector_3& up)
     {
         vector_3 z_axis = normalize(eye - target);
@@ -63,7 +57,6 @@ namespace engine
         };
     }
 
-    // matrix_projection (const real32 aspect_ratio) -> const matrix_4
     const matrix_4 matrix_projection(const real32 aspect_ratio)
     {
         real32 fov_sin = sinf(0.5f * fov_angle_y);
@@ -82,7 +75,6 @@ namespace engine
         };
     }
 
-    // matrix_rotation_x (const real32 angle) -> const matrix_4
     const matrix_4 matrix_rotation_x(const real32 angle)
     {
         real32 sin_angle = sinf(angle);
@@ -97,7 +89,6 @@ namespace engine
         };
     }
 
-    // matrix_rotation_y (const real32 angle) -> const matrix_4
     const matrix_4 matrix_rotation_y(const real32 angle)
     {
         real32 sin_angle = sinf(angle);
@@ -112,7 +103,6 @@ namespace engine
         };
     }
 
-    // matrix_rotation_z (const real32 angle) -> const matrix_4
     const matrix_4 matrix_rotation_z(const real32 angle)
     {
         real32 sin_angle = sinf(angle);
@@ -127,7 +117,6 @@ namespace engine
         };
     }
 
-    // matrix_transpose (const matrix_4& src) -> const matrix_4
     const matrix_4 matrix_transpose(const matrix_4& src)
     {
         vector_4 row_1 = src.row_1;

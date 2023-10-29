@@ -1,13 +1,16 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "std.h"
-#include "vector.h"
+#include "src/core/type/std.h"
+#include "src/core/type/vector.h"
 
 
-namespace engine {
-    union vector_4 {
+namespace engine
+{
+    union vector_4
+    {
         vector<4> data;
-        struct {
+        struct
+        {
             real32 x;
             real32 y;
             real32 z;

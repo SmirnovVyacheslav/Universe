@@ -1,14 +1,15 @@
-// Copyright: (C) 2022-2023 Vyacheslav Smirnov. All rights reserved.
+// Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include <iostream>
 #include <math.h>
 #include <stdexcept>
 
-#include "std.h"
+#include "src/core/type/std.h"
 #include "src/core/math/const.h"
 
 
-namespace engine {
+namespace engine
+{
     template <int32 size>
     struct vector;
     template <int32 size>
@@ -49,7 +50,8 @@ namespace engine {
 
 
     template <int32 size>
-    struct vector {
+    struct vector
+    {
         real32 data[size];
 
         vector();
@@ -83,154 +85,211 @@ namespace engine {
 
 
     template <int32 size>
-    vector<size>::vector() {
-        if (size <= 0) {
+    vector<size>::vector()
+    {
+        if (size <= 0)
+        {
             throw std::invalid_argument("Vector size should be positive");
         }
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             data[i] = 0.0f;
         }
     }
+
     template <int32 size>
-    real32& vector<size>::operator[](const int32 index) {
+    real32& vector<size>::operator[](const int32 index)
+    {
         return data[(size + index % size) % size];
     }
+
     template <int32 size>
-    const real32& vector<size>::operator[](const int32 index) const {
+    const real32& vector<size>::operator[](const int32 index) const
+    {
         return data[(size + index % size) % size];
     }
 
 
     template <int32 size>
-    const real32 length(const vector<size>& vec) {
+    const real32 length(const vector<size>& vec)
+    {
         return sqrtf(vec * vec);
     }
+
     template <int32 size>
-    const vector<size> normalize(const vector<size>& vec) {
+    const vector<size> normalize(const vector<size>& vec)
+    {
         real32 vec_length = length(vec);
-        if (vec_length < eps) {
+        if (vec_length < eps)
+        {
             throw std::invalid_argument("Vector length is zero - division by zero");
         }
         return vec / vec_length;
     }
+
     template <int32 size>
     const vector<size> operator+(const vector<size>& vec_a, const vector<size>& vec_b) {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = vec_a[i] + vec_b[i];
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator-(const vector<size>& vec_a, const vector<size>& vec_b) {
+    const vector<size> operator-(const vector<size>& vec_a, const vector<size>& vec_b)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = vec_a[i] - vec_b[i];
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator+(const vector<size>& vec, const real32& num) {
+    const vector<size> operator+(const vector<size>& vec, const real32& num)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = vec[i] + num;
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator-(const vector<size>& vec, const real32& num) {
+    const vector<size> operator-(const vector<size>& vec, const real32& num)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = vec[i] - num;
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator*(const vector<size>& vec, const real32& num) {
+    const vector<size> operator*(const vector<size>& vec, const real32& num)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = vec[i] * num;
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator/(const vector<size>& vec, const real32& num) {
-        if (num < eps) {
+    const vector<size> operator/(const vector<size>& vec, const real32& num)
+    {
+        if (num < eps)
+        {
             throw std::invalid_argument("Division by zero");
         }
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = vec[i] / num;
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator+(const real32& num, const vector<size>& vec) {
+    const vector<size> operator+(const real32& num, const vector<size>& vec)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = num + vec[i];
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator-(const real32& num, const vector<size>& vec) {
+    const vector<size> operator-(const real32& num, const vector<size>& vec)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = num - vec[i];
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator*(const real32& num, const vector<size>& vec) {
+    const vector<size> operator*(const real32& num, const vector<size>& vec)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             vec_res[i] = num * vec[i];
         }
         return vec_res;
     }
+
     template <int32 size>
-    const vector<size> operator/(const real32& num, const vector<size>& vec) {
+    const vector<size> operator/(const real32& num, const vector<size>& vec)
+    {
         vector<size> vec_res;
-        for (int32 i = 0; i < size; ++i) {
-            if (vec[i] < eps) {
+        for (int32 i = 0; i < size; ++i)
+        {
+            if (vec[i] < eps)
+            {
                 throw std::invalid_argument("Division by zero");
             }
             vec_res[i] = num / vec[i];
         }
         return vec_res;
     }
+
     template <int32 size>
-    bool operator==(const vector<size>& vec_a, const vector<size>& vec_b) {
-        for (int32 i = 0; i < size; ++i) {
-            if ((vec_a[i] - vec_b[i]) * (vec_a[i] - vec_b[i]) > eps) {
+    bool operator==(const vector<size>& vec_a, const vector<size>& vec_b)
+    {
+        for (int32 i = 0; i < size; ++i)
+        {
+            if ((vec_a[i] - vec_b[i]) * (vec_a[i] - vec_b[i]) > eps)
+            {
                 return false;
             }
         }
         return true;
     }
+
     template <int32 size>
-    bool operator!=(const vector<size>& vec_a, const vector<size>& vec_b) {
+    bool operator!=(const vector<size>& vec_a, const vector<size>& vec_b)
+    {
         return !(vec_a == vec_b);
     }
+
     // Scalar product
     template <int32 size>
-    const real32 operator*(const vector<size>& vec_a, const vector<size>& vec_b) {
+    const real32 operator*(const vector<size>& vec_a, const vector<size>& vec_b)
+    {
         real32 result = 0.0f;
-        for (int32 i = 0; i < size; ++i) {
+        for (int32 i = 0; i < size; ++i)
+        {
             result += vec_a[i] * vec_b[i];
         }
         return result;
     }
+
     template <int32 size>
-    std::istream& operator>>(std::istream& in_stream, vector<size>& vec) {
-        for (int32 i = 0; i < size; ++i) {
+    std::istream& operator>>(std::istream& in_stream, vector<size>& vec)
+    {
+        for (int32 i = 0; i < size; ++i)
+        {
             in_stream >> vec[i];
         }
         return in_stream;
     }
+
     template <int32 size>
-    std::ostream& operator<<(std::ostream& out_stream, const vector<size>& vec) {
-        for (int32 i = 0; i < size; ++i) {
+    std::ostream& operator<<(std::ostream& out_stream, const vector<size>& vec)
+    {
+        for (int32 i = 0; i < size; ++i)
+        {
             out_stream << vec[i] << " ";
         }
         out_stream << std::endl;
