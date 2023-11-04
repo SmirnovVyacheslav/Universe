@@ -8,16 +8,16 @@ namespace engine::ui
 {
     engine_ui::engine_ui()
     {
-        init();
+        engine::init();
     }
 
     void engine_ui::exec()
     {
-        //
+        engine::exec();
     }
 
     engine_ui::~engine_ui()
     {
-        term();
+        engine::term();
     }
 }

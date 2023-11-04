@@ -13,7 +13,10 @@ namespace engine
 
     void exec()
     {
-        //
+        while (true)
+        {
+            //
+        }
     }
 
     void term()
