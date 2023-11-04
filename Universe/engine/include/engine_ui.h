@@ -12,6 +12,8 @@ namespace engine::ui
         engine_ui(engine_ui&& src) = default;
         engine_ui(const engine_ui& src) = default;
 
+        void exec();
+
         engine_ui& operator=(engine_ui&& src) = default;
         engine_ui& operator=(const engine_ui& src) = default;
 

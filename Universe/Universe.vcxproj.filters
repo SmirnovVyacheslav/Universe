@@ -64,6 +64,9 @@
     <Filter Include="src\engine\platfom\impl\render\directx">
       <UniqueIdentifier>{062dfc1d-ff76-4dfc-9bba-58060d0074cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\api">
+      <UniqueIdentifier>{b2a6ac19-854f-4e15-8daa-915b2dee1f4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -74,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="engine\src\ui\engine_ui.cpp">
       <Filter>src\engine\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\initialize.cpp">
-      <Filter>src\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\impl\core\core.cpp">
       <Filter>src\engine\platfom\impl\core</Filter>
@@ -111,6 +111,9 @@
     <ClCompile Include="engine\src\core\type\vertex.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\api\core.cpp">
+      <Filter>src\engine\api</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
@@ -124,9 +127,6 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\math\const.h">
       <Filter>src\engine\core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\initialize.h">
-      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\def\abstract_class.h">
       <Filter>src\engine\core\def</Filter>
@@ -187,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\def\class_format.h">
       <Filter>src\engine\core\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\api\core.h">
+      <Filter>src\engine\api</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

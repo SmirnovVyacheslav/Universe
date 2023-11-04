@@ -16,6 +16,6 @@ namespace game_ui
 
     void game::run()
     {
-        // Game code
+        engine_inst.exec();
     };
 }

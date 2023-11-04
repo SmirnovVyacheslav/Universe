@@ -4,6 +4,7 @@
 
 namespace engine
 {
-    void initialize();
-    void terminate();
+    void init();
+    void exec();
+    void term();
 }

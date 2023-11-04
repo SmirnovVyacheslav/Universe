@@ -151,7 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="engine\src\core\initialize.cpp" />
+    <ClCompile Include="engine\src\api\core.cpp" />
     <ClCompile Include="engine\src\core\type\matrix_4.cpp" />
     <ClCompile Include="engine\src\core\type\string.cpp" />
     <ClCompile Include="engine\src\core\type\vector_3.cpp" />
@@ -169,9 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\engine_ui.h" />
+    <ClInclude Include="engine\src\api\core.h" />
     <ClInclude Include="engine\src\core\def\abstract_class.h" />
     <ClInclude Include="engine\src\core\def\class_format.h" />
-    <ClInclude Include="engine\src\core\initialize.h" />
     <ClInclude Include="engine\src\core\math\const.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\type\array.h" />
