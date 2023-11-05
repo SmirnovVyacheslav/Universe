@@ -5,9 +5,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="include\engine">
-      <UniqueIdentifier>{a612ba96-b20b-42e3-9072-b543449d59dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -33,9 +30,6 @@
     </Filter>
     <Filter Include="src\engine\platfom">
       <UniqueIdentifier>{abdae529-326a-4bb4-a50a-d0eba00d47e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\ui">
-      <UniqueIdentifier>{a26ff347-d4e5-4661-b1b6-c00f3010bb5f}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\core\def">
       <UniqueIdentifier>{14e14479-d7a1-4500-80f8-a84b8761f703}</UniqueIdentifier>
@@ -64,8 +58,20 @@
     <Filter Include="src\engine\platfom\impl\render\directx">
       <UniqueIdentifier>{062dfc1d-ff76-4dfc-9bba-58060d0074cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\api">
-      <UniqueIdentifier>{b2a6ac19-854f-4e15-8daa-915b2dee1f4c}</UniqueIdentifier>
+    <Filter Include="src\engine\core\api">
+      <UniqueIdentifier>{5946bb4e-acb0-419e-ad23-a2af6623a954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\impl">
+      <UniqueIdentifier>{180614e8-14c5-417d-b385-ea08b9d3f1c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\impl\core">
+      <UniqueIdentifier>{b568fe09-8893-45f7-812e-6fdbd6363e72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\impl\control">
+      <UniqueIdentifier>{0ef88bd4-b408-4827-94af-695e2f7d29bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\impl\event">
+      <UniqueIdentifier>{1c951db9-60b2-4622-8ebf-ab11adb7acac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -74,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="game\src\game.cpp">
       <Filter>src\game</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\ui\engine_ui.cpp">
-      <Filter>src\engine\ui</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\impl\core\core.cpp">
       <Filter>src\engine\platfom\impl\core</Filter>
@@ -111,16 +114,19 @@
     <ClCompile Include="engine\src\core\type\vertex.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\api\core.cpp">
-      <Filter>src\engine\api</Filter>
+    <ClCompile Include="engine\src\core\impl\core\core.cpp">
+      <Filter>src\engine\core\impl\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\core\impl\control\control.cpp">
+      <Filter>src\engine\core\impl\control</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\core\impl\event\event.cpp">
+      <Filter>src\engine\core\impl\event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
       <Filter>src\engine\core\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\include\engine_ui.h">
-      <Filter>include\engine</Filter>
     </ClInclude>
     <ClInclude Include="game\src\game.h">
       <Filter>src\game</Filter>
@@ -188,8 +194,14 @@
     <ClInclude Include="engine\src\core\def\class_format.h">
       <Filter>src\engine\core\def</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\api\core.h">
-      <Filter>src\engine\api</Filter>
+    <ClInclude Include="engine\src\core\api\event.h">
+      <Filter>src\engine\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\api\control.h">
+      <Filter>src\engine\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\api\core.h">
+      <Filter>src\engine\core\api</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

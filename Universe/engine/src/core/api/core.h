@@ -2,7 +2,7 @@
 #pragma once
 
 
-namespace engine
+namespace engine::core
 {
     void init();
     void exec();

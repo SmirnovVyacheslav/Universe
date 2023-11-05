@@ -1,10 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/api/core.h"
+#include "src/core/api/core.h"
 
+#include "src/core/api/control.h"
+#include "src/core/api/event.h"
 #include "src/platform/api/core.h"
 
 
-namespace engine
+namespace engine::core
 {
     void init()
     {
@@ -13,9 +15,11 @@ namespace engine
 
     void exec()
     {
-        while (true)
+        control::start();
+
+        while (control::status())
         {
-            //
+            event::handle();
         }
     }
 

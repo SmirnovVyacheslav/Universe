@@ -2,8 +2,6 @@
 #pragma once
 #include "src/core/def/class_format.h"
 
-#include "engine_ui.h"
-
 
 namespace game_ui
 {
@@ -20,7 +18,5 @@ namespace game_ui
         game& operator=(const game& src) = default;
 
         ~game();
-        ____________________private___________________
-        engine::ui::engine_ui engine_inst;
     };
 }

@@ -1,21 +1,23 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "game.h"
 
+#include "src/core/api/core.h"
+
 
 namespace game_ui
 {
     game::game()
     {
-        // Initialize code
+        engine::core::init();
     };
 
     game::~game()
     {
-        // Termination code
+        engine::core::term();
     }
 
     void game::run()
     {
-        engine_inst.exec();
+        engine::core::exec();
     };
 }

@@ -151,7 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="engine\src\api\core.cpp" />
+    <ClCompile Include="engine\src\core\impl\control\control.cpp" />
+    <ClCompile Include="engine\src\core\impl\core\core.cpp" />
+    <ClCompile Include="engine\src\core\impl\event\event.cpp" />
     <ClCompile Include="engine\src\core\type\matrix_4.cpp" />
     <ClCompile Include="engine\src\core\type\string.cpp" />
     <ClCompile Include="engine\src\core\type\vector_3.cpp" />
@@ -163,13 +165,13 @@
     <ClCompile Include="engine\src\platform\impl\view\view.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\win32\window_handler.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\win32\window_impl.cpp" />
-    <ClCompile Include="engine\src\ui\engine_ui.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\include\engine_ui.h" />
-    <ClInclude Include="engine\src\api\core.h" />
+    <ClInclude Include="engine\src\core\api\control.h" />
+    <ClInclude Include="engine\src\core\api\core.h" />
+    <ClInclude Include="engine\src\core\api\event.h" />
     <ClInclude Include="engine\src\core\def\abstract_class.h" />
     <ClInclude Include="engine\src\core\def\class_format.h" />
     <ClInclude Include="engine\src\core\math\const.h" />
