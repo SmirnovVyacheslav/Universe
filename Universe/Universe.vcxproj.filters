@@ -73,6 +73,12 @@
     <Filter Include="src\engine\core\impl\event">
       <UniqueIdentifier>{1c951db9-60b2-4622-8ebf-ab11adb7acac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\platfom\impl\event">
+      <UniqueIdentifier>{6b00197f-d18b-4662-b20a-a5b9e11a0e26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\platfom\impl\event\win32">
+      <UniqueIdentifier>{67e6ce6a-518c-4597-83e0-cd920c778051}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -122,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="engine\src\core\impl\event\event.cpp">
       <Filter>src\engine\core\impl\event</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\event\event.cpp">
+      <Filter>src\engine\platfom\impl\event</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\event\win32\event.cpp">
+      <Filter>src\engine\platfom\impl\event\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\event\queue.cpp">
+      <Filter>src\engine\platfom\impl\event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +217,15 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\api\core.h">
       <Filter>src\engine\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\event.h">
+      <Filter>src\engine\platfom\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\event\win32\event.h">
+      <Filter>src\engine\platfom\impl\event\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\event\queue.h">
+      <Filter>src\engine\platfom\impl\event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

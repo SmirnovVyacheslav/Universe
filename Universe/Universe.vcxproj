@@ -160,6 +160,9 @@
     <ClCompile Include="engine\src\core\type\vector_4.cpp" />
     <ClCompile Include="engine\src\core\type\vertex.cpp" />
     <ClCompile Include="engine\src\platform\impl\core\core.cpp" />
+    <ClCompile Include="engine\src\platform\impl\event\event.cpp" />
+    <ClCompile Include="engine\src\platform\impl\event\queue.cpp" />
+    <ClCompile Include="engine\src\platform\impl\event\win32\event.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\render.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\view.cpp" />
@@ -186,8 +189,11 @@
     <ClInclude Include="engine\src\core\type\vector_4.h" />
     <ClInclude Include="engine\src\core\type\vertex.h" />
     <ClInclude Include="engine\src\platform\api\core.h" />
+    <ClInclude Include="engine\src\platform\api\event.h" />
     <ClInclude Include="engine\src\platform\api\render.h" />
     <ClInclude Include="engine\src\platform\api\view.h" />
+    <ClInclude Include="engine\src\platform\impl\event\queue.h" />
+    <ClInclude Include="engine\src\platform\impl\event\win32\event.h" />
     <ClInclude Include="engine\src\platform\impl\render\directx\device_impl.h" />
     <ClInclude Include="engine\src\platform\impl\render\device.h" />
     <ClInclude Include="engine\src\platform\impl\view\win32\window_config.h" />
