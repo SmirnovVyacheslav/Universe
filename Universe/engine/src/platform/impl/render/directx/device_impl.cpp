@@ -14,7 +14,11 @@ namespace engine::platform::render::directx
     }
 
     device_impl::~device_impl()
-    {}
+    {
+        release_resource(swap_chain);
+        release_resource(device_context);
+        release_resource(device);
+    }
 
     void device_impl::create_device()
     {
@@ -52,6 +56,24 @@ namespace engine::platform::render::directx
         if (FAILED(result))
         {
             throw std::invalid_argument("Failed to create device");
+        }
+    }
+
+    template<typename T>
+    void device_impl::clear_resource(T* resource)
+    {
+        if (resource)
+        {
+            resource->ClearState();
+        }
+    }
+
+    template<typename T>
+    void device_impl::release_resource(T* resource)
+    {
+        if (resource)
+        {
+            resource->Release();
         }
     }
 

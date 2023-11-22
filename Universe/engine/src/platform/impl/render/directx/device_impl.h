@@ -37,6 +37,11 @@ namespace engine::platform::render::directx
         IDXGISwapChain* swap_chain = nullptr;
 
         void create_device();
+
+        template<typename T>
+        void clear_resource(T* resource);
+        template<typename T>
+        void release_resource(T* resource);
     };
 
     #else
