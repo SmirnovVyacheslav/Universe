@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "src/platform/impl/render/directx/device_impl.h"
 
+#include "src/core/type/std.h"
 #include "src/platform/api/view.h"
 
 
@@ -10,17 +11,22 @@ namespace engine::platform::render::directx
 
     device_impl::device_impl()
     {
-        create_device();
+        init_device();
+        init_reder_target_view();
+        init_view_port();
     }
 
     device_impl::~device_impl()
     {
+        clear_resource(device_context);
+
+        release_resource(render_target_view);
         release_resource(swap_chain);
         release_resource(device_context);
         release_resource(device);
     }
 
-    void device_impl::create_device()
+    void device_impl::init_device()
     {
         DXGI_SWAP_CHAIN_DESC swap_chain_desc;
         ZeroMemory(&swap_chain_desc, sizeof(swap_chain_desc));
@@ -57,6 +63,41 @@ namespace engine::platform::render::directx
         {
             throw std::invalid_argument("Failed to create device");
         }
+    }
+
+    void device_impl::init_reder_target_view() {
+        HRESULT result = 0;
+        ID3D11Texture2D* back_buffer = NULL;
+
+        result = swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&back_buffer);
+
+        if (FAILED(result))
+        {
+            throw std::invalid_argument("Failed to init back buffer");
+        }
+
+        result = device->CreateRenderTargetView(back_buffer, NULL, &render_target_view);
+        back_buffer->Release();
+
+        if (FAILED(result))
+        {
+            throw std::invalid_argument("Failed to init render target view");
+        }
+
+        device_context->OMSetRenderTargets(1, &render_target_view, 0);
+    }
+
+    void device_impl::init_view_port() {
+        D3D11_VIEWPORT view_port;
+
+        view_port.Width = static_cast<real32>(render_cfg.width);
+        view_port.Height = static_cast<real32>(render_cfg.height);
+        view_port.MinDepth = 0.0f;
+        view_port.MaxDepth = 1.0f;
+        view_port.TopLeftX = 0;
+        view_port.TopLeftY = 0;
+
+        device_context->RSSetViewports(1, &view_port);
     }
 
     template<typename T>
