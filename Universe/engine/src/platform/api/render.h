@@ -16,5 +16,6 @@ namespace engine::platform::render
     };
 
     void init();
+    void draw();
     void term();
 }

@@ -4,6 +4,7 @@
 #include "src/core/api/control.h"
 #include "src/core/api/event.h"
 #include "src/platform/api/core.h"
+#include "src/platform/api/render.h"
 
 
 namespace engine::core
@@ -20,6 +21,7 @@ namespace engine::core
         while (control::status())
         {
             event::handle();
+            platform::render::draw();
         }
     }
 

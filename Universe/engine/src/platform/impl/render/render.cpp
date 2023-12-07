@@ -15,6 +15,11 @@ namespace engine::platform::render
         device_inst = new directx::device_impl();
     }
 
+    void draw()
+    {
+        //
+    }
+
     void term()
     {
         delete device_inst;
