@@ -25,6 +25,8 @@ namespace engine::platform::render::directx
         device_impl(device_impl&& src) = delete;
         device_impl(const device_impl& src) = delete;
 
+        void draw();
+
         device_impl& operator=(device_impl&& src) = delete;
         device_impl& operator=(const device_impl& src) = delete;
 

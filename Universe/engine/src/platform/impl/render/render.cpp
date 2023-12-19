@@ -17,7 +17,7 @@ namespace engine::platform::render
 
     void draw()
     {
-        //
+        device_inst->draw();
     }
 
     void term()

@@ -26,6 +26,11 @@ namespace engine::platform::render::directx
         release_resource(device);
     }
 
+    void device_impl::draw()
+    {
+        //
+    }
+
     void device_impl::init_device()
     {
         DXGI_SWAP_CHAIN_DESC swap_chain_desc;

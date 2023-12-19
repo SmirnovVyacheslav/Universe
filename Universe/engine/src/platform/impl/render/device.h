@@ -8,5 +8,7 @@ namespace engine::platform::render
     abstract_class device
     {
         abstract_def(device)
+
+        virtual void draw() = 0;
     };
 }
