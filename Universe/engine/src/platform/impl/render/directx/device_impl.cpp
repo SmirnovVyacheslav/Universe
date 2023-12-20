@@ -28,7 +28,7 @@ namespace engine::platform::render::directx
 
     void device_impl::draw()
     {
-        device_context->ClearRenderTargetView(render_target_view, background_color);
+        device_context->ClearRenderTargetView(render_target_view, *background_color);
 
         swap_chain->Present(0, 0);
     }

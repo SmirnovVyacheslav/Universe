@@ -22,6 +22,7 @@ namespace engine
         vector3(vector3&& src) = default;
         vector3(const vector3& src) = default;
 
+        operator const real32* () const;
         vector3& operator=(vector3&& src) = default;
         vector3& operator=(const vector3& src) = default;
         real32& operator[](const int32 index);

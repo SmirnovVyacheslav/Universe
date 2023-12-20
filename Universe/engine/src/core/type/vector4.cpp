@@ -15,6 +15,11 @@ namespace engine
         data = vec;
     }
 
+    vector4::operator const real32* () const
+    {
+        return reinterpret_cast<const real32*>(this);
+    }
+
     real32& vector4::operator[](const int32 index)
     {
        return data[index];

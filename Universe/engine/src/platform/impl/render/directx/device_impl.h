@@ -3,6 +3,7 @@
 #include "src/core/def/abstract_class.h"
 #include "src/core/def/class_format.h"
 #include "src/core/type/std.h"
+#include "src/core/type/vector4.h"
 #include "src/platform/api/render.h"
 #include "src/platform/impl/render/device.h"
 
@@ -34,7 +35,8 @@ namespace engine::platform::render::directx
         ~device_impl();
         ____________________private___________________
         render_config render_cfg;
-        real32 background_color[4] = {0.0f, 0.9f, 0.5f, 1.0f};
+        vector4 background_color[4] = { { 0.0f, 0.9f, 0.5f, 1.0f } };
+        // real32 background_color[4] = {0.0f, 0.9f, 0.5f, 1.0f};
 
         ID3D11Device* device = nullptr;
         ID3D11DeviceContext* device_context = nullptr;
