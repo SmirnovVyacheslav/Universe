@@ -36,7 +36,6 @@ namespace engine::platform::render::directx
         ____________________private___________________
         render_config render_cfg;
         vector4 background_color[4] = { { 0.0f, 0.9f, 0.5f, 1.0f } };
-        // real32 background_color[4] = {0.0f, 0.9f, 0.5f, 1.0f};
 
         ID3D11Device* device = nullptr;
         ID3D11DeviceContext* device_context = nullptr;
