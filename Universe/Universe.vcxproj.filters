@@ -105,16 +105,16 @@
     <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\type\matrix_4.cpp">
+    <ClCompile Include="engine\src\core\type\matrix4.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\type\string.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\type\vector_3.cpp">
+    <ClCompile Include="engine\src\core\type\vector3.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\type\vector_4.cpp">
+    <ClCompile Include="engine\src\core\type\vector4.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\core\type\vertex.cpp">
@@ -185,7 +185,7 @@
     <ClInclude Include="engine\src\core\type\map.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\type\matrix_4.h">
+    <ClInclude Include="engine\src\core\type\matrix4.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\std.h">
@@ -197,10 +197,10 @@
     <ClInclude Include="engine\src\core\type\vector.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\type\vector_3.h">
+    <ClInclude Include="engine\src\core\type\vector3.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\type\vector_4.h">
+    <ClInclude Include="engine\src\core\type\vector4.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\vertex.h">

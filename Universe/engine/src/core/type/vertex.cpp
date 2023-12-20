@@ -4,6 +4,6 @@
 
 namespace engine
 {
-    vertex::vertex(const vector_3& pos, const vector_4& color) : pos(pos), color(color)
+    vertex::vertex(const vector3& pos, const vector4& color) : pos(pos), color(color)
     {}
 }

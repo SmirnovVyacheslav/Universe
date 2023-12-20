@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/type/vector_3.h"
-#include "src/core/type/vector_4.h"
+#include "src/core/type/vector3.h"
+#include "src/core/type/vector4.h"
 #include "src/core/def/class_format.h"
 
 namespace engine
@@ -10,7 +10,7 @@ namespace engine
     {
         ____________________public____________________
         vertex() = default;
-        vertex(const vector_3& pos, const vector_4& color);
+        vertex(const vector3& pos, const vector4& color);
         vertex(vertex&& src) = default;
         vertex(const vertex& src) = default;
 
@@ -19,7 +19,7 @@ namespace engine
 
         ~vertex() = default;
         ____________________private___________________
-        vector_3 pos;
-        vector_4 color;
+        vector3 pos;
+        vector4 color;
     };
 }
