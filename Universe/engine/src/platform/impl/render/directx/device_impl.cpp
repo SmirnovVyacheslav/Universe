@@ -12,7 +12,8 @@ namespace engine::platform::render::directx
     device_impl::device_impl()
     {
         init_device();
-        init_reder_target_view();
+        init_depth_stencil_view();
+        init_render_target_view();
         init_view_port();
     }
 
@@ -72,7 +73,45 @@ namespace engine::platform::render::directx
         }
     }
 
-    void device_impl::init_reder_target_view() {
+    void device_impl::init_depth_stencil_view()
+    {
+        D3D11_TEXTURE2D_DESC depth_stencil_desc;
+        ZeroMemory(&depth_stencil_desc, sizeof(depth_stencil_desc));
+
+        depth_stencil_desc.Width = render_cfg.width;
+        depth_stencil_desc.Height = render_cfg.height;
+        depth_stencil_desc.MipLevels = 1;
+        depth_stencil_desc.ArraySize = 1;
+        depth_stencil_desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+        depth_stencil_desc.SampleDesc.Count = 1;
+        depth_stencil_desc.SampleDesc.Quality = 0;
+        depth_stencil_desc.Usage = D3D11_USAGE_DEFAULT;
+        depth_stencil_desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+        depth_stencil_desc.CPUAccessFlags = 0;
+        depth_stencil_desc.MiscFlags = 0;
+        
+        HRESULT result = device->CreateTexture2D(&depth_stencil_desc, NULL, &depth_stencil);
+        if (FAILED(result))
+        {
+            throw std::invalid_argument("Failed to create depth stencil");
+        }
+
+        D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_desc;
+        ZeroMemory(&depth_stencil_view_desc, sizeof(depth_stencil_view_desc));
+
+        depth_stencil_view_desc.Format = depth_stencil_desc.Format;
+        depth_stencil_view_desc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+        depth_stencil_view_desc.Texture2D.MipSlice = 0;
+
+        result = device->CreateDepthStencilView(depth_stencil, &depth_stencil_view_desc, &depth_stencil_view);
+        if (FAILED(result))
+        {
+            throw std::invalid_argument("Failed to create depth stencil view");
+        }
+    }
+
+    void device_impl::init_render_target_view()
+    {
         HRESULT result = 0;
         ID3D11Texture2D* back_buffer = NULL;
 
@@ -91,10 +130,11 @@ namespace engine::platform::render::directx
             throw std::invalid_argument("Failed to init render target view");
         }
 
-        device_context->OMSetRenderTargets(1, &render_target_view, 0);
+        device_context->OMSetRenderTargets(1, &render_target_view, depth_stencil_view);
     }
 
-    void device_impl::init_view_port() {
+    void device_impl::init_view_port()
+    {
         D3D11_VIEWPORT view_port;
 
         view_port.Width = static_cast<real32>(render_cfg.width);

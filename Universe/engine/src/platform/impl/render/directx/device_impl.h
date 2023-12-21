@@ -40,10 +40,13 @@ namespace engine::platform::render::directx
         ID3D11Device* device = nullptr;
         ID3D11DeviceContext* device_context = nullptr;
         IDXGISwapChain* swap_chain = nullptr;
+        ID3D11Texture2D* depth_stencil = nullptr;
+        ID3D11DepthStencilView* depth_stencil_view = nullptr;
         ID3D11RenderTargetView* render_target_view = nullptr;
 
         void init_device();
-        void init_reder_target_view();
+        void init_depth_stencil_view();
+        void init_render_target_view();
         void init_view_port();
 
         template<typename T>
