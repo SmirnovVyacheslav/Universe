@@ -3,8 +3,10 @@
 #include "src/core/def/abstract_class.h"
 #include "src/core/def/class_format.h"
 #include "src/core/type/std.h"
+#include "src/core/type/string.h"
 #include "src/core/type/vector4.h"
 #include "src/platform/api/render.h"
+#include "src/platform/api/render/shader.h"
 #include "src/platform/impl/render/device.h"
 
 #ifdef platform_windows
@@ -17,7 +19,7 @@
 
 namespace engine::platform::render::directx
 {
-    #ifdef platform_windows
+    #ifdef platform_windows 
 
     class device_impl : public device
     {
@@ -28,6 +30,7 @@ namespace engine::platform::render::directx
         device_impl(const device_impl& src) = delete;
 
         void draw();
+        shader::shader* init_shader(string file);
 
         device_impl& operator=(device_impl&& src) = delete;
         device_impl& operator=(const device_impl& src) = delete;

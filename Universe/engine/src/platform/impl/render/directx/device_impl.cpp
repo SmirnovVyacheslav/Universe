@@ -3,6 +3,7 @@
 
 #include "src/core/type/std.h"
 #include "src/platform/api/view.h"
+#include "src/platform/impl/render/directx/shader_impl.h"
 
 
 namespace engine::platform::render::directx
@@ -32,6 +33,11 @@ namespace engine::platform::render::directx
         device_context->ClearRenderTargetView(render_target_view, *background_color);
 
         swap_chain->Present(0, 0);
+    }
+
+    shader::shader* device_impl::init_shader(string file)
+    {
+        return new shader::directx::shader_impl(device);
     }
 
     void device_impl::init_device()
