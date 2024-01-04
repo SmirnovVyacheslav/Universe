@@ -79,6 +79,9 @@
     <Filter Include="src\engine\platfom\impl\event\win32">
       <UniqueIdentifier>{67e6ce6a-518c-4597-83e0-cd920c778051}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\platfom\api\render">
+      <UniqueIdentifier>{452e8269-fcd6-4c8d-8354-afe7be598378}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -137,6 +140,30 @@
     </ClCompile>
     <ClCompile Include="engine\src\platform\impl\event\queue.cpp">
       <Filter>src\engine\platfom\impl\event</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\index_buff.cpp">
+      <Filter>src\engine\platfom\impl\render</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\shader.cpp">
+      <Filter>src\engine\platfom\impl\render</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\vertex_buff.cpp">
+      <Filter>src\engine\platfom\impl\render</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\vertex_layout.cpp">
+      <Filter>src\engine\platfom\impl\render</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\directx\index_buff_impl.cpp">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\directx\shader_impl.cpp">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\directx\vertex_buff_impl.cpp">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\directx\vertex_layout_impl.cpp">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +253,21 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\impl\event\queue.h">
       <Filter>src\engine\platfom\impl\event</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\render\shader.h">
+      <Filter>src\engine\platfom\api\render</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\render\directx\index_buff_impl.h">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\render\directx\shader_impl.h">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\render\directx\vertex_buff_impl.h">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\render\directx\vertex_layout_impl.h">
+      <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
