@@ -5,8 +5,11 @@
 #include "src/core/type/std.h"
 #include "src/core/type/string.h"
 #include "src/core/type/vector4.h"
+#include "src/core/type/vertex.h"
 #include "src/platform/api/render.h"
 #include "src/platform/api/render/shader.h"
+#include "src/platform/api/render/vertex_buff.h"
+#include "src/platform/api/render/index_buff.h"
 #include "src/platform/impl/render/device.h"
 
 #ifdef platform_windows
@@ -31,6 +34,8 @@ namespace engine::platform::render::directx
 
         void draw();
         shader::shader* init_shader(string file);
+        vertex_buff::vertex_buff* init_vertex_buff(vertex* data);
+        index_buff::index_buff* init_index_buff(uint16* data);
 
         device_impl& operator=(device_impl&& src) = delete;
         device_impl& operator=(const device_impl& src) = delete;
@@ -51,11 +56,6 @@ namespace engine::platform::render::directx
         void init_depth_stencil_view();
         void init_render_target_view();
         void init_view_port();
-
-        template<typename T>
-        void clear_resource(T* resource);
-        template<typename T>
-        void release_resource(T* resource);
     };
 
     #else

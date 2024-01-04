@@ -1,21 +1,28 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "src/platform/impl/render/directx/shader_impl.h"
 
+#include "src/platform/impl/render/directx/term_resource.h"
+
 
 namespace engine::platform::render::shader::directx
 {
-    shader_impl::shader_impl(ID3D11Device* device) : device(device)
-    {}
+    #ifdef platform_windows
+
+    shader_impl::shader_impl(ID3D11Device* device, string file) : device(device), file(file)
+    {
+        init_vertex_shader(file);
+        init_pixel_shader(file);
+    }
     
     shader_impl::~shader_impl()
     {
-        //
+        term_pixel_shader();
+        term_vertex_shader();
     }
 
-    void* shader_impl::init_vertex_shader(string file)
+    void shader_impl::init_vertex_shader(string file)
     {
-        ID3D11VertexShader* vertex_shader = nullptr;
-        ID3DBlob* vertex_blob = compile_shader_file(file, shader_vertex_entry, shader_vertex_model);
+        ID3DBlob* vertex_blob = compile_shader_file(file, vertex_entry, vertex_model);
 
         HRESULT result = device->CreateVertexShader
         (
@@ -24,6 +31,7 @@ namespace engine::platform::render::shader::directx
             NULL,
             &vertex_shader
         );
+
         if (FAILED(result))
         {
             vertex_blob->Release();
@@ -32,14 +40,11 @@ namespace engine::platform::render::shader::directx
 
         init_vertex_layout(vertex_blob);
         vertex_blob->Release();
-
-        return vertex_shader;
     }
 
-    void* shader_impl::init_pixel_shader(string file)
+    void shader_impl::init_pixel_shader(string file)
     {
-        ID3D11PixelShader* pixel_shader = nullptr;
-        ID3DBlob* pixel_blob = compile_shader_file(file, shader_pixel_entry, shader_pixel_model);
+        ID3DBlob* pixel_blob = compile_shader_file(file, pixel_entry, pixel_model);
 
         HRESULT result = device->CreatePixelShader
         (
@@ -48,13 +53,36 @@ namespace engine::platform::render::shader::directx
             NULL,
             &pixel_shader
         );
+
         pixel_blob->Release();
         if (FAILED(result))
         {
             throw std::invalid_argument("Failed to create pixel shader");
         }
+    }
 
-        return pixel_shader;
+    void shader_impl::init_vertex_layout(ID3DBlob* vertex_blob)
+    {
+        D3D11_INPUT_ELEMENT_DESC layout[] =
+        {
+            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        };
+        UINT layout_size = ARRAYSIZE(layout);
+
+        HRESULT result = device->CreateInputLayout
+        (
+            layout,
+            layout_size,
+            vertex_blob->GetBufferPointer(),
+            vertex_blob->GetBufferSize(),
+            &vertex_layout
+        );
+
+        if (FAILED(result))
+        {
+            throw std::invalid_argument("Failed to create input layout");
+        }
     }
 
     ID3DBlob* shader_impl::compile_shader_file(string path, string entry, string model)
@@ -114,6 +142,7 @@ namespace engine::platform::render::shader::directx
             &output_blob,
             &error_blob
         );
+
         if (FAILED(result))
         {
             if (error_blob)
@@ -123,21 +152,22 @@ namespace engine::platform::render::shader::directx
             }
             throw std::invalid_argument("Failed to compile shader");
         }
-        release_resource(error_blob);
+
+        render::directx::release_resource(error_blob);
 
         return output_blob;
     }
 
-    void shader_impl::term_vertex_shader(void* vertex_shader)
+    void shader_impl::term_vertex_shader()
     {
-        ID3D11VertexShader* vertex_shader = reinterpret_cast<ID3D11VertexShader*>(vertex_shader);
-        release_resource(vertex_shader);
+        render::directx::release_resource(vertex_layout);
+        render::directx::release_resource(vertex_shader);
     }
 
-    void shader_impl::term_pixel_shader(void* pixel_shader)
+    void shader_impl::term_pixel_shader()
     {
-        ID3D11PixelShader* pixel_shader = reinterpret_cast<ID3D11PixelShader*>(pixel_shader);
-        release_resource(pixel_shader);
+        render::directx::release_resource(pixel_shader);
     }
 
+    #endif
 }

@@ -3,6 +3,8 @@
 #include "src/platform/api/render/shader.h"
 #include "src/core/type/map.h"
 
+#include "src/platform/impl/render/device.h"
+
 
 namespace engine::platform::render::shader
 {
@@ -10,16 +12,17 @@ namespace engine::platform::render::shader
 
     void init(string file)
     {
-        //
+        shader* new_shader = render::init_shader(file);
+        shader_map.add(0, new_shader);
     }
 
     void term(int32 id)
     {
-        //
+        delete shader_map[id];
     }
 
-    void get(int32 id)
+    shader* get(int32 id)
     {
-        //
+        return shader_map[id];
     }
 }

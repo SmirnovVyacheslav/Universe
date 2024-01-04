@@ -3,7 +3,10 @@
 
 #include "src/core/type/std.h"
 #include "src/platform/api/view.h"
+#include "src/platform/impl/render/directx/term_resource.h"
 #include "src/platform/impl/render/directx/shader_impl.h"
+#include "src/platform/impl/render/directx/vertex_buff_impl.h"
+#include "src/platform/impl/render/directx/index_buff_impl.h"
 
 
 namespace engine::platform::render::directx
@@ -37,7 +40,17 @@ namespace engine::platform::render::directx
 
     shader::shader* device_impl::init_shader(string file)
     {
-        return new shader::directx::shader_impl(device);
+        return new shader::directx::shader_impl(device, file);
+    }
+
+    vertex_buff::vertex_buff* device_impl::init_vertex_buff(vertex* data)
+    {
+        return new vertex_buff::directx::vertex_buff_impl(device, data);
+    }
+
+    index_buff::index_buff* device_impl::init_index_buff(uint16* data)
+    {
+        return new index_buff::directx::index_buff_impl(device, data);
     }
 
     void device_impl::init_device()
@@ -151,24 +164,6 @@ namespace engine::platform::render::directx
         view_port.TopLeftY = 0;
 
         device_context->RSSetViewports(1, &view_port);
-    }
-
-    template<typename T>
-    void device_impl::clear_resource(T* resource)
-    {
-        if (resource)
-        {
-            resource->ClearState();
-        }
-    }
-
-    template<typename T>
-    void device_impl::release_resource(T* resource)
-    {
-        if (resource)
-        {
-            resource->Release();
-        }
     }
 
     #endif

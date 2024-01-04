@@ -150,9 +150,6 @@
     <ClCompile Include="engine\src\platform\impl\render\vertex_buff.cpp">
       <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\impl\render\vertex_layout.cpp">
-      <Filter>src\engine\platfom\impl\render</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\platform\impl\render\directx\index_buff_impl.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
@@ -162,8 +159,11 @@
     <ClCompile Include="engine\src\platform\impl\render\directx\vertex_buff_impl.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\impl\render\directx\vertex_layout_impl.cpp">
+    <ClCompile Include="engine\src\platform\impl\render\directx\term_resource.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\device.cpp">
+      <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,8 +266,14 @@
     <ClInclude Include="engine\src\platform\impl\render\directx\vertex_buff_impl.h">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\impl\render\directx\vertex_layout_impl.h">
+    <ClInclude Include="engine\src\platform\impl\render\directx\term_resource.h">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\render\index_buff.h">
+      <Filter>src\engine\platfom\api\render</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\api\render\vertex_buff.h">
+      <Filter>src\engine\platfom\api\render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

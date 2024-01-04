@@ -12,7 +12,7 @@ namespace engine::core
     void init()
     {
         platform::init();
-        platform::render::init_shader("game/res/shader/base.fx");
+        //platform::render::init_shader("game/res/shader/base.fx");
     }
 
     void exec()

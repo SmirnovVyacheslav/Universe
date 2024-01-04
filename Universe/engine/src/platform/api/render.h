@@ -20,46 +20,4 @@ namespace engine::platform::render
     void term();
 
     void draw();
-
-    namespace vertex_buff
-    {
-        abstract_class vertex_buff
-        {
-            abstract_def(vertex_buff)
-
-            int32 id;
-        };
-
-        add(string file);
-        vertex_buff* get(int32 id);
-        del(int32 id);
-    }
-
-    namespace index_buff
-    {
-        abstract_class index_buff
-        {
-            abstract_def(index_biff)
-
-            int32 id;
-        };
-
-        add(string file);
-        index_buff* get(int32 id);
-        del(int32 id);
-    }
-
-    namespace vertex_layout
-    {
-        abstract_class vertex_layout
-        {
-            abstract_def(vertex_layout)
-
-            int32 id;
-        };
-
-        add(string file);
-        vertex_layout* get(int32 id);
-        del(int32 id);
-    }
 }
