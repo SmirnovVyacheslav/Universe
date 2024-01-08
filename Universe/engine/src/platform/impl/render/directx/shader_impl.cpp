@@ -85,6 +85,22 @@ namespace engine::platform::render::shader::directx
         }
     }
 
+    void shader_impl::init_constant_buff() {
+        D3D11_BUFFER_DESC buffer_data;
+        ZeroMemory(&buffer_data, sizeof(buffer_data));
+
+        buffer_data.Usage = D3D11_USAGE_DEFAULT;
+        buffer_data.ByteWidth = sizeof(constant_buff_cpu);
+        buffer_data.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        buffer_data.CPUAccessFlags = 0;
+
+        HRESULT result = device->CreateBuffer(&buffer_data, NULL, &constant_buff);
+        if (FAILED(result))
+        {
+            throw std::invalid_argument("Failed to create shader constant buffer");
+        }
+    }
+
     ID3DBlob* shader_impl::compile_shader_file(string path, string entry, string model)
     {
         ID3DBlob* error_blob = nullptr;

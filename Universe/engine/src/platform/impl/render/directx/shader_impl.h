@@ -2,6 +2,7 @@
 #pragma once
 #include "src/core/def/abstract_class.h"
 #include "src/core/def/class_format.h"
+#include "src/core/type/matrix4.h"
 #include "src/platform/api/render/shader.h"
 
 #ifdef platform_windows
@@ -15,6 +16,13 @@
 namespace engine::platform::render::shader::directx
 {
     #ifdef platform_windows
+
+    struct constant_buff_cpu
+    {
+        matrix4 world;
+        matrix4 view;
+        matrix4 projection;
+    };
 
     class shader_impl : public shader
     {
@@ -35,6 +43,7 @@ namespace engine::platform::render::shader::directx
         ID3D11VertexShader* vertex_shader = nullptr;
         ID3D11PixelShader* pixel_shader = nullptr;
         ID3D11InputLayout* vertex_layout = nullptr;
+        ID3D11Buffer* constant_buff = nullptr;
 
         string vertex_entry = u8"VS";
         string vertex_model = u8"vs_4_0";
@@ -44,6 +53,7 @@ namespace engine::platform::render::shader::directx
         void init_vertex_shader(string file);
         void init_pixel_shader(string file);
         void init_vertex_layout(ID3DBlob* vertex_blob);
+        void init_constant_buff();
 
         void term_vertex_shader();
         void term_pixel_shader();

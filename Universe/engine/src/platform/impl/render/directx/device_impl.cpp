@@ -2,6 +2,7 @@
 #include "src/platform/impl/render/directx/device_impl.h"
 
 #include "src/core/type/std.h"
+#include "src/core/type/matrix4.h"
 #include "src/platform/api/view.h"
 #include "src/platform/impl/render/directx/term_resource.h"
 #include "src/platform/impl/render/directx/shader_impl.h"
@@ -12,6 +13,17 @@
 namespace engine::platform::render::directx
 {
     #ifdef platform_windows
+
+    struct shader_constant_buff
+    {
+        matrix4 world;
+        matrix4 view;
+        matrix4 projection;
+    };
+    matrix4 world;
+    matrix4 view;
+    matrix4 projection;
+
 
     device_impl::device_impl()
     {
@@ -35,6 +47,20 @@ namespace engine::platform::render::directx
     {
         device_context->ClearRenderTargetView(render_target_view, *background_color);
         device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+        //shader_constant_buff constant_buff;
+        //constant_buff.mWorld = matrix_transpose(world);
+        //constant_buff.mView = matrix_transpose(view);
+        //constant_buff.mProjection = matrix_transpose(projection);
+        //immediate_context->UpdateSubresource(constant_buffer, 0, NULL, &constant_buff, 0, 0);
+
+        ////
+        //// Рендер куба
+        ////
+        //g_pImmediateContext->VSSetShader(g_pVertexShader, NULL, 0);
+        //g_pImmediateContext->VSSetConstantBuffers(0, 1, &g_pConstantBuffer);
+        //g_pImmediateContext->PSSetShader(g_pPixelShader, NULL, 0);
+        //g_pImmediateContext->DrawIndexed(36, 0, 0);
 
         swap_chain->Present(0, 0);
     }
