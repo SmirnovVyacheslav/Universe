@@ -167,7 +167,6 @@
     <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\directx\index_buff_impl.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\directx\shader_impl.cpp" />
-    <ClCompile Include="engine\src\platform\impl\render\directx\term_resource.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\directx\vertex_buff_impl.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\index_buff.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\render.cpp" />

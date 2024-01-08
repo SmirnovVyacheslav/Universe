@@ -159,9 +159,6 @@
     <ClCompile Include="engine\src\platform\impl\render\directx\vertex_buff_impl.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\impl\render\directx\term_resource.cpp">
-      <Filter>src\engine\platfom\impl\render\directx</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\platform\impl\render\device.cpp">
       <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
