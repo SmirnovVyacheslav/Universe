@@ -34,6 +34,7 @@ namespace engine::platform::render::directx
     void device_impl::draw()
     {
         device_context->ClearRenderTargetView(render_target_view, *background_color);
+        device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
         swap_chain->Present(0, 0);
     }
