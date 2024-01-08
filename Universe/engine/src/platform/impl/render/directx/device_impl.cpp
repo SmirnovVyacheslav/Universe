@@ -30,6 +30,8 @@ namespace engine::platform::render::directx
         init_depth_stencil_view();
         init_render_target_view();
         init_view_port();
+
+        set_primitive_topology();
     }
 
     device_impl::~device_impl()
@@ -47,19 +49,27 @@ namespace engine::platform::render::directx
         device_context->ClearRenderTargetView(render_target_view, *background_color);
         device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-        //shader_constant_buff constant_buff;
-        //constant_buff.mWorld = matrix_transpose(world);
-        //constant_buff.mView = matrix_transpose(view);
-        //constant_buff.mProjection = matrix_transpose(projection);
-        //immediate_context->UpdateSubresource(constant_buffer, 0, NULL, &constant_buff, 0, 0);
+        //// Установка вершинного буфера
+        //UINT stride = sizeof(SimpleVertex);
+        //UINT offset = 0;
+        //g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
 
-        ////
-        //// Рендер куба
-        ////
-        //g_pImmediateContext->VSSetShader(g_pVertexShader, NULL, 0);
-        //g_pImmediateContext->VSSetConstantBuffers(0, 1, &g_pConstantBuffer);
-        //g_pImmediateContext->PSSetShader(g_pPixelShader, NULL, 0);
-        //g_pImmediateContext->DrawIndexed(36, 0, 0);
+        //// Установка индексного буфера
+        //g_pImmediateContext->IASetIndexBuffer(g_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+        
+        /*local_constant_buffer cb;
+        cb.mWorld = matrix_transpose(world);
+        cb.mView = matrix_transpose(view);
+        cb.mProjection = matrix_transpose(projection);
+        immediate_context->UpdateSubresource(constant_buffer, 0, NULL, &cb, 0, 0);*/
+
+        //immediate_context->VSSetShader(vertex_shader, NULL, 0);
+        //immediate_context->VSSetConstantBuffers(0, 1, &constant_buffer);
+        //immediate_context->PSSetShader(pixel_shader, NULL, 0);
+        //immediate_context->PSSetConstantBuffers(0, 1, &constant_buffer);
+
+        //immediate_context->DrawIndexed(36, 0, 0);
 
         swap_chain->Present(0, 0);
     }
@@ -190,6 +200,11 @@ namespace engine::platform::render::directx
         view_port.TopLeftY = 0;
 
         device_context->RSSetViewports(1, &view_port);
+    }
+
+    void device_impl::set_primitive_topology()
+    {
+        device_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     }
 
     #endif

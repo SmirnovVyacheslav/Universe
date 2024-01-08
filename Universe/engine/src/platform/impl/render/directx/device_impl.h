@@ -56,6 +56,8 @@ namespace engine::platform::render::directx
         void init_depth_stencil_view();
         void init_render_target_view();
         void init_view_port();
+
+        void set_primitive_topology();
     };
 
     #else
