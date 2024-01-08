@@ -3,6 +3,7 @@
 
 #include "src/core/type/std.h"
 #include "src/core/type/matrix4.h"
+#include "src/core/type/vector3.h"
 #include "src/platform/api/view.h"
 #include "src/platform/impl/render/directx/term_resource.h"
 #include "src/platform/impl/render/directx/shader_impl.h"
@@ -14,15 +15,13 @@ namespace engine::platform::render::directx
 {
     #ifdef platform_windows
 
-    struct shader_constant_buff
-    {
-        matrix4 world;
-        matrix4 view;
-        matrix4 projection;
-    };
-    matrix4 world;
-    matrix4 view;
-    matrix4 projection;
+    vector3 eye(0.0f, 1.0f, -5.0f);
+    vector3 at(0.0f, 1.0f, 0.0f);
+    vector3 up(0.0f, 1.0f, 0.0f);
+
+    matrix4 world = matrix_rotation_y(3.14159f / 4.0f);
+    matrix4 view = matrix_look_at(eye, at, up);
+    matrix4 projection = matrix_projection(128 / static_cast<float>(256));
 
 
     device_impl::device_impl()
