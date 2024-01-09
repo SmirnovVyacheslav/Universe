@@ -4,7 +4,9 @@
 #include "src/core/type/std.h"
 #include "src/core/type/matrix4.h"
 #include "src/core/type/vector3.h"
+#include "src/core/type/vertex.h"
 #include "src/platform/api/view.h"
+#include "src/platform/api/render/vertex_buff.h"
 #include "src/platform/impl/render/directx/term_resource.h"
 #include "src/platform/impl/render/directx/shader_impl.h"
 #include "src/platform/impl/render/directx/vertex_buff_impl.h"
@@ -49,10 +51,10 @@ namespace engine::platform::render::directx
         device_context->ClearRenderTargetView(render_target_view, *background_color);
         device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-        //// Установка вершинного буфера
-        //UINT stride = sizeof(SimpleVertex);
-        //UINT offset = 0;
-        //g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
+        UINT stride = sizeof(vertex);
+        UINT offset = 0;
+        vertex_buff::directx::vertex_buff_impl* vertex_buffer = dynamic_cast<vertex_buff::directx::vertex_buff_impl*>(vertex_buff::get(0));
+        device_context->IASetVertexBuffers(0, 1, vertex_buffer->get_data(), &stride, &offset);
 
         //// Установка индексного буфера
         //g_pImmediateContext->IASetIndexBuffer(g_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);

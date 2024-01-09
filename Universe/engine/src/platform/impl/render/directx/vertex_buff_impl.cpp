@@ -38,5 +38,10 @@ namespace engine::platform::render::vertex_buff::directx
         delete[] data;
     }
 
+    ID3D11Buffer** vertex_buff_impl::get_data()
+    {
+        return &vertex_buffer;
+    }
+
     #endif
 }

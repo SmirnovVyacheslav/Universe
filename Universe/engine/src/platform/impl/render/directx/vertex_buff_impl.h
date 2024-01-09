@@ -24,6 +24,8 @@ namespace engine::platform::render::vertex_buff::directx
         vertex_buff_impl(vertex_buff_impl&& src) = delete;
         vertex_buff_impl(const vertex_buff_impl& src) = delete;
 
+        ID3D11Buffer** get_data();
+
         vertex_buff_impl& operator=(vertex_buff_impl&& src) = delete;
         vertex_buff_impl& operator=(const vertex_buff_impl& src) = delete;
 
