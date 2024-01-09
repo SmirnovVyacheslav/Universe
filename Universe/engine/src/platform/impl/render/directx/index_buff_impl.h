@@ -24,6 +24,8 @@ namespace engine::platform::render::index_buff::directx
         index_buff_impl(index_buff_impl&& src) = delete;
         index_buff_impl(const index_buff_impl& src) = delete;
 
+        ID3D11Buffer* get_data();
+
         index_buff_impl& operator=(index_buff_impl&& src) = delete;
         index_buff_impl& operator=(const index_buff_impl& src) = delete;
 

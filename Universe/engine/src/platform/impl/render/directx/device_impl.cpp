@@ -56,10 +56,9 @@ namespace engine::platform::render::directx
         vertex_buff::directx::vertex_buff_impl* vertex_buffer = dynamic_cast<vertex_buff::directx::vertex_buff_impl*>(vertex_buff::get(0));
         device_context->IASetVertexBuffers(0, 1, vertex_buffer->get_data(), &stride, &offset);
 
-        //// Установка индексного буфера
-        //g_pImmediateContext->IASetIndexBuffer(g_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+        index_buff::directx::index_buff_impl* index_buffer = dynamic_cast<index_buff::directx::index_buff_impl*>(index_buff::get(0));
+        device_context->IASetIndexBuffer(index_buffer->get_data(), DXGI_FORMAT_R16_UINT, 0);
 
-        
         /*local_constant_buffer cb;
         cb.mWorld = matrix_transpose(world);
         cb.mView = matrix_transpose(view);

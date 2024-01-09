@@ -38,5 +38,10 @@ namespace engine::platform::render::index_buff::directx
         delete[] data;
     }
 
+    ID3D11Buffer* index_buff_impl::get_data()
+    {
+        return index_buffer;
+    }
+
 #endif
 }
