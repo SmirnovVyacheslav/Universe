@@ -6,7 +6,9 @@
 #include "src/core/type/vector3.h"
 #include "src/core/type/vertex.h"
 #include "src/platform/api/view.h"
+#include "src/platform/api/render/shader.h"
 #include "src/platform/api/render/vertex_buff.h"
+#include "src/platform/api/render/index_buff.h"
 #include "src/platform/impl/render/directx/term_resource.h"
 #include "src/platform/impl/render/directx/shader_impl.h"
 #include "src/platform/impl/render/directx/vertex_buff_impl.h"
@@ -59,16 +61,9 @@ namespace engine::platform::render::directx
         index_buff::directx::index_buff_impl* index_buffer = dynamic_cast<index_buff::directx::index_buff_impl*>(index_buff::get(0));
         device_context->IASetIndexBuffer(index_buffer->get_data(), DXGI_FORMAT_R16_UINT, 0);
 
-        /*local_constant_buffer cb;
-        cb.mWorld = matrix_transpose(world);
-        cb.mView = matrix_transpose(view);
-        cb.mProjection = matrix_transpose(projection);
-        immediate_context->UpdateSubresource(constant_buffer, 0, NULL, &cb, 0, 0);*/
-
-        //immediate_context->VSSetShader(vertex_shader, NULL, 0);
-        //immediate_context->VSSetConstantBuffers(0, 1, &constant_buffer);
-        //immediate_context->PSSetShader(pixel_shader, NULL, 0);
-        //immediate_context->PSSetConstantBuffers(0, 1, &constant_buffer);
+        shader::directx::shader_impl* shader_inst = dynamic_cast<shader::directx::shader_impl*>(shader::get(0));
+        shader_inst->update(world, view, projection);
+        shader_inst->set();
 
         //immediate_context->DrawIndexed(36, 0, 0);
 
@@ -77,7 +72,7 @@ namespace engine::platform::render::directx
 
     shader::shader* device_impl::init_shader(string file)
     {
-        return new shader::directx::shader_impl(device, file);
+        return new shader::directx::shader_impl(device, device_context, file);
     }
 
     vertex_buff::vertex_buff* device_impl::init_vertex_buff(vertex* data)

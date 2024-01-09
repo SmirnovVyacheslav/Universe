@@ -8,16 +8,34 @@ namespace engine::platform::render::shader::directx
 {
     #ifdef platform_windows
 
-    shader_impl::shader_impl(ID3D11Device* device, string file) : device(device), file(file)
+    shader_impl::shader_impl(ID3D11Device* device, ID3D11DeviceContext* device_context, string file) :
+        device(device), device_context(device_context), file(file)
     {
         init_vertex_shader(file);
         init_pixel_shader(file);
+        init_constant_buff();
     }
     
     shader_impl::~shader_impl()
     {
         term_pixel_shader();
         term_vertex_shader();
+    }
+
+    void shader_impl::update(matrix4 world, matrix4 view, matrix4 projection)
+    {
+        cb.world = matrix_transpose(world);
+        cb.view = matrix_transpose(view);
+        cb.projection = matrix_transpose(projection);
+        device_context->UpdateSubresource(constant_buff, 0, NULL, &cb, 0, 0);
+    }
+
+    void shader_impl::set()
+    {
+        device_context->VSSetShader(vertex_shader, NULL, 0);
+        device_context->VSSetConstantBuffers(0, 1, &constant_buff);
+        device_context->PSSetShader(pixel_shader, NULL, 0);
+        device_context->PSSetConstantBuffers(0, 1, &constant_buff);
     }
 
     void shader_impl::init_vertex_shader(string file)

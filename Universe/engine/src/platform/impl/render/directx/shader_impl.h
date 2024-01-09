@@ -28,9 +28,12 @@ namespace engine::platform::render::shader::directx
     {
         abstract_impl(shader_impl)
         ____________________public____________________
-        shader_impl(ID3D11Device* device, string file);
+        shader_impl(ID3D11Device* device, ID3D11DeviceContext* device_context, string file);
         shader_impl(shader_impl&& src) = delete;
         shader_impl(const shader_impl& src) = delete;
+
+        void update(matrix4 world, matrix4 view, matrix4 projection);
+        void set();
 
         shader_impl& operator=(shader_impl&& src) = delete;
         shader_impl& operator=(const shader_impl& src) = delete;
@@ -40,10 +43,13 @@ namespace engine::platform::render::shader::directx
         string file;
 
         ID3D11Device* device = nullptr;
+        ID3D11DeviceContext* device_context = nullptr;
         ID3D11VertexShader* vertex_shader = nullptr;
         ID3D11PixelShader* pixel_shader = nullptr;
         ID3D11InputLayout* vertex_layout = nullptr;
         ID3D11Buffer* constant_buff = nullptr;
+
+        constant_buff_cpu cb;
 
         string vertex_entry = u8"VS";
         string vertex_model = u8"vs_4_0";
