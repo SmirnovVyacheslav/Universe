@@ -101,6 +101,8 @@ namespace engine::platform::render::shader::directx
         {
             throw std::invalid_argument("Failed to create input layout");
         }
+
+        device_context->IASetInputLayout(vertex_layout);
     }
 
     void shader_impl::init_constant_buff() {

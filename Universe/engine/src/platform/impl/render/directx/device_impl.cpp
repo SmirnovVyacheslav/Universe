@@ -65,7 +65,7 @@ namespace engine::platform::render::directx
         shader_inst->update(world, view, projection);
         shader_inst->set();
 
-        //immediate_context->DrawIndexed(36, 0, 0);
+        device_context->DrawIndexed(36, 0, 0);
 
         swap_chain->Present(0, 0);
     }
