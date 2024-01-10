@@ -10,8 +10,8 @@ namespace engine::platform::view
     {
         string name = u8"Engine";
 
-        int32 width = 800;
-        int32 height = 600;
+        int32 width = 128;
+        int32 height = 256;
         int32 refresh_rate = 60;
     };
 

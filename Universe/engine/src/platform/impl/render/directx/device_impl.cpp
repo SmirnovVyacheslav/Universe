@@ -19,13 +19,13 @@ namespace engine::platform::render::directx
 {
     #ifdef platform_windows
 
-    vector3 eye(0.0f, 1.0f, -5.0f);
+    vector3 eye(0.0f, 3.0f, -5.0f);
     vector3 at(0.0f, 1.0f, 0.0f);
     vector3 up(0.0f, 1.0f, 0.0f);
 
     matrix4 world = matrix_rotation_y(3.14159f / 4.0f);
     matrix4 view = matrix_look_at(eye, at, up);
-    matrix4 projection = matrix_projection(128 / static_cast<float>(256));
+    matrix4 projection = matrix_projection(static_cast<float>(128) / static_cast<float>(256));
 
 
     device_impl::device_impl()
