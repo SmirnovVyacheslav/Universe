@@ -162,6 +162,9 @@
     <ClCompile Include="engine\src\platform\impl\render\device.cpp">
       <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\platform\impl\render\matrix.cpp">
+      <Filter>src\engine\platfom\impl\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\src\core\memory\smart_ptr.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\api\render\vertex_buff.h">
       <Filter>src\engine\platfom\api\render</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\platform\impl\render\matrix.h">
+      <Filter>src\engine\platfom\impl\render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
