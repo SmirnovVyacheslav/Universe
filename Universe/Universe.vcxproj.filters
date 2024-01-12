@@ -82,6 +82,15 @@
     <Filter Include="src\engine\platfom\api\render">
       <UniqueIdentifier>{452e8269-fcd6-4c8d-8354-afe7be598378}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render">
+      <UniqueIdentifier>{f6a7d103-9891-4082-a14e-2dd4a6a4deeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\api">
+      <UniqueIdentifier>{922ceeea-3094-441a-8a04-cbc1c3534edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\impl">
+      <UniqueIdentifier>{1363a0bf-a208-4342-9c7e-c41fee503ea6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -164,6 +173,12 @@
     </ClCompile>
     <ClCompile Include="engine\src\platform\impl\render\matrix.cpp">
       <Filter>src\engine\platfom\impl\render</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\impl\camera.cpp">
+      <Filter>src\engine\render\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\impl\render.cpp">
+      <Filter>src\engine\render\impl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +292,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\impl\render\matrix.h">
       <Filter>src\engine\platfom\impl\render</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\api\render.h">
+      <Filter>src\engine\render\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\impl\camera.h">
+      <Filter>src\engine\render\impl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

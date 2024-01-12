@@ -176,6 +176,8 @@
     <ClCompile Include="engine\src\platform\impl\view\view.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\win32\window_handler.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\win32\window_impl.cpp" />
+    <ClCompile Include="engine\src\render\impl\camera.cpp" />
+    <ClCompile Include="engine\src\render\impl\render.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
@@ -216,6 +218,8 @@
     <ClInclude Include="engine\src\platform\impl\view\win32\window_handler.h" />
     <ClInclude Include="engine\src\platform\impl\view\win32\window_impl.h" />
     <ClInclude Include="engine\src\platform\impl\view\window.h" />
+    <ClInclude Include="engine\src\render\api\render.h" />
+    <ClInclude Include="engine\src\render\impl\camera.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

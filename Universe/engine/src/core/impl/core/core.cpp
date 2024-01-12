@@ -11,11 +11,15 @@
 #include "src/platform/api/render/vertex_buff.h"
 #include "src/platform/api/render/index_buff.h"
 
+#include "src/render/api/render.h"
+
 
 namespace engine::core
 {
     void init()
     {
+        render::init();
+
         platform::init();
 
         string basic_shaer = "game/res/shader/base.fx";
