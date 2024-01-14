@@ -178,6 +178,7 @@
     <ClCompile Include="engine\src\platform\impl\view\win32\window_impl.cpp" />
     <ClCompile Include="engine\src\render\impl\camera.cpp" />
     <ClCompile Include="engine\src\render\impl\render.cpp" />
+    <ClCompile Include="engine\src\render\impl\settings.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
@@ -198,6 +199,7 @@
     <ClInclude Include="engine\src\core\type\vector3.h" />
     <ClInclude Include="engine\src\core\type\vector4.h" />
     <ClInclude Include="engine\src\core\type\vertex.h" />
+    <ClInclude Include="engine\src\define\abstract.h" />
     <ClInclude Include="engine\src\platform\api\core.h" />
     <ClInclude Include="engine\src\platform\api\event.h" />
     <ClInclude Include="engine\src\platform\api\render.h" />
@@ -219,6 +221,7 @@
     <ClInclude Include="engine\src\platform\impl\view\win32\window_impl.h" />
     <ClInclude Include="engine\src\platform\impl\view\window.h" />
     <ClInclude Include="engine\src\render\api\render.h" />
+    <ClInclude Include="engine\src\render\api\settings.h" />
     <ClInclude Include="engine\src\render\impl\camera.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>

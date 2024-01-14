@@ -91,6 +91,9 @@
     <Filter Include="src\engine\render\impl">
       <UniqueIdentifier>{1363a0bf-a208-4342-9c7e-c41fee503ea6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\define">
+      <UniqueIdentifier>{2f69fd2a-4e8d-42b1-a193-36a5dc2c22e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -178,6 +181,9 @@
       <Filter>src\engine\render\impl</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\render\impl\render.cpp">
+      <Filter>src\engine\render\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\impl\settings.cpp">
       <Filter>src\engine\render\impl</Filter>
     </ClCompile>
   </ItemGroup>
@@ -298,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\render\impl\camera.h">
       <Filter>src\engine\render\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\define\abstract.h">
+      <Filter>src\engine\define</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\api\settings.h">
+      <Filter>src\engine\render\api</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

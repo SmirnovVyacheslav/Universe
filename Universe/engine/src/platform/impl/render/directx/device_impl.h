@@ -27,7 +27,7 @@ namespace engine::platform::render::directx
     class device_impl : public device
     {
         abstract_impl(device_impl)
-        ____________________public____________________
+    public:
         device_impl();
         device_impl(device_impl&& src) = delete;
         device_impl(const device_impl& src) = delete;
@@ -41,7 +41,7 @@ namespace engine::platform::render::directx
         device_impl& operator=(const device_impl& src) = delete;
 
         ~device_impl();
-        ____________________private___________________
+    private:
         render_config render_cfg;
         vector4 background_color[4] = { { 0.0f, 0.9f, 0.5f, 1.0f } };
 
