@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/render/impl/camera.h"
+#include "src/render/api/camera.h"
 
 #include "src/render/api/settings.h"
 #include "src/core/type/vector3.h"
@@ -21,17 +21,21 @@ namespace engine::render::camera
 
         ~impl();
     private:
-        vector3 eye;
-        vector3 at;
-        vector3 up;
+        vector3 eye = { 0.0f, 0.0f, 0.0f };
+        vector3 at = { 0.0f, 0.0f, 0.0f };
+        vector3 up = { 0.0f, 0.0f, 0.0f };
 
-        matrix4 view;
-        matrix4 projection;
+        matrix4 view = matrix_identity();
+        matrix4 projection = matrix_identity();
     };
 
     impl::impl()
     {
         settings::obj settings_inst = settings::get();
+
+        eye = { 0.0f, 3.0f, -5.0f };
+        at = { 0.0f, 1.0f, 0.0f };
+        up = { 0.0f, 1.0f, 0.0f };
 
         view = matrix_look_at(eye, at, up);
         projection = matrix_projection(

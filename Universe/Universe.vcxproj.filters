@@ -302,13 +302,13 @@
     <ClInclude Include="engine\src\render\api\render.h">
       <Filter>src\engine\render\api</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\impl\camera.h">
-      <Filter>src\engine\render\impl</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\define\abstract.h">
       <Filter>src\engine\define</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\render\api\settings.h">
+      <Filter>src\engine\render\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\api\camera.h">
       <Filter>src\engine\render\api</Filter>
     </ClInclude>
   </ItemGroup>
