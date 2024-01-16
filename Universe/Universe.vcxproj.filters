@@ -174,9 +174,6 @@
     <ClCompile Include="engine\src\platform\impl\render\device.cpp">
       <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\platform\impl\render\matrix.cpp">
-      <Filter>src\engine\platfom\impl\render</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\render\impl\camera.cpp">
       <Filter>src\engine\render\impl</Filter>
     </ClCompile>
@@ -184,6 +181,9 @@
       <Filter>src\engine\render\impl</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\render\impl\settings.cpp">
+      <Filter>src\engine\render\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\impl\device.cpp">
       <Filter>src\engine\render\impl</Filter>
     </ClCompile>
   </ItemGroup>
@@ -296,9 +296,6 @@
     <ClInclude Include="engine\src\platform\api\render\vertex_buff.h">
       <Filter>src\engine\platfom\api\render</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\platform\impl\render\matrix.h">
-      <Filter>src\engine\platfom\impl\render</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\render\api\render.h">
       <Filter>src\engine\render\api</Filter>
     </ClInclude>
@@ -309,6 +306,9 @@
       <Filter>src\engine\render\api</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\render\api\camera.h">
+      <Filter>src\engine\render\api</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\api\device.h">
       <Filter>src\engine\render\api</Filter>
     </ClInclude>
   </ItemGroup>

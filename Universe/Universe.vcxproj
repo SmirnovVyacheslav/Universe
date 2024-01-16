@@ -169,7 +169,6 @@
     <ClCompile Include="engine\src\platform\impl\render\directx\shader_impl.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\directx\vertex_buff_impl.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\index_buff.cpp" />
-    <ClCompile Include="engine\src\platform\impl\render\matrix.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\render.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\shader.cpp" />
     <ClCompile Include="engine\src\platform\impl\render\vertex_buff.cpp" />
@@ -177,6 +176,7 @@
     <ClCompile Include="engine\src\platform\impl\view\win32\window_handler.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\win32\window_impl.cpp" />
     <ClCompile Include="engine\src\render\impl\camera.cpp" />
+    <ClCompile Include="engine\src\render\impl\device.cpp" />
     <ClCompile Include="engine\src\render\impl\render.cpp" />
     <ClCompile Include="engine\src\render\impl\settings.cpp" />
     <ClCompile Include="game\src\game.cpp" />
@@ -215,12 +215,12 @@
     <ClInclude Include="engine\src\platform\impl\render\directx\shader_impl.h" />
     <ClInclude Include="engine\src\platform\impl\render\directx\term_resource.h" />
     <ClInclude Include="engine\src\platform\impl\render\directx\vertex_buff_impl.h" />
-    <ClInclude Include="engine\src\platform\impl\render\matrix.h" />
     <ClInclude Include="engine\src\platform\impl\view\win32\window_config.h" />
     <ClInclude Include="engine\src\platform\impl\view\win32\window_handler.h" />
     <ClInclude Include="engine\src\platform\impl\view\win32\window_impl.h" />
     <ClInclude Include="engine\src\platform\impl\view\window.h" />
     <ClInclude Include="engine\src\render\api\camera.h" />
+    <ClInclude Include="engine\src\render\api\device.h" />
     <ClInclude Include="engine\src\render\api\render.h" />
     <ClInclude Include="engine\src\render\api\settings.h" />
     <ClInclude Include="game\src\game.h" />
