@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/render/api/device.h"
+#include "src/render/src/device/inc/api.h"
 
 
 namespace engine::render::device

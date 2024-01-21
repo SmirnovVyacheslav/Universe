@@ -1,10 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/type/std.h"
+#include "src/render/src/camera/inc/obj.h"
 
 
-namespace engine::render
+namespace engine::render::camera
 {
     void init();
     void term();
+
+    obj& get();
 }

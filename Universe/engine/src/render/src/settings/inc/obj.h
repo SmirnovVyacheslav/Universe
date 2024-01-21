@@ -13,10 +13,4 @@ namespace engine::render::settings
 
         bool windowed = true;
     };
-
-
-    void init();
-    void term();
-
-    obj& get();
 }

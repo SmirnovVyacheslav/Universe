@@ -9,10 +9,4 @@ namespace engine::render::camera
     {
         abstract
     };
-
-
-    void init();
-    void term();
-
-    obj& get();
 }

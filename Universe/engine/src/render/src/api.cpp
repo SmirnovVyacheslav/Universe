@@ -1,8 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/render/def/api.h"
-
-#include "src/render/api/camera.h"
-#include "src/render/api/settings.h"
+#include "src/render/inc/api.h"
+#include "src/render/src/camera/inc/api.h"
+#include "src/render/src/settings/inc/api.h"
 
 
 namespace engine::render

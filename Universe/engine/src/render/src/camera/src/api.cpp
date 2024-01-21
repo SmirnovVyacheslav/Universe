@@ -1,15 +1,16 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/render/api/settings.h"
+#include "src/render/src/camera/inc/api.h"
+#include "src/render/src/camera/src/ext/inc/impl.h"
 
 
-namespace engine::render::settings
+namespace engine::render::camera
 {
-    obj* inst = nullptr;
+    impl* inst = nullptr;
 
-    
+
     void init()
     {
-        inst = new obj;
+        inst = new impl;
     }
 
     void term()

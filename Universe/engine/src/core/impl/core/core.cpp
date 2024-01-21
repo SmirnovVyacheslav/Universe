@@ -11,7 +11,7 @@
 #include "src/platform/api/render/vertex_buff.h"
 #include "src/platform/api/render/index_buff.h"
 
-#include "src/render/def/api.h"
+#include "src/render/inc/api.h"
 
 
 namespace engine::core
