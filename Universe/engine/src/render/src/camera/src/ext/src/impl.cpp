@@ -1,5 +1,4 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 #include "src/render/src/camera/src/ext/inc/impl.h"
 #include "src/render/src/settings/inc/api.h"
 
