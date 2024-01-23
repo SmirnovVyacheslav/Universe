@@ -130,6 +130,27 @@
     <Filter Include="src\engine\render\src\settings\src">
       <UniqueIdentifier>{38baf50e-5189-4cee-ab22-c8193ff1e597}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\src\device\src\ext">
+      <UniqueIdentifier>{d099fa45-0c17-4719-952c-6953ece2f8c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\device\src\ext\directx">
+      <UniqueIdentifier>{00908515-be5b-4f8b-9f73-d0edf3a2ab45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\device\src\ext\directx\inc">
+      <UniqueIdentifier>{15d6186f-8a53-4766-880d-0ae17566e399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\device\src\ext\directx\src">
+      <UniqueIdentifier>{6516a3e0-5bf1-4494-99cb-c5444dc0a372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\ext">
+      <UniqueIdentifier>{393be1e6-ed61-418f-bd7d-5e03881308fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\ext\directx">
+      <UniqueIdentifier>{a44eae8b-4bf5-4f64-a8bc-9576f3aaeb2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\ext\directx\inc">
+      <UniqueIdentifier>{df4e11ba-d666-4715-82d2-fb8ac28afdd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -224,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\render\src\settings\src\api.cpp">
       <Filter>src\engine\render\src\settings\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\src\device\src\ext\directx\inc\impl.cpp">
+      <Filter>src\engine\render\src\device\src\ext\directx\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +382,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\render\src\settings\inc\obj.h">
       <Filter>src\engine\render\src\settings\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\src\device\src\ext\directx\inc\impl.h">
+      <Filter>src\engine\render\src\device\src\ext\directx\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\src\ext\directx\inc\res.h">
+      <Filter>src\engine\render\src\ext\directx\inc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

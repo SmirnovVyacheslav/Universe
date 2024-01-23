@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/render/src/device/inc/api.h"
+#include "src/render/src/settings/inc/api.h"
 #include "src/core/type/vector3.h"
 #include "src/core/type/matrix4.h"
 
@@ -14,6 +15,7 @@
 
 namespace engine::render::device::directx
 {
+
 #ifdef platform_windows
 
     class impl : public obj
@@ -30,6 +32,7 @@ namespace engine::render::device::directx
 
         ~impl();
     private:
+        settings::obj settings_obj;
         vector4 background_color[4] = { { 0.0f, 0.9f, 0.5f, 1.0f } };
 
         ID3D11Device* device = nullptr;

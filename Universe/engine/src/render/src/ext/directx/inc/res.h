@@ -2,7 +2,7 @@
 #pragma once
 
 
-namespace engine::platform::render::directx
+namespace engine::render::ext::directx
 {
     template<typename T>
     void clear_resource(T* resource)
