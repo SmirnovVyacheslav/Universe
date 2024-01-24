@@ -180,6 +180,7 @@
     <ClCompile Include="engine\src\render\src\camera\src\ext\src\impl.cpp" />
     <ClCompile Include="engine\src\render\src\device\src\api.cpp" />
     <ClCompile Include="engine\src\render\src\device\src\ext\directx\inc\impl.cpp" />
+    <ClCompile Include="engine\src\render\src\index\src\api.cpp" />
     <ClCompile Include="engine\src\render\src\settings\src\api.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
@@ -228,6 +229,8 @@
     <ClInclude Include="engine\src\render\src\device\inc\api.h" />
     <ClInclude Include="engine\src\render\src\device\src\ext\directx\inc\impl.h" />
     <ClInclude Include="engine\src\render\src\ext\directx\inc\res.h" />
+    <ClInclude Include="engine\src\render\src\index\inc\api.h" />
+    <ClInclude Include="engine\src\render\src\index\inc\obj.h" />
     <ClInclude Include="engine\src\render\src\settings\inc\api.h" />
     <ClInclude Include="engine\src\render\src\settings\inc\obj.h" />
     <ClInclude Include="game\src\game.h" />

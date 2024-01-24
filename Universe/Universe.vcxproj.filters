@@ -151,6 +151,15 @@
     <Filter Include="src\engine\render\src\ext\directx\inc">
       <UniqueIdentifier>{df4e11ba-d666-4715-82d2-fb8ac28afdd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\src\index">
+      <UniqueIdentifier>{2fe9f62c-ef53-4867-b4c3-e26ae23f212f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\index\inc">
+      <UniqueIdentifier>{df882c2e-0d38-4640-95a5-06a3a12bb3e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\src\index\src">
+      <UniqueIdentifier>{262b3488-ee79-41b1-92bc-a1923d82b2ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -248,6 +257,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\render\src\device\src\ext\directx\inc\impl.cpp">
       <Filter>src\engine\render\src\device\src\ext\directx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\src\index\src\api.cpp">
+      <Filter>src\engine\render\src\index\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +400,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\render\src\ext\directx\inc\res.h">
       <Filter>src\engine\render\src\ext\directx\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\src\index\inc\api.h">
+      <Filter>src\engine\render\src\index\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\src\index\inc\obj.h">
+      <Filter>src\engine\render\src\index\inc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
