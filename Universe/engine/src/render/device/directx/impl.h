@@ -50,6 +50,24 @@ namespace engine::render::device::directx
         void set_primitive_topology();
     };
 
+    template<typename T>
+    void clear(T* res)
+    {
+        if (res)
+        {
+            res->ClearState();
+        }
+    }
+
+    template<typename T>
+    void release(T* res)
+    {
+        if (res)
+        {
+            res->Release();
+        }
+    }
+
 #else
 
     class impl : public obj
