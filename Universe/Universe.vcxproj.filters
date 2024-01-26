@@ -88,77 +88,20 @@
     <Filter Include="src\engine\define">
       <UniqueIdentifier>{2f69fd2a-4e8d-42b1-a193-36a5dc2c22e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\inc">
-      <UniqueIdentifier>{cfcef406-484c-4b51-8b04-0c1a788b1065}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src">
-      <UniqueIdentifier>{7863e0ff-8374-4e6d-b355-0aa31ebef860}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\camera">
-      <UniqueIdentifier>{ccd798c4-78bf-41e9-9a9f-33c6c9ae5065}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\device">
-      <UniqueIdentifier>{4f3b8835-a1e7-4d27-8734-7d394859bf8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\settings">
+    <Filter Include="src\engine\render\settings">
       <UniqueIdentifier>{76ca58a2-ec1f-4bbd-a2fc-f35764d04789}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\src\camera\inc">
-      <UniqueIdentifier>{c5395cbf-8391-45f7-99d9-8131dfb46cf6}</UniqueIdentifier>
+    <Filter Include="src\engine\render\camera">
+      <UniqueIdentifier>{1ddb2a49-fe4a-41a1-a22c-92f1a94e6e17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\src\camera\src">
-      <UniqueIdentifier>{3d4c7dc7-edb1-4fe1-ab60-b25ddd007db3}</UniqueIdentifier>
+    <Filter Include="src\engine\render\device">
+      <UniqueIdentifier>{4f3b8835-a1e7-4d27-8734-7d394859bf8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\src\camera\src\ext">
-      <UniqueIdentifier>{8fcfdddd-0eb3-4866-95c8-72f7bd8a498d}</UniqueIdentifier>
+    <Filter Include="src\engine\render\device\directx">
+      <UniqueIdentifier>{d0e70afc-4d31-4b2c-84e3-c08e8fbc51a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\src\camera\src\ext\inc">
-      <UniqueIdentifier>{f4c3bbb0-1962-47f8-a450-32241545b8e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\camera\src\ext\src">
-      <UniqueIdentifier>{e74ff7bf-0b69-4e7c-b7cc-2a3bfa5c9a54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\device\inc">
-      <UniqueIdentifier>{91fc6399-544e-4a68-8531-03772140a58f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\device\src">
-      <UniqueIdentifier>{2fb1b87d-6d2d-4823-83a8-121dac0681f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\settings\inc">
-      <UniqueIdentifier>{7bd5227a-6f3e-472c-82cd-97c96d553d6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\settings\src">
-      <UniqueIdentifier>{38baf50e-5189-4cee-ab22-c8193ff1e597}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\device\src\ext">
-      <UniqueIdentifier>{d099fa45-0c17-4719-952c-6953ece2f8c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\device\src\ext\directx">
-      <UniqueIdentifier>{00908515-be5b-4f8b-9f73-d0edf3a2ab45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\device\src\ext\directx\inc">
-      <UniqueIdentifier>{15d6186f-8a53-4766-880d-0ae17566e399}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\device\src\ext\directx\src">
-      <UniqueIdentifier>{6516a3e0-5bf1-4494-99cb-c5444dc0a372}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\ext">
-      <UniqueIdentifier>{393be1e6-ed61-418f-bd7d-5e03881308fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\ext\directx">
-      <UniqueIdentifier>{a44eae8b-4bf5-4f64-a8bc-9576f3aaeb2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\ext\directx\inc">
-      <UniqueIdentifier>{df4e11ba-d666-4715-82d2-fb8ac28afdd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\index">
+    <Filter Include="src\engine\render\index">
       <UniqueIdentifier>{2fe9f62c-ef53-4867-b4c3-e26ae23f212f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\index\inc">
-      <UniqueIdentifier>{df882c2e-0d38-4640-95a5-06a3a12bb3e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\src\index\src">
-      <UniqueIdentifier>{262b3488-ee79-41b1-92bc-a1923d82b2ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -240,26 +183,26 @@
     <ClCompile Include="engine\src\platform\impl\render\device.cpp">
       <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\src\api.cpp">
-      <Filter>src\engine\render\src</Filter>
+    <ClCompile Include="engine\src\render\api.cpp">
+      <Filter>src\engine\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\src\camera\src\api.cpp">
-      <Filter>src\engine\render\src\camera\src</Filter>
+    <ClCompile Include="engine\src\render\camera\impl.cpp">
+      <Filter>src\engine\render\camera</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\src\camera\src\ext\src\impl.cpp">
-      <Filter>src\engine\render\src\camera\src\ext\src</Filter>
+    <ClCompile Include="engine\src\render\camera\api.cpp">
+      <Filter>src\engine\render\camera</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\src\device\src\api.cpp">
-      <Filter>src\engine\render\src\device\src</Filter>
+    <ClCompile Include="engine\src\render\settings\api.cpp">
+      <Filter>src\engine\render\settings</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\src\settings\src\api.cpp">
-      <Filter>src\engine\render\src\settings\src</Filter>
+    <ClCompile Include="engine\src\render\device\api.cpp">
+      <Filter>src\engine\render\device</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\src\device\src\ext\directx\inc\impl.cpp">
-      <Filter>src\engine\render\src\device\src\ext\directx\src</Filter>
+    <ClCompile Include="engine\src\render\device\directx\impl.cpp">
+      <Filter>src\engine\render\device\directx</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\src\index\src\api.cpp">
-      <Filter>src\engine\render\src\index\src</Filter>
+    <ClCompile Include="engine\src\render\index\api.cpp">
+      <Filter>src\engine\render\index</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,38 +317,35 @@
     <ClInclude Include="engine\src\define\abstract.h">
       <Filter>src\engine\define</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\inc\api.h">
-      <Filter>src\engine\render\inc</Filter>
+    <ClInclude Include="engine\src\render\api.h">
+      <Filter>src\engine\render</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\camera\inc\api.h">
-      <Filter>src\engine\render\src\camera\inc</Filter>
+    <ClInclude Include="engine\src\render\camera\api.h">
+      <Filter>src\engine\render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\camera\inc\obj.h">
-      <Filter>src\engine\render\src\camera\inc</Filter>
+    <ClInclude Include="engine\src\render\camera\impl.h">
+      <Filter>src\engine\render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\camera\src\ext\inc\impl.h">
-      <Filter>src\engine\render\src\camera\src\ext\inc</Filter>
+    <ClInclude Include="engine\src\render\camera\obj.h">
+      <Filter>src\engine\render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\device\inc\api.h">
-      <Filter>src\engine\render\src\device\inc</Filter>
+    <ClInclude Include="engine\src\render\settings\api.h">
+      <Filter>src\engine\render\settings</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\settings\inc\api.h">
-      <Filter>src\engine\render\src\settings\inc</Filter>
+    <ClInclude Include="engine\src\render\settings\obj.h">
+      <Filter>src\engine\render\settings</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\settings\inc\obj.h">
-      <Filter>src\engine\render\src\settings\inc</Filter>
+    <ClInclude Include="engine\src\render\device\api.h">
+      <Filter>src\engine\render\device</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\device\src\ext\directx\inc\impl.h">
-      <Filter>src\engine\render\src\device\src\ext\directx\inc</Filter>
+    <ClInclude Include="engine\src\render\device\directx\impl.h">
+      <Filter>src\engine\render\device\directx</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\ext\directx\inc\res.h">
-      <Filter>src\engine\render\src\ext\directx\inc</Filter>
+    <ClInclude Include="engine\src\render\index\api.h">
+      <Filter>src\engine\render\index</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\src\index\inc\api.h">
-      <Filter>src\engine\render\src\index\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\render\src\index\inc\obj.h">
-      <Filter>src\engine\render\src\index\inc</Filter>
+    <ClInclude Include="engine\src\render\index\obj.h">
+      <Filter>src\engine\render\index</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

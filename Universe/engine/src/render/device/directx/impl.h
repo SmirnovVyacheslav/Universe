@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/render/src/device/inc/api.h"
-#include "src/render/src/settings/inc/api.h"
+#include "src/render/device/api.h"
+#include "src/render/settings/api.h"
 #include "src/core/type/vector3.h"
 #include "src/core/type/matrix4.h"
 

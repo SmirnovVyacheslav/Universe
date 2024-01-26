@@ -1,6 +1,5 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/render/src/device/src/ext/directx/inc/impl.h"
-#include "src/render/src/ext/directx/inc/res.h"
+#include "src/render/device/directx/impl.h"
 #include "src/platform/api/view.h"
 
 
@@ -21,12 +20,12 @@ namespace engine::render::device::directx
 
     impl::~impl()
     {
-        ext::directx::clear_resource(device_context);
+        clear(device_context);
 
-        ext::directx::release_resource(render_target_view);
-        ext::directx::release_resource(swap_chain);
-        ext::directx::release_resource(device_context);
-        ext::directx::release_resource(device);
+        release(render_target_view);
+        release(swap_chain);
+        release(device_context);
+        release(device);
     }
 
     void impl::draw()

@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/render/src/settings/inc/obj.h"
+#include "src/render/settings/obj.h"
 
 
 namespace engine::render::settings
