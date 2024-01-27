@@ -18,4 +18,9 @@ namespace engine::render::device
         delete inst;
         inst = nullptr;
     }
+
+    string type()
+    {
+        return "directx";
+    }
 }
