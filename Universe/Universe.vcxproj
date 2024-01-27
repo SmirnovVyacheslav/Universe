@@ -183,6 +183,10 @@
     <ClCompile Include="engine\src\render\index\api.cpp" />
     <ClCompile Include="engine\src\render\index\directx\impl.cpp" />
     <ClCompile Include="engine\src\render\settings\api.cpp" />
+    <ClCompile Include="engine\src\var\matrix4.cpp" />
+    <ClCompile Include="engine\src\var\string.cpp" />
+    <ClCompile Include="engine\src\var\vector3.cpp" />
+    <ClCompile Include="engine\src\var\vector4.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
@@ -234,6 +238,14 @@
     <ClInclude Include="engine\src\render\index\obj.h" />
     <ClInclude Include="engine\src\render\settings\api.h" />
     <ClInclude Include="engine\src\render\settings\obj.h" />
+    <ClInclude Include="engine\src\var\array.h" />
+    <ClInclude Include="engine\src\var\map.h" />
+    <ClInclude Include="engine\src\var\matrix4.h" />
+    <ClInclude Include="engine\src\var\std.h" />
+    <ClInclude Include="engine\src\var\string.h" />
+    <ClInclude Include="engine\src\var\vector.h" />
+    <ClInclude Include="engine\src\var\vector3.h" />
+    <ClInclude Include="engine\src\var\vector4.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

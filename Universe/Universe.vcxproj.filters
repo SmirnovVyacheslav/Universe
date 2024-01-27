@@ -106,6 +106,9 @@
     <Filter Include="src\engine\render\index\directx">
       <UniqueIdentifier>{01b961c7-6e6b-4c92-8e3a-7546eeba89da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\var">
+      <UniqueIdentifier>{b176be06-e1a2-4cc8-8b74-06f7a8914279}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -209,6 +212,18 @@
     </ClCompile>
     <ClCompile Include="engine\src\render\index\directx\impl.cpp">
       <Filter>src\engine\render\index\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\var\string.cpp">
+      <Filter>src\engine\var</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\var\vector3.cpp">
+      <Filter>src\engine\var</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\var\vector4.cpp">
+      <Filter>src\engine\var</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\var\matrix4.cpp">
+      <Filter>src\engine\var</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +370,30 @@
     </ClInclude>
     <ClInclude Include="engine\src\render\index\directx\impl.h">
       <Filter>src\engine\render\index\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\matrix4.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\std.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\string.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\vector.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\vector3.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\vector4.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\array.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\map.h">
+      <Filter>src\engine\var</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
