@@ -18,7 +18,7 @@ namespace engine::render::index::directx
     class impl : public obj
     {
     public:
-        impl(ID3D11Device* device, uint16* data);
+        impl(uint16* data);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -32,7 +32,7 @@ namespace engine::render::index::directx
         uint16* data;
 
         ID3D11Device* device = nullptr;
-        ID3D11Buffer* index_buffer = nullptr;
+        ID3D11Buffer* buffer = nullptr;
     };
 
 #endif

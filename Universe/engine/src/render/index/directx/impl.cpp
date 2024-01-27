@@ -1,15 +1,14 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/platform/impl/render/directx/index_buff_impl.h"
+#include "src/render/index/directx/impl.h"
+#include "src/render/device/directx/impl.h"
 
-#include "src/platform/impl/render/directx/term_resource.h"
 
-
-namespace engine::platform::render::index_buff::directx
+namespace engine::render::index::directx
 {
+
 #ifdef platform_windows
 
-    index_buff_impl::index_buff_impl(ID3D11Device* device, uint16* data) :
-        device(device), data(data)
+    impl::impl(uint16* data) : data(data)
     {
         D3D11_BUFFER_DESC buffer_data;
         ZeroMemory(&buffer_data, sizeof(buffer_data));
@@ -24,7 +23,7 @@ namespace engine::platform::render::index_buff::directx
 
         init_data.pSysMem = data;
 
-        HRESULT result = device->CreateBuffer(&buffer_data, &init_data, &index_buffer);
+        HRESULT result = device->CreateBuffer(&buffer_data, &init_data, &buffer);
 
         if (FAILED(result))
         {
@@ -32,16 +31,17 @@ namespace engine::platform::render::index_buff::directx
         }
     }
 
-    index_buff_impl::~index_buff_impl()
+    impl::~impl()
     {
-        render::directx::release_resource(index_buffer);
+        device::directx::release(buffer);
         delete[] data;
     }
 
-    ID3D11Buffer* index_buff_impl::get_data()
+    ID3D11Buffer* impl::get_data()
     {
-        return index_buffer;
+        return buffer;
     }
 
 #endif
+
 }

@@ -103,6 +103,9 @@
     <Filter Include="src\engine\render\index">
       <UniqueIdentifier>{2fe9f62c-ef53-4867-b4c3-e26ae23f212f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\index\directx">
+      <UniqueIdentifier>{01b961c7-6e6b-4c92-8e3a-7546eeba89da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -203,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\render\index\api.cpp">
       <Filter>src\engine\render\index</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\index\directx\impl.cpp">
+      <Filter>src\engine\render\index\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\render\index\obj.h">
       <Filter>src\engine\render\index</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\index\directx\impl.h">
+      <Filter>src\engine\render\index\directx</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
