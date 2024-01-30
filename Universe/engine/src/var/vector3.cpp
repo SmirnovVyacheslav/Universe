@@ -7,7 +7,7 @@
 //    vector3::vector3() : x(0.0f), y(0.0f), z(0.0f)
 //    {}
 //
-//    vector3::vector3(real32 x, real32 y, real32 z) : x(x), y(y), z(z)
+//    vector3::vector3(fp32 x, fp32 y, fp32 z) : x(x), y(y), z(z)
 //    {}
 //
 //    vector3::vector3(const vector<3> vec)
@@ -15,23 +15,23 @@
 //        data = vec;
 //    }
 //
-//    vector3::operator const real32* () const
+//    vector3::operator const fp32* () const
 //    {
-//        return reinterpret_cast<const real32*>(this);
+//        return reinterpret_cast<const fp32*>(this);
 //    }
 //
-//    real32& vector3::operator[](const int32 index)
-//    {
-//        return data[index];
-//    }
-//
-//    const real32& vector3::operator[](const int32 index) const
+//    fp32& vector3::operator[](const int32 index)
 //    {
 //        return data[index];
 //    }
 //
+//    const fp32& vector3::operator[](const int32 index) const
+//    {
+//        return data[index];
+//    }
 //
-//    const real32 length(const vector3& vec)
+//
+//    const fp32 length(const vector3& vec)
 //    {
 //        return length(vec.data);
 //    }
@@ -51,42 +51,42 @@
 //        return vec_a.data - vec_b.data;
 //    }
 //
-//    const vector3 operator+(const vector3& vec, const real32& num)
+//    const vector3 operator+(const vector3& vec, const fp32& num)
 //    {
 //        return vec.data + num;
 //    }
 //
-//    const vector3 operator-(const vector3& vec, const real32& num)
+//    const vector3 operator-(const vector3& vec, const fp32& num)
 //    {
 //        return vec.data - num;
 //    }
 //
-//    const vector3 operator*(const vector3& vec, const real32& num)
+//    const vector3 operator*(const vector3& vec, const fp32& num)
 //    {
 //        return vec.data * num;
 //    }
 //
-//    const vector3 operator/(const vector3& vec, const real32& num)
+//    const vector3 operator/(const vector3& vec, const fp32& num)
 //    {
 //        return vec.data / num;
 //    }
 //
-//    const vector3 operator+(const real32& num, const vector3& vec)
+//    const vector3 operator+(const fp32& num, const vector3& vec)
 //    {
 //        return num + vec.data;
 //    }
 //
-//    const vector3 operator-(const real32& num, const vector3& vec)
+//    const vector3 operator-(const fp32& num, const vector3& vec)
 //    {
 //        return num - vec.data;
 //    }
 //
-//    const vector3 operator*(const real32& num, const vector3& vec)
+//    const vector3 operator*(const fp32& num, const vector3& vec)
 //    {
 //        return num * vec.data;
 //    }
 //
-//    const vector3 operator/(const real32& num, const vector3& vec)
+//    const vector3 operator/(const fp32& num, const vector3& vec)
 //    {
 //        return num / vec.data;
 //    }
@@ -102,7 +102,7 @@
 //    }
 //
 //    // Scalar product
-//    const real32 operator*(const vector3& vec_a, const vector3& vec_b)
+//    const fp32 operator*(const vector3& vec_a, const vector3& vec_b)
 //    {
 //        return vec_a.data * vec_b.data;
 //    }

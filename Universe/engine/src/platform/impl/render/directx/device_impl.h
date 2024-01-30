@@ -2,7 +2,7 @@
 #pragma once
 #include "src/core/def/abstract_class.h"
 #include "src/core/def/class_format.h"
-#include "src/core/type/std.h"
+#include "src/var/std.h"
 #include "src/core/type/string.h"
 #include "src/core/type/vector4.h"
 #include "src/core/type/vertex.h"

@@ -4,7 +4,7 @@
 //#include <math.h>
 //#include <stdexcept>
 //
-//#include "src/core/type/std.h"
+//#include "src/var/std.h"
 //#include "src/core/math/const.h"
 //
 //
@@ -13,7 +13,7 @@
 //    template <int32 size>
 //    struct vector;
 //    template <int32 size>
-//    const real32 length(const vector<size>& vec);
+//    const fp32 length(const vector<size>& vec);
 //    template <int32 size>
 //    const vector<size> normalize(const vector<size>& vec);
 //    template <int32 size>
@@ -21,28 +21,28 @@
 //    template <int32 size>
 //    const vector<size> operator-(const vector<size>& vec_a, const vector<size>& vec_b);
 //    template <int32 size>
-//    const vector<size> operator+(const vector<size>& vec, const real32& num);
+//    const vector<size> operator+(const vector<size>& vec, const fp32& num);
 //    template <int32 size>
-//    const vector<size> operator-(const vector<size>& vec, const real32& num);
+//    const vector<size> operator-(const vector<size>& vec, const fp32& num);
 //    template <int32 size>
-//    const vector<size> operator*(const vector<size>& vec, const real32& num);
+//    const vector<size> operator*(const vector<size>& vec, const fp32& num);
 //    template <int32 size>
-//    const vector<size> operator/(const vector<size>& vec, const real32& num);
+//    const vector<size> operator/(const vector<size>& vec, const fp32& num);
 //    template <int32 size>
-//    const vector<size> operator+(const real32& num, const vector<size>& vec);
+//    const vector<size> operator+(const fp32& num, const vector<size>& vec);
 //    template <int32 size>
-//    const vector<size> operator-(const real32& num, const vector<size>& vec);
+//    const vector<size> operator-(const fp32& num, const vector<size>& vec);
 //    template <int32 size>
-//    const vector<size> operator*(const real32& num, const vector<size>& vec);
+//    const vector<size> operator*(const fp32& num, const vector<size>& vec);
 //    template <int32 size>
-//    const vector<size> operator/(const real32& num, const vector<size>& vec);
+//    const vector<size> operator/(const fp32& num, const vector<size>& vec);
 //    template <int32 size>
 //    bool operator==(const vector<size>& vec_a, const vector<size>& vec_b);
 //    template <int32 size>
 //    bool operator!=(const vector<size>& vec_a, const vector<size>& vec_b);
 //    // Scalar product
 //    template <int32 size>
-//    const real32 operator*(const vector<size>& vec_a, const vector<size>& vec_b);
+//    const fp32 operator*(const vector<size>& vec_a, const vector<size>& vec_b);
 //    template <int32 size>
 //    std::istream& operator>>(std::istream& in_stream, vector<size>& vec);
 //    template <int32 size>
@@ -52,7 +52,7 @@
 //    template <int32 size>
 //    struct vector
 //    {
-//        real32 data[size];
+//        fp32 data[size];
 //
 //        vector();
 //        vector(vector&& src) = default;
@@ -60,25 +60,25 @@
 //
 //        vector& operator=(vector&& src) = default;
 //        vector& operator=(const vector& src) = default;
-//        real32& operator[](const int32 index);
-//        const real32& operator[](const int32 index) const;
+//        fp32& operator[](const int32 index);
+//        const fp32& operator[](const int32 index) const;
 //
 //        ~vector() = default;
 //
 //        friend const vector<size> operator+ <size> (const vector<size>& vec_a, const vector<size>& vec_b);
 //        friend const vector<size> operator- <size> (const vector<size>& vec_a, const vector<size>& vec_b);
-//        friend const vector<size> operator+ <size> (const vector<size>& vec, const real32& num);
-//        friend const vector<size> operator- <size> (const vector<size>& vec, const real32& num);
-//        friend const vector<size> operator* <size> (const vector<size>& vec, const real32& num);
-//        friend const vector<size> operator/ <size> (const vector<size>& vec, const real32& num);
-//        friend const vector<size> operator+ <size> (const real32& num, const vector<size>& vec);
-//        friend const vector<size> operator- <size> (const real32& num, const vector<size>& vec);
-//        friend const vector<size> operator* <size> (const real32& num, const vector<size>& vec);
-//        friend const vector<size> operator/ <size> (const real32& num, const vector<size>& vec);
+//        friend const vector<size> operator+ <size> (const vector<size>& vec, const fp32& num);
+//        friend const vector<size> operator- <size> (const vector<size>& vec, const fp32& num);
+//        friend const vector<size> operator* <size> (const vector<size>& vec, const fp32& num);
+//        friend const vector<size> operator/ <size> (const vector<size>& vec, const fp32& num);
+//        friend const vector<size> operator+ <size> (const fp32& num, const vector<size>& vec);
+//        friend const vector<size> operator- <size> (const fp32& num, const vector<size>& vec);
+//        friend const vector<size> operator* <size> (const fp32& num, const vector<size>& vec);
+//        friend const vector<size> operator/ <size> (const fp32& num, const vector<size>& vec);
 //        friend bool operator== <size> (const vector<size>& vec_a, const vector<size>& vec_b);
 //        friend bool operator!= <size> (const vector<size>& vec_a, const vector<size>& vec_b);
 //        // Scalar product
-//        friend const real32 operator* <size> (const vector<size>& vec_a, const vector<size>& vec_b);
+//        friend const fp32 operator* <size> (const vector<size>& vec_a, const vector<size>& vec_b);
 //        friend std::istream& operator>> <size> (std::istream& in_stream, vector<size>& vec);
 //        friend std::ostream& operator<< <size> (std::ostream& out_stream, const vector<size>& vec);
 //    };
@@ -98,20 +98,20 @@
 //    }
 //
 //    template <int32 size>
-//    real32& vector<size>::operator[](const int32 index)
+//    fp32& vector<size>::operator[](const int32 index)
 //    {
 //        return data[(size + index % size) % size];
 //    }
 //
 //    template <int32 size>
-//    const real32& vector<size>::operator[](const int32 index) const
+//    const fp32& vector<size>::operator[](const int32 index) const
 //    {
 //        return data[(size + index % size) % size];
 //    }
 //
 //
 //    template <int32 size>
-//    const real32 length(const vector<size>& vec)
+//    const fp32 length(const vector<size>& vec)
 //    {
 //        return sqrtf(vec * vec);
 //    }
@@ -119,7 +119,7 @@
 //    template <int32 size>
 //    const vector<size> normalize(const vector<size>& vec)
 //    {
-//        real32 vec_length = length(vec);
+//        fp32 vec_length = length(vec);
 //        if (vec_length < eps)
 //        {
 //            throw std::invalid_argument("Vector length is zero - division by zero");
@@ -149,7 +149,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator+(const vector<size>& vec, const real32& num)
+//    const vector<size> operator+(const vector<size>& vec, const fp32& num)
 //    {
 //        vector<size> vec_res;
 //        for (int32 i = 0; i < size; ++i)
@@ -160,7 +160,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator-(const vector<size>& vec, const real32& num)
+//    const vector<size> operator-(const vector<size>& vec, const fp32& num)
 //    {
 //        vector<size> vec_res;
 //        for (int32 i = 0; i < size; ++i)
@@ -171,7 +171,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator*(const vector<size>& vec, const real32& num)
+//    const vector<size> operator*(const vector<size>& vec, const fp32& num)
 //    {
 //        vector<size> vec_res;
 //        for (int32 i = 0; i < size; ++i)
@@ -182,7 +182,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator/(const vector<size>& vec, const real32& num)
+//    const vector<size> operator/(const vector<size>& vec, const fp32& num)
 //    {
 //        if (num < eps)
 //        {
@@ -197,7 +197,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator+(const real32& num, const vector<size>& vec)
+//    const vector<size> operator+(const fp32& num, const vector<size>& vec)
 //    {
 //        vector<size> vec_res;
 //        for (int32 i = 0; i < size; ++i)
@@ -208,7 +208,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator-(const real32& num, const vector<size>& vec)
+//    const vector<size> operator-(const fp32& num, const vector<size>& vec)
 //    {
 //        vector<size> vec_res;
 //        for (int32 i = 0; i < size; ++i)
@@ -219,7 +219,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator*(const real32& num, const vector<size>& vec)
+//    const vector<size> operator*(const fp32& num, const vector<size>& vec)
 //    {
 //        vector<size> vec_res;
 //        for (int32 i = 0; i < size; ++i)
@@ -230,7 +230,7 @@
 //    }
 //
 //    template <int32 size>
-//    const vector<size> operator/(const real32& num, const vector<size>& vec)
+//    const vector<size> operator/(const fp32& num, const vector<size>& vec)
 //    {
 //        vector<size> vec_res;
 //        for (int32 i = 0; i < size; ++i)
@@ -265,9 +265,9 @@
 //
 //    // Scalar product
 //    template <int32 size>
-//    const real32 operator*(const vector<size>& vec_a, const vector<size>& vec_b)
+//    const fp32 operator*(const vector<size>& vec_a, const vector<size>& vec_b)
 //    {
-//        real32 result = 0.0f;
+//        fp32 result = 0.0f;
 //        for (int32 i = 0; i < size; ++i)
 //        {
 //            result += vec_a[i] * vec_b[i];

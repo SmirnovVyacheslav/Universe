@@ -201,7 +201,6 @@
     <ClInclude Include="engine\src\core\type\array.h" />
     <ClInclude Include="engine\src\core\type\map.h" />
     <ClInclude Include="engine\src\core\type\matrix4.h" />
-    <ClInclude Include="engine\src\core\type\std.h" />
     <ClInclude Include="engine\src\core\type\string.h" />
     <ClInclude Include="engine\src\core\type\vector.h" />
     <ClInclude Include="engine\src\core\type\vector3.h" />

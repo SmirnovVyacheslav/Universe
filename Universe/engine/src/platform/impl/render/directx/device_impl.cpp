@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "src/platform/impl/render/directx/device_impl.h"
 
-#include "src/core/type/std.h"
+#include "src/var/std.h"
 #include "src/core/type/matrix4.h"
 #include "src/core/type/vector3.h"
 #include "src/core/type/vertex.h"
@@ -188,8 +188,8 @@ namespace engine::platform::render::directx
     {
         D3D11_VIEWPORT view_port;
 
-        view_port.Width = static_cast<real32>(render_cfg.width);
-        view_port.Height = static_cast<real32>(render_cfg.height);
+        view_port.Width = static_cast<fp32>(render_cfg.width);
+        view_port.Height = static_cast<fp32>(render_cfg.height);
         view_port.MinDepth = 0.0f;
         view_port.MaxDepth = 1.0f;
         view_port.TopLeftX = 0;

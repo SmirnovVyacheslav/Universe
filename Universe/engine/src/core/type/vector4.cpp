@@ -7,7 +7,7 @@ namespace engine
     vector4::vector4() : x(0.0f), y(0.0f), z(0.0f), w(0.0f)
     {}
 
-    vector4::vector4(real32 x, real32 y, real32 z, real32 w) : x(x), y(y), z(z), w(w)
+    vector4::vector4(fp32 x, fp32 y, fp32 z, fp32 w) : x(x), y(y), z(z), w(w)
     {}
 
     vector4::vector4(const vector<4> vec)
@@ -15,23 +15,23 @@ namespace engine
         data = vec;
     }
 
-    vector4::operator const real32* () const
+    vector4::operator const fp32* () const
     {
-        return reinterpret_cast<const real32*>(this);
+        return reinterpret_cast<const fp32*>(this);
     }
 
-    real32& vector4::operator[](const int32 index)
-    {
-       return data[index];
-    }
-
-    const real32& vector4::operator[](const int32 index) const
+    fp32& vector4::operator[](const int32 index)
     {
        return data[index];
     }
 
+    const fp32& vector4::operator[](const int32 index) const
+    {
+       return data[index];
+    }
 
-    const real32 length(const vector4& vec)
+
+    const fp32 length(const vector4& vec)
     {
         return length(vec.data);
     }
@@ -51,42 +51,42 @@ namespace engine
         return vec_a.data - vec_b.data;
     }
 
-    const vector4 operator+(const vector4& vec, const real32& num) 
+    const vector4 operator+(const vector4& vec, const fp32& num) 
     {
         return vec.data + num;
     }
 
-    const vector4 operator-(const vector4& vec, const real32& num)
+    const vector4 operator-(const vector4& vec, const fp32& num)
     {
         return vec.data - num;
     }
 
-    const vector4 operator*(const vector4& vec, const real32& num)
+    const vector4 operator*(const vector4& vec, const fp32& num)
     {
         return vec.data * num;
     }
 
-    const vector4 operator/(const vector4& vec, const real32& num)
+    const vector4 operator/(const vector4& vec, const fp32& num)
     {
         return vec.data / num;
     }
 
-    const vector4 operator+(const real32& num, const vector4& vec)
+    const vector4 operator+(const fp32& num, const vector4& vec)
     {
         return num + vec.data;
     }
 
-    const vector4 operator-(const real32& num, const vector4& vec)
+    const vector4 operator-(const fp32& num, const vector4& vec)
     {
         return num - vec.data;
     }
 
-    const vector4 operator*(const real32& num, const vector4& vec)
+    const vector4 operator*(const fp32& num, const vector4& vec)
     {
         return num * vec.data;
     }
 
-    const vector4 operator/(const real32& num, const vector4& vec)
+    const vector4 operator/(const fp32& num, const vector4& vec)
     {
         return num / vec.data;
     }
@@ -102,7 +102,7 @@ namespace engine
     }
 
     // Scalar product
-    const real32 operator*(const vector4& vec_a, const vector4& vec_b)
+    const fp32 operator*(const vector4& vec_a, const vector4& vec_b)
     {
         return vec_a.data * vec_b.data;
     }

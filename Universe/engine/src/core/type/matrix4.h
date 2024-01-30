@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/type/std.h"
+#include "src/var/std.h"
 #include "src/core/type/vector3.h"
 #include "src/core/type/vector4.h"
 
@@ -33,9 +33,9 @@ namespace engine
 
     const matrix4 matrix_identity();
     const matrix4 matrix_look_at(const vector3& eye, const vector3& target, const vector3& up);
-    const matrix4 matrix_projection(const real32 aspect_ratio);
-    const matrix4 matrix_rotation_x(const real32 angle);
-    const matrix4 matrix_rotation_y(const real32 angle);
-    const matrix4 matrix_rotation_z(const real32 angle);
+    const matrix4 matrix_projection(const fp32 aspect_ratio);
+    const matrix4 matrix_rotation_x(const fp32 angle);
+    const matrix4 matrix_rotation_y(const fp32 angle);
+    const matrix4 matrix_rotation_z(const fp32 angle);
     const matrix4 matrix_transpose(const matrix4& src);
 }

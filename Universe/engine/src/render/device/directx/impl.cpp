@@ -153,8 +153,8 @@ namespace engine::render::device::directx
     {
         D3D11_VIEWPORT view_port;
 
-        view_port.Width = static_cast<real32>(settings_obj.width);
-        view_port.Height = static_cast<real32>(settings_obj.height);
+        view_port.Width = static_cast<fp32>(settings_obj.width);
+        view_port.Height = static_cast<fp32>(settings_obj.height);
         view_port.MinDepth = 0.0f;
         view_port.MaxDepth = 1.0f;
         view_port.TopLeftX = 0;

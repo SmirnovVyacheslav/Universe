@@ -3,7 +3,7 @@
 
 #include "src/core/api/control.h"
 #include "src/core/api/event.h"
-#include "src/core/type/std.h"
+#include "src/var/std.h"
 #include "src/core/type/vertex.h"
 #include "src/platform/api/core.h"
 #include "src/platform/api/render.h"

@@ -5,9 +5,9 @@
 //namespace engine
 //{
 //    const int32 matrix_size = 4;
-//    const real32 fov_angle_y = 1.570796327f;
-//    const real32 projection_front_z = 0.01f;
-//    const real32 projection_back_z = 100.0f;
+//    const fp32 fov_angle_y = 1.570796327f;
+//    const fp32 projection_front_z = 0.01f;
+//    const fp32 projection_back_z = 100.0f;
 //
 //
 //    matrix4::matrix4() :
@@ -57,14 +57,14 @@
 //        };
 //    }
 //
-//    const matrix4 matrix_projection(const real32 aspect_ratio)
+//    const matrix4 matrix_projection(const fp32 aspect_ratio)
 //    {
-//        real32 fov_sin = sinf(0.5f * fov_angle_y);
-//        real32 fov_cos = cosf(0.5f * fov_angle_y);
+//        fp32 fov_sin = sinf(0.5f * fov_angle_y);
+//        fp32 fov_cos = cosf(0.5f * fov_angle_y);
 //
-//        real32 height = fov_cos / fov_sin;
-//        real32 width = height / aspect_ratio;
-//        real32 projection_ratio = projection_back_z / (projection_front_z - projection_back_z);
+//        fp32 height = fov_cos / fov_sin;
+//        fp32 width = height / aspect_ratio;
+//        fp32 projection_ratio = projection_back_z / (projection_front_z - projection_back_z);
 //
 //        return
 //        {
@@ -75,10 +75,10 @@
 //        };
 //    }
 //
-//    const matrix4 matrix_rotation_x(const real32 angle)
+//    const matrix4 matrix_rotation_x(const fp32 angle)
 //    {
-//        real32 sin_angle = sinf(angle);
-//        real32 cos_angle = cosf(angle);
+//        fp32 sin_angle = sinf(angle);
+//        fp32 cos_angle = cosf(angle);
 //
 //        return
 //        {
@@ -89,10 +89,10 @@
 //        };
 //    }
 //
-//    const matrix4 matrix_rotation_y(const real32 angle)
+//    const matrix4 matrix_rotation_y(const fp32 angle)
 //    {
-//        real32 sin_angle = sinf(angle);
-//        real32 cos_angle = cosf(angle);
+//        fp32 sin_angle = sinf(angle);
+//        fp32 cos_angle = cosf(angle);
 //
 //        return
 //        {
@@ -103,10 +103,10 @@
 //        };
 //    }
 //
-//    const matrix4 matrix_rotation_z(const real32 angle)
+//    const matrix4 matrix_rotation_z(const fp32 angle)
 //    {
-//        real32 sin_angle = sinf(angle);
-//        real32 cos_angle = cosf(angle);
+//        fp32 sin_angle = sinf(angle);
+//        fp32 cos_angle = cosf(angle);
 //
 //        return
 //        {

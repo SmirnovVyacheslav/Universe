@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/type/std.h"
+#include "src/var/std.h"
 #include "src/core/type/string.h"
 
 
