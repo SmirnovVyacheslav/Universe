@@ -2,7 +2,7 @@
 #pragma once
 #include "src/core/def/abstract_class.h"
 #include "src/var/std.h"
-#include "src/core/type/string.h"
+#include "src/var/string.h"
 
 
 namespace engine::platform::render::shader

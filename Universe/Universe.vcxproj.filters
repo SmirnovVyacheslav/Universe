@@ -138,9 +138,6 @@
     <ClCompile Include="engine\src\core\type\matrix4.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\type\string.cpp">
-      <Filter>src\engine\core\type</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\type\vector3.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
@@ -273,9 +270,6 @@
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\matrix4.h">
-      <Filter>src\engine\core\type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\type\string.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\vector.h">

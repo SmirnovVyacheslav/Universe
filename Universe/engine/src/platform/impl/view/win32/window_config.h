@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/core/type/string.h"
+#include "src/var/string.h"
 
 #ifdef platform_windows
 #include <windows.h>

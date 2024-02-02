@@ -155,7 +155,6 @@
     <ClCompile Include="engine\src\core\impl\core\core.cpp" />
     <ClCompile Include="engine\src\core\impl\event\event.cpp" />
     <ClCompile Include="engine\src\core\type\matrix4.cpp" />
-    <ClCompile Include="engine\src\core\type\string.cpp" />
     <ClCompile Include="engine\src\core\type\vector3.cpp" />
     <ClCompile Include="engine\src\core\type\vector4.cpp" />
     <ClCompile Include="engine\src\core\type\vertex.cpp" />
@@ -201,7 +200,6 @@
     <ClInclude Include="engine\src\core\type\array.h" />
     <ClInclude Include="engine\src\core\type\map.h" />
     <ClInclude Include="engine\src\core\type\matrix4.h" />
-    <ClInclude Include="engine\src\core\type\string.h" />
     <ClInclude Include="engine\src\core\type\vector.h" />
     <ClInclude Include="engine\src\core\type\vector3.h" />
     <ClInclude Include="engine\src\core\type\vector4.h" />

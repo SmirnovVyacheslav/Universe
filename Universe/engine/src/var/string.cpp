@@ -7,28 +7,37 @@ namespace engine
     uint32 sid = 0;
 
 
-    string::string() : id(sid++)
+    string::string() : id(sid++), str(u8"")
     {}
 
-    string::string(const char* value) :
-        id(string_map::add(std::u8string(reinterpret_cast<const char8_t*>(value))))
+    string::string(const char* str) :
+        id(sid++),
+        str(std::u8string(reinterpret_cast<const char8_t*>(str)))
     {}
 
-    string::string(const std::string& value) :
-        id(string_map::add(std::u8string(reinterpret_cast<const char8_t*>(value.c_str()))))
+    string::string(const std::string& str) :
+        id(sid++),
+        str(std::u8string(reinterpret_cast<const char8_t*>(str.c_str())))
     {}
 
-    string::string(const char8_t* value) :
-        id(string_map::add(std::u8string(value)))
+    string::string(const char8_t* str) :
+        id(sid++),
+        str(std::u8string(str))
     {}
 
-    string::string(const std::u8string& value) :
-        id(string_map::add(value))
+    string::string(const std::u8string& str) :
+        id(sid++),
+        str(str)
     {}
+
+    const char* string::c_str() const
+    {
+        return reinterpret_cast<const char*>(str.c_str());
+    }
 
     std::string string::s_str() const
     {
-        return std::string(reinterpret_cast<const char*>(string_map::get(id).c_str()));
+        return std::string(c_str());
     }
 
     std::wstring string::w_str() const
@@ -42,7 +51,7 @@ namespace engine
 
     std::u8string string::u8_str() const
     {
-        return string_map::get(id);
+        return str;
     }
 
     std::u16string string::u16_str() const
@@ -70,7 +79,7 @@ namespace engine
     std::u32string string::u32_str() const
     {
         std::u32string utf32;
-        std::u8string utf8 = string_map::get(id);
+        std::u8string utf8 = str;
 
         for (size_t i = 0; i < utf8.length(); ++i)
         {
@@ -134,7 +143,7 @@ namespace engine
     {
         std::string std_str;
         in_stream >> std_str;
-        str = string(reinterpret_cast<const char8_t*>(std_str.c_str()));
+        str = string(std_str);
         return in_stream;
     }
 

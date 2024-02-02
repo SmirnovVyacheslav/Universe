@@ -13,14 +13,14 @@ namespace engine
     {
     public:
         string();
-        string(const char* value);
-        string(const std::string& value);
-        string(const char8_t* value);
-        string(const std::u8string& value);
+        string(const char* str);
+        string(const std::string& str);
+        string(const char8_t* str);
+        string(const std::u8string& str);
         string(string&& src) = default;
         string(const string& src) = default;
 
-        char* c_str() const;
+        const char* c_str() const;
         std::string s_str() const;
         std::wstring w_str() const;
         std::u8string u8_str() const;
@@ -33,13 +33,7 @@ namespace engine
         ~string() = default;
     private:
         uint32 id = 0;
-
-        char* c_string;
-        std::string s_string;
-        std::wstring w_string;
-        std::u8string u8_string;
-        std::u16string u16_string;
-        std::u32string u32_string;
+        std::u8string str;
 
         friend struct std::hash<engine::string>;
         friend bool operator==(const string& str_a, const string& str_b);
