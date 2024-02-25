@@ -2,7 +2,7 @@
 #pragma once
 #include "src/render/device/api.h"
 #include "src/render/settings/api.h"
-#include "src/core/type/vector3.h"
+#include "src/var/vector3.h"
 #include "src/core/type/matrix4.h"
 
 #ifdef platform_windows

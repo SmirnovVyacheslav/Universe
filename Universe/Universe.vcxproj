@@ -155,8 +155,6 @@
     <ClCompile Include="engine\src\core\impl\core\core.cpp" />
     <ClCompile Include="engine\src\core\impl\event\event.cpp" />
     <ClCompile Include="engine\src\core\type\matrix4.cpp" />
-    <ClCompile Include="engine\src\core\type\vector3.cpp" />
-    <ClCompile Include="engine\src\core\type\vector4.cpp" />
     <ClCompile Include="engine\src\core\type\vertex.cpp" />
     <ClCompile Include="engine\src\platform\impl\core\core.cpp" />
     <ClCompile Include="engine\src\platform\impl\event\event.cpp" />
@@ -195,14 +193,10 @@
     <ClInclude Include="engine\src\core\api\event.h" />
     <ClInclude Include="engine\src\core\def\abstract_class.h" />
     <ClInclude Include="engine\src\core\def\class_format.h" />
-    <ClInclude Include="engine\src\core\math\const.h" />
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\type\array.h" />
     <ClInclude Include="engine\src\core\type\map.h" />
     <ClInclude Include="engine\src\core\type\matrix4.h" />
-    <ClInclude Include="engine\src\core\type\vector.h" />
-    <ClInclude Include="engine\src\core\type\vector3.h" />
-    <ClInclude Include="engine\src\core\type\vector4.h" />
     <ClInclude Include="engine\src\core\type\vertex.h" />
     <ClInclude Include="engine\src\define\abstract.h" />
     <ClInclude Include="engine\src\platform\api\core.h" />
@@ -236,6 +230,7 @@
     <ClInclude Include="engine\src\render\settings\api.h" />
     <ClInclude Include="engine\src\render\settings\obj.h" />
     <ClInclude Include="engine\src\var\array.h" />
+    <ClInclude Include="engine\src\var\const.h" />
     <ClInclude Include="engine\src\var\map.h" />
     <ClInclude Include="engine\src\var\matrix4.h" />
     <ClInclude Include="engine\src\var\std.h" />

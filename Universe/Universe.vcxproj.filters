@@ -22,9 +22,6 @@
     <Filter Include="src\engine\core">
       <UniqueIdentifier>{99e039be-9900-40e5-8e68-34473bd4a681}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\core\math">
-      <UniqueIdentifier>{bfe4bcb3-b9fa-43f3-9855-d9f0ca954060}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\core\memory">
       <UniqueIdentifier>{9e96e594-60bb-4bb7-8df3-b2c358ff274c}</UniqueIdentifier>
     </Filter>
@@ -138,12 +135,6 @@
     <ClCompile Include="engine\src\core\type\matrix4.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\type\vector3.cpp">
-      <Filter>src\engine\core\type</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\type\vector4.cpp">
-      <Filter>src\engine\core\type</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\type\vertex.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
@@ -230,9 +221,6 @@
     <ClInclude Include="game\src\game.h">
       <Filter>src\game</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\math\const.h">
-      <Filter>src\engine\core\math</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\def\abstract_class.h">
       <Filter>src\engine\core\def</Filter>
     </ClInclude>
@@ -270,15 +258,6 @@
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\matrix4.h">
-      <Filter>src\engine\core\type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\type\vector.h">
-      <Filter>src\engine\core\type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\type\vector3.h">
-      <Filter>src\engine\core\type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\type\vector4.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\vertex.h">
@@ -384,6 +363,9 @@
       <Filter>src\engine\var</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\var\map.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\const.h">
       <Filter>src\engine\var</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/render/camera/api.h"
-#include "src/core/type/vector3.h"
+#include "src/var/vector3.h"
 #include "src/core/type/matrix4.h"
 
 

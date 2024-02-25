@@ -4,7 +4,7 @@
 #include "src/core/def/class_format.h"
 #include "src/var/std.h"
 #include "src/var/string.h"
-#include "src/core/type/vector4.h"
+#include "src/var/vector4.h"
 #include "src/core/type/vertex.h"
 #include "src/platform/api/render.h"
 #include "src/platform/api/render/shader.h"

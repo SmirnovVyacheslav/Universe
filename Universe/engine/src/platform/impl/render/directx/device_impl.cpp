@@ -3,7 +3,7 @@
 
 #include "src/var/std.h"
 #include "src/core/type/matrix4.h"
-#include "src/core/type/vector3.h"
+#include "src/var/vector3.h"
 #include "src/core/type/vertex.h"
 #include "src/platform/api/view.h"
 #include "src/platform/api/render/shader.h"
