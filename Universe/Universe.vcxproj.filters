@@ -248,12 +248,6 @@
     <ClInclude Include="engine\src\platform\impl\render\directx\device_impl.h">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\core\type\array.h">
-      <Filter>src\engine\core\type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\type\map.h">
-      <Filter>src\engine\core\type</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\core\type\vertex.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>

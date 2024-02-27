@@ -4,7 +4,7 @@
 
 #include "src/core/def/class_format.h"
 #include "src/var/std.h"
-#include "src/core/type/array.h"
+#include "src/var/array.h"
 
 
 namespace engine

@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/platform/api/render/vertex_buff.h"
-#include "src/core/type/map.h"
+#include "src/var/map.h"
 
 #include "src/platform/impl/render/device.h"
 
