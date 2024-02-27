@@ -2,7 +2,7 @@
 #pragma once
 #include "src/core/def/abstract_class.h"
 #include "src/core/def/class_format.h"
-#include "src/core/type/matrix4.h"
+#include "src/var/matrix4.h"
 #include "src/platform/api/render/shader.h"
 
 #ifdef platform_windows

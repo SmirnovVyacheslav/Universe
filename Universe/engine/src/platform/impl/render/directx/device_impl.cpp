@@ -2,7 +2,7 @@
 #include "src/platform/impl/render/directx/device_impl.h"
 
 #include "src/var/std.h"
-#include "src/core/type/matrix4.h"
+#include "src/var/matrix4.h"
 #include "src/var/vector3.h"
 #include "src/core/type/vertex.h"
 #include "src/platform/api/view.h"

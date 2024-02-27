@@ -2,7 +2,7 @@
 #pragma once
 #include "src/render/camera/api.h"
 #include "src/var/vector3.h"
-#include "src/core/type/matrix4.h"
+#include "src/var/matrix4.h"
 
 
 namespace engine::render::camera

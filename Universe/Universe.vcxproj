@@ -154,7 +154,6 @@
     <ClCompile Include="engine\src\core\impl\control\control.cpp" />
     <ClCompile Include="engine\src\core\impl\core\core.cpp" />
     <ClCompile Include="engine\src\core\impl\event\event.cpp" />
-    <ClCompile Include="engine\src\core\type\matrix4.cpp" />
     <ClCompile Include="engine\src\core\type\vertex.cpp" />
     <ClCompile Include="engine\src\platform\impl\core\core.cpp" />
     <ClCompile Include="engine\src\platform\impl\event\event.cpp" />
@@ -196,7 +195,6 @@
     <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
     <ClInclude Include="engine\src\core\type\array.h" />
     <ClInclude Include="engine\src\core\type\map.h" />
-    <ClInclude Include="engine\src\core\type\matrix4.h" />
     <ClInclude Include="engine\src\core\type\vertex.h" />
     <ClInclude Include="engine\src\define\abstract.h" />
     <ClInclude Include="engine\src\platform\api\core.h" />

@@ -3,7 +3,7 @@
 #include "src/render/device/api.h"
 #include "src/render/settings/api.h"
 #include "src/var/vector3.h"
-#include "src/core/type/matrix4.h"
+#include "src/var/matrix4.h"
 
 #ifdef platform_windows
 #include <d3d11.h>

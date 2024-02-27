@@ -132,9 +132,6 @@
     <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\type\matrix4.cpp">
-      <Filter>src\engine\core\type</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\type\vertex.cpp">
       <Filter>src\engine\core\type</Filter>
     </ClCompile>
@@ -255,9 +252,6 @@
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\map.h">
-      <Filter>src\engine\core\type</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\type\matrix4.h">
       <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\type\vertex.h">
