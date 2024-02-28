@@ -22,17 +22,11 @@
     <Filter Include="src\engine\core">
       <UniqueIdentifier>{99e039be-9900-40e5-8e68-34473bd4a681}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\core\memory">
-      <UniqueIdentifier>{9e96e594-60bb-4bb7-8df3-b2c358ff274c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\platfom">
       <UniqueIdentifier>{abdae529-326a-4bb4-a50a-d0eba00d47e2}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\core\def">
       <UniqueIdentifier>{14e14479-d7a1-4500-80f8-a84b8761f703}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\core\type">
-      <UniqueIdentifier>{ade26dc7-f97d-4199-b274-d4468ef1a43e}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\platfom\api">
       <UniqueIdentifier>{e7259197-b0a8-4ba9-8b69-b81fb00a188d}</UniqueIdentifier>
@@ -132,9 +126,6 @@
     <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\core\type\vertex.cpp">
-      <Filter>src\engine\core\type</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\core\impl\core\core.cpp">
       <Filter>src\engine\core\impl\core</Filter>
     </ClCompile>
@@ -210,11 +201,11 @@
     <ClCompile Include="engine\src\var\matrix4.cpp">
       <Filter>src\engine\var</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\var\vertex.cpp">
+      <Filter>src\engine\var</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\src\core\memory\smart_ptr.h">
-      <Filter>src\engine\core\memory</Filter>
-    </ClInclude>
     <ClInclude Include="game\src\game.h">
       <Filter>src\game</Filter>
     </ClInclude>
@@ -247,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="engine\src\platform\impl\render\directx\device_impl.h">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\type\vertex.h">
-      <Filter>src\engine\core\type</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\core\def\class_format.h">
       <Filter>src\engine\core\def</Filter>
@@ -354,6 +342,12 @@
       <Filter>src\engine\var</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\var\const.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\vertex.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\smart_ptr.h">
       <Filter>src\engine\var</Filter>
     </ClInclude>
   </ItemGroup>

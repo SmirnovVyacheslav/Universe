@@ -4,7 +4,7 @@
 #include "src/var/std.h"
 #include "src/var/matrix4.h"
 #include "src/var/vector3.h"
-#include "src/core/type/vertex.h"
+#include "src/var/vertex.h"
 #include "src/platform/api/view.h"
 #include "src/platform/api/render/shader.h"
 #include "src/platform/api/render/vertex_buff.h"

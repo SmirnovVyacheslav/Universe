@@ -1,5 +1,5 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/core/type/vertex.h"
+#include "src/var/vertex.h"
 
 
 namespace engine

@@ -1,10 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include <stdexcept>
-
-#include "src/core/def/class_format.h"
 #include "src/var/std.h"
 #include "src/var/array.h"
+
+#include <stdexcept>
 
 
 namespace engine
@@ -18,7 +17,7 @@ namespace engine
     template<typename T>
     class lead_ptr
     {
-        ____________________public____________________
+    public:
         lead_ptr() = default;
         lead_ptr(lead_ptr&& src) = default;
         lead_ptr(const lead_ptr & src) = delete;
@@ -35,7 +34,7 @@ namespace engine
         T& operator*();
 
         ~lead_ptr();
-        ____________________private___________________
+    private:
         T* obj_ptr = nullptr;
         array<slave_ptr<T>*> slave_ptr_array;
 
@@ -50,7 +49,7 @@ namespace engine
     template<typename T>
     class slave_ptr
     {
-        ____________________public____________________
+    public:
         slave_ptr();
         slave_ptr(slave_ptr&& src);
         slave_ptr(const slave_ptr& src);
@@ -60,7 +59,7 @@ namespace engine
         T* operator->();
 
         ~slave_ptr();
-        ____________________private___________________
+    private:
         lead_ptr<T>* obj_ptr = nullptr;
 
         slave_ptr(lead_ptr<T>* obj_ptr);

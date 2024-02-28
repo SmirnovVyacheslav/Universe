@@ -154,7 +154,6 @@
     <ClCompile Include="engine\src\core\impl\control\control.cpp" />
     <ClCompile Include="engine\src\core\impl\core\core.cpp" />
     <ClCompile Include="engine\src\core\impl\event\event.cpp" />
-    <ClCompile Include="engine\src\core\type\vertex.cpp" />
     <ClCompile Include="engine\src\platform\impl\core\core.cpp" />
     <ClCompile Include="engine\src\platform\impl\event\event.cpp" />
     <ClCompile Include="engine\src\platform\impl\event\queue.cpp" />
@@ -183,6 +182,7 @@
     <ClCompile Include="engine\src\var\string.cpp" />
     <ClCompile Include="engine\src\var\vector3.cpp" />
     <ClCompile Include="engine\src\var\vector4.cpp" />
+    <ClCompile Include="engine\src\var\vertex.cpp" />
     <ClCompile Include="game\src\game.cpp" />
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
@@ -192,8 +192,6 @@
     <ClInclude Include="engine\src\core\api\event.h" />
     <ClInclude Include="engine\src\core\def\abstract_class.h" />
     <ClInclude Include="engine\src\core\def\class_format.h" />
-    <ClInclude Include="engine\src\core\memory\smart_ptr.h" />
-    <ClInclude Include="engine\src\core\type\vertex.h" />
     <ClInclude Include="engine\src\define\abstract.h" />
     <ClInclude Include="engine\src\platform\api\core.h" />
     <ClInclude Include="engine\src\platform\api\event.h" />
@@ -229,11 +227,13 @@
     <ClInclude Include="engine\src\var\const.h" />
     <ClInclude Include="engine\src\var\map.h" />
     <ClInclude Include="engine\src\var\matrix4.h" />
+    <ClInclude Include="engine\src\var\smart_ptr.h" />
     <ClInclude Include="engine\src\var\std.h" />
     <ClInclude Include="engine\src\var\string.h" />
     <ClInclude Include="engine\src\var\vector.h" />
     <ClInclude Include="engine\src\var\vector3.h" />
     <ClInclude Include="engine\src\var\vector4.h" />
+    <ClInclude Include="engine\src\var\vertex.h" />
     <ClInclude Include="game\src\game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

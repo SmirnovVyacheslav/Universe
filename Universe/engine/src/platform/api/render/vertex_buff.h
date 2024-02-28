@@ -3,7 +3,7 @@
 #include "src/core/def/abstract_class.h"
 #include "src/var/std.h"
 #include "src/var/string.h"
-#include "src/core/type/vertex.h"
+#include "src/var/vertex.h"
 
 
 namespace engine::platform::render::vertex_buff
