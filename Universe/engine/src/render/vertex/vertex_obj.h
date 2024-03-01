@@ -1,21 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 #include "src/def/abstract.h"
-#include "src/var/string.h"
+#include "src/var/std.h"
 
 
-namespace engine::render::device
+namespace engine::render::vertex
 {
     class obj
     {
         abstract
 
-        virtual void draw() = 0;
+        int32 id;
     };
-
-
-    void init();
-    void term();
-
-    string type();
 }

@@ -76,9 +76,6 @@
     <Filter Include="src\engine\render">
       <UniqueIdentifier>{f6a7d103-9891-4082-a14e-2dd4a6a4deeb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\define">
-      <UniqueIdentifier>{2f69fd2a-4e8d-42b1-a193-36a5dc2c22e5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render\settings">
       <UniqueIdentifier>{76ca58a2-ec1f-4bbd-a2fc-f35764d04789}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,12 @@
     </Filter>
     <Filter Include="src\engine\var">
       <UniqueIdentifier>{b176be06-e1a2-4cc8-8b74-06f7a8914279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\vertex">
+      <UniqueIdentifier>{a1be1a35-37b5-4bc1-ba60-4e37c4117e89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\def">
+      <UniqueIdentifier>{8e136ba3-d254-48a1-a5d9-591952e1bcf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +207,9 @@
     <ClCompile Include="engine\src\var\vertex.cpp">
       <Filter>src\engine\var</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\render\vertex\vertex_api.cpp">
+      <Filter>src\engine\render\vertex</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\game.h">
@@ -281,9 +287,6 @@
     <ClInclude Include="engine\src\platform\api\render\vertex_buff.h">
       <Filter>src\engine\platfom\api\render</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\define\abstract.h">
-      <Filter>src\engine\define</Filter>
-    </ClInclude>
     <ClInclude Include="engine\src\render\api.h">
       <Filter>src\engine\render</Filter>
     </ClInclude>
@@ -349,6 +352,15 @@
     </ClInclude>
     <ClInclude Include="engine\src\var\smart_ptr.h">
       <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\vertex\vertex_api.h">
+      <Filter>src\engine\render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\vertex\vertex_obj.h">
+      <Filter>src\engine\render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\def\abstract.h">
+      <Filter>src\engine\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
