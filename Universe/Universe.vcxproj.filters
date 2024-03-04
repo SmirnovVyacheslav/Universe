@@ -103,6 +103,9 @@
     <Filter Include="src\engine\def">
       <UniqueIdentifier>{8e136ba3-d254-48a1-a5d9-591952e1bcf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\vertex\directx">
+      <UniqueIdentifier>{96fbedeb-2021-4aac-905c-2671efe9d7b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -209,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\render\vertex\vertex_api.cpp">
       <Filter>src\engine\render\vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\vertex\directx\vertex_impl.cpp">
+      <Filter>src\engine\render\vertex\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\def\abstract.h">
       <Filter>src\engine\def</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\vertex\directx\vertex_impl.h">
+      <Filter>src\engine\render\vertex\directx</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
