@@ -106,6 +106,12 @@
     <Filter Include="src\engine\render\vertex\directx">
       <UniqueIdentifier>{96fbedeb-2021-4aac-905c-2671efe9d7b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\shader">
+      <UniqueIdentifier>{1433f19c-15e0-4d6a-98c6-7ef437765528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\shader\directx">
+      <UniqueIdentifier>{6c0f2d4d-8845-4657-a2de-16b0b4d32f13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -215,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="engine\src\render\vertex\directx\vertex_impl.cpp">
       <Filter>src\engine\render\vertex\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\shader\shader_api.cpp">
+      <Filter>src\engine\render\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\render\shader\directx\shader_impl.cpp">
+      <Filter>src\engine\render\shader\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +382,15 @@
     </ClInclude>
     <ClInclude Include="engine\src\render\vertex\directx\vertex_impl.h">
       <Filter>src\engine\render\vertex\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\shader\shader_api.h">
+      <Filter>src\engine\render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\shader\shader_obj.h">
+      <Filter>src\engine\render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\render\shader\directx\shader_impl.h">
+      <Filter>src\engine\render\shader\directx</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

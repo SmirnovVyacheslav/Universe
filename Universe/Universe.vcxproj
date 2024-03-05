@@ -178,6 +178,8 @@
     <ClCompile Include="engine\src\render\index\api.cpp" />
     <ClCompile Include="engine\src\render\index\directx\impl.cpp" />
     <ClCompile Include="engine\src\render\settings\api.cpp" />
+    <ClCompile Include="engine\src\render\shader\directx\shader_impl.cpp" />
+    <ClCompile Include="engine\src\render\shader\shader_api.cpp" />
     <ClCompile Include="engine\src\render\vertex\directx\vertex_impl.cpp" />
     <ClCompile Include="engine\src\render\vertex\vertex_api.cpp" />
     <ClCompile Include="engine\src\var\matrix4.cpp" />
@@ -225,6 +227,9 @@
     <ClInclude Include="engine\src\render\index\obj.h" />
     <ClInclude Include="engine\src\render\settings\api.h" />
     <ClInclude Include="engine\src\render\settings\obj.h" />
+    <ClInclude Include="engine\src\render\shader\directx\shader_impl.h" />
+    <ClInclude Include="engine\src\render\shader\shader_api.h" />
+    <ClInclude Include="engine\src\render\shader\shader_obj.h" />
     <ClInclude Include="engine\src\render\vertex\directx\vertex_impl.h" />
     <ClInclude Include="engine\src\render\vertex\vertex_api.h" />
     <ClInclude Include="engine\src\render\vertex\vertex_obj.h" />
