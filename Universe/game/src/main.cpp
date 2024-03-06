@@ -4,8 +4,9 @@
 
 int main(int argc, char* argv[])
 {
-    game_ui::game game_inst;
-    game_inst.run();
+    game::init();
+    game::exec();
+    game::term();
 
     return 0;
 }
