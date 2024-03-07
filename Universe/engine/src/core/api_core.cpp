@@ -1,5 +1,5 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/core/api/core.h"
+#include "src/core/api_core.h"
 
 #include "src/core/api/control.h"
 #include "src/core/api/event.h"

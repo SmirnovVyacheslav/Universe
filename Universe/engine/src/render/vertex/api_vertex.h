@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/render/vertex/vertex_obj.h"
+#include "src/render/vertex/obj_vertex.h"
 
 
 namespace engine::render::vertex
