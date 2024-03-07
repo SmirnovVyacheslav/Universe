@@ -152,8 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\core\api_core.cpp" />
-    <ClCompile Include="engine\src\core\impl\control\control.cpp" />
-    <ClCompile Include="engine\src\core\impl\event\event.cpp" />
+    <ClCompile Include="engine\src\core\control\api_control.cpp" />
+    <ClCompile Include="engine\src\core\event\api_event.cpp" />
     <ClCompile Include="engine\src\platform\impl\core\core.cpp" />
     <ClCompile Include="engine\src\platform\impl\event\event.cpp" />
     <ClCompile Include="engine\src\platform\impl\event\queue.cpp" />
@@ -191,11 +191,11 @@
     <ClCompile Include="game\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\src\core\api\control.h" />
-    <ClInclude Include="engine\src\core\api\event.h" />
     <ClInclude Include="engine\src\core\api_core.h" />
+    <ClInclude Include="engine\src\core\control\api_control.h" />
     <ClInclude Include="engine\src\core\def\abstract_class.h" />
     <ClInclude Include="engine\src\core\def\class_format.h" />
+    <ClInclude Include="engine\src\core\event\api_event.h" />
     <ClInclude Include="engine\src\def\abstract.h" />
     <ClInclude Include="engine\src\platform\api\core.h" />
     <ClInclude Include="engine\src\platform\api\event.h" />

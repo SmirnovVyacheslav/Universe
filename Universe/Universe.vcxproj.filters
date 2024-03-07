@@ -49,21 +49,6 @@
     <Filter Include="src\engine\platfom\impl\render\directx">
       <UniqueIdentifier>{062dfc1d-ff76-4dfc-9bba-58060d0074cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\core\api">
-      <UniqueIdentifier>{5946bb4e-acb0-419e-ad23-a2af6623a954}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\core\impl">
-      <UniqueIdentifier>{180614e8-14c5-417d-b385-ea08b9d3f1c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\core\impl\core">
-      <UniqueIdentifier>{b568fe09-8893-45f7-812e-6fdbd6363e72}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\core\impl\control">
-      <UniqueIdentifier>{0ef88bd4-b408-4827-94af-695e2f7d29bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\core\impl\event">
-      <UniqueIdentifier>{1c951db9-60b2-4622-8ebf-ab11adb7acac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\platfom\impl\event">
       <UniqueIdentifier>{6b00197f-d18b-4662-b20a-a5b9e11a0e26}</UniqueIdentifier>
     </Filter>
@@ -112,6 +97,12 @@
     <Filter Include="src\engine\render\shader\directx">
       <UniqueIdentifier>{6c0f2d4d-8845-4657-a2de-16b0b4d32f13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\core\control">
+      <UniqueIdentifier>{0ef88bd4-b408-4827-94af-695e2f7d29bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\event">
+      <UniqueIdentifier>{1c951db9-60b2-4622-8ebf-ab11adb7acac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\src\main.cpp">
@@ -137,12 +128,6 @@
     </ClCompile>
     <ClCompile Include="engine\src\platform\impl\render\directx\device_impl.cpp">
       <Filter>src\engine\platfom\impl\render\directx</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\impl\control\control.cpp">
-      <Filter>src\engine\core\impl\control</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\core\impl\event\event.cpp">
-      <Filter>src\engine\core\impl\event</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\platform\impl\event\event.cpp">
       <Filter>src\engine\platfom\impl\event</Filter>
@@ -228,6 +213,12 @@
     <ClCompile Include="engine\src\core\api_core.cpp">
       <Filter>src\engine\core</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\core\control\api_control.cpp">
+      <Filter>src\engine\core\control</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\core\event\api_event.cpp">
+      <Filter>src\engine\core\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\src\api_game.h">
@@ -265,12 +256,6 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\def\class_format.h">
       <Filter>src\engine\core\def</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\api\event.h">
-      <Filter>src\engine\core\api</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\core\api\control.h">
-      <Filter>src\engine\core\api</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\platform\api\event.h">
       <Filter>src\engine\platfom\api</Filter>
@@ -391,6 +376,12 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\api_core.h">
       <Filter>src\engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\control\api_control.h">
+      <Filter>src\engine\core\control</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\core\event\api_event.h">
+      <Filter>src\engine\core\event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

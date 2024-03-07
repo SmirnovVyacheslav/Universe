@@ -2,7 +2,7 @@
 #include "src/platform/api/event.h"
 
 #include "src/core/def/class_format.h"
-#include "src/core/api/control.h"
+#include "src/core/control/api_control.h"
 #include "src/platform/impl/event/queue.h"
 #include "src/platform/impl/event/win32/event.h"
 
