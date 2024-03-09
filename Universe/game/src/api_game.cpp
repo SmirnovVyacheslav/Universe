@@ -1,6 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+
 #include "api_game.h"
+
 #include "src/core/api_core.h"
+
 
 
 namespace game

@@ -1,9 +1,11 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+
 #include "src/var/std.h"
+#include "src/var/error.h"
 
 #include <vector>
-#include <stdexcept>
+
 
 
 namespace engine
@@ -37,7 +39,7 @@ namespace engine
    {
        if (size < 0)
        {
-           throw std::invalid_argument("Negative array size");
+           throw error("Negative array size");
        }
        data.reserve(static_cast<size_t>(size));
    }
@@ -70,7 +72,7 @@ namespace engine
                return i;
            }
        }
-       throw std::invalid_argument("Item does not exist");
+       throw error("Item does not exist");
    }
 
    template <typename T>

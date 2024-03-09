@@ -105,9 +105,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game\src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="game\src\api_game.cpp">
       <Filter>src\game</Filter>
     </ClCompile>
@@ -159,22 +156,22 @@
     <ClCompile Include="engine\src\platform\impl\render\device.cpp">
       <Filter>src\engine\platfom\impl\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\api.cpp">
+    <ClCompile Include="engine\src\render\api_render.cpp">
       <Filter>src\engine\render</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\camera\impl.cpp">
+    <ClCompile Include="engine\src\render\camera\impl_camera.cpp">
       <Filter>src\engine\render\camera</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\camera\api.cpp">
+    <ClCompile Include="engine\src\render\camera\api_camera.cpp">
       <Filter>src\engine\render\camera</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\settings\api.cpp">
+    <ClCompile Include="engine\src\render\settings\api_settings.cpp">
       <Filter>src\engine\render\settings</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\device\api.cpp">
+    <ClCompile Include="engine\src\render\device\api_device.cpp">
       <Filter>src\engine\render\device</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\render\device\directx\impl.cpp">
+    <ClCompile Include="engine\src\render\device\directx\impl_device.cpp">
       <Filter>src\engine\render\device\directx</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\render\index\api.cpp">
@@ -218,6 +215,12 @@
     </ClCompile>
     <ClCompile Include="engine\src\core\event\api_event.cpp">
       <Filter>src\engine\core\event</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\var\error.cpp">
+      <Filter>src\engine\var</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,28 +290,28 @@
     <ClInclude Include="engine\src\platform\api\render\vertex_buff.h">
       <Filter>src\engine\platfom\api\render</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\api.h">
+    <ClInclude Include="engine\src\render\api_render.h">
       <Filter>src\engine\render</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\camera\api.h">
+    <ClInclude Include="engine\src\render\camera\api_camera.h">
       <Filter>src\engine\render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\camera\impl.h">
+    <ClInclude Include="engine\src\render\camera\impl_camera.h">
       <Filter>src\engine\render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\camera\obj.h">
+    <ClInclude Include="engine\src\render\camera\obj_camera.h">
       <Filter>src\engine\render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\settings\api.h">
+    <ClInclude Include="engine\src\render\settings\api_settings.h">
       <Filter>src\engine\render\settings</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\settings\obj.h">
+    <ClInclude Include="engine\src\render\settings\obj_settings.h">
       <Filter>src\engine\render\settings</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\device\api.h">
+    <ClInclude Include="engine\src\render\device\api_device.h">
       <Filter>src\engine\render\device</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\render\device\directx\impl.h">
+    <ClInclude Include="engine\src\render\device\directx\impl_device.h">
       <Filter>src\engine\render\device\directx</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\render\index\api.h">
@@ -382,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="engine\src\core\event\api_event.h">
       <Filter>src\engine\core\event</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\var\error.h">
+      <Filter>src\engine\var</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

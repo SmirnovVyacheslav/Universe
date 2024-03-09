@@ -1,10 +1,14 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/core/api_core.h"
+
+#include "api_core.h"
+
+#include "src/render/api_render.h"
+
+#include "src/platform/api/core.h"
 
 #include "src/core/event/api_event.h"
 #include "src/core/control/api_control.h"
-#include "src/render/api.h"
-#include "src/platform/api/core.h"
+
 
 
 namespace engine::core

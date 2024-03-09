@@ -1,9 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/render/camera/obj.h"
+#include "src/render/settings/obj_settings.h"
 
 
-namespace engine::render::camera
+namespace engine::render::settings
 {
     void init();
     void term();

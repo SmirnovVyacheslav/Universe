@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+
 #include "src/var/std.h"
 #include "src/var/array.h"
+#include "src/var/error.h"
 
-#include <stdexcept>
 
 
 namespace engine
@@ -108,7 +109,7 @@ namespace engine
     {
         if (obj_ptr == nullptr)
         {
-            throw std::invalid_argument("Main object was not initialized");
+            throw error("Main object was not initialized");
         }
         slave_ptr_array.append(new slave_ptr(this));
         return *slave_ptr_array[-1];
@@ -137,7 +138,7 @@ namespace engine
     {
         if (obj_ptr == nullptr)
         {
-            throw std::invalid_argument("Main object was not initialized");
+            throw error("Main object was not initialized");
         }
         return obj_ptr;
     }
@@ -147,7 +148,7 @@ namespace engine
     {
         if (obj_ptr == nullptr)
         {
-            throw std::invalid_argument("Main object was not initialized");
+            throw error("Main object was not initialized");
         }
         return *obj_ptr;
     }
@@ -216,7 +217,7 @@ namespace engine
     {
         if (obj_ptr == nullptr)
         {
-            throw std::invalid_argument("Main object was deleted");
+            throw error("Main object was deleted");
         }
         return obj_ptr->operator->();
     }

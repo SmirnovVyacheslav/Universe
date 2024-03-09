@@ -1,5 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/render/device/directx/impl.h"
+
+#include "impl_device.h"
+
 #include "src/platform/api/view.h"
 
 

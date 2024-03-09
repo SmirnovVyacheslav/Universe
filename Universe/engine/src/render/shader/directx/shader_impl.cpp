@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "src/render/shader/directx/shader_impl.h"
-#include "src/render/device/directx/impl.h"
+#include "src/render/device/directx/impl_device.h"
 
 
 namespace engine::render::shader::directx

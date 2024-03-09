@@ -1,16 +1,16 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "src/render/device/api.h"
-#include "src/render/settings/api.h"
+
 #include "src/var/vector3.h"
 #include "src/var/matrix4.h"
 
-#ifdef platform_windows
+#include "src/render/device/api_device.h"
+#include "src/render/settings/api_settings.h"
+
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <windows.h>
-#endif
 
 
 namespace engine::render::device::directx

@@ -121,7 +121,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;platform_windows;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)engine;$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -140,7 +140,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)engine;$(ProjectDir)engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,18 +170,19 @@
     <ClCompile Include="engine\src\platform\impl\view\view.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\win32\window_handler.cpp" />
     <ClCompile Include="engine\src\platform\impl\view\win32\window_impl.cpp" />
-    <ClCompile Include="engine\src\render\api.cpp" />
-    <ClCompile Include="engine\src\render\camera\api.cpp" />
-    <ClCompile Include="engine\src\render\camera\impl.cpp" />
-    <ClCompile Include="engine\src\render\device\api.cpp" />
-    <ClCompile Include="engine\src\render\device\directx\impl.cpp" />
+    <ClCompile Include="engine\src\render\api_render.cpp" />
+    <ClCompile Include="engine\src\render\camera\api_camera.cpp" />
+    <ClCompile Include="engine\src\render\camera\impl_camera.cpp" />
+    <ClCompile Include="engine\src\render\device\api_device.cpp" />
+    <ClCompile Include="engine\src\render\device\directx\impl_device.cpp" />
     <ClCompile Include="engine\src\render\index\api.cpp" />
     <ClCompile Include="engine\src\render\index\directx\impl.cpp" />
-    <ClCompile Include="engine\src\render\settings\api.cpp" />
+    <ClCompile Include="engine\src\render\settings\api_settings.cpp" />
     <ClCompile Include="engine\src\render\shader\directx\shader_impl.cpp" />
     <ClCompile Include="engine\src\render\shader\shader_api.cpp" />
     <ClCompile Include="engine\src\render\vertex\directx\impl_vertex.cpp" />
     <ClCompile Include="engine\src\render\vertex\api_vertex.cpp" />
+    <ClCompile Include="engine\src\var\error.cpp" />
     <ClCompile Include="engine\src\var\matrix4.cpp" />
     <ClCompile Include="engine\src\var\string.cpp" />
     <ClCompile Include="engine\src\var\vector3.cpp" />
@@ -216,17 +217,17 @@
     <ClInclude Include="engine\src\platform\impl\view\win32\window_handler.h" />
     <ClInclude Include="engine\src\platform\impl\view\win32\window_impl.h" />
     <ClInclude Include="engine\src\platform\impl\view\window.h" />
-    <ClInclude Include="engine\src\render\api.h" />
-    <ClInclude Include="engine\src\render\camera\api.h" />
-    <ClInclude Include="engine\src\render\camera\impl.h" />
-    <ClInclude Include="engine\src\render\camera\obj.h" />
-    <ClInclude Include="engine\src\render\device\api.h" />
-    <ClInclude Include="engine\src\render\device\directx\impl.h" />
+    <ClInclude Include="engine\src\render\api_render.h" />
+    <ClInclude Include="engine\src\render\camera\api_camera.h" />
+    <ClInclude Include="engine\src\render\camera\impl_camera.h" />
+    <ClInclude Include="engine\src\render\camera\obj_camera.h" />
+    <ClInclude Include="engine\src\render\device\api_device.h" />
+    <ClInclude Include="engine\src\render\device\directx\impl_device.h" />
     <ClInclude Include="engine\src\render\index\api.h" />
     <ClInclude Include="engine\src\render\index\directx\impl.h" />
     <ClInclude Include="engine\src\render\index\obj.h" />
-    <ClInclude Include="engine\src\render\settings\api.h" />
-    <ClInclude Include="engine\src\render\settings\obj.h" />
+    <ClInclude Include="engine\src\render\settings\api_settings.h" />
+    <ClInclude Include="engine\src\render\settings\obj_settings.h" />
     <ClInclude Include="engine\src\render\shader\directx\shader_impl.h" />
     <ClInclude Include="engine\src\render\shader\shader_api.h" />
     <ClInclude Include="engine\src\render\shader\shader_obj.h" />
@@ -235,6 +236,7 @@
     <ClInclude Include="engine\src\render\vertex\obj_vertex.h" />
     <ClInclude Include="engine\src\var\array.h" />
     <ClInclude Include="engine\src\var\const.h" />
+    <ClInclude Include="engine\src\var\error.h" />
     <ClInclude Include="engine\src\var\map.h" />
     <ClInclude Include="engine\src\var\matrix4.h" />
     <ClInclude Include="engine\src\var\smart_ptr.h" />

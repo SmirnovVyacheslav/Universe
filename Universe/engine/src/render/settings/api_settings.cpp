@@ -1,16 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
-#include "src/render/device/api.h"
+#include "src/render/settings/api_settings.h"
 
 
-namespace engine::render::device
+namespace engine::render::settings
 {
     obj* inst = nullptr;
 
-
+    
     void init()
     {
-        // inst = new impl;
+        inst = new obj;
     }
 
     void term()
@@ -19,8 +18,8 @@ namespace engine::render::device
         inst = nullptr;
     }
 
-    string type()
+    obj& get()
     {
-        return "directx";
+        return *inst;
     }
 }

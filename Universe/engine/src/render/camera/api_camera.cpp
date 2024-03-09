@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/render/camera/api.h"
-#include "src/render/camera/impl.h"
+#include "src/render/camera/api_camera.h"
+#include "src/render/camera/impl_camera.h"
 
 
 namespace engine::render::camera

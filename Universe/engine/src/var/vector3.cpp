@@ -1,5 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "src/var/vector3.h"
+
+#include "vector3.h"
+
 
 
 namespace engine

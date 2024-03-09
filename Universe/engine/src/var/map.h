@@ -1,7 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include <stdexcept>
+
+#include "error.h"
+
 #include <unordered_map>
+
 
 
 namespace engine
@@ -67,7 +70,7 @@ namespace engine
        {
            return data[key];
        }
-       throw std::invalid_argument("Key does not exist");
+       throw error("Key does not exist");
    }
 
    template <typename K, typename V>
@@ -77,6 +80,6 @@ namespace engine
        {
            return data[key];
        }
-       throw std::invalid_argument("Key does not exist");
+       throw error("Key does not exist");
    }
 }
