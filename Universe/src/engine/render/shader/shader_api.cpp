@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/render/shader/shader_api.h"
+
+#include "shader_api.h"
 
 
 namespace engine::render::shader

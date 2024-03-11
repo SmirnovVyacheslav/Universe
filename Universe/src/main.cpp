@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_game.h"
+#include "game/api_game.h"
 
 
 int main(int argc, char* argv[])

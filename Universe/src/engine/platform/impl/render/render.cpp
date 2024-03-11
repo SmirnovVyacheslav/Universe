@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/platform/api/render.h"
+#include "engine/platform/api/render.h"
 
-#include "engine/src/platform/impl/render/device.h"
+#include "engine/platform/impl/render/device.h"
 
 
 namespace engine::platform::render

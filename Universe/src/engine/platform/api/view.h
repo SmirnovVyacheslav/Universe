@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/var/std.h"
-#include "engine/src/var/string.h"
+#include "engine/var/std.h"
+#include "engine/var/string.h"
 
 
 namespace engine::platform::view

@@ -1,6 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/render/index/directx/impl.h"
-#include "engine/src/render/device/directx/impl_device.h"
+
+#include "impl.h"
+
+#include "engine/render/device/directx/impl_device.h"
 
 
 namespace engine::render::index::directx

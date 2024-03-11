@@ -2,8 +2,7 @@
 
 #include "api_event.h"
 
-#include "engine/src/platform/api/event.h"
-
+#include "engine/platform/api/event.h"
 
 
 namespace engine::core::event

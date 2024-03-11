@@ -1,9 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/platform/api/render/index_buff.h"
-#include "engine/src/var/map.h"
+#include "engine/platform/api/render/index_buff.h"
+#include "engine/var/map.h"
 
-#include "engine/src/platform/impl/render/device.h"
+#include "engine/platform/impl/render/device.h"
 
 
 namespace engine::platform::render::index_buff

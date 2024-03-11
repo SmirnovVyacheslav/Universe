@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/core/def/abstract_class.h"
+#include "engine/core/def/abstract_class.h"
 
 
 namespace engine::platform::view

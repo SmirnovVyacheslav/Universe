@@ -1,8 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "engine/src/var/std.h"
-#include "engine/src/var/vector.h"
+#include "std.h"
+#include "vector.h"
 
 
 

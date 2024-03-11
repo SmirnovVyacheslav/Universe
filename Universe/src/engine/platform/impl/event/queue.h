@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/core/def/class_format.h"
-#include "engine/src/platform/api/event.h"
+#include "engine/core/def/class_format.h"
+#include "engine/platform/api/event.h"
 
 
 namespace engine::platform::event

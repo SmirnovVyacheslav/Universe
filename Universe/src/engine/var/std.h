@@ -4,7 +4,6 @@
 #include <cstdint>
 
 
-
 namespace engine
 {
     using int16 = std::int16_t;

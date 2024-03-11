@@ -1,9 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/core/def/abstract_class.h"
-#include "engine/src/platform/api/render/shader.h"
-#include "engine/src/platform/api/render/vertex_buff.h"
-#include "engine/src/platform/api/render/index_buff.h"
+#include "engine/core/def/abstract_class.h"
+#include "engine/platform/api/render/shader.h"
+#include "engine/platform/api/render/vertex_buff.h"
+#include "engine/platform/api/render/index_buff.h"
 
 
 

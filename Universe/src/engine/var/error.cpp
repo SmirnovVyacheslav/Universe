@@ -3,7 +3,6 @@
 #include "error.h"
 
 
-
 namespace engine
 {
     error::error(const char* message) : message(message)

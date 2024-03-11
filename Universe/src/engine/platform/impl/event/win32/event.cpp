@@ -1,5 +1,5 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/platform/impl/event/win32/event.h"
+#include "engine/platform/impl/event/win32/event.h"
 
 #ifdef platform_windows
 #include <windows.h>

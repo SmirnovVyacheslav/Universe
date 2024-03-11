@@ -3,8 +3,8 @@
 
 #include "api_camera.h"
 
-#include "var/vector3.h"
-#include "var/matrix4.h"
+#include "engine/var/vector3.h"
+#include "engine/var/matrix4.h"
 
 
 namespace engine::render::camera

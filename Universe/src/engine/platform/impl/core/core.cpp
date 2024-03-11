@@ -1,9 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/platform/api/core.h"
+#include "engine/platform/api/core.h"
 
-#include "engine/src/platform/api/event.h"
-#include "engine/src/platform/api/view.h"
-#include "engine/src/platform/api/render.h"
+#include "engine/platform/api/event.h"
+#include "engine/platform/api/view.h"
+#include "engine/platform/api/render.h"
 
 
 namespace engine::platform

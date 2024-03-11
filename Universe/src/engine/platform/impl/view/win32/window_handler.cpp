@@ -1,8 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/platform/impl/view/win32/window_handler.h"
+#include "engine/platform/impl/view/win32/window_handler.h"
 
-#include "engine/src/platform/api/event.h"
+#include "engine/platform/api/event.h"
 
 
 namespace engine::platform::view::win32

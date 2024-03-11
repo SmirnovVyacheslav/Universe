@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/render/vertex/api_vertex.h"
+
+#include "engine/render/vertex/api_vertex.h"
 
 
 namespace engine::render::vertex

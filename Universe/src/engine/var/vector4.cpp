@@ -3,7 +3,6 @@
 #include "vector4.h"
 
 
-
 namespace engine
 {
     vector4::vector4() : x(0.0f), y(0.0f), z(0.0f), w(0.0f)

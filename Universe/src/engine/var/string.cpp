@@ -3,7 +3,6 @@
 #include "string.h"
 
 
-
 namespace engine
 {
     uint32 sid = 0;

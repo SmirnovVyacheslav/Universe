@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/platform/impl/render/device.h"
-#include "engine/src/platform/impl/render/directx/device_impl.h"
+#include "engine/platform/impl/render/device.h"
+#include "engine/platform/impl/render/directx/device_impl.h"
 
 
 namespace engine::platform::render

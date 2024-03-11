@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/render/index/obj.h"
+
+#include "obj.h"
 
 
 namespace engine::render::index

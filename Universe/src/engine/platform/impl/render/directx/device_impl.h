@@ -1,16 +1,16 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/core/def/abstract_class.h"
-#include "engine/src/core/def/class_format.h"
-#include "engine/src/var/std.h"
-#include "engine/src/var/string.h"
-#include "engine/src/var/vector4.h"
-#include "engine/src/var/vertex.h"
-#include "engine/src/platform/api/render.h"
-#include "engine/src/platform/api/render/shader.h"
-#include "engine/src/platform/api/render/vertex_buff.h"
-#include "engine/src/platform/api/render/index_buff.h"
-#include "engine/src/platform/impl/render/device.h"
+#include "engine/core/def/abstract_class.h"
+#include "engine/core/def/class_format.h"
+#include "engine/var/std.h"
+#include "engine/var/string.h"
+#include "engine/var/vector4.h"
+#include "engine/var/vertex.h"
+#include "engine/platform/api/render.h"
+#include "engine/platform/api/render/shader.h"
+#include "engine/platform/api/render/vertex_buff.h"
+#include "engine/platform/api/render/index_buff.h"
+#include "engine/platform/impl/render/device.h"
 
 #ifdef platform_windows
 #include <d3d11.h>

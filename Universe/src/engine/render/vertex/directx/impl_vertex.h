@@ -1,7 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/render/vertex/api_vertex.h"
-#include "engine/src/var/vertex.h"
+
+#include "engine/render/vertex/api_vertex.h"
+#include "engine/var/vertex.h"
 
 #ifdef platform_windows
 #include <d3d11.h>

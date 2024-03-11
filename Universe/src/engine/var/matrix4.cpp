@@ -3,7 +3,6 @@
 #include "matrix4.h"
 
 
-
 namespace engine
 {
    const int32 matrix_size = 4;

@@ -1,8 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/render/shader/shader_api.h"
-#include "engine/src/var/matrix4.h"
-#include "engine/src/var/string.h"
+
+#include "engine/render/shader/shader_api.h"
+
+#include "engine/var/matrix4.h"
+#include "engine/var/string.h"
 
 #ifdef platform_windows
 #include <d3d11.h>

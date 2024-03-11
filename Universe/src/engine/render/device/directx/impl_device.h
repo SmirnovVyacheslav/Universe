@@ -1,11 +1,11 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "engine/src/var/vector3.h"
-#include "engine/src/var/matrix4.h"
+#include "engine/var/vector3.h"
+#include "engine/var/matrix4.h"
 
-#include "engine/src/render/device/api_device.h"
-#include "engine/src/render/settings/api_settings.h"
+#include "engine/render/device/api_device.h"
+#include "engine/render/settings/api_settings.h"
 
 #include <d3d11.h>
 #include <d3dx11.h>

@@ -1,8 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/core/def/abstract_class.h"
-#include "engine/src/core/def/class_format.h"
-#include "engine/src/platform/api/render/index_buff.h"
+#include "engine/core/def/abstract_class.h"
+#include "engine/core/def/class_format.h"
+#include "engine/platform/api/render/index_buff.h"
 
 #ifdef platform_windows
 #include <d3d11.h>

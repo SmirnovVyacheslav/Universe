@@ -1,18 +1,18 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/platform/impl/render/directx/device_impl.h"
+#include "engine/platform/impl/render/directx/device_impl.h"
 
-#include "engine/src/var/std.h"
-#include "engine/src/var/matrix4.h"
-#include "engine/src/var/vector3.h"
-#include "engine/src/var/vertex.h"
-#include "engine/src/platform/api/view.h"
-#include "engine/src/platform/api/render/shader.h"
-#include "engine/src/platform/api/render/vertex_buff.h"
-#include "engine/src/platform/api/render/index_buff.h"
-#include "engine/src/platform/impl/render/directx/term_resource.h"
-#include "engine/src/platform/impl/render/directx/shader_impl.h"
-#include "engine/src/platform/impl/render/directx/vertex_buff_impl.h"
-#include "engine/src/platform/impl/render/directx/index_buff_impl.h"
+#include "engine/var/std.h"
+#include "engine/var/matrix4.h"
+#include "engine/var/vector3.h"
+#include "engine/var/vertex.h"
+#include "engine/platform/api/view.h"
+#include "engine/platform/api/render/shader.h"
+#include "engine/platform/api/render/vertex_buff.h"
+#include "engine/platform/api/render/index_buff.h"
+#include "engine/platform/impl/render/directx/term_resource.h"
+#include "engine/platform/impl/render/directx/shader_impl.h"
+#include "engine/platform/impl/render/directx/vertex_buff_impl.h"
+#include "engine/platform/impl/render/directx/index_buff_impl.h"
 
 
 namespace engine::platform::render::directx

@@ -2,7 +2,7 @@
 
 #include "api_game.h"
 
-#include "core/api_core.h"
+#include "engine/core/api_core.h"
 
 
 namespace game

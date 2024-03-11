@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/render/index/api.h"
+
+#include "api.h"
 
 
 namespace engine::render::index

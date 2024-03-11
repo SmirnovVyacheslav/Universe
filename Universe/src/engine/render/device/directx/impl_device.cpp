@@ -2,7 +2,7 @@
 
 #include "impl_device.h"
 
-#include "engine/src/platform/api/view.h"
+#include "engine/platform/api/view.h"
 
 
 namespace engine::render::device::directx

@@ -1,12 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#include "engine/src/core/def/class_format.h"
-#include "engine/src/core/def/abstract_class.h"
+#include "engine/core/def/class_format.h"
+#include "engine/core/def/abstract_class.h"
 
-#include "engine/src/platform/api/view.h"
-#include "engine/src/platform/impl/view/window.h"
-#include "engine/src/platform/impl/view/win32/window_config.h"
-#include "engine/src/platform/impl/view/win32/window_handler.h"
+#include "engine/platform/api/view.h"
+#include "engine/platform/impl/view/window.h"
+#include "engine/platform/impl/view/win32/window_config.h"
+#include "engine/platform/impl/view/win32/window_handler.h"
 
 #ifdef platform_windows
 #include <windows.h>

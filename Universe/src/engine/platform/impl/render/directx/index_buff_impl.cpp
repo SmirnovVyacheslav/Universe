@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/platform/impl/render/directx/index_buff_impl.h"
+#include "engine/platform/impl/render/directx/index_buff_impl.h"
 
-#include "engine/src/platform/impl/render/directx/term_resource.h"
+#include "engine/platform/impl/render/directx/term_resource.h"
 
 
 namespace engine::platform::render::index_buff::directx

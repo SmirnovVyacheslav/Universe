@@ -1,13 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include <math.h>
+#include "std.h"
+#include "const.h"
+#include "error.h"
 
+#include <cmath>
 #include <iostream>
-#include <stdexcept>
-
-#include "engine/src/var/const.h"
-#include "engine/src/var/std.h"
 
 
 namespace engine
@@ -91,7 +90,7 @@ namespace engine
     {
         if (size <= 0)
         {
-            throw std::invalid_argument("Vector size should be positive");
+            throw error("Vector size should be positive");
         }
         for (int32 i = 0; i < size; ++i)
         {
@@ -124,7 +123,7 @@ namespace engine
         fp32 vec_length = length(vec);
         if (vec_length < eps)
         {
-            throw std::invalid_argument("Vector length is zero - division by zero");
+            throw error("Vector length is zero - division by zero");
         }
         return vec / vec_length;
     }
@@ -188,7 +187,7 @@ namespace engine
     {
         if (num < eps)
         {
-            throw std::invalid_argument("Division by zero");
+            throw error("Division by zero");
         }
         vector<size> vec_res;
         for (int32 i = 0; i < size; ++i)
@@ -239,7 +238,7 @@ namespace engine
         {
             if (vec[i] < eps)
             {
-                throw std::invalid_argument("Division by zero");
+                throw error("Division by zero");
             }
             vec_res[i] = num / vec[i];
         }

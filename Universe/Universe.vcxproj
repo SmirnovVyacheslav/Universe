@@ -18,6 +18,104 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\engine\core\api_core.cpp" />
+    <ClCompile Include="src\engine\core\control\api_control.cpp" />
+    <ClCompile Include="src\engine\core\event\api_event.cpp" />
+    <ClCompile Include="src\engine\platform\impl\core\core.cpp" />
+    <ClCompile Include="src\engine\platform\impl\event\event.cpp" />
+    <ClCompile Include="src\engine\platform\impl\event\queue.cpp" />
+    <ClCompile Include="src\engine\platform\impl\event\win32\event.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\device.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\directx\device_impl.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\directx\index_buff_impl.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\directx\shader_impl.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\directx\vertex_buff_impl.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\index_buff.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\render.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\shader.cpp" />
+    <ClCompile Include="src\engine\platform\impl\render\vertex_buff.cpp" />
+    <ClCompile Include="src\engine\platform\impl\view\view.cpp" />
+    <ClCompile Include="src\engine\platform\impl\view\win32\window_handler.cpp" />
+    <ClCompile Include="src\engine\platform\impl\view\win32\window_impl.cpp" />
+    <ClCompile Include="src\engine\render\api_render.cpp" />
+    <ClCompile Include="src\engine\render\camera\api_camera.cpp" />
+    <ClCompile Include="src\engine\render\camera\impl_camera.cpp" />
+    <ClCompile Include="src\engine\render\device\api_device.cpp" />
+    <ClCompile Include="src\engine\render\device\directx\impl_device.cpp" />
+    <ClCompile Include="src\engine\render\index\api.cpp" />
+    <ClCompile Include="src\engine\render\index\directx\impl.cpp" />
+    <ClCompile Include="src\engine\render\settings\api_settings.cpp" />
+    <ClCompile Include="src\engine\render\shader\directx\shader_impl.cpp" />
+    <ClCompile Include="src\engine\render\shader\shader_api.cpp" />
+    <ClCompile Include="src\engine\render\vertex\api_vertex.cpp" />
+    <ClCompile Include="src\engine\render\vertex\directx\impl_vertex.cpp" />
+    <ClCompile Include="src\engine\var\error.cpp" />
+    <ClCompile Include="src\engine\var\matrix4.cpp" />
+    <ClCompile Include="src\engine\var\string.cpp" />
+    <ClCompile Include="src\engine\var\vector3.cpp" />
+    <ClCompile Include="src\engine\var\vector4.cpp" />
+    <ClCompile Include="src\engine\var\vertex.cpp" />
+    <ClCompile Include="src\game\api_game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\engine\core\api_core.h" />
+    <ClInclude Include="src\engine\core\control\api_control.h" />
+    <ClInclude Include="src\engine\core\def\abstract_class.h" />
+    <ClInclude Include="src\engine\core\def\class_format.h" />
+    <ClInclude Include="src\engine\core\event\api_event.h" />
+    <ClInclude Include="src\engine\def\abstract.h" />
+    <ClInclude Include="src\engine\platform\api\core.h" />
+    <ClInclude Include="src\engine\platform\api\event.h" />
+    <ClInclude Include="src\engine\platform\api\render.h" />
+    <ClInclude Include="src\engine\platform\api\render\index_buff.h" />
+    <ClInclude Include="src\engine\platform\api\render\shader.h" />
+    <ClInclude Include="src\engine\platform\api\render\vertex_buff.h" />
+    <ClInclude Include="src\engine\platform\api\view.h" />
+    <ClInclude Include="src\engine\platform\impl\event\queue.h" />
+    <ClInclude Include="src\engine\platform\impl\event\win32\event.h" />
+    <ClInclude Include="src\engine\platform\impl\render\device.h" />
+    <ClInclude Include="src\engine\platform\impl\render\directx\device_impl.h" />
+    <ClInclude Include="src\engine\platform\impl\render\directx\index_buff_impl.h" />
+    <ClInclude Include="src\engine\platform\impl\render\directx\shader_impl.h" />
+    <ClInclude Include="src\engine\platform\impl\render\directx\term_resource.h" />
+    <ClInclude Include="src\engine\platform\impl\render\directx\vertex_buff_impl.h" />
+    <ClInclude Include="src\engine\platform\impl\view\win32\window_config.h" />
+    <ClInclude Include="src\engine\platform\impl\view\win32\window_handler.h" />
+    <ClInclude Include="src\engine\platform\impl\view\win32\window_impl.h" />
+    <ClInclude Include="src\engine\platform\impl\view\window.h" />
+    <ClInclude Include="src\engine\render\api_render.h" />
+    <ClInclude Include="src\engine\render\camera\api_camera.h" />
+    <ClInclude Include="src\engine\render\camera\impl_camera.h" />
+    <ClInclude Include="src\engine\render\camera\obj_camera.h" />
+    <ClInclude Include="src\engine\render\device\api_device.h" />
+    <ClInclude Include="src\engine\render\device\directx\impl_device.h" />
+    <ClInclude Include="src\engine\render\index\api.h" />
+    <ClInclude Include="src\engine\render\index\directx\impl.h" />
+    <ClInclude Include="src\engine\render\index\obj.h" />
+    <ClInclude Include="src\engine\render\settings\api_settings.h" />
+    <ClInclude Include="src\engine\render\settings\obj_settings.h" />
+    <ClInclude Include="src\engine\render\shader\directx\shader_impl.h" />
+    <ClInclude Include="src\engine\render\shader\shader_api.h" />
+    <ClInclude Include="src\engine\render\shader\shader_obj.h" />
+    <ClInclude Include="src\engine\render\vertex\api_vertex.h" />
+    <ClInclude Include="src\engine\render\vertex\directx\impl_vertex.h" />
+    <ClInclude Include="src\engine\render\vertex\obj_vertex.h" />
+    <ClInclude Include="src\engine\var\array.h" />
+    <ClInclude Include="src\engine\var\const.h" />
+    <ClInclude Include="src\engine\var\error.h" />
+    <ClInclude Include="src\engine\var\map.h" />
+    <ClInclude Include="src\engine\var\matrix4.h" />
+    <ClInclude Include="src\engine\var\smart_ptr.h" />
+    <ClInclude Include="src\engine\var\std.h" />
+    <ClInclude Include="src\engine\var\string.h" />
+    <ClInclude Include="src\engine\var\vector.h" />
+    <ClInclude Include="src\engine\var\vector3.h" />
+    <ClInclude Include="src\engine\var\vector4.h" />
+    <ClInclude Include="src\engine\var\vertex.h" />
+    <ClInclude Include="src\game\api_game.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -121,7 +219,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;platform_windows;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)game/src;$(ProjectDir)engine/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -140,7 +238,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)game/src;$(ProjectDir)engine/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

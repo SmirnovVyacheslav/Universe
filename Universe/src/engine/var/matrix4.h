@@ -1,10 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "engine/src/var/std.h"
-#include "engine/src/var/vector3.h"
-#include "engine/src/var/vector4.h"
-
+#include "std.h"
+#include "vector3.h"
+#include "vector4.h"
 
 
 namespace engine

@@ -1,10 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/platform/api/event.h"
+#include "engine/platform/api/event.h"
 
-#include "engine/src/core/def/class_format.h"
-#include "engine/src/core/control/api_control.h"
-#include "engine/src/platform/impl/event/queue.h"
-#include "engine/src/platform/impl/event/win32/event.h"
+#include "engine/core/def/class_format.h"
+#include "engine/core/control/api_control.h"
+#include "engine/platform/impl/event/queue.h"
+#include "engine/platform/impl/event/win32/event.h"
 
 
 namespace engine::platform::event

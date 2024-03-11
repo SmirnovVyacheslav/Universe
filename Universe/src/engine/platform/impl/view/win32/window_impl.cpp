@@ -1,5 +1,5 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/src/platform/impl/view/win32/window_impl.h"
+#include "engine/platform/impl/view/win32/window_impl.h"
 
 
 namespace engine::platform::view::win32
