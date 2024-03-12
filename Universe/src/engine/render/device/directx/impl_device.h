@@ -1,22 +1,26 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
+#include "../api_device.h"
+
+#include "engine/def/platform.h"
+#include "engine/render/api_render.h"
+#include "engine/render/settings/api_settings.h"
 #include "engine/var/vector3.h"
 #include "engine/var/matrix4.h"
 
-#include "engine/render/device/api_device.h"
-#include "engine/render/settings/api_settings.h"
-
+#ifdef windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <windows.h>
+#endif
 
 
 namespace engine::render::device::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     class impl : public obj
     {

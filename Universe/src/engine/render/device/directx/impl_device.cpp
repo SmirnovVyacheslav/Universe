@@ -8,7 +8,7 @@
 namespace engine::render::device::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     impl::impl() : settings_obj(settings::get())
     {

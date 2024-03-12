@@ -1,10 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "engine/render/vertex/api_vertex.h"
+#include "../api_vertex.h"
+
+#include "engine/def/platform.h"
 #include "engine/var/vertex.h"
 
-#ifdef platform_windows
+#ifdef windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
@@ -15,7 +17,7 @@
 namespace engine::render::vertex::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     class impl : public obj
     {
