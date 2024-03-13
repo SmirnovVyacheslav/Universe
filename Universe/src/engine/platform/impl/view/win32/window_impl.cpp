@@ -1,10 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "engine/platform/impl/view/win32/window_impl.h"
 
+#include "engine/def/platform.h"
+
 
 namespace engine::platform::view::win32
 {
-    #ifdef platform_windows
+    #ifdef windows
 
     window_impl::window_impl()
     {

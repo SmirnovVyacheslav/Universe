@@ -1,10 +1,11 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include "engine/def/platform.h"
 #include "engine/core/def/abstract_class.h"
 #include "engine/core/def/class_format.h"
 #include "engine/platform/api/render/vertex_buff.h"
 
-#ifdef platform_windows
+#ifdef windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
@@ -14,7 +15,7 @@
 
 namespace engine::platform::render::vertex_buff::directx
 {
-#ifdef platform_windows
+#ifdef windows
 
     class vertex_buff_impl : public vertex_buff
     {

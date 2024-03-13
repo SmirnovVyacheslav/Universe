@@ -5,8 +5,8 @@
 #include "event/api_event.h"
 #include "control/api_control.h"
 
-#include "engine/render/api_render.h"
 #include "engine/platform/api/core.h"
+#include "engine/render/api_render.h"
 
 
 namespace engine::core

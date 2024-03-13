@@ -1,12 +1,13 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "engine/platform/impl/render/directx/vertex_buff_impl.h"
 
+#include "engine/def/platform.h"
 #include "engine/platform/impl/render/directx/term_resource.h"
 
 
 namespace engine::platform::render::vertex_buff::directx
 {
-    #ifdef platform_windows
+    #ifdef windows
 
     vertex_buff_impl::vertex_buff_impl(ID3D11Device* device, vertex* data) :
         device(device), data(data)

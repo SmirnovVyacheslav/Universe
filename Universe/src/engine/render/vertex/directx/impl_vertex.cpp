@@ -1,13 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "engine/render/vertex/directx/impl_vertex.h"
+#include "impl_vertex.h"
+
+#include "engine/def/platform.h"
 #include "engine/render/device/directx/impl_device.h"
 
 
 namespace engine::render::vertex::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     impl::impl(engine::vertex* data) : data(data)
     {

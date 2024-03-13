@@ -1,12 +1,13 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "engine/platform/impl/render/directx/index_buff_impl.h"
 
+#include "engine/def/platform.h"
 #include "engine/platform/impl/render/directx/term_resource.h"
 
 
 namespace engine::platform::render::index_buff::directx
 {
-#ifdef platform_windows
+#ifdef windows
 
     index_buff_impl::index_buff_impl(ID3D11Device* device, uint16* data) :
         device(device), data(data)

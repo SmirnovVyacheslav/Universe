@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-
 #include "impl_device.h"
 
+#include "engine/def/platform.h"
 #include "engine/platform/api/view.h"
 
 

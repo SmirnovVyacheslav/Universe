@@ -2,12 +2,13 @@
 #pragma once
 #include "engine/platform/impl/view/win32/window_handler.h"
 
+#include "engine/def/platform.h"
 #include "engine/platform/api/event.h"
 
 
 namespace engine::platform::view::win32
 {
-    #ifdef platform_windows
+    #ifdef windows
 
     LRESULT CALLBACK window_handler(HWND id, UINT message, WPARAM w_value, LPARAM l_value)
     {

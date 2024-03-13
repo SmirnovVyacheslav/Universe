@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
+#include "engine/def/platform.h"
 #include "engine/render/index/api.h"
 
-#ifdef platform_windows
+#ifdef windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
@@ -14,7 +15,7 @@
 namespace engine::render::index::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     class impl : public obj
     {

@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "engine/platform/impl/render/directx/device_impl.h"
-
+#include "engine/def/platform.h"
 #include "engine/var/std.h"
 #include "engine/var/matrix4.h"
 #include "engine/var/vector3.h"
@@ -17,7 +17,7 @@
 
 namespace engine::platform::render::directx
 {
-    #ifdef platform_windows
+    #ifdef windows
 
     vector3 eye(0.0f, 3.0f, -5.0f);
     vector3 at(0.0f, 1.0f, 0.0f);

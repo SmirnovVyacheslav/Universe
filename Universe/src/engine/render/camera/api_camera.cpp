@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "api_camera.h"
+
 #include "impl_camera.h"
 
 

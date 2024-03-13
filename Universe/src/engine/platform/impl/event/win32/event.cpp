@@ -1,14 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
+#include "engine/def/platform.h"
 #include "engine/platform/impl/event/win32/event.h"
 
-#ifdef platform_windows
+#ifdef windows
 #include <windows.h>
 #endif
 
 
 namespace engine::platform::event::win32
 {
-    #ifdef platform_windows
+    #ifdef windows
 
     void handle()
     {

@@ -381,5 +381,8 @@
     <ClInclude Include="src\engine\render\vertex\directx\impl_vertex.h">
       <Filter>src\engine\render\vertex\directx</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\def\platform.h">
+      <Filter>src\engine\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -66,6 +66,7 @@
     <ClInclude Include="src\engine\core\def\class_format.h" />
     <ClInclude Include="src\engine\core\event\api_event.h" />
     <ClInclude Include="src\engine\def\abstract.h" />
+    <ClInclude Include="src\engine\def\platform.h" />
     <ClInclude Include="src\engine\platform\api\core.h" />
     <ClInclude Include="src\engine\platform\api\event.h" />
     <ClInclude Include="src\engine\platform\api\render.h" />

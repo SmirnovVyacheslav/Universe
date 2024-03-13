@@ -2,13 +2,14 @@
 
 #include "impl.h"
 
+#include "engine/def/platform.h"
 #include "engine/render/device/directx/impl_device.h"
 
 
 namespace engine::render::index::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     impl::impl(uint16* data) : data(data)
     {

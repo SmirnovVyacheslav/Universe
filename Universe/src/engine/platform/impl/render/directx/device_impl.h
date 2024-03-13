@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include "engine/def/platform.h"
 #include "engine/core/def/abstract_class.h"
 #include "engine/core/def/class_format.h"
 #include "engine/var/std.h"
@@ -12,7 +13,7 @@
 #include "engine/platform/api/render/index_buff.h"
 #include "engine/platform/impl/render/device.h"
 
-#ifdef platform_windows
+#ifdef windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
@@ -22,7 +23,7 @@
 
 namespace engine::platform::render::directx
 {
-    #ifdef platform_windows 
+    #ifdef windows 
 
     class device_impl : public device
     {

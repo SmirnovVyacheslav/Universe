@@ -1,12 +1,13 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #include "engine/platform/impl/render/directx/shader_impl.h"
 
+#include "engine/def/platform.h"
 #include "engine/platform/impl/render/directx/term_resource.h"
 
 
 namespace engine::platform::render::shader::directx
 {
-    #ifdef platform_windows
+    #ifdef windows
 
     shader_impl::shader_impl(ID3D11Device* device, ID3D11DeviceContext* device_context, string file) :
         device(device), device_context(device_context), file(file)

@@ -2,13 +2,14 @@
 
 #include "shader_impl.h"
 
+#include "engine/def/platform.h"
 #include "engine/render/device/directx/impl_device.h"
 
 
 namespace engine::render::shader::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     impl::impl(string file) : file(file)
     {

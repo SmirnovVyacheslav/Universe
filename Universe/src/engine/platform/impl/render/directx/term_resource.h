@@ -1,6 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
-#ifdef platform_windows
+#include "engine/def/platform.h"
+
+#ifdef windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
@@ -10,7 +12,7 @@
 
 namespace engine::platform::render::directx
 {
-    #ifdef platform_windows 
+    #ifdef windows 
 
     template<typename T>
     void clear_resource(T* resource)

@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
+#include "engine/def/platform.h"
 #include "engine/core/def/class_format.h"
 #include "engine/core/def/abstract_class.h"
 
@@ -8,14 +9,14 @@
 #include "engine/platform/impl/view/win32/window_config.h"
 #include "engine/platform/impl/view/win32/window_handler.h"
 
-#ifdef platform_windows
+#ifdef windows
 #include <windows.h>
 #endif
 
 
 namespace engine::platform::view::win32
 {
-    #ifdef platform_windows
+    #ifdef windows
 
     class window_impl : public window
     {

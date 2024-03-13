@@ -1,12 +1,13 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "engine/render/shader/shader_api.h"
+#include "../shader_api.h"
 
+#include "engine/def/platform.h"
 #include "engine/var/matrix4.h"
 #include "engine/var/string.h"
 
-#ifdef platform_windows
+#ifdef windows
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
@@ -17,7 +18,7 @@
 namespace engine::render::shader::directx
 {
 
-#ifdef platform_windows
+#ifdef windows
 
     struct constant_buff_cpu
     {
