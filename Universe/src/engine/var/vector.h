@@ -1,9 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "std.h"
 #include "const.h"
 #include "error.h"
+#include "std.h"
 
 #include <cmath>
 #include <iostream>

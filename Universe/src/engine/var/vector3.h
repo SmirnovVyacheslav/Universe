@@ -5,7 +5,6 @@
 #include "vector.h"
 
 
-
 namespace engine
 {
     union vector3
