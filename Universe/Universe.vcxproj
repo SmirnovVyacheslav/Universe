@@ -92,6 +92,7 @@
     <ClInclude Include="src\engine\render\camera\obj_camera.h" />
     <ClInclude Include="src\engine\render\device\api_device.h" />
     <ClInclude Include="src\engine\render\device\directx\impl_device.h" />
+    <ClInclude Include="src\engine\render\device\obj_device.h" />
     <ClInclude Include="src\engine\render\index\api.h" />
     <ClInclude Include="src\engine\render\index\directx\impl.h" />
     <ClInclude Include="src\engine\render\index\obj.h" />

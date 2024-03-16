@@ -384,5 +384,8 @@
     <ClInclude Include="src\engine\def\platform.h">
       <Filter>src\engine\def</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\render\device\obj_device.h">
+      <Filter>src\engine\render\device</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

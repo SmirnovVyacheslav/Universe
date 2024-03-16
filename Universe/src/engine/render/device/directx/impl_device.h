@@ -4,10 +4,9 @@
 #include "../api_device.h"
 
 #include "engine/def/platform.h"
-#include "engine/render/api_render.h"
 #include "engine/render/settings/api_settings.h"
-#include "engine/var/vector3.h"
 #include "engine/var/matrix4.h"
+#include "engine/var/vector3.h"
 
 #ifdef windows
 #include <d3d11.h>

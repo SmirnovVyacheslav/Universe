@@ -1,15 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "obj_device.h"
-
-#include "engine/var/string.h"
+#include "engine/def/abstract.h"
 
 
 namespace engine::render::device
 {
-    void init();
-    void term();
+    class obj
+    {
+        abstract
 
-    string type();
+        virtual void draw() = 0;
+    };
 }

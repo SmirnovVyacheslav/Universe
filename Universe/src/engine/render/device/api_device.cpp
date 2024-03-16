@@ -3,6 +3,8 @@
 
 #include "api_device.h"
 
+#include "directx/impl_device.h"
+
 
 namespace engine::render::device
 {
