@@ -16,8 +16,8 @@ namespace engine::render::device
 
     void term()
     {
-        delete inst;
-        inst = nullptr;
+        // delete inst;
+        // inst = nullptr;
     }
 
     string type()

@@ -3,6 +3,7 @@
 #include "api_render.h"
 
 #include "camera/api_camera.h"
+#include "device/api_device.h"
 #include "settings/api_settings.h"
 
 
@@ -12,11 +13,13 @@ namespace engine::render
     {
         settings::init();
         camera::init();
+        device::init();
     }
 
     void term()
     {
         camera::term();
         settings::term();
+        device::term();
     }
 }

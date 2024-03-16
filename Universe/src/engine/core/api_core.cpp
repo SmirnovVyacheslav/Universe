@@ -2,8 +2,8 @@
 
 #include "api_core.h"
 
-#include "event/api_event.h"
 #include "control/api_control.h"
+#include "event/api_event.h"
 
 #include "engine/platform/api/core.h"
 #include "engine/render/api_render.h"
