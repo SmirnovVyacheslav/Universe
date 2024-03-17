@@ -5,6 +5,8 @@
 namespace game
 {
     void init();
+
     void exec();
+
     void term();
 }

@@ -9,7 +9,9 @@
 namespace engine::render::device
 {
     void init();
-    void term();
 
+    void draw();
     string type();
+
+    void term();
 }

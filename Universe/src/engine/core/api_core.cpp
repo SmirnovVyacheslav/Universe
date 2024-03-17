@@ -24,6 +24,7 @@ namespace engine::core
         while (control::status())
         {
             event::handle();
+            render::draw();
         }
     }
 

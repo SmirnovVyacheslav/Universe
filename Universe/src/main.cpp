@@ -6,7 +6,9 @@
 int main(int argc, char* argv[])
 {
     game::init();
+
     game::exec();
+
     game::term();
 
     return 0;

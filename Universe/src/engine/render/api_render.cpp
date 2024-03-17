@@ -16,6 +16,11 @@ namespace engine::render
         device::init();
     }
 
+    void draw()
+    {
+        device::draw();
+    }
+
     void term()
     {
         camera::term();

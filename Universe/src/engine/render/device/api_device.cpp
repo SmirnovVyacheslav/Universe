@@ -13,17 +13,22 @@ namespace engine::render::device
 
     void init()
     {
-        // inst = new impl;
+        inst = new directx::impl();
     }
 
-    void term()
+    void draw()
     {
-        // delete inst;
-        // inst = nullptr;
+        inst->draw();
     }
 
     string type()
     {
         return "directx";
+    }
+
+    void term()
+    {
+        delete inst;
+        inst = nullptr;
     }
 }

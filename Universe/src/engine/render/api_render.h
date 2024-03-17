@@ -7,5 +7,8 @@
 namespace engine::render
 {
     void init();
+
+    void draw();
+
     void term();
 }

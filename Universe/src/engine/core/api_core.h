@@ -5,6 +5,8 @@
 namespace engine::core
 {
     void init();
+
     void exec();
+
     void term();
 }
