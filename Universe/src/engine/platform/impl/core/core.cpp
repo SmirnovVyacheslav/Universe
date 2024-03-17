@@ -3,7 +3,6 @@
 
 #include "engine/platform/api/event.h"
 #include "engine/platform/api/view.h"
-#include "engine/platform/api/render.h"
 
 
 namespace engine::platform
@@ -12,12 +11,10 @@ namespace engine::platform
     {
         event::init();
         view::init();
-        render::init();
     }
 
     void term()
     {
-        render::term();
         view::term();
         event::term();
     }

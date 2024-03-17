@@ -38,9 +38,6 @@
     <Filter Include="src\engine\platform\impl">
       <UniqueIdentifier>{77f7b548-867d-4757-82d6-298471ba61d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\platform\api\render">
-      <UniqueIdentifier>{b090cb8e-f5b8-4bd2-99bd-e9b938838269}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\platform\impl\core">
       <UniqueIdentifier>{3ffcc01e-0690-4785-94f6-7d375026e304}</UniqueIdentifier>
     </Filter>
@@ -49,12 +46,6 @@
     </Filter>
     <Filter Include="src\engine\platform\impl\event\win32">
       <UniqueIdentifier>{199964c0-97cc-4d51-9f48-06d8bfd84b3a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platform\impl\render">
-      <UniqueIdentifier>{3ba383d5-1996-41e1-bd0c-12fce2d398c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platform\impl\render\directx">
-      <UniqueIdentifier>{80d51e96-ca87-4bde-a63d-e093caac4b70}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\platform\impl\view">
       <UniqueIdentifier>{3b089706-1cd2-41f3-8364-0948d494a928}</UniqueIdentifier>
@@ -141,33 +132,6 @@
     </ClCompile>
     <ClCompile Include="src\engine\platform\impl\event\win32\event.cpp">
       <Filter>src\engine\platform\impl\event\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\device.cpp">
-      <Filter>src\engine\platform\impl\render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\index_buff.cpp">
-      <Filter>src\engine\platform\impl\render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\render.cpp">
-      <Filter>src\engine\platform\impl\render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\shader.cpp">
-      <Filter>src\engine\platform\impl\render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\vertex_buff.cpp">
-      <Filter>src\engine\platform\impl\render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\directx\index_buff_impl.cpp">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\directx\shader_impl.cpp">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\directx\vertex_buff_impl.cpp">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\render\directx\device_impl.cpp">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\platform\impl\view\view.cpp">
       <Filter>src\engine\platform\impl\view</Filter>
@@ -279,44 +243,14 @@
     <ClInclude Include="src\engine\platform\api\event.h">
       <Filter>src\engine\platform\api</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\platform\api\render.h">
-      <Filter>src\engine\platform\api</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\platform\api\view.h">
       <Filter>src\engine\platform\api</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\api\render\index_buff.h">
-      <Filter>src\engine\platform\api\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\api\render\shader.h">
-      <Filter>src\engine\platform\api\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\api\render\vertex_buff.h">
-      <Filter>src\engine\platform\api\render</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\platform\impl\event\queue.h">
       <Filter>src\engine\platform\impl\event</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\platform\impl\event\win32\event.h">
       <Filter>src\engine\platform\impl\event\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\render\device.h">
-      <Filter>src\engine\platform\impl\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\render\directx\index_buff_impl.h">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\render\directx\shader_impl.h">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\render\directx\term_resource.h">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\render\directx\vertex_buff_impl.h">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\render\directx\device_impl.h">
-      <Filter>src\engine\platform\impl\render\directx</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\platform\impl\view\window.h">
       <Filter>src\engine\platform\impl\view</Filter>
