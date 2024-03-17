@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api.h"
+#include "api_index.h"
 
 
 namespace engine::render::index
@@ -15,8 +15,8 @@ namespace engine::render::index
 
     void term()
     {
-        delete inst;
-        inst = nullptr;
+        // delete inst;
+        // inst = nullptr;
     }
 
     obj& get()

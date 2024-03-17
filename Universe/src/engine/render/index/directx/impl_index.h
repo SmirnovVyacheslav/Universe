@@ -1,8 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
+#include "../api_index.h"
+
 #include "engine/def/platform.h"
-#include "engine/render/index/api.h"
 
 #ifdef windows
 #include <d3d11.h>

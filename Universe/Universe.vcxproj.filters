@@ -157,10 +157,10 @@
     <ClCompile Include="src\engine\render\device\directx\impl_device.cpp">
       <Filter>src\engine\render\device\directx</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\index\api.cpp">
+    <ClCompile Include="src\engine\render\index\api_index.cpp">
       <Filter>src\engine\render\index</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\index\directx\impl.cpp">
+    <ClCompile Include="src\engine\render\index\directx\impl_index.cpp">
       <Filter>src\engine\render\index\directx</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\render\settings\api_settings.cpp">
@@ -282,13 +282,13 @@
     <ClInclude Include="src\engine\render\device\directx\impl_device.h">
       <Filter>src\engine\render\device\directx</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\index\api.h">
+    <ClInclude Include="src\engine\render\index\api_index.h">
       <Filter>src\engine\render\index</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\index\obj.h">
+    <ClInclude Include="src\engine\render\index\obj_index.h">
       <Filter>src\engine\render\index</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\index\directx\impl.h">
+    <ClInclude Include="src\engine\render\index\directx\impl_index.h">
       <Filter>src\engine\render\index\directx</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\settings\api_settings.h">

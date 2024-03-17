@@ -4,6 +4,7 @@
 
 #include "camera/api_camera.h"
 #include "device/api_device.h"
+#include "index/api_index.h"
 #include "settings/api_settings.h"
 
 
@@ -14,6 +15,7 @@ namespace engine::render
         settings::init();
         camera::init();
         device::init();
+        index::init();
     }
 
     void draw()
@@ -26,5 +28,6 @@ namespace engine::render
         camera::term();
         settings::term();
         device::term();
+        index::term();
     }
 }

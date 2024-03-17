@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "impl.h"
+#include "impl_index.h"
 
 #include "engine/def/platform.h"
 #include "engine/render/device/directx/impl_device.h"
