@@ -4,6 +4,7 @@
 
 #include "engine/def/platform.h"
 #include "engine/render/device/directx/impl_device.h"
+#include "engine/var/error.h"
 
 
 namespace engine::render::index::directx
@@ -30,19 +31,19 @@ namespace engine::render::index::directx
 
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to create index buffer");
+            throw error("Failed to create index buffer");
         }
+    }
+
+    ID3D11Buffer* impl::get_data()
+    {
+        return buffer;
     }
 
     impl::~impl()
     {
         device::directx::release(buffer);
         delete[] data;
-    }
-
-    ID3D11Buffer* impl::get_data()
-    {
-        return buffer;
     }
 
 #endif

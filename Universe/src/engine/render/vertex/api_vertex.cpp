@@ -13,14 +13,14 @@ namespace engine::render::vertex
         //inst = new obj;
     }
 
-    void term()
-    {
-        delete inst;
-        inst = nullptr;
-    }
-
     obj& get()
     {
         return *inst;
+    }
+
+    void term()
+    {
+        // delete inst;
+        // inst = nullptr;
     }
 }

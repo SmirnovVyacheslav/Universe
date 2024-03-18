@@ -13,14 +13,14 @@ namespace engine::render::index
         //inst = new obj;
     }
 
+    obj& get()
+    {
+        return *inst;
+    }
+
     void term()
     {
         // delete inst;
         // inst = nullptr;
-    }
-
-    obj& get()
-    {
-        return *inst;
     }
 }

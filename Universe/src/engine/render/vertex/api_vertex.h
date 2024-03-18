@@ -7,7 +7,8 @@
 namespace engine::render::vertex
 {
     void init();
-    void term();
 
     obj& get();
+
+    void term();
 }

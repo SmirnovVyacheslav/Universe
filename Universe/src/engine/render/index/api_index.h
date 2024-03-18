@@ -7,7 +7,8 @@
 namespace engine::render::index
 {
     void init();
-    void term();
 
     obj& get();
+
+    void term();
 }
