@@ -7,7 +7,8 @@
 namespace engine::render::shader
 {
     void init();
-    void term();
 
     obj& get();
+
+    void term();
 }

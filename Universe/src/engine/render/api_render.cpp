@@ -6,6 +6,7 @@
 #include "device/api_device.h"
 #include "index/api_index.h"
 #include "settings/api_settings.h"
+#include "shader/shader_api.h"
 #include "vertex/api_vertex.h"
 
 
@@ -18,6 +19,7 @@ namespace engine::render
         device::init();
         index::init();
         vertex::init();
+        shader::init();
     }
 
     void draw()
@@ -27,6 +29,7 @@ namespace engine::render
 
     void term()
     {
+        shader::term();
         vertex::term();
         index::term();
         device::term();

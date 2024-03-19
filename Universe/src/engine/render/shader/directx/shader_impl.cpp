@@ -18,12 +18,6 @@ namespace engine::render::shader::directx
         init_constant_buff();
     }
 
-    impl::~impl()
-    {
-        term_pixel_shader();
-        term_vertex_shader();
-    }
-
     void impl::update(matrix4 world, matrix4 view, matrix4 projection)
     {
         cb.world = matrix_transpose(world);
@@ -38,6 +32,12 @@ namespace engine::render::shader::directx
         device_context->VSSetConstantBuffers(0, 1, &constant_buff);
         device_context->PSSetShader(pixel_shader, NULL, 0);
         device_context->PSSetConstantBuffers(0, 1, &constant_buff);
+    }
+
+    impl::~impl()
+    {
+        term_pixel_shader();
+        term_vertex_shader();
     }
 
     void impl::init_vertex_shader(string file)

@@ -21,16 +21,6 @@ namespace engine::render::device::directx
         set_primitive_topology();
     }
 
-    impl::~impl()
-    {
-        clear(device_context);
-
-        release(render_target_view);
-        release(swap_chain);
-        release(device_context);
-        release(device);
-    }
-
     void impl::draw()
     {
         device_context->ClearRenderTargetView(render_target_view, *background_color);
@@ -51,6 +41,16 @@ namespace engine::render::device::directx
         device_context->DrawIndexed(36, 0, 0);*/
 
         swap_chain->Present(0, 0);
+    }
+
+    impl::~impl()
+    {
+        clear(device_context);
+
+        release(render_target_view);
+        release(swap_chain);
+        release(device_context);
+        release(device);
     }
 
     void impl::init_device()
