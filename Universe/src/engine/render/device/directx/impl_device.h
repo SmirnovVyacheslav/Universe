@@ -21,6 +21,14 @@ namespace engine::render::device::directx
 
 #ifdef windows
 
+    extern ID3D11Device* device;
+    extern ID3D11DeviceContext* device_context;
+    extern IDXGISwapChain* swap_chain;
+    extern ID3D11Texture2D* depth_stencil;
+    extern ID3D11DepthStencilView* depth_stencil_view;
+    extern ID3D11RenderTargetView* render_target_view;
+
+
     class impl : public obj
     {
     public:
@@ -37,13 +45,6 @@ namespace engine::render::device::directx
     private:
         settings::obj settings_obj;
         vector4 background_color[4] = { { 0.0f, 0.9f, 0.5f, 1.0f } };
-
-        ID3D11Device* device = nullptr;
-        ID3D11DeviceContext* device_context = nullptr;
-        IDXGISwapChain* swap_chain = nullptr;
-        ID3D11Texture2D* depth_stencil = nullptr;
-        ID3D11DepthStencilView* depth_stencil_view = nullptr;
-        ID3D11RenderTargetView* render_target_view = nullptr;
 
         void init_device();
         void init_depth_stencil_view();

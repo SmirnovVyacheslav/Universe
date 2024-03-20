@@ -11,6 +11,14 @@ namespace engine::render::device::directx
 
 #ifdef windows
 
+    ID3D11Device* device = nullptr;
+    ID3D11DeviceContext* device_context = nullptr;
+    IDXGISwapChain* swap_chain = nullptr;
+    ID3D11Texture2D* depth_stencil = nullptr;
+    ID3D11DepthStencilView* depth_stencil_view = nullptr;
+    ID3D11RenderTargetView* render_target_view = nullptr;
+
+
     impl::impl() : settings_obj(settings::get())
     {
         init_device();
@@ -51,6 +59,13 @@ namespace engine::render::device::directx
         release(swap_chain);
         release(device_context);
         release(device);
+        
+        device = nullptr;
+        device_context = nullptr;
+        swap_chain = nullptr;
+        depth_stencil = nullptr;
+        depth_stencil_view = nullptr;
+        render_target_view = nullptr;
     }
 
     void impl::init_device()

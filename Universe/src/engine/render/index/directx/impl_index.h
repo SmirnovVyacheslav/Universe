@@ -33,8 +33,6 @@ namespace engine::render::index::directx
         ~impl();
     private:
         uint16* data;
-
-        ID3D11Device* device = nullptr;
         ID3D11Buffer* buffer = nullptr;
     };
 
