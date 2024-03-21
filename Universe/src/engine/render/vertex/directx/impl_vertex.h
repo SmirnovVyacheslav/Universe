@@ -34,8 +34,6 @@ namespace engine::render::vertex::directx
         ~impl();
     private:
         engine::vertex* data;
-
-        ID3D11Device* device = nullptr;
         ID3D11Buffer* buffer = nullptr;
     };
 

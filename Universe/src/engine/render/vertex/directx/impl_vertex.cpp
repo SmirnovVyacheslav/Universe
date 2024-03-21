@@ -27,7 +27,7 @@ namespace engine::render::vertex::directx
 
         init_data.pSysMem = data;
 
-        HRESULT result = device->CreateBuffer(&buffer_data, &init_data, &buffer);
+        HRESULT result = device::directx::device->CreateBuffer(&buffer_data, &init_data, &buffer);
 
         if (FAILED(result))
         {
