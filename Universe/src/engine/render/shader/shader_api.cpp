@@ -2,6 +2,8 @@
 
 #include "shader_api.h"
 
+#include "directx/shader_impl.h"
+
 
 namespace engine::render::shader
 {
@@ -10,7 +12,7 @@ namespace engine::render::shader
 
     void init()
     {
-        //inst = new obj;
+        inst = new directx::impl("res/game/shader/base.fx");
     }
 
     obj& get()
@@ -20,7 +22,7 @@ namespace engine::render::shader
 
     void term()
     {
-        // delete inst;
-        // inst = nullptr;
+        delete inst;
+        inst = nullptr;
     }
 }

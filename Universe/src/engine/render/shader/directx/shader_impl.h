@@ -44,8 +44,6 @@ namespace engine::render::shader::directx
     private:
         string file;
 
-        ID3D11Device* device = nullptr;
-        ID3D11DeviceContext* device_context = nullptr;
         ID3D11VertexShader* vertex_shader = nullptr;
         ID3D11PixelShader* pixel_shader = nullptr;
         ID3D11InputLayout* vertex_layout = nullptr;

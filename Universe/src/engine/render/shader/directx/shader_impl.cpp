@@ -23,15 +23,15 @@ namespace engine::render::shader::directx
         cb.world = matrix_transpose(world);
         cb.view = matrix_transpose(view);
         cb.projection = matrix_transpose(projection);
-        device_context->UpdateSubresource(constant_buff, 0, NULL, &cb, 0, 0);
+        device::directx::device_context->UpdateSubresource(constant_buff, 0, NULL, &cb, 0, 0);
     }
 
     void impl::set()
     {
-        device_context->VSSetShader(vertex_shader, NULL, 0);
-        device_context->VSSetConstantBuffers(0, 1, &constant_buff);
-        device_context->PSSetShader(pixel_shader, NULL, 0);
-        device_context->PSSetConstantBuffers(0, 1, &constant_buff);
+        device::directx::device_context->VSSetShader(vertex_shader, NULL, 0);
+        device::directx::device_context->VSSetConstantBuffers(0, 1, &constant_buff);
+        device::directx::device_context->PSSetShader(pixel_shader, NULL, 0);
+        device::directx::device_context->PSSetConstantBuffers(0, 1, &constant_buff);
     }
 
     impl::~impl()
@@ -44,7 +44,7 @@ namespace engine::render::shader::directx
     {
         ID3DBlob* vertex_blob = compile_shader_file(file, vertex_entry, vertex_model);
 
-        HRESULT result = device->CreateVertexShader
+        HRESULT result = device::directx::device->CreateVertexShader
         (
             vertex_blob->GetBufferPointer(),
             vertex_blob->GetBufferSize(),
@@ -66,7 +66,7 @@ namespace engine::render::shader::directx
     {
         ID3DBlob* pixel_blob = compile_shader_file(file, pixel_entry, pixel_model);
 
-        HRESULT result = device->CreatePixelShader
+        HRESULT result = device::directx::device->CreatePixelShader
         (
             pixel_blob->GetBufferPointer(),
             pixel_blob->GetBufferSize(),
@@ -90,7 +90,7 @@ namespace engine::render::shader::directx
         };
         UINT layout_size = ARRAYSIZE(layout);
 
-        HRESULT result = device->CreateInputLayout
+        HRESULT result = device::directx::device->CreateInputLayout
         (
             layout,
             layout_size,
@@ -104,7 +104,7 @@ namespace engine::render::shader::directx
             throw std::invalid_argument("Failed to create input layout");
         }
 
-        device_context->IASetInputLayout(vertex_layout);
+        device::directx::device_context->IASetInputLayout(vertex_layout);
     }
 
     void impl::init_constant_buff() {
@@ -116,7 +116,7 @@ namespace engine::render::shader::directx
         buffer_data.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
         buffer_data.CPUAccessFlags = 0;
 
-        HRESULT result = device->CreateBuffer(&buffer_data, NULL, &constant_buff);
+        HRESULT result = device::directx::device->CreateBuffer(&buffer_data, NULL, &constant_buff);
         if (FAILED(result))
         {
             throw std::invalid_argument("Failed to create shader constant buffer");
