@@ -2,6 +2,7 @@
 #pragma once
 
 #include "engine/def/abstract.h"
+#include "engine/var/matrix4.h"
 
 
 namespace engine::render::camera
@@ -9,5 +10,9 @@ namespace engine::render::camera
     class obj
     {
         abstract
+
+        virtual matrix4 world() = 0;
+        virtual matrix4 view() = 0;
+        virtual matrix4 projection() = 0;
     };
 }

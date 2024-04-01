@@ -4,6 +4,8 @@
 
 #include "engine/def/platform.h"
 #include "engine/platform/api/view.h"
+#include "engine/render/camera/api_camera.h"
+#include "engine/render/shader/shader_api.h"
 
 
 namespace engine::render::device::directx
@@ -34,6 +36,12 @@ namespace engine::render::device::directx
         device_context->ClearRenderTargetView(render_target_view, *background_color);
         device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
+        camera::obj& camera_obj = camera::get();
+
+        shader::obj& shader_obj = shader::get();
+        shader_obj.update(camera_obj.world(), camera_obj.view(), camera_obj.projection());
+        shader_obj.set();
+
         /*UINT stride = sizeof(vertex);
         UINT offset = 0;
         vertex_buff::directx::vertex_buff_impl* vertex_buffer = dynamic_cast<vertex_buff::directx::vertex_buff_impl*>(vertex_buff::get(0));
@@ -41,10 +49,6 @@ namespace engine::render::device::directx
 
         index_buff::directx::index_buff_impl* index_buffer = dynamic_cast<index_buff::directx::index_buff_impl*>(index_buff::get(0));
         device_context->IASetIndexBuffer(index_buffer->get_data(), DXGI_FORMAT_R16_UINT, 0);
-
-        shader::directx::shader_impl* shader_inst = dynamic_cast<shader::directx::shader_impl*>(shader::get(0));
-        shader_inst->update(world, view, projection);
-        shader_inst->set();
 
         device_context->DrawIndexed(36, 0, 0);*/
 

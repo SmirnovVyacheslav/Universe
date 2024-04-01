@@ -7,12 +7,12 @@
 
 namespace engine::render::camera
 {
-    impl* inst = nullptr;
+    obj* inst = nullptr;
 
 
     void init()
     {
-        inst = new impl;
+        inst = new impl();
     }
 
     void term()

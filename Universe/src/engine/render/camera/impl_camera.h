@@ -16,6 +16,10 @@ namespace engine::render::camera
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
+        matrix4 world();
+        matrix4 view();
+        matrix4 projection();
+
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;
 
@@ -25,7 +29,8 @@ namespace engine::render::camera
         vector3 at = { 0.0f, 0.0f, 0.0f };
         vector3 up = { 0.0f, 0.0f, 0.0f };
 
-        matrix4 view = matrix_identity();
-        matrix4 projection = matrix_identity();
+        matrix4 matrix_world = matrix_identity();
+        matrix4 matrix_view = matrix_identity();
+        matrix4 matrix_projection = matrix_identity();
     };
 }
