@@ -169,7 +169,7 @@
     <ClCompile Include="src\engine\render\shader\shader_api.cpp">
       <Filter>src\engine\render\shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\shader\directx\shader_impl.cpp">
+    <ClCompile Include="src\engine\render\shader\directx\impl_shader.cpp">
       <Filter>src\engine\render\shader\directx</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\render\vertex\api_vertex.cpp">
@@ -297,13 +297,13 @@
     <ClInclude Include="src\engine\render\settings\obj_settings.h">
       <Filter>src\engine\render\settings</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\shader\shader_api.h">
+    <ClInclude Include="src\engine\render\shader\api_shader.h">
       <Filter>src\engine\render\shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\shader\shader_obj.h">
+    <ClInclude Include="src\engine\render\shader\obj_shader.h">
       <Filter>src\engine\render\shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\shader\directx\shader_impl.h">
+    <ClInclude Include="src\engine\render\shader\directx\impl_shader.h">
       <Filter>src\engine\render\shader\directx</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\vertex\api_vertex.h">

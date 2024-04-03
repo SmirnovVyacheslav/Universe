@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "../shader_api.h"
+#include "../api_shader.h"
 
 #include "engine/def/platform.h"
 #include "engine/var/matrix4.h"

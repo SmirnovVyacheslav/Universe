@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "shader_obj.h"
+#include "obj_shader.h"
 
 
 namespace engine::render::shader

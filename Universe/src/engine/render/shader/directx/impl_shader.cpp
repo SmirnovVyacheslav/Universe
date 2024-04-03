@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "shader_impl.h"
+#include "impl_shader.h"
 
 #include "engine/def/platform.h"
 #include "engine/render/device/directx/impl_device.h"

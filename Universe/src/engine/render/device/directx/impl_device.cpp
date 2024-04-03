@@ -6,7 +6,7 @@
 #include "engine/platform/api/view.h"
 #include "engine/render/camera/api_camera.h"
 #include "engine/render/index/api_index.h"
-#include "engine/render/shader/shader_api.h"
+#include "engine/render/shader/api_shader.h"
 #include "engine/render/vertex/api_vertex.h"
 
 

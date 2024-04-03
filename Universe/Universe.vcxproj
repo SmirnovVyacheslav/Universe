@@ -37,7 +37,7 @@
     <ClCompile Include="src\engine\render\index\api_index.cpp" />
     <ClCompile Include="src\engine\render\index\directx\impl_index.cpp" />
     <ClCompile Include="src\engine\render\settings\api_settings.cpp" />
-    <ClCompile Include="src\engine\render\shader\directx\shader_impl.cpp" />
+    <ClCompile Include="src\engine\render\shader\directx\impl_shader.cpp" />
     <ClCompile Include="src\engine\render\shader\shader_api.cpp" />
     <ClCompile Include="src\engine\render\vertex\api_vertex.cpp" />
     <ClCompile Include="src\engine\render\vertex\directx\impl_vertex.cpp" />
@@ -79,9 +79,9 @@
     <ClInclude Include="src\engine\render\index\obj_index.h" />
     <ClInclude Include="src\engine\render\settings\api_settings.h" />
     <ClInclude Include="src\engine\render\settings\obj_settings.h" />
-    <ClInclude Include="src\engine\render\shader\directx\shader_impl.h" />
-    <ClInclude Include="src\engine\render\shader\shader_api.h" />
-    <ClInclude Include="src\engine\render\shader\shader_obj.h" />
+    <ClInclude Include="src\engine\render\shader\directx\impl_shader.h" />
+    <ClInclude Include="src\engine\render\shader\api_shader.h" />
+    <ClInclude Include="src\engine\render\shader\obj_shader.h" />
     <ClInclude Include="src\engine\render\vertex\api_vertex.h" />
     <ClInclude Include="src\engine\render\vertex\directx\impl_vertex.h" />
     <ClInclude Include="src\engine\render\vertex\obj_vertex.h" />

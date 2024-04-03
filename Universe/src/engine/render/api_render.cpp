@@ -6,7 +6,7 @@
 #include "device/api_device.h"
 #include "index/api_index.h"
 #include "settings/api_settings.h"
-#include "shader/shader_api.h"
+#include "shader/api_shader.h"
 #include "vertex/api_vertex.h"
 
 
