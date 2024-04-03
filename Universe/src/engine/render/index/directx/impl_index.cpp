@@ -35,9 +35,9 @@ namespace engine::render::index::directx
         }
     }
 
-    ID3D11Buffer* impl::get_data()
+    void impl::set()
     {
-        return buffer;
+        device::directx::device_context->IASetIndexBuffer(buffer, DXGI_FORMAT_R16_UINT, 0);
     }
 
     impl::~impl()

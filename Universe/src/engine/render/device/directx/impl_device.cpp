@@ -5,6 +5,7 @@
 #include "engine/def/platform.h"
 #include "engine/platform/api/view.h"
 #include "engine/render/camera/api_camera.h"
+#include "engine/render/index/api_index.h"
 #include "engine/render/shader/shader_api.h"
 
 
@@ -38,6 +39,8 @@ namespace engine::render::device::directx
 
         camera::obj& camera_obj = camera::get();
 
+        index::get().set();
+
         shader::obj& shader_obj = shader::get();
         shader_obj.update(camera_obj.world(), camera_obj.view(), camera_obj.projection());
         shader_obj.set();
@@ -46,9 +49,6 @@ namespace engine::render::device::directx
         UINT offset = 0;
         vertex_buff::directx::vertex_buff_impl* vertex_buffer = dynamic_cast<vertex_buff::directx::vertex_buff_impl*>(vertex_buff::get(0));
         device_context->IASetVertexBuffers(0, 1, vertex_buffer->get_data(), &stride, &offset);
-
-        index_buff::directx::index_buff_impl* index_buffer = dynamic_cast<index_buff::directx::index_buff_impl*>(index_buff::get(0));
-        device_context->IASetIndexBuffer(index_buffer->get_data(), DXGI_FORMAT_R16_UINT, 0);
 
         device_context->DrawIndexed(36, 0, 0);*/
 

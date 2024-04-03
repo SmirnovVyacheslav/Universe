@@ -25,7 +25,7 @@ namespace engine::render::index::directx
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
-        ID3D11Buffer* get_data();
+        void set();
 
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;

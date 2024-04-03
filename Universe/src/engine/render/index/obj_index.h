@@ -12,5 +12,7 @@ namespace engine::render::index
         abstract
 
         int32 id;
+
+        virtual void set() = 0;
     };
 }
