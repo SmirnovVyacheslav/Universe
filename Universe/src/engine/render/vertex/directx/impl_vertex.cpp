@@ -35,9 +35,9 @@ namespace engine::render::vertex::directx
         }
     }
 
-    ID3D11Buffer** impl::get_data()
+    void impl::set()
     {
-        return &buffer;
+        device::directx::device_context->IASetVertexBuffers(0, 1, &buffer, &stride, &offset);
     }
 
     impl::~impl()

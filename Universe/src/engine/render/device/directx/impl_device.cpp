@@ -7,6 +7,7 @@
 #include "engine/render/camera/api_camera.h"
 #include "engine/render/index/api_index.h"
 #include "engine/render/shader/shader_api.h"
+#include "engine/render/vertex/api_vertex.h"
 
 
 namespace engine::render::device::directx
@@ -37,20 +38,15 @@ namespace engine::render::device::directx
         device_context->ClearRenderTargetView(render_target_view, *background_color);
         device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-        camera::obj& camera_obj = camera::get();
-
         index::get().set();
+        vertex::get().set();
 
+        camera::obj& camera_obj = camera::get();
         shader::obj& shader_obj = shader::get();
         shader_obj.update(camera_obj.world(), camera_obj.view(), camera_obj.projection());
         shader_obj.set();
 
-        /*UINT stride = sizeof(vertex);
-        UINT offset = 0;
-        vertex_buff::directx::vertex_buff_impl* vertex_buffer = dynamic_cast<vertex_buff::directx::vertex_buff_impl*>(vertex_buff::get(0));
-        device_context->IASetVertexBuffers(0, 1, vertex_buffer->get_data(), &stride, &offset);
-
-        device_context->DrawIndexed(36, 0, 0);*/
+        device_context->DrawIndexed(36, 0, 0);
 
         swap_chain->Present(0, 0);
     }

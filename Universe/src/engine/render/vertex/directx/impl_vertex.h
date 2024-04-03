@@ -26,7 +26,7 @@ namespace engine::render::vertex::directx
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
-        ID3D11Buffer** get_data();
+        void set();
 
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;
@@ -35,6 +35,9 @@ namespace engine::render::vertex::directx
     private:
         engine::vertex* data;
         ID3D11Buffer* buffer = nullptr;
+
+        UINT offset = 0;
+        UINT stride = sizeof(engine::vertex);
     };
 
 #endif
