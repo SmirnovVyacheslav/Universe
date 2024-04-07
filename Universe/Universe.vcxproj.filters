@@ -86,6 +86,9 @@
     <Filter Include="src\engine\render\vertex\directx">
       <UniqueIdentifier>{122a12c2-5f05-415a-9614-fa0401da01a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\mesh">
+      <UniqueIdentifier>{214d13b2-5a2d-4d64-9057-cfc36cc81cd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
