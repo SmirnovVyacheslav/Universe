@@ -184,6 +184,9 @@
     <ClCompile Include="src\engine\render\mesh\api_mesh.cpp">
       <Filter>src\engine\render\mesh</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\render\mesh\obj_mesh.cpp">
+      <Filter>src\engine\render\mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
@@ -328,6 +331,9 @@
       <Filter>src\engine\render\device</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\mesh\api_mesh.h">
+      <Filter>src\engine\render\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\mesh\obj_mesh.h">
       <Filter>src\engine\render\mesh</Filter>
     </ClInclude>
   </ItemGroup>
