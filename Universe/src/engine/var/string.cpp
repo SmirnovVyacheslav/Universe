@@ -132,7 +132,8 @@ namespace engine
 
     bool operator==(const string& str_a, const string& str_b)
     {
-        return str_a.id == str_b.id;
+        // return str_a.id == str_b.id;
+        return str_a.u8_str() == str_b.u8_str();
     }
 
     bool operator!=(const string& str_a, const string& str_b)
