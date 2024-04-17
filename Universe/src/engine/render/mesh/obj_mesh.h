@@ -24,5 +24,8 @@ namespace engine::render::mesh
     private:
         index::obj* index_obj = nullptr;
         vertex::obj* vertex_obj = nullptr;
+
+        void load_index_data(string file);
+        void load_vertex_data(string file);
     };
 }

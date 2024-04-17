@@ -17,6 +17,7 @@ namespace engine::render::mesh
 {
     obj::obj(string file)
     {
+        load_index_data(file);
         array<uint16> index_arr;
         array<engine::vertex> vertex_arr;
 
@@ -25,7 +26,7 @@ namespace engine::render::mesh
 
         string str;
         input_stream >> str;
-        if (str != string(u8"vertices")) {
+        if (str != string(u8"vertex")) {
             throw std::invalid_argument("Incorrect file format");
         }
         std::cout << str;
@@ -40,7 +41,7 @@ namespace engine::render::mesh
         }
 
         input_stream >> str;
-        if (str != string(u8"indices")) {
+        if (str != string(u8"index")) {
             throw std::invalid_argument("Incorrect file format");
         }
 
@@ -67,4 +68,33 @@ namespace engine::render::mesh
         // delete vertex_obj;
     }
 
+
+    void obj::load_index_data(string file)
+    {
+        std::ifstream ifstream;
+        ifstream.open(file.u8_str());
+
+        string str;
+        while ((ifstream >> str) && (str != string(u8"index")));
+        if (str != string(u8"index")) {
+            throw std::invalid_argument("Incorrect file format");
+        }
+
+        uint16 index_val = 0;
+        uint32 index_num = 0;
+        array<uint16> index_arr;
+
+        ifstream >> index_num;
+        for (uint32 i = 0; i < index_num; ++i) {
+            ifstream >> index_val;
+            index_arr.append(index_val);
+        }
+
+        ifstream.close();
+    }
+
+    void obj::load_vertex_data(string file)
+    {
+        //
+    }
 }

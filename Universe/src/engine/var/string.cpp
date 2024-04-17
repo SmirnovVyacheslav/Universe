@@ -138,7 +138,7 @@ namespace engine
 
     bool operator!=(const string& str_a, const string& str_b)
     {
-        return str_a.id != str_b.id;
+        return !(str_a == str_b);
     }
 
     std::istream& operator>>(std::istream& in_stream, string& str)
