@@ -9,14 +9,14 @@
 #include "shader/api_shader.h"
 #include "vertex/api_vertex.h"
 
-#include "mesh/api_mesh.h"
+//#include "mesh/api_mesh.h"
 
 
 namespace engine::render
 {
     void init()
     {
-        mesh::obj(u8"res/game/mesh/cube.mesh");
+        //mesh::obj(u8"res/game/mesh/cube.mesh");
         settings::init();
         camera::init();
         device::init();

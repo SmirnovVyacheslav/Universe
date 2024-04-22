@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "obj_mesh.h"
+#include "impl_mesh.h"
 
 #include "engine/var/vector3.h"
 #include "engine/var/vector4.h"
@@ -12,25 +12,25 @@
 
 namespace engine::render::mesh
 {
-    obj::obj(string file)
+    void impl::init(string file)
     {
         load_index_data(file);
         load_vertex_data(file);
     }
 
-    void obj::set()
+    void impl::set()
     {
         //
     }
 
-    obj::~obj()
+    impl::~impl()
     {
         // delete index_obj;
         // delete vertex_obj;
     }
 
 
-    array<uint16> obj::load_index_data(string file)
+    array<uint16> impl::load_index_data(string file)
     {
         std::ifstream ifstream;
         ifstream.open(file.u8_str());
@@ -55,7 +55,7 @@ namespace engine::render::mesh
         return index_arr;
     }
 
-    array<engine::vertex> obj::load_vertex_data(string file)
+    array<engine::vertex> impl::load_vertex_data(string file)
     {
         std::ifstream ifstream;
         ifstream.open(file.u8_str());

@@ -37,7 +37,7 @@
     <ClCompile Include="src\engine\render\index\api_index.cpp" />
     <ClCompile Include="src\engine\render\index\directx\impl_index.cpp" />
     <ClCompile Include="src\engine\render\mesh\api_mesh.cpp" />
-    <ClCompile Include="src\engine\render\mesh\obj_mesh.cpp" />
+    <ClCompile Include="src\engine\render\mesh\impl_mesh.cpp" />
     <ClCompile Include="src\engine\render\settings\api_settings.cpp" />
     <ClCompile Include="src\engine\render\shader\directx\impl_shader.cpp" />
     <ClCompile Include="src\engine\render\shader\shader_api.cpp" />
@@ -80,6 +80,7 @@
     <ClInclude Include="src\engine\render\index\directx\impl_index.h" />
     <ClInclude Include="src\engine\render\index\obj_index.h" />
     <ClInclude Include="src\engine\render\mesh\api_mesh.h" />
+    <ClInclude Include="src\engine\render\mesh\impl_mesh.h" />
     <ClInclude Include="src\engine\render\mesh\obj_mesh.h" />
     <ClInclude Include="src\engine\render\settings\api_settings.h" />
     <ClInclude Include="src\engine\render\settings\obj_settings.h" />
