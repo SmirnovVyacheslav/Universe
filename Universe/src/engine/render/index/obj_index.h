@@ -2,6 +2,7 @@
 #pragma once
 
 #include "engine/def/abstract.h"
+#include "engine/var/array.h"
 #include "engine/var/std.h"
 
 

@@ -38,7 +38,7 @@ namespace engine::render::device::directx
         device_context->ClearRenderTargetView(render_target_view, *background_color);
         device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-        index::get().set();
+        /*index::get().set();
         vertex::get().set();
 
         camera::obj& camera_obj = camera::get();
@@ -46,7 +46,7 @@ namespace engine::render::device::directx
         shader_obj.update(camera_obj.world(), camera_obj.view(), camera_obj.projection());
         shader_obj.set();
 
-        device_context->DrawIndexed(36, 0, 0);
+        device_context->DrawIndexed(36, 0, 0);*/
 
         swap_chain->Present(0, 0);
     }

@@ -8,6 +8,7 @@ namespace engine::render::index
 {
     void init();
 
+    void add(array<uint16> data);
     obj& get();
 
     void term();

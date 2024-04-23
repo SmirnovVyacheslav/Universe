@@ -21,7 +21,7 @@ namespace engine::render::index::directx
     class impl : public obj
     {
     public:
-        impl(uint16* data);
+        impl(array<uint16> data);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -32,7 +32,7 @@ namespace engine::render::index::directx
 
         ~impl();
     private:
-        uint16* data;
+        array<uint16> data;
         ID3D11Buffer* buffer = nullptr;
     };
 

@@ -26,6 +26,8 @@ namespace engine
        array& operator=(const array& src_ptr) = default;
        T& operator[](const int32 index);
        const T& operator[](const int32 index) const;
+       T* operator*();
+       const T* operator*() const;
 
        ~array() = default;
    private:
@@ -84,5 +86,17 @@ namespace engine
    const T& array<T>::operator[](const int32 index) const
    {
        return data[(size() + index % size()) % size()];
+   }
+
+   template <typename T>
+   T* array<T>::operator*()
+   {
+       return &data.front();
+   }
+
+   template <typename T>
+   const T* array<T>::operator*() const
+   {
+       return &data.front();
    }
 }
