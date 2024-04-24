@@ -22,7 +22,7 @@ namespace engine::render::vertex::directx
     class impl : public obj
     {
     public:
-        impl(engine::vertex* data);
+        impl(array<engine::vertex> data);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -33,7 +33,7 @@ namespace engine::render::vertex::directx
 
         ~impl();
     private:
-        engine::vertex* data;
+        array<engine::vertex> data;
         ID3D11Buffer* buffer = nullptr;
 
         UINT offset = 0;
