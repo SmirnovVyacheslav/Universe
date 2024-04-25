@@ -2,6 +2,8 @@
 
 #include "api_mesh.h"
 
+#include "impl_mesh.h"
+
 
 namespace engine::render::mesh
 {
@@ -9,7 +11,13 @@ namespace engine::render::mesh
 
     void init()
     {
-        //
+        term();
+
+    }
+
+    void add(string file)
+    {
+        inst = new impl(file);
     }
 
     obj& get()
@@ -19,7 +27,8 @@ namespace engine::render::mesh
 
     void term()
     {
-        //
+        delete inst;
+        inst = nullptr;
     }
 
 }

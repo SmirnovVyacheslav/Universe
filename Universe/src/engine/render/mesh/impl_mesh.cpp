@@ -12,7 +12,7 @@
 
 namespace engine::render::mesh
 {
-    void impl::init(string file)
+    impl::impl(string file)
     {
         load_index_data(file);
         load_vertex_data(file);

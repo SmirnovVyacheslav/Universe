@@ -8,6 +8,7 @@ namespace engine::render::mesh
 {
     void init();
 
+    void add(string file);
     obj& get();
 
     void term();

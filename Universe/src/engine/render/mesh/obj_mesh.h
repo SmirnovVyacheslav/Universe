@@ -11,7 +11,6 @@ namespace engine::render::mesh
     {
         abstract
 
-        virtual void init(string file) = 0;
         virtual void set() = 0;
     };
 }

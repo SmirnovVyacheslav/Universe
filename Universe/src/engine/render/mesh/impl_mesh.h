@@ -16,11 +16,10 @@ namespace engine::render::mesh
     class impl : public obj
     {
     public:
-        impl() = default;
+        impl(string file);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
-        void init(string file);
         void set();
 
         impl& operator=(impl&& src) = delete;
