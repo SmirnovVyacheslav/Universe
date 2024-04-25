@@ -15,13 +15,9 @@ namespace engine::render::vertex
         term();
     }
 
-    void add(array<engine::vertex> data)
+    obj& add(array<engine::vertex> data)
     {
         inst = new directx::impl(data);
-    }
-
-    obj& get()
-    {
         return *inst;
     }
 

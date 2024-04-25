@@ -11,8 +11,7 @@ namespace engine::render::vertex
 {
     void init();
 
-    void add(array<engine::vertex> data);
-    obj& get();
+    obj& add(array<engine::vertex> data);
 
     void term();
 }

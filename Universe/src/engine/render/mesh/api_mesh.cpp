@@ -12,16 +12,11 @@ namespace engine::render::mesh
     void init()
     {
         term();
-
     }
 
-    void add(string file)
+    obj& add(string file)
     {
         inst = new impl(file);
-    }
-
-    obj& get()
-    {
         return *inst;
     }
 

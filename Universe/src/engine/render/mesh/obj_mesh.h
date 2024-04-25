@@ -2,7 +2,6 @@
 #pragma once
 
 #include "engine/def/abstract.h"
-#include "engine/var/string.h"
 
 
 namespace engine::render::mesh

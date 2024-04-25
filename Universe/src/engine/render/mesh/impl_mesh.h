@@ -3,8 +3,8 @@
 
 #include "obj_mesh.h"
 
-#include "engine/render/index/obj_index.h"
-#include "engine/render/vertex/obj_vertex.h"
+#include "engine/render/index/api_index.h"
+#include "engine/render/vertex/api_vertex.h"
 #include "engine/var/array.h"
 #include "engine/var/std.h"
 #include "engine/var/string.h"
@@ -27,8 +27,8 @@ namespace engine::render::mesh
 
         ~impl();
     private:
-        index::obj* index_obj = nullptr;
-        vertex::obj* vertex_obj = nullptr;
+        index::obj& index_obj;
+        vertex::obj& vertex_obj;
 
         array<uint16> load_index_data(string file);
         array<engine::vertex> load_vertex_data(string file);

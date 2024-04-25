@@ -15,13 +15,9 @@ namespace engine::render::index
         term();
     }
 
-    void add(array<uint16> data)
+    obj& add(array<uint16> data)
     {
         inst = new directx::impl(data);
-    }
-
-    obj& get()
-    {
         return *inst;
     }
 

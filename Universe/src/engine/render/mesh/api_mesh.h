@@ -3,13 +3,14 @@
 
 #include "obj_mesh.h"
 
+#include "engine/var/string.h"
+
 
 namespace engine::render::mesh
 {
     void init();
 
-    void add(string file);
-    obj& get();
+    obj& add(string file);
 
     void term();
 }

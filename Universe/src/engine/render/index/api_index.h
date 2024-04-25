@@ -3,13 +3,15 @@
 
 #include "obj_index.h"
 
+#include "engine/var/array.h"
+#include "engine/var/std.h"
+
 
 namespace engine::render::index
 {
     void init();
 
-    void add(array<uint16> data);
-    obj& get();
+    obj& add(array<uint16> data);
 
     void term();
 }

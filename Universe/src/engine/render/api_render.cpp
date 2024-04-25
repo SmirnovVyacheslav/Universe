@@ -15,7 +15,6 @@ namespace engine::render
 {
     void init()
     {
-        //mesh::obj(u8"res/game/mesh/cube.mesh");
         settings::init();
         camera::init();
         device::init();
@@ -27,6 +26,7 @@ namespace engine::render
 
     void draw()
     {
+        mesh::obj& mesh_obj = mesh::add(u8"res/game/mesh/cube.mesh");
         device::draw();
     }
 

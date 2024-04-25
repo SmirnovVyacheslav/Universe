@@ -12,11 +12,10 @@
 
 namespace engine::render::mesh
 {
-    impl::impl(string file)
-    {
-        load_index_data(file);
-        load_vertex_data(file);
-    }
+    impl::impl(string file) :
+        index_obj(index::add(load_index_data(file))),
+        vertex_obj(vertex::add(load_vertex_data(file)))
+    {}
 
     void impl::set()
     {
@@ -24,11 +23,7 @@ namespace engine::render::mesh
     }
 
     impl::~impl()
-    {
-        // delete index_obj;
-        // delete vertex_obj;
-    }
-
+    {}
 
     array<uint16> impl::load_index_data(string file)
     {
