@@ -3,6 +3,7 @@
 
 #include "obj_device.h"
 
+#include "engine/render/mesh/obj_mesh.h"
 #include "engine/var/string.h"
 
 
@@ -10,7 +11,7 @@ namespace engine::render::device
 {
     void init();
 
-    void draw();
+    void draw(mesh::obj& mesh_obj);
     string type();
 
     void term();

@@ -33,20 +33,19 @@ namespace engine::render::device::directx
         set_primitive_topology();
     }
 
-    void impl::draw()
+    void impl::draw(mesh::obj& mesh_obj)
     {
         device_context->ClearRenderTargetView(render_target_view, *background_color);
         device_context->ClearDepthStencilView(depth_stencil_view, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-        /*index::get().set();
-        vertex::get().set();
+        mesh_obj.set();
 
         camera::obj& camera_obj = camera::get();
         shader::obj& shader_obj = shader::get();
         shader_obj.update(camera_obj.world(), camera_obj.view(), camera_obj.projection());
         shader_obj.set();
 
-        device_context->DrawIndexed(36, 0, 0);*/
+        device_context->DrawIndexed(36, 0, 0);
 
         swap_chain->Present(0, 0);
     }

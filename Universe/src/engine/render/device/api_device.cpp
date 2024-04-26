@@ -16,9 +16,9 @@ namespace engine::render::device
         inst = new directx::impl();
     }
 
-    void draw()
+    void draw(mesh::obj& mesh_obj)
     {
-        inst->draw();
+        inst->draw(mesh_obj);
     }
 
     string type()

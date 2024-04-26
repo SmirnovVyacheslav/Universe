@@ -19,7 +19,8 @@ namespace engine::render::mesh
 
     void impl::set()
     {
-        //
+        index_obj.set();
+        vertex_obj.set();
     }
 
     impl::~impl()
