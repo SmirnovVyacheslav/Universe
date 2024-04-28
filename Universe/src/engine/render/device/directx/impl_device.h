@@ -6,6 +6,7 @@
 #include "engine/def/platform.h"
 #include "engine/render/settings/api_settings.h"
 #include "engine/render/mesh/obj_mesh.h"
+#include "engine/render/shader/obj_shader.h"
 #include "engine/var/matrix4.h"
 #include "engine/var/vector3.h"
 
@@ -37,7 +38,7 @@ namespace engine::render::device::directx
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
-        void draw(mesh::obj& mesh_obj);
+        void draw(mesh::obj& mesh_obj, shader::obj& shader_obj);
 
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;

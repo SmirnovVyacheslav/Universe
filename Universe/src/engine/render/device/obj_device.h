@@ -4,6 +4,7 @@
 #include "engine/def/abstract.h"
 
 #include "engine/render/mesh/obj_mesh.h"
+#include "engine/render/shader/obj_shader.h"
 
 
 namespace engine::render::device
@@ -12,6 +13,6 @@ namespace engine::render::device
     {
         abstract
 
-        virtual void draw(mesh::obj& mesh_obj) = 0;
+        virtual void draw(mesh::obj& mesh_obj, shader::obj& shader_obj) = 0;
     };
 }

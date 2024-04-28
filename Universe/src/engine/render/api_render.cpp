@@ -27,7 +27,8 @@ namespace engine::render
     void draw()
     {
         mesh::obj& mesh_obj = mesh::add(u8"res/game/mesh/cube.mesh");
-        device::draw(mesh_obj);
+        shader::obj& shader_obj = shader::add(u8"res/game/shader/base.fx");
+        device::draw(mesh_obj, shader_obj);
     }
 
     void term()

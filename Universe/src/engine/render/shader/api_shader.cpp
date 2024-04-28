@@ -12,11 +12,12 @@ namespace engine::render::shader
 
     void init()
     {
-        inst = new directx::impl("res/game/shader/base.fx");
+        term();
     }
 
-    obj& get()
+    obj& add(string file)
     {
+        inst = new directx::impl(file);
         return *inst;
     }
 

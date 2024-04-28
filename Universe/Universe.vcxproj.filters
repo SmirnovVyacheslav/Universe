@@ -169,7 +169,7 @@
     <ClCompile Include="src\engine\render\settings\api_settings.cpp">
       <Filter>src\engine\render\settings</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\shader\shader_api.cpp">
+    <ClCompile Include="src\engine\render\shader\api_shader.cpp">
       <Filter>src\engine\render\shader</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\render\shader\directx\impl_shader.cpp">

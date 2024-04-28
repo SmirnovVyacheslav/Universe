@@ -3,12 +3,14 @@
 
 #include "obj_shader.h"
 
+#include "engine/var/string.h"
+
 
 namespace engine::render::shader
 {
     void init();
 
-    obj& get();
+    obj& add(string file);
 
     void term();
 }
