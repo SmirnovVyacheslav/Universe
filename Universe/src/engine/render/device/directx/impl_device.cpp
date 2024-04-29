@@ -44,7 +44,7 @@ namespace engine::render::device::directx
         shader_obj.update(camera_obj.world(), camera_obj.view(), camera_obj.projection());
         shader_obj.set();
 
-        device_context->DrawIndexed(36, 0, 0);
+        device_context->DrawIndexed(mesh_obj.size(), 0, 0);
 
         swap_chain->Present(0, 0);
     }

@@ -21,6 +21,7 @@ namespace engine::render::mesh
         impl(const impl& src) = delete;
 
         void set();
+        int32 size();
 
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;

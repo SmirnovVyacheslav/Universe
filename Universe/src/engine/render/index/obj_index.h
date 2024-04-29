@@ -14,5 +14,6 @@ namespace engine::render::index
         int32 id;
 
         virtual void set() = 0;
+        virtual int32 size() = 0;
     };
 }

@@ -23,6 +23,11 @@ namespace engine::render::mesh
         vertex_obj.set();
     }
 
+    int32 impl::size()
+    {
+        return index_obj.size();
+    }
+
     impl::~impl()
     {}
 

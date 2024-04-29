@@ -2,6 +2,7 @@
 #pragma once
 
 #include "engine/def/abstract.h"
+#include "engine/var/std.h"
 
 
 namespace engine::render::mesh
@@ -11,5 +12,6 @@ namespace engine::render::mesh
         abstract
 
         virtual void set() = 0;
+        virtual int32 size() = 0;
     };
 }

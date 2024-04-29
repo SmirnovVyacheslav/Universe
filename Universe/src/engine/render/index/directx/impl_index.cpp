@@ -40,6 +40,11 @@ namespace engine::render::index::directx
         device::directx::device_context->IASetIndexBuffer(buffer, DXGI_FORMAT_R16_UINT, 0);
     }
 
+    int32 impl::size()
+    {
+        return data.size();
+    }
+
     impl::~impl()
     {
         device::directx::release(buffer);
