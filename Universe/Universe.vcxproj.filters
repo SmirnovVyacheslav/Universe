@@ -89,6 +89,9 @@
     <Filter Include="src\engine\render\mesh">
       <UniqueIdentifier>{214d13b2-5a2d-4d64-9057-cfc36cc81cd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\model">
+      <UniqueIdentifier>{b62c1b12-0313-4c75-b172-c9590db449ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
