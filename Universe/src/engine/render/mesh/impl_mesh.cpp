@@ -2,8 +2,9 @@
 
 #include "impl_mesh.h"
 
-#include "engine/var/vector3.h"
-#include "engine/var/vector4.h"
+#include "engine/render/index/api_index.h"
+#include "engine/render/settings/api_settings.h"
+#include "engine/render/vertex/api_vertex.h"
 
 #include <iostream>
 #include <filesystem>
@@ -12,29 +13,10 @@
 
 namespace engine::render::mesh
 {
-    impl::impl(string file) :
-        index_obj(index::add(load_index_data(file))),
-        vertex_obj(vertex::add(load_vertex_data(file)))
-    {}
-
-    void impl::set()
-    {
-        index_obj.set();
-        vertex_obj.set();
-    }
-
-    int32 impl::size()
-    {
-        return index_obj.size();
-    }
-
-    impl::~impl()
-    {}
-
-    array<uint16> impl::load_index_data(string file)
+    index::obj& get_index(string mesh_name)
     {
         std::ifstream ifstream;
-        ifstream.open(file.u8_str());
+        ifstream.open(settings::get().dir.model.u8_str() + mesh_name.u8_str() + u8".mesh");
 
         string str;
         while ((ifstream >> str) && (str != string(u8"index")));
@@ -51,15 +33,15 @@ namespace engine::render::mesh
             ifstream >> index_val;
             index_arr.append(index_val);
         }
-
         ifstream.close();
-        return index_arr;
+
+        return index::add(index_arr);
     }
 
-    array<engine::vertex> impl::load_vertex_data(string file)
+    vertex::obj& get_vertex(string mesh_name)
     {
         std::ifstream ifstream;
-        ifstream.open(file.u8_str());
+        ifstream.open(settings::get().dir.model.u8_str() + mesh_name.u8_str() + u8".mesh");
 
         string str;
         while ((ifstream >> str) && (str != string(u8"vertex")));
@@ -76,8 +58,28 @@ namespace engine::render::mesh
             ifstream >> vertex_val;
             vertex_arr.append(engine::vertex(vertex_val, vector4(0.0f, 0.0f, 1.0f, 1.0f)));
         }
-
         ifstream.close();
-        return vertex_arr;
+
+        return vertex::add(vertex_arr);
     }
+
+
+    impl::impl(string mesh_name) :
+        index_obj(get_index(mesh_name)),
+        vertex_obj(get_vertex(mesh_name))
+    {}
+
+    void impl::set()
+    {
+        index_obj.set();
+        vertex_obj.set();
+    }
+
+    int32 impl::size()
+    {
+        return index_obj.size();
+    }
+
+    impl::~impl()
+    {}
 }

@@ -1,20 +1,19 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 #pragma once
 
-#include "obj_mesh.h"
+#include "obj_model.h"
 
-#include "engine/render/index/obj_index.h"
-#include "engine/render/vertex/obj_vertex.h"
-#include "engine/var/std.h"
+#include "engine/render/mesh/api_mesh.h"
+#include "engine/render/shader/api_shader.h"
 #include "engine/var/string.h"
 
 
-namespace engine::render::mesh
+namespace engine::render::model
 {
     class impl : public obj
     {
     public:
-        impl(string mesh_name);
+        impl(string name);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -26,7 +25,8 @@ namespace engine::render::mesh
 
         ~impl();
     private:
-        index::obj& index_obj;
-        vertex::obj& vertex_obj;
+        mesh::obj& mesh_obj;
     };
+
+    mesh::obj& get_mesh(string model_name);
 }
