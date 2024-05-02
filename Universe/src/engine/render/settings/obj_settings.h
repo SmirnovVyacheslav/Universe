@@ -9,9 +9,9 @@ namespace engine::render::settings
 {
     struct dir
     {
-        string mesh = u8"res/game/mesh";
-        string model = u8"res/game/model";
-        string shader = u8"res/game/shader";
+        string mesh = u8"res/game/mesh/";
+        string model = u8"res/game/model/";
+        string shader = u8"res/game/shader/";
     };
 
     struct obj

@@ -16,7 +16,7 @@ namespace engine::render::mesh
     index::obj& get_index(string mesh_name)
     {
         std::ifstream ifstream;
-        ifstream.open(settings::get().dir.model.u8_str() + mesh_name.u8_str() + u8".mesh");
+        ifstream.open(settings::get().dir.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
 
         string str;
         while ((ifstream >> str) && (str != string(u8"index")));
@@ -41,7 +41,7 @@ namespace engine::render::mesh
     vertex::obj& get_vertex(string mesh_name)
     {
         std::ifstream ifstream;
-        ifstream.open(settings::get().dir.model.u8_str() + mesh_name.u8_str() + u8".mesh");
+        ifstream.open(settings::get().dir.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
 
         string str;
         while ((ifstream >> str) && (str != string(u8"vertex")));

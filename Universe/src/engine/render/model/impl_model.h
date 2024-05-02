@@ -27,6 +27,4 @@ namespace engine::render::model
     private:
         mesh::obj& mesh_obj;
     };
-
-    mesh::obj& get_mesh(string model_name);
 }

@@ -11,23 +11,6 @@
 
 namespace engine::render::model
 {
-    impl::impl(string name) :
-        mesh_obj(get_mesh(name))
-    {}
-
-    void impl::set()
-    {
-        //
-    }
-
-    int32 impl::size()
-    {
-        // return index_obj.size();
-    }
-
-    impl::~impl()
-    {}
-
     mesh::obj& get_mesh(string model_name)
     {
         std::ifstream ifstream;
@@ -59,4 +42,22 @@ namespace engine::render::model
 
         return shader::add(str);
     }*/
+
+
+    impl::impl(string name) :
+        mesh_obj(get_mesh(name))
+    {}
+
+    void impl::set()
+    {
+        mesh_obj.set();
+    }
+
+    int32 impl::size()
+    {
+        return mesh_obj.size();
+    }
+
+    impl::~impl()
+    {}
 }

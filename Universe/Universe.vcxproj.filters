@@ -190,6 +190,12 @@
     <ClCompile Include="src\engine\render\mesh\impl_mesh.cpp">
       <Filter>src\engine\render\mesh</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\render\model\impl_model.cpp">
+      <Filter>src\engine\render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\model\api_model.cpp">
+      <Filter>src\engine\render\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
@@ -341,6 +347,15 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\mesh\impl_mesh.h">
       <Filter>src\engine\render\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\api_model.h">
+      <Filter>src\engine\render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\impl_model.h">
+      <Filter>src\engine\render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\obj_model.h">
+      <Filter>src\engine\render\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
