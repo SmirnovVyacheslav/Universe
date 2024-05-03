@@ -1,7 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "api_model.h"
-
 #include "impl_model.h"
 
 

@@ -1,12 +1,16 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
 #include "obj_model.h"
 
 #include "engine/render/mesh/api_mesh.h"
 #include "engine/render/shader/api_shader.h"
+
+#include "engine/var/std.h"
 #include "engine/var/string.h"
 
+
+#ifndef ENGINE_RENDER_MODEL_IMPL
+#define ENGINE_RENDER_MODEL_IMPL
 
 namespace engine::render::model
 {
@@ -28,3 +32,5 @@ namespace engine::render::model
         mesh::obj& mesh_obj;
     };
 }
+
+#endif

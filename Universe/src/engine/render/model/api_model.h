@@ -1,10 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
 #include "obj_model.h"
 
 #include "engine/var/string.h"
 
+
+#ifndef ENGINE_RENDER_MODEL_API
+#define ENGINE_RENDER_MODEL_API
 
 namespace engine::render::model
 {
@@ -14,3 +16,5 @@ namespace engine::render::model
 
     void term();
 }
+
+#endif
