@@ -1,8 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "engine/def/abstract.h"
-
-#include "engine/var/std.h"
+#include "inc/inc_obj_model.h"
 
 
 #ifndef ENGINE_RENDER_MODEL_OBJ

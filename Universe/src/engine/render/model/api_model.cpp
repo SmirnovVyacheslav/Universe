@@ -1,7 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "api_model.h"
+
 #include "impl_model.h"
+
+#include "obj_model.h"
+
+#include "engine/var/string.h"
 
 
 namespace engine::render::model
