@@ -92,9 +92,6 @@
     <Filter Include="src\engine\render\model">
       <UniqueIdentifier>{b62c1b12-0313-4c75-b172-c9590db449ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\model\inc">
-      <UniqueIdentifier>{b61eb19e-7638-4f39-a9bc-ae9f330b3dce}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -360,8 +357,8 @@
     <ClInclude Include="src\engine\render\model\obj_model.h">
       <Filter>src\engine\render\model</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\model\inc\inc_obj_model.h">
-      <Filter>src\engine\render\model\inc</Filter>
+    <ClInclude Include="src\engine\render\model\inc_h_obj_model.h">
+      <Filter>src\engine\render\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

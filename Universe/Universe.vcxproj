@@ -86,7 +86,7 @@
     <ClInclude Include="src\engine\render\mesh\obj_mesh.h" />
     <ClInclude Include="src\engine\render\model\api_model.h" />
     <ClInclude Include="src\engine\render\model\impl_model.h" />
-    <ClInclude Include="src\engine\render\model\inc\inc_obj_model.h" />
+    <ClInclude Include="src\engine\render\model\inc_h_obj_model.h" />
     <ClInclude Include="src\engine\render\model\obj_model.h" />
     <ClInclude Include="src\engine\render\settings\api_settings.h" />
     <ClInclude Include="src\engine\render\settings\obj_settings.h" />
