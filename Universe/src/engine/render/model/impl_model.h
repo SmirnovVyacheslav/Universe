@@ -1,12 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "obj_model.h"
-
-#include "engine/render/mesh/api_mesh.h"
-#include "engine/render/shader/api_shader.h"
-
-#include "engine/var/std.h"
-#include "engine/var/string.h"
+#include "inc_dep/inc_h_impl_model.h"
 
 
 #ifndef ENGINE_RENDER_MODEL_IMPL

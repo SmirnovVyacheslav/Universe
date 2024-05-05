@@ -92,6 +92,9 @@
     <Filter Include="src\engine\render\model">
       <UniqueIdentifier>{b62c1b12-0313-4c75-b172-c9590db449ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\model\inc_dep">
+      <UniqueIdentifier>{609ead3b-e2a7-41c9-bf3b-0964e908152c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -357,8 +360,20 @@
     <ClInclude Include="src\engine\render\model\obj_model.h">
       <Filter>src\engine\render\model</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\model\inc_h_obj_model.h">
-      <Filter>src\engine\render\model</Filter>
+    <ClInclude Include="src\engine\render\model\inc_dep\inc_h_api_model.h">
+      <Filter>src\engine\render\model\inc_dep</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\inc_dep\inc_h_impl_model.h">
+      <Filter>src\engine\render\model\inc_dep</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\inc_dep\inc_h_obj_model.h">
+      <Filter>src\engine\render\model\inc_dep</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\inc_dep\inc_s_api_model.h">
+      <Filter>src\engine\render\model\inc_dep</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\inc_dep\inc_s_impl_model.h">
+      <Filter>src\engine\render\model\inc_dep</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

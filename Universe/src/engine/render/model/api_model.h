@@ -1,9 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "obj_model.h"
-#include "engine/render/model/obj_model.h"
-
-#include "engine/var/string.h"
+#include "inc_dep/inc_h_api_model.h"
 
 
 #ifndef ENGINE_RENDER_MODEL_API
