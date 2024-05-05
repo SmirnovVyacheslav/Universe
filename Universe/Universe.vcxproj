@@ -78,6 +78,8 @@
     <ClInclude Include="src\engine\render\device\api_device.h" />
     <ClInclude Include="src\engine\render\device\directx\impl_device.h" />
     <ClInclude Include="src\engine\render\device\obj_device.h" />
+    <ClInclude Include="src\engine\render\inc_dep\inc_h_api_render.h" />
+    <ClInclude Include="src\engine\render\inc_dep\inc_s_api_render.h" />
     <ClInclude Include="src\engine\render\index\api_index.h" />
     <ClInclude Include="src\engine\render\index\directx\impl_index.h" />
     <ClInclude Include="src\engine\render\index\obj_index.h" />

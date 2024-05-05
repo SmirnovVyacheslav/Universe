@@ -95,6 +95,9 @@
     <Filter Include="src\engine\render\model\inc_dep">
       <UniqueIdentifier>{609ead3b-e2a7-41c9-bf3b-0964e908152c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\inc_dep">
+      <UniqueIdentifier>{6b9b3ae8-2934-4e86-a88e-59f65285b3b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -374,6 +377,12 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\model\inc_dep\inc_s_impl_model.h">
       <Filter>src\engine\render\model\inc_dep</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\inc_dep\inc_h_api_render.h">
+      <Filter>src\engine\render\inc_dep</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\inc_dep\inc_s_api_render.h">
+      <Filter>src\engine\render\inc_dep</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

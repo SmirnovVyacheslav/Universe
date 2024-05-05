@@ -1,8 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/var/std.h"
+#include "inc_dep/inc_h_api_render.h"
 
+
+#ifndef ENGINE_RENDER_API
+#define ENGINE_RENDER_API
 
 namespace engine::render
 {
@@ -12,3 +14,5 @@ namespace engine::render
 
     void term();
 }
+
+#endif

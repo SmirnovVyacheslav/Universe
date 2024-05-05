@@ -1,14 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_render.h"
-
-#include "camera/api_camera.h"
-#include "device/api_device.h"
-#include "index/api_index.h"
-#include "mesh/api_mesh.h"
-#include "settings/api_settings.h"
-#include "shader/api_shader.h"
-#include "vertex/api_vertex.h"
+#include "inc_dep/inc_s_api_render.h"
 
 
 namespace engine::render
@@ -22,17 +14,19 @@ namespace engine::render
         vertex::init();
         shader::init();
         mesh::init();
+        model::init();
     }
 
     void draw()
     {
-        mesh::obj& mesh_obj = mesh::add(u8"cube");
+        model::obj& model_obj = model::add(u8"cube");
         shader::obj& shader_obj = shader::add(u8"res/game/shader/base.fx");
-        device::draw(mesh_obj, shader_obj);
+        device::draw(model_obj, shader_obj);
     }
 
     void term()
     {
+        model::term();
         mesh::term();
         shader::term();
         vertex::term();
