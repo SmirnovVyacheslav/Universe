@@ -12,7 +12,7 @@ namespace engine::render::device
 {
     void init();
 
-    void draw(model::obj& model_obj, shader::obj& shader_obj);
+    void draw(model::obj& model_obj);
     string type();
 
     void term();

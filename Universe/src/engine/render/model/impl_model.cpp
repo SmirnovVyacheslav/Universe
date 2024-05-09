@@ -5,7 +5,7 @@
 
 namespace engine::render::model
 {
-    mesh::obj& get_mesh(string model_name)
+    static mesh::obj& get_mesh(string model_name)
     {
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.model.u8_str() + model_name.u8_str() + u8".model");
@@ -21,7 +21,7 @@ namespace engine::render::model
         return mesh::add(str);
     }
 
-    /*shader::obj& get_shader(string model_name)
+    static shader::obj& get_shader(string model_name)
     {
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.model.u8_str() + model_name.u8_str() + u8".model");
@@ -35,16 +35,18 @@ namespace engine::render::model
         ifstream.close();
 
         return shader::add(str);
-    }*/
+    }
 
 
     impl::impl(string name) :
-        mesh_obj(get_mesh(name))
+        mesh_obj(get_mesh(name)),
+        shader_obj(get_shader(name))
     {}
 
     void impl::set()
     {
         mesh_obj.set();
+        shader_obj.set();
     }
 
     int32 impl::size()

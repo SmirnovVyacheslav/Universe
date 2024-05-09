@@ -38,7 +38,7 @@ namespace engine::render::device::directx
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
-        void draw(model::obj& model_obj, shader::obj& shader_obj);
+        void draw(model::obj& model_obj);
 
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;

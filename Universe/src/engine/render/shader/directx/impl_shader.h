@@ -1,19 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "../api_shader.h"
+#include "def/inc_h_impl_shader.h"
 
-#include "engine/def/platform.h"
-#include "engine/var/matrix4.h"
-#include "engine/var/string.h"
 
-#ifdef windows
-#include <d3d11.h>
-#include <d3dx11.h>
-#include <d3dcompiler.h>
-#include <windows.h>
-#endif
-
+#ifndef ENGINE_RENDER_SHADER_DIRECTX_IMPL
+#define ENGINE_RENDER_SHADER_DIRECTX_IMPL
 
 namespace engine::render::shader::directx
 {
@@ -30,11 +21,10 @@ namespace engine::render::shader::directx
     class impl : public obj
     {
     public:
-        impl(string file);
+        impl(string name);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
-        void update(matrix4 world, matrix4 view, matrix4 projection);
         void set();
 
         impl& operator=(impl&& src) = delete;
@@ -42,7 +32,7 @@ namespace engine::render::shader::directx
 
         ~impl();
     private:
-        string file;
+        string name;
 
         ID3D11VertexShader* vertex_shader = nullptr;
         ID3D11PixelShader* pixel_shader = nullptr;
@@ -71,3 +61,5 @@ namespace engine::render::shader::directx
 #endif
 
 }
+
+#endif

@@ -20,8 +20,7 @@ namespace engine::render
     void draw()
     {
         model::obj& model_obj = model::add(u8"cube");
-        shader::obj& shader_obj = shader::add(u8"res/game/shader/base.fx");
-        device::draw(model_obj, shader_obj);
+        device::draw(model_obj);
     }
 
     void term()

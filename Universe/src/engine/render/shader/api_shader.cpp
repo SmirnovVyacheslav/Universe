@@ -1,8 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_shader.h"
-
-#include "directx/impl_shader.h"
+#include "def/inc_s_api_shader.h"
 
 
 namespace engine::render::shader
@@ -15,9 +13,9 @@ namespace engine::render::shader
         term();
     }
 
-    obj& add(string file)
+    obj& add(string name)
     {
-        inst = new directx::impl(file);
+        inst = new directx::impl(name);
         return *inst;
     }
 

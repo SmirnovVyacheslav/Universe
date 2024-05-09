@@ -1,9 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "impl_shader.h"
-
-#include "engine/def/platform.h"
-#include "engine/render/device/directx/impl_device.h"
+#include "def/inc_s_impl_shader.h"
 
 
 namespace engine::render::shader::directx
@@ -11,23 +8,22 @@ namespace engine::render::shader::directx
 
 #ifdef windows
 
-    impl::impl(string file) : file(file)
+    impl::impl(string name) : name(name)
     {
-        init_vertex_shader(file);
-        init_pixel_shader(file);
+        init_vertex_shader(name);
+        init_pixel_shader(name);
         init_constant_buff();
-    }
-
-    void impl::update(matrix4 world, matrix4 view, matrix4 projection)
-    {
-        cb.world = matrix_transpose(world);
-        cb.view = matrix_transpose(view);
-        cb.projection = matrix_transpose(projection);
-        device::directx::device_context->UpdateSubresource(constant_buff, 0, NULL, &cb, 0, 0);
     }
 
     void impl::set()
     {
+        camera::obj& camera_obj = camera::get();
+
+        cb.world = matrix_transpose(camera_obj.world());
+        cb.view = matrix_transpose(camera_obj.view());
+        cb.projection = matrix_transpose(camera_obj.projection());
+        device::directx::device_context->UpdateSubresource(constant_buff, 0, NULL, &cb, 0, 0);
+
         device::directx::device_context->VSSetShader(vertex_shader, NULL, 0);
         device::directx::device_context->VSSetConstantBuffers(0, 1, &constant_buff);
         device::directx::device_context->PSSetShader(pixel_shader, NULL, 0);
@@ -40,9 +36,13 @@ namespace engine::render::shader::directx
         term_vertex_shader();
     }
 
-    void impl::init_vertex_shader(string file)
+    void impl::init_vertex_shader(string name)
     {
-        ID3DBlob* vertex_blob = compile_shader_file(file, vertex_entry, vertex_model);
+        ID3DBlob* vertex_blob = compile_shader_file(
+            settings::get().dir.shader.u8_str() + name.u8_str() + u8".fx",
+            vertex_entry,
+            vertex_model
+       );
 
         HRESULT result = device::directx::device->CreateVertexShader
         (
@@ -55,16 +55,20 @@ namespace engine::render::shader::directx
         if (FAILED(result))
         {
             vertex_blob->Release();
-            throw std::invalid_argument("Failed to create vertex shader");
+            throw error("Failed to create vertex shader");
         }
 
         init_vertex_layout(vertex_blob);
         vertex_blob->Release();
     }
 
-    void impl::init_pixel_shader(string file)
+    void impl::init_pixel_shader(string name)
     {
-        ID3DBlob* pixel_blob = compile_shader_file(file, pixel_entry, pixel_model);
+        ID3DBlob* pixel_blob = compile_shader_file(
+            settings::get().dir.shader.u8_str() + name.u8_str() + u8".fx",
+            pixel_entry,
+            pixel_model
+        );
 
         HRESULT result = device::directx::device->CreatePixelShader
         (
@@ -77,7 +81,7 @@ namespace engine::render::shader::directx
         pixel_blob->Release();
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to create pixel shader");
+            throw error("Failed to create pixel shader");
         }
     }
 
@@ -101,7 +105,7 @@ namespace engine::render::shader::directx
 
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to create input layout");
+            throw error("Failed to create input layout");
         }
 
         device::directx::device_context->IASetInputLayout(vertex_layout);
@@ -119,7 +123,7 @@ namespace engine::render::shader::directx
         HRESULT result = device::directx::device->CreateBuffer(&buffer_data, NULL, &constant_buff);
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to create shader constant buffer");
+            throw error("Failed to create shader constant buffer");
         }
     }
 
@@ -150,7 +154,7 @@ namespace engine::render::shader::directx
                 OutputDebugStringA(static_cast<char*>(error_blob->GetBufferPointer()));
                 error_blob->Release();
             }
-            throw std::invalid_argument("Failed to compile shader");
+            throw error("Failed to compile shader");
         }
         if (error_blob)
         {
@@ -188,7 +192,7 @@ namespace engine::render::shader::directx
                 OutputDebugStringA(static_cast<char*>(error_blob->GetBufferPointer()));
                 error_blob->Release();
             }
-            throw std::invalid_argument("Failed to compile shader");
+            throw error("Failed to compile shader");
         }
 
         device::directx::release(error_blob);

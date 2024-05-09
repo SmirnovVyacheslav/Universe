@@ -98,6 +98,12 @@
     <Filter Include="src\engine\render\inc_dep">
       <UniqueIdentifier>{6b9b3ae8-2934-4e86-a88e-59f65285b3b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\shader\def">
+      <UniqueIdentifier>{3fdb270a-031b-4a6e-9b46-d5ad92a7d4a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\shader\directx\def">
+      <UniqueIdentifier>{516e0c54-0597-4828-8a57-5af1d0b4e65d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -383,6 +389,21 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\inc_dep\inc_s_api_render.h">
       <Filter>src\engine\render\inc_dep</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\shader\def\inc_s_api_shader.h">
+      <Filter>src\engine\render\shader\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\shader\def\inc_h_api_shader.h">
+      <Filter>src\engine\render\shader\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\shader\def\inc_h_obj_shader.h">
+      <Filter>src\engine\render\shader\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\shader\directx\def\inc_h_impl_shader.h">
+      <Filter>src\engine\render\shader\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\shader\directx\def\inc_s_impl_shader.h">
+      <Filter>src\engine\render\shader\directx\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

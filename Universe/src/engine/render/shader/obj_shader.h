@@ -1,10 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/def/abstract.h"
-#include "engine/var/matrix4.h"
-#include "engine/var/std.h"
+#include "def/inc_h_obj_shader.h"
 
+
+#ifndef ENGINE_RENDER_SHADER_OBJ
+#define ENGINE_RENDER_SHADER_OBJ
 
 namespace engine::render::shader
 {
@@ -15,6 +15,7 @@ namespace engine::render::shader
         int32 id;
 
         virtual void set() = 0;
-        virtual void update(matrix4 world, matrix4 view, matrix4 projection) = 0;
     };
 }
+
+#endif

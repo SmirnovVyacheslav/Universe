@@ -24,6 +24,7 @@ namespace engine::render::model
         ~impl();
     private:
         mesh::obj& mesh_obj;
+        shader::obj& shader_obj;
     };
 }
 

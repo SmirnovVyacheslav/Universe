@@ -13,6 +13,6 @@ namespace engine::render::device
     {
         abstract
 
-        virtual void draw(model::obj& model_obj, shader::obj& shader_obj) = 0;
+        virtual void draw(model::obj& model_obj) = 0;
     };
 }
