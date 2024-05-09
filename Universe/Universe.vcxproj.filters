@@ -95,14 +95,20 @@
     <Filter Include="src\engine\render\model\inc_dep">
       <UniqueIdentifier>{609ead3b-e2a7-41c9-bf3b-0964e908152c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\inc_dep">
-      <UniqueIdentifier>{6b9b3ae8-2934-4e86-a88e-59f65285b3b1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render\shader\def">
       <UniqueIdentifier>{3fdb270a-031b-4a6e-9b46-d5ad92a7d4a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\render\shader\directx\def">
       <UniqueIdentifier>{516e0c54-0597-4828-8a57-5af1d0b4e65d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\def">
+      <UniqueIdentifier>{6b9b3ae8-2934-4e86-a88e-59f65285b3b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\vertex\def">
+      <UniqueIdentifier>{bc9f234c-5794-4dda-9a35-439867e6e68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\vertex\directx\def">
+      <UniqueIdentifier>{0ec06a09-383e-4a62-8cf7-f3f630c0409d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -384,26 +390,41 @@
     <ClInclude Include="src\engine\render\model\inc_dep\inc_s_impl_model.h">
       <Filter>src\engine\render\model\inc_dep</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\inc_dep\inc_h_api_render.h">
-      <Filter>src\engine\render\inc_dep</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\inc_dep\inc_s_api_render.h">
-      <Filter>src\engine\render\inc_dep</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\shader\def\inc_s_api_shader.h">
+    <ClInclude Include="src\engine\render\shader\def\incl_s_api_shader.h">
       <Filter>src\engine\render\shader\def</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\shader\def\inc_h_api_shader.h">
+    <ClInclude Include="src\engine\render\shader\def\incl_h_api_shader.h">
       <Filter>src\engine\render\shader\def</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\shader\def\inc_h_obj_shader.h">
+    <ClInclude Include="src\engine\render\shader\def\incl_h_obj_shader.h">
       <Filter>src\engine\render\shader\def</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\shader\directx\def\inc_h_impl_shader.h">
+    <ClInclude Include="src\engine\render\shader\directx\def\incl_h_impl_shader.h">
       <Filter>src\engine\render\shader\directx\def</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\shader\directx\def\inc_s_impl_shader.h">
+    <ClInclude Include="src\engine\render\shader\directx\def\incl_s_impl_shader.h">
       <Filter>src\engine\render\shader\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\def\incl_h_api_render.h">
+      <Filter>src\engine\render\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\def\incl_s_api_render.h">
+      <Filter>src\engine\render\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertex\def\incl_h_api_vertex.h">
+      <Filter>src\engine\render\vertex\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertex\def\incl_h_obj_vertex.h">
+      <Filter>src\engine\render\vertex\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertex\def\incl_s_api_vertex.h">
+      <Filter>src\engine\render\vertex\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertex\directx\def\incl_h_impl_vertex.h">
+      <Filter>src\engine\render\vertex\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertex\directx\def\incl_s_impl_vertex.h">
+      <Filter>src\engine\render\vertex\directx\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

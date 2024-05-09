@@ -1,10 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "impl_vertex.h"
-
-#include "engine/def/platform.h"
-#include "engine/render/device/directx/impl_device.h"
-#include "engine/var/error.h"
+#include "def/incl_s_impl_vertex.h"
 
 
 namespace engine::render::vertex::directx

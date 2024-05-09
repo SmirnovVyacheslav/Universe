@@ -1,11 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "obj_vertex.h"
+#include "def/incl_h_api_vertex.h"
 
-#include "engine/var/array.h"
-#include "engine/var/vertex.h"
 
+#ifndef ENGINE_RENDER_VERTEX_API
+#define ENGINE_RENDER_VERTEX_API
 
 namespace engine::render::vertex
 {
@@ -15,3 +14,5 @@ namespace engine::render::vertex
 
     void term();
 }
+
+#endif

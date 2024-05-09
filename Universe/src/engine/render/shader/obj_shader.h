@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/inc_h_obj_shader.h"
+#include "def/incl_h_obj_shader.h"
 
 
 #ifndef ENGINE_RENDER_SHADER_OBJ

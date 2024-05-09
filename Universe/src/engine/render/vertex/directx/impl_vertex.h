@@ -1,18 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "../api_vertex.h"
+#include "def/incl_h_impl_vertex.h"
 
-#include "engine/def/platform.h"
-#include "engine/var/vertex.h"
 
-#ifdef windows
-#include <d3d11.h>
-#include <d3dx11.h>
-#include <d3dcompiler.h>
-#include <windows.h>
-#endif
-
+#ifndef ENGINE_RENDER_VERTEX_DIRECTX_IMPL
+#define ENGINE_RENDER_VERTEX_DIRECTX_IMPL
 
 namespace engine::render::vertex::directx
 {
@@ -43,3 +35,5 @@ namespace engine::render::vertex::directx
 #endif
 
 }
+
+#endif

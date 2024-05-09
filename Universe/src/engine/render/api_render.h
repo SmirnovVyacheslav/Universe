@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "inc_dep/inc_h_api_render.h"
+#include "def/incl_h_api_render.h"
 
 
 #ifndef ENGINE_RENDER_API

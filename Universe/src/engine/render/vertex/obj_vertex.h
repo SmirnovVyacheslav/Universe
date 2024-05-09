@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/def/abstract.h"
-#include "engine/var/std.h"
+#include "def/incl_h_obj_vertex.h"
 
+
+#ifndef ENGINE_RENDER_VERTEX_OBJ
+#define ENGINE_RENDER_VERTEX_OBJ
 
 namespace engine::render::vertex
 {
@@ -16,3 +17,5 @@ namespace engine::render::vertex
         virtual void set() = 0;
     };
 }
+
+#endif

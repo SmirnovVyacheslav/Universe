@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/inc_s_impl_shader.h"
+#include "def/incl_s_impl_shader.h"
 
 
 namespace engine::render::shader::directx
