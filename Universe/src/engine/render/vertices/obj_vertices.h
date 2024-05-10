@@ -1,12 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_obj_vertex.h"
+#include "def/incl_h_obj_vertices.h"
 
 
-#ifndef ENGINE_RENDER_VERTEX_OBJ
-#define ENGINE_RENDER_VERTEX_OBJ
+#ifndef ENGINE_RENDER_VERTICES_OBJ
+#define ENGINE_RENDER_VERTICES_OBJ
 
-namespace engine::render::vertex
+namespace engine::render::vertices
 {
     class obj
     {

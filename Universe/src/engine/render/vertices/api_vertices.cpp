@@ -1,9 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_api_vertex.h"
+#include "def/incl_s_api_vertices.h"
 
 
-namespace engine::render::vertex
+namespace engine::render::vertices
 {
     obj* inst = nullptr;
 

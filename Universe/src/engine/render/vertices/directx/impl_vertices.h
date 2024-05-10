@@ -1,12 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_impl_vertex.h"
+#include "def/incl_h_impl_vertices.h"
 
 
-#ifndef ENGINE_RENDER_VERTEX_DIRECTX_IMPL
-#define ENGINE_RENDER_VERTEX_DIRECTX_IMPL
+#ifndef ENGINE_RENDER_VERTICES_DIRECTX_IMPL
+#define ENGINE_RENDER_VERTICES_DIRECTX_IMPL
 
-namespace engine::render::vertex::directx
+namespace engine::render::vertices::directx
 {
 
 #ifdef windows
@@ -14,7 +14,7 @@ namespace engine::render::vertex::directx
     class impl : public obj
     {
     public:
-        impl(array<engine::vertex> data);
+        impl(array<vertex> data);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -25,11 +25,11 @@ namespace engine::render::vertex::directx
 
         ~impl();
     private:
-        array<engine::vertex> data;
+        array<vertex> data;
         ID3D11Buffer* buffer = nullptr;
 
         UINT offset = 0;
-        UINT stride = sizeof(engine::vertex);
+        UINT stride = sizeof(vertex);
     };
 
 #endif

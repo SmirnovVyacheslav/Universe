@@ -4,7 +4,7 @@
 
 #include "engine/render/index/api_index.h"
 #include "engine/render/settings/api_settings.h"
-#include "engine/render/vertex/api_vertex.h"
+#include "engine/render/vertices/api_vertices.h"
 
 #include <iostream>
 #include <filesystem>
@@ -13,7 +13,7 @@
 
 namespace engine::render::mesh
 {
-    index::obj& get_index(string mesh_name)
+    static index::obj& get_index(string mesh_name)
     {
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
@@ -38,7 +38,7 @@ namespace engine::render::mesh
         return index::add(index_arr);
     }
 
-    vertex::obj& get_vertex(string mesh_name)
+    static vertices::obj& get_vertices(string mesh_name)
     {
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
@@ -51,28 +51,28 @@ namespace engine::render::mesh
 
         vector3 vertex_val;
         uint32 vertex_num = 0;
-        array<engine::vertex> vertex_arr;
+        array<vertex> vertex_arr;
 
         ifstream >> vertex_num;
         for (uint32 i = 0; i < vertex_num; ++i) {
             ifstream >> vertex_val;
-            vertex_arr.append(engine::vertex(vertex_val, vector4(0.0f, 0.0f, 1.0f, 1.0f)));
+            vertex_arr.append(vertex(vertex_val, vector4(0.0f, 0.0f, 1.0f, 1.0f)));
         }
         ifstream.close();
 
-        return vertex::add(vertex_arr);
+        return vertices::add(vertex_arr);
     }
 
 
     impl::impl(string mesh_name) :
         index_obj(get_index(mesh_name)),
-        vertex_obj(get_vertex(mesh_name))
+        vertices_obj(get_vertices(mesh_name))
     {}
 
     void impl::set()
     {
         index_obj.set();
-        vertex_obj.set();
+        vertices_obj.set();
     }
 
     int32 impl::size()

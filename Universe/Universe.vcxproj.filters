@@ -80,12 +80,6 @@
     <Filter Include="src\engine\render\shader\directx">
       <UniqueIdentifier>{b380f5a5-f1fd-4c51-b3e7-4d78bd890f3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\vertex">
-      <UniqueIdentifier>{9dae40be-f2ed-4d34-9ee1-6ecdabf1f40e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\vertex\directx">
-      <UniqueIdentifier>{122a12c2-5f05-415a-9614-fa0401da01a0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render\mesh">
       <UniqueIdentifier>{214d13b2-5a2d-4d64-9057-cfc36cc81cd6}</UniqueIdentifier>
     </Filter>
@@ -104,11 +98,17 @@
     <Filter Include="src\engine\render\def">
       <UniqueIdentifier>{6b9b3ae8-2934-4e86-a88e-59f65285b3b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\vertex\def">
-      <UniqueIdentifier>{bc9f234c-5794-4dda-9a35-439867e6e68d}</UniqueIdentifier>
+    <Filter Include="src\engine\render\vertices">
+      <UniqueIdentifier>{9dae40be-f2ed-4d34-9ee1-6ecdabf1f40e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\vertex\directx\def">
+    <Filter Include="src\engine\render\vertices\directx">
+      <UniqueIdentifier>{122a12c2-5f05-415a-9614-fa0401da01a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\vertices\directx\def">
       <UniqueIdentifier>{0ec06a09-383e-4a62-8cf7-f3f630c0409d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\vertices\def">
+      <UniqueIdentifier>{bc9f234c-5794-4dda-9a35-439867e6e68d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -196,12 +196,6 @@
     <ClCompile Include="src\engine\render\shader\directx\impl_shader.cpp">
       <Filter>src\engine\render\shader\directx</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\vertex\api_vertex.cpp">
-      <Filter>src\engine\render\vertex</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\render\vertex\directx\impl_vertex.cpp">
-      <Filter>src\engine\render\vertex\directx</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\render\mesh\api_mesh.cpp">
       <Filter>src\engine\render\mesh</Filter>
     </ClCompile>
@@ -213,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="src\engine\render\model\api_model.cpp">
       <Filter>src\engine\render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\vertices\api_vertices.cpp">
+      <Filter>src\engine\render\vertices</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\vertices\directx\impl_vertices.cpp">
+      <Filter>src\engine\render\vertices\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -342,15 +342,6 @@
     <ClInclude Include="src\engine\render\shader\directx\impl_shader.h">
       <Filter>src\engine\render\shader\directx</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\api_vertex.h">
-      <Filter>src\engine\render\vertex</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\obj_vertex.h">
-      <Filter>src\engine\render\vertex</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\directx\impl_vertex.h">
-      <Filter>src\engine\render\vertex\directx</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\def\platform.h">
       <Filter>src\engine\def</Filter>
     </ClInclude>
@@ -411,20 +402,29 @@
     <ClInclude Include="src\engine\render\def\incl_s_api_render.h">
       <Filter>src\engine\render\def</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\def\incl_h_api_vertex.h">
-      <Filter>src\engine\render\vertex\def</Filter>
+    <ClInclude Include="src\engine\render\vertices\api_vertices.h">
+      <Filter>src\engine\render\vertices</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\def\incl_h_obj_vertex.h">
-      <Filter>src\engine\render\vertex\def</Filter>
+    <ClInclude Include="src\engine\render\vertices\obj_vertices.h">
+      <Filter>src\engine\render\vertices</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\def\incl_s_api_vertex.h">
-      <Filter>src\engine\render\vertex\def</Filter>
+    <ClInclude Include="src\engine\render\vertices\def\incl_h_api_vertices.h">
+      <Filter>src\engine\render\vertices\def</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\directx\def\incl_h_impl_vertex.h">
-      <Filter>src\engine\render\vertex\directx\def</Filter>
+    <ClInclude Include="src\engine\render\vertices\def\incl_h_obj_vertices.h">
+      <Filter>src\engine\render\vertices\def</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\vertex\directx\def\incl_s_impl_vertex.h">
-      <Filter>src\engine\render\vertex\directx\def</Filter>
+    <ClInclude Include="src\engine\render\vertices\def\incl_s_api_vertices.h">
+      <Filter>src\engine\render\vertices\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertices\directx\impl_vertices.h">
+      <Filter>src\engine\render\vertices\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertices\directx\def\incl_h_impl_vertices.h">
+      <Filter>src\engine\render\vertices\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\vertices\directx\def\incl_s_impl_vertices.h">
+      <Filter>src\engine\render\vertices\directx\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,20 +1,20 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_impl_vertex.h"
+#include "def/incl_s_impl_vertices.h"
 
 
-namespace engine::render::vertex::directx
+namespace engine::render::vertices::directx
 {
 
 #ifdef windows
 
-    impl::impl(array<engine::vertex> data) : data(data)
+    impl::impl(array<vertex> data) : data(data)
     {
         D3D11_BUFFER_DESC buffer_data;
         ZeroMemory(&buffer_data, sizeof(buffer_data));
 
         buffer_data.Usage = D3D11_USAGE_DEFAULT;
-        buffer_data.ByteWidth = sizeof(engine::vertex) * data.size();
+        buffer_data.ByteWidth = sizeof(vertex) * data.size();
         buffer_data.BindFlags = D3D11_BIND_VERTEX_BUFFER;
         buffer_data.CPUAccessFlags = 0;
 

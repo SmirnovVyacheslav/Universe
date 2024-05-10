@@ -11,7 +11,7 @@ namespace engine::render
         camera::init();
         device::init();
         index::init();
-        vertex::init();
+        vertices::init();
         shader::init();
         mesh::init();
         model::init();
@@ -28,7 +28,7 @@ namespace engine::render
         model::term();
         mesh::term();
         shader::term();
-        vertex::term();
+        vertices::term();
         index::term();
         device::term();
         camera::term();

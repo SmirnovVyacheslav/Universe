@@ -4,7 +4,7 @@
 #include "obj_mesh.h"
 
 #include "engine/render/index/obj_index.h"
-#include "engine/render/vertex/obj_vertex.h"
+#include "engine/render/vertices/obj_vertices.h"
 #include "engine/var/std.h"
 #include "engine/var/string.h"
 
@@ -27,6 +27,6 @@ namespace engine::render::mesh
         ~impl();
     private:
         index::obj& index_obj;
-        vertex::obj& vertex_obj;
+        vertices::obj& vertices_obj;
     };
 }
