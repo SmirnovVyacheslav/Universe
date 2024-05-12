@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "inc_dep/inc_h_impl_model.h"
+#include "def/incl_h_impl_model.h"
 
 
 #ifndef ENGINE_RENDER_MODEL_IMPL

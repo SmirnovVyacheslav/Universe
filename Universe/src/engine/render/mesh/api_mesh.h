@@ -1,10 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "obj_mesh.h"
+#include "def/incl_h_api_mesh.h"
 
-#include "engine/var/string.h"
 
+#ifndef ENGINE_RENDER_MESH_API
+#define ENGINE_RENDER_MESH_API
 
 namespace engine::render::mesh
 {
@@ -14,3 +14,5 @@ namespace engine::render::mesh
 
     void term();
 }
+
+#endif

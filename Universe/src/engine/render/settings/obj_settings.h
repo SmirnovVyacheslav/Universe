@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/var/std.h"
-#include "engine/var/string.h"
+#include "def/incl_h_obj_settings.h"
 
+
+#ifndef ENGINE_RENDER_SETTINGS_OBJ
+#define ENGINE_RENDER_SETTINGS_OBJ
 
 namespace engine::render::settings
 {
@@ -25,3 +26,5 @@ namespace engine::render::settings
         dir dir;
     };
 }
+
+#endif

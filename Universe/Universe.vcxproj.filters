@@ -86,9 +86,6 @@
     <Filter Include="src\engine\render\model">
       <UniqueIdentifier>{b62c1b12-0313-4c75-b172-c9590db449ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\model\inc_dep">
-      <UniqueIdentifier>{609ead3b-e2a7-41c9-bf3b-0964e908152c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render\shader\def">
       <UniqueIdentifier>{3fdb270a-031b-4a6e-9b46-d5ad92a7d4a1}</UniqueIdentifier>
     </Filter>
@@ -109,6 +106,15 @@
     </Filter>
     <Filter Include="src\engine\render\vertices\def">
       <UniqueIdentifier>{bc9f234c-5794-4dda-9a35-439867e6e68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\settings\def">
+      <UniqueIdentifier>{46278827-f978-4375-8e37-26ca9b58639c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\model\def">
+      <UniqueIdentifier>{609ead3b-e2a7-41c9-bf3b-0964e908152c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\mesh\def">
+      <UniqueIdentifier>{c9966710-844f-437e-9e10-6935a66f4cd1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -366,21 +372,6 @@
     <ClInclude Include="src\engine\render\model\obj_model.h">
       <Filter>src\engine\render\model</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\model\inc_dep\inc_h_api_model.h">
-      <Filter>src\engine\render\model\inc_dep</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\model\inc_dep\inc_h_impl_model.h">
-      <Filter>src\engine\render\model\inc_dep</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\model\inc_dep\inc_h_obj_model.h">
-      <Filter>src\engine\render\model\inc_dep</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\model\inc_dep\inc_s_api_model.h">
-      <Filter>src\engine\render\model\inc_dep</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\model\inc_dep\inc_s_impl_model.h">
-      <Filter>src\engine\render\model\inc_dep</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\render\shader\def\incl_s_api_shader.h">
       <Filter>src\engine\render\shader\def</Filter>
     </ClInclude>
@@ -425,6 +416,45 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\vertices\directx\def\incl_s_impl_vertices.h">
       <Filter>src\engine\render\vertices\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\settings\def\incl_h_api_settings.h">
+      <Filter>src\engine\render\settings\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\settings\def\incl_h_obj_settings.h">
+      <Filter>src\engine\render\settings\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\settings\def\incl_s_api_settings.h">
+      <Filter>src\engine\render\settings\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\def\incl_h_api_model.h">
+      <Filter>src\engine\render\model\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\def\incl_h_impl_model.h">
+      <Filter>src\engine\render\model\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\def\incl_h_obj_model.h">
+      <Filter>src\engine\render\model\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\def\incl_s_api_model.h">
+      <Filter>src\engine\render\model\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\model\def\incl_s_impl_model.h">
+      <Filter>src\engine\render\model\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\mesh\def\incl_h_obj_mesh.h">
+      <Filter>src\engine\render\mesh\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\mesh\def\incl_s_api_mesh.h">
+      <Filter>src\engine\render\mesh\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\mesh\def\incl_h_api_mesh.h">
+      <Filter>src\engine\render\mesh\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\mesh\def\incl_s_impl_mesh.h">
+      <Filter>src\engine\render\mesh\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\mesh\def\incl_h_impl_mesh.h">
+      <Filter>src\engine\render\mesh\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_settings.h"
+#include "def/incl_s_api_settings.h"
 
 
 namespace engine::render::settings
@@ -10,17 +10,18 @@ namespace engine::render::settings
     
     void init()
     {
+        term();
         inst = new obj;
+    }
+
+    obj& get()
+    {
+        return *inst;
     }
 
     void term()
     {
         delete inst;
         inst = nullptr;
-    }
-
-    obj& get()
-    {
-        return *inst;
     }
 }

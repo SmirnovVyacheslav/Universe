@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/def/abstract.h"
-#include "engine/var/std.h"
+#include "def/incl_h_obj_mesh.h"
 
+
+#ifndef ENGINE_RENDER_MESH_OBJ
+#define ENGINE_RENDER_MESH_OBJ
 
 namespace engine::render::mesh
 {
@@ -15,3 +16,5 @@ namespace engine::render::mesh
         virtual int32 size() = 0;
     };
 }
+
+#endif

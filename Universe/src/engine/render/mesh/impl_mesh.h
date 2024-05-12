@@ -1,20 +1,17 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "obj_mesh.h"
+#include "def/incl_h_impl_mesh.h"
 
-#include "engine/render/index/obj_index.h"
-#include "engine/render/vertices/obj_vertices.h"
-#include "engine/var/std.h"
-#include "engine/var/string.h"
 
+#ifndef ENGINE_RENDER_MESH_IMPL
+#define ENGINE_RENDER_MESH_IMPL
 
 namespace engine::render::mesh
 {
     class impl : public obj
     {
     public:
-        impl(string mesh_name);
+        impl(string name);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -30,3 +27,5 @@ namespace engine::render::mesh
         vertices::obj& vertices_obj;
     };
 }
+
+#endif

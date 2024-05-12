@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "inc_dep/inc_s_api_model.h"
+#include "def/incl_s_api_model.h"
 
 
 namespace engine::render::model

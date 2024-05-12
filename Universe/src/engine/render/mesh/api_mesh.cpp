@@ -1,8 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_mesh.h"
-
-#include "impl_mesh.h"
+#include "def/incl_s_api_mesh.h"
 
 
 namespace engine::render::mesh
