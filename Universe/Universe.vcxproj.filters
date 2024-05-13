@@ -122,6 +122,12 @@
     <Filter Include="src\engine\render\indices\directx\def">
       <UniqueIdentifier>{eccf8c4c-8372-445f-9815-e22c407ac01a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\device\def">
+      <UniqueIdentifier>{c4321a51-5739-4211-94d0-aaac3c26d943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\device\directx\def">
+      <UniqueIdentifier>{09c8338a-b9b7-497e-a6e6-034c4da034e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -476,6 +482,21 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\indices\directx\impl_indices.h">
       <Filter>src\engine\render\indices\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\device\def\incl_h_api_device.h">
+      <Filter>src\engine\render\device\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\device\def\incl_h_obj_device.h">
+      <Filter>src\engine\render\device\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\device\def\incl_s_api_device.h">
+      <Filter>src\engine\render\device\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\device\directx\def\incl_s_impl_device.h">
+      <Filter>src\engine\render\device\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\device\directx\def\incl_h_impl_device.h">
+      <Filter>src\engine\render\device\directx\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

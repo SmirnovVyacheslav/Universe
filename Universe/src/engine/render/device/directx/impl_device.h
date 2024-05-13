@@ -1,22 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "../api_device.h"
+#include "def/incl_h_impl_device.h"
 
-#include "engine/def/platform.h"
-#include "engine/render/settings/api_settings.h"
-#include "engine/render/model/obj_model.h"
-#include "engine/render/shader/obj_shader.h"
-#include "engine/var/matrix4.h"
-#include "engine/var/vector3.h"
 
-#ifdef windows
-#include <d3d11.h>
-#include <d3dx11.h>
-#include <d3dcompiler.h>
-#include <windows.h>
-#endif
-
+#ifndef ENGINE_RENDER_DEVICE_DIRECTX_IMPL
+#define ENGINE_RENDER_DEVICE_DIRECTX_IMPL
 
 namespace engine::render::device::directx
 {
@@ -94,3 +82,5 @@ namespace engine::render::device::directx
 #endif
 
 }
+
+#endif

@@ -1,9 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "api_device.h"
-
-#include "directx/impl_device.h"
+#include "def/incl_s_api_device.h"
 
 
 namespace engine::render::device
@@ -13,6 +10,7 @@ namespace engine::render::device
 
     void init()
     {
+        term();
         inst = new directx::impl();
     }
 

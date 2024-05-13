@@ -1,11 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/def/abstract.h"
+#include "def/incl_h_obj_device.h"
 
-#include "engine/render/model/obj_model.h"
-#include "engine/render/shader/obj_shader.h"
 
+#ifndef ENGINE_RENDER_DEVICE_OBJ
+#define ENGINE_RENDER_DEVICE_OBJ
 
 namespace engine::render::device
 {
@@ -16,3 +15,5 @@ namespace engine::render::device
         virtual void draw(model::obj& model_obj) = 0;
     };
 }
+
+#endif

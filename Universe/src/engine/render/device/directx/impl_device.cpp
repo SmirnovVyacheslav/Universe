@@ -1,9 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "impl_device.h"
-
-#include "engine/def/platform.h"
-#include "engine/platform/api/view.h"
+#include "def/incl_s_impl_device.h"
 
 
 namespace engine::render::device::directx
@@ -93,7 +90,7 @@ namespace engine::render::device::directx
 
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to create device");
+            throw error("Failed to create device");
         }
     }
 
@@ -117,7 +114,7 @@ namespace engine::render::device::directx
         HRESULT result = device->CreateTexture2D(&depth_stencil_desc, NULL, &depth_stencil);
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to create depth stencil");
+            throw error("Failed to create depth stencil");
         }
 
         D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_desc;
@@ -130,7 +127,7 @@ namespace engine::render::device::directx
         result = device->CreateDepthStencilView(depth_stencil, &depth_stencil_view_desc, &depth_stencil_view);
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to create depth stencil view");
+            throw error("Failed to create depth stencil view");
         }
     }
 
@@ -143,7 +140,7 @@ namespace engine::render::device::directx
 
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to init back buffer");
+            throw error("Failed to init back buffer");
         }
 
         result = device->CreateRenderTargetView(back_buffer, NULL, &render_target_view);
@@ -151,7 +148,7 @@ namespace engine::render::device::directx
 
         if (FAILED(result))
         {
-            throw std::invalid_argument("Failed to init render target view");
+            throw error("Failed to init render target view");
         }
 
         device_context->OMSetRenderTargets(1, &render_target_view, depth_stencil_view);
