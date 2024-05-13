@@ -65,12 +65,6 @@
     <Filter Include="src\engine\render\device\directx">
       <UniqueIdentifier>{3af79f61-bfef-48eb-bf05-581aa2752ad8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\index">
-      <UniqueIdentifier>{f2ae02c9-8a0c-4073-90dd-00abe48872df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\index\directx">
-      <UniqueIdentifier>{d6f3091c-416b-4910-b7fa-72035029426f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render\settings">
       <UniqueIdentifier>{341d60b7-d4e2-4266-8d96-11b9d4598376}</UniqueIdentifier>
     </Filter>
@@ -115,6 +109,18 @@
     </Filter>
     <Filter Include="src\engine\render\mesh\def">
       <UniqueIdentifier>{c9966710-844f-437e-9e10-6935a66f4cd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\indices">
+      <UniqueIdentifier>{f2ae02c9-8a0c-4073-90dd-00abe48872df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\indices\directx">
+      <UniqueIdentifier>{d6f3091c-416b-4910-b7fa-72035029426f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\indices\def">
+      <UniqueIdentifier>{d5747ddd-84d7-4665-b425-7011454b5399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\indices\directx\def">
+      <UniqueIdentifier>{eccf8c4c-8372-445f-9815-e22c407ac01a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -187,12 +193,6 @@
     <ClCompile Include="src\engine\render\device\directx\impl_device.cpp">
       <Filter>src\engine\render\device\directx</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\index\api_index.cpp">
-      <Filter>src\engine\render\index</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\render\index\directx\impl_index.cpp">
-      <Filter>src\engine\render\index\directx</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\render\settings\api_settings.cpp">
       <Filter>src\engine\render\settings</Filter>
     </ClCompile>
@@ -219,6 +219,12 @@
     </ClCompile>
     <ClCompile Include="src\engine\render\vertices\directx\impl_vertices.cpp">
       <Filter>src\engine\render\vertices\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\indices\api_indices.cpp">
+      <Filter>src\engine\render\indices</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\indices\directx\impl_indices.cpp">
+      <Filter>src\engine\render\indices\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,15 +329,6 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\device\directx\impl_device.h">
       <Filter>src\engine\render\device\directx</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\index\api_index.h">
-      <Filter>src\engine\render\index</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\index\obj_index.h">
-      <Filter>src\engine\render\index</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\index\directx\impl_index.h">
-      <Filter>src\engine\render\index\directx</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\settings\api_settings.h">
       <Filter>src\engine\render\settings</Filter>
@@ -455,6 +452,30 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\mesh\def\incl_h_impl_mesh.h">
       <Filter>src\engine\render\mesh\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\api_indices.h">
+      <Filter>src\engine\render\indices</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\obj_indices.h">
+      <Filter>src\engine\render\indices</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\def\incl_s_api_indices.h">
+      <Filter>src\engine\render\indices\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\def\incl_h_api_indices.h">
+      <Filter>src\engine\render\indices\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\def\incl_h_obj_indices.h">
+      <Filter>src\engine\render\indices\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\directx\def\incl_s_impl_indices.h">
+      <Filter>src\engine\render\indices\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\directx\def\incl_h_impl_indices.h">
+      <Filter>src\engine\render\indices\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\indices\directx\impl_indices.h">
+      <Filter>src\engine\render\indices\directx</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

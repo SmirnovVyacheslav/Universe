@@ -5,7 +5,7 @@
 
 namespace engine::render::mesh
 {
-    static index::obj& get_index(string mesh_name)
+    static indices::obj& get_indices(string mesh_name)
     {
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
@@ -27,7 +27,7 @@ namespace engine::render::mesh
         }
         ifstream.close();
 
-        return index::add(index_arr);
+        return indices::add(index_arr);
     }
 
     static vertices::obj& get_vertices(string mesh_name)
@@ -57,19 +57,19 @@ namespace engine::render::mesh
 
 
     impl::impl(string name) :
-        index_obj(get_index(name)),
+        indices_obj(get_indices(name)),
         vertices_obj(get_vertices(name))
     {}
 
     void impl::set()
     {
-        index_obj.set();
+        indices_obj.set();
         vertices_obj.set();
     }
 
     int32 impl::size()
     {
-        return index_obj.size();
+        return indices_obj.size();
     }
 
     impl::~impl()

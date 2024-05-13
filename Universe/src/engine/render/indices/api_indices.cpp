@@ -1,11 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_index.h"
-
-#include "directx/impl_index.h"
+#include "def/incl_s_api_indices.h"
 
 
-namespace engine::render::index
+namespace engine::render::indices
 {
     obj* inst = nullptr;
 

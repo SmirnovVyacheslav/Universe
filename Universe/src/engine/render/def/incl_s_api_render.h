@@ -6,7 +6,7 @@
 
 #include "engine/render/device/api_device.h"
 
-#include "engine/render/index/api_index.h"
+#include "engine/render/indices/api_indices.h"
 
 #include "engine/render/mesh/api_mesh.h"
 

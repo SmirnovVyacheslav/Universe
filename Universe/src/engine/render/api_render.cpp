@@ -10,7 +10,7 @@ namespace engine::render
         settings::init();
         camera::init();
         device::init();
-        index::init();
+        indices::init();
         vertices::init();
         shader::init();
         mesh::init();
@@ -29,7 +29,7 @@ namespace engine::render
         mesh::term();
         shader::term();
         vertices::term();
-        index::term();
+        indices::term();
         device::term();
         camera::term();
         settings::term();

@@ -1,19 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "../api_index.h"
-
-#include "engine/def/platform.h"
-
-#ifdef windows
-#include <d3d11.h>
-#include <d3dx11.h>
-#include <d3dcompiler.h>
-#include <windows.h>
-#endif
+#include "def/incl_h_impl_indices.h"
 
 
-namespace engine::render::index::directx
+#ifndef ENGINE_RENDER_INDICES_DIRECTX_IMPL
+#define ENGINE_RENDER_INDICES_DIRECTX_IMPL
+
+namespace engine::render::indices::directx
 {
 
 #ifdef windows
@@ -40,3 +33,5 @@ namespace engine::render::index::directx
 #endif
 
 }
+
+#endif

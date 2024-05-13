@@ -23,7 +23,7 @@ namespace engine::render::mesh
 
         ~impl();
     private:
-        index::obj& index_obj;
+        indices::obj& indices_obj;
         vertices::obj& vertices_obj;
     };
 }

@@ -2,8 +2,8 @@
 
 #include "engine/render/mesh/impl_mesh.h"
 
-#include "engine/render/index/api_index.h"
-#include "engine/render/index/obj_index.h"
+#include "engine/render/indices/api_indices.h"
+#include "engine/render/indices/obj_indices.h"
 
 #include "engine/render/settings/api_settings.h"
 #include "engine/render/settings/obj_settings.h"

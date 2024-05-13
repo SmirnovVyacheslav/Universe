@@ -1,13 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "impl_index.h"
-
-#include "engine/def/platform.h"
-#include "engine/render/device/directx/impl_device.h"
-#include "engine/var/error.h"
+#include "def/incl_s_impl_indices.h"
 
 
-namespace engine::render::index::directx
+namespace engine::render::indices::directx
 {
 
 #ifdef windows

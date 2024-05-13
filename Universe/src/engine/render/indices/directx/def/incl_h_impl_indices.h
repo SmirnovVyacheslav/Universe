@@ -2,10 +2,10 @@
 
 #include "engine/def/platform.h"
 
-#include "engine/render/shader/obj_shader.h"
+#include "engine/render/indices/obj_indices.h"
 
-#include "engine/var/matrix4.h"
-#include "engine/var/string.h"
+#include "engine/var/array.h"
+#include "engine/var/std.h"
 
 
 #ifdef windows

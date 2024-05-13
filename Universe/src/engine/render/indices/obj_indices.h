@@ -1,11 +1,12 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/def/abstract.h"
-#include "engine/var/std.h"
+#include "def/incl_h_obj_indices.h"
 
 
-namespace engine::render::index
+#ifndef ENGINE_RENDER_INDICES_OBJ
+#define ENGINE_RENDER_INDICES_OBJ
+
+namespace engine::render::indices
 {
     class obj
     {
@@ -17,3 +18,5 @@ namespace engine::render::index
         virtual int32 size() = 0;
     };
 }
+
+#endif
