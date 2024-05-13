@@ -1,8 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_camera.h"
-
-#include "impl_camera.h"
+#include "def/incl_s_api_camera.h"
 
 
 namespace engine::render::camera
@@ -12,17 +10,18 @@ namespace engine::render::camera
 
     void init()
     {
+        term();
         inst = new impl();
+    }
+
+    obj& get()
+    {
+        return *inst;
     }
 
     void term()
     {
         delete inst;
         inst = nullptr;
-    }
-
-    obj& get()
-    {
-        return *inst;
     }
 }

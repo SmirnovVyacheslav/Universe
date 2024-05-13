@@ -1,8 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "impl_camera.h"
-
-#include "engine/render/settings/api_settings.h"
+#include "def/incl_s_impl_camera.h"
 
 
 namespace engine::render::camera

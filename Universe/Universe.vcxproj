@@ -73,6 +73,11 @@
     <ClInclude Include="src\engine\platform\impl\view\window.h" />
     <ClInclude Include="src\engine\render\api_render.h" />
     <ClInclude Include="src\engine\render\camera\api_camera.h" />
+    <ClInclude Include="src\engine\render\camera\def\incl_h_api_camera.h" />
+    <ClInclude Include="src\engine\render\camera\def\incl_h_impl_camera.h" />
+    <ClInclude Include="src\engine\render\camera\def\incl_h_obj_camera.h" />
+    <ClInclude Include="src\engine\render\camera\def\incl_s_api_camera.h" />
+    <ClInclude Include="src\engine\render\camera\def\incl_s_impl_camera.h" />
     <ClInclude Include="src\engine\render\camera\impl_camera.h" />
     <ClInclude Include="src\engine\render\camera\obj_camera.h" />
     <ClInclude Include="src\engine\render\def\incl_h_api_render.h" />

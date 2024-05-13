@@ -128,6 +128,9 @@
     <Filter Include="src\engine\render\device\directx\def">
       <UniqueIdentifier>{09c8338a-b9b7-497e-a6e6-034c4da034e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\camera\def">
+      <UniqueIdentifier>{051c76d2-ea66-4587-8ae6-dee5358b8441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -497,6 +500,21 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\device\directx\def\incl_h_impl_device.h">
       <Filter>src\engine\render\device\directx\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\camera\def\incl_s_api_camera.h">
+      <Filter>src\engine\render\camera\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\camera\def\incl_h_api_camera.h">
+      <Filter>src\engine\render\camera\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\camera\def\incl_s_impl_camera.h">
+      <Filter>src\engine\render\camera\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\camera\def\incl_h_impl_camera.h">
+      <Filter>src\engine\render\camera\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\camera\def\incl_h_obj_camera.h">
+      <Filter>src\engine\render\camera\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

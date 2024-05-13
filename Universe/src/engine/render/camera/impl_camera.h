@@ -1,11 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "api_camera.h"
+#include "def/incl_h_impl_camera.h"
 
-#include "engine/var/matrix4.h"
-#include "engine/var/vector3.h"
 
+#ifndef ENGINE_RENDER_CAMERA_IMPL
+#define ENGINE_RENDER_CAMERA_IMPL
 
 namespace engine::render::camera
 {
@@ -34,3 +33,5 @@ namespace engine::render::camera
         matrix4 matrix_projection = matrix_identity();
     };
 }
+
+#endif

@@ -1,8 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "obj_camera.h"
+#include "def/incl_h_api_camera.h"
 
+
+#ifndef ENGINE_RENDER_CAMERA_API
+#define ENGINE_RENDER_CAMERA_API
 
 namespace engine::render::camera
 {
@@ -12,3 +14,5 @@ namespace engine::render::camera
 
     void term();
 }
+
+#endif

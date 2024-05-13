@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "engine/def/abstract.h"
-#include "engine/var/matrix4.h"
+#include "def/incl_h_obj_camera.h"
 
+
+#ifndef ENGINE_RENDER_CAMERA_OBJ
+#define ENGINE_RENDER_CAMERA_OBJ
 
 namespace engine::render::camera
 {
@@ -16,3 +17,5 @@ namespace engine::render::camera
         virtual matrix4 projection() = 0;
     };
 }
+
+#endif
