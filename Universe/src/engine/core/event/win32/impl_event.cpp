@@ -1,15 +1,11 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#include "engine/def/platform.h"
-#include "engine/platform/impl/event/win32/event.h"
 
-#ifdef windows
-#include <windows.h>
-#endif
+#include "def/incl_s_impl_event.h"
 
 
-namespace engine::platform::event::win32
+namespace engine::core::event::impl
 {
-    #ifdef windows
+#ifdef windows
 
     void handle()
     {
@@ -21,10 +17,5 @@ namespace engine::platform::event::win32
         }
     }
 
-    #else
-
-    void handle()
-    {}
-
-    #endif
+#endif
 }

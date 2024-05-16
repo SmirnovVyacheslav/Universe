@@ -15,6 +15,7 @@ namespace engine::core
     {
         platform::init();
         render::init();
+        event::init();
     }
 
     void exec()
@@ -30,6 +31,7 @@ namespace engine::core
 
     void term()
     {
+        event::term();
         render::term();
         platform::term();
     }

@@ -3,7 +3,8 @@
 #include "engine/platform/impl/view/win32/window_handler.h"
 
 #include "engine/def/platform.h"
-#include "engine/platform/api/event.h"
+#include "engine/core/event/api_event.h"
+#include "engine/core/event/obj_event.h"
 
 
 namespace engine::platform::view::win32
@@ -42,9 +43,9 @@ namespace engine::platform::view::win32
                 {
                     case VK_ESCAPE:
                     {
-                        event::event_item item;
-                        item.exit = true;
-                        event::add(item);
+                        engine::core::event::obj event_obj;
+                        event_obj.exit = true;
+                        engine::core::event::add(event_obj);
                     }
                     break;
                 }
@@ -58,10 +59,6 @@ namespace engine::platform::view::win32
 
             case WM_DESTROY:
             {
-                event::event_item item;
-                item.exit = true;
-                event::add(item);
-
                 PostQuitMessage(0);
                 return 0;
             }

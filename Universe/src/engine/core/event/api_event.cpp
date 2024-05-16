@@ -1,14 +1,38 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_event.h"
-
-#include "engine/platform/api/event.h"
+#include "def/incl_s_api_event.h"
 
 
 namespace engine::core::event
 {
+    queue<obj>* queue_inst = nullptr;
+
+
+    void init()
+    {
+        term();
+        queue_inst = new queue<obj>;
+    }
+
+    void add(obj& item)
+    {
+        queue_inst->add(item);
+    }
+
     void handle()
     {
-        platform::event::handle();
+        impl::handle();
+
+        obj item = queue_inst->get();
+        if (item.exit)
+        {
+            core::control::stop();
+        }
+    }
+
+    void term()
+    {
+        delete queue_inst;
+        queue_inst = nullptr;
     }
 }
