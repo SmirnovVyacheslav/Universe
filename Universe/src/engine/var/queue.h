@@ -3,8 +3,8 @@
 #include "def/incl_h_queue.h"
 
 
-#ifndef ENGINE_EVENT
-#define ENGINE_EVENT
+#ifndef ENGINE_QUEUE
+#define ENGINE_QUEUE
 
 namespace engine
 {
