@@ -1,21 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_core.h"
-
-#include "control/api_control.h"
-#include "event/api_event.h"
-
-#include "engine/platform/api/core.h"
-#include "engine/render/api_render.h"
+#include "def/incl_s_api_core.h"
 
 
 namespace engine::core
 {
     void init()
     {
-        platform::init();
-        render::init();
         event::init();
+        view::init();
+        render::init();
     }
 
     void exec()
@@ -31,8 +25,8 @@ namespace engine::core
 
     void term()
     {
-        event::term();
         render::term();
-        platform::term();
+        view::term();
+        event::term();
     }
 }

@@ -1,6 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
+#include "def/incl_h_api_core.h"
+
+
+#ifndef ENGINE_CORE_API
+#define ENGINE_CORE_API
 
 namespace engine::core
 {
@@ -10,3 +14,5 @@ namespace engine::core
 
     void term();
 }
+
+#endif
