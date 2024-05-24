@@ -7,6 +7,7 @@ namespace engine::core
 {
     void init()
     {
+        settings::init();
         event::init();
         view::init();
         render::init();
@@ -28,5 +29,6 @@ namespace engine::core
         render::term();
         view::term();
         event::term();
+        settings::term();
     }
 }

@@ -3,7 +3,7 @@
 #include "def/incl_s_api_settings.h"
 
 
-namespace engine::render::settings
+namespace engine::core::settings
 {
     obj* inst = nullptr;
 

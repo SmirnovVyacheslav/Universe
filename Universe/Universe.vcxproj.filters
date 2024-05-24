@@ -29,24 +29,6 @@
     <Filter Include="src\engine\def">
       <UniqueIdentifier>{63c4c2f0-6f5a-4b2c-bec1-6caa079e6493}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\platform">
-      <UniqueIdentifier>{4ebb9416-f1da-4fb6-931b-0752e13efb17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platform\api">
-      <UniqueIdentifier>{c16ffbcb-cc88-4584-9765-650fc8f61ac8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platform\impl">
-      <UniqueIdentifier>{77f7b548-867d-4757-82d6-298471ba61d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platform\impl\core">
-      <UniqueIdentifier>{3ffcc01e-0690-4785-94f6-7d375026e304}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platform\impl\view">
-      <UniqueIdentifier>{3b089706-1cd2-41f3-8364-0948d494a928}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\platform\impl\view\win32">
-      <UniqueIdentifier>{850cd7cc-afd1-47bb-9877-3523d7246dc1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render">
       <UniqueIdentifier>{e17cecd6-55a8-4c59-8a82-3279494c6e11}</UniqueIdentifier>
     </Filter>
@@ -137,6 +119,24 @@
     <Filter Include="src\engine\core\event\win32\def">
       <UniqueIdentifier>{2c92216c-2265-46bb-a3f4-404edeefcd76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\core\view">
+      <UniqueIdentifier>{64f5e3e3-d963-4a24-9588-0ce1d371bf0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\view\def">
+      <UniqueIdentifier>{1b7de75c-bfd5-4d92-9c2c-6f7dee841df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\view\win32">
+      <UniqueIdentifier>{19fb1d89-852b-4963-b243-8444f427422d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\view\win32\def">
+      <UniqueIdentifier>{7a15639d-8716-4e31-bced-03440ea6d68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\settings">
+      <UniqueIdentifier>{7f8719b8-3eb9-4c58-b79b-9312c07b39cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\core\settings\def">
+      <UniqueIdentifier>{09a7cf8e-24ea-4aec-b290-4816c1c7cdd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -171,18 +171,6 @@
     </ClCompile>
     <ClCompile Include="src\engine\core\event\api_event.cpp">
       <Filter>src\engine\core\event</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\core\core.cpp">
-      <Filter>src\engine\platform\impl\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\view\view.cpp">
-      <Filter>src\engine\platform\impl\view</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\view\win32\window_handler.cpp">
-      <Filter>src\engine\platform\impl\view\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\platform\impl\view\win32\window_impl.cpp">
-      <Filter>src\engine\platform\impl\view\win32</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\render\api_render.cpp">
       <Filter>src\engine\render</Filter>
@@ -235,6 +223,15 @@
     <ClCompile Include="src\engine\core\event\win32\impl_event.cpp">
       <Filter>src\engine\core\event\win32</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\core\view\api_view.cpp">
+      <Filter>src\engine\core\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\view\win32\impl_view.cpp">
+      <Filter>src\engine\core\view\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\settings\api_settings.cpp">
+      <Filter>src\engine\core\settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
@@ -282,35 +279,11 @@
     <ClInclude Include="src\engine\core\control\api_control.h">
       <Filter>src\engine\core\control</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\core\def\abstract_class.h">
-      <Filter>src\engine\core\def</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\core\def\class_format.h">
-      <Filter>src\engine\core\def</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\core\event\api_event.h">
       <Filter>src\engine\core\event</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\def\abstract.h">
       <Filter>src\engine\def</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\api\core.h">
-      <Filter>src\engine\platform\api</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\api\view.h">
-      <Filter>src\engine\platform\api</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\view\window.h">
-      <Filter>src\engine\platform\impl\view</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\view\win32\window_handler.h">
-      <Filter>src\engine\platform\impl\view\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\view\win32\window_impl.h">
-      <Filter>src\engine\platform\impl\view\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\platform\impl\view\win32\window_config.h">
-      <Filter>src\engine\platform\impl\view\win32</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\api_render.h">
       <Filter>src\engine\render</Filter>
@@ -533,6 +506,51 @@
     </ClInclude>
     <ClInclude Include="src\engine\core\event\win32\def\incl_s_impl_event.h">
       <Filter>src\engine\core\event\win32\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\api_view.h">
+      <Filter>src\engine\core\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\def\incl_h_api_view.h">
+      <Filter>src\engine\core\view\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\def\incl_s_api_view.h">
+      <Filter>src\engine\core\view\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\def\incl_h_obj_view.h">
+      <Filter>src\engine\core\view\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\obj_view.h">
+      <Filter>src\engine\core\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\win32\impl_view.h">
+      <Filter>src\engine\core\view\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\win32\def\incl_h_impl_view.h">
+      <Filter>src\engine\core\view\win32\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\view\win32\def\incl_s_impl_view.h">
+      <Filter>src\engine\core\view\win32\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\def\incl_s_api_core.h">
+      <Filter>src\engine\core\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\def\incl_h_api_core.h">
+      <Filter>src\engine\core\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\settings\api_settings.h">
+      <Filter>src\engine\core\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\settings\obj_settings.h">
+      <Filter>src\engine\core\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\settings\def\incl_h_api_settings.h">
+      <Filter>src\engine\core\settings\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\settings\def\incl_h_obj_settings.h">
+      <Filter>src\engine\core\settings\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\settings\def\incl_s_api_settings.h">
+      <Filter>src\engine\core\settings\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

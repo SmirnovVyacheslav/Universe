@@ -2,7 +2,8 @@
 
 #include "engine/def/platform.h"
 
-#include "engine/platform/api/view.h"
+#include "engine/core/view/api_view.h"
+#include "engine/core/view/obj_view.h"
 
 #include "engine/render/device/directx/impl_device.h"
 

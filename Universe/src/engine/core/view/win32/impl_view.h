@@ -26,7 +26,7 @@ namespace engine::core::view
     private:
         HWND hwnd;
 
-        LPCTSTR window_name = L"Engine";
+        LPCTSTR window_name = static_cast<LPCTSTR>(settings::get().view.name.w_str().c_str());
         LPCTSTR window_class_name = L"window_class_engine";
     };
 

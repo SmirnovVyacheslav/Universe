@@ -67,7 +67,7 @@ namespace engine::render::device::directx
         swap_chain_desc.BufferDesc.RefreshRate.Numerator = settings_obj.refresh;
         swap_chain_desc.BufferDesc.RefreshRate.Denominator = 1;
         swap_chain_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        swap_chain_desc.OutputWindow = reinterpret_cast<HWND>(platform::view::id());
+        swap_chain_desc.OutputWindow = reinterpret_cast<HWND>(core::view::get().id());
         swap_chain_desc.SampleDesc.Count = 1;
         swap_chain_desc.SampleDesc.Quality = 0;
         swap_chain_desc.Windowed = settings_obj.windowed;

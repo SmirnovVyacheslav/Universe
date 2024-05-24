@@ -3,10 +3,10 @@
 #include "def/incl_h_api_settings.h"
 
 
-#ifndef ENGINE_RENDER_SETTINGS_API
-#define ENGINE_RENDER_SETTINGS_API
+#ifndef ENGINE_CORE_SETTINGS_API
+#define ENGINE_CORE_SETTINGS_API
 
-namespace engine::render::settings
+namespace engine::core::settings
 {
     void init();
 

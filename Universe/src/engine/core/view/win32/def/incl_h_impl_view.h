@@ -2,10 +2,10 @@
 
 #include "engine/def/platform.h"
 
-#include "engine/core/view/obj_view.h"
+#include "engine/core/settings/api_settings.h"
+#include "engine/core/settings/obj_settings.h"
 
-#include "engine/var/std.h"
-#include "engine/var/string.h"
+#include "engine/core/view/obj_view.h"
 
 
 #ifdef windows

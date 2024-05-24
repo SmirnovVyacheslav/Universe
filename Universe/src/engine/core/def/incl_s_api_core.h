@@ -6,6 +6,8 @@
 
 #include "engine/core/event/api_event.h"
 
+#include "engine/core/settings/api_settings.h"
+
 #include "engine/core/view/api_view.h"
 
 #include "engine/render/api_render.h"

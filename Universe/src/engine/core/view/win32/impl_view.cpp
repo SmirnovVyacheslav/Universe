@@ -37,8 +37,10 @@ namespace engine::core::view
                 {
                     case VK_ESCAPE:
                     {
-                        engine::core::event::obj event_obj;
-                        event_obj.exit = true;
+                        engine::core::event::obj event_obj =
+                        {
+                            .exit = true
+                        };
                         engine::core::event::add(event_obj);
                     }
                     break;
@@ -69,6 +71,7 @@ namespace engine::core::view
 
     impl::impl()
     {
+
         WNDCLASSEX window_class_data = {
             .cbSize = sizeof(WNDCLASSEX),
             .style = CS_HREDRAW | CS_VREDRAW,
@@ -79,21 +82,21 @@ namespace engine::core::view
             .hCursor = LoadCursor(NULL, IDC_ARROW),
             .hbrBackground = static_cast<HBRUSH>(GetStockObject(WHITE_BRUSH)),
             .lpszMenuName = NULL,
-            .lpszClassName = static_cast<LPCTSTR>(L"engine_window_class")
+            .lpszClassName = window_class_name
         };
         if (!RegisterClassEx(&window_class_data))
         {
-            throw error(u8"Failed to register window class");
+            throw error("Failed to register window class");
         }
 
         hwnd = CreateWindow(
-            win32_data.lpszClassName,
-            static_cast<LPCTSTR>(L"Engine"),
+            window_class_name,
+            window_name,
             WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT,
             CW_USEDEFAULT,
-            155,//view_cfg.width,
-            1566,//view_cfg.height,
+            settings::get().view.width,
+            settings::get().view.height,
             NULL,
             NULL,
             NULL,
@@ -101,7 +104,7 @@ namespace engine::core::view
         );
         if (!hwnd)
         {
-            throw error(u8"Failed to create window");
+            throw error("Failed to create window");
         }
 
         ShowWindow(hwnd, SW_SHOWNORMAL);
@@ -115,7 +118,7 @@ namespace engine::core::view
     impl::~impl()
     {
         DestroyWindow(hwnd);
-        UnregisterClass(win32_data.lpszClassName, GetModuleHandle(nullptr));
+        UnregisterClass(window_class_name, GetModuleHandle(nullptr));
     }
 
 #endif

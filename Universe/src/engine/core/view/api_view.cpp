@@ -5,18 +5,22 @@
 
 namespace engine::core::view
 {
+    obj* inst = nullptr;
+
     void init()
     {
-        //
+        term();
+        inst = new impl();
     }
 
     obj& get()
     {
-        //
+        return *inst;
     }
 
     void term()
     {
-        //
+        delete inst;
+        inst = nullptr;
     }
 }
