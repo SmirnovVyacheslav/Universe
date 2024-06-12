@@ -158,6 +158,8 @@
     <ClInclude Include="src\engine\var\vector4.h" />
     <ClInclude Include="src\engine\var\vertex.h" />
     <ClInclude Include="src\game\api_game.h" />
+    <ClInclude Include="src\game\def\incl_h_api_game.h" />
+    <ClInclude Include="src\game\def\incl_s_api_game.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

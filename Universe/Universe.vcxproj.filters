@@ -137,6 +137,9 @@
     <Filter Include="src\engine\core\settings\def">
       <UniqueIdentifier>{09a7cf8e-24ea-4aec-b290-4816c1c7cdd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\def">
+      <UniqueIdentifier>{6203687e-b5cd-4a22-96b1-810586eaead8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -551,6 +554,12 @@
     </ClInclude>
     <ClInclude Include="src\engine\core\settings\def\incl_s_api_settings.h">
       <Filter>src\engine\core\settings\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\def\incl_h_api_game.h">
+      <Filter>src\game\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\def\incl_s_api_game.h">
+      <Filter>src\game\def</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

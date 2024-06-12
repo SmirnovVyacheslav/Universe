@@ -1,5 +1,7 @@
 # Plan
 
- - Add mesh class
- - Load mesh for cube
- - Add mesh init for cube
+ - Fix codestyle and issues
+ - Add menu
+ - Add landscape
+ - Add move camera
+ - Add pause

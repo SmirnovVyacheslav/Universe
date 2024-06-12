@@ -1,8 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "api_game.h"
-
-#include "engine/core/api_core.h"
+#include "def/incl_s_api_game.h"
 
 
 namespace game
