@@ -145,7 +145,14 @@
     <ClInclude Include="src\engine\render\vertices\obj_vertices.h" />
     <ClInclude Include="src\engine\var\array.h" />
     <ClInclude Include="src\engine\var\const.h" />
+    <ClInclude Include="src\engine\var\def\icnl_s_matrix4.h" />
+    <ClInclude Include="src\engine\var\def\incl_h_array.h" />
+    <ClInclude Include="src\engine\var\def\incl_h_const.h" />
+    <ClInclude Include="src\engine\var\def\incl_h_error.h" />
+    <ClInclude Include="src\engine\var\def\incl_h_map.h" />
+    <ClInclude Include="src\engine\var\def\incl_h_matrix4.h" />
     <ClInclude Include="src\engine\var\def\incl_h_queue.h" />
+    <ClInclude Include="src\engine\var\def\incl_s_error.h" />
     <ClInclude Include="src\engine\var\error.h" />
     <ClInclude Include="src\engine\var\map.h" />
     <ClInclude Include="src\engine\var\matrix4.h" />

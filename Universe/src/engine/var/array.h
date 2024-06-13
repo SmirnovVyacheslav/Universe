@@ -1,11 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "error.h"
-#include "std.h"
+#include "def/incl_h_array.h"
 
-#include <vector>
 
+#ifndef ENGINE_ARRAY
+#define ENGINE_ARRAY
 
 namespace engine
 {
@@ -100,3 +99,5 @@ namespace engine
        return &data.front();
    }
 }
+
+#endif

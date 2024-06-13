@@ -561,5 +561,26 @@
     <ClInclude Include="src\game\def\incl_s_api_game.h">
       <Filter>src\game\def</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_array.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_const.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_error.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_s_error.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_map.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\icnl_s_matrix4.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_matrix4.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

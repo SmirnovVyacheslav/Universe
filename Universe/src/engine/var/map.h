@@ -1,10 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "error.h"
+#include "def/incl_h_map.h"
 
-#include <unordered_map>
 
+#ifndef ENGINE_MAP
+#define ENGINE_MAP
 
 namespace engine
 {
@@ -82,3 +82,5 @@ namespace engine
        throw error("Key does not exist");
    }
 }
+
+#endif

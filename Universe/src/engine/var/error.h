@@ -1,8 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include <stdexcept>
+#include "def/incl_h_error.h"
 
+
+#ifndef ENGINE_ERROR
+#define ENGINE_ERROR
 
 namespace engine
 {
@@ -21,3 +23,5 @@ namespace engine
         const char* message;
     };
 }
+
+#endif

@@ -1,10 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "std.h"
-#include "vector3.h"
-#include "vector4.h"
+#include "def/incl_h_matrix4.h"
 
+
+#ifndef ENGINE_MATRIX4
+#define ENGINE_MATRIX4
 
 namespace engine
 {
@@ -40,3 +40,5 @@ namespace engine
    const matrix4 matrix_rotation_z(const fp32 angle);
    const matrix4 matrix_transpose(const matrix4& src);
 }
+
+#endif

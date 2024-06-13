@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "error.h"
+#include "def/incl_s_error.h"
 
 
 namespace engine
