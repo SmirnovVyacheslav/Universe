@@ -1,8 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include <cstdint>
+#include "def/incl_h_std.h"
 
+
+#ifndef ENGINE_STD
+#define ENGINE_STD
 
 namespace engine
 {
@@ -15,3 +17,5 @@ namespace engine
     using fp32 = float;
     using fp64 = double;
 }
+
+#endif

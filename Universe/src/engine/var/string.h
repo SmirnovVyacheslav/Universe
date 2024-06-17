@@ -1,12 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "std.h"
+#include "def/incl_h_string.h"
 
-#include <iostream>
-#include <functional>
-#include <string>
 
+#ifndef ENGINE_STRING
+#define ENGINE_STRING
 
 namespace engine
 {
@@ -55,3 +53,5 @@ namespace std
         }
     };
 }
+
+#endif

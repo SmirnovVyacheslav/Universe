@@ -582,5 +582,17 @@
     <ClInclude Include="src\engine\var\def\incl_h_matrix4.h">
       <Filter>src\engine\var\def</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_smart_ptr.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_std.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_string.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_s_string.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

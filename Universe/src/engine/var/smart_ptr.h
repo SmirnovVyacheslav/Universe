@@ -1,10 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "array.h"
-#include "error.h"
-#include "std.h"
+#include "def/incl_h_smart_ptr.h"
 
+
+#ifndef ENGINE_SMART_PTR
+#define ENGINE_SMART_PTR
 
 namespace engine
 {
@@ -228,3 +228,5 @@ namespace engine
         obj_ptr = nullptr;
     }
 }
+
+#endif
