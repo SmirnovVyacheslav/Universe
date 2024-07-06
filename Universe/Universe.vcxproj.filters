@@ -594,5 +594,14 @@
     <ClInclude Include="src\engine\var\def\incl_s_string.h">
       <Filter>src\engine\var\def</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_vector.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_vector3.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_s_vector3.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

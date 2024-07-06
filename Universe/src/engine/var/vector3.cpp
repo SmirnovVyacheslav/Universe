@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "vector3.h"
+#include "def/incl_s_vector3.h"
 
 
 namespace engine

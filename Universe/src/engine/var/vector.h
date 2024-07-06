@@ -1,13 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "const.h"
-#include "error.h"
-#include "std.h"
+#include "def/incl_h_vector.h"
 
-#include <cmath>
-#include <iostream>
 
+#ifndef ENGINE_VECTOR
+#define ENGINE_VECTOR
 
 namespace engine
 {
@@ -297,3 +294,5 @@ namespace engine
         return out_stream;
     }
 }
+
+#endif
