@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "std.h"
-#include "vector.h"
+#include "def/incl_h_vector4.h"
 
+
+#ifndef ENGINE_VECTOR4
+#define ENGINE_VECTOR4
 
 namespace engine
 {
@@ -53,3 +54,5 @@ namespace engine
     std::istream& operator>>(std::istream& in_stream, vector4& vec);
     std::ostream& operator<<(std::ostream& out_stream, const vector4& vec);
 }
+
+#endif

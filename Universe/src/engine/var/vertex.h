@@ -1,9 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-#include "vector3.h"
-#include "vector4.h"
+#include "def/incl_h_vertex.h"
 
+
+#ifndef ENGINE_VERTEX
+#define ENGINE_VERTEX
 
 namespace engine
 {
@@ -24,3 +25,5 @@ namespace engine
         vector4 color;
     };
 }
+
+#endif

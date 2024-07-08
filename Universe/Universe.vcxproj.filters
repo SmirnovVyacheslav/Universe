@@ -603,5 +603,17 @@
     <ClInclude Include="src\engine\var\def\incl_s_vector3.h">
       <Filter>src\engine\var\def</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_s_vector4.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_vector4.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_s_vertex.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\def\incl_h_vertex.h">
+      <Filter>src\engine\var\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
