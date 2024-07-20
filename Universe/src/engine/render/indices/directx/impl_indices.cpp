@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_impl_indices.h"
+#include "ipf/ips_impl_indices.h"
 
 
 namespace engine::render::indices::directx

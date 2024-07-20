@@ -1,6 +1,10 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
+#include "ipf/iph_api_control.h"
+
+
+#ifndef ENGINE_CORE_CONTROL_API
+#define ENGINE_CORE_CONTROL_API
 
 namespace engine::core::control
 {
@@ -8,3 +12,5 @@ namespace engine::core::control
     bool status();
     void stop();
 }
+
+#endif

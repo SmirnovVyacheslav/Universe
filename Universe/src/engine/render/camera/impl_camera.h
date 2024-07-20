@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_impl_camera.h"
+#include "ipf/iph_impl_camera.h"
 
 
 #ifndef ENGINE_RENDER_CAMERA_IMPL

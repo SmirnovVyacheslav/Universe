@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_api_mesh.h"
+#include "ipf/iph_api_mesh.h"
 
 
 #ifndef ENGINE_RENDER_MESH_API

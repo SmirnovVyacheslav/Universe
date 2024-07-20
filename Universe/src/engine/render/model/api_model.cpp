@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_api_model.h"
+#include "ipf/ips_api_model.h"
 
 
 namespace engine::render::model

@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_string.h"
+#include "ipf/ips_string.h"
 
 
 namespace engine

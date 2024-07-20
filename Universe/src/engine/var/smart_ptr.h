@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_smart_ptr.h"
+#include "ipf/iph_smart_ptr.h"
 
 
 #ifndef ENGINE_SMART_PTR

@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_obj_indices.h"
+#include "ipf/iph_obj_indices.h"
 
 
 #ifndef ENGINE_RENDER_INDICES_OBJ

@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_impl_view.h"
+#include "ipf/ips_impl_view.h"
 
 
 namespace engine::core::view

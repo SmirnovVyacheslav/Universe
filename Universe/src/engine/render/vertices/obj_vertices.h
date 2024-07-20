@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_obj_vertices.h"
+#include "ipf/iph_obj_vertices.h"
 
 
 #ifndef ENGINE_RENDER_VERTICES_OBJ

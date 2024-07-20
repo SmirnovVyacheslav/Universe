@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_vector3.h"
+#include "ipf/ips_vector3.h"
 
 
 namespace engine

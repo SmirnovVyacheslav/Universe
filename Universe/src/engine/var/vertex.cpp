@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_s_vertex.h"
+#include "ipf/ips_vertex.h"
 
 
 namespace engine

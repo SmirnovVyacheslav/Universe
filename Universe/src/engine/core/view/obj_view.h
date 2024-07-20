@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "def/incl_h_obj_view.h"
+#include "ipf/iph_obj_view.h"
 
 
 #ifndef ENGINE_CORE_VIEW_OBJ
