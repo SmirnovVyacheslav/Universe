@@ -143,6 +143,12 @@
     <Filter Include="src\engine\core\control\ipf">
       <UniqueIdentifier>{0b8289e8-4442-4fce-b98b-6035fc4ae4cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\text">
+      <UniqueIdentifier>{fcc120c2-ea00-4464-8bb1-953d1fa92047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\text\ipf">
+      <UniqueIdentifier>{b4f512ce-ec54-435a-bbe5-0014d563c92e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -237,6 +243,9 @@
     </ClCompile>
     <ClCompile Include="src\engine\core\settings\api_settings.cpp">
       <Filter>src\engine\core\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\text\api_text.cpp">
+      <Filter>src\engine\render\text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -623,6 +632,21 @@
     </ClInclude>
     <ClInclude Include="src\engine\core\control\ipf\iph_api_control.h">
       <Filter>src\engine\core\control\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\api_text.h">
+      <Filter>src\engine\render\text</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\obj_text.h">
+      <Filter>src\engine\render\text</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\ipf\iph_api_text.h">
+      <Filter>src\engine\render\text\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\ipf\iph_obj_text.h">
+      <Filter>src\engine\render\text\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\ipf\ips_api_text.h">
+      <Filter>src\engine\render\text\ipf</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
