@@ -15,6 +15,7 @@ namespace engine::render
         shader::init();
         mesh::init();
         model::init();
+        text::init();
     }
 
     void draw()
@@ -25,6 +26,7 @@ namespace engine::render
 
     void term()
     {
+        text::term();
         model::term();
         mesh::term();
         shader::term();
