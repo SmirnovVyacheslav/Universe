@@ -41,6 +41,7 @@
     <ClCompile Include="src\engine\render\shader\directx\impl_shader.cpp" />
     <ClCompile Include="src\engine\render\shader\api_shader.cpp" />
     <ClCompile Include="src\engine\render\text\api_text.cpp" />
+    <ClCompile Include="src\engine\render\text\impl_text.cpp" />
     <ClCompile Include="src\engine\render\vertices\api_vertices.cpp" />
     <ClCompile Include="src\engine\render\vertices\directx\impl_vertices.cpp" />
     <ClCompile Include="src\engine\var\error.cpp" />
@@ -139,9 +140,12 @@
     <ClInclude Include="src\engine\render\shader\ipf\ips_api_shader.h" />
     <ClInclude Include="src\engine\render\shader\obj_shader.h" />
     <ClInclude Include="src\engine\render\text\api_text.h" />
+    <ClInclude Include="src\engine\render\text\impl_text.h" />
     <ClInclude Include="src\engine\render\text\ipf\iph_api_text.h" />
+    <ClInclude Include="src\engine\render\text\ipf\iph_impl_text.h" />
     <ClInclude Include="src\engine\render\text\ipf\iph_obj_text.h" />
     <ClInclude Include="src\engine\render\text\ipf\ips_api_text.h" />
+    <ClInclude Include="src\engine\render\text\ipf\ips_impl_text.h" />
     <ClInclude Include="src\engine\render\text\obj_text.h" />
     <ClInclude Include="src\engine\render\vertices\api_vertices.h" />
     <ClInclude Include="src\engine\render\vertices\directx\impl_vertices.h" />

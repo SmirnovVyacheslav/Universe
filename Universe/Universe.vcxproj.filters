@@ -247,6 +247,9 @@
     <ClCompile Include="src\engine\render\text\api_text.cpp">
       <Filter>src\engine\render\text</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\render\text\impl_text.cpp">
+      <Filter>src\engine\render\text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
@@ -647,6 +650,15 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\text\ipf\ips_api_text.h">
       <Filter>src\engine\render\text\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\ipf\ips_impl_text.h">
+      <Filter>src\engine\render\text\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\ipf\iph_impl_text.h">
+      <Filter>src\engine\render\text\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\text\impl_text.h">
+      <Filter>src\engine\render\text</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
