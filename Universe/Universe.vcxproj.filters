@@ -149,6 +149,12 @@
     <Filter Include="src\engine\render\text\ipf">
       <UniqueIdentifier>{b4f512ce-ec54-435a-bbe5-0014d563c92e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\render\font">
+      <UniqueIdentifier>{b5e94932-e8de-4900-9c60-762f51e81f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\render\font\ipf">
+      <UniqueIdentifier>{23b59744-13d1-4090-8530-eb8e415b5ba6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -249,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="src\engine\render\text\impl_text.cpp">
       <Filter>src\engine\render\text</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\font\api_font.cpp">
+      <Filter>src\engine\render\font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -659,6 +668,21 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\text\impl_text.h">
       <Filter>src\engine\render\text</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\api_font.h">
+      <Filter>src\engine\render\font</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\obj_font.h">
+      <Filter>src\engine\render\font</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\ipf\iph_api_font.h">
+      <Filter>src\engine\render\font\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\ipf\iph_obj_font.h">
+      <Filter>src\engine\render\font\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\ipf\ips_api_font.h">
+      <Filter>src\engine\render\font\ipf</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
