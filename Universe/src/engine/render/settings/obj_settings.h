@@ -10,6 +10,8 @@ namespace engine::render::settings
 {
     struct dir
     {
+        string font = u8"res/engine/font/";
+
         string mesh = u8"res/game/mesh/";
         string model = u8"res/game/model/";
         string shader = u8"res/game/shader/";

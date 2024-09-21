@@ -259,6 +259,9 @@
     <ClCompile Include="src\engine\render\font\api_font.cpp">
       <Filter>src\engine\render\font</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\render\font\impl_font.cpp">
+      <Filter>src\engine\render\font</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
@@ -683,6 +686,15 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\font\ipf\ips_api_font.h">
       <Filter>src\engine\render\font\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\ipf\iph_impl_font.h">
+      <Filter>src\engine\render\font\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\ipf\ips_impl_font.h">
+      <Filter>src\engine\render\font\ipf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\font\impl_font.h">
+      <Filter>src\engine\render\font</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

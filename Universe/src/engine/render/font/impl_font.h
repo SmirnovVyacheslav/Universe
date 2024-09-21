@@ -8,7 +8,10 @@
 
 namespace engine::render::font
 {
-    //
+    class impl : public obj
+    {
+        impl(string name);
+    };
 }
 
 #endif
