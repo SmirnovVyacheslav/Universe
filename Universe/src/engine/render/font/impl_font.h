@@ -10,6 +10,9 @@ namespace engine::render::font
 {
     class impl : public obj
     {
+        uint16 tex_width = 0;
+        uint16 tex_height = 0;
+
         impl(string name);
     };
 }
