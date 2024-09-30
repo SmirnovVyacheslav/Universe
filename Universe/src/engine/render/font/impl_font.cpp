@@ -40,6 +40,10 @@ namespace engine::render::font
                     }
                 }
             }
+            else if(data == "char")
+            {
+                //
+            }
         }
 
         ifstream.close();

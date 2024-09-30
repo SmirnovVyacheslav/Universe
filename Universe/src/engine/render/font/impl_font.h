@@ -8,6 +8,17 @@
 
 namespace engine::render::font
 {
+    struct char_data
+    {
+        int16 x = 0;
+        int16 y = 0;
+        int16 w = 0;
+        int16 h = 0;
+        int16 ox = 0;
+        int16 oy = 0;
+        int16 ax = 0;
+    };
+
     class impl : public obj
     {
         uint16 tex_width = 0;
