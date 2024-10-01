@@ -42,7 +42,52 @@ namespace engine::render::font
             }
             else if(data == "char")
             {
-                //
+                uint16 id = 0;
+                char_data chard;
+
+                while(!sstream.eof())
+                {
+                    sstream >> data;
+                    index = data.find('=');
+                    key = data.substr(0, index);
+                    value = data.substr(index + 1);
+
+                    std::stringstream vsstream;
+                    vsstream << value;
+                    if(key == "id")
+                    {
+                        vsstream >> id;
+                    }
+                    else if(key == "x")
+                    {
+                        vsstream >> chard.x;
+                    }
+                    else if(key == "y")
+                    {
+                        vsstream >> chard.y;
+                    }
+                    else if(key == "width")
+                    {
+                        vsstream >> chard.w;
+                    }
+                    else if(key == "height")
+                    {
+                        vsstream >> chard.h;
+                    }
+                    else if(key == "xoffset")
+                    {
+                        vsstream >> chard.ox;
+                    }
+                    else if(key == "yoffset")
+                    {
+                        vsstream >> chard.oy;
+                    }
+                    else if(key == "xadvance")
+                    {
+                        vsstream >> chard.ax;
+                    }
+                    char_map[id] = chard;
+                }
             }
         }
 

@@ -24,6 +24,8 @@ namespace engine::render::font
         uint16 tex_width = 0;
         uint16 tex_height = 0;
 
+        map<uint16, char_data> char_map;
+
         impl(string name);
     };
 }
