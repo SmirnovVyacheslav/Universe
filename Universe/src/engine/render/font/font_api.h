@@ -1,7 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/iph_api_font.h"
+#include "font_obj.h"
 
+#include "engine/var/string.h"
 
 #ifndef ENGINE_RENDER_FONT_API
 #define ENGINE_RENDER_FONT_API

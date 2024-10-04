@@ -152,9 +152,6 @@
     <Filter Include="src\engine\render\font">
       <UniqueIdentifier>{b5e94932-e8de-4900-9c60-762f51e81f31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\font\ipf">
-      <UniqueIdentifier>{23b59744-13d1-4090-8530-eb8e415b5ba6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -256,10 +253,10 @@
     <ClCompile Include="src\engine\render\text\impl_text.cpp">
       <Filter>src\engine\render\text</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\font\api_font.cpp">
+    <ClCompile Include="src\engine\render\font\font_api.cpp">
       <Filter>src\engine\render\font</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\font\impl_font.cpp">
+    <ClCompile Include="src\engine\render\font\font_impl.cpp">
       <Filter>src\engine\render\font</Filter>
     </ClCompile>
   </ItemGroup>
@@ -672,28 +669,13 @@
     <ClInclude Include="src\engine\render\text\impl_text.h">
       <Filter>src\engine\render\text</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\font\api_font.h">
+    <ClInclude Include="src\engine\render\font\font_api.h">
       <Filter>src\engine\render\font</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\font\obj_font.h">
+    <ClInclude Include="src\engine\render\font\font_obj.h">
       <Filter>src\engine\render\font</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\font\ipf\iph_api_font.h">
-      <Filter>src\engine\render\font\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\font\ipf\iph_obj_font.h">
-      <Filter>src\engine\render\font\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\font\ipf\ips_api_font.h">
-      <Filter>src\engine\render\font\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\font\ipf\iph_impl_font.h">
-      <Filter>src\engine\render\font\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\font\ipf\ips_impl_font.h">
-      <Filter>src\engine\render\font\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\font\impl_font.h">
+    <ClInclude Include="src\engine\render\font\font_impl.h">
       <Filter>src\engine\render\font</Filter>
     </ClInclude>
   </ItemGroup>

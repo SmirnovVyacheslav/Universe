@@ -1,7 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/ips_api_font.h"
-
+#include "font_api.h"
 
 namespace engine::render::font
 {

@@ -1,7 +1,13 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/ips_impl_font.h"
+#include "font_impl.h"
 
+#include "engine/render/settings/api_settings.h"
+
+#include <iostream>
+#include <filesystem>
+#include <fstream>
+#include <sstream>
 
 namespace engine::render::font
 {
@@ -10,7 +16,7 @@ namespace engine::render::font
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.font.u8_str() + name.u8_str() + u8".fnt");
 
-        size_t index;
+        /*size_t index;
         std::string line, data, key, value;
         while(!ifstream.eof())
         {
@@ -89,7 +95,7 @@ namespace engine::render::font
                     char_map[id] = chard;
                 }
             }
-        }
+        }*/
 
         ifstream.close();
     }

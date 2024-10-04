@@ -1,23 +1,15 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/iph_impl_font.h"
+#include "font_obj.h"
+
+#include "engine/var/map.h"
+#include "engine/var/string.h"
 
 #ifndef ENGINE_RENDER_FONT_IMPL
 #define ENGINE_RENDER_FONT_IMPL
 
 namespace engine::render::font
 {
-    struct char_data
-    {
-        int16 x = 0;
-        int16 y = 0;
-        int16 w = 0;
-        int16 h = 0;
-        int16 ox = 0;
-        int16 oy = 0;
-        int16 ax = 0;
-    };
-
     class impl : public obj
     {
     public:
@@ -30,8 +22,19 @@ namespace engine::render::font
 
         ~impl() = default;
     private:
-        uint16 tex_width = 0;
-        uint16 tex_height = 0;
+        struct char_data
+        {
+            int16 pos_x = 0;
+            int16 pos_y = 0;
+            int16 size_w = 0;
+            int16 size_h = 0;
+            int16 offset_x = 0;
+            int16 offset_y = 0;
+            int16 advance_x = 0;
+        };
+
+        uint16 char_width = 0;
+        uint16 char_height = 0;
         map<uint16, char_data> char_map;
     };
 }
