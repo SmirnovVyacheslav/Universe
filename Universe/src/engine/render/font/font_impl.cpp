@@ -16,47 +16,47 @@ namespace engine::render::font
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.font.u8_str() + name.u8_str() + u8".fnt");
 
-        /*size_t index;
-        std::string line, data, key, value;
+        size_t index;
+        std::string line, item, key, value;
         while(!ifstream.eof())
         {
             std::stringstream sstream;
 		    std::getline(ifstream, line);
             sstream << line;
 
-            sstream >> data;
-            if(data == "common")
+            sstream >> item;
+            if(item == "common")
             {
                 while(!sstream.eof())
                 {
-                    sstream >> data;
-                    index = data.find('=');
-                    key = data.substr(0, index);
-                    value = data.substr(index + 1);
+                    sstream >> item;
+                    index = item.find('=');
+                    key = item.substr(0, index);
+                    value = item.substr(index + 1);
 
                     std::stringstream vsstream;
                     vsstream << value;
                     if(key == "scaleW")
                     {
-                        vsstream >> tex_width;
+                        vsstream >> char_width;
                     }
                     else if(key == "scaleH")
                     {
-                        vsstream >> tex_height;
+                        vsstream >> char_height;
                     }
                 }
             }
-            else if(data == "char")
+            else if(item == "char")
             {
                 uint16 id = 0;
-                char_data chard;
+                char_data data;
 
                 while(!sstream.eof())
                 {
-                    sstream >> data;
-                    index = data.find('=');
-                    key = data.substr(0, index);
-                    value = data.substr(index + 1);
+                    sstream >> item;
+                    index = item.find('=');
+                    key = item.substr(0, index);
+                    value = item.substr(index + 1);
 
                     std::stringstream vsstream;
                     vsstream << value;
@@ -66,36 +66,36 @@ namespace engine::render::font
                     }
                     else if(key == "x")
                     {
-                        vsstream >> chard.x;
+                        vsstream >> data.pos_x;
                     }
                     else if(key == "y")
                     {
-                        vsstream >> chard.y;
+                        vsstream >> data.pos_y;
                     }
                     else if(key == "width")
                     {
-                        vsstream >> chard.w;
+                        vsstream >> data.size_w;
                     }
                     else if(key == "height")
                     {
-                        vsstream >> chard.h;
+                        vsstream >> data.size_h;
                     }
                     else if(key == "xoffset")
                     {
-                        vsstream >> chard.ox;
+                        vsstream >> data.offset_x;
                     }
                     else if(key == "yoffset")
                     {
-                        vsstream >> chard.oy;
+                        vsstream >> data.offset_y;
                     }
                     else if(key == "xadvance")
                     {
-                        vsstream >> chard.ax;
+                        vsstream >> data.advance_x;
                     }
-                    char_map[id] = chard;
+                    char_map[id] = data;
                 }
             }
-        }*/
+        }
 
         ifstream.close();
     }

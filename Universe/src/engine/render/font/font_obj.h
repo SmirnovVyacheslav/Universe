@@ -12,7 +12,7 @@ namespace engine::render::font
     {
         abstract
 
-        int32 id;
+        int32 id = 0;
 
         virtual void set() = 0;
     };
