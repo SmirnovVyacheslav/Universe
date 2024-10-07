@@ -17,6 +17,6 @@
 
 #include "engine/render/shader/api_shader.h"
 
-#include "engine/render/text/api_text.h"
+#include "engine/render/text/text_api.h"
 
 #include "engine/render/vertices/api_vertices.h"

@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/ips_api_text.h"
-
+#include "text_api.h"
+#include "text_impl.h"
 
 namespace engine::render::text
 {
@@ -15,7 +15,8 @@ namespace engine::render::text
 
     obj& add()
     {
-        inst = nullptr;
+        term();
+        inst = new impl();
         return *inst;
     }
 

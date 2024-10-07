@@ -146,9 +146,6 @@
     <Filter Include="src\engine\render\text">
       <UniqueIdentifier>{fcc120c2-ea00-4464-8bb1-953d1fa92047}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\text\ipf">
-      <UniqueIdentifier>{b4f512ce-ec54-435a-bbe5-0014d563c92e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render\font">
       <UniqueIdentifier>{b5e94932-e8de-4900-9c60-762f51e81f31}</UniqueIdentifier>
     </Filter>
@@ -247,10 +244,10 @@
     <ClCompile Include="src\engine\core\settings\api_settings.cpp">
       <Filter>src\engine\core\settings</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\text\api_text.cpp">
+    <ClCompile Include="src\engine\render\text\text_api.cpp">
       <Filter>src\engine\render\text</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\text\impl_text.cpp">
+    <ClCompile Include="src\engine\render\text\text_impl.cpp">
       <Filter>src\engine\render\text</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\render\font\font_api.cpp">
@@ -645,28 +642,13 @@
     <ClInclude Include="src\engine\core\control\ipf\iph_api_control.h">
       <Filter>src\engine\core\control\ipf</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\text\api_text.h">
+    <ClInclude Include="src\engine\render\text\text_api.h">
       <Filter>src\engine\render\text</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\text\obj_text.h">
+    <ClInclude Include="src\engine\render\text\text_obj.h">
       <Filter>src\engine\render\text</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\text\ipf\iph_api_text.h">
-      <Filter>src\engine\render\text\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\text\ipf\iph_obj_text.h">
-      <Filter>src\engine\render\text\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\text\ipf\ips_api_text.h">
-      <Filter>src\engine\render\text\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\text\ipf\ips_impl_text.h">
-      <Filter>src\engine\render\text\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\text\ipf\iph_impl_text.h">
-      <Filter>src\engine\render\text\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\text\impl_text.h">
+    <ClInclude Include="src\engine\render\text\text_impl.h">
       <Filter>src\engine\render\text</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\font\font_api.h">

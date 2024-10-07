@@ -1,7 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/iph_impl_text.h"
+#include "text_obj.h"
 
+#include "engine/render/font/font_api.h"
 
 #ifndef ENGINE_RENDER_TEXT_IMPL
 #define ENGINE_RENDER_TEXT_IMPL
@@ -11,7 +12,7 @@ namespace engine::render::text
     class impl : public obj
     {
     public:
-        impl() = default;
+        impl();
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -21,6 +22,8 @@ namespace engine::render::text
         impl& operator=(const impl& src) = delete;
 
         ~impl() = default;
+    private:
+        font::obj& font_obj;
     };
 }
 
