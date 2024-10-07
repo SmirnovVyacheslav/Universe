@@ -17,6 +17,8 @@ namespace engine::render::font
         impl(impl&& src) = default;
         impl(const impl& src) = default;
 
+        void set();
+
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;
 

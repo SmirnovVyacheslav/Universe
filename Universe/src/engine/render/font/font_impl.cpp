@@ -99,4 +99,7 @@ namespace engine::render::font
 
         ifstream.close();
     }
+
+    void impl::set()
+    {}
 }

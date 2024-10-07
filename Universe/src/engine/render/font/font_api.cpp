@@ -1,6 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
 #include "font_api.h"
+#include "font_impl.h"
 
 namespace engine::render::font
 {
@@ -10,11 +11,12 @@ namespace engine::render::font
     void init()
     {
         term();
-
     }
 
     obj& get(string name)
     {
+        term();
+        inst = new impl(name);
         return *inst;
     }
 
