@@ -12,7 +12,7 @@
 
 namespace engine::render::font
 {
-    impl::impl(string name) //: shader_obj(shader::add(u8""))
+    impl::impl(string name) : shader_obj(shader::add(settings::get().dir.engine.shader.u8_str() + u8"font.fx"))
     {
         std::ifstream ifstream;
         ifstream.open(settings::get().dir.engine.font.u8_str() + name.u8_str() + u8".fnt");

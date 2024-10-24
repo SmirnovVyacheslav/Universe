@@ -40,7 +40,7 @@ namespace engine::render::font
         uint16 char_height = 0;
         map<uint16, char_data> char_map;
 
-        //shader::obj& shader_obj;
+        shader::obj& shader_obj;
     };
 }
 
