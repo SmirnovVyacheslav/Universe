@@ -2,6 +2,7 @@
 
 #include "font_obj.h"
 
+#include "engine/render/shader/obj_shader.h"
 #include "engine/var/map.h"
 #include "engine/var/string.h"
 
@@ -38,6 +39,8 @@ namespace engine::render::font
         uint16 char_width = 0;
         uint16 char_height = 0;
         map<uint16, char_data> char_map;
+
+        //shader::obj& shader_obj;
     };
 }
 

@@ -21,7 +21,7 @@ namespace engine::render::shader::directx
     class impl : public obj
     {
     public:
-        impl(string name);
+        impl(string file);
         impl(impl&& src) = delete;
         impl(const impl& src) = delete;
 
@@ -32,7 +32,7 @@ namespace engine::render::shader::directx
 
         ~impl();
     private:
-        string name;
+        string file;
 
         ID3D11VertexShader* vertex_shader = nullptr;
         ID3D11PixelShader* pixel_shader = nullptr;
@@ -54,7 +54,7 @@ namespace engine::render::shader::directx
         void term_vertex_shader();
         void term_pixel_shader();
 
-        ID3DBlob* compile_shader_file(string path, string entry, string model);
+        ID3DBlob* compile_shader_file(string file, string entry, string model);
         ID3DBlob* compile_shader_code(string code, string entry, string model);
     };
 

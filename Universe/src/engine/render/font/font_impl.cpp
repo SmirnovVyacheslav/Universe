@@ -3,6 +3,7 @@
 #include "font_impl.h"
 
 #include "engine/render/settings/api_settings.h"
+#include "engine/render/shader/api_shader.h"
 
 #include <iostream>
 #include <filesystem>
@@ -11,10 +12,10 @@
 
 namespace engine::render::font
 {
-    impl::impl(string name)
+    impl::impl(string name) //: shader_obj(shader::add(u8""))
     {
         std::ifstream ifstream;
-        ifstream.open(settings::get().dir.font.u8_str() + name.u8_str() + u8".fnt");
+        ifstream.open(settings::get().dir.engine.font.u8_str() + name.u8_str() + u8".fnt");
 
         size_t index;
         std::string line, item, key, value;

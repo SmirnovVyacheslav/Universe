@@ -8,7 +8,7 @@ namespace engine::render::mesh
     static indices::obj& get_indices(string mesh_name)
     {
         std::ifstream ifstream;
-        ifstream.open(settings::get().dir.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
+        ifstream.open(settings::get().dir.game.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
 
         string str;
         while ((ifstream >> str) && (str != string(u8"index")));
@@ -33,7 +33,7 @@ namespace engine::render::mesh
     static vertices::obj& get_vertices(string mesh_name)
     {
         std::ifstream ifstream;
-        ifstream.open(settings::get().dir.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
+        ifstream.open(settings::get().dir.game.mesh.u8_str() + mesh_name.u8_str() + u8".mesh");
 
         string str;
         while ((ifstream >> str) && (str != string(u8"vertex")));

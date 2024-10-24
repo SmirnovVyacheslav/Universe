@@ -8,10 +8,10 @@ namespace engine::render::shader::directx
 
 #ifdef windows
 
-    impl::impl(string name) : name(name)
+    impl::impl(string file) : file(file)
     {
-        init_vertex_shader(name);
-        init_pixel_shader(name);
+        init_vertex_shader(file);
+        init_pixel_shader(file);
         init_constant_buff();
     }
 
@@ -36,13 +36,9 @@ namespace engine::render::shader::directx
         term_vertex_shader();
     }
 
-    void impl::init_vertex_shader(string name)
+    void impl::init_vertex_shader(string file)
     {
-        ID3DBlob* vertex_blob = compile_shader_file(
-            settings::get().dir.shader.u8_str() + name.u8_str() + u8".fx",
-            vertex_entry,
-            vertex_model
-       );
+        ID3DBlob* vertex_blob = compile_shader_file(file, vertex_entry, vertex_model);
 
         HRESULT result = device::directx::device->CreateVertexShader
         (
@@ -62,13 +58,9 @@ namespace engine::render::shader::directx
         vertex_blob->Release();
     }
 
-    void impl::init_pixel_shader(string name)
+    void impl::init_pixel_shader(string file)
     {
-        ID3DBlob* pixel_blob = compile_shader_file(
-            settings::get().dir.shader.u8_str() + name.u8_str() + u8".fx",
-            pixel_entry,
-            pixel_model
-        );
+        ID3DBlob* pixel_blob = compile_shader_file(file, pixel_entry, pixel_model);
 
         HRESULT result = device::directx::device->CreatePixelShader
         (
@@ -127,7 +119,7 @@ namespace engine::render::shader::directx
         }
     }
 
-    ID3DBlob* impl::compile_shader_file(string path, string entry, string model)
+    ID3DBlob* impl::compile_shader_file(string file, string entry, string model)
     {
         ID3DBlob* error_blob = nullptr;
         ID3DBlob* output_blob = nullptr;
@@ -135,7 +127,7 @@ namespace engine::render::shader::directx
 
         HRESULT result = D3DX11CompileFromFile
         (
-            path.w_str().c_str(),
+            file.w_str().c_str(),
             NULL,
             NULL,
             entry.s_str().c_str(),
