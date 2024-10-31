@@ -13,9 +13,9 @@ namespace engine::render::shader
         term();
     }
 
-    obj& add(string name)
+    obj& add(string file)
     {
-        inst = new directx::impl(name);
+        inst = new directx::impl(file);
         return *inst;
     }
 

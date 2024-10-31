@@ -15,6 +15,9 @@ namespace engine::render::device::directx
     ID3D11DepthStencilView* depth_stencil_view = nullptr;
     ID3D11RenderTargetView* render_target_view = nullptr;
 
+    ID3D11BlendState* blend_state_on = nullptr;
+    ID3D11BlendState* blend_state_off = nullptr;
+
 
     impl::impl() : settings_obj(settings::get())
     {
@@ -22,6 +25,7 @@ namespace engine::render::device::directx
         init_depth_stencil_view();
         init_render_target_view();
         init_view_port();
+        init_blend_state();
 
         set_primitive_topology();
     }
@@ -166,6 +170,35 @@ namespace engine::render::device::directx
         view_port.TopLeftY = 0;
 
         device_context->RSSetViewports(1, &view_port);
+    }
+
+    void impl::init_blend_state()
+    {
+        D3D11_BLEND_DESC blend_state_desc;
+        ZeroMemory(&blend_state_desc, sizeof(D3D11_BLEND_DESC));
+
+        blend_state_desc.RenderTarget[0].BlendEnable = TRUE;
+        blend_state_desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+        blend_state_desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+        blend_state_desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+        blend_state_desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+        blend_state_desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+        blend_state_desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+        blend_state_desc.RenderTarget[0].RenderTargetWriteMask = 0x0f;
+
+        HRESULT result = device->CreateBlendState(&blend_state_desc, &blend_state_on);
+        if (FAILED(result))
+        {
+            throw error("Failed to init blend state");
+        }
+
+        blend_state_desc.RenderTarget[0].BlendEnable = FALSE;
+
+        result = device->CreateBlendState(&blend_state_desc, &blend_state_off);
+        if (FAILED(result))
+        {
+            throw error("Failed to init blend state");
+        }
     }
 
     void impl::set_primitive_topology()

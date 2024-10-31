@@ -18,6 +18,9 @@ namespace engine::render::device::directx
     extern ID3D11DepthStencilView* depth_stencil_view;
     extern ID3D11RenderTargetView* render_target_view;
 
+    extern ID3D11BlendState* blend_state_on;
+    extern ID3D11BlendState* blend_state_off;
+
 
     class impl : public obj
     {
@@ -40,6 +43,7 @@ namespace engine::render::device::directx
         void init_depth_stencil_view();
         void init_render_target_view();
         void init_view_port();
+        void init_blend_state();
 
         void set_primitive_topology();
     };
