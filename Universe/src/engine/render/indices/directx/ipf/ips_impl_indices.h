@@ -4,7 +4,7 @@
 
 #include "engine/render/indices/directx/impl_indices.h"
 
-#include "engine/render/device/directx/impl_device.h"
+#include "engine/render/device/device_impl_directx.h"
 
 #include "engine/var/array.h"
 #include "engine/var/error.h"

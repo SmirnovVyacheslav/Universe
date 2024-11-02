@@ -35,9 +35,6 @@
     <Filter Include="src\engine\render\device">
       <UniqueIdentifier>{58e48af9-6a37-44d6-8651-851893db3d62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\render\device\directx">
-      <UniqueIdentifier>{3af79f61-bfef-48eb-bf05-581aa2752ad8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\render\settings">
       <UniqueIdentifier>{341d60b7-d4e2-4266-8d96-11b9d4598376}</UniqueIdentifier>
     </Filter>
@@ -88,12 +85,6 @@
     </Filter>
     <Filter Include="src\engine\render\camera\ipf">
       <UniqueIdentifier>{fd2b144c-acfe-4875-977e-ade61e956986}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\device\ipf">
-      <UniqueIdentifier>{4e2ccbde-7bf0-4c50-8f6f-d66e4e1bdeee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\render\device\directx\ipf">
-      <UniqueIdentifier>{a3baf014-2032-4218-b429-697e282fe02a}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\render\indices\ipf">
       <UniqueIdentifier>{d07700cb-c6ce-4e55-b6de-24aedbbc1d13}</UniqueIdentifier>
@@ -193,11 +184,8 @@
     <ClCompile Include="src\engine\render\camera\impl_camera.cpp">
       <Filter>src\engine\render\camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\render\device\api_device.cpp">
+    <ClCompile Include="src\engine\render\device\device_api.cpp">
       <Filter>src\engine\render\device</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\render\device\directx\impl_device.cpp">
-      <Filter>src\engine\render\device\directx</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\render\settings\api_settings.cpp">
       <Filter>src\engine\render\settings</Filter>
@@ -255,6 +243,9 @@
     </ClCompile>
     <ClCompile Include="src\engine\render\font\font_impl.cpp">
       <Filter>src\engine\render\font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\render\device\device_impl_directx.cpp">
+      <Filter>src\engine\render\device</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -321,11 +312,8 @@
     <ClInclude Include="src\engine\render\camera\obj_camera.h">
       <Filter>src\engine\render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\render\device\api_device.h">
+    <ClInclude Include="src\engine\render\device\device_api.h">
       <Filter>src\engine\render\device</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\device\directx\impl_device.h">
-      <Filter>src\engine\render\device\directx</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\settings\api_settings.h">
       <Filter>src\engine\render\settings</Filter>
@@ -344,9 +332,6 @@
     </ClInclude>
     <ClInclude Include="src\engine\def\platform.h">
       <Filter>src\engine\def</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\device\obj_device.h">
-      <Filter>src\engine\render\device</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\mesh\api_mesh.h">
       <Filter>src\engine\render\mesh</Filter>
@@ -491,21 +476,6 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\camera\ipf\ips_impl_camera.h">
       <Filter>src\engine\render\camera\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\device\ipf\iph_api_device.h">
-      <Filter>src\engine\render\device\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\device\ipf\iph_obj_device.h">
-      <Filter>src\engine\render\device\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\device\ipf\ips_api_device.h">
-      <Filter>src\engine\render\device\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\device\directx\ipf\iph_impl_device.h">
-      <Filter>src\engine\render\device\directx\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\render\device\directx\ipf\ips_impl_device.h">
-      <Filter>src\engine\render\device\directx\ipf</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\indices\ipf\iph_api_indices.h">
       <Filter>src\engine\render\indices\ipf</Filter>
@@ -659,6 +629,12 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\font\font_impl.h">
       <Filter>src\engine\render\font</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\device\device_obj.h">
+      <Filter>src\engine\render\device</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\device\device_impl_directx.h">
+      <Filter>src\engine\render\device</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

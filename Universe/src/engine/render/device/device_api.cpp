@@ -1,7 +1,11 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/ips_api_device.h"
+#include "device_api.h"
+#include "device_obj.h"
+#include "device_impl_directx.h"
 
+#include "engine/render/model/obj_model.h"
+#include "engine/var/string.h"
 
 namespace engine::render::device
 {

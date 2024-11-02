@@ -5,7 +5,7 @@
 #include "engine/render/camera/api_camera.h"
 #include "engine/render/camera/obj_camera.h"
 
-#include "engine/render/device/directx/impl_device.h"
+#include "engine/render/device/device_impl_directx.h"
 
 #include "engine/render/shader/directx/impl_shader.h"
 

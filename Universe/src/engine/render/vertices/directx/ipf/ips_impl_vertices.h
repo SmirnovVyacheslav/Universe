@@ -2,7 +2,7 @@
 
 #include "engine/def/platform.h"
 
-#include "engine/render/device/directx/impl_device.h"
+#include "engine/render/device/device_impl_directx.h"
 
 #include "engine/render/vertices/directx/impl_vertices.h"
 

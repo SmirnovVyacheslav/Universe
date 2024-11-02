@@ -4,7 +4,7 @@
 
 #include "engine/render/camera/api_camera.h"
 
-#include "engine/render/device/api_device.h"
+#include "engine/render/device/device_api.h"
 
 #include "engine/render/indices/api_indices.h"
 

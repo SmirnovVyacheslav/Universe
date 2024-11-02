@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/iph_obj_device.h"
-
+#include "engine/def/abstract.h"
+#include "engine/render/model/obj_model.h"
 
 #ifndef ENGINE_RENDER_DEVICE_OBJ
 #define ENGINE_RENDER_DEVICE_OBJ
