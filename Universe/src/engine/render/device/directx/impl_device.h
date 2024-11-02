@@ -30,6 +30,8 @@ namespace engine::render::device::directx
         impl(const impl& src) = delete;
 
         void draw(model::obj& model_obj);
+        void enable_alpha_blend();
+        void disable_alpha_blend();
 
         impl& operator=(impl&& src) = delete;
         impl& operator=(const impl& src) = delete;

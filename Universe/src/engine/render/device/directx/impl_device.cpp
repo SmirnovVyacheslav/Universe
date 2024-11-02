@@ -42,6 +42,26 @@ namespace engine::render::device::directx
         swap_chain->Present(0, 0);
     }
 
+    void impl::enable_alpha_blend()
+    {
+        float blendFactor[4];
+        blendFactor[0] = 0.0f;
+        blendFactor[1] = 0.0f;
+        blendFactor[2] = 0.0f;
+        blendFactor[3] = 0.0f;
+        device_context->OMSetBlendState(blend_state_on, blendFactor, 0xffffffff);
+    }
+
+    void impl::disable_alpha_blend()
+    {
+        float blendFactor[4];
+        blendFactor[0] = 0.0f;
+        blendFactor[1] = 0.0f;
+        blendFactor[2] = 0.0f;
+        blendFactor[3] = 0.0f;
+        device_context->OMSetBlendState(blend_state_off, blendFactor, 0xffffffff);
+    }
+
     impl::~impl()
     {
         clear(device_context);
