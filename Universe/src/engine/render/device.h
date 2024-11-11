@@ -7,7 +7,7 @@
 
 namespace engine::render::device
 {
-    #define render_device_api
+    /*#define render_device_api
 
     class obj
     {
@@ -21,7 +21,7 @@ namespace engine::render::device
 
     obj& get();
 
-    void del();
+    void del();*/
 }
 
 #endif

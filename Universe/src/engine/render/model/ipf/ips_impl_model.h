@@ -5,8 +5,7 @@
 
 #include "engine/render/model/impl_model.h"
 
-#include "engine/render/settings/api_settings.h"
-#include "engine/render/settings/obj_settings.h"
+#include "engine/render/settings.h"
 
 #include "engine/render/shader/api_shader.h"
 #include "engine/render/shader/obj_shader.h"

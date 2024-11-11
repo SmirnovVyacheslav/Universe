@@ -13,8 +13,6 @@
 #include "engine/render/model/api_model.h"
 #include "engine/render/model/obj_model.h"
 
-#include "engine/render/settings/api_settings.h"
-
 #include "engine/render/shader/api_shader.h"
 
 #include "engine/render/text/text_api.h"

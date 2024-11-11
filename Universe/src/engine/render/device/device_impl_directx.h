@@ -4,8 +4,7 @@
 
 #include "engine/def/platform.h"
 #include "engine/render/model/obj_model.h"
-#include "engine/render/settings/api_settings.h"
-#include "engine/render/settings/obj_settings.h"
+#include "engine/render/settings.h"
 #include "engine/var/matrix4.h"
 #include "engine/var/vector3.h"
 #include "engine/var/vector4.h"

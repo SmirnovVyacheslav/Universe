@@ -6,7 +6,7 @@
 
 namespace engine::render::device
 {
-    obj* inst = nullptr;
+    /*obj* inst = nullptr;
 
     
     obj& add()
@@ -22,5 +22,5 @@ namespace engine::render::device
     void del()
     {
         delete inst;
-    }
+    }*/
 }

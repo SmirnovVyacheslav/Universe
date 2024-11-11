@@ -2,7 +2,7 @@
 
 #include "font_impl.h"
 
-#include "engine/render/settings/api_settings.h"
+#include "engine/render/settings.h"
 #include "engine/render/shader/api_shader.h"
 
 #include <iostream>

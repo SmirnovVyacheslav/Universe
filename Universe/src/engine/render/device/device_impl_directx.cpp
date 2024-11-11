@@ -6,8 +6,7 @@
 #include "engine/core/view/api_view.h"
 #include "engine/core/view/obj_view.h"
 #include "engine/render/model/obj_model.h"
-#include "engine/render/settings/api_settings.h"
-#include "engine/render/settings/obj_settings.h"
+#include "engine/render/settings.h"
 #include "engine/var/error.h"
 #include "engine/var/std.h"
 

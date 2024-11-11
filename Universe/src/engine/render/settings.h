@@ -1,10 +1,9 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/iph_obj_settings.h"
+#include "engine/var/string.h"
 
-
-#ifndef ENGINE_RENDER_SETTINGS_OBJ
-#define ENGINE_RENDER_SETTINGS_OBJ
+#ifndef ENGINE_RENDER_SETTINGS
+#define ENGINE_RENDER_SETTINGS
 
 namespace engine::render::settings
 {
@@ -15,7 +14,7 @@ namespace engine::render::settings
             string font = u8"res/engine/font/";
             string shader = u8"res/engine/shader/";
         } engine;
-        
+
         struct
         {
             string mesh = u8"res/game/mesh/";
@@ -34,6 +33,9 @@ namespace engine::render::settings
 
         dir dir;
     };
+
+
+    obj& get();
 }
 
 #endif

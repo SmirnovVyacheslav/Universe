@@ -7,7 +7,6 @@ namespace engine::render
 {
     void init()
     {
-        settings::init();
         camera::init();
         device::init();
         indices::init();
@@ -34,6 +33,5 @@ namespace engine::render
         indices::term();
         device::term();
         camera::term();
-        settings::term();
     }
 }

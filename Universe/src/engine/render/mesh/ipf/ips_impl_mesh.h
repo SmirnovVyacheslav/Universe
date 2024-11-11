@@ -5,8 +5,7 @@
 #include "engine/render/indices/api_indices.h"
 #include "engine/render/indices/obj_indices.h"
 
-#include "engine/render/settings/api_settings.h"
-#include "engine/render/settings/obj_settings.h"
+#include "engine/render/settings.h"
 
 #include "engine/render/vertices/api_vertices.h"
 #include "engine/render/vertices/obj_vertices.h"
