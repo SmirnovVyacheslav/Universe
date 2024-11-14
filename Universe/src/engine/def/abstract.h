@@ -5,9 +5,19 @@
 #define abstract \
     protected: \
         obj() = default; \
-        obj(obj&& src) = default; \
-        obj(const obj& src) = default; \
     public: \
         virtual ~obj() = default; \
+        obj(obj&& src) = default; \
+        obj(const obj& src) = default; \
         obj& operator=(obj&& src) = default; \
         obj& operator=(const obj& src) = default;
+
+//#define abstract \
+//    protected: \
+//        obj() = default; \
+//        obj(obj&& src) = default; \
+//        obj(const obj& src) = default; \
+//    public: \
+//        virtual ~obj() = default; \
+//        obj& operator=(obj&& src) = default; \
+//        obj& operator=(const obj& src) = default;
