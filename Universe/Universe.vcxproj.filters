@@ -636,5 +636,8 @@
     <ClInclude Include="src\engine\render\settings.h">
       <Filter>src\engine\render</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\def\obj.h">
+      <Filter>src\engine\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

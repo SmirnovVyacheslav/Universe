@@ -19,6 +19,15 @@ namespace engine::render::settings
         ~impl() = default;
     };
 
+    class ref : public obj
+    {
+        //
+    };
+
+    class mng
+    {
+        //
+    };
 
     obj& get()
     {
