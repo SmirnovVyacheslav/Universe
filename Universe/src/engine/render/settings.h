@@ -1,5 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
+#include "engine/def/obj_api.h"
+
 #include "engine/var/std.h"
 #include "engine/var/string.h"
 
@@ -10,6 +12,8 @@ namespace engine::render::settings
 {
     class obj
     {
+        obj_api
+
         struct
         {
             struct

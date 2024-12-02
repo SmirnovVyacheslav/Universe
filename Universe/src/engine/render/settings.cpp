@@ -4,9 +4,11 @@
 
 namespace engine::render::settings
 {
+    mng* mng_inst = nullptr;
+    
     obj* inst = nullptr;
 
-    class impl : public obj
+    class impl
     {
     public:
         impl() = default;
@@ -19,17 +21,25 @@ namespace engine::render::settings
         ~impl() = default;
     };
 
-    class ref : public obj
-    {
-        //
-    };
-
     class mng
     {
-        //
+    public:
+        mng() = default;
+        mng(mng&& src) = delete;
+        mng(const mng& src) = delete;
+
+        mng& operator=(mng&& src) = delete;
+        mng& operator=(const mng& src) = delete;
+        obj& operator[](const int32 id);
+        const obj& operator[](const int32 id) const;
+
+        ~mng() = default;
+
+    private:
+        obj* inst = nullptr;
     };
 
-    obj& get()
+    obj get()
     {
         if (!inst)
         {
