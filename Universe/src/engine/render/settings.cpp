@@ -4,10 +4,6 @@
 
 namespace engine::render::settings
 {
-    mng* mng_inst = nullptr;
-    
-    obj* inst = nullptr;
-
     class impl
     {
     public:
@@ -21,7 +17,7 @@ namespace engine::render::settings
         ~impl() = default;
     };
 
-    class mng
+    class ref
     {
     public:
         mng() = default;
@@ -37,6 +33,7 @@ namespace engine::render::settings
 
     private:
         obj* inst = nullptr;
+        mng* inst = nullptr;
     };
 
     obj get()
