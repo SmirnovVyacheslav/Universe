@@ -175,6 +175,7 @@
     <ClInclude Include="src\engine\var\ipf\ips_vertex.h" />
     <ClInclude Include="src\engine\var\map.h" />
     <ClInclude Include="src\engine\var\matrix4.h" />
+    <ClInclude Include="src\engine\var\ptr.h" />
     <ClInclude Include="src\engine\var\queue.h" />
     <ClInclude Include="src\engine\var\smart_ptr.h" />
     <ClInclude Include="src\engine\var\std.h" />

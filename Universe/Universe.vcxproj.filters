@@ -639,5 +639,8 @@
     <ClInclude Include="src\engine\def\obj_api.h">
       <Filter>src\engine\def</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\var\ptr.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
