@@ -3,7 +3,7 @@
 
 
 #define abstract \
-    protected: \
+    public: \
         obj() = default; \
     public: \
         virtual ~obj() = default; \

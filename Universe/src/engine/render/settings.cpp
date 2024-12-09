@@ -4,7 +4,20 @@
 
 namespace engine::render::settings
 {
-    class impl
+    obj* inst = nullptr;
+
+
+    obj& get()
+    {
+        if (!inst)
+        {
+            inst = new obj;
+        }
+
+        return *inst;
+    }
+
+    /*class impl
     {
     public:
         impl() = default;
@@ -44,5 +57,5 @@ namespace engine::render::settings
         }
 
         return *inst;
-    }
+    }*/
 }

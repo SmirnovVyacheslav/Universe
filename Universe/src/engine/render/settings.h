@@ -1,6 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "engine/def/obj_api.h"
+#include "engine/def/abstract.h"
 
 #include "engine/var/std.h"
 #include "engine/var/string.h"
@@ -10,7 +10,7 @@
 
 namespace engine::render::settings
 {
-    class obj
+    /*class obj
     {
         obj_api
 
@@ -42,9 +42,9 @@ namespace engine::render::settings
     };
 
 
-    obj get();
+    obj get();*/
 
-    /*class obj
+    class obj
     {
         abstract
 
@@ -69,10 +69,10 @@ namespace engine::render::settings
         int32 refresh = 60;
 
         bool windowed = true;
-    };*/
+    };
 
 
-    /*obj& get();*/
+    obj& get();
 }
 
 #endif
