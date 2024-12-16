@@ -1,5 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
+#include "error.h"
+
 #ifndef ENGINE_VAR_PTR
 #define ENGINE_VAR_PTR
 
@@ -10,15 +12,53 @@ namespace engine
     {
     public:
         ptr() = default;
-        ptr(ptr&& src) = default;
-        ptr(const ptr& src) = default;
+        ptr(ptr&& src) = delete;
+        ptr(const ptr& src) = delete;
 
+        template<typename... A>
+        void init(A&&... args);
+        void term();
+
+        T* operator->();
         ptr& operator=(ptr&& src) = delete;
         ptr& operator=(const ptr& src) = delete;
 
-        ~ptr() = default;
+        ~ptr();
     private:
+        T* obj_ptr = nullptr;
     };
+
+
+    template<typename T>
+    template<typename... A>
+    void ptr<T>::init(A&&... args)
+    {
+        term();
+        obj_ptr = new T(std::forward<A>(args)...);
+    }
+
+    template<typename T>
+    void ptr<T>::term()
+    {
+        delete obj_ptr;
+        obj_ptr = nullptr;
+    }
+
+    template<typename T>
+    T* ptr<T>::operator->()
+    {
+        if (obj_ptr == nullptr)
+        {
+            throw error("Object was not initialized");
+        }
+        return obj_ptr;
+    }
+
+    template<typename T>
+    ptr<T>::~ptr()
+    {
+        term();
+    }
 }
 
 #endif
