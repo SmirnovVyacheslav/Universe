@@ -30,23 +30,25 @@ namespace engine::render::settings
         ~impl() = default;
     };
 
-    class ref
+    class set
     {
     public:
+        static int32 add();
+        static obj& get(int32 id);
+        static void del(int32 id);
+    private:
+        static set* set_inst = nullptr;
+        map<int32, obj*> id_obj_map;
+        map<int32, int32> arg_id_map;
+
         mng() = default;
         mng(mng&& src) = delete;
         mng(const mng& src) = delete;
 
         mng& operator=(mng&& src) = delete;
         mng& operator=(const mng& src) = delete;
-        obj& operator[](const int32 id);
-        const obj& operator[](const int32 id) const;
 
         ~mng() = default;
-
-    private:
-        obj* inst = nullptr;
-        mng* inst = nullptr;
     };
 
     obj get()
