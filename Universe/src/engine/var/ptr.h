@@ -28,6 +28,23 @@ namespace engine
         T* obj_ptr = nullptr;
     };
 
+    template <typename T>
+    class ref
+    {
+    public:
+        ref(ptr<T>* obj_ptr);
+        ref(ref&& src) = default;
+        ref(const ref& src) = default;
+
+        T* operator->();
+        ref& operator=(ref&& src) = default;
+        ref& operator=(const ref& src) = default;
+
+        ~ref() = default;
+    private:
+        ptr<T>* obj_ptr = nullptr;
+    };
+
 
     template<typename T>
     template<typename... A>
@@ -58,6 +75,16 @@ namespace engine
     ptr<T>::~ptr()
     {
         term();
+    }
+
+
+    template<typename T>
+    ref<T>::ref(ptr<T>* obj_ptr) : obj_ptr(obj_ptr) {}
+
+    template<typename T>
+    T* ref<T>::operator->()
+    {
+        return obj_ptr->operator->();
     }
 }
 
