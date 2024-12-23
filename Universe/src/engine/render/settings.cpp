@@ -2,6 +2,8 @@
 
 #include "settings.h"
 
+#include "engine/var/ptr.h"
+
 namespace engine::render::settings
 {
     obj* inst = nullptr;
@@ -38,8 +40,8 @@ namespace engine::render::settings
         static void del(int32 id);
     private:
         static set* set_inst = nullptr;
-        map<int32, obj*> id_obj_map;
         map<int32, int32> arg_id_map;
+        map<int32, ptr<impl>> id_impl_map;
 
         mng() = default;
         mng(mng&& src) = delete;
