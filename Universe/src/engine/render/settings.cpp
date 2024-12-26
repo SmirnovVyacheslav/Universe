@@ -39,13 +39,14 @@ namespace engine::render::settings
         static obj& get(int32 id);
         static void del(int32 id);
     private:
-        static set* set_inst = nullptr;
         map<int32, int32> arg_id_map;
         map<int32, ptr<impl>> id_impl_map;
 
         mng() = default;
         mng(mng&& src) = delete;
         mng(const mng& src) = delete;
+
+        static set* inst();
 
         mng& operator=(mng&& src) = delete;
         mng& operator=(const mng& src) = delete;
