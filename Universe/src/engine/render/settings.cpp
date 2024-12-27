@@ -35,23 +35,23 @@ namespace engine::render::settings
     class set
     {
     public:
-        static int32 add();
-        static obj& get(int32 id);
-        static void del(int32 id);
+        static int32     add();
+        static ref<impl> get(int32 id);
+        static void      del(int32 id);
     private:
-        map<int32, int32> arg_id_map;
+        map<int32, int32>     arg_id_map;
         map<int32, ptr<impl>> id_impl_map;
 
-        mng() = default;
-        mng(mng&& src) = delete;
-        mng(const mng& src) = delete;
+        set()               = default;
+        set(set&& src)      = delete;
+        set(const set& src) = delete;
 
         static set* inst();
 
-        mng& operator=(mng&& src) = delete;
-        mng& operator=(const mng& src) = delete;
+        set& operator=(set&& src)      = delete;
+        set& operator=(const set& src) = delete;
 
-        ~mng() = default;
+        ~set() = default;
     };
 
     obj get()
