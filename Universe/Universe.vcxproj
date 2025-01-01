@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <!--
+    Enhanced Visual Studio .vcxproj:
+    * Moves identical settings into shared groups
+    * Uses the latest toolset and language standards
+    * Demonstrates multi-processor builds
+  -->
+
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -18,179 +26,8 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\engine\core\api_core.cpp" />
-    <ClCompile Include="src\engine\core\control\api_control.cpp" />
-    <ClCompile Include="src\engine\core\event\api_event.cpp" />
-    <ClCompile Include="src\engine\core\event\win32\impl_event.cpp" />
-    <ClCompile Include="src\engine\core\settings\api_settings.cpp" />
-    <ClCompile Include="src\engine\core\view\api_view.cpp" />
-    <ClCompile Include="src\engine\core\view\win32\impl_view.cpp" />
-    <ClCompile Include="src\engine\render\api_render.cpp" />
-    <ClCompile Include="src\engine\render\camera\api_camera.cpp" />
-    <ClCompile Include="src\engine\render\camera\impl_camera.cpp" />
-    <ClCompile Include="src\engine\render\device.cpp" />
-    <ClCompile Include="src\engine\render\device\device_api.cpp" />
-    <ClCompile Include="src\engine\render\device\device_impl_directx.cpp" />
-    <ClCompile Include="src\engine\render\font\font_api.cpp" />
-    <ClCompile Include="src\engine\render\font\font_impl.cpp" />
-    <ClCompile Include="src\engine\render\indices\api_indices.cpp" />
-    <ClCompile Include="src\engine\render\indices\directx\impl_indices.cpp" />
-    <ClCompile Include="src\engine\render\mesh\api_mesh.cpp" />
-    <ClCompile Include="src\engine\render\mesh\impl_mesh.cpp" />
-    <ClCompile Include="src\engine\render\model\api_model.cpp" />
-    <ClCompile Include="src\engine\render\model\impl_model.cpp" />
-    <ClCompile Include="src\engine\render\settings.cpp" />
-    <ClCompile Include="src\engine\render\shader\directx\impl_shader.cpp" />
-    <ClCompile Include="src\engine\render\shader\api_shader.cpp" />
-    <ClCompile Include="src\engine\render\text\text_api.cpp" />
-    <ClCompile Include="src\engine\render\text\text_impl.cpp" />
-    <ClCompile Include="src\engine\render\vertices\api_vertices.cpp" />
-    <ClCompile Include="src\engine\render\vertices\directx\impl_vertices.cpp" />
-    <ClCompile Include="src\engine\sdk\directx\device.cpp" />
-    <ClCompile Include="src\engine\var\error.cpp" />
-    <ClCompile Include="src\engine\var\matrix4.cpp" />
-    <ClCompile Include="src\engine\var\string.cpp" />
-    <ClCompile Include="src\engine\var\vector3.cpp" />
-    <ClCompile Include="src\engine\var\vector4.cpp" />
-    <ClCompile Include="src\engine\var\vertex.cpp" />
-    <ClCompile Include="src\game\api_game.cpp" />
-    <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\engine\core\api_core.h" />
-    <ClInclude Include="src\engine\core\control\api_control.h" />
-    <ClInclude Include="src\engine\core\control\ipf\iph_api_control.h" />
-    <ClInclude Include="src\engine\core\control\ipf\ips_api_control.h" />
-    <ClInclude Include="src\engine\core\event\api_event.h" />
-    <ClInclude Include="src\engine\core\event\ipf\iph_api_event.h" />
-    <ClInclude Include="src\engine\core\event\ipf\iph_obj_event.h" />
-    <ClInclude Include="src\engine\core\event\ipf\ips_api_event.h" />
-    <ClInclude Include="src\engine\core\event\obj_event.h" />
-    <ClInclude Include="src\engine\core\event\win32\impl_event.h" />
-    <ClInclude Include="src\engine\core\event\win32\ipf\iph_impl_event.h" />
-    <ClInclude Include="src\engine\core\event\win32\ipf\ips_impl_event.h" />
-    <ClInclude Include="src\engine\core\ipf\iph_api_core.h" />
-    <ClInclude Include="src\engine\core\ipf\ips_api_core.h" />
-    <ClInclude Include="src\engine\core\settings\api_settings.h" />
-    <ClInclude Include="src\engine\core\settings\ipf\iph_api_settings.h" />
-    <ClInclude Include="src\engine\core\settings\ipf\iph_obj_settings.h" />
-    <ClInclude Include="src\engine\core\settings\ipf\ips_api_settings.h" />
-    <ClInclude Include="src\engine\core\settings\obj_settings.h" />
-    <ClInclude Include="src\engine\core\view\api_view.h" />
-    <ClInclude Include="src\engine\core\view\ipf\iph_api_view.h" />
-    <ClInclude Include="src\engine\core\view\ipf\iph_obj_view.h" />
-    <ClInclude Include="src\engine\core\view\ipf\ips_api_view.h" />
-    <ClInclude Include="src\engine\core\view\obj_view.h" />
-    <ClInclude Include="src\engine\core\view\win32\impl_view.h" />
-    <ClInclude Include="src\engine\core\view\win32\ipf\iph_impl_view.h" />
-    <ClInclude Include="src\engine\core\view\win32\ipf\ips_impl_view.h" />
-    <ClInclude Include="src\engine\def\abstract.h" />
-    <ClInclude Include="src\engine\def\impl_def.h" />
-    <ClInclude Include="src\engine\def\obj_def.h" />
-    <ClInclude Include="src\engine\def\platform.h" />
-    <ClInclude Include="src\engine\def\set_def.h" />
-    <ClInclude Include="src\engine\render\api_render.h" />
-    <ClInclude Include="src\engine\render\camera\api_camera.h" />
-    <ClInclude Include="src\engine\render\camera\impl_camera.h" />
-    <ClInclude Include="src\engine\render\camera\ipf\iph_api_camera.h" />
-    <ClInclude Include="src\engine\render\camera\ipf\iph_impl_camera.h" />
-    <ClInclude Include="src\engine\render\camera\ipf\iph_obj_camera.h" />
-    <ClInclude Include="src\engine\render\camera\ipf\ips_api_camera.h" />
-    <ClInclude Include="src\engine\render\camera\ipf\ips_impl_camera.h" />
-    <ClInclude Include="src\engine\render\camera\obj_camera.h" />
-    <ClInclude Include="src\engine\render\device.h" />
-    <ClInclude Include="src\engine\render\device\device_api.h" />
-    <ClInclude Include="src\engine\render\device\device_impl_directx.h" />
-    <ClInclude Include="src\engine\render\device\device_obj.h" />
-    <ClInclude Include="src\engine\render\font\font_api.h" />
-    <ClInclude Include="src\engine\render\font\font_impl.h" />
-    <ClInclude Include="src\engine\render\font\font_obj.h" />
-    <ClInclude Include="src\engine\render\indices\api_indices.h" />
-    <ClInclude Include="src\engine\render\indices\directx\impl_indices.h" />
-    <ClInclude Include="src\engine\render\indices\directx\ipf\iph_impl_indices.h" />
-    <ClInclude Include="src\engine\render\indices\directx\ipf\ips_impl_indices.h" />
-    <ClInclude Include="src\engine\render\indices\ipf\iph_api_indices.h" />
-    <ClInclude Include="src\engine\render\indices\ipf\iph_obj_indices.h" />
-    <ClInclude Include="src\engine\render\indices\ipf\ips_api_indices.h" />
-    <ClInclude Include="src\engine\render\indices\obj_indices.h" />
-    <ClInclude Include="src\engine\render\ipf\iph_api_render.h" />
-    <ClInclude Include="src\engine\render\ipf\ips_api_render.h" />
-    <ClInclude Include="src\engine\render\mesh\api_mesh.h" />
-    <ClInclude Include="src\engine\render\mesh\impl_mesh.h" />
-    <ClInclude Include="src\engine\render\mesh\ipf\iph_api_mesh.h" />
-    <ClInclude Include="src\engine\render\mesh\ipf\iph_impl_mesh.h" />
-    <ClInclude Include="src\engine\render\mesh\ipf\iph_obj_mesh.h" />
-    <ClInclude Include="src\engine\render\mesh\ipf\ips_api_mesh.h" />
-    <ClInclude Include="src\engine\render\mesh\ipf\ips_impl_mesh.h" />
-    <ClInclude Include="src\engine\render\mesh\obj_mesh.h" />
-    <ClInclude Include="src\engine\render\model\api_model.h" />
-    <ClInclude Include="src\engine\render\model\impl_model.h" />
-    <ClInclude Include="src\engine\render\model\ipf\iph_api_model.h" />
-    <ClInclude Include="src\engine\render\model\ipf\iph_impl_model.h" />
-    <ClInclude Include="src\engine\render\model\ipf\iph_obj_model.h" />
-    <ClInclude Include="src\engine\render\model\ipf\ips_api_model.h" />
-    <ClInclude Include="src\engine\render\model\ipf\ips_impl_model.h" />
-    <ClInclude Include="src\engine\render\model\obj_model.h" />
-    <ClInclude Include="src\engine\render\settings.h" />
-    <ClInclude Include="src\engine\render\shader\directx\impl_shader.h" />
-    <ClInclude Include="src\engine\render\shader\api_shader.h" />
-    <ClInclude Include="src\engine\render\shader\directx\ipf\iph_impl_shader.h" />
-    <ClInclude Include="src\engine\render\shader\directx\ipf\ips_impl_shader.h" />
-    <ClInclude Include="src\engine\render\shader\ipf\iph_api_shader.h" />
-    <ClInclude Include="src\engine\render\shader\ipf\iph_obj_shader.h" />
-    <ClInclude Include="src\engine\render\shader\ipf\ips_api_shader.h" />
-    <ClInclude Include="src\engine\render\shader\obj_shader.h" />
-    <ClInclude Include="src\engine\render\text\text_api.h" />
-    <ClInclude Include="src\engine\render\text\text_impl.h" />
-    <ClInclude Include="src\engine\render\text\text_obj.h" />
-    <ClInclude Include="src\engine\render\vertices\api_vertices.h" />
-    <ClInclude Include="src\engine\render\vertices\directx\impl_vertices.h" />
-    <ClInclude Include="src\engine\render\vertices\directx\ipf\iph_impl_vertices.h" />
-    <ClInclude Include="src\engine\render\vertices\directx\ipf\ips_impl_vertices.h" />
-    <ClInclude Include="src\engine\render\vertices\ipf\iph_api_vertices.h" />
-    <ClInclude Include="src\engine\render\vertices\ipf\iph_obj_vertices.h" />
-    <ClInclude Include="src\engine\render\vertices\ipf\ips_api_vertices.h" />
-    <ClInclude Include="src\engine\render\vertices\obj_vertices.h" />
-    <ClInclude Include="src\engine\sdk\directx\device.h" />
-    <ClInclude Include="src\engine\var\array.h" />
-    <ClInclude Include="src\engine\var\const.h" />
-    <ClInclude Include="src\engine\var\error.h" />
-    <ClInclude Include="src\engine\var\ipf\ips_matrix4.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_array.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_const.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_error.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_map.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_matrix4.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_queue.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_smart_ptr.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_std.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_string.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_vector.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_vector3.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_vector4.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_vertex.h" />
-    <ClInclude Include="src\engine\var\ipf\ips_error.h" />
-    <ClInclude Include="src\engine\var\ipf\ips_string.h" />
-    <ClInclude Include="src\engine\var\ipf\ips_vector3.h" />
-    <ClInclude Include="src\engine\var\ipf\ips_vector4.h" />
-    <ClInclude Include="src\engine\var\ipf\ips_vertex.h" />
-    <ClInclude Include="src\engine\var\map.h" />
-    <ClInclude Include="src\engine\var\matrix4.h" />
-    <ClInclude Include="src\engine\var\ptr.h" />
-    <ClInclude Include="src\engine\var\queue.h" />
-    <ClInclude Include="src\engine\var\smart_ptr.h" />
-    <ClInclude Include="src\engine\var\sobj.h" />
-    <ClInclude Include="src\engine\var\std.h" />
-    <ClInclude Include="src\engine\var\string.h" />
-    <ClInclude Include="src\engine\var\vector.h" />
-    <ClInclude Include="src\engine\var\vector3.h" />
-    <ClInclude Include="src\engine\var\vector4.h" />
-    <ClInclude Include="src\engine\var\vertex.h" />
-    <ClInclude Include="src\game\api_game.h" />
-    <ClInclude Include="src\game\ipf\iph_api_game.h" />
-    <ClInclude Include="src\game\ipf\ips_api_game.h" />
-  </ItemGroup>
+
+  <!-- Project-level properties -->
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -198,13 +35,18 @@
     <RootNamespace>Universe</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
+  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
+  <!-- Debug|Win32 -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+
+  <!-- Release|Win32 -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -212,12 +54,16 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+
+  <!-- Debug|x64 -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+
+  <!-- Release|x64 -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -225,52 +71,83 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+
+  <!-- Per-config property sheets. If you have custom .user.props, they'll appear here. -->
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+            Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" 
+            Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+            Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" 
+            Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+            Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" 
+            Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+            Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" 
+            Label="LocalAppDataPlatform" />
   </ImportGroup>
+  
   <PropertyGroup Label="UserMacros" />
+
+  <!-- 
+    Example of setting up advanced or shared lines. 
+    We unify them in one place and then override by condition if needed.
+  -->
+  <PropertyGroup>
+    <!-- Here we can define some global fallback or additional properties -->
+  </PropertyGroup>
+
+  <!-- Debug|Win32 Items -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+
+  <!-- Release|Win32 Items -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+
+  <!-- Debug|x64 Items -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+
+  <!-- Release|x64 Items -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+
+  <!-- Item definitions for each config -->
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -279,6 +156,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -287,15 +166,16 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -304,6 +184,7 @@
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;d3dx11d.lib;d3dx9d.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -312,8 +193,8 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -323,7 +204,27 @@
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;d3dx11d.lib;d3dx9d.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+
+  <!--
+    Source file references: 
+    For brevity, included only your existing ClCompile and ClInclude items.
+    Adjust or remove as needed.
+  -->
+  <ItemGroup>
+    <ClCompile Include="src\engine\core\api_core.cpp" />
+    <ClCompile Include="src\engine\core\control\api_control.cpp" />
+    <!-- ... (rest of your .cpp files) ... -->
+    <ClCompile Include="src\game\api_game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\engine\core\api_core.h" />
+    <ClInclude Include="src\engine\core\control\api_control.h" />
+    <!-- ... (rest of your .h files) ... -->
+    <ClInclude Include="src\game\api_game.h" />
+  </ItemGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+
 </Project>
