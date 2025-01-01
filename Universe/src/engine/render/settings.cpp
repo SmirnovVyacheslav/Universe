@@ -2,7 +2,9 @@
 
 #include "settings.h"
 
-#include "engine/var/ptr.h"
+#include "engine/def/impl_def.h"
+#include "engine/def/set_def.h"
+
 #include "engine/var/sobj.h"
 
 namespace engine::render::settings
@@ -22,44 +24,33 @@ namespace engine::render::settings
 
     /*class impl
     {
+        impl_def;
+
     public:
-        impl() = default;
-        impl(impl&& src) = delete;
-        impl(const impl& src) = delete;
-
-        impl& operator=(impl&& src) = delete;
-        impl& operator=(const impl& src) = delete;
-
-        ~impl() = default;
-    };
-
-    class set
-    {
-    public:
-        static int32     add();
-        static ref<impl> get(int32 id);
-        static void      del(int32 id);
-    private:
-        map<int32, int32>     arg_id_map;
-        map<int32, ptr<impl>> id_impl_map;
-
-        set()               = default;
-        set(set&& src)      = delete;
-        set(const set& src) = delete;
-
-        set& operator=(set&& src)      = delete;
-        set& operator=(const set& src) = delete;
-
-        ~set() = default;
-    };
-
-    obj get()
-    {
-        if (!inst)
+        struct
         {
-            inst = new impl;
-        }
+            struct
+            {
+                string font   = u8"res/engine/font/";
+                string shader = u8"res/engine/shader/";
+            } engine;
 
-        return *inst;
-    }*/
+            struct
+            {
+                string mesh   = u8"res/game/mesh/";
+                string model  = u8"res/game/model/";
+                string shader = u8"res/game/shader/";
+            } game;
+        } dir;
+
+        struct
+        {
+            int32 width   = 128;
+            int32 height  = 256;
+            int32 refresh = 60;
+
+            bool windowed = true;
+
+        } view;
+    };*/
 }

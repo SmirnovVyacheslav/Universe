@@ -3,7 +3,7 @@
 
 #include "engine/var/std.h"
 
-#define obj_api \
+#define obj_def \
     public: \
         obj(); \
         obj(obj&& src); \

@@ -86,8 +86,10 @@
     <ClInclude Include="src\engine\core\view\win32\ipf\iph_impl_view.h" />
     <ClInclude Include="src\engine\core\view\win32\ipf\ips_impl_view.h" />
     <ClInclude Include="src\engine\def\abstract.h" />
+    <ClInclude Include="src\engine\def\impl_def.h" />
     <ClInclude Include="src\engine\def\obj_def.h" />
     <ClInclude Include="src\engine\def\platform.h" />
+    <ClInclude Include="src\engine\def\set_def.h" />
     <ClInclude Include="src\engine\render\api_render.h" />
     <ClInclude Include="src\engine\render\camera\api_camera.h" />
     <ClInclude Include="src\engine\render\camera\impl_camera.h" />
