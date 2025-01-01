@@ -636,10 +636,13 @@
     <ClInclude Include="src\engine\render\settings.h">
       <Filter>src\engine\render</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\def\obj_api.h">
+    <ClInclude Include="src\engine\def\obj_def.h">
       <Filter>src\engine\def</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\var\ptr.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\sobj.h">
       <Filter>src\engine\var</Filter>
     </ClInclude>
   </ItemGroup>

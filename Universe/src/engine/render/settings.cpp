@@ -3,6 +3,7 @@
 #include "settings.h"
 
 #include "engine/var/ptr.h"
+#include "engine/var/sobj.h"
 
 namespace engine::render::settings
 {
@@ -45,8 +46,6 @@ namespace engine::render::settings
         set()               = default;
         set(set&& src)      = delete;
         set(const set& src) = delete;
-
-        static set* inst();
 
         set& operator=(set&& src)      = delete;
         set& operator=(const set& src) = delete;

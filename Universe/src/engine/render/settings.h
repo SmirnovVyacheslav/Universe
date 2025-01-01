@@ -12,7 +12,7 @@ namespace engine::render::settings
 {
     /*class obj
     {
-        obj_api
+        obj_api;
 
         struct
         {
@@ -39,10 +39,7 @@ namespace engine::render::settings
             bool windowed();
 
         } view;
-    };
-
-
-    obj get();*/
+    };*/
 
     class obj
     {
