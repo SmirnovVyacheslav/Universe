@@ -651,5 +651,8 @@
     <ClInclude Include="src\engine\def\set_def.h">
       <Filter>src\engine\def</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\var\set.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
