@@ -2,6 +2,7 @@
 
 #include "map.h"
 #include "ptr.h"
+#include "sobj.h"
 #include "std.h"
 
 #ifndef ENGINE_VAR_SET
@@ -15,7 +16,10 @@ namespace engine
     public:
         static int32 add()
         {
-            //
+            set<t, a1, a2, a3> inst = sobj<set<t, a1, a2, a3>>::inst();
+            
+            int32 id = static_cast<int32>(std::hash<t>());
+            
         }
         static int32 add(a1 arg1)
         {
