@@ -156,13 +156,13 @@
     <ClInclude Include="src\engine\var\array.h" />
     <ClInclude Include="src\engine\var\const.h" />
     <ClInclude Include="src\engine\var\error.h" />
+    <ClInclude Include="src\engine\var\id.h" />
     <ClInclude Include="src\engine\var\ipf\ips_matrix4.h" />
     <ClInclude Include="src\engine\var\ipf\iph_array.h" />
     <ClInclude Include="src\engine\var\ipf\iph_const.h" />
     <ClInclude Include="src\engine\var\ipf\iph_error.h" />
     <ClInclude Include="src\engine\var\ipf\iph_map.h" />
     <ClInclude Include="src\engine\var\ipf\iph_matrix4.h" />
-    <ClInclude Include="src\engine\var\ipf\iph_queue.h" />
     <ClInclude Include="src\engine\var\ipf\iph_smart_ptr.h" />
     <ClInclude Include="src\engine\var\ipf\iph_std.h" />
     <ClInclude Include="src\engine\var\ipf\iph_string.h" />

@@ -453,9 +453,6 @@
     <ClInclude Include="src\engine\var\ipf\iph_matrix4.h">
       <Filter>src\engine\var\ipf</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\var\ipf\iph_queue.h">
-      <Filter>src\engine\var\ipf</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\render\ipf\iph_api_render.h">
       <Filter>src\engine\render\ipf</Filter>
     </ClInclude>
@@ -652,6 +649,9 @@
       <Filter>src\engine\def</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\var\set.h">
+      <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\var\id.h">
       <Filter>src\engine\var</Filter>
     </ClInclude>
   </ItemGroup>
