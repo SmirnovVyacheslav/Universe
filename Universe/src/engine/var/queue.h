@@ -1,44 +1,43 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/iph_queue.h"
+#include <queue>
 
-
-#ifndef ENGINE_QUEUE
-#define ENGINE_QUEUE
+#ifndef ENGINE_VAR_QUEUE
+#define ENGINE_VAR_QUEUE
 
 namespace engine
 {
-    template <typename T>
+    template <typename t>
     class queue
     {
     public:
-        queue() = default;
-        queue(queue&& src) = delete;
+        queue()                 = default;
+        queue(queue&& src)      = delete;
         queue(const queue& src) = delete;
 
-        void add(T& item);
-        T& get();
+        void add(t& item)
+        {
+            q.push(item);
+        }
+        t get()
+        {
+            t item = q.front();
+            q.pop();
+            return item;
+        }
 
-        queue& operator=(queue&& src) = delete;
+        operator bool()
+        {
+            return !q.empty();
+        }
+
+        queue& operator=(queue&& src)      = delete;
         queue& operator=(const queue& src) = delete;
 
         ~queue() = default;
     private:
-        T item;
+        std::queue<t> q;
     };
-
-
-    template <typename T>
-    void queue<T>::add(T& item)
-    {
-        this->item = item;
-    }
-
-    template <typename T>
-    T& queue<T>::get()
-    {
-        return item;
-    }
 }
 
 #endif
