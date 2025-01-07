@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
+#include "queue.h"
 #include "sobj.h"
 #include "std.h"
 
@@ -15,9 +16,20 @@ namespace engine
         static int32 get()
         {
             id<t> inst = sobj<id<t>>::inst();
-            return 0;
+            if (inst.q)
+            {
+                return inst.q.get();
+            }
+            return inst.idf++;
+        }
+        static void del(int32 idt)
+        {
+            id<t> inst = sobj<id<t>>::inst();
         }
     private:
+        int32 idf;
+        queue<int32> q;
+
         id()              = default;
         id(id&& src)      = delete;
         id(const id& src) = delete;
