@@ -23,10 +23,13 @@ namespace engine::core::event
     {
         impl::handle();
 
-        obj item = queue_inst->get();
-        if (item.exit)
+        if (*queue_inst)
         {
-            core::control::stop();
+            obj item = queue_inst->get();
+            if (item.exit)
+            {
+                core::control::stop();
+            }
         }
     }
 

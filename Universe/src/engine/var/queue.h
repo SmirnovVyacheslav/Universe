@@ -1,5 +1,6 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
+#include "error.h"
 #include <queue>
 
 #ifndef ENGINE_VAR_QUEUE
@@ -21,6 +22,11 @@ namespace engine
         }
         t get()
         {
+            if (q.empty())
+            {
+                throw error("Queue is empty");
+            }
+
             t item = q.front();
             q.pop();
             return item;
