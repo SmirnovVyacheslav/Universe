@@ -10,10 +10,12 @@
 namespace engine
 {
     template <typename t>
+    // queue free_id
+    // next_id
     class id
     {
     public:
-        static int32 get()
+        static int32 add()
         {
             id<t> inst = sobj<id<t>>::inst();
             if (inst.q)
