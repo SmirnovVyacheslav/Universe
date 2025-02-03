@@ -140,6 +140,24 @@
     <Filter Include="src\engine\sdk\directx">
       <UniqueIdentifier>{25f80c90-b4ed-49dc-93fc-69238c79885e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\lib">
+      <UniqueIdentifier>{c39a9d5e-e9a1-4578-8e83-0cd65c994268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\lib\dt">
+      <UniqueIdentifier>{031bae6c-8d2c-478f-b1f7-54e5cf26d87f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\lib\sdp">
+      <UniqueIdentifier>{0c2e409c-800a-4559-88c1-66972a2a4e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\lib\dt\base">
+      <UniqueIdentifier>{122e585d-05bd-458a-ada2-60886b6bed8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\lib\dt\comp">
+      <UniqueIdentifier>{57ca77fc-31ba-4df9-8836-d92ba0328184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\lib\dt\math">
+      <UniqueIdentifier>{329eca90-5630-4b21-991e-315a40eb6e23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -653,6 +671,84 @@
     </ClInclude>
     <ClInclude Include="src\engine\var\id.h">
       <Filter>src\engine\var</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\all.h">
+      <Filter>src\engine\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\all.h">
+      <Filter>src\engine\lib\dt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base\all.h">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base\fp16.h">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base\fp32.h">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base\int16.h">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base\int32.h">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base\uint16.h">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base\uint32.h">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\comp\array.h">
+      <Filter>src\engine\lib\dt\comp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\comp\map.h">
+      <Filter>src\engine\lib\dt\comp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\comp\queue.h">
+      <Filter>src\engine\lib\dt\comp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\comp\string.h">
+      <Filter>src\engine\lib\dt\comp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\comp\all.h">
+      <Filter>src\engine\lib\dt\comp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math\matrix4.h">
+      <Filter>src\engine\lib\dt\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math\vector.h">
+      <Filter>src\engine\lib\dt\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math\vector3.h">
+      <Filter>src\engine\lib\dt\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math\vector4.h">
+      <Filter>src\engine\lib\dt\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math\all.h">
+      <Filter>src\engine\lib\dt\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math\const.h">
+      <Filter>src\engine\lib\dt\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\sdp\pool.h">
+      <Filter>src\engine\lib\sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\sdp\ptr.h">
+      <Filter>src\engine\lib\sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\sdp\ref.h">
+      <Filter>src\engine\lib\sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\sdp\so.h">
+      <Filter>src\engine\lib\sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\sdp\all.h">
+      <Filter>src\engine\lib\sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\sdp\gid.h">
+      <Filter>src\engine\lib\sdp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
