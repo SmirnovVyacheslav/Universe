@@ -106,6 +106,7 @@
     <ClInclude Include="src\engine\lib\dt\comp\string.h" />
     <ClInclude Include="src\engine\lib\dt\math\all.h" />
     <ClInclude Include="src\engine\lib\dt\math\const.h" />
+    <ClInclude Include="src\engine\lib\dt\math\hash.h" />
     <ClInclude Include="src\engine\lib\dt\math\matrix4.h" />
     <ClInclude Include="src\engine\lib\dt\math\vector.h" />
     <ClInclude Include="src\engine\lib\dt\math\vector3.h" />

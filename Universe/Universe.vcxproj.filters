@@ -750,5 +750,8 @@
     <ClInclude Include="src\engine\lib\sdp\gid.h">
       <Filter>src\engine\lib\sdp</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math\hash.h">
+      <Filter>src\engine\lib\dt\math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
