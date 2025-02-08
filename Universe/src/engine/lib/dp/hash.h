@@ -1,11 +1,22 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
-#pragma once
 
-/*template<>
-    struct hash<uint32>
+//#include "../dt/all.h"
+
+#include <functional>
+
+#ifndef ENGINE_LIB_DP_HASH
+#define ENGINE_LIB_DP_HASH
+
+namespace engine::lib::dp
+{
+   /* template<typename t>
+    struct hash
     {
-        size_t operator()(const uint32& arg) const
+        uint32 operator()(const t& arg) const
         {
             return static_cast<size_t>(arg);
         }
     };*/
+}
+
+#endif
