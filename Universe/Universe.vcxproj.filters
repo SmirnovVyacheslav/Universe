@@ -675,12 +675,6 @@
     <ClInclude Include="src\engine\lib\lib.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\lib\dt\dt.h">
-      <Filter>src\engine\lib\dt</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\dt\base\base.h">
-      <Filter>src\engine\lib\dt\base</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\lib\dt\base\fp16.h">
       <Filter>src\engine\lib\dt\base</Filter>
     </ClInclude>
@@ -711,9 +705,6 @@
     <ClInclude Include="src\engine\lib\dt\comp\string.h">
       <Filter>src\engine\lib\dt\comp</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\lib\dt\comp\comp.h">
-      <Filter>src\engine\lib\dt\comp</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\lib\dt\math\matrix4.h">
       <Filter>src\engine\lib\dt\math</Filter>
     </ClInclude>
@@ -724,9 +715,6 @@
       <Filter>src\engine\lib\dt\math</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\lib\dt\math\vector4.h">
-      <Filter>src\engine\lib\dt\math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\dt\math\math.h">
       <Filter>src\engine\lib\dt\math</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\lib\dt\math\const.h">
@@ -758,6 +746,21 @@
     </ClInclude>
     <ClInclude Include="src\engine\lib\dt\base\uint64.h">
       <Filter>src\engine\lib\dt\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dp.h">
+      <Filter>src\engine\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt.h">
+      <Filter>src\engine\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\base.h">
+      <Filter>src\engine\lib\dt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\comp.h">
+      <Filter>src\engine\lib\dt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\dt\math.h">
+      <Filter>src\engine\lib\dt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

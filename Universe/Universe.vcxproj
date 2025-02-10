@@ -90,6 +90,11 @@
     <ClInclude Include="src\engine\def\obj_def.h" />
     <ClInclude Include="src\engine\def\platform.h" />
     <ClInclude Include="src\engine\def\set_def.h" />
+    <ClInclude Include="src\engine\lib\dp.h" />
+    <ClInclude Include="src\engine\lib\dt.h" />
+    <ClInclude Include="src\engine\lib\dt\base.h" />
+    <ClInclude Include="src\engine\lib\dt\comp.h" />
+    <ClInclude Include="src\engine\lib\dt\math.h" />
     <ClInclude Include="src\engine\lib\lib.h" />
     <ClInclude Include="src\engine\lib\dp\dp.h" />
     <ClInclude Include="src\engine\lib\dp\gid.h" />
@@ -98,8 +103,6 @@
     <ClInclude Include="src\engine\lib\dp\ptr.h" />
     <ClInclude Include="src\engine\lib\dp\ref.h" />
     <ClInclude Include="src\engine\lib\dp\so.h" />
-    <ClInclude Include="src\engine\lib\dt\dt.h" />
-    <ClInclude Include="src\engine\lib\dt\base\base.h" />
     <ClInclude Include="src\engine\lib\dt\base\fp16.h" />
     <ClInclude Include="src\engine\lib\dt\base\fp32.h" />
     <ClInclude Include="src\engine\lib\dt\base\int16.h" />
@@ -108,12 +111,10 @@
     <ClInclude Include="src\engine\lib\dt\base\uint16.h" />
     <ClInclude Include="src\engine\lib\dt\base\uint32.h" />
     <ClInclude Include="src\engine\lib\dt\base\uint64.h" />
-    <ClInclude Include="src\engine\lib\dt\comp\comp.h" />
     <ClInclude Include="src\engine\lib\dt\comp\array.h" />
     <ClInclude Include="src\engine\lib\dt\comp\map.h" />
     <ClInclude Include="src\engine\lib\dt\comp\queue.h" />
     <ClInclude Include="src\engine\lib\dt\comp\string.h" />
-    <ClInclude Include="src\engine\lib\dt\math\math.h" />
     <ClInclude Include="src\engine\lib\dt\math\const.h" />
     <ClInclude Include="src\engine\lib\dt\math\matrix4.h" />
     <ClInclude Include="src\engine\lib\dt\math\vector.h" />
