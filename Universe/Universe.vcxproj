@@ -26,6 +26,7 @@
     <ClCompile Include="src\engine\core\settings\api_settings.cpp" />
     <ClCompile Include="src\engine\core\view\api_view.cpp" />
     <ClCompile Include="src\engine\core\view\win32\impl_view.cpp" />
+    <ClCompile Include="src\engine\lib\dt\base\uint32.cpp" />
     <ClCompile Include="src\engine\render\api_render.cpp" />
     <ClCompile Include="src\engine\render\camera\api_camera.cpp" />
     <ClCompile Include="src\engine\render\camera\impl_camera.cpp" />

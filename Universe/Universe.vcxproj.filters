@@ -271,6 +271,9 @@
     <ClCompile Include="src\engine\render\settings.cpp">
       <Filter>src\engine\render</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\lib\dt\base\uint32.cpp">
+      <Filter>src\engine\lib\dt\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
