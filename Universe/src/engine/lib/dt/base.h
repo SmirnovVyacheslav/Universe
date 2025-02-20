@@ -1,11 +1,8 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#ifndef ENGINE_STD
-#define ENGINE_STD
+#ifndef ENGINE_LIB_DT_BASE
+#define ENGINE_LIB_DT_BASE
 
-namespace engine::lib::dt
-{
-    // using namespace;
-}
+#include "base/uint32.h"
 
 #endif
