@@ -26,8 +26,6 @@
     <ClCompile Include="src\engine\core\settings\api_settings.cpp" />
     <ClCompile Include="src\engine\core\view\api_view.cpp" />
     <ClCompile Include="src\engine\core\view\win32\impl_view.cpp" />
-    <ClCompile Include="src\engine\lib\dt\base\fp16.cpp" />
-    <ClCompile Include="src\engine\lib\dt\base\fp32.cpp" />
     <ClCompile Include="src\engine\lib\dt\base\int16.cpp" />
     <ClCompile Include="src\engine\lib\dt\base\int32.cpp" />
     <ClCompile Include="src\engine\lib\dt\base\int64.cpp" />
@@ -109,7 +107,7 @@
     <ClInclude Include="src\engine\lib\dp\ptr.h" />
     <ClInclude Include="src\engine\lib\dp\ref.h" />
     <ClInclude Include="src\engine\lib\dp\so.h" />
-    <ClInclude Include="src\engine\lib\dt\base\fp16.h" />
+    <ClInclude Include="src\engine\lib\dt\base\fp64.h" />
     <ClInclude Include="src\engine\lib\dt\base\fp32.h" />
     <ClInclude Include="src\engine\lib\dt\base\int16.h" />
     <ClInclude Include="src\engine\lib\dt\base\int32.h" />
