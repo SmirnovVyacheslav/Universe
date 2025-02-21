@@ -32,6 +32,7 @@
     <ClCompile Include="src\engine\lib\dt\base\uint16.cpp" />
     <ClCompile Include="src\engine\lib\dt\base\uint32.cpp" />
     <ClCompile Include="src\engine\lib\dt\base\uint64.cpp" />
+    <ClCompile Include="src\engine\lib\object\std.cpp" />
     <ClCompile Include="src\engine\render\api_render.cpp" />
     <ClCompile Include="src\engine\render\camera\api_camera.cpp" />
     <ClCompile Include="src\engine\render\camera\impl_camera.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="src\engine\lib\dt\math\vector.h" />
     <ClInclude Include="src\engine\lib\dt\math\vector3.h" />
     <ClInclude Include="src\engine\lib\dt\math\vector4.h" />
+    <ClInclude Include="src\engine\lib\object\std.h" />
     <ClInclude Include="src\engine\render\api_render.h" />
     <ClInclude Include="src\engine\render\camera\api_camera.h" />
     <ClInclude Include="src\engine\render\camera\impl_camera.h" />

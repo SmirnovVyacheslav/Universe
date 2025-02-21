@@ -158,6 +158,12 @@
     <Filter Include="src\engine\lib\dp">
       <UniqueIdentifier>{0c2e409c-800a-4559-88c1-66972a2a4e11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\engine\lib\pattern">
+      <UniqueIdentifier>{55549094-dd93-40af-89ca-d529d6d0354b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine\lib\object">
+      <UniqueIdentifier>{7c0be4ce-08d9-419a-9037-2f7c17e9bb4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -288,6 +294,9 @@
     </ClCompile>
     <ClCompile Include="src\engine\lib\dt\base\int16.cpp">
       <Filter>src\engine\lib\dt\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\lib\object\std.cpp">
+      <Filter>src\engine\lib\object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -773,6 +782,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\lib.h">
       <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\object\std.h">
+      <Filter>src\engine\lib\object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
