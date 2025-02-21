@@ -1,7 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#ifndef ENGINE_LIB_OBJECT_STD
-#define ENGINE_LIB_OBJECT_STD
+#ifndef ENGINE_LIB_DATATYPE_STD
+#define ENGINE_LIB_DATATYPE_STD
 
 #include <cstdint>
 #include <functional>
