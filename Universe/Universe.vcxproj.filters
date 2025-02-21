@@ -155,13 +155,10 @@
     <Filter Include="src\engine\lib\dt\math">
       <UniqueIdentifier>{329eca90-5630-4b21-991e-315a40eb6e23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\lib\dp">
-      <UniqueIdentifier>{0c2e409c-800a-4559-88c1-66972a2a4e11}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\lib\pattern">
       <UniqueIdentifier>{55549094-dd93-40af-89ca-d529d6d0354b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\lib\object">
+    <Filter Include="src\engine\lib\datatype">
       <UniqueIdentifier>{7c0be4ce-08d9-419a-9037-2f7c17e9bb4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -295,8 +292,8 @@
     <ClCompile Include="src\engine\lib\dt\base\int16.cpp">
       <Filter>src\engine\lib\dt\base</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\lib\object\std.cpp">
-      <Filter>src\engine\lib\object</Filter>
+    <ClCompile Include="src\engine\lib\datatype\std.cpp">
+      <Filter>src\engine\lib\datatype</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -744,28 +741,13 @@
     <ClInclude Include="src\engine\lib\dt\math\const.h">
       <Filter>src\engine\lib\dt\math</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\lib\dp\pool.h">
-      <Filter>src\engine\lib\dp</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\dp\ptr.h">
-      <Filter>src\engine\lib\dp</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\dp\ref.h">
-      <Filter>src\engine\lib\dp</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\dp\so.h">
-      <Filter>src\engine\lib\dp</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\dp\gid.h">
-      <Filter>src\engine\lib\dp</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\lib\dt\base\int64.h">
       <Filter>src\engine\lib\dt\base</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\lib\dt\base\uint64.h">
       <Filter>src\engine\lib\dt\base</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\lib\dp.h">
+    <ClInclude Include="src\engine\lib\pattern.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\lib\dt.h">
@@ -783,8 +765,8 @@
     <ClInclude Include="src\engine\lib.h">
       <Filter>src\engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\lib\object\std.h">
-      <Filter>src\engine\lib\object</Filter>
+    <ClInclude Include="src\engine\lib\datatype\std.h">
+      <Filter>src\engine\lib\datatype</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
