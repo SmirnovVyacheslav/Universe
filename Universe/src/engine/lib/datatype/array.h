@@ -25,43 +25,32 @@ namespace engine
         {
             return static_cast<uint32>(data.size());
         }
-        void append(T&& item)
+        void append(t&& item)
         {
             data.push_back(std::move(item));
         }
-        void append(const T& item)
+        void append(const t& item)
         {
             data.push_back(item);
         }
-        uint32 find_index(const T& item)
-        {
-            for (uint32 i = 0; i < size(); ++i)
-            {
-                if (data[static_cast<size_t>(i)] == item)
-                {
-                    return i;
-                }
-            }
-            // error
-        }
 
-        array& operator=(array&& src_ptr)      = default;
-        array& operator=(const array& src_ptr) = default;
+        array& operator=(array&& src)      = default;
+        array& operator=(const array& src) = default;
 
         t& operator[](const int32 index)
         {
-            return data[(size() + index % size()) % size()];
+            return data[static_cast<size_t>((size() + index % size()) % size())];
         }
-        const T& operator[](const int32 index) const
+        const t& operator[](const int32 index) const
         {
-            return data[(size() + index % size()) % size()];
+            return data[static_cast<size_t>((size() + index % size()) % size())];
         }
 
-        T* operator*()
+        t* operator*()
         {
             return &data.front();
         }
-        const T* operator*() const
+        const t* operator*() const
         {
             return &data.front();
         }
