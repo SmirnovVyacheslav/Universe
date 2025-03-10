@@ -720,5 +720,8 @@
     <ClInclude Include="src\engine\lib\const.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\lib\flow.h">
+      <Filter>src\engine\lib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
