@@ -21,7 +21,6 @@ namespace engine::core
         {
             event::handle();
             render::draw();
-            //std::exit(-1);
         }
     }
 

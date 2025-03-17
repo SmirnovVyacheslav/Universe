@@ -265,6 +265,9 @@
     <ClCompile Include="src\engine\lib\datatype\std.cpp">
       <Filter>src\engine\lib\datatype</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\lib\sys.cpp">
+      <Filter>src\engine\lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
@@ -720,7 +723,7 @@
     <ClInclude Include="src\engine\lib\const.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\lib\flow.h">
+    <ClInclude Include="src\engine\lib\sys.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
   </ItemGroup>
