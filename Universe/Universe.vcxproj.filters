@@ -143,12 +143,6 @@
     <Filter Include="src\engine\lib">
       <UniqueIdentifier>{c39a9d5e-e9a1-4578-8e83-0cd65c994268}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\lib\pattern">
-      <UniqueIdentifier>{55549094-dd93-40af-89ca-d529d6d0354b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\engine\lib\datatype">
-      <UniqueIdentifier>{7c0be4ce-08d9-419a-9037-2f7c17e9bb4a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -261,9 +255,6 @@
     </ClCompile>
     <ClCompile Include="src\engine\render\settings.cpp">
       <Filter>src\engine\render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\lib\datatype\std.cpp">
-      <Filter>src\engine\lib\datatype</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\lib\sys.cpp">
       <Filter>src\engine\lib</Filter>
@@ -669,61 +660,10 @@
     <ClInclude Include="src\engine\var\id.h">
       <Filter>src\engine\var</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\lib\pattern.h">
-      <Filter>src\engine\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype.h">
-      <Filter>src\engine\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib.h">
-      <Filter>src\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\std.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\pattern\pool.h">
-      <Filter>src\engine\lib\pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\pattern\ptr.h">
-      <Filter>src\engine\lib\pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\pattern\ref.h">
-      <Filter>src\engine\lib\pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\pattern\single.h">
-      <Filter>src\engine\lib\pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\pattern\gid.h">
-      <Filter>src\engine\lib\pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\array.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\map.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\queue.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\string.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\matrix4.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\vector.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\vector3.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\datatype\vector4.h">
-      <Filter>src\engine\lib\datatype</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lib\const.h">
-      <Filter>src\engine\lib</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\lib\sys.h">
+      <Filter>src\engine\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lib\array.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
   </ItemGroup>
