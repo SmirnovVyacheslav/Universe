@@ -3,8 +3,6 @@
 #ifndef ENGINE_LIB_ARRAY
 #define ENGINE_LIB_ARRAY
 
-#include <vector>
-
 
 namespace engine
 {
@@ -12,7 +10,11 @@ namespace engine
     class array
     {
     public:
-        array(int size = 0)
+        array(int size)
+        {
+            //
+        }
+        /*array(int size = 0)
         {
             data.reserve(static_cast<size_t>(size));
         }
@@ -53,9 +55,8 @@ namespace engine
             return &data.front();
         }
 
-        ~array() = default;
+        ~array() = default;*/
     private:
-        std::vector<t> data;
     };
 }
 
