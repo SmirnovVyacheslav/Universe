@@ -9,7 +9,7 @@
 
 namespace engine
 {
-    void exit(const char* msg) noexcept
+    void crash(const char* msg) noexcept
     {
         std::ofstream crash_file;
         crash_file.open("crash.log");

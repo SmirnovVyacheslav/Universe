@@ -6,7 +6,7 @@
 
 namespace engine
 {
-    void exit(const char* msg) noexcept;
+    void crash(const char* msg) noexcept;
 }
 
 #endif
