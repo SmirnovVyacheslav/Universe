@@ -3,8 +3,6 @@
 #ifndef ENGINE_LIB_ARRAY
 #define ENGINE_LIB_ARRAY
 
-#include "sys.h"
-
 
 namespace engine
 {
@@ -23,11 +21,11 @@ namespace engine
             delete[] data;
         }
 
-        array(array&& src)      = default;
-        array(const array& src) = default;
+        array(array&& src)      = delete;
+        array(const array& src) = delete;
 
-        array& operator=(array&& src)      = default;
-        array& operator=(const array& src) = default;
+        array& operator=(array&& src)      = delete;
+        array& operator=(const array& src) = delete;
 
         t* operator*()
         {
