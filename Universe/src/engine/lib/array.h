@@ -12,7 +12,7 @@ namespace engine
     public:
         const int size;
 
-        array(const int size) : 
+        array(const int size) :
             size(size),
             data(new t[static_cast<size_t>(size)])
         {}
@@ -44,7 +44,7 @@ namespace engine
         {
             return data[static_cast<size_t>((size + index % size) % size)];
         }
-        
+
     private:
         t* const data;
     };
