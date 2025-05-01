@@ -259,6 +259,9 @@
     <ClCompile Include="src\engine\lib\sys.cpp">
       <Filter>src\engine\lib</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\render\config.cpp">
+      <Filter>src\engine\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\api_game.h">
@@ -665,6 +668,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\lib\array.h">
       <Filter>src\engine\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\render\config.h">
+      <Filter>src\engine\render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

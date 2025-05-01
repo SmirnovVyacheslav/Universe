@@ -30,6 +30,7 @@
     <ClCompile Include="src\engine\render\api_render.cpp" />
     <ClCompile Include="src\engine\render\camera\api_camera.cpp" />
     <ClCompile Include="src\engine\render\camera\impl_camera.cpp" />
+    <ClCompile Include="src\engine\render\config.cpp" />
     <ClCompile Include="src\engine\render\device.cpp" />
     <ClCompile Include="src\engine\render\device\device_api.cpp" />
     <ClCompile Include="src\engine\render\device\device_impl_directx.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="src\engine\render\camera\ipf\ips_api_camera.h" />
     <ClInclude Include="src\engine\render\camera\ipf\ips_impl_camera.h" />
     <ClInclude Include="src\engine\render\camera\obj_camera.h" />
+    <ClInclude Include="src\engine\render\config.h" />
     <ClInclude Include="src\engine\render\device.h" />
     <ClInclude Include="src\engine\render\device\device_api.h" />
     <ClInclude Include="src\engine\render\device\device_impl_directx.h" />
