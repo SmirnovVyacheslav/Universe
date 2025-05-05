@@ -10,30 +10,41 @@ namespace engine::render::config
     {
     public:
 
-        ref()
+        ref(t(* const get) (), void (* const set) (t)) :
+            get(get), set(set)
         {}
         ~ref()
         {}
 
-        ref(ref&& src) = delete;
-        ref(const ref& src) = delete;
+        ref(ref&& src) = default;
+        ref(const ref& src) = default;
 
         ref& operator=(ref&& src) = delete;
         ref& operator=(const ref& src) = delete;
 
-        operator t() { return 1; }
-        operator t() const { return 1; }
-
-        t* operator*()
+        ref& operator=(t&& src)
         {
-            return &data;
+            set(src);
+            return *this;
         }
-        const t* operator*() const
+        ref& operator=(const t& src)
         {
-            return &data;
+            set(src);
+            return *this;
+        }
+
+        operator t()
+        {
+            return get();
+        }
+        operator t() const
+        {
+            return get();
         }
 
     private:
+        t (* const get) ();
+        void (* const set) (t);
     };
 
     class obj
