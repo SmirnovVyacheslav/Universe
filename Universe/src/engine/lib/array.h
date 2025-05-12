@@ -3,7 +3,6 @@
 #ifndef ENGINE_LIB_ARRAY
 #define ENGINE_LIB_ARRAY
 
-
 namespace engine
 {
     template <typename t>

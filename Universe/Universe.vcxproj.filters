@@ -8,9 +8,6 @@
     <Filter Include="src\engine">
       <UniqueIdentifier>{f33f5589-046e-4e67-a5a4-8bed4255cb47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game">
-      <UniqueIdentifier>{5c4013b1-5cb4-4d8b-a1e6-aede286fa794}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\var">
       <UniqueIdentifier>{d09bca4b-1f0d-48bb-994e-2e4ff0ecead6}</UniqueIdentifier>
     </Filter>
@@ -70,9 +67,6 @@
     </Filter>
     <Filter Include="src\engine\core\settings">
       <UniqueIdentifier>{7f8719b8-3eb9-4c58-b79b-9312c07b39cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\ipf">
-      <UniqueIdentifier>{ab2b8b03-2a0e-44e9-b2c9-d85b954fc36d}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\engine\var\ipf">
       <UniqueIdentifier>{f17c4972-a68c-48f2-a7e7-aca7bd653de7}</UniqueIdentifier>
@@ -147,9 +141,6 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\api_game.cpp">
-      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\var\matrix4.cpp">
       <Filter>src\engine\var</Filter>
@@ -262,11 +253,11 @@
     <ClCompile Include="src\engine\render\config.cpp">
       <Filter>src\engine\render</Filter>
     </ClCompile>
+    <ClCompile Include="src\game.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\game\api_game.h">
-      <Filter>src\game</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\var\map.h">
       <Filter>src\engine\var</Filter>
     </ClInclude>
@@ -401,12 +392,6 @@
     </ClInclude>
     <ClInclude Include="src\engine\core\settings\obj_settings.h">
       <Filter>src\engine\core\settings</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\ipf\iph_api_game.h">
-      <Filter>src\game\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\ipf\ips_api_game.h">
-      <Filter>src\game\ipf</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\var\ipf\iph_smart_ptr.h">
       <Filter>src\engine\var\ipf</Filter>
@@ -671,6 +656,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\render\config.h">
       <Filter>src\engine\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

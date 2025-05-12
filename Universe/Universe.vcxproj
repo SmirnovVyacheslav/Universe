@@ -56,7 +56,7 @@
     <ClCompile Include="src\engine\var\vector3.cpp" />
     <ClCompile Include="src\engine\var\vector4.cpp" />
     <ClCompile Include="src\engine\var\vertex.cpp" />
-    <ClCompile Include="src\game\api_game.cpp" />
+    <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -193,9 +193,7 @@
     <ClInclude Include="src\engine\var\vector3.h" />
     <ClInclude Include="src\engine\var\vector4.h" />
     <ClInclude Include="src\engine\var\vertex.h" />
-    <ClInclude Include="src\game\api_game.h" />
-    <ClInclude Include="src\game\ipf\iph_api_game.h" />
-    <ClInclude Include="src\game\ipf\ips_api_game.h" />
+    <ClInclude Include="src\game.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

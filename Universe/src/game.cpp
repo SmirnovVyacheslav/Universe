@@ -1,22 +1,17 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/ips_api_game.h"
+#include "game.h"
 
+#include "engine/core/api_core.h"
 
 namespace game
 {
-    void init()
+    int run()
     {
         engine::core::init();
-    }
-
-    void exec()
-    {
         engine::core::exec();
-    }
-
-    void term()
-    {
         engine::core::term();
+
+        return 0;
     }
 }
