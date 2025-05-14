@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\engine\core\api_core.cpp" />
     <ClCompile Include="src\engine\core\control\api_control.cpp" />
     <ClCompile Include="src\engine\core\event\api_event.cpp" />
@@ -60,6 +61,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine.h" />
     <ClInclude Include="src\engine\core\api_core.h" />
     <ClInclude Include="src\engine\core\control\api_control.h" />
     <ClInclude Include="src\engine\core\control\ipf\iph_api_control.h" />

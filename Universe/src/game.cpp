@@ -2,16 +2,12 @@
 
 #include "game.h"
 
-#include "engine/core/api_core.h"
+#include "engine.h"
 
 namespace game
 {
     int run()
     {
-        engine::core::init();
-        engine::core::exec();
-        engine::core::term();
-
-        return 0;
+        return engine::run();
     }
 }

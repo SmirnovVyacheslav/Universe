@@ -256,6 +256,9 @@
     <ClCompile Include="src\game.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\var\map.h">
@@ -658,6 +661,9 @@
       <Filter>src\engine\render</Filter>
     </ClInclude>
     <ClInclude Include="src\game.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
