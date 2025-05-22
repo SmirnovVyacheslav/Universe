@@ -2,16 +2,12 @@
 
 #include "engine.h"
 
-#include "engine/core/api_core.h"
+#include "engine/core.h"
 
 namespace engine
 {
     int run()
     {
-        engine::core::init();
-        engine::core::exec();
-        engine::core::term();
-
-        return 0;
+        return engine::core::run();
     }
 }

@@ -1,20 +1,22 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "ipf/ips_api_core.h"
+#include "core.h"
 
+#include "engine/core/control/api_control.h"
+#include "engine/core/event/api_event.h"
+#include "engine/core/settings/api_settings.h"
+#include "engine/core/view/api_view.h"
+#include "engine/render/api_render.h"
 
 namespace engine::core
 {
-    void init()
+    int run()
     {
         settings::init();
         event::init();
         view::init();
         render::init();
-    }
 
-    void exec()
-    {
         control::start();
 
         while (control::status())
@@ -22,13 +24,12 @@ namespace engine::core
             event::handle();
             render::draw();
         }
-    }
 
-    void term()
-    {
         render::term();
         view::term();
         event::term();
         settings::term();
+
+        return 0;
     }
 }

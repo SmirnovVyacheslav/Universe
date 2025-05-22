@@ -101,9 +101,6 @@
     <Filter Include="src\engine\render\vertices\directx\ipf">
       <UniqueIdentifier>{eff602fa-8528-4c77-8392-9e9e43c6f4a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\engine\core\ipf">
-      <UniqueIdentifier>{a463f8f7-9a67-48b5-96d7-9ef3dc6e78de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\engine\core\view\ipf">
       <UniqueIdentifier>{09984e1a-18bc-4254-82ae-8be606478e9e}</UniqueIdentifier>
     </Filter>
@@ -159,9 +156,6 @@
     </ClCompile>
     <ClCompile Include="src\engine\var\error.cpp">
       <Filter>src\engine\var</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\core\api_core.cpp">
-      <Filter>src\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\core\control\api_control.cpp">
       <Filter>src\engine\core\control</Filter>
@@ -259,6 +253,9 @@
     <ClCompile Include="src\engine.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\core.cpp">
+      <Filter>src\engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\var\map.h">
@@ -296,9 +293,6 @@
     </ClInclude>
     <ClInclude Include="src\engine\var\error.h">
       <Filter>src\engine\var</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\core\api_core.h">
-      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\control\api_control.h">
       <Filter>src\engine\core\control</Filter>
@@ -546,12 +540,6 @@
     <ClInclude Include="src\engine\render\vertices\directx\ipf\ips_impl_vertices.h">
       <Filter>src\engine\render\vertices\directx\ipf</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\core\ipf\iph_api_core.h">
-      <Filter>src\engine\core\ipf</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\core\ipf\ips_api_core.h">
-      <Filter>src\engine\core\ipf</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\core\view\ipf\iph_api_view.h">
       <Filter>src\engine\core\view\ipf</Filter>
     </ClInclude>
@@ -665,6 +653,9 @@
     </ClInclude>
     <ClInclude Include="src\engine.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core.h">
+      <Filter>src\engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

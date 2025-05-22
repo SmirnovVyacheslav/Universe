@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\engine.cpp" />
-    <ClCompile Include="src\engine\core\api_core.cpp" />
+    <ClCompile Include="src\engine\core.cpp" />
     <ClCompile Include="src\engine\core\control\api_control.cpp" />
     <ClCompile Include="src\engine\core\event\api_event.cpp" />
     <ClCompile Include="src\engine\core\event\win32\impl_event.cpp" />
@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine.h" />
-    <ClInclude Include="src\engine\core\api_core.h" />
+    <ClInclude Include="src\engine\core.h" />
     <ClInclude Include="src\engine\core\control\api_control.h" />
     <ClInclude Include="src\engine\core\control\ipf\iph_api_control.h" />
     <ClInclude Include="src\engine\core\control\ipf\ips_api_control.h" />
@@ -74,8 +74,6 @@
     <ClInclude Include="src\engine\core\event\win32\impl_event.h" />
     <ClInclude Include="src\engine\core\event\win32\ipf\iph_impl_event.h" />
     <ClInclude Include="src\engine\core\event\win32\ipf\ips_impl_event.h" />
-    <ClInclude Include="src\engine\core\ipf\iph_api_core.h" />
-    <ClInclude Include="src\engine\core\ipf\ips_api_core.h" />
     <ClInclude Include="src\engine\core\settings\api_settings.h" />
     <ClInclude Include="src\engine\core\settings\ipf\iph_api_settings.h" />
     <ClInclude Include="src\engine\core\settings\ipf\iph_obj_settings.h" />
