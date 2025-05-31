@@ -5,6 +5,12 @@
 
 namespace engine::render::config
 {
+    struct size
+    {
+        int w = 0;
+        int h = 0;
+    };
+
     template <typename t>
     class ref
     {
@@ -49,6 +55,7 @@ namespace engine::render::config
 
     class obj
     {
+    public:
         //
     };
     /*class obj
