@@ -1,56 +1,24 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
-#include "settings.h"
+#include "config.h"
 
-#include "engine/def/impl_def.h"
-#include "engine/def/set_def.h"
-
-#include "engine/var/sobj.h"
-
-namespace engine::render::settings
+namespace engine::render::config
 {
- /*   obj* inst = nullptr;
-
-
-    obj& get()
+    class impl
     {
-        if (!inst)
-        {
-            inst = new obj;
-        }
-
-        return *inst;
-    }*/
-
-    /*class impl
-    {
-        impl_def;
-
     public:
-        struct
-        {
-            struct
-            {
-                string font   = u8"res/engine/font/";
-                string shader = u8"res/engine/shader/";
-            } engine;
+        impl() = default;
+        ~impl() = default;
 
-            struct
-            {
-                string mesh   = u8"res/game/mesh/";
-                string model  = u8"res/game/model/";
-                string shader = u8"res/game/shader/";
-            } game;
-        } dir;
+        impl(impl&& src) = delete;
+        impl(const impl& src) = delete;
 
-        struct
-        {
-            int32 width   = 128;
-            int32 height  = 256;
-            int32 refresh = 60;
+        impl& operator=(impl&& src) = delete;
+        impl& operator=(const impl& src) = delete;
+    private:
+        int width  = 128;
+        int height = 256;
 
-            bool windowed = true;
-
-        } view;
-    };*/
+        int refresh = 60;
+    };
 }
