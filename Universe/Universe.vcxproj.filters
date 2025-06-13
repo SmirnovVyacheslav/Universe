@@ -657,5 +657,8 @@
     <ClInclude Include="src\engine\core.h">
       <Filter>src\engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\lib\ref.h">
+      <Filter>src\engine\lib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
