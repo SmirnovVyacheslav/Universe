@@ -93,6 +93,7 @@
     <ClInclude Include="src\engine\def\platform.h" />
     <ClInclude Include="src\engine\def\set_def.h" />
     <ClInclude Include="src\engine\lib\array.h" />
+    <ClInclude Include="src\engine\lib\ptr.h" />
     <ClInclude Include="src\engine\lib\ref.h" />
     <ClInclude Include="src\engine\lib\sys.h" />
     <ClInclude Include="src\engine\render\api_render.h" />

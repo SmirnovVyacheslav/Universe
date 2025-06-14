@@ -660,5 +660,8 @@
     <ClInclude Include="src\engine\lib\ref.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\lib\ptr.h">
+      <Filter>src\engine\lib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
