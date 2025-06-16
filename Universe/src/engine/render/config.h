@@ -14,6 +14,7 @@ namespace engine::render::config
 
         ref<int> width;
         ref<int> height;
+
         ref<int> refresh;
     };
 }

@@ -663,5 +663,8 @@
     <ClInclude Include="src\engine\lib\ptr.h">
       <Filter>src\engine\lib</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\def\impl.h">
+      <Filter>src\engine\def</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

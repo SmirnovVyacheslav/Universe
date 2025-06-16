@@ -1,5 +1,7 @@
 // Copyright: (C) 2022 Vyacheslav Smirnov. All rights reserved.
 
+#include <utility>
+
 #ifndef ENGINE_LIB_PTR
 #define ENGINE_LIB_PTR
 
@@ -9,46 +11,49 @@ namespace engine
     class ptr
     {
     public:
-        ptr()  = default;
-        ~ptr() = default;
+        ptr()
+        {}
+        ~ptr()
+        {
+            delete inst;
+        }
 
-        ptr(ptr&& src)      = default;
-        ptr(const ptr& src) = default;
+        ptr(ptr&& src)      = delete;
+        ptr(const ptr& src) = delete;
 
         template<typename... a>
         void init(a&&... args)
         {
-            inst = new t(std::forward<a>(args)...);
+            if (inst == nullptr)
+            {
+                inst = new t(std::forward<a>(args)...);
+            }
+            ++refs;
         }
         void term()
         {
-            //
+            --refs;
+            if (refs == 0)
+            {
+                delete inst;
+            }
         }
 
         ptr& operator=(ptr&& src)      = delete;
         ptr& operator=(const ptr& src) = delete;
 
-        ptr& operator=(t&& src)
+        t* operator->()
         {
-            return *this;
+            return inst;
         }
-        ptr& operator=(const t& src)
+        t* operator->() const
         {
-            return *this;
-        }
-
-        operator t()
-        {
-            return &t;
-        }
-        operator t() const
-        {
-            return &t;
+            return inst;
         }
 
     private:
-        t* inst;
         int refs = 0;
+        t*  inst = nullptr;
     };
 }
 
