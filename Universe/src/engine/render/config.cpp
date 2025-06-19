@@ -2,21 +2,15 @@
 
 #include "config.h"
 
+#include "engine/def/impl.h"
 #include "engine/lib/ptr.h"
 
 namespace engine::render::config
 {
     class impl
     {
-    public:
-        impl()  = default;
-        ~impl() = default;
+        impl_def
 
-        impl(impl&& src)      = delete;
-        impl(const impl& src) = delete;
-
-        impl& operator=(impl&& src)      = delete;
-        impl& operator=(const impl& src) = delete;
     private:
         int width  = 128;
         int height = 256;
@@ -26,5 +20,4 @@ namespace engine::render::config
 
 
     ptr<impl> impl_inst;
-
 }

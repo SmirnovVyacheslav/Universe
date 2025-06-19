@@ -4,7 +4,7 @@
     public: \
         impl()  = default; \
         ~impl() = default; \
-        impl(impl&& src)      = default; \
-        impl(const impl& src) = default; \
-        impl& operator=(impl&& src)      = default; \
-        impl& operator=(const impl& src) = default;
+        impl(impl&& src)      = delete; \
+        impl(const impl& src) = delete; \
+        impl& operator=(impl&& src)      = delete; \
+        impl& operator=(const impl& src) = delete;
