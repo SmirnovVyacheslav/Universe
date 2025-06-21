@@ -11,7 +11,6 @@ namespace engine::render::config
     {
         impl_def
 
-    private:
         int width  = 128;
         int height = 256;
 
@@ -20,4 +19,35 @@ namespace engine::render::config
 
 
     ptr<impl> impl_inst;
+
+
+    static int get_width()
+    {
+        return impl_inst->width;
+    }
+    static void set_width(int width)
+    {
+        impl_inst->width = width;
+    }
+    
+    static int get_height()
+    {
+        return impl_inst->height;
+    }
+    static void set_height(int height)
+    {
+        impl_inst->height = height;
+    }
+    
+    static int get_refresh()
+    {
+        return impl_inst->refresh;
+    }
+    static void set_refresh(int refresh)
+    {
+        impl_inst->refresh = refresh;
+    }
+
+
+    //
 }
