@@ -49,5 +49,30 @@ namespace engine::render::config
     }
 
 
-    //
+    obj::obj() :
+        width(ref<int>(get_width, set_width)),
+        height(ref<int>(get_height, set_height)),
+        refresh(ref<int>(get_refresh, set_refresh))
+    {
+        impl_inst.init();
+    }
+    obj::~obj()
+    {
+        impl_inst.term();
+    }
+
+    obj::obj(obj&& src) noexcept :
+        width(src.width),
+        height(src.height),
+        refresh(src.refresh)
+    {
+        impl_inst.init();
+    }
+    obj::obj(const obj& src) noexcept :
+        width(src.width),
+        height(src.height),
+        refresh(src.refresh)
+    {
+        impl_inst.init();
+    }
 }

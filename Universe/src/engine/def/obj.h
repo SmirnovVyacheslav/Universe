@@ -2,9 +2,9 @@
 
 #define obj_def \
     public: \
-        obj()  = default; \
-        ~obj() = default; \
-        obj(obj&& src)      = default; \
-        obj(const obj& src) = default; \
-        obj& operator=(obj&& src)      = default; \
-        obj& operator=(const obj& src) = default;
+        obj();  \
+        ~obj(); \
+        obj(obj&& src) noexcept;      \
+        obj(const obj& src) noexcept; \
+        obj& operator=(obj&& src)      = delete; \
+        obj& operator=(const obj& src) = delete;
